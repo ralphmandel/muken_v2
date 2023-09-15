@@ -1,0 +1,1634 @@
+// Dota Ability hunter
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+  "hunter__precache"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+    "AbilityTextureName"    		"hunter__precache"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"99"
+		"RequiredLevel"         	 	"-200"
+
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"hunter_1__shot"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_1__shot"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"hunter_shot"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityCastAnimation"   		"ACT"
+		"AbilityCastPoint"       		"1"
+		//"AnimationPlaybackRate"  		"2"
+
+    "AbilityValues"
+		{
+			"kill_chance"	    "0.3"
+			"cd_mult"	        "3"
+			"cd_mult_tooltip"	"0"
+			"damage"			    "1 2 3 4 5 6 7"
+			"rank"			      "1 2 3 4 5 6 7"
+		}
+	}
+
+	"hunter_2__aim"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_2__aim"
+		"AbilityTextureName"     		"hunter_aim"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NONE"
+
+    "AbilityValues"
+		{
+      "knockback_duration"  "0.1"
+      "knockback_distance"  "70"
+      "debuff_duration"     "4"
+      "poison_damage"       "30"
+			"slow"			          "1 2 3 4 5 6 7"
+			"rank"			          "1 2 3 4 5 6 7"
+		}
+	}
+
+	"hunter_3__radar"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_3__radar"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"hunter_radar"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+    "AbilityValues"
+		{
+			"search_time"	  "5"
+			"fow_time"	    "20"
+			"radius"        "450"
+			"bonus_radius"  "1 2 3 4 5 6 7"
+			"rank"			    "1 2 3 4 5 6 7"
+		}
+	}
+
+	"hunter_4__bandage"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_4__bandage"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"hunter_bandage"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityBehavior"				    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+    "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_CUSTOM"
+    "AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_PREFER_ENEMIES"
+
+		"AbilityCastAnimation"   		"ACT_"
+		"AbilityCastPoint"       		"0.1"
+
+    "AbilityValues"
+		{
+      "duration"  "5"
+      "ms"        "75"
+			"hp_regen"	"1 2 3 4 5 6 7"
+			"rank"			"1 2 3 4 5 6 7"
+		}
+	}
+
+	"hunter_5__trap"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_5__trap"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"hunter_trap"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
+		"AbilityCastPoint"       		"0.2"
+
+    "AbilityValues"
+		{
+      "debuff_duration" "6"
+      "root_duration"   "4"
+      "trap_radius"     "90"
+      "vision_radius"   "125"
+      "hits"            "2"
+      "delay"           "5"
+			"lifetime"	      "1 2 3 4 5 6 7"
+			"rank"			      "1 2 3 4 5 6 7"
+		}
+	}
+
+	"hunter_u__camouflage"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/nature/hunter/hunter_u__camouflage"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"     		"hunter_camouflage"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"8"
+    "LevelsBetweenUpgrades"  		"25"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+		{
+      "delay_out"     "0.5"
+      "limit_speed"   "225"
+      "bonus_damage"  "5"
+      "atk_range"     "500"
+      "vision_range"  "1 2 3 4 5 6 7"
+			"rank"			    "1 2 3 4 5 6 7"
+		}
+	}
+
+    //RANKS 1
+        "hunter_1__shot_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_1__shot_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_shot"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"1"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+    //RANKS 2
+        "hunter_2__aim_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+        
+        "hunter_2__aim_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_2__aim_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_aim"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"2"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+    //RANKS 3
+        "hunter_3__radar_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_3__radar_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_radar"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"3"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+    //RANKS 4
+        "hunter_4__bandage_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_4__bandage_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_bandage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"4"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+    //RANKS 5
+        "hunter_5__trap_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_5__trap_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_trap"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"5"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+    //RANKS U
+        "hunter_u__camouflage_rank_11"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"11"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_12"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"1"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"12"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_21"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"21"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_22"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"2"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"22"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_31"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"31"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_32"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"3"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"32"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_41"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"41"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+        "hunter_u__camouflage_rank_42"{
+            "BaseClass"						"ability_lua"
+            "ScriptFile"					"heroes/nature/hunter/hunter-ranks_lua"
+            "AbilityTextureName"    		"hunter_camouflage"
+            "FightRecapLevel"				"1"
+            "MaxLevel"						"4"	
+            
+            "AbilityType"					"ABILITY_TYPE_BASIC"
+            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+            "AbilitySpecial"
+            {
+                "01"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "skill"					"6"
+                }
+                "02"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "id"					"42"
+                }
+                "03"
+                {
+                    "var_type"				"FIELD_FLOAT"
+                    "permanent"				"0"
+                }
+            }
+        }
+
+
+}

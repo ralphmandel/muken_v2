@@ -1,0 +1,32 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/panel_runemaster.css"/>
+  </styles>
+  <scripts>
+  </scripts>
+    <Panel class="root" hittest="false">
+        <Panel id="RunesContainer" hittest="false">
+                    <RadioButton class="runes-container" id="defaultValue" checked="checked" tabindex="auto">
+                        <Image src="file://{resources}/images/custom_game/rune_power_small.png" class="img_selected"/>
+                        <Label class="RuneName" text="POWER" />
+                    </RadioButton>
+
+                    <RadioButton class="runes-container" tabindex="auto">
+                         <Image src="file://{resources}/images/custom_game/rune_light_small.png" class="img_selected"/>
+                        <Label class="RuneName" text="LIGHT" />
+                    </RadioButton>
+
+                    <RadioButton class="runes-container" tabindex="auto">
+                        <Image src="file://{resources}/images/custom_game/rune_arcane_small.png" class="img_selected"/>
+                        <Label class="RuneName" text="ARCANE" />
+                    </RadioButton>
+
+                    <RadioButton class="runes-container" tabindex="auto">
+                        <Image src="file://{resources}/images/custom_game/rune_shadow_small.png" class="img_selected"/>
+                        <Label class="RuneName" text="SHADOW" />
+                    </RadioButton>
+               
+	    </Panel>
+
+    </Panel>
+</root>

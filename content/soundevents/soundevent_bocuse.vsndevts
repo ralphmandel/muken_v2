@@ -1,0 +1,428 @@
+"Bocuse.Cut"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/bocuse_cut_1.vsnd"
+							"value1"	"sounds/bocuse_cut_2.vsnd"
+							"value2"	"sounds/bocuse_cut_3.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.30000"	}
+				}
+			}
+		}
+	}
+}
+
+"Bocuse.Cut.1"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/bocuse_cut_1.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.30000"	}
+				}
+			}
+		}
+	}
+}
+
+"Bocuse.Cut.2"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/bocuse_cut_2.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.30000"	}
+				}
+			}
+		}
+	}
+}
+
+"Bocuse.Cut.3"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/bocuse_cut_3.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.30000"	}
+				}
+			}
+		}
+	}
+}
+
+"Bocuse.Flambee.Buff"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/viper/enc/nethertoxin_lp_ti8.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "0.60000"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Bocuse.Sauce"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/physics/damage/npc/gore_01.vsnd"
+							"value1"	"sounds/physics/damage/npc/gore_02.vsnd"
+							"value2"	"sounds/physics/damage/npc/gore_03.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Physics"	}
+					"volume"            { "value"   "1.00000"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Bocuse.Roux"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/viper/viper_strike.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "0.3"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Bioshadow.Poison"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/viper/impact.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.3"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Crusader.Summon"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/skeleton_king/reincarnate_arcana.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Slayer.Chain"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/physics/movement/hero/pudge/chain_movement1.vsnd"
+							"value1"	"sounds/physics/movement/hero/pudge/chain_movement2.vsnd"
+							"value2"	"sounds/physics/movement/hero/pudge/chain_movement3.vsnd"
+							"value3"	"sounds/physics/movement/hero/pudge/chain_movement4.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"BaseAttacks"	}
+					"volume"            { "value"   "0.8"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Slayer.Chain2"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/physics/movement/hero/pudge/arc_chain_move01.vsnd"
+							"value1"	"sounds/physics/movement/hero/pudge/arc_chain_move02.vsnd"
+							"value2"	"sounds/physics/movement/hero/pudge/arc_chain_move03.vsnd"
+							"value3"	"sounds/physics/movement/hero/pudge/arc_chain_move04.vsnd"
+							"value4"	"sounds/physics/movement/hero/pudge/arc_chain_move05.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"BaseAttacks"	}
+					"volume"            { "value"   "0.8"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Slayer.Laught"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/slayer_laught.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1"	}
+				}
+			}
+		}
+	}
+}
+
+"Hero_Slayer.Chain_Hit"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/axe/attack01.vsnd"
+							"value1"	"sounds/weapons/hero/axe/attack02.vsnd"
+							"value2"	"sounds/weapons/hero/axe/attack03.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "0.5"	}
+				}
+			}
+		}
+	}
+}

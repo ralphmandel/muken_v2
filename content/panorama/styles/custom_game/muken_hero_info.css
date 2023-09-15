@@ -1,0 +1,120 @@
+@keyframes 'ProgressOpacity'{0%{opacity: 1;}25%{opacity: 0.5;}50%{opacity: 0.1;}75%{opacity: 0.5;}100%{opacity: 1;}}
+
+.root {
+  position: 0px 0px 0.0px;
+  height: 1100px;
+  width: 1800px;
+  /* background-color: red; */
+}
+
+#hero_panel {
+  position: -80px 450px 0.0px;
+  margin-left: 300px;
+  height: 1000px;
+  width: 1000px;
+  horizontal-align: middle;
+}
+
+.column {
+  position: 1360px 140px 0.0px;
+  flow-children: down;
+  height: 224px;
+  max-width: 346px;
+  vertical-align: center;
+  /* background-color: gradient( linear, 0% 100%, 0% 0%, from( #171A25dd ), to( #171A25dd ) ); */
+}
+
+.item {
+  vertical-align: middle;
+  margin: 1px 0;
+  padding: 2px;
+}
+
+.item:hover {
+  brightness: 2.0;
+}
+
+.item:hover .Image_class {
+  pre-transform-scale2d: 1.2;
+  wash-color: #616d7ec4;
+}
+
+.item:hover .Image_class, .item:hover .skill-box {
+  animation-name: ProgressOpacity;
+  animation-duration: 1s;
+  animation-delay: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+Image {
+  max-width: 100%;
+  margin: 0px 0;
+  height: 30px;
+  width: 38px;
+  wash-color: #616d7efb;
+  border-radius: 5px;
+}
+
+.skill-box{
+  width: 346px;
+  margin-top: 10px;
+  margin-left: 40px;
+  wash-color: #616d7ea1;
+  height: 15px;
+  flow-children: right;
+}
+
+.marks {
+  width: fill-parent-flow(1);
+  max-width: 45px;
+  height: 15px;
+  margin-left: 2px;
+  transform: skew( -15deg );
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(222, 231, 255, 0.08);
+}  
+
+.marks .unowned{
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(222, 231, 255, 0.08);
+}
+
+.owned{
+  background-color: gradient( linear, 0% 0%, 0% 90%, from( #d7e2eb ), to( #7d898f ) );
+  border: 1px solid rgb(0, 0, 0);
+  z-index: 1;
+  width: fill-parent-flow(1);
+  max-width: 45px;
+  height: 15px;
+  animation-name: Pulse;
+  animation-duration: 1.0s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes 'Pulse'{
+  0%{
+         box-shadow: 0px 0px 16px #73ABFF11;
+         brightness: 1;
+  }
+
+  100%{
+         box-shadow: 0px 0px 16px #73ABFF44;
+         brightness: 3;
+  }
+}
+
+.img_collapse {
+  visibility: collapse;
+}
+
+/* .item:not(:hover) .marks {
+  animation-name: ProgressMarks;
+  animation-duration: 0.8s;
+  animation-delay: 0.1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+} */
+
+

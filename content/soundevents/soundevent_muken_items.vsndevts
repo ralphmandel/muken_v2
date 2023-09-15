@@ -1,0 +1,134 @@
+"Crit_Magical"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_src1_3d"
+
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/crit_magical.vsnd"
+						}
+					}
+
+					"volume_rand_min" 	 	{ "value"   "-0.04" }
+					"volume_rand_max" 		{ "value"   "0.06" }
+					"pitch_rand_min" 		{ "value"   "-0.050000" }
+					"pitch_rand_max"  		{ "value"   "0.050000" }
+					"pitch"  				{ "value"   "1.000000" }
+					"soundlevel"  			{ "value"   "68.000000" }
+					"distance_max"  		{ "value"   "2500.000000" }
+					"limiter_on"  			{ "value"   "0.000000" }
+					"volume"           	 	{ "value"   "0.60000" }
+				}
+			}
+		}
+	}
+}
+
+"Eternal_Wings.Active"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/weapons/hero/omniknight/guardian01.vsnd"
+							"value1"	"sounds/weapons/hero/omniknight/guardian02.vsnd"
+							"value2"	"sounds/weapons/hero/omniknight/guardian03.vsnd"
+							"value3"	"sounds/weapons/hero/omniknight/guardian04.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.00000"	}
+				}
+			}
+		}
+	}
+}
+
+"Arcane_Hammer.Start"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/item_silence_start.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.00000"	}
+				}
+			}
+		}
+	}
+}
+
+"Arcane_Hammer.End"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/item_silence_end.vsnd"
+						}
+					}
+
+					"memory_type"
+					{
+						"value"			"0"
+					}
+					"mixgroup"			{ "value"	"Weapons"	}
+					"volume"            { "value"   "1.00000"	}
+				}
+			}
+		}
+	}
+}

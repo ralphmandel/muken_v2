@@ -1,0 +1,155 @@
+"TalentTree_dasdingo"
+{
+	"Points"
+	{
+		"min_level" "2"
+		"max_level" "25"
+		"amount"	"1"
+		"special_levels"
+		{
+			"3"	"35"
+		}
+	}
+	
+	"npc_dota_hero_shadow_shaman"
+	{
+		"dasdingo_1__field" //TAB NAME
+		{ //TAB DATA
+			"1" //NLVL
+			{ //TALENTS
+				"1"   "dasdingo_1__field_rank_11" // PATH + TALENT
+				"2"   "dasdingo_1__field_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_1__field_rank_21"
+				"2"   "dasdingo_1__field_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_1__field_rank_31"
+				"2"   "dasdingo_1__field_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_1__field_rank_41"
+				"2"   "dasdingo_1__field_rank_42"
+			}
+		}
+		"dasdingo_2__tree"
+		{
+			"1"
+			{
+				"1"   "dasdingo_2__tree_rank_11"
+				"2"   "dasdingo_2__tree_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_2__tree_rank_21"
+				"2"   "dasdingo_2__tree_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_2__tree_rank_31"
+				"2"   "dasdingo_2__tree_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_2__tree_rank_41"
+				"2"   "dasdingo_2__tree_rank_42"
+			}
+		}
+		"dasdingo_3__leech"
+		{
+			"1"
+			{
+				"1"   "dasdingo_3__leech_rank_11"
+				"2"   "dasdingo_3__leech_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_3__leech_rank_21"
+				"2"   "dasdingo_3__leech_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_3__leech_rank_31"
+				"2"   "dasdingo_3__leech_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_3__leech_rank_41"
+				"2"   "dasdingo_3__leech_rank_42"
+			}
+		}
+		"dasdingo_4__tribal"
+		{
+			"1"
+			{
+				"1"   "dasdingo_4__tribal_rank_11"
+				"2"   "dasdingo_4__tribal_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_4__tribal_rank_21"
+				"2"   "dasdingo_4__tribal_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_4__tribal_rank_31"
+				"2"   "dasdingo_4__tribal_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_4__tribal_rank_41"
+				"2"   "dasdingo_4__tribal_rank_42"
+			}
+		}
+		"dasdingo_5__hex"
+		{
+			"1"
+			{
+				"1"   "dasdingo_5__hex_rank_11"
+				"2"   "dasdingo_5__hex_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_5__hex_rank_21"
+				"2"   "dasdingo_5__hex_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_5__hex_rank_31"
+				"2"   "dasdingo_5__hex_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_5__hex_rank_41"
+				"2"   "dasdingo_5__hex_rank_42"
+			}
+		}
+		"dasdingo_u__curse"
+		{
+			"1"
+			{
+				"1"   "dasdingo_u__curse_rank_11"
+				"2"   "dasdingo_u__curse_rank_12"
+			}
+			"2"
+			{
+				"1"   "dasdingo_u__curse_rank_21"
+				"2"   "dasdingo_u__curse_rank_22"
+			}
+			"3"
+			{
+				"1"   "dasdingo_u__curse_rank_31"
+				"2"   "dasdingo_u__curse_rank_32"
+			}
+			"4"
+			{
+				"1"   "dasdingo_u__curse_rank_41"
+				"2"   "dasdingo_u__curse_rank_42"
+			}
+		}
+	}	
+}

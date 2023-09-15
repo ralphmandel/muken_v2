@@ -1,0 +1,23 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/muken_info.css"/>
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/muken_info.js"/>
+    </scripts>
+    <Button hittest="false" class="InfoWindow">
+        <!-- INFO WINDOWS -->
+        <Panel hittest="false" id="InfoContainer" onactivate=''>
+            <Panel id="InfoColumnContainer_1"/>
+            <Panel id="InfoColumnContainer_2"/>
+            <Panel id="InfoColumnContainer_3"/>
+            <Panel id="InfoColumnContainer_4"/>
+        </Panel>
+        
+        <!-- INFO BUTTON -->
+        <Button hittest="true" id="InfoButton" onactivate='OnInfoButtonClick()'>
+            <Panel hittest="false" id="InfoButtonActive" class="Hide" />
+            <Label text="" />
+        </Button>
+    </Button>
+</root>
