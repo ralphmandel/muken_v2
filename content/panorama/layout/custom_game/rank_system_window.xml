@@ -1,0 +1,50 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/rank_system.css"/>
+  </styles>
+
+  <!-- <Panel class="RankTierBlocked" id="Tier-blocked1"/> -->
+
+  <Panel hittest="true" class="RootContainer">
+    <Panel id="RankContainer" hittest="false">
+      <Panel class="RankSpellContainer" hittest="false">
+
+        <Label text="TIER 3"/>
+        <Panel class="RankTier" id="Tier3" hittest="false">
+          <Button class="RankUpgraded RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Button>
+          <Button class="RankDisabled RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Button>
+        </Panel>
+
+        <Label text="TIER 2"/>
+        <Panel class="RankTier" id="Tier2" hittest="false">
+          <Panel class="RankAvailable RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Panel>
+          <Panel class="RankAvailable RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Panel>
+        </Panel>
+        
+        <Label text="TIER 1"/>
+        <Panel class="RankTier" id="Tier1" hittest="false">
+          <Panel class="RankDisabled RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Panel>
+          <Panel class="RankUpgraded RankPanel">
+            <DOTAAbilityImage id="RankImage" abilityname="" />
+          </Panel>
+        </Panel>
+        
+        <Panel class="RankName" hittest="false">
+          <Label text="curseness bond"/>
+          <Label text="RANK LEVEL"/>
+        </Panel>
+
+      </Panel>
+    </Panel>
+  </Panel>
+</root>

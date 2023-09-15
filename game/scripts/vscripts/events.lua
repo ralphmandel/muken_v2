@@ -20,22 +20,17 @@ function GameMode:OnGameRulesStateChange(keys)
 
   if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
     Timers:CreateTimer(0.5, function()
-      for team = DOTA_TEAM_CUSTOM_MIN, DOTA_TEAM_CUSTOM_MIN + 3 do
-        local players_num = PlayerResource:GetPlayerCountForTeam(team)
-        if players_num > 0 then
-          for i = 1, players_num do
-            local id = PlayerResource:GetNthPlayerIDOnTeam(team, i)
-            CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(id), "team_name_from_server", {})
-          end
-        end
-      end
+      CustomGameEventManager:Send_ServerToAllClients("team_name_from_server", {})
     end)
   end
 
   if newState == DOTA_GAMERULES_STATE_PRE_GAME then
     LoadBots()
-    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(0), "rune_panel_from_server", {})
-    --AddFOWViewer(DOTA_TEAM_CUSTOM_4, Vector(0, 0, 0), 5000, 9999, false)
+
+    Timers:CreateTimer(0.5, function()
+      CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(0), "rune_panel_from_server", {})
+      CustomGameEventManager:Send_ServerToAllClients("ranks_layout_from_lua", {})
+    end)
   end
 
   if newState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then

@@ -1,0 +1,16 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/rank_system.css"/>
+  </styles>
+  <script>
+    var context = $.GetContextPanel();
+
+    function OnRankButtonClick() {
+      context.Data().OnRankButtonClick(context.id);
+    }
+
+  </script>
+  <Panel hittest="true" class="RootButton" onactivate="OnRankButtonClick()">
+    <ToggleButton hittest="true" class="RankButton"/>
+  </Panel>
+</root>

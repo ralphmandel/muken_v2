@@ -1,10 +1,4 @@
-.RankRootContainer {
-  width: 100%;
-  height: 100%;
-  ignore-parent-flow: true;
-}
-
-.TalentButtons {
+/* .RankButtons {
   width: 300px;
   height: 50px;
   vertical-align: bottom;
@@ -14,48 +8,56 @@
   margin-left: 0px;
   
   position: -37px 16px 0px;
+} */
+
+.RootButton {
+  z-index: 100;
+  width: 20px;
+  height: 20px;
+  margin-top: 149px;
+  margin-left: 22px;
 }
 
-.talent_button {
+.RankButton {
   width: 20px;
   height: 20px;
   transition-property: background-image;
-  background-image: url("file://{images}/custom_game/talent_button_off.png");
+  background-image: url("file://{images}/custom_game/Rank_button_off.png");
   background-size: 100% 100%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   transition-duration: .12s;
-  margin-top: 149px;
-  margin-left: 22px;
 
   width: 20px;
   height: 20px;
 }
 
-.talent_button:hover {
-  background-image: url("file://{images}/custom_game/talent_button_on.png");
+.RankButton:Selected {
+  background-image: url("file://{images}/custom_game/Rank_button_on.png");
 }
 
-#TalentContainer{
+#RankContainer{
   width: 400px;
   height: 350px;
-  vertical-align: top;
-  horizontal-align: middle;
+  margin-top: 43px;
   /* margin-right: 70px;
   margin-bottom: 95px; */
-  ignore-parent-flow: true;
 }
 
-.TalentSpellContainer {
+.RootContainer {
+  z-index: -3;
+}
+
+.RankSpellContainer {
   background-image: url("s2r://panorama/images/hud/reborn/hud_custom_ti10/ability_bg_psd.vtex");
   border-radius: 5px;
   background-size: cover;
   width: 130px;
-  height: 300px;
+  height: 320px;
   flow-children: down;
 }
 
-.TalentSpellContainer Label{
+.RankSpellContainer Label{
   font-size: 15px;
   horizontal-align: center;
   text-transform: uppercase;
@@ -68,13 +70,12 @@
 
 }
 
-.talent-skill-label {
+.RankName {
   flow-children: down;
   horizontal-align: center;
 }
 
-
-.talent-skill-label Label{
+.RankName Label{
   border-top: 2px;
   border-bottom: 2px;
 
@@ -84,23 +85,55 @@
   letter-spacing: -1px;
 }
 
-.TalentTier {
+/* .RankTierBlocked{
+  width: 110px;
+  height: 55px;
+  margin: 1px 2px 0px 2px;
+  horizontal-align: center;
+  background-image: url("file://{images}/custom_game/Rank_locked2.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  z-index: 10;
+  ignore-parent-flow: true;
+  margin-left: -3px;
+} */
+
+.RankTier{
   width: 110px;
   margin: 1px 2px 0px 2px;
+  padding-left: 0px;
   flow-children: right;
   horizontal-align: center;
 }
 
-.TalentTierAvailable {
-  width: 110px;
-  margin: 1px 2px 0px 2px;
-  flow-children: right;
+.RankUpgraded{
   horizontal-align: center;
+  border: 2px solid white;
+  border-radius: 3px;
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
+}
+
+.RankDisabled{
+  horizontal-align: center;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  wash-color: #999999;
+}
+
+.RankAvailable{
+  horizontal-align: center;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( rgba(208, 195, 135, 0.462) ), to( #432c008a) );
   animation-name: Available;
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   transition-property: brightness, opacity;
+}
+
+.RankPanel{
+  margin-left: 5px;
 }
 
 @keyframes 'Available'{
@@ -118,56 +151,30 @@
   }
  }
 
- .TalentTierBlocked{
-  width: 110px;
-  height: 55px;
-  margin: 1px 2px 0px 2px;
-  horizontal-align: center;
-  background-image: url("file://{images}/custom_game/talent_locked2.png");
-  background-position: 50% 50%;
-  background-size: cover;
-  z-index: 10;
-  ignore-parent-flow: true;
-  margin-left: -3px;
-
- }
-
  .hide {
   visibility: collapse;
- }
-
- #Tier-blocked2{
-  margin-top: -55px;
- }
-
- #Tier-blocked3{
-  margin-top: -104px;
  }
 
 DOTAAbilityImage {
   width: 45px;
   height: 45px;
   padding: 1px;
-
 }
 
-.TalentSkillOn {
-  horizontal-align: center;
-  border: 2px solid white;
-  border-radius: 3px;
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
-}
+.ContainerPosLow0{margin-left: 724px;}
+.ContainerPosLow1{margin-left: 789px;}
+.ContainerPosLow2{margin-left: 984px;}
+.ContainerPosLow3{margin-left: 1049px;}
 
-.TalentSkillOff {
-  horizontal-align: center;
-  border: 1px solid #000000;
-  border-radius: 3px;
-  wash-color: #999999;
-}
+.ContainerPosMid0{margin-left: 724px;}
+.ContainerPosMid1{margin-left: 782px;}
+.ContainerPosMid2{margin-left: 898px;}
+.ContainerPosMid3{margin-left: 956px;}
+.ContainerPosMid4{margin-left: 1014px;}
 
-.TalentSkill {
-  horizontal-align: center;
-  border: 1px solid #ffffff;
-  border-radius: 3px;
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( rgba(208, 195, 135, 0.462) ), to( #432c008a) );
-}
+.ContainerPosHigh0{margin-left: 713px;}
+.ContainerPosHigh1{margin-left: 771px;}
+.ContainerPosHigh2{margin-left: 829px;}
+.ContainerPosHigh3{margin-left: 887px;}
+.ContainerPosHigh4{margin-left: 945px;}
+.ContainerPosHigh5{margin-left: 1003px;}
