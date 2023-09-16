@@ -1,0 +1,27 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/rank_system.css"/>
+  </styles>
+  <script>
+    var context = $.GetContextPanel();
+    var id = $.GetContextPanel().id;
+    var tier = id.charAt(id.length - 2);
+    var path = id.charAt(id.length - 1);
+
+    function ShowRankTooltip() {
+      context.Data().ShowRankTooltip(id, tier, path);
+    }
+
+    function HideRankTooltip() {
+      context.Data().HideRankTooltip(id, tier, path);
+    }
+
+    function OnRankClick() {
+      context.Data().OnRankClick(id, tier, path);
+    }
+  </script>
+
+  <Button class="RankStateDisabled RankPanel" onactivate="OnRankClick()" onmouseover="ShowRankTooltip()" onmouseout="HideRankTooltip()">
+    <DOTAAbilityImage id="RankImage" abilityname="" />
+  </Button>
+</root>

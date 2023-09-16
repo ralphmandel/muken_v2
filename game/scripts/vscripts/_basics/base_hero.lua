@@ -4,6 +4,7 @@ LinkLuaModifier("_general_script", "_bot_scripts/_general_script", LUA_MODIFIER_
 LinkLuaModifier("_fountain_refresh_hp", "_modifiers/_fountain_refresh_hp", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_fountain_refresh_mp", "_modifiers/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
 require("internal/talent_tree")
+require("internal/rank_system")
 
 -- INIT
 
@@ -45,53 +46,55 @@ require("internal/talent_tree")
     self.ranks_name = GetRanksList(self.abilities_name)
     self.ranks_upgraded = {}
     self.rank_points = 0
-
-    self:UpdatePanoramaRanks()
 	end
 
 -- UPDATE DATA
 
-  function base_hero:UpdatePanoramaRanks()
-		local player = self:GetCaster():GetPlayerOwner()
+  function base_hero:UpdatePanoramaRanksByName(skill_name)
+    local caster = self:GetCaster()
+		local player = caster:GetPlayerOwner()
 		if (not player) then return end
+
+    local skill_id = self:GetSkillID(skill_name)
+    if skill_id == nil then return end
 
     local list = {}
 
-    for skill = 1, #self.abilities_name, 1 do
-      list[skill] = {}
-      for tier = 1, 3, 1 do
-        list[skill][tier] = {}
-        for path = 1, 2, 1 do
-          list[skill][tier][path] = self:GetRankState(skill, tier, path)
-        end
+    for tier = 1, 3, 1 do
+      list[tier] = {}
+      for path = 1, 2, 1 do
+        list[tier][path] = {}
+        list[tier][path]["rank_name"] = self.ranks_name[skill_id][tier][path]
+        list[tier][path]["rank_state"] = self:GetRankState(skill_id, tier, path)
       end
     end
 
-		CustomGameEventManager:Send_ServerToPlayer(player, "ranks_state_from_lua", list)
+		CustomGameEventManager:Send_ServerToPlayer(player, "ranks_from_lua", {skill_name = skill_name, table = list})
 	end
 
-  function base_hero:GetRankState(skill, tier, path)
-    local rank_name = self.ranks_name[skill][tier][path]
-    if self:IsRankTrained(rank_name) then return "rank_state_upgraded" end
-    if self:IsRankAvailable(skill, tier, path) then return "rank_state_available" end
-    return "rank_state_disabled"
-  end
-
-  function base_hero:IsRankTrained(rank_name)
-    for _, rank in pairs(self.ranks_upgraded) do
-      if rank:GetAbilityName() == rank_name then
-        return true
+  function base_hero:GetSkillID(skill_name)
+    for id, name in pairs(self.abilities_name) do
+      if name == skill_name then
+        return id
       end
     end
-
-    return false
   end
 
-  function base_hero:IsRankAvailable(skill, tier, path)
+  function base_hero:GetRankState(skill_id, tier, path)
+    local caster = self:GetCaster()
+    local rank_name = self.ranks_name[skill_id][tier][path]
+    if caster:HasAbility(rank_name) then return "RankStateUpgraded" end
+    if self:IsRankAvailable(skill_id, tier, path) then return "RankStateAvailable" end
+    return "RankStateDisabled"
+  end
+
+  function base_hero:IsRankAvailable(skill_id, tier, path)
+    local caster = self:GetCaster()
     if self.rank_points < tier then return false end
+    if caster:FindAbilityByName(self.abilities_name[skill_id]):IsTrained() == false then return false end
     
-    for i_path, rank_name in pairs(self.ranks_name[skill][tier]) do
-      if path ~= i_path and self:IsRankTrained(rank_name) then
+    for i_path, rank_name in pairs(self.ranks_name[skill_id][tier]) do
+      if path ~= i_path and caster:HasAbility(rank_name) then
         return false
       end
     end
@@ -99,7 +102,7 @@ require("internal/talent_tree")
     return true
   end
 
-  function base_hero:UpgradeRank(rank_name, tier)
+  function base_hero:UpgradeRank(rank_name, skill_name, tier)
     local caster = self:GetCaster()
     local ability = caster:AddAbility(rank_name)
 
@@ -107,7 +110,7 @@ require("internal/talent_tree")
     table.insert(self.ranks_upgraded, ability)
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
-    self:UpdatePanoramaRanks()
+    self:UpdatePanoramaRanksByName(skill_name)
   end
 
 -- HERO LEVEL UP

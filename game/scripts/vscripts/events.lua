@@ -27,7 +27,7 @@ function GameMode:OnGameRulesStateChange(keys)
   if newState == DOTA_GAMERULES_STATE_PRE_GAME then
     LoadBots()
 
-    Timers:CreateTimer(0.5, function()
+    Timers:CreateTimer(1, function()
       CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(0), "rune_panel_from_server", {})
       CustomGameEventManager:Send_ServerToAllClients("ranks_layout_from_lua", {})
     end)

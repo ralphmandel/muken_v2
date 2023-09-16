@@ -106,21 +106,21 @@
   horizontal-align: center;
 }
 
-.RankUpgraded{
+.RankStateUpgraded{
   horizontal-align: center;
   border: 2px solid white;
   border-radius: 3px;
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
 }
 
-.RankDisabled{
+.RankStateDisabled{
   horizontal-align: center;
   border: 1px solid #000000;
   border-radius: 3px;
-  wash-color: #999999;
+  wash-color: #757575;
 }
 
-.RankAvailable{
+.RankStateAvailable{
   horizontal-align: center;
   border: 1px solid #ffffff;
   border-radius: 3px;

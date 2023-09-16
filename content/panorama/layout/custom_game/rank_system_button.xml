@@ -9,8 +9,16 @@
       context.Data().OnRankButtonClick(context.id);
     }
 
+    function OnMouseIn() {
+      context.Data().OnMouseIn(context.id);
+    }
+
+    function OnMouseOut() {
+      context.Data().OnMouseOut(context.id);
+    }
+
   </script>
-  <Panel hittest="true" class="RootButton" onactivate="OnRankButtonClick()">
+  <Panel hittest="true" class="RootButton" onactivate="OnRankButtonClick()" onmouseover="OnMouseIn()" onmouseout="OnMouseOut()">
     <ToggleButton hittest="true" class="RankButton"/>
   </Panel>
 </root>
