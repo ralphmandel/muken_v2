@@ -44,7 +44,6 @@ require("internal/rank_system")
 
 		self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
     self.ranks_name = GetRanksList(self.abilities_name)
-    self.ranks_upgraded = {}
     self.rank_points = 0
 	end
 
@@ -102,12 +101,16 @@ require("internal/rank_system")
     return true
   end
 
-  function base_hero:UpgradeRank(rank_name, skill_name, tier)
+  function base_hero:UpgradeRank(skill_name, tier, path)
     local caster = self:GetCaster()
-    local ability = caster:AddAbility(rank_name)
+    local skill_id = self:GetSkillID(skill_name)
+    tier = tonumber(tier)
+    path = tonumber(path)
+
+    local ability = caster:AddAbility(self.ranks_name[skill_id][tier][path])
 
     ability:UpgradeAbility(true)
-    table.insert(self.ranks_upgraded, ability)
+    self.rank_points = self.rank_points - tier
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
     self:UpdatePanoramaRanksByName(skill_name)
@@ -166,6 +169,4 @@ require("internal/rank_system")
 
   function base_hero:UpdateRankPoints(points)
 		self.rank_points = self.rank_points + points
-
-		self:UpdatePanoramaState()
 	end

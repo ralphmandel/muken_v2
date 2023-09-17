@@ -24,8 +24,11 @@ function base_hero_mod:OnRefresh(kv)
 end
 
 function base_hero_mod:OnIntervalThink()
-  local player = self.parent:GetPlayerOwner()
-  CustomGameEventManager:Send_ServerToPlayer(player, "portrait_request_from_server", {})
+  if self.parent:IsControllableByAnyPlayer() then
+    local player = self.parent:GetPlayerOwner()
+    CustomGameEventManager:Send_ServerToPlayer(player, "portrait_request_from_server", {})
+    CustomGameEventManager:Send_ServerToPlayer(player, "rank_window_position_from_lua", {})    
+  end
 end
 
 ------------------------------------------------------------

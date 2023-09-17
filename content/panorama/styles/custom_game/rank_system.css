@@ -117,7 +117,7 @@
   horizontal-align: center;
   border: 1px solid #000000;
   border-radius: 3px;
-  wash-color: #757575;
+  wash-color: #484848;
 }
 
 .RankStateAvailable{
@@ -161,20 +161,20 @@ DOTAAbilityImage {
   padding: 1px;
 }
 
-.ContainerPosLow0{margin-left: 724px;}
-.ContainerPosLow1{margin-left: 789px;}
-.ContainerPosLow2{margin-left: 984px;}
-.ContainerPosLow3{margin-left: 1049px;}
+.FourAbilities .Ability0{margin-left: 724px;}
+.FourAbilities .Ability1{margin-left: 789px;}
+.FourAbilities .Ability2{margin-left: 854px;}
+.FourAbilities .Ability3{margin-left: 919px;}
 
-.ContainerPosMid0{margin-left: 724px;}
-.ContainerPosMid1{margin-left: 782px;}
-.ContainerPosMid2{margin-left: 898px;}
-.ContainerPosMid3{margin-left: 956px;}
-.ContainerPosMid4{margin-left: 1014px;}
+.FiveAbilities .Ability0{margin-left: 724px;}
+.FiveAbilities .Ability1{margin-left: 782px;}
+.FiveAbilities .Ability2{margin-left: 840px;}
+.FiveAbilities .Ability3{margin-left: 898px;}
+.FiveAbilities .Ability4{margin-left: 956px;}
 
-.ContainerPosHigh0{margin-left: 713px;}
-.ContainerPosHigh1{margin-left: 771px;}
-.ContainerPosHigh2{margin-left: 829px;}
-.ContainerPosHigh3{margin-left: 887px;}
-.ContainerPosHigh4{margin-left: 945px;}
-.ContainerPosHigh5{margin-left: 1003px;}
+.SixAbilities .Ability0{margin-left: 713px;}
+.SixAbilities .Ability1{margin-left: 771px;}
+.SixAbilities .Ability2{margin-left: 829px;}
+.SixAbilities .Ability3{margin-left: 887px;}
+.SixAbilities .Ability4{margin-left: 945px;}
+.SixAbilities .Ability5{margin-left: 1003px;}
