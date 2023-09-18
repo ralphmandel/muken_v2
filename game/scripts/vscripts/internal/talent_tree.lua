@@ -20,7 +20,7 @@ function TalentTree:InitPanaromaEvents()
   
   CustomGameEventManager:RegisterListener("role_bar_update", Dynamic_Wrap(TalentTree, 'OnRoleBarRequest'))
   CustomGameEventManager:RegisterListener("scoreboard_update", Dynamic_Wrap(TalentTree, 'OnScoreRequest'))
-  CustomGameEventManager:RegisterListener("portrait_unit_update", Dynamic_Wrap(TalentTree, 'OnPortraitUpdate'))
+  CustomGameEventManager:RegisterListener("request_unit_info_from_panorama", Dynamic_Wrap(TalentTree, 'OnPortraitUpdate'))
   CustomGameEventManager:RegisterListener("game_points_from_server", Dynamic_Wrap(TalentTree, 'GamePointsUpdate'))
 end
 
@@ -99,7 +99,7 @@ function TalentTree:OnPortraitUpdate(event)
     buff_amp = BaseStats(entity):GetTotalBuffAmpPercent()
   }
 
-  CustomGameEventManager:Send_ServerToPlayer(player, "info_state_from_server", info)
+  CustomGameEventManager:Send_ServerToPlayer(player, "unit_info_from_lua", info)
 end
 
 function TalentTree:OnTalentTreeTalentsRequest(event)

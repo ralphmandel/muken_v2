@@ -25,8 +25,10 @@ end
 
 function base_hero_mod:OnIntervalThink()
   if self.parent:IsControllableByAnyPlayer() then
-    local player = self.parent:GetPlayerOwner()
-    CustomGameEventManager:Send_ServerToPlayer(player, "portrait_request_from_server", {})
+		local player = self:GetCaster():GetPlayerOwner()
+		if (not player) then return end
+
+    CustomGameEventManager:Send_ServerToPlayer(player, "unit_info_request_from_lua", {})
   end
 end
 

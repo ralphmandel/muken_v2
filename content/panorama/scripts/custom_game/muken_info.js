@@ -90,9 +90,8 @@ var isWindowOpened = true;
     }
   }
 
-  function OnPortraitRequest() {
-    var nEntityIndex = Players.GetLocalPlayerPortraitUnit()
-    GameEvents.SendCustomGameEventToServer("portrait_unit_update", {entity: nEntityIndex})
+  function OnUnitInfoUpdate(event) {
+    GameEvents.SendCustomGameEventToServer("request_unit_info_from_panorama", {"entity": Players.GetLocalPlayerPortraitUnit()})
   }
 
 //INIT
@@ -106,8 +105,8 @@ var isWindowOpened = true;
     INFO_CONTAINER[3] = $("#InfoColumnContainer_3");
     INFO_CONTAINER[4] = $("#InfoColumnContainer_4");
 
-    GameEvents.Subscribe("portrait_request_from_server", OnPortraitRequest);
-    GameEvents.Subscribe("info_state_from_server", OnInfoUpdate);
+    GameEvents.Subscribe("unit_info_from_lua", OnInfoUpdate);
+    GameEvents.Subscribe("unit_info_request_from_lua", OnUnitInfoUpdate);
 
     CreateLayout()
     // SetOpenState(isWindowOpened)
