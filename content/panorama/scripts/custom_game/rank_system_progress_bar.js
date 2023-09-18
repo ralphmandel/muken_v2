@@ -20,18 +20,18 @@ function OnPortraitChanged(nEntityIndex) {
 
 function OnBarUpdate(event) {
   if (event.entity == Players.GetLocalPlayerPortraitUnit()) {
-    XP_LABEL.text = event.rank_level + " / 15";
-    PROGRESS_BAR_LABEL.text = event.points;
-    PROGRESS_BAR_CIRCULAR.value(parseInt(event.rank_level));
-    PROGRESS_BAR_CIRCULAR.min(0);
-    PROGRESS_BAR_CIRCULAR.max(15);
-    PROGRESS_BAR_CIRCULAR_BLUR.value(parseInt(event.rank_level));
-    PROGRESS_BAR_CIRCULAR_BLUR.min(0);
-    PROGRESS_BAR_CIRCULAR_BLUR.max(15);
-    PROGRESS_BAR_LIFETIME.value(parseInt(event.rank_level));
-    PROGRESS_BAR_LIFETIME.min(0);
-    PROGRESS_BAR_LIFETIME.max(15);
-    PROGRESS_BAR_LIFETIME.valuePerNotch(1);
+    // XP_LABEL.text = event.rank_level + " / 15";
+    // PROGRESS_BAR_LABEL.text = event.points;
+    // PROGRESS_BAR_CIRCULAR.value(parseInt(event.rank_level));
+    // PROGRESS_BAR_CIRCULAR.min(0);
+    // PROGRESS_BAR_CIRCULAR.max(15);
+    // PROGRESS_BAR_CIRCULAR_BLUR.value(parseInt(event.rank_level));
+    // PROGRESS_BAR_CIRCULAR_BLUR.min(0);
+    // PROGRESS_BAR_CIRCULAR_BLUR.max(15);
+    // PROGRESS_BAR_LIFETIME.value(parseInt(event.rank_level));
+    // PROGRESS_BAR_LIFETIME.min(0);
+    // PROGRESS_BAR_LIFETIME.max(15);
+    // PROGRESS_BAR_LIFETIME.valuePerNotch(1);
   }
 }
 
@@ -43,6 +43,10 @@ function OnBarUpdate(event) {
   PROGRESS_BAR_CIRCULAR = $("#CircularXPProgress");
   PROGRESS_BAR_CIRCULAR_BLUR = $("#CircularXPProgressBlur");
   PROGRESS_BAR_LIFETIME = $("#LifetimeProgress");
+  var rank_bar = $.GetContextPanel().FindChildTraverse("RankXPProgress_FG");
+  $.Msg('MONSTER',rank_bar);
+  rank_bar.style.clip = "radial( 50% 50%, 0deg, 180deg )";
+
 })()
 
 $.RegisterForUnhandledEvent("DOTAHudUpdate", () => {

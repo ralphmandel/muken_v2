@@ -28,7 +28,7 @@
   opacity: 1.0;
  }
 
- #CircularXPProgressBlur{
+ #RankXPProgressBlur{
 
   blur: gaussian ( 5 );
   z-index: -1;
@@ -68,7 +68,7 @@
  }
 
 
-#CircularXPProgressBlur,#CircularXPProgress{
+#RankXPProgressBlur,#RankXPProgress{
 
 
   visibility: visible;
@@ -89,7 +89,7 @@
   background-color: #121212;
  }
 
- #CircularXPProgressBlur, #CircularXPProgress{
+ #RankXPProgressBlur, #RankXPProgress{
 
 
   visibility: visible;
@@ -106,20 +106,20 @@
      height: 48px;
  }
 
- #CircularXPProgressBlur_FG,#CircularXPProgress_FG{
+ #RankXPProgressBlur_FG,#RankXPProgress_FG{
 
 
   width: 100%;
   height: 100%;
      border-radius: 50%;
-     border: 1.5px solid #E7D291;
+     border: 2px solid #5bbadf;
      z-index: 50;
   transition-property: clip;
   transition-duration: .2s;
   transition-timing-function: ease-in-out;
  }
 
- #CircularXPProgressBlur_BG,#CircularXPProgress_BG{
+ #RankXPProgressBlur_BG,#RankXPProgress_BG{
 
 
   width: 100%;
@@ -131,12 +131,12 @@
  }
 
 
- #CircularXPProgressBlur_FG{
+ #RankXPProgressBlur_FG{
 
   border: 2px solid #DA6F00;
  }
 
- #CircularXPProgressBlur_BG{
+ #RankXPProgressBlur_BG{
 
   border-color: #000000;
  }
@@ -175,7 +175,7 @@
  }
 
 #LifetimeProgress{
-  visibility: visible;
+  visibility: collapse;
  }
 
 #LifetimeProgress_Left{
