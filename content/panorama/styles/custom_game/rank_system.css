@@ -99,11 +99,21 @@
 } */
 
 .RankTier{
-  width: 110px;
-  margin: 1px 2px 0px 2px;
-  padding-left: 0px;
+  height: 52px;
+  width: 120px;
+  margin-left: 5px;
   flow-children: right;
-  horizontal-align: center;
+}
+
+.RankPanel{
+  margin-left: 6px;
+  margin-right: 1px;
+  vertical-align: middle;
+}
+
+.ShowAbilityLeft {
+  margin-left: 5px;
+  margin-right: 0px;
 }
 
 .RankStateUpgraded{
@@ -132,10 +142,6 @@
   transition-property: brightness, opacity;
 }
 
-.RankPanel{
-  margin-left: 5px;
-}
-
 @keyframes 'Available'{
   0%{
     opacity: 0.9;
@@ -156,15 +162,20 @@
  }
 
 DOTAAbilityImage {
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   padding: 1px;
 }
 
-.FourAbilities .Ability0{margin-left: 724px;}
-.FourAbilities .Ability1{margin-left: 789px;}
-.FourAbilities .Ability2{margin-left: 854px;}
-.FourAbilities .Ability3{margin-left: 919px;}
+.ShowAbility {
+  width: 48px;
+  height: 48px;
+}
+
+.Ability0{margin-left: 724px;}
+.Ability1{margin-left: 789px;}
+.Ability2{margin-left: 854px;}
+.Ability3{margin-left: 919px;}
 
 .FiveAbilities .Ability0{margin-left: 724px;}
 .FiveAbilities .Ability1{margin-left: 782px;}

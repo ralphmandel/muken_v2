@@ -5,41 +5,55 @@ var rank_states = {
 };
 
 var current_id = "Ability0";
+var bFiveAbilities = false;
+var bSixAbilities = false;
 
 (function(){
   GameEvents.Subscribe("ranks_layout_from_lua", CreateLayout);
   GameEvents.Subscribe("ranks_from_lua", OnRankPanelUpdate);
-  GameEvents.Subscribe("skill_name_from_lua", OnRanksRequest);
-  GameEvents.Subscribe("rank_window_position_from_lua", OnRankPositionUpdate);
+  GameEvents.Subscribe("skill_name_from_lua", SendRanksRequest);
+  GameEvents.Subscribe("update_rank_window_from_lua", SendRankWindowUpdateRequest);
   
   CreateLayout();
 })()
 
-function OnRanksRequest(event) {
+function OnRankButtonClick(id) {
+  Game.EmitSound("General.SelectAction");
+
+  current_id = id;
+
+  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
+    if (button_id == id) {
+      if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
+        RANK_WINDOW.style.visibility = "visible";
+      } else {
+        RANK_WINDOW.style.visibility = "collapse";
+      }
+    } else {
+      BUTTON_LAYOUT[button_id].GetChild(0).SetSelected(false);
+    }
+  }
+
+  SendRankWindowUpdateRequest();
+}
+
+function SendRankWindowUpdateRequest(event) {  
+  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
+    if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
+      GameEvents.SendCustomGameEventToServer("request_skill_name_from_panorama", {"id": button_id});
+    }
+  }
+}
+
+function SendRanksRequest(event) {
+  var lower_hud_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
+  bFiveAbilities = lower_hud_panel.BHasClass("FiveAbilities");
+  bSixAbilities = lower_hud_panel.BHasClass("SixAbilities");
+
   var abilities_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("abilities");
   var skill_name = abilities_panel.FindChildTraverse(event.id).FindChildTraverse("AbilityImage").abilityname;
 
   GameEvents.SendCustomGameEventToServer("ranks_from_panorama", {"skill_name": skill_name});
-}
-
-function OnRankPositionUpdate(event) {
-  var lower_hud_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
-  var type = "FourAbilities";
-  
-  if (lower_hud_panel.BHasClass("FiveAbilities")) {type = "FiveAbilities"}
-  if (lower_hud_panel.BHasClass("SixAbilities")) {type = "SixAbilities"}
-
-  $.Msg(type, current_id);
-
-  RANK_WINDOW.SetHasClass("FourAbilities", type == "FourAbilities");
-  RANK_WINDOW.SetHasClass("FiveAbilities", type == "FiveAbilities");
-  RANK_WINDOW.SetHasClass("SixAbilities", type == "SixAbilities");
-  RANK_WINDOW.SetHasClass("Ability0", current_id == "Ability0");
-  RANK_WINDOW.SetHasClass("Ability1", current_id == "Ability1");
-  RANK_WINDOW.SetHasClass("Ability2", current_id == "Ability2");
-  RANK_WINDOW.SetHasClass("Ability3", current_id == "Ability3");
-  RANK_WINDOW.SetHasClass("Ability4", current_id == "Ability4");
-  RANK_WINDOW.SetHasClass("Ability5", current_id == "Ability5");
 }
 
 function OnRankPanelUpdate(event) {
@@ -54,37 +68,36 @@ function OnRankPanelUpdate(event) {
 
   RANK_PANELS["skill_name"] = event.skill_name;
   RANK_WINDOW_TITLE.FindChildTraverse("SkillName").text = $.Localize("#DOTA_Tooltip_ability_" + event.skill_name);
+  UpdateRankPosition();
 }
 
-function OnRankButtonClick(id) {
-  Game.EmitSound("General.SelectAction");
-
-  current_id = id;
-
-  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
-    if (button_id == id) {
-      if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
-        RANK_WINDOW.style.visibility = "visible";
-        GameEvents.SendCustomGameEventToServer("request_skill_name_from_panorama", {"id": button_id});
-      } else {
-        RANK_WINDOW.style.visibility = "collapse";
-      }
-    } else {
-      BUTTON_LAYOUT[button_id].GetChild(0).SetSelected(false);
-    }
-  }
+function UpdateRankPosition() {
+  RANK_WINDOW.SetHasClass("FiveAbilities", bFiveAbilities);
+  RANK_WINDOW.SetHasClass("SixAbilities", bSixAbilities);
+  RANK_WINDOW.SetHasClass("Ability0", current_id == "Ability0");
+  RANK_WINDOW.SetHasClass("Ability1", current_id == "Ability1");
+  RANK_WINDOW.SetHasClass("Ability2", current_id == "Ability2");
+  RANK_WINDOW.SetHasClass("Ability3", current_id == "Ability3");
+  RANK_WINDOW.SetHasClass("Ability4", current_id == "Ability4");
+  RANK_WINDOW.SetHasClass("Ability5", current_id == "Ability5");
 }
 
 function ShowRankTooltip(id, tier, path) {
   var rank_image = RANK_PANELS[tier][path].GetChild(0);
   $.DispatchEvent("DOTAShowAbilityTooltip", rank_image, rank_image.abilityname);
   Game.EmitSound("Config.Move");
+
+  rank_image.SetHasClass("ShowAbility", true);
+  RANK_PANELS[tier][path].SetHasClass("ShowAbilityLeft", true);
 }
 
 function HideRankTooltip(id, tier, path) {
   var rank_image = RANK_PANELS[tier][path].GetChild(0);
   $.DispatchEvent("DOTAHideAbilityTooltip", rank_image);
   Game.EmitSound("Config.Move");
+
+  rank_image.SetHasClass("ShowAbility", false);
+  RANK_PANELS[tier][path].SetHasClass("ShowAbilityLeft", false);
 }
 
 function OnRankClick(id, tier, path) {

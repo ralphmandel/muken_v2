@@ -52,6 +52,7 @@ require("internal/rank_system")
   function base_hero:UpdatePanoramaRanksByName(skill_name)
     local caster = self:GetCaster()
 		local player = caster:GetPlayerOwner()
+    if caster:IsControllableByAnyPlayer() == false then return end
 		if (not player) then return end
 
     local skill_id = self:GetSkillID(skill_name)
@@ -165,8 +166,21 @@ require("internal/rank_system")
 				end
 			end
 		end
+
+    self:UpdatePanoramaRankWindow()
 	end
 
   function base_hero:UpdateRankPoints(points)
 		self.rank_points = self.rank_points + points
+    self:UpdatePanoramaRankWindow()
+	end
+
+  function base_hero:UpdatePanoramaRankWindow()
+    local caster = self:GetCaster()
+    if caster:IsControllableByAnyPlayer() == false then return end
+
+		local player = caster:GetPlayerOwner()
+		if (not player) then return end
+
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_rank_window_from_lua", {})    
 	end
