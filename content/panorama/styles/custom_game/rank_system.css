@@ -10,6 +10,12 @@
   position: -37px 16px 0px;
 } */
 
+#RankWindowRoot {
+  transform: translateY(0px);
+  opacity: 1;
+  transition: transform 0.1s ease-in-out 0s, opacity 0.1s ease-in-out 0s;
+}
+
 .RootButton {
   z-index: 100;
   width: 20px;

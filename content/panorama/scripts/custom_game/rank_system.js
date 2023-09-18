@@ -27,8 +27,11 @@ function OnRankButtonClick(id) {
     if (button_id == id) {
       if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
         window_visibility_state = "visible";
+        RANK_WINDOW.style.transform = "translateY(0px)";
+        RANK_WINDOW.style.opacity = "1";
       } else {
-        window_visibility_state = "collapse";
+        RANK_WINDOW.style.transform = "translateY(400px)";
+        RANK_WINDOW.style.opacity = "0";
         RANK_WINDOW.style.visibility = window_visibility_state;
       }
     } else {
