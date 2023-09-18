@@ -7,6 +7,7 @@ var rank_states = {
 var current_id = "Ability0";
 var bFiveAbilities = false;
 var bSixAbilities = false;
+var window_visibility_state = "collapse";
 
 (function(){
   GameEvents.Subscribe("ranks_layout_from_lua", CreateLayout);
@@ -25,9 +26,10 @@ function OnRankButtonClick(id) {
   for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
     if (button_id == id) {
       if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
-        RANK_WINDOW.style.visibility = "visible";
+        window_visibility_state = "visible";
       } else {
-        RANK_WINDOW.style.visibility = "collapse";
+        window_visibility_state = "collapse";
+        RANK_WINDOW.style.visibility = window_visibility_state;
       }
     } else {
       BUTTON_LAYOUT[button_id].GetChild(0).SetSelected(false);
@@ -80,6 +82,7 @@ function UpdateRankPosition() {
   RANK_WINDOW.SetHasClass("Ability3", current_id == "Ability3");
   RANK_WINDOW.SetHasClass("Ability4", current_id == "Ability4");
   RANK_WINDOW.SetHasClass("Ability5", current_id == "Ability5");
+  RANK_WINDOW.style.visibility = window_visibility_state;
 }
 
 function ShowRankTooltip(id, tier, path) {
@@ -110,7 +113,7 @@ function OnRankClick(id, tier, path) {
 }
 
 function OnMouseIn(id) {
-  Game.EmitSound("Config.Move");
+  //Game.EmitSound("Config.Move");
 }
 
 function OnMouseOut(id) {
