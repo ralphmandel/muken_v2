@@ -34,26 +34,26 @@
       </Panel>
       <Panel class="item" id="item_category_def" onmouseover="OnOverCategoryDef()" onmouseout="OnOutCategoryDef()">
         <Image src="file://{resources}/images/custom_game/self_def.png" class="Image_class"/>
-          <Panel class="skill-box" id="category_def">
-                  <Panel id="m1">
+            <Panel class="skill-box" id="category_def">
+                <Panel id="m1">
                   <Panel></Panel>
-              </Panel>
-              <Panel id="m2">
+                </Panel>
+                <Panel id="m2">
                   <Panel></Panel>
-              </Panel>
-              <Panel id="m3">
+                </Panel>
+                <Panel id="m3">
                   <Panel></Panel>
-              </Panel>
-              <Panel id="m4">
+                </Panel>
+                <Panel id="m4">
                   <Panel></Panel>
-              </Panel>
-              <Panel id="m5">
+                </Panel>
+                <Panel id="m5">
                   <Panel></Panel>
-              </Panel>
-              <Panel id="m6">
+                </Panel>
+                <Panel id="m6">
                   <Panel></Panel>
-              </Panel>
-        </Panel>
+                </Panel>
+            </Panel>
       </Panel>
       <Panel class="item" id="item_category_esc" onmouseover="OnOverCategoryEsc()" onmouseout="OnOutCategoryEsc()">
         <Image src="file://{resources}/images/custom_game/self_escape.png" class="Image_class"/>

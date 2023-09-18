@@ -6,78 +6,70 @@
 #PointsContainer {
   width: fill-parent-flow( 1.0 );
   height: fill-parent-flow( 1.0 );
-  vertical-align: center;
-  horizontal-align: center;
-  opacity: 1.0;
-  transform: none;
-  
-  transition-property: opacity, transform, pre-transform-scale2d, wash-color;
-  transition-duration: 0.4s;
-  transition-delay: 0.0s;
-  transition-timing-function: ease-in-out;
-  box-shadow: #00000099 -4px -4px 8px 8px;
   flow-children: down;
-  padding: 2px;
+  padding: 5px;
   background-color: gradient( linear, 100% 0%, 100% 100%, from( #111111 ), color-stop( 0.00, #272b30 ), color-stop( 0.6, #181a1e ), to( #181a1e ) );
-  
   border: 2px solid white;
-     border-brush: gradient( linear, -50% 0%, 0% 100%, from( #fff ), to( #586e6c) );
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #fff ), to( #586e6c) );
 }
 
 .bottom-button-container{
-  width: 100%;
+  width: 180px;
   height: fill-parent-flow( 1.0 );
   flow-children: down;
-  border-bottom: 2px solid black;
-  horizontal-align: center;
- 
+  horizontal-align: left;
+  padding: 5px;
+  margin-left: 5px;
+  border-right: 1px solid #49525555;
  }
 
  .bottom-radio-button{
   height: 30px;
+  width: 150px;
   flow-children: right;
-  horizontal-align: center;
+  horizontal-align: left;
+  wash-color: #99999970;
  }
 
- .bottom-radio-button Image{
-  opacity: 0;
-  height: 30px;
-  width: 30px;
+ .img_selected{
+  width: 22px;
+  height: 22px;
+  transition-property: background-image;
+  background-image: url("file://{images}/custom_game/radio_button_off3.png");
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; 
+  vertical-align: center;
  }
 
  .bottom-radio-button Label{
-  font-size: 24px;
+
+  font-size: 22px;
+  padding-bottom: -5px;
   vertical-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal;
   color: #c9c9c9;
+  horizontal-align: right;
  }
 
- .bottom-radio-button:hover {
-    pre-transform-scale2d: 1.15;
- }
+
 
  .bottom-radio-button:Selected Label{
-  brightness: 5;
+  brightness: 2;
   wash-color: none;
+  color: #e9e8e8;
  }
  
- .bottom-radio-button:Selected Image{
-  opacity: 1;
+ .bottom-radio-button:Selected .img_selected{
 
+  background-image: url("file://{images}/custom_game/radio_button_on3.png");
  }
 
- .bottom-radio-button:Selected{
-  opacity: 1;
-  pre-transform-scale2d: 1.1;
- }
-
-
- .bottom-radio-separator{
-  margin-left: 10px;
-  margin-right: 5px;
-  font-size: 22px;
-  vertical-align: center;
-  color: #aaa;
+ .divider{
+  width: 100%;
+  height: 1px;
+  background-color: #49525555;
+  margin-bottom: 15px;
  }
