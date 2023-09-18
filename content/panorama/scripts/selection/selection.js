@@ -67,7 +67,7 @@ function Selection_Reset(msg)
 function OnUpdateSelectedUnit()
 {
     var nEntityIndex = Players.GetLocalPlayerPortraitUnit()
-    //$.Msg( "teste 01 ", Entities.GetUnitName(nEntityIndex) );
+    //$.Msg("teste 01 ", Entities.GetUnitName(nEntityIndex));
     
     if (skip == true){
         skip = false;
@@ -99,8 +99,8 @@ function GetSelectionOverride(entityIndex) {
 function OnUpdateQueryUnit()
 {
     var nEntityIndex = Players.GetLocalPlayerPortraitUnit()
-    $.Msg("teste 02 ", Entities.GetUnitName(nEntityIndex));
-    $.Msg( "OnUpdateQueryUnit ", Players.GetQueryUnit(Players.GetLocalPlayer()));
+    //$.Msg("teste 02", Entities.GetUnitName(nEntityIndex));
+    //$.Msg("teste 03", Players.GetQueryUnit(Players.GetLocalPlayer()));
 }
 
 (function () {

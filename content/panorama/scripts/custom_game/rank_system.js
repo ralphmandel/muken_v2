@@ -7,16 +7,56 @@ var rank_states = {
 var current_id = "Ability0";
 var bFiveAbilities = false;
 var bSixAbilities = false;
-var window_visibility_state = "collapse";
+var isWindowOpened = false;
+var current_portrait_entity = "";
+var panels_init = false;
 
 (function(){
   GameEvents.Subscribe("ranks_layout_from_lua", CreateLayout);
   GameEvents.Subscribe("ranks_from_lua", OnRankPanelUpdate);
   GameEvents.Subscribe("skill_name_from_lua", SendRanksRequest);
   GameEvents.Subscribe("update_rank_window_from_lua", SendRankWindowUpdateRequest);
-  
-  CreateLayout();
+  GameEvents.Subscribe("set_rank_buttons_from_lua", SetRankButtonsVisibility);
+  GameEvents.Subscribe("dota_player_update_selected_unit", OnUpdateSelectedUnit);
+  GameEvents.Subscribe("dota_player_update_query_unit", OnUpdateQueryUnit);
 })()
+
+function OnUpdateSelectedUnit() {
+  var nEntityIndex = Players.GetLocalPlayerPortraitUnit();
+  if (nEntityIndex != current_portrait_entity) {OnPortraitChanged(nEntityIndex)}
+}
+
+function OnUpdateQueryUnit() {
+  var nEntityIndex = Players.GetLocalPlayerPortraitUnit();
+  if (nEntityIndex != current_portrait_entity) {OnPortraitChanged(nEntityIndex)}
+}
+
+function OnPortraitChanged(nEntityIndex) {
+  if (panels_init == false) {return}
+
+  current_portrait_entity = nEntityIndex;
+  isWindowOpened = false;
+  RANK_WINDOW.style.transform = "translateY(400px)";
+  RANK_WINDOW.style.opacity = "0";
+
+  GameEvents.SendCustomGameEventToServer("request_buttons_state_from_panorama", {"entity": nEntityIndex});
+
+  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
+    if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
+      BUTTON_LAYOUT[button_id].GetChild(0).SetSelected(false);
+    }
+  }
+}
+
+function SetRankButtonsVisibility(event) {
+  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
+    if (event.bEnable == true) {
+      BUTTON_LAYOUT[button_id].style.visibility = "visible";
+    } else {
+      BUTTON_LAYOUT[button_id].style.visibility = "collapse";
+    }
+  }
+}
 
 function OnRankButtonClick(id) {
   Game.EmitSound("General.SelectAction");
@@ -26,26 +66,26 @@ function OnRankButtonClick(id) {
   for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
     if (button_id == id) {
       if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
-        window_visibility_state = "visible";
-        RANK_WINDOW.style.transform = "translateY(0px)";
-        RANK_WINDOW.style.opacity = "1";
+        isWindowOpened = true;
       } else {
+        isWindowOpened = false;
         RANK_WINDOW.style.transform = "translateY(400px)";
         RANK_WINDOW.style.opacity = "0";
-        RANK_WINDOW.style.visibility = window_visibility_state;
       }
     } else {
       BUTTON_LAYOUT[button_id].GetChild(0).SetSelected(false);
     }
   }
 
-  SendRankWindowUpdateRequest();
+  SendRankWindowUpdateRequest({"entity": current_portrait_entity});
 }
 
-function SendRankWindowUpdateRequest(event) {  
-  for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
-    if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
-      GameEvents.SendCustomGameEventToServer("request_skill_name_from_panorama", {"id": button_id});
+function SendRankWindowUpdateRequest(event) {
+  if (event.entity == Players.GetLocalPlayerPortraitUnit()) {
+    for (const [button_id, button] of Object.entries(BUTTON_LAYOUT)) {
+      if (BUTTON_LAYOUT[button_id].GetChild(0).checked == true) {
+        GameEvents.SendCustomGameEventToServer("request_skill_name_from_panorama", {"id": button_id});
+      }
     }
   }
 }
@@ -58,7 +98,7 @@ function SendRanksRequest(event) {
   var abilities_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("abilities");
   var skill_name = abilities_panel.FindChildTraverse(event.id).FindChildTraverse("AbilityImage").abilityname;
 
-  GameEvents.SendCustomGameEventToServer("ranks_from_panorama", {"skill_name": skill_name});
+  GameEvents.SendCustomGameEventToServer("ranks_from_panorama", {"skill_name": skill_name, "entity": Players.GetLocalPlayerPortraitUnit()});
 }
 
 function OnRankPanelUpdate(event) {
@@ -77,15 +117,18 @@ function OnRankPanelUpdate(event) {
 }
 
 function UpdateRankPosition() {
+  for(var i = 0; i <= 5; i++) {
+    var class_name = "Ability" + i;
+    RANK_WINDOW.SetHasClass(class_name, current_id == class_name);
+  }
+
   RANK_WINDOW.SetHasClass("FiveAbilities", bFiveAbilities);
   RANK_WINDOW.SetHasClass("SixAbilities", bSixAbilities);
-  RANK_WINDOW.SetHasClass("Ability0", current_id == "Ability0");
-  RANK_WINDOW.SetHasClass("Ability1", current_id == "Ability1");
-  RANK_WINDOW.SetHasClass("Ability2", current_id == "Ability2");
-  RANK_WINDOW.SetHasClass("Ability3", current_id == "Ability3");
-  RANK_WINDOW.SetHasClass("Ability4", current_id == "Ability4");
-  RANK_WINDOW.SetHasClass("Ability5", current_id == "Ability5");
-  RANK_WINDOW.style.visibility = window_visibility_state;
+
+  if (isWindowOpened == true) {
+    RANK_WINDOW.style.transform = "translateY(0px)";
+    RANK_WINDOW.style.opacity = "1";
+  }
 }
 
 function ShowRankTooltip(id, tier, path) {
@@ -107,11 +150,13 @@ function HideRankTooltip(id, tier, path) {
 }
 
 function OnRankClick(id, tier, path) {
-  if (RANK_PANELS[tier][path].BHasClass(rank_states[2])) {
-    Game.EmitSound("Config.Ok");
-    GameEvents.SendCustomGameEventToServer("rank_up_from_panorama", {
-      "skill_name": RANK_PANELS["skill_name"], "tier": tier, "path": path
-    });
+  if (Game.GetLocalPlayerInfo().player_selected_hero_entity_index == current_portrait_entity) {
+    if (RANK_PANELS[tier][path].BHasClass(rank_states[2])) {
+      Game.EmitSound("Config.Ok");
+      GameEvents.SendCustomGameEventToServer("rank_up_from_panorama", {
+        "skill_name": RANK_PANELS["skill_name"], "tier": tier, "path": path, "entity": current_portrait_entity
+      });
+    }
   }
 }
 
@@ -128,7 +173,9 @@ function CreateLayout(){
 
   RANK_WINDOW = $.CreatePanel("Panel", lower_hud_panel, "RankWindowRoot");
   RANK_WINDOW.BLoadLayout("file://{resources}/layout/custom_game/rank_system_window.xml", false, false);
-  RANK_WINDOW.style.visibility = "collapse";
+  RANK_WINDOW.style.transform = "translateY(400px)";
+  RANK_WINDOW.style.opacity = "0";
+
   RANK_WINDOW_TITLE = RANK_WINDOW.FindChildTraverse("Title");
 
   for(var tier = 1; tier <= 3; tier++) {
@@ -154,4 +201,7 @@ function CreateLayout(){
     abilities_panel.GetChild(i).MoveChildBefore(BUTTON_LAYOUT[id], abilities_panel.GetChild(i).FindChildTraverse("ButtonAndLevel"));
     abilities_panel.GetChild(i).FindChildTraverse("LevelUp0").style.visibility = "collapse";
   }
+
+  panels_init = true;
+  OnPortraitChanged(Players.GetLocalPlayerPortraitUnit());
 }

@@ -15,6 +15,7 @@ function RankSystem:InitPanaromaEvents()
   CustomGameEventManager:RegisterListener("ranks_from_panorama", Dynamic_Wrap(RankSystem, 'OnRanksTableRequest'))
   CustomGameEventManager:RegisterListener("rank_up_from_panorama", Dynamic_Wrap(RankSystem, 'OnRankUpgrade'))
   CustomGameEventManager:RegisterListener("request_skill_name_from_panorama", Dynamic_Wrap(RankSystem, 'OnSkillNameRequest'))
+  CustomGameEventManager:RegisterListener("request_buttons_state_from_panorama", Dynamic_Wrap(RankSystem, 'OnButtonsStateRequest'))
 end
 
 function RankSystem:OnSkillNameRequest(event)
@@ -32,21 +33,35 @@ function RankSystem:OnRanksTableRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local hero = player:GetAssignedHero()
-  if (not hero) then return end
+  local hero = EntIndexToHScript(event.entity)
+  if (not hero) then RankSystem:OnButtonsStateRequest(event) return end
+  if BaseHero(hero) == nil then RankSystem:OnButtonsStateRequest(event) return end
 
-  if BaseHero(hero) == nil then return end
 
-  BaseHero(hero):UpdatePanoramaRanksByName(event.skill_name)
+  BaseHero(hero):UpdatePanoramaRanksByName(player, event.skill_name)
 end
 
-function RankSystem:OnRankUpgrade(event)
+function RankSystem:OnButtonsStateRequest(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local hero = player:GetAssignedHero()
+  local bEnable = false
+  local hero = EntIndexToHScript(event.entity)
+  if hero then
+    if BaseHero(hero) then
+      bEnable = true
+    end
+  end
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "set_rank_buttons_from_lua", {bEnable = bEnable})
+end
+
+function RankSystem:OnRankUpgrade(event)
+  if (not event or not event.PlayerID) then return end
+
+  local hero = EntIndexToHScript(event.entity)
   if (not hero) then return end
 
   if BaseHero(hero) == nil then return end

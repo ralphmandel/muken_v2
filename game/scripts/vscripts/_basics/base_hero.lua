@@ -49,10 +49,8 @@ require("internal/rank_system")
 
 -- UPDATE DATA
 
-  function base_hero:UpdatePanoramaRanksByName(skill_name)
+  function base_hero:UpdatePanoramaRanksByName(player, skill_name)
     local caster = self:GetCaster()
-		local player = caster:GetPlayerOwner()
-    if caster:IsControllableByAnyPlayer() == false then return end
 		if (not player) then return end
 
     local skill_id = self:GetSkillID(skill_name)
@@ -114,7 +112,7 @@ require("internal/rank_system")
     self.rank_points = self.rank_points - tier
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
-    self:UpdatePanoramaRanksByName(skill_name)
+    self:UpdatePanoramaRankWindow()
   end
 
 -- HERO LEVEL UP
@@ -177,10 +175,5 @@ require("internal/rank_system")
 
   function base_hero:UpdatePanoramaRankWindow()
     local caster = self:GetCaster()
-    if caster:IsControllableByAnyPlayer() == false then return end
-
-		local player = caster:GetPlayerOwner()
-		if (not player) then return end
-
-    CustomGameEventManager:Send_ServerToPlayer(player, "update_rank_window_from_lua", {})    
+    CustomGameEventManager:Send_ServerToAllClients("update_rank_window_from_lua", {entity = caster:entindex()})    
 	end

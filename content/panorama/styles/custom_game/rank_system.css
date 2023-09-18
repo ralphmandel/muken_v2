@@ -13,7 +13,7 @@
 #RankWindowRoot {
   transform: translateY(0px);
   opacity: 1;
-  transition: transform 0.1s ease-in-out 0s, opacity 0.1s ease-in-out 0s;
+  transition: transform 0.2s ease-in-out 0s, opacity 0.1s ease-in-out 0s;
 }
 
 .RootButton {
@@ -182,16 +182,18 @@ DOTAAbilityImage {
 .Ability1{margin-left: 789px;}
 .Ability2{margin-left: 854px;}
 .Ability3{margin-left: 919px;}
+.Ability4{visibility: collapse;}
+.Ability5{visibility: collapse;}
 
 .FiveAbilities .Ability0{margin-left: 724px;}
 .FiveAbilities .Ability1{margin-left: 782px;}
 .FiveAbilities .Ability2{margin-left: 840px;}
 .FiveAbilities .Ability3{margin-left: 898px;}
-.FiveAbilities .Ability4{margin-left: 956px;}
+.FiveAbilities .Ability4{margin-left: 956px; visibility: visible;}
 
 .SixAbilities .Ability0{margin-left: 713px;}
 .SixAbilities .Ability1{margin-left: 771px;}
 .SixAbilities .Ability2{margin-left: 829px;}
 .SixAbilities .Ability3{margin-left: 887px;}
-.SixAbilities .Ability4{margin-left: 945px;}
-.SixAbilities .Ability5{margin-left: 1003px;}
+.SixAbilities .Ability4{margin-left: 945px; visibility: visible;}
+.SixAbilities .Ability5{margin-left: 1003px; visibility: visible;}
