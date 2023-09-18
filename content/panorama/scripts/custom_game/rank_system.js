@@ -11,16 +11,6 @@ var isWindowOpened = false;
 var current_portrait_entity = "";
 var panels_init = false;
 
-(function(){
-  GameEvents.Subscribe("ranks_layout_from_lua", CreateLayout);
-  GameEvents.Subscribe("ranks_from_lua", OnRankPanelUpdate);
-  GameEvents.Subscribe("skill_name_from_lua", SendRanksRequest);
-  GameEvents.Subscribe("update_rank_window_from_lua", SendRankWindowUpdateRequest);
-  GameEvents.Subscribe("set_rank_buttons_from_lua", SetRankButtonsVisibility);
-  GameEvents.Subscribe("dota_player_update_selected_unit", OnUpdateSelectedUnit);
-  GameEvents.Subscribe("dota_player_update_query_unit", OnUpdateQueryUnit);
-})()
-
 function OnUpdateSelectedUnit() {
   var nEntityIndex = Players.GetLocalPlayerPortraitUnit();
   if (nEntityIndex != current_portrait_entity) {OnPortraitChanged(nEntityIndex)}
@@ -205,3 +195,13 @@ function CreateLayout(){
   panels_init = true;
   OnPortraitChanged(Players.GetLocalPlayerPortraitUnit());
 }
+
+(function(){
+  GameEvents.Subscribe("ranks_layout_from_lua", CreateLayout);
+  GameEvents.Subscribe("ranks_from_lua", OnRankPanelUpdate);
+  GameEvents.Subscribe("skill_name_from_lua", SendRanksRequest);
+  GameEvents.Subscribe("update_rank_window_from_lua", SendRankWindowUpdateRequest);
+  GameEvents.Subscribe("set_rank_buttons_from_lua", SetRankButtonsVisibility);
+  GameEvents.Subscribe("dota_player_update_selected_unit", OnUpdateSelectedUnit);
+  GameEvents.Subscribe("dota_player_update_query_unit", OnUpdateQueryUnit);
+})()

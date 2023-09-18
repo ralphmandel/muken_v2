@@ -109,10 +109,30 @@ require("internal/rank_system")
     local ability = caster:AddAbility(self.ranks_name[skill_id][tier][path])
 
     ability:UpgradeAbility(true)
-    self.rank_points = self.rank_points - tier
+    self:UpdateRankPoints(-tier)
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
-    self:UpdatePanoramaRankWindow()
+  end
+
+  function base_hero:GetProgressBarInfo()
+    local caster = self:GetCaster()
+    local level = 0
+
+    for skill = 1, 6, 1 do
+      for tier = 1, 3, 1 do
+        for path = 1, 2, 1 do
+          if caster:HasAbility(self.ranks_name[skill][tier][path]) then
+            level = level + tier
+          end
+        end
+      end
+    end
+
+    return {
+      entity = caster:entindex(),
+      points = self.rank_points,
+      rank_level = level
+    }
   end
 
 -- HERO LEVEL UP
@@ -171,9 +191,15 @@ require("internal/rank_system")
   function base_hero:UpdateRankPoints(points)
 		self.rank_points = self.rank_points + points
     self:UpdatePanoramaRankWindow()
+    self:UpdatePanoramaProgressBar()
 	end
 
   function base_hero:UpdatePanoramaRankWindow()
     local caster = self:GetCaster()
     CustomGameEventManager:Send_ServerToAllClients("update_rank_window_from_lua", {entity = caster:entindex()})    
+	end
+
+  function base_hero:UpdatePanoramaProgressBar()
+    local caster = self:GetCaster()
+    CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", self:GetProgressBarInfo())    
 	end

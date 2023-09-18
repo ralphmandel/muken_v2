@@ -12,10 +12,25 @@ function RankSystem:Init()
 end
 
 function RankSystem:InitPanaromaEvents()
+  CustomGameEventManager:RegisterListener("request_bar_info_from_panorama", Dynamic_Wrap(RankSystem, 'OnProgressBarRequest'))
+
   CustomGameEventManager:RegisterListener("ranks_from_panorama", Dynamic_Wrap(RankSystem, 'OnRanksTableRequest'))
   CustomGameEventManager:RegisterListener("rank_up_from_panorama", Dynamic_Wrap(RankSystem, 'OnRankUpgrade'))
   CustomGameEventManager:RegisterListener("request_skill_name_from_panorama", Dynamic_Wrap(RankSystem, 'OnSkillNameRequest'))
   CustomGameEventManager:RegisterListener("request_buttons_state_from_panorama", Dynamic_Wrap(RankSystem, 'OnButtonsStateRequest'))
+end
+
+function RankSystem:OnProgressBarRequest(event)
+  if (not event or not event.PlayerID) then return end
+  
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+
+  local hero = EntIndexToHScript(event.entity)
+  if (not hero) then return end
+  if BaseHero(hero) == nil then return end
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_bar_from_lua", BaseHero(hero):GetProgressBarInfo())
 end
 
 function RankSystem:OnSkillNameRequest(event)
