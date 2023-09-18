@@ -239,8 +239,7 @@ function DeleteTableKeys(msg)
   GameEvents.Subscribe("game_points_from_server", CreatePointsPanel);
   GameEvents.Subscribe("rune_panel_from_server", CreateRunePanel);
   //GameEvents.Subscribe("dota_player_hero_selection_dirty", OnUpdateHeroSelection1);
-  var BuffPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("BuffContainer");
-  $.Msg("dota6" , BuffPanel.FindChildTraverse("buffs").actualyoffset);
+  GameEvents.Subscribe("rank_xp_bar_from_server", CreateRankXpBar);
 })()
 
 function CreatePointsPanel(){
@@ -360,6 +359,12 @@ function OnTeamNameUpdate() {
 
 
 
+}
+
+function CreateRankXpBar(){
+  var CenterBlock = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
+  var rankxpbar = $.CreatePanel( "Panel", CenterBlock, "" );
+  rankxpbar.BLoadLayout( "file://{resources}/layout/custom_game/rank_system_progress_bar.xml", false, false );
 }
 
 //function OnUpdateHeroSelection1() {

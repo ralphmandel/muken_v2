@@ -30,6 +30,7 @@ function GameMode:OnGameRulesStateChange(keys)
     Timers:CreateTimer(1, function()
       CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(0), "rune_panel_from_server", {})
       CustomGameEventManager:Send_ServerToAllClients("ranks_layout_from_lua", {})
+      CustomGameEventManager:Send_ServerToAllClients("rank_xp_bar_from_server", {})
     end)
   end
 
