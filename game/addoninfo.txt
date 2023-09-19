@@ -7,6 +7,33 @@
   {
     "MaxPlayers"                    "16"
   }
+  "Default_Keys"
+    {
+        "01"
+        {
+            "Key"       "A"
+            "Command"   "RunePowerCommand"
+            "Name"      "Rune Power"
+        }
+        "02"
+        {
+            "Key"       "S"
+            "Command"   "RuneLightCommand"
+            "Name"      "Rune Light"
+        }
+         "03"
+        {
+            "Key"       "D"
+            "Command"   "RuneArcaneCommand"
+            "Name"      "Rune Arcane"
+        }
+         "04"
+        {
+            "Key"       "F"
+            "Command"   "RuneShadowCommand"
+            "Name"      "Rune Shadow"
+        }
+    }
   // "muken_arena_turbo"
   // {
   //   "MaxPlayers"                    "16"

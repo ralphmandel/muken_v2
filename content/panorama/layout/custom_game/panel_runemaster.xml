@@ -3,25 +3,50 @@
     <include src="file://{resources}/styles/custom_game/panel_runemaster.css"/>
   </styles>
   <scripts>
+    <include src="file://{resources}/scripts/custom_game/panel_runemaster.js"/>
   </scripts>
     <Panel class="root" hittest="false">
+                      <Panel id="HotkeyContainer" hittest="false">
+                          <Panel class="HotkeyRow" hittest="false" hittestchildren="false">
+                            <Panel class="Hotkey">
+                              <Label id="HotkeyText" text="A" html="true" />
+                            </Panel>
+                          </Panel>
+                          <Panel class="HotkeyRow" hittest="false" hittestchildren="false">
+                            <Panel class="Hotkey">
+                              <Label id="HotkeyText" text="S" html="true" />
+                            </Panel>
+                          </Panel>
+                          <Panel class="HotkeyRow" hittest="false" hittestchildren="false">
+                            <Panel class="Hotkey">
+                              <Label id="HotkeyText" text="D" html="true" />
+                            </Panel>
+                          </Panel>
+                          <Panel class="HotkeyRow" hittest="false" hittestchildren="false">
+                            <Panel class="Hotkey">
+                              <Label id="HotkeyText" text="F" html="true" />
+                            </Panel>
+                          </Panel>
+                       
+                      </Panel>
+                 
         <Panel id="RunesContainer" hittest="false">
-                    <RadioButton class="runes-container" id="defaultValue" checked="checked" tabindex="auto">
+                    <RadioButton class="runes-container" id="power" checked="checked" tabindex="auto">
                         <Image src="file://{resources}/images/custom_game/rune_power_small.png" class="img_selected"/>
                         <Label class="RuneName" text="POWER" />
                     </RadioButton>
 
-                    <RadioButton class="runes-container" tabindex="auto">
+                    <RadioButton class="runes-container" id="light" tabindex="auto">
                          <Image src="file://{resources}/images/custom_game/rune_light_small.png" class="img_selected"/>
                         <Label class="RuneName" text="LIGHT" />
                     </RadioButton>
 
-                    <RadioButton class="runes-container" tabindex="auto">
+                    <RadioButton class="runes-container" id="arcane" tabindex="auto">
                         <Image src="file://{resources}/images/custom_game/rune_arcane_small.png" class="img_selected"/>
                         <Label class="RuneName" text="ARCANE" />
                     </RadioButton>
 
-                    <RadioButton class="runes-container" tabindex="auto">
+                    <RadioButton class="runes-container" id="shadow" tabindex="auto">
                         <Image src="file://{resources}/images/custom_game/rune_shadow_small.png" class="img_selected"/>
                         <Label class="RuneName" text="SHADOW" />
                     </RadioButton>

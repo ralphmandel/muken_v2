@@ -1,3 +1,5 @@
+require('libraries/notifications')
+
 if (not _G.TalentTree) then
   _G.TalentTree = class({})
 end
@@ -22,6 +24,12 @@ function TalentTree:InitPanaromaEvents()
   CustomGameEventManager:RegisterListener("scoreboard_update", Dynamic_Wrap(TalentTree, 'OnScoreRequest'))
   CustomGameEventManager:RegisterListener("request_unit_info_from_panorama", Dynamic_Wrap(TalentTree, 'OnPortraitUpdate'))
   CustomGameEventManager:RegisterListener("game_points_from_server", Dynamic_Wrap(TalentTree, 'GamePointsUpdate'))
+  CustomGameEventManager:RegisterListener("dota_time_from_panorama", Dynamic_Wrap(TalentTree, 'Notifications'))
+  
+end
+
+function TalentTree:Notifications(params)
+  Notifications:TopToAll({text="THE FIRST TEAM TO REACH #score POINTS WINS", duration=10.0})
 end
 
 function TalentTree:GamePointsUpdate(params)

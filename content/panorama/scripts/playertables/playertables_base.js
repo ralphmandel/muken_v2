@@ -240,7 +240,24 @@ function DeleteTableKeys(msg)
   GameEvents.Subscribe("rune_panel_from_server", CreateRunePanel);
   //GameEvents.Subscribe("dota_player_hero_selection_dirty", OnUpdateHeroSelection1);
   GameEvents.Subscribe("rank_xp_bar_from_server", CreateRankXpBar);
+  
+  var ExecuteOnce = false;
+  $.RegisterForUnhandledEvent("DOTAHudUpdate", () => {
+    var gameTime = Game.GetGameTime();
+    var transitionTime = Game.GetStateTransitionTime();
+    var timerValue = (gameTime - transitionTime);
+    if (!ExecuteOnce) {
+      if (timerValue >= 1  ){
+        GameEvents.SendCustomGameEventToServer("dota_time_from_panorama", function() {});
+        $.Msg(timerValue);
+        ExecuteOnce = true;
+      }
+    }
+  });
+
 })()
+
+
 
 function CreatePointsPanel(){
   var TeamSelect = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("TeamSelectContainer").FindChildTraverse("TeamsList");
@@ -274,7 +291,7 @@ function CreateRunePanel(){
   var RuneContainer = $.CreatePanel( "Panel", CenterPanel, "" );
   RuneContainer.BLoadLayout( "file://{resources}/layout/custom_game/panel_runemaster.xml", false, false );
   CenterPanel.MoveChildBefore(RuneContainer, CenterPanel.GetChild(24));
-  CenterPanel.FindChildTraverse("defaultValue").checked = true;
+  CenterPanel.FindChildTraverse("power").checked = true;
   $.Msg("skillet", BuffPanel.FindChildTraverse("buffs").style.transform == 0);
 
   

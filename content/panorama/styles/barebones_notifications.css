@@ -7,8 +7,9 @@
 .BarebonesTopNotifications
 {
     width: 100%;
-    height: 100%;
     flow-children: down;
+    min-height: 200px;
+    max-height: 500px;
 }
 
 .BarebonesBottomNotifications
