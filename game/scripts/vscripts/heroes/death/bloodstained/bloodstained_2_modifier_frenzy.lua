@@ -46,7 +46,8 @@ end
 function bloodstained_2_modifier_frenzy:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MIN_HEALTH,
-    MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING
+    MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING,
+    MODIFIER_EVENT_ON_ATTACK_LANDED
 	}
 
 	return funcs
@@ -60,17 +61,16 @@ function bloodstained_2_modifier_frenzy:GetModifierStatusResistanceStacking()
   return self:GetAbility():GetSpecialValueFor("status_res")
 end
 
+function bloodstained_2_modifier_frenzy:OnAttackLanded(keys)
+  if keys.attacker ~= self.parent then return end
+
+  local cleave = self.ability:GetSpecialValueFor("special_cleave") * 0.01
+	local string = "particles/bloodstained/cleave/bloodstained_cleave.vpcf"
+	if cleave > 0 then DoCleaveAttack(self.parent, keys.target, self.ability, keys.damage * cleave, 100, 400, 500, string) end
+end
+
 function bloodstained_2_modifier_frenzy:OnIntervalThink()
-	if IsServer() then
-		if self.ability.target then
-			if IsValidEntity(self.ability.target) then
-				if self.ability.target:IsAlive() then
-					self:StartIntervalThink(FrameTime())
-					return
-				end
-			end
-		end
-		
+	if IsServer() then		
 		local enemies = FindUnitsInRadius(
 			self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, 500,
 			DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
@@ -83,7 +83,7 @@ function bloodstained_2_modifier_frenzy:OnIntervalThink()
 			self:StartIntervalThink(FrameTime())
 			return
 		end
-
+    
 		self:Destroy()
 	end
 end
@@ -93,7 +93,6 @@ end
 -- EFFECTS -----------------------------------------------------------
 
 function bloodstained_2_modifier_frenzy:GetEffectName()
-	--return "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
 	return "particles/bloodstained/frenzy/bloodstained_hands_v2.vpcf"
 end
 

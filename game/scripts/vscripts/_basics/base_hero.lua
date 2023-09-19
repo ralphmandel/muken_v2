@@ -45,6 +45,7 @@ require("internal/rank_system")
 		self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
     self.ranks_name = GetRanksList(self.abilities_name)
     self.rank_points = 0
+    self.max_level = 15
 	end
 
 -- UPDATE DATA
@@ -106,9 +107,11 @@ require("internal/rank_system")
     tier = tonumber(tier)
     path = tonumber(path)
 
-    local ability = caster:AddAbility(self.ranks_name[skill_id][tier][path])
+    local rank = caster:AddAbility(self.ranks_name[skill_id][tier][path])
+    local ability = caster:FindAbilityByName(self.abilities_name[skill_id])
 
-    ability:UpgradeAbility(true)
+    rank:UpgradeAbility(true)
+    ability:SetLevel(ability:GetLevel() + tier)
     self:UpdateRankPoints(-tier)
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
@@ -131,7 +134,8 @@ require("internal/rank_system")
     return {
       entity = caster:entindex(),
       points = self.rank_points,
-      rank_level = level
+      rank_level = level,
+      max_level = self.max_level
     }
   end
 

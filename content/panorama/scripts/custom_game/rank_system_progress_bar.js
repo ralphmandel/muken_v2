@@ -23,7 +23,7 @@ function OnBarUpdate(event) {
     var progress = parseInt(event.rank_level) * 24;
     PROGRESS_BAR_CIRCULAR.style.clip = "radial( 50% 50%, 0deg, " + progress + "deg )";
     PROGRESS_BAR_LABEL.text = event.points;
-    XP_LABEL.text = event.rank_level + " / 15";
+    XP_LABEL.text = event.rank_level + " / " + event.max_level;
   }
 }
 

@@ -33,9 +33,21 @@ function bloodstained_2_modifier_passive:OnAttackLanded(keys)
 	if self.parent:HasModifier("bloodstained_2_modifier_frenzy") then return end
 	if self.ability:IsCooldownReady() == false then return end
 
+  local purge = self.ability:GetSpecialValueFor("special_purge")
+  local bleeding_duration = self.ability:GetSpecialValueFor("special_bleeding_duration")
+
 	if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 		self.ability.target = keys.target
+
+    if purge == 1 then
+      self.parent:Purge(false, true, false, false, false)
+    end
+
+    if bleeding_duration > 0 then
+      AddModifier(keys.target, self.ability, "_modifier_bleeding", {duration = bleeding_duration}, true)
+    end
+
     AddModifier(self.parent, self.ability, "bloodstained_2_modifier_frenzy", {
       duration = self.ability:GetSpecialValueFor("duration")
     }, true)

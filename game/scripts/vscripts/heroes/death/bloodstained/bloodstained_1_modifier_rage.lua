@@ -9,13 +9,15 @@ function bloodstained_1_modifier_rage:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  self.str = 0
+  self.str = self.ability:GetSpecialValueFor("special_str_init")
 
 	self.ability:EndCooldown()
 	self.ability:SetActivated(false)
 
   AddStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
   AddBonus(self.ability, "LCK", self.parent, self.ability:GetSpecialValueFor("lck"), 0, nil)
+
+  if IsServer() then self:SetStackCount(self.str) end
 end
 
 function bloodstained_1_modifier_rage:OnRefresh(kv)
@@ -52,10 +54,6 @@ end
 
 function bloodstained_1_modifier_rage:OnAttackLanded(keys)
   if keys.attacker ~= self.parent then return end
-
-	local cleave = self.ability:GetSpecialValueFor("special_cleave") * 0.01
-	local string = "particles/bloodstained/cleave/bloodstained_cleave.vpcf"
-	if cleave > 0 then DoCleaveAttack(self.parent, keys.target, self.ability, keys.damage * cleave, 100, 400, 500, string) end
 end
 
 function bloodstained_1_modifier_rage:OnDeath(keys)
