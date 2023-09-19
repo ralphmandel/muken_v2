@@ -38,7 +38,8 @@ end
 function bloodstained_1_modifier_rage:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
-		MODIFIER_EVENT_ON_ATTACK_LANDED
+		MODIFIER_EVENT_ON_ATTACK_LANDED,
+    MODIFIER_EVENT_ON_DEATH
 	}
 
 	return funcs
@@ -47,6 +48,27 @@ end
 function bloodstained_1_modifier_rage:OnTakeDamage(keys)
 	if keys.unit ~= self.parent then return end
   self:FilterDamage(keys.damage)
+end
+
+function bloodstained_1_modifier_rage:OnAttackLanded(keys)
+  if keys.attacker ~= self.parent then return end
+
+	local cleave = self.ability:GetSpecialValueFor("special_cleave") * 0.01
+	local string = "particles/bloodstained/cleave/bloodstained_cleave.vpcf"
+	if cleave > 0 then DoCleaveAttack(self.parent, keys.target, self.ability, keys.damage * cleave, 100, 400, 500, string) end
+end
+
+function bloodstained_1_modifier_rage:OnDeath(keys)
+  if keys.attacker == nil then return end
+	if keys.attacker:IsBaseNPC() == false then return end
+  if keys.attacker ~= self.parent then return end
+  if keys.unit:GetTeamNumber() == self.parent:GetTeamNumber() then return end
+	if keys.unit:IsHero() == false then return end
+	if keys.unit:IsIllusion() then return end
+  
+  if self.ability:GetSpecialValueFor("special_reset") == 1 then
+    self:SetDuration(self:GetDuration(), true)
+  end
 end
 
 function bloodstained_1_modifier_rage:OnStackCountChanged(old)

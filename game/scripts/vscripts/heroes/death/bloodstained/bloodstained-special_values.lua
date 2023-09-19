@@ -34,25 +34,33 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
 		if value_name == "rank" then return 1 end
 		if value_name == "cooldown" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_1__rage_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_1__rage_rank_12") then
+      if value_name == "special_reset" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_1__rage_rank_21") then
+      if value_name == "call_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_1__rage_rank_22") then
+      if value_name == "radius" then return 1 end
+      if value_name == "special_blink" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_1__rage_rank_31") then
+      if value_name == "str_gain" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_1__rage_rank_32") then
+      if value_name == "special_cleave" then return 1 end
 		end
 	end
 
@@ -197,8 +205,17 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
 		if value_name == "AbilityManaCost" then return 275 * (1 + ((ability_level - 1) * 0.05)) end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("special_blink") end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 		if value_name == "cooldown" then return 16 - (value_level * 1) end
+
+    if value_name == "duration" then return 12 end
+    if value_name == "special_reset" then return 1 end
+    if value_name == "call_duration" then return 6 end
+    if value_name == "radius" then return 375 end
+    if value_name == "special_blink" then return 300 end
+    if value_name == "str_gain" then return 2 end
+    if value_name == "special_cleave" then return 100 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then

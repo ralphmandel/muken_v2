@@ -23,11 +23,23 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     return self:GetSpecialValueFor("radius")
   end
 
+  function bloodstained_1__rage:GetBehavior()
+		if self:GetSpecialValueFor("special_blink") > 0 then return DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR_AOE end
+
+    return DOTA_ABILITY_BEHAVIOR_NO_TARGET
+  end
+
 -- SPELL START
 
   function bloodstained_1__rage:OnSpellStart()
     local caster = self:GetCaster()
     AddModifier(caster, self, "bloodstained_1_modifier_rage", {duration = self:GetSpecialValueFor("duration")}, true)
+
+    if self:GetSpecialValueFor("special_blink") > 0 then
+      local origin = caster:GetOrigin()
+      FindClearSpaceForUnit(caster, caster:GetCursorPosition(), true)
+      self:PlayEfxBlink(origin)
+    end
     
     local enemies = FindUnitsInRadius(
       caster:GetTeamNumber(), caster:GetOrigin(), nil, self:GetAOERadius(),
@@ -63,4 +75,20 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
       caster:EmitSound("Bloodstained.fury")
       caster:EmitSound("Bloodstained.rage")
     end
+  end
+
+  function bloodstained_1__rage:PlayEfxBlink(origin)
+    local caster = self:GetCaster()
+    local particle_cast_a = "particles/econ/events/ti6/blink_dagger_start_ti6_lvl2.vpcf"
+    local particle_cast_b = "particles/econ/events/ti6/blink_dagger_end_ti6_lvl2.vpcf"
+
+    local effect_cast_a = ParticleManager:CreateParticle(particle_cast_a, PATTACH_ABSORIGIN, caster)
+    ParticleManager:SetParticleControl(effect_cast_a, 0, origin)
+    ParticleManager:ReleaseParticleIndex(effect_cast_a)
+
+    local effect_cast_b = ParticleManager:CreateParticle(particle_cast_b, PATTACH_ABSORIGIN, caster)
+    ParticleManager:SetParticleControl(effect_cast_b, 0, caster:GetOrigin())
+    ParticleManager:ReleaseParticleIndex(effect_cast_b)
+
+    if IsServer() then caster:EmitSound("DOTA_Item.Overwhelming_Blink.Activate") end
   end

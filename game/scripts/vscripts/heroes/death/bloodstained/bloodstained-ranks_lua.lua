@@ -86,4 +86,7 @@ function bloodstained__precache:Precache(context)
   PrecacheResource( "particle", "particles/bloodstained/bloodstained_field_replica.vpcf", context )
   PrecacheResource( "particle", "particles/bloodstained/bloodstained_seal_impact.vpcf", context )
   PrecacheResource( "particle", "particles/bloodstained/bloodstained_seal_war.vpcf", context )
+  PrecacheResource( "particle", "particles/bloodstained/cleave/bloodstained_cleave.vpcf", context )
+  PrecacheResource( "particle", "particles/econ/events/ti6/blink_dagger_start_ti6_lvl2.vpcf", context )
+  PrecacheResource( "particle", "particles/econ/events/ti6/blink_dagger_end_ti6_lvl2.vpcf", context )
 end
