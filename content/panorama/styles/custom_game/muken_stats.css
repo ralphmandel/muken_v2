@@ -41,11 +41,12 @@
 }
 
 .PlusBox {
-  border: 2px solid white;
+  border: 1.5px solid white;
   width: 18px;
   height: 18px;
   margin-bottom: 6px;
   border-radius: 30%;
+  background-image: none;
 }
 
 .PlusBox:hover {
@@ -53,29 +54,35 @@
   transition: 0.2s;
 }
 
-.PlusCrossX, .PlusCrossY {
-  background-color: white;
-}
-
-.PlusCross {
-  background-color: #293843;
+.PlusBox:active {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("file://{images}/custom_game/Rank_button_on_small.png");
 }
 
 .PlusCrossX
 {
-  width: 10px;
-  height: 2px;
-  margin-top: 6px;
-  margin-left: 2px;
+  z-index: 0;
+  margin: 1px;
+  width: 15px;
+  height: 15px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("file://{images}/custom_game/Rank_button_on_small.png");
 }
 
-.PlusCrossY
-{
-  width: 2px;
-  height: 10px;
-  margin-top: 2px;
-  margin-left: 6px;
+.PlusCrossY{
+  /* z-index: 1;
+  margin: 1px;
+
+  width: 15px;
+  height: 15px;
+  background-position: 50% 50%;
+  background-image: url("file://{images}/custom_game/Rank_button_on_small.png");
+   */
 }
+
+
 
 #StatsColumnContainer
 {

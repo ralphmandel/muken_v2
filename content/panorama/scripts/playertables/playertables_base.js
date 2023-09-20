@@ -240,23 +240,8 @@ function DeleteTableKeys(msg)
   GameEvents.Subscribe("rune_panel_from_server", CreateRunePanel);
   //GameEvents.Subscribe("dota_player_hero_selection_dirty", OnUpdateHeroSelection1);
   GameEvents.Subscribe("rank_xp_bar_from_server", CreateRankXpBar);
-  
-  var ExecuteOnce = false;
-  $.RegisterForUnhandledEvent("DOTAHudUpdate", () => {
-    var gameTime = Game.GetGameTime();
-    var transitionTime = Game.GetStateTransitionTime();
-    var timerValue = (gameTime - transitionTime);
-    if (!ExecuteOnce) {
-      if (timerValue >= 1  ){
-        GameEvents.SendCustomGameEventToServer("dota_time_from_panorama", function() {});
-        $.Msg(timerValue);
-        ExecuteOnce = true;
-      }
-    }
-  });
-
+  GameEvents.Subscribe("notifications_from_server", Notifications);
 })()
-
 
 
 function CreatePointsPanel(){
@@ -270,10 +255,6 @@ function CreatePointsPanel(){
     var SelectPoints = $.CreatePanel( "Panel", TeamSelect, "" );
 
     SelectPoints.BLoadLayout( "file://{resources}/layout/custom_game/game_setup_points.xml", false, false );
-  
-
-    
-    
   }
   //RadioButton.GetSelectedButton()
   var defaultCheck = TeamSelect.FindChildTraverse("PointsContainer").FindChildTraverse("defaultValue");
@@ -382,6 +363,22 @@ function CreateRankXpBar(){
   var CenterBlock = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
   var rankxpbar = $.CreatePanel( "Panel", CenterBlock, "" );
   rankxpbar.BLoadLayout( "file://{resources}/layout/custom_game/rank_system_progress_bar.xml", false, false );
+}
+
+function Notifications(){
+  var ExecuteOnce = false;
+  $.RegisterForUnhandledEvent("DOTAHudUpdate", () => {
+    var gameTime = Game.GetGameTime();
+    var transitionTime = Game.GetStateTransitionTime();
+    var timerValue = (gameTime - transitionTime);
+    if (!ExecuteOnce) {
+      if (timerValue >= 1  ){
+        GameEvents.SendCustomGameEventToServer("dota_time_from_panorama", function() {});
+        $.Msg(timerValue);
+        ExecuteOnce = true;
+      }
+    }
+  });
 }
 
 //function OnUpdateHeroSelection1() {

@@ -1,8 +1,8 @@
+"use strict";
 
 function OnRunePower(){
     var power = $.GetContextPanel().FindChildTraverse("power");
     power.checked = true;
-    $.Msg("teste2")
 }
 
 function OnRuneLight(){
