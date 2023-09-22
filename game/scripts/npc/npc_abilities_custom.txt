@@ -4,6 +4,46 @@
 {
   "Version"   "1"
 
+	"Path_1"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"_basics/_void"
+    "AbilityTextureName"  "Path_1"
+		"FightRecapLevel"			"1"
+		"MaxLevel"						"1"	
+		
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"Path_2"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"_basics/_void"
+    "AbilityTextureName"  "Path_2"
+		"FightRecapLevel"			"1"
+		"MaxLevel"						"1"	
+		
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"Path_3"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"_basics/_void"
+    "AbilityTextureName"  "Path_3"
+		"FightRecapLevel"			"1"
+		"MaxLevel"						"1"	
+		
+		"AbilityType"					"ABILITY_TYPE_BASIC"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+
+
+
+
 	"slot_1"
 	{
 		"BaseClass"						"ability_lua"

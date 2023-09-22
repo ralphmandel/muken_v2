@@ -36,7 +36,7 @@ function CreateLayout(){
     PATH_LAYOUT[id] = $.CreatePanel("Button", PATH_LAYOUT["WindowRoot"].FindChildTraverse("ButtonContainer"), id);
     PATH_LAYOUT[id].BLoadLayout("file://{resources}/layout/custom_game/muken_path_button.xml", false, false);
     PATH_LAYOUT[id].Data().OnPathClick = OnPathClick;
-    //PATH_LAYOUT[id].GetChild(0).abilityname = id;
+    PATH_LAYOUT[id].GetChild(0).abilityname = id;
   }
 }
 
