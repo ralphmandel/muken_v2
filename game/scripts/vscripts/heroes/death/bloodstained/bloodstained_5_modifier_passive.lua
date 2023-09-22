@@ -26,20 +26,59 @@ end
 
 function bloodstained_5_modifier_passive:DeclareFunctions()
 	local funcs = {
-		MODIFIER_EVENT_ON_ATTACKED
+		MODIFIER_EVENT_ON_ATTACKED,
+    MODIFIER_EVENT_ON_DEATH
 	}
 
 	return funcs
 end
 
 function bloodstained_5_modifier_passive:OnAttacked(keys)
-	if keys.attacker ~= self.parent then return end
+	if keys.attacker:GetTeamNumber() ~= self.parent:GetTeamNumber() then return end
 	if self.parent:PassivesDisabled() then return end
 	if self.parent:GetTeamNumber() == keys.target:GetTeamNumber() then return end
 
-	local heal = keys.original_damage * self:GetLifestealPercent() * 0.01
-	self.parent:Heal(heal, self.ability)
-	self:PlayEfxLifesteal(keys.target)
+  if keys.attacker == self.parent then
+    local heal = keys.original_damage * self:GetLifestealPercent() * 0.01
+    self.parent:Heal(heal, self.ability)
+    self:PlayEfxLifesteal(keys.attacker, keys.target)
+  else
+    local heal_allies = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal_allies") * 0.01
+    if heal_allies > 0 then
+      keys.attacker:Heal(heal_allies, self.ability)
+      self:PlayEfxLifesteal(keys.attacker, keys.target)
+    end
+  end
+end
+
+function bloodstained_5_modifier_passive:OnDeath(keys)
+  if keys.attacker == nil then return end
+	if keys.attacker:IsBaseNPC() == false then return end
+  if keys.unit:GetTeamNumber() == self.parent:GetTeamNumber() then return end
+	if keys.unit:IsIllusion() then return end
+  if keys.unit:IsHero() == false and keys.unit:IsConsideredHero() == false then return end
+
+  local target_hp = self.ability:GetSpecialValueFor("special_target_hp")
+  local self_hp_hero = self.ability:GetSpecialValueFor("special_self_hp_hero")
+  local self_hp_creep = self.ability:GetSpecialValueFor("special_self_hp_creep")
+
+  if target_hp > 0 then
+    if keys.attacker == self.parent then
+      self.parent:Heal(keys.unit:GetMaxHealth() * target_hp * 0.01, self.ability)
+      self:PlayEfxHeal()
+    end
+  end
+
+  if CalcDistanceBetweenEntityOBB(self.parent, keys.unit) < self.ability:GetAOERadius() then
+    self:PlayEfxPull(keys.unit)
+    self:PlayEfxHeal()
+
+    if keys.unit:IsHero() then
+      self.parent:Heal(self.parent:GetMaxHealth() * self_hp_hero * 0.01, self.ability)
+    else
+      self.parent:Heal(self.parent:GetMaxHealth() * self_hp_creep * 0.01, self.ability)
+    end
+  end
 end
 
 function bloodstained_5_modifier_passive:OnIntervalThink()
@@ -77,14 +116,34 @@ function bloodstained_5_modifier_passive:GetEffectAttachType()
 	return PATTACH_POINT_FOLLOW
 end
 
-function bloodstained_5_modifier_passive:PlayEfxLifesteal(target)
+function bloodstained_5_modifier_passive:PlayEfxLifesteal(attacker, target)
 	local particle_cast = "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture_nuke.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target)
 	ParticleManager:SetParticleControlEnt(effect_cast, 1, target, PATTACH_ABSORIGIN_FOLLOW, "", Vector(0,0,0), true)
 
 	local particle_cast2 = "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodbath.vpcf"
-    local effect_cast2 = ParticleManager:CreateParticle(particle_cast2, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+    local effect_cast2 = ParticleManager:CreateParticle(particle_cast2, PATTACH_ABSORIGIN_FOLLOW, attacker)
 	ParticleManager:ReleaseParticleIndex(effect_cast2)
 
-	if IsServer() then self.parent:EmitSound("Bloodstained.Lifesteal") end
+	if IsServer() then attacker:EmitSound("Bloodstained.Lifesteal") end
+end
+
+function bloodstained_5_modifier_passive:PlayEfxPull(target)
+	local particle_cast = "particles/units/heroes/hero_undying/undying_soul_rip_damage.vpcf"
+	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+	ParticleManager:SetParticleControl(effect_cast, 0, self.parent:GetOrigin())
+	ParticleManager:SetParticleControl(effect_cast, 1, target:GetOrigin())
+	ParticleManager:SetParticleControl(effect_cast, 2, self.parent:GetOrigin())
+
+  if IsServer() then self.parent:EmitSound("Hero_Undying.SoulRip.Cast") end
+end
+
+function bloodstained_5_modifier_passive:PlayEfxHeal()
+	local particle_cast = "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodbath.vpcf"
+	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+
+	local particle_cast_2 = "particles/osiris/poison_alt/osiris_poison_splash_shake.vpcf"
+	local effect = ParticleManager:CreateParticle(particle_cast_2, PATTACH_ABSORIGIN, self.parent)
+	ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
+	ParticleManager:SetParticleControl(effect, 1, Vector(500, 0, 0))
 end

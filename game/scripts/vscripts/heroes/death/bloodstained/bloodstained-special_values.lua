@@ -153,15 +153,21 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "base_heal" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_11") then
+      if value_name == "special_target_hp" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_12") then
+      if value_name == "special_self_hp_hero" then return 1 end
+      if value_name == "special_self_hp_creep" then return 1 end
+      if value_name == "special_heal_radius" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_21") then
+      if value_name == "max_heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_22") then
+      if value_name == "special_lifesteal_allies" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_31") then
@@ -259,6 +265,13 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 		if value_name == "base_heal" then return 4 + (value_level * 1) end
+
+    if value_name == "special_target_hp" then return 15 end
+    if value_name == "special_self_hp_hero" then return 10 end
+    if value_name == "special_self_hp_creep" then return 2 end
+    if value_name == "special_heal_radius" then return 500 end
+    if value_name == "max_heal" then return 50 end
+    if value_name == "special_lifesteal_allies" then return ability:GetSpecialValueFor("base_heal") end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_u__seal" then

@@ -13,6 +13,10 @@ LinkLuaModifier("bloodstained_5_modifier_passive_status_efx", "heroes/death/bloo
     end)
   end
 
+  function bloodstained_5__lifesteal:GetAOERadius()
+    return self:GetSpecialValueFor("special_heal_radius")
+  end
+
   function bloodstained_5__lifesteal:GetIntrinsicModifierName()
     return "bloodstained_5_modifier_passive"
   end
