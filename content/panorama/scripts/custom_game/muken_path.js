@@ -6,7 +6,7 @@ var path_states = {
 
 function OnPathClick(id) {
   if (PATH_LAYOUT[id].BHasClass(path_states[2])) {
-    Game.EmitSound("Config.Ok");
+    Game.EmitSound("Config.Start");
     GameEvents.SendCustomGameEventToServer("chosen_path_from_panorama", {"path": id});
   }
 }
