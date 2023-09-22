@@ -18,6 +18,8 @@ function RankSystem:InitPanaromaEvents()
   CustomGameEventManager:RegisterListener("rank_up_from_panorama", Dynamic_Wrap(RankSystem, 'OnRankUpgrade'))
   CustomGameEventManager:RegisterListener("request_skill_name_from_panorama", Dynamic_Wrap(RankSystem, 'OnSkillNameRequest'))
   CustomGameEventManager:RegisterListener("request_buttons_state_from_panorama", Dynamic_Wrap(RankSystem, 'OnButtonsStateRequest'))
+
+  CustomGameEventManager:RegisterListener("chosen_path_from_panorama", Dynamic_Wrap(RankSystem, 'OnPathUpgrade'))
 end
 
 function RankSystem:OnProgressBarRequest(event)
@@ -82,6 +84,20 @@ function RankSystem:OnRankUpgrade(event)
   if BaseHero(hero) == nil then return end
 
   BaseHero(hero):UpgradeRank(event.skill_name, event.tier, event.path)
+end
+
+function RankSystem:OnPathUpgrade(event)
+  if (not event or not event.PlayerID) then return end
+
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+
+  local hero = player:GetAssignedHero()
+  if (not hero) then return end
+
+  if BaseHero(hero) == nil then return end
+
+  BaseHero(hero):UpgradePath(event.path)
 end
 
 RankSystem:Init()

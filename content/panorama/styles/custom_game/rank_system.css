@@ -61,6 +61,7 @@
   width: 130px;
   height: 320px;
   flow-children: down;
+  box-shadow: fill 0.0px 0.0px 10.0px 1.0px #000000DE;
 }
 
 .RankSpellContainer Label{
@@ -112,6 +113,7 @@
 }
 
 .RankPanel{
+  horizontal-align: center;
   margin-left: 6px;
   margin-right: 1px;
   vertical-align: middle;
@@ -122,22 +124,24 @@
   margin-right: 0px;
 }
 
-.RankStateUpgraded{
-  horizontal-align: center;
+.PathPanel{
+  margin-left: 0px;
+  margin-right: 25px;
+}
+
+.StateUpgraded{
   border: 2px solid white;
   border-radius: 3px;
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
 }
 
-.RankStateDisabled{
-  horizontal-align: center;
+.StateDisabled{
   border: 1px solid #000000;
   border-radius: 3px;
   wash-color: #484848;
 }
 
-.RankStateAvailable{
-  horizontal-align: center;
+.StateAvailable{
   border: 1px solid #ffffff;
   border-radius: 3px;
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( rgba(208, 195, 135, 0.462) ), to( #432c008a) );

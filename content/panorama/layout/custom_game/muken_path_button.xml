@@ -1,0 +1,17 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/rank_system.css"/>
+  </styles>
+  <script>
+    var context = $.GetContextPanel();
+    var id = $.GetContextPanel().id;
+
+    function OnPathClick() {
+      context.Data().OnPathClick(id);
+    }
+  </script>
+
+  <Button class="StateDisabled PathPanel" onactivate="OnPathClick()">
+    <DOTAAbilityImage id="PathImage" abilityname="" />
+  </Button>
+</root>

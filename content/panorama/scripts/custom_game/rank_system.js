@@ -1,8 +1,8 @@
 var RANK_WINDOW, RANK_WINDOW_TITLE, RANK_PANELS = {}, BUTTON_LAYOUT = {};
 
 var rank_states = {
-  1: "RankStateDisabled", 2: "RankStateAvailable", 3: "RankStateUpgraded",
-};
+  1: "StateDisabled", 2: "StateAvailable", 3: "StateUpgraded",
+}
 
 var current_id = "Ability0";
 var bFiveAbilities = false;

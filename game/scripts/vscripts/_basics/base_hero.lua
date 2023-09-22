@@ -46,6 +46,9 @@ require("internal/rank_system")
     self.ranks_name = GetRanksList(self.abilities_name)
     self.rank_points = 0
     self.max_level = 15
+
+    self.chosen_path = {Path_1 = false, Path_2 = false, Path_3 = false}
+    self.path_points = 0
 	end
 
 -- UPDATE DATA
@@ -82,9 +85,9 @@ require("internal/rank_system")
   function base_hero:GetRankState(skill_id, tier, path)
     local caster = self:GetCaster()
     local rank_name = self.ranks_name[skill_id][tier][path]
-    if caster:HasAbility(rank_name) then return "RankStateUpgraded" end
-    if self:IsRankAvailable(skill_id, tier, path) then return "RankStateAvailable" end
-    return "RankStateDisabled"
+    if caster:HasAbility(rank_name) then return "StateUpgraded" end
+    if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
+    return "StateDisabled"
   end
 
   function base_hero:IsRankAvailable(skill_id, tier, path)
@@ -156,12 +159,12 @@ require("internal/rank_system")
 			end
 		end
 
-    if level == 15 then
-      self:UpdateAbilityPoints(1)
-    end
-
     if (level + 1) % 2 == 0 then
       self:UpdateRankPoints(1)
+    end
+
+    if level % 15 == 0 then
+      self:UpdatePathPoints(1)
     end
 
     local bot_script = caster:FindModifierByName("_general_script")
@@ -198,6 +201,11 @@ require("internal/rank_system")
     self:UpdatePanoramaProgressBar()
 	end
 
+  function base_hero:UpdatePathPoints(points)
+		self.path_points = self.path_points + points
+    self:UpdatePanoramaPathWindow()
+	end
+
   function base_hero:UpdatePanoramaRankWindow()
     local caster = self:GetCaster()
     CustomGameEventManager:Send_ServerToAllClients("update_rank_window_from_lua", {entity = caster:entindex()})    
@@ -207,3 +215,32 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", self:GetProgressBarInfo())    
 	end
+
+  function base_hero:UpdatePanoramaPathWindow()
+    local caster = self:GetCaster()
+    CustomGameEventManager:Send_ServerToAllClients("update_path_window_from_lua", {
+      path_states = self.chosen_path, path_points = self.path_points
+    })    
+	end
+
+-- PATH
+
+  function base_hero:UpgradePath(path)
+    local caster = self:GetCaster()
+    self.chosen_path[path] = true
+
+    if path == "Path_1" then
+      self:UpdateAbilityPoints(1)
+    end
+
+    if path == "Path_2" then
+      self.max_level = self.max_level + 6
+      self:UpdateRankPoints(6)
+    end
+
+    if path == "Path_3" then
+      BaseStats(caster):IncrementSpenderPoints(12, 3)
+    end
+
+    self:UpdatePathPoints(-1)
+  end

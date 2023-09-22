@@ -1,0 +1,59 @@
+#PathWindow{
+  width: 300px;
+  height: 135px;
+  margin-top: 127px;
+  /* margin-right: 70px;
+  margin-bottom: 95px; */
+}
+
+#ButtonContainer{
+  height: 52px;
+  width: 220px;
+  flow-children: right;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+#LabelContainer{
+  height: 45px;
+  width: 244px;
+  flow-children: right;
+  margin-left: 16px;
+}
+
+#LabelContainer Label{
+  font-size: 11px;
+  horizontal-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0px 1px 4px 3.0 #000000;
+  letter-spacing: 3px;
+  text-align: center;
+  horizontal-align: middle;
+  vertical-align: middle;
+  width: 60px;
+  margin-right: 16px;
+}
+
+#PathBG {
+  background-image: url("s2r://panorama/images/hud/reborn/hud_custom_ti10/ability_bg_psd.vtex");
+  border-radius: 5px;
+  background-size: cover;
+  width: 244px;
+  height: 320px;
+  flow-children: down;
+  box-shadow: fill 0.0px 0.0px 10.0px 1.0px #000000DE;
+}
+
+.Header {
+  font-size: 15px;
+  horizontal-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0px 1px 4px 3.0 #000000;
+  margin-top: 6px;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}

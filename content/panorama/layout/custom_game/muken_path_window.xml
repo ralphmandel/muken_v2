@@ -1,0 +1,20 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_path.css"/>
+  </styles>
+
+  <Panel hittest="true">
+    <Panel id="PathWindow" hittest="false">
+      <Panel id="PathBG" hittest="false">
+        <Label class="Header" text="MUKEN PATH"/>
+        <Panel id="ButtonContainer" hittest="false">
+        </Panel>
+        <Panel id="LabelContainer" hittest="false">
+          <Label text="+1 Ability Point" />
+          <Label text="+6 Rank Points" />
+          <Label text="+12 Stats Points" />
+        </Panel>
+      </Panel>
+    </Panel>
+  </Panel>
+</root>
