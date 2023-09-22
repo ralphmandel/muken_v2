@@ -18,28 +18,25 @@
 
 .RootButton {
   z-index: 100;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-top: 149px;
-  margin-left: 22px;
+  horizontal-align: center;
 }
 
 .RankButton {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   transition-property: background-image;
-  background-image: url("file://{images}/custom_game/Rank_button_off.png");
+  background-image: url("file://{images}/custom_game/Rank_button_off_edited.png");
   background-size: 100% 100%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   transition-duration: .12s;
-
-  width: 20px;
-  height: 20px;
 }
 
 .RankButton:Selected {
-  background-image: url("file://{images}/custom_game/Rank_button_on.png");
+  background-image: url("file://{images}/custom_game/Rank_button_on_edited.png");
 }
 
 #RankContainer{
