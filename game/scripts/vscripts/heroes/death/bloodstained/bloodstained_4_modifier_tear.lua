@@ -12,7 +12,9 @@ function bloodstained_4_modifier_tear:OnCreated(kv)
 
 	self.tick = self.ability:GetSpecialValueFor("tick")
 	self.blood_duration = self.ability:GetSpecialValueFor("blood_duration")
-	self.init_loss = self.ability:GetSpecialValueFor("special_init_loss")
+	self.init_loss = self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("special_init_loss") * 0.01
+
+  if self.parent:GetHealth() <= self.init_loss then self.init_loss = self.parent:GetHealth() - 1 end
 
 	if IsServer() then
 		self:PlayEfxStart(self.ability:GetAOERadius())
@@ -21,8 +23,8 @@ function bloodstained_4_modifier_tear:OnCreated(kv)
 		if self.init_loss > 0 then
 			ApplyDamage({
 				attacker = self.caster, victim = self.parent, ability = self.ability,
-				damage = self.init_loss, damage_type = DAMAGE_TYPE_PURE,
-				damage_flags = 	DOTA_DAMAGE_FLAG_NON_LETHAL
+				damage = self.init_loss, damage_type = self.ability:GetAbilityDamageType(),
+				damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
 			})
 		end
 	end
@@ -35,7 +37,6 @@ function bloodstained_4_modifier_tear:OnRemoved()
 	if self.particle then ParticleManager:DestroyParticle(self.particle, true) end
 	
 	self:PullBlood()
-	self:PullCopies()
 
 	if IsServer() then self.parent:StopSound("Bloodstained.Mist.Loop") end
 end
@@ -58,10 +59,17 @@ function bloodstained_4_modifier_tear:OnTakeDamage(keys)
 end
 
 function bloodstained_4_modifier_tear:OnIntervalThink()
-	local hp_lost = self.ability:GetSpecialValueFor("hp_lost")
-	local damage = self.parent:GetMaxHealth() * hp_lost * 0.01
+	local damage = self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("hp_lost") * 0.01
 
-	local enemies = FindUnitsInRadius(
+  self:ApplyDrain(damage)
+
+	if IsServer() then self:StartIntervalThink(self.tick) end
+end
+
+-- UTILS -----------------------------------------------------------
+
+function bloodstained_4_modifier_tear:ApplyDrain(damage)
+  local enemies = FindUnitsInRadius(
 		self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius(),
 		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
 		self.ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
@@ -71,20 +79,16 @@ function bloodstained_4_modifier_tear:OnIntervalThink()
 		ApplyDamage({
 			attacker = self.caster, victim = enemy, ability = self.ability,
 			damage = damage, damage_type = self.ability:GetAbilityDamageType(),
-			damage_flags = 	DOTA_DAMAGE_FLAG_NON_LETHAL
+			damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
 		})
 	end
 
 	ApplyDamage({
 		attacker = self.caster, victim = self.parent, ability = self.ability,
-		damage = damage, damage_type = DAMAGE_TYPE_PURE,
-		damage_flags = 	DOTA_DAMAGE_FLAG_NON_LETHAL
+		damage = damage, damage_type = self.ability:GetAbilityDamageType(),
+		damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
 	})
-
-	if IsServer() then self:StartIntervalThink(self.tick) end
 end
-
--- UTILS -----------------------------------------------------------
 
 function bloodstained_4_modifier_tear:ApplyHaemorrhage(keys)
 	if keys.attacker == nil then return end
@@ -126,7 +130,9 @@ function bloodstained_4_modifier_tear:PullBlood()
 		end
 	end
 
+  total_blood = total_blood + self:PullCopies()
   total_blood = total_blood * BaseStats(self.caster):GetHealPower()
+
 
 	if total_blood >= 1 then
 		self.parent:Heal(total_blood, self.ability)
@@ -135,7 +141,9 @@ function bloodstained_4_modifier_tear:PullBlood()
 end
 
 function bloodstained_4_modifier_tear:PullCopies()
-	if self.ability:GetSpecialValueFor("special_copy_leech") == 0 then return end
+	if self.ability:GetSpecialValueFor("special_copy_leech") == 0 then return 0 end
+
+  local total_blood = 0
 
 	local copies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, -1,
@@ -145,8 +153,15 @@ function bloodstained_4_modifier_tear:PullCopies()
 
 	for _,copy in pairs(copies) do
 		self:PlayEfxPull(copy)
+    local modifier = copy:FindModifierByName("bloodstained__modifier_copy")
+    if modifier then
+      total_blood = total_blood + modifier:GetStackCount()
+    end
+
 		copy:RemoveModifierByNameAndCaster("bloodstained__modifier_copy", self.caster)
 	end
+
+  return total_blood
 end
 
 -- EFFECTS -----------------------------------------------------------

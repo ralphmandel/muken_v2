@@ -121,11 +121,6 @@ base_stats_mod = class ({})
           if keys.inflictor:GetAbilityName() == "bloodstained_u__seal" then
             return
           end
-
-          if keys.inflictor:GetAbilityName() == "bloodstained_4__tear"
-          and keys.damage_type == DAMAGE_TYPE_PURE then
-            return
-          end
         end
       end
 
@@ -262,6 +257,9 @@ base_stats_mod = class ({})
     if keys.gain < 1 then return end
 
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, keys.unit, keys.gain, keys.unit)
+
+    if keys.inflictor:GetAbilityName() == "bloodstained_5__lifesteal" then return end
+
     if IsServer() then self.parent:EmitSound("Effect.Heal") end
   end
 

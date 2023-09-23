@@ -38,14 +38,15 @@ function bloodstained_5_modifier_passive:OnAttacked(keys)
 	if self.parent:PassivesDisabled() then return end
 	if self.parent:GetTeamNumber() == keys.target:GetTeamNumber() then return end
 
+  local heal = keys.original_damage * self:GetLifestealPercent(keys.attacker) * 0.01
+
   if keys.attacker == self.parent then
-    local heal = keys.original_damage * self:GetLifestealPercent() * 0.01
     self.parent:Heal(heal, self.ability)
     self:PlayEfxLifesteal(keys.attacker, keys.target)
   else
-    local heal_allies = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal_allies") * 0.01
-    if heal_allies > 0 then
-      keys.attacker:Heal(heal_allies, self.ability)
+    heal = heal * self.ability:GetSpecialValueFor("special_lifesteal_allies") * 0.01
+    if heal > 0 then
+      keys.attacker:Heal(heal, self.ability)
       self:PlayEfxLifesteal(keys.attacker, keys.target)
     end
   end
@@ -83,17 +84,17 @@ end
 
 function bloodstained_5_modifier_passive:OnIntervalThink()
 	if IsServer() then
-		self:SetStackCount(math.floor(self:GetLifestealPercent()))
+		self:SetStackCount(math.floor(self:GetLifestealPercent(self.parent)))
 		self:StartIntervalThink(FrameTime())
 	end
 end
 
 -- UTILS -----------------------------------------------------------
 
-function bloodstained_5_modifier_passive:GetLifestealPercent()
+function bloodstained_5_modifier_passive:GetLifestealPercent(target)
 	local base_heal = self.ability:GetSpecialValueFor("base_heal")
 	local max_heal = self.ability:GetSpecialValueFor("max_heal")
-	local deficit_percent =  1 - (self.parent:GetHealth() / self.parent:GetMaxHealth())
+	local deficit_percent =  1 - (target:GetHealth() / target:GetMaxHealth())
 
 	return ((max_heal - base_heal) * deficit_percent) + base_heal
 end
