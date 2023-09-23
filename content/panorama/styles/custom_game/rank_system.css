@@ -41,14 +41,13 @@
 
 #RankContainer{
   width: 400px;
-  height: 350px;
-  margin-top: 43px;
+  height: fit-children;
   /* margin-right: 70px;
   margin-bottom: 95px; */
 }
 
 .RootContainer {
-  z-index: -3;
+  z-index: 300;
 }
 
 .RankSpellContainer {
@@ -56,7 +55,8 @@
   border-radius: 5px;
   background-size: cover;
   width: 130px;
-  height: 320px;
+  /* height: 330px; */
+  height: 330px;
   flow-children: down;
   box-shadow: fill 0.0px 0.0px 10.0px 1.0px #000000DE;
 }
@@ -68,26 +68,45 @@
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0px 1px 4px 3.0 #000000;
-  margin-top: 6px;
-  margin-bottom: 2px;
-  letter-spacing: 1px;
-
+  margin-top: 10px;
+  letter-spacing: 3px;
+  font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
-.RankName {
-  flow-children: down;
+#RankNameContainer {
   horizontal-align: center;
+  height: 51px;
+  flow-children: down;
 }
 
-.RankName Label{
-  border-top: 2px;
-  border-bottom: 2px;
+#RankLevelContainer {
+  horizontal-align: center;
+  height: 39px;
+  flow-children: down;
+}
 
-  padding-top: 5px;
+.RankSpellContainer .RankName {
+  /* border-top: 2px;
+  border-bottom: 2px; */
+  text-align: center;
   font-size: 12px;
-  horizontal-align: middle;
-  letter-spacing: -1px;
+  letter-spacing: 1px;
 }
+
+.RankSpellContainer .RankLevel {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 0px;
+}
+
+.RankSpellContainer .RankCurrentLevel {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-top: 0px;
+}
+
 
 /* .RankTierBlocked{
   width: 110px;

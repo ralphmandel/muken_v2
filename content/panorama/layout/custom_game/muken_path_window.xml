@@ -5,7 +5,7 @@
 
   <Panel hittest="true">
     <Panel id="PathWindow" class="ControlPanel Maximized" hittest="false">
-      <Button id="ControlPanelSlideThumb" onactivate="$.GetContextPanel().ToggleClass('Minimized')">
+      <Button id="ControlPanelSlideThumb" onactivate="$.GetContextPanel().ToggleClass('Minimized'); Game.EmitSound('General.SelectAction')">
 				<Panel class="RightArrowButtonIcon"/>
 			</Button>
       <Panel id="PathBG" hittest="false">

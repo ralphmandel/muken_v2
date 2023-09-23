@@ -71,7 +71,15 @@ require("internal/rank_system")
       end
     end
 
-		CustomGameEventManager:Send_ServerToPlayer(player, "ranks_from_lua", {skill_name = skill_name, table = list})
+    local skill_level = 0
+    if caster:FindAbilityByName(skill_name):IsTrained() then
+      skill_level = caster:FindAbilityByName(skill_name):GetLevel() + 5
+      if skill_id == 6 then skill_level = skill_level + 3 end
+    end
+
+		CustomGameEventManager:Send_ServerToPlayer(player, "ranks_from_lua", {
+      skill_name = skill_name, skill_level = skill_level, table = list
+    })
 	end
 
   function base_hero:GetSkillID(skill_name)

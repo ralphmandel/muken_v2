@@ -1,4 +1,4 @@
-var RANK_WINDOW, RANK_WINDOW_TITLE, RANK_PANELS = {}, BUTTON_LAYOUT = {};
+var RANK_WINDOW, RANK_TITLE = {}, RANK_PANELS = {}, BUTTON_LAYOUT = {};
 
 var rank_states = {
   1: "StateDisabled", 2: "StateAvailable", 3: "StateUpgraded",
@@ -102,7 +102,8 @@ function OnRankPanelUpdate(event) {
   }
 
   RANK_PANELS["skill_name"] = event.skill_name;
-  RANK_WINDOW_TITLE.FindChildTraverse("SkillName").text = $.Localize("#DOTA_Tooltip_ability_" + event.skill_name);
+  RANK_TITLE["Name"].text = $.Localize("#DOTA_Tooltip_ability_" + event.skill_name);
+  RANK_TITLE["Level"].text = event.skill_level;
   UpdateRankPosition();
 }
 
@@ -166,7 +167,8 @@ function CreateLayout(){
   RANK_WINDOW.style.transform = "translateY(400px)";
   RANK_WINDOW.style.opacity = "0";
 
-  RANK_WINDOW_TITLE = RANK_WINDOW.FindChildTraverse("Title");
+  RANK_TITLE["Name"] = RANK_WINDOW.FindChildTraverse("RankNameContainer").FindChildTraverse("SkillName");
+  RANK_TITLE["Level"] = RANK_WINDOW.FindChildTraverse("RankLevelContainer").FindChildTraverse("SkillLevel");
 
   for(var tier = 1; tier <= 3; tier++) {
     var tier_panel = RANK_WINDOW.FindChildTraverse("Tier" + tier);
