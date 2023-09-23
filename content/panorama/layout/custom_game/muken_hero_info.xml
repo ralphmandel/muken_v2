@@ -113,6 +113,7 @@
       <Image src="file://{resources}/images/custom_game/rune_shadow_75.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/Rank_button_off_small.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/Rank_button_on_small.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/double_arrow_left.png" class="img_collapse"/>
 
       
     </Panel>

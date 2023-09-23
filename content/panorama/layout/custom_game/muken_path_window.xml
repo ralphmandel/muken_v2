@@ -4,7 +4,10 @@
   </styles>
 
   <Panel hittest="true">
-    <Panel id="PathWindow" hittest="false">
+    <Panel id="PathWindow" class="ControlPanel Maximized" hittest="false">
+      <Button id="ControlPanelSlideThumb" onactivate="$.GetContextPanel().ToggleClass('Minimized')">
+				<Panel class="RightArrowButtonIcon"/>
+			</Button>
       <Panel id="PathBG" hittest="false">
         <Label class="Header" text="MUKEN PATH"/>
         <Panel id="ButtonContainer" hittest="false">
