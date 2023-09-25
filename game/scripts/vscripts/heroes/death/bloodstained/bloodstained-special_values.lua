@@ -97,24 +97,31 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
     if value_name == "max_range" then return 1 end
+		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_11") then
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_12") then
+      if value_name == "special_slow_percent" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_21") then
+      if value_name == "shared_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_22") then
+      if value_name == "special_max_hp_steal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_32") then
+      if value_name == "special_kill_reset" then return 1 end
 		end
 	end
 
@@ -231,7 +238,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 3 end
+		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "duration" then return 3 + (value_level * 0.25) end
 
     if value_name == "ms" then return 300 end
@@ -243,10 +250,36 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
   end
 
 	if ability:GetAbilityName() == "bloodstained_3__curse" then
-		if value_name == "AbilityManaCost" then return 450 end
-		if value_name == "AbilityCooldown" then return 30 end
-    if value_name == "AbilityCastRange" then return 350 end
-		if value_name == "max_range" then return 700 + (value_level * 50) end
+		if value_name == "AbilityManaCost" then return 550 end
+		if value_name == "AbilityCooldown" then return 0 end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
+        return 2
+      end
+      return 1
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
+        return 45
+      end
+      return 60
+    end
+    
+    if value_name == "AbilityCastRange" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_11") then
+        return 550
+      end
+      return 350
+    end
+
+		if value_name == "max_range" then return ability:GetSpecialValueFor("AbilityCastRange") + 350 end
+		if value_name == "duration" then return 30 + (value_level * 5) end
+		if value_name == "special_slow_percent" then return 20 end
+    if value_name == "shared_damage" then return 100 end
+    if value_name == "special_max_hp_steal" then return 20 end
+    if value_name == "special_kill_reset" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_4__tear" then

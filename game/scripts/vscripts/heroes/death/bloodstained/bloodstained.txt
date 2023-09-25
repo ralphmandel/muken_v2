@@ -64,7 +64,7 @@
 
     "AbilityValues"
 		{
-      "chance"    "12"
+      "chance"    "10"
       "ms"        "150"
       "status_res""30"
       "agi"       "10"
@@ -97,7 +97,11 @@
     "AbilityValues"
 		{
 			"shared_damage" "75"
-			"max_range"		  "1 2 3 4 5 6 7"
+			"max_range"		  "1"
+			"duration"		  "1 2 3 4 5 6 7"
+      "special_slow_percent" "0"
+      "special_max_hp_steal" "0"
+      "special_kill_reset"   "0"
 		}
 	}
 

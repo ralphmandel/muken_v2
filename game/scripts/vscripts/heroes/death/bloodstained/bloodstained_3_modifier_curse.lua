@@ -2,6 +2,8 @@ bloodstained_3_modifier_curse = class({})
 
 function bloodstained_3_modifier_curse:IsHidden() return false end
 function bloodstained_3_modifier_curse:IsPurgable() return true end
+function bloodstained_3_modifier_curse:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
+function bloodstained_3_modifier_curse:RemoveOnDeath() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
@@ -11,13 +13,22 @@ function bloodstained_3_modifier_curse:OnCreated(kv)
   self.ability = self:GetAbility()
 
 	if self.parent ~= self.caster then
-		self.ability:SetActivated(false)
-		self.ability:EndCooldown()
+    local mod = AddModifier(self.caster, self.ability, self:GetName(), {}, false)
 
-    AddModifier(self.caster, self.ability, self:GetName(), {}, false)
-    -- AddModifier(self.parent, self.ability, "_modifier_movespeed_debuff", {
-    --   percent = self.ability:GetSpecialValueFor("special_slow")
-    -- }, false)
+    self:SetEndCallback(function(interrupted)
+      mod:Destroy()
+    end)
+
+    AddModifier(self.parent, self.ability, "_modifier_percent_movespeed_debuff", {
+      percent = self.ability:GetSpecialValueFor("special_slow_percent")
+    }, false)
+
+    local hp_stolen = math.floor(self.parent:GetBaseMaxHealth() * self.ability:GetSpecialValueFor("special_max_hp_steal") * 0.01)
+
+    if hp_stolen > 0 then
+      AddModifier(self.parent, self.ability, "bloodstained__modifier_bloodloss", {hp_stolen = hp_stolen}, false)
+      AddModifier(self.caster, self.ability, "bloodstained__modifier_bloodgain", {hp_stolen = hp_stolen}, false)
+    end
 	end
 
 	if IsServer() then
@@ -30,29 +41,37 @@ function bloodstained_3_modifier_curse:OnRefresh(kv)
 end
 
 function bloodstained_3_modifier_curse:OnRemoved()
-	if self.ability.target then self.ability.target:RemoveModifierByNameAndCaster(self:GetName(), self.caster) end
-	self.caster:RemoveModifierByNameAndCaster(self:GetName(), self.caster)
-	self.ability.target = nil
-
 	if self.parent ~= self.caster then
-		self.ability:SetActivated(true)
-
-    if self.parent:IsAlive() == false then
-      self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
-    end
+    if self.endCallback then self.endCallback(self.interrupted) end
 	end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_movespeed_debuff", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_percent_movespeed_debuff", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "bloodstained__modifier_bloodloss", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.caster, "bloodstained__modifier_bloodgain", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
 function bloodstained_3_modifier_curse:DeclareFunctions()
 	local funcs = {
+    MODIFIER_EVENT_ON_DEATH,
 		MODIFIER_EVENT_ON_TAKEDAMAGE
 	}
 
 	return funcs
+end
+
+function bloodstained_3_modifier_curse:OnDeath(keys)
+  if self.parent == self.caster then return end
+  if keys.unit == self.parent or keys.unit == self.caster then
+
+    if self.ability:GetSpecialValueFor("special_kill_reset") == 1
+    and keys.unit == self.parent then
+      self.ability:SetCurrentAbilityCharges(self.ability:GetCurrentAbilityCharges() + 1)
+    end
+
+    self:Destroy()
+  end
 end
 
 function bloodstained_3_modifier_curse:OnTakeDamage(keys)
@@ -80,7 +99,6 @@ function bloodstained_3_modifier_curse:OnIntervalThink()
 			local current_distance = CalcDistanceBetweenEntityOBB(self.caster, self.parent)
 			local max_range = self.ability:GetSpecialValueFor("max_range")
 			if current_distance > max_range then
-        self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
         self:Destroy() return
       end
 		end
@@ -90,6 +108,10 @@ function bloodstained_3_modifier_curse:OnIntervalThink()
 end
 
 -- UTILS -----------------------------------------------------------
+
+function bloodstained_3_modifier_curse:SetEndCallback(func)
+	self.endCallback = func
+end
 
 -- EFFECTS -----------------------------------------------------------
 

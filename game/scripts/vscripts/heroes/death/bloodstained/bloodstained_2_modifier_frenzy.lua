@@ -27,7 +27,6 @@ function bloodstained_2_modifier_frenzy:OnRefresh(kv)
 end
 
 function bloodstained_2_modifier_frenzy:OnRemoved()
-	self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 	self.parent:SetForceAttackTarget(nil)
 	RemoveBonus(self.ability, "AGI", self.parent)
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_movespeed_buff", self.ability)
