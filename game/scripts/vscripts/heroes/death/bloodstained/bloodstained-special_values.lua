@@ -189,24 +189,31 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "duration" then return 1 end
+		if value_name == "steal_duration" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_12") then
+      if value_name == "slow_duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_21") then
+      if value_name == "special_break" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_22") then
+      if value_name == "hp_stolen" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_31") then
+      if value_name == "special_kill" then return 1 end
+      if value_name == "special_bleed_in" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_32") then
+      if value_name == "special_bleed_out" then return 1 end
 		end
 	end
 
@@ -319,7 +326,15 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 		if value_name == "AbilityManaCost" then return 850 end
 		if value_name == "AbilityCooldown" then return 100 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") - 50 end
-    if value_name == "duration" then return 12 + (value_level * 0.5) end
+    if value_name == "steal_duration" then return 90 + (value_level * 10) end
+
+    if value_name == "duration" then return 15 end
+    if value_name == "slow_duration" then return 3 end
+    if value_name == "special_break" then return 1 end
+    if value_name == "hp_stolen" then return 15 end
+    if value_name == "special_kill" then return 20 end
+    if value_name == "special_bleed_in" then return 1 end
+    if value_name == "special_bleed_out" then return 1 end
 	end
 
 	return 0

@@ -21,6 +21,10 @@ function bloodstained__modifier_bloodstained:OnCreated(kv)
       hp_stolen = 0
     }, false)
 
+    if self.ability:GetSpecialValueFor("special_bleed_out") == 1 then
+      AddModifier(self.parent, self.ability, "_modifier_bleeding", {}, false)
+    end
+
     self:PlayEfxStart()
   end
 end
@@ -32,6 +36,8 @@ function bloodstained__modifier_bloodstained:OnRefresh(kv)
 end
 
 function bloodstained__modifier_bloodstained:OnRemoved()
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bleeding", self.ability)
+
   if IsServer() then
     if self.steal == true then
       self.target_mod:SetDuration(self.ability:GetSpecialValueFor("steal_duration"), true)

@@ -10,12 +10,18 @@ function bloodstained_u_modifier_aura_effect:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
 	self.ability = self:GetAbility()
+
+  if self.ability:GetSpecialValueFor("special_bleed_in") == 1
+  and self.caster:GetTeamNumber() ~= self.parent:GetTeamNumber() then
+    AddModifier(self.parent, self.ability, "_modifier_bleeding", {}, false)
+  end
 end
 
 function bloodstained_u_modifier_aura_effect:OnRefresh(kv)
 end
 
 function bloodstained_u_modifier_aura_effect:OnRemoved()
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bleeding", self.ability)
 	self:ApplyBloodIllusion()
 end
 
@@ -26,12 +32,18 @@ function bloodstained_u_modifier_aura_effect:CheckState()
 		[MODIFIER_STATE_SILENCED] = true
 	}
 
+  if self:GetAbility():GetSpecialValueFor("special_break") == 1
+  and self:GetCaster():GetTeamNumber() ~= self:GetParent():GetTeamNumber() then
+		table.insert(state, MODIFIER_STATE_PASSIVES_DISABLED, true)
+	end
+
 	return state
 end
 
 function bloodstained_u_modifier_aura_effect:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_AVOID_DAMAGE,
+    MODIFIER_EVENT_ON_DEATH
 	}
 
 	return funcs
@@ -40,6 +52,19 @@ end
 function bloodstained_u_modifier_aura_effect:GetModifierAvoidDamage(keys)
   if keys.attacker:HasModifier(self:GetName()) == false then return 1 end
 	return 0
+end
+
+function bloodstained_u_modifier_aura_effect:OnDeath(keys)
+  if keys.unit:IsHero() == false then return end
+  if keys.unit:IsIllusion() then return end
+
+  local kill = self.ability:GetSpecialValueFor("special_kill")
+
+  if kill > 0 and keys.unit == self.parent then
+    local cd = self.ability:GetCooldownTimeRemaining()
+    self.ability:EndCooldown()
+    self.ability:StartCooldown(cd - kill)
+  end
 end
 
 -- UTILS -----------------------------------------------------------
