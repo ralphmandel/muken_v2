@@ -350,7 +350,7 @@ require("internal/rank_system")
     end
 
     if path == "Path_3" then
-      self:UpdateStatPoints(60, "nil")
+      self:UpdateStatPoints(30, "nil")
     end
 
     self:UpdatePathPoints(-1)

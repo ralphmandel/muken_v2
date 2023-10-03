@@ -76,8 +76,8 @@
 		"AbilityValues"
 		{
       "sub_stat_incoming_heal"  "1" //%
+      "sub_stat_health_regen"   "0.4"
       "sub_stat_max_health"     "50"
-      "sub_stat_health_regen"   "0.25"
       "sub_stat_incoming_buff"  "0.4" //%
 		}
 	}

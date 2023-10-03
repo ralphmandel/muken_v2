@@ -284,7 +284,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 		if value_name == "max_range" then return ability:GetSpecialValueFor("AbilityCastRange") + 350 end
 		if value_name == "duration" then return 30 + (value_level * 5) end
 		if value_name == "special_slow_percent" then return 20 end
-    if value_name == "shared_damage" then return 100 end
+    if value_name == "shared_damage" then return 80 end
     if value_name == "special_max_hp_steal" then return 20 end
     if value_name == "special_kill_reset" then return 1 end
 	end
