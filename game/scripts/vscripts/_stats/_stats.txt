@@ -33,7 +33,7 @@
 		"AbilityValues"
 		{
       "sub_stat_movespeed"          "3"
-      "sub_stat_atk_speed"          "1"
+      "sub_stat_attack_speed"          "1"
       "sub_stat_dodge"              "0.1" //% /^
       "sub_stat_cooldown_reduction" "0.1" //% /^
       "sub_stat_mana_regen"         "0.1"

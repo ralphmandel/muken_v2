@@ -12,9 +12,13 @@ function bloodstained_2_modifier_frenzy:OnCreated(kv)
 
 	self.parent:SetForceAttackTarget(self.ability.target)
 	
-	AddBonus(self.ability, "AGI", self.parent, self.ability:GetSpecialValueFor("agi"), 0, nil)
-  AddModifier(self.parent, self.ability, "_modifier_movespeed_buff", {
-    percent = self.ability:GetSpecialValueFor("ms")
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    status_resist_stack = self.ability:GetSpecialValueFor("status_res"),
+    attack_speed = self.ability:GetSpecialValueFor("attack_speed")
+  }, false)
+
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {
+    value = self.ability:GetSpecialValueFor("ms")
   }, false)
 
 	if IsServer() then
@@ -28,8 +32,9 @@ end
 
 function bloodstained_2_modifier_frenzy:OnRemoved()
 	self.parent:SetForceAttackTarget(nil)
-	RemoveBonus(self.ability, "AGI", self.parent)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_movespeed_buff", self.ability)
+
+  RemoveSubStats(self.parent, self.ability, {"attack_speed", "status_resist_stack"})
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_increase", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -45,7 +50,6 @@ end
 function bloodstained_2_modifier_frenzy:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MIN_HEALTH,
-    MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING,
     MODIFIER_EVENT_ON_ATTACK_LANDED
 	}
 
@@ -54,10 +58,6 @@ end
 
 function bloodstained_2_modifier_frenzy:GetMinHealth()
   return 1
-end
-
-function bloodstained_2_modifier_frenzy:GetModifierStatusResistanceStacking()
-  return self:GetAbility():GetSpecialValueFor("status_res")
 end
 
 function bloodstained_2_modifier_frenzy:OnAttackLanded(keys)

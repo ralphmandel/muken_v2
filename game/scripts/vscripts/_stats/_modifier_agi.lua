@@ -17,7 +17,7 @@ function _modifier_agi:OnCreated(kv)
 
   self.data = {
     sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
-    sub_stat_atk_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_atk_speed"), bonus = 0},
+    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
     sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge"), bonus = 0},
     sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
     sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
@@ -74,7 +74,7 @@ end
 
 function _modifier_agi:GetModifierAttackSpeedBonus_Constant()
   if self.parent:HasModifier("ancient_1_modifier_passive") then return 0 end
-  return self:GetCalculedData("sub_stat_atk_speed", false)
+  return self:GetCalculedData("sub_stat_attack_speed", false)
 end
 
 function _modifier_agi:GetModifierBaseAttackTimeConstant()
