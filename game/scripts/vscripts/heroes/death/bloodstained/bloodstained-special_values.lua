@@ -55,11 +55,11 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("bloodstained_1__rage_rank_31") then
-      if value_name == "str_gain" then return 1 end
+      if value_name == "damage_gain" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_1__rage_rank_32") then
-      if value_name == "special_str_init" then return 1 end
+      if value_name == "special_damage_init" then return 1 end
 		end
 	end
 
@@ -239,8 +239,8 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "call_duration" then return 6 end
     if value_name == "radius" then return 375 end
     if value_name == "special_blink" then return 300 end
-    if value_name == "str_gain" then return 2 end 
-    if value_name == "special_str_init" then return 20 end
+    if value_name == "damage_gain" then return 10 end
+    if value_name == "special_damage_init" then return 100 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then

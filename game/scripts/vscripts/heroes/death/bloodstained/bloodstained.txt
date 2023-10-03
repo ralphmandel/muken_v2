@@ -40,13 +40,12 @@
 		{
       "radius"        "275"
       "call_duration" "3"
-      "lck"           "10"
-      "str_gain"      "1"
+      "damage_gain"   "6"
       "duration"      "10"
       "cooldown"		  "1 2 3 4 5 6 7"
-      "special_reset"     "0"
-      "special_blink"     "0"
-      "special_str_init"  "0"
+      "special_reset"       "0"
+      "special_blink"       "0"
+      "special_damage_init" "0"
 		}
 	}
 

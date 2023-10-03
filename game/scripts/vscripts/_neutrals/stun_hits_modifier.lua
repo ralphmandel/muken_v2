@@ -64,7 +64,7 @@ function stun_hits_modifier:CheckStun()
 end
 
 function stun_hits_modifier:PrepareCrit()
-  BaseStats(self.parent):SetForceCrit(100, self.stun_crit)
+  MainStats(self.parent, "STR"):SetForceCrit(100, self.stun_crit)
 end
 
 --------------------------------------------------------------------------------

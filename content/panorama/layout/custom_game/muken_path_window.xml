@@ -15,7 +15,7 @@
         <Panel id="LabelContainer" hittest="false">
           <Label text="+1 Ability Point" />
           <Label text="+6 Rank Points" />
-          <Label text="+12 Stats Points" />
+          <Label text="+60 Stats Points" />
         </Panel>
       </Panel>
     </Panel>

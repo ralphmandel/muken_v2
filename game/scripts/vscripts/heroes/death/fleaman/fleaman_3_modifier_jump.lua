@@ -114,7 +114,7 @@ function fleaman_3_modifier_jump:PerformImpact(point)
 		if enemy:IsIllusion() then
       enemy:Kill(self.ability, nil)
 		else
-      BaseStats(self.parent):SetForceCrit(100, nil)
+      MainStats(self.parent, "STR"):SetForceCrit(100, nil)
 			self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
 		end
 	end

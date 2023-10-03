@@ -7,7 +7,7 @@ LinkLuaModifier("lawbreaker_1_modifier_passive", "heroes/death/lawbreaker/lawbre
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseStats(self:GetCaster()):AddManaExtra(self)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

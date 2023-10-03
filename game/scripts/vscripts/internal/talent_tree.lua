@@ -76,35 +76,62 @@ function TalentTree:OnPortraitUpdate(event)
   local entity = EntIndexToHScript(event.entity)
   if entity == nil then return end
   if IsValidEntity(entity) == false then return end
-  if BaseStats(entity) == nil then return end
   if hero:CanEntityBeSeenByMyTeam(entity) == false then return end
+  if MainStats(entity, "STR") == nil then return end
+  if MainStats(entity, "AGI") == nil then return end
+  if MainStats(entity, "INT") == nil then return end
+  if MainStats(entity, "VIT") == nil then return end
 
   local info = {
     unit_name = entity:GetUnitName(),
 
-    physical_damage = BaseStats(entity):GetTotalPhysicalDamagePercent(),
+    physical_damage = MainStats(entity, "STR"):GetPhysicalDamageAmp(),
     attack_speed = entity:GetDisplayAttackSpeed(),
     armor = entity:GetPhysicalArmorValue(false),
-    evasion = BaseStats(entity):GetDodgePercent(),
-    crit_chance = BaseStats(entity):GetCriticalChance(),
+    evasion = MainStats(entity, "AGI"):GetDodge(),
+    crit_chance = MainStats(entity, "STR"):GetCriticalChance(),
 
-    attack_damage = entity:GetAverageTrueAttackDamage(nil) + BaseStats(entity):GetBonusAtkDamage(),
+    attack_damage = entity:GetAverageTrueAttackDamage(nil),
     movespeed = entity:GetIdealSpeed(),
-    block = BaseStats(entity):GetBlockAtkDamage(),
+    block = 0,
     hp_regen = entity:GetHealthRegen(),
-    crit_damage = 100 + BaseStats(entity):GetTotalCriticalDamage(),
+    crit_damage = MainStats(entity, "STR"):GetCriticalDamage(),
 
-    magical_damage = BaseStats(entity):GetTotalMagicalDamagePercent(),
+    magical_damage = MainStats(entity, "INT"):GetMagicalDamageAmp(),
     current_vision = entity:GetCurrentVisionRange(),
-    magical_resist = entity:Script_GetMagicalArmorValue(false, BaseStats(entity)) * 100,
+    magical_resist = entity:Script_GetMagicalArmorValue(false, MainStats(entity, "INT")) * 100,
     mp_regen = entity:GetManaRegen(),
-    debuff_amp = BaseStats(entity):GetTotalDebuffAmpPercent(),
+    debuff_amp = MainStats(entity, "INT"):GetDebuffAmp() * 100,
 
-    heal_power = BaseStats(entity):GetTotalHealPowerPercent(),
-    heal_amp = 100 + BaseStats(entity):GetHealAmp(),
-    status_resist = BaseStats(entity):GetStatusResistPercent(),
+    heal_power = MainStats(entity, "INT"):GetHealPower() * 100,
+    heal_amp = MainStats(entity, "VIT"):GetIncomingHeal(),
+    status_resist = MainStats(entity, "INT"):GetStatusResist() * 100,
     cd_reduction = entity:GetCooldownReduction() * 100,
-    buff_amp = BaseStats(entity):GetTotalBuffAmpPercent()
+    buff_amp = MainStats(entity, "VIT"):GetIncomingBuff() * 100
+
+    -- physical_damage = BaseStats(entity):GetTotalPhysicalDamagePercent(),
+    -- attack_speed = entity:GetDisplayAttackSpeed(),
+    -- armor = entity:GetPhysicalArmorValue(false),
+    -- evasion = BaseStats(entity):GetDodgePercent(),
+    -- crit_chance = BaseStats(entity):GetCriticalChance(),
+
+    -- attack_damage = entity:GetAverageTrueAttackDamage(nil),
+    -- movespeed = entity:GetIdealSpeed(),
+    -- block = BaseStats(entity):GetBlockAtkDamage(),
+    -- hp_regen = entity:GetHealthRegen(),
+    -- crit_damage = 100 + BaseStats(entity):GetTotalCriticalDamage(),
+
+    -- magical_damage = BaseStats(entity):GetTotalMagicalDamagePercent(),
+    -- current_vision = entity:GetCurrentVisionRange(),
+    -- magical_resist = entity:Script_GetMagicalArmorValue(false, BaseStats(entity)) * 100,
+    -- mp_regen = entity:GetManaRegen(),
+    -- debuff_amp = BaseStats(entity):GetTotalDebuffAmpPercent(),
+
+    -- heal_power = BaseStats(entity):GetTotalHealPowerPercent(),
+    -- heal_amp = 100 + BaseStats(entity):GetHealAmp(),
+    -- status_resist = BaseStats(entity):GetStatusResistPercent(),
+    -- cd_reduction = entity:GetCooldownReduction() * 100,
+    -- buff_amp = BaseStats(entity):GetTotalBuffAmpPercent()
   }
 
   CustomGameEventManager:Send_ServerToPlayer(player, "unit_info_from_lua", info)

@@ -95,7 +95,7 @@ function bloodstained_4_modifier_tear:ApplyHaemorrhage(keys)
 	if keys.attacker:IsBaseNPC() == false then return end
 	if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return end
 	if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return end
-	if BaseStats(keys.attacker).has_crit ~= true then return end
+	--BaseStats(keys.attacker).has_crit ~= true then return end
 
 	local point = (keys.attacker:GetAbsOrigin() - keys.unit:GetAbsOrigin()):Normalized()
 	self:CreateBlood(keys.unit, keys.damage, keys.unit:GetAbsOrigin() - (point * 175))
@@ -131,7 +131,7 @@ function bloodstained_4_modifier_tear:PullBlood()
 	end
 
   total_blood = total_blood + self:PullCopies()
-  total_blood = total_blood * BaseStats(self.caster):GetHealPower()
+  --total_blood = total_blood * BaseStats(self.caster):GetHealPower()
 
 
 	if total_blood >= 1 then
