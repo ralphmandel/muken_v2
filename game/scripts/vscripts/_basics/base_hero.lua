@@ -20,9 +20,7 @@ require("internal/rank_system")
 		if caster:IsIllusion() then return end
 
 		if self:GetLevel() == 1 then
-      self.hero_name = GetHeroName(self:GetCaster():GetUnitName())
-      self.hero_team = GetHeroTeam(self:GetCaster():GetUnitName())
-      self.ability_points = GetHeroInitPts(self.hero_name)
+      self.ability_points = GetHeroInitPts(GetHeroName(self:GetCaster():GetUnitName()))
 
       self:ResetData()
 

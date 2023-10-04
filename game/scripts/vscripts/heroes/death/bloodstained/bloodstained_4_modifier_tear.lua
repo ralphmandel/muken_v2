@@ -12,9 +12,7 @@ function bloodstained_4_modifier_tear:OnCreated(kv)
 
 	self.tick = self.ability:GetSpecialValueFor("tick")
 	self.blood_duration = self.ability:GetSpecialValueFor("blood_duration")
-	self.init_loss = self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("special_init_loss") * 0.01
-
-  if self.parent:GetHealth() <= self.init_loss then self.init_loss = self.parent:GetHealth() - 1 end
+	self.init_loss = self.parent:GetHealth() * self.ability:GetSpecialValueFor("special_init_loss") * 0.01
 
 	if IsServer() then
 		self:PlayEfxStart(self.ability:GetAOERadius())

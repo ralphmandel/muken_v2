@@ -16,7 +16,7 @@ function bloodstained__modifier_copy:OnCreated(kv)
   self.target = EntIndexToHScript(kv.target_index)
 
   AddStatusEfx(self.ability, "bloodstained__modifier_copy_status_efx", self.caster, self.parent)
-  AddBonus(self.ability, "CON", self.parent, -9999, 0, nil)
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {value = 100}, false)
 
   self.max_barrier = 100
   self.barrier = self.max_barrier
@@ -30,7 +30,6 @@ end
 
 function bloodstained__modifier_copy:OnRemoved()
   RemoveStatusEfx(self.ability, "bloodstained__modifier_copy_status_efx", self.caster, self.parent)
-  RemoveBonus(self.ability, "CON", self.parent)
 
   if self.target then
     if IsValidEntity(self.target) then
@@ -74,7 +73,6 @@ end
 function bloodstained__modifier_copy:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_MIN_HEALTH,
-    MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
     MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_CONSTANT,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
     MODIFIER_EVENT_ON_DEATH
@@ -85,10 +83,6 @@ end
 
 function bloodstained__modifier_copy:GetMinHealth(keys)
 	return self:GetParent():GetMaxHealth()
-end
-
-function bloodstained__modifier_copy:GetModifierMoveSpeedBonus_Percentage(target)
-	return 100
 end
 
 function bloodstained__modifier_copy:GetModifierIncomingPhysicalDamageConstant(keys)  

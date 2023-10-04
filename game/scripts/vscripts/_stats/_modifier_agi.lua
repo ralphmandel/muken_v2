@@ -15,18 +15,28 @@ function _modifier_agi:OnCreated(kv)
   self.const_base_attack_time = self.ability:GetSpecialValueFor("const_base_attack_time")
   self.const_base_mana_regen = self.ability:GetSpecialValueFor("const_base_mana_regen")
 
-  self.data = {
-    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
-    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
-    sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge"), bonus = 0},
-    sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
-    sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
-    sub_stat_movespeed_increase = {mult = 0, bonus = 0},
-    sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
-    sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
-    sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
-    sub_stat_attack_time = {mult = 0, bonus = 0}
-  }
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        self.data = mod.data
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+      end
+    end
+  else
+    self.data = {
+      sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
+      sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
+      sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge"), bonus = 0},
+      sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
+      sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
+      sub_stat_movespeed_increase = {mult = 0, bonus = 0},
+      sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
+      sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
+      sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
+      sub_stat_attack_time = {mult = 0, bonus = 0}
+    }
+  end
 end
 
 function _modifier_agi:OnRefresh(kv)

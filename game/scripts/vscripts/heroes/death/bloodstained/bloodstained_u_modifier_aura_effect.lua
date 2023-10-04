@@ -77,8 +77,8 @@ function bloodstained_u_modifier_aura_effect:ApplyBloodIllusion()
 	if self.ability:IsActivated() then return end
   if self.parent:HasModifier("bloodstained__modifier_bloodstained") then return end
 
-  AddModifier(self.parent, self.ability, "_modifier_percent_movespeed_debuff", {
-    duration = self.ability:GetSpecialValueFor("slow_duration"), percent = 100
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {
+    value = 100, duration = self.ability:GetSpecialValueFor("slow_duration")
   }, true)
 	
 	self:CreateCopy()

@@ -19,8 +19,8 @@ function bloodstained_3_modifier_curse:OnCreated(kv)
       mod:Destroy()
     end)
 
-    AddModifier(self.parent, self.ability, "_modifier_percent_movespeed_debuff", {
-      percent = self.ability:GetSpecialValueFor("special_slow_percent")
+    AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {
+      value = self.ability:GetSpecialValueFor("special_slow_percent")
     }, false)
 
     local hp_stolen = math.floor(self.parent:GetBaseMaxHealth() * self.ability:GetSpecialValueFor("special_max_hp_steal") * 0.01)
@@ -45,7 +45,7 @@ function bloodstained_3_modifier_curse:OnRemoved()
     if self.endCallback then self.endCallback(self.interrupted) end
 	end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_percent_movespeed_debuff", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_increase", self.ability)
   RemoveAllModifiersByNameAndAbility(self.parent, "bloodstained__modifier_bloodloss", self.ability)
   RemoveAllModifiersByNameAndAbility(self.caster, "bloodstained__modifier_bloodgain", self.ability)
 end

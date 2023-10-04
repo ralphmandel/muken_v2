@@ -11,16 +11,26 @@ function _modifier_int:OnCreated(kv)
 
   self.main_bonus = 0
 
-  self.data = {
-    sub_stat_max_mana = {mult = self.ability:GetSpecialValueFor("sub_stat_max_mana"), bonus = 0},
-    sub_stat_magical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_magical_damage"), bonus = 0},
-    sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
-    sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
-    sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
-    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
-    sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
-    sub_stat_status_resist_stack = {mult = 0, bonus = 0}
-  }
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        self.data = mod.data
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+      end
+    end
+  else
+    self.data = {
+      sub_stat_max_mana = {mult = self.ability:GetSpecialValueFor("sub_stat_max_mana"), bonus = 0},
+      sub_stat_magical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_magical_damage"), bonus = 0},
+      sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
+      sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
+      sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
+      sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
+      sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
+      sub_stat_status_resist_stack = {mult = 0, bonus = 0}
+    }
+  end
 end
 
 function _modifier_int:OnRefresh(kv)

@@ -17,14 +17,24 @@ function _modifier_str:OnCreated(kv)
 
   self.const_critical_damage = self.ability:GetSpecialValueFor("const_critical_damage")
 
-  self.data = {
-    sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
-    sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
-    sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
-    sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
-    sub_stat_critical_damage = {mult = 0, bonus = 0},
-    sub_stat_miss_chance = {mult = 0, bonus = 0}
-  }
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        self.data = mod.data
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+      end
+    end
+  else
+    self.data = {
+      sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
+      sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
+      sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
+      sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
+      sub_stat_critical_damage = {mult = 0, bonus = 0},
+      sub_stat_miss_chance = {mult = 0, bonus = 0}
+    }
+  end
 end
 
 function _modifier_str:OnRefresh(kv)

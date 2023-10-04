@@ -385,10 +385,6 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
 					[2] = DOTA_TEAM_CUSTOM_2,
 					[3] = DOTA_TEAM_CUSTOM_3,
 					[4] = DOTA_TEAM_CUSTOM_4,
-					-- [5] = DOTA_TEAM_CUSTOM_5,
-					-- [6] = DOTA_TEAM_CUSTOM_6,
-					-- [7] = DOTA_TEAM_CUSTOM_7,
-					-- [8] = DOTA_TEAM_CUSTOM_8
 				}
 			
 				for _, teamNum in pairs(teams) do

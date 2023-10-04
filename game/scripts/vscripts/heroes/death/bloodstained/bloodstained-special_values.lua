@@ -175,13 +175,15 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_22") then
-      if value_name == "special_lifesteal_allies" then return 1 end
+      if value_name == "special_max_hp_regen" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_31") then
+      if value_name == "special_min_heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_32") then
+      if value_name == "special_max_heal" then return 1 end
 		end
 	end
 
@@ -303,7 +305,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "blood_percent" then return 8 + (value_level * 0.25) end
     if value_name == "special_copy_leech" then return 1 end
     if value_name == "blood_duration" then return 30 end
-    if value_name == "special_init_loss" then return 20 end
+    if value_name == "special_init_loss" then return 30 end
     if value_name == "hp_lost" then return 2 end
     if value_name == "tick" then return 0.75 end
     if value_name == "radius" then return 500 end
@@ -319,7 +321,9 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "special_self_hp_creep" then return 2 end
     if value_name == "special_heal_radius" then return 500 end
     if value_name == "max_heal" then return 50 end
-    if value_name == "special_lifesteal_allies" then return 30 end
+    if value_name == "special_max_hp_regen" then return 40 end
+    if value_name == "special_min_heal" then return 25 end
+    if value_name == "special_max_heal" then return 40 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_u__seal" then
