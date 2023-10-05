@@ -15,28 +15,20 @@ function _modifier_agi:OnCreated(kv)
   self.const_base_attack_time = self.ability:GetSpecialValueFor("const_base_attack_time")
   self.const_base_mana_regen = self.ability:GetSpecialValueFor("const_base_mana_regen")
 
-  if self.parent:IsIllusion() then
-    for _, hero in pairs(HeroList:GetAllHeroes()) do
-      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
-        local mod = hero:FindModifierByName(self:GetName())
-        self.data = mod.data
-        self.ability:SetLevel(mod:GetAbility():GetLevel())
-      end
-    end
-  else
-    self.data = {
-      sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
-      sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
-      sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge"), bonus = 0},
-      sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
-      sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
-      sub_stat_movespeed_increase = {mult = 0, bonus = 0},
-      sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
-      sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
-      sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
-      sub_stat_attack_time = {mult = 0, bonus = 0}
-    }
-  end
+  self.data = {
+    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed")},
+    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed")},
+    sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge")},
+    sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction")},
+    sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen")},
+    sub_stat_movespeed_increase = {mult = 0},
+    sub_stat_movespeed_decrease = {mult = 0},
+    sub_stat_movespeed_percent_increase = {mult = 0},
+    sub_stat_movespeed_percent_decrease = {mult = 0},
+    sub_stat_attack_time = {mult = 0}
+  }
+  
+  self:LoadData()
 end
 
 function _modifier_agi:OnRefresh(kv)
@@ -144,6 +136,10 @@ end
 
 -- GETTERS --------------------------------------------------------------------------------
 
+function _modifier_agi:GetData(property)
+  return self.data[property].bonus
+end
+
 function _modifier_agi:GetBonusMS()
   return self:GetCalculedData("sub_stat_movespeed_increase", false) - self:GetCalculedData("sub_stat_movespeed_decrease", false)
 end
@@ -186,4 +182,24 @@ function _modifier_agi:UpdateSubBonus(property)
   for _,modifier in pairs(mods) do value = value + modifier.kv[property] end
 
   self.data["sub_stat_"..property].bonus = value
+end
+
+function _modifier_agi:LoadData()
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        for property, table in pairs(self.data) do
+          self.data[property].bonus = mod:GetData(property)
+        end
+
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+        return
+      end
+    end
+  else
+    for property, table in pairs(self.data) do
+      self.data[property].bonus = 0
+    end
+  end
 end

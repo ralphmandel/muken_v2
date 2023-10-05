@@ -25,7 +25,7 @@ end
 
 function fleaman_1_modifier_precision:OnRemoved()
   RemoveStatusEfx(self.ability, "fleaman_1_modifier_precision_status_efx", self.caster, self.parent)
-	RemoveBonus(self.ability, "AGI", self.parent)
+  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -34,8 +34,11 @@ function fleaman_1_modifier_precision:OnStackCountChanged(old)
 	if old == self:GetStackCount() then return end
 	if self:GetStackCount() == 0 then self:Destroy() return end
 
-  RemoveBonus(self.ability, "AGI", self.parent)
-  AddBonus(self.ability, "AGI", self.parent, self:GetStackCount() * self.ability:GetSpecialValueFor("agi"), 0, nil)
+  RemoveSubStats(self.parent, self.ability, {"attack_speed", "dodge"})
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    attack_speed = self:GetStackCount() * self.ability:GetSpecialValueFor("attack_speed"),
+    dodge = self:GetStackCount() * self.ability:GetSpecialValueFor("dodge")
+  }, false)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -57,7 +60,7 @@ end
 -- EFFECTS -----------------------------------------------------------
 
 function fleaman_1_modifier_precision:GetStatusEffectName()
-    return "particles/status_fx/status_effect_slark_shadow_dance.vpcf"
+  return "particles/status_fx/status_effect_slark_shadow_dance.vpcf"
 end
 
 function fleaman_1_modifier_precision:StatusEffectPriority()

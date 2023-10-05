@@ -6,14 +6,13 @@ function bloodstained__modifier_copy:IsPurgable() return false end
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function bloodstained__modifier_copy:OnCreated(kv)
-  if not IsServer() then return end
-
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
   self.hp_stolen = kv.hp_stolen
   self.target = EntIndexToHScript(kv.target_index)
+  self.target_team = self.target:GetTeamNumber()
 
   AddStatusEfx(self.ability, "bloodstained__modifier_copy_status_efx", self.caster, self.parent)
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {value = 100}, false)
@@ -23,6 +22,8 @@ function bloodstained__modifier_copy:OnCreated(kv)
 
   self:SetHasCustomTransmitterData(true)
   self:SetStackCount(self.hp_stolen)
+
+  if IsServer() then self:OnIntervalThink() end
 end
 
 function bloodstained__modifier_copy:OnRefresh(kv)
@@ -126,6 +127,11 @@ function bloodstained__modifier_copy:OnStackCountChanged(old)
   AddModifier(self.target, self.ability, "bloodstained__modifier_bloodstained", {
     hp_stolen = self:GetStackCount()
   }, false)
+end
+
+function bloodstained__modifier_copy:OnIntervalThink()
+  AddFOWViewer(self.target_team, self.parent:GetOrigin(), 100, 0.3, false)
+  if IsServer() then self:StartIntervalThink(0.2) end
 end
 
 -- UTILS -----------------------------------------------------------

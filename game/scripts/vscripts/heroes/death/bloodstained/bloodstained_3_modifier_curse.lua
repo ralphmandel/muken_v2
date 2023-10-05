@@ -45,7 +45,7 @@ function bloodstained_3_modifier_curse:OnRemoved()
     if self.endCallback then self.endCallback(self.interrupted) end
 	end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_increase", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
   RemoveAllModifiersByNameAndAbility(self.parent, "bloodstained__modifier_bloodloss", self.ability)
   RemoveAllModifiersByNameAndAbility(self.caster, "bloodstained__modifier_bloodgain", self.ability)
 end

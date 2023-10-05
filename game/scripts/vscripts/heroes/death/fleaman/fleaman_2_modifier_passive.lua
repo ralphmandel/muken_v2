@@ -46,9 +46,6 @@ function fleaman_2_modifier_passive:OnStackCountChanged(old)
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_movespeed_buff", self.ability)
 
   if self:GetStackCount() > 0 then
-    AddModifier(self.parent, self.ability, "_modifier_movespeed_buff", {
-      percent = self:GetStackCount() * self.ability:GetSpecialValueFor("ms")
-    }, false)
   end
 end
 

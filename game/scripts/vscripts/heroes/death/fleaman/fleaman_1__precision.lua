@@ -27,7 +27,7 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 
     self:StartCooldown(0.4)
 
-    caster:Purge(false, true, false, false, false)
+    --caster:Purge(false, true, false, false, false)
     AddModifier(caster, self, "fleaman_1_modifier_precision",  {}, false)
 
     Timers:CreateTimer(0.35, function()

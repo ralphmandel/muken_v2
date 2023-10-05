@@ -11,22 +11,14 @@ function _modifier_vit:OnCreated(kv)
 
   self.main_bonus = 0
 
-  if self.parent:IsIllusion() then
-    for _, hero in pairs(HeroList:GetAllHeroes()) do
-      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
-        local mod = hero:FindModifierByName(self:GetName())
-        self.data = mod.data
-        self.ability:SetLevel(mod:GetAbility():GetLevel())
-      end
-    end
-  else
-    self.data = {
-      sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
-      sub_stat_health_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_health_regen"), bonus = 0},
-      sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
-      sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0}
-    }
-  end
+  self.data = {
+    sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
+    sub_stat_health_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_health_regen"), bonus = 0},
+    sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
+    sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0}
+  }
+
+  self:LoadData()
 end
 
 function _modifier_vit:OnRefresh(kv)
@@ -84,6 +76,10 @@ end
 
 -- GETTERS --------------------------------------------------------------------------------
 
+function _modifier_vit:GetData(property)
+  return self.data[property].bonus
+end
+
 function _modifier_vit:GetIncomingHeal()
   return self:GetCalculedDataStack("sub_stat_incoming_heal", false)
 end
@@ -114,4 +110,24 @@ function _modifier_vit:UpdateSubBonus(property)
   for _,modifier in pairs(mods) do value = value + modifier.kv[property] end
 
   self.data["sub_stat_"..property].bonus = value
+end
+
+function _modifier_vit:LoadData()
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        for property, table in pairs(self.data) do
+          self.data[property].bonus = mod:GetData(property)
+        end
+
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+        return
+      end
+    end
+  else
+    for property, table in pairs(self.data) do
+      self.data[property].bonus = 0
+    end
+  end
 end

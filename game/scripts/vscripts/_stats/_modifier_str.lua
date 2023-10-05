@@ -17,24 +17,16 @@ function _modifier_str:OnCreated(kv)
 
   self.const_critical_damage = self.ability:GetSpecialValueFor("const_critical_damage")
 
-  if self.parent:IsIllusion() then
-    for _, hero in pairs(HeroList:GetAllHeroes()) do
-      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
-        local mod = hero:FindModifierByName(self:GetName())
-        self.data = mod.data
-        self.ability:SetLevel(mod:GetAbility():GetLevel())
-      end
-    end
-  else
-    self.data = {
-      sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
-      sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
-      sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
-      sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
-      sub_stat_critical_damage = {mult = 0, bonus = 0},
-      sub_stat_miss_chance = {mult = 0, bonus = 0}
-    }
-  end
+  self.data = {
+    sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
+    sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
+    sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
+    sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
+    sub_stat_critical_damage = {mult = 0, bonus = 0},
+    sub_stat_miss_chance = {mult = 0, bonus = 0}
+  }
+
+  self:LoadData()
 end
 
 function _modifier_str:OnRefresh(kv)
@@ -116,6 +108,10 @@ end
 
 -- SETTERS/GETTERS --------------------------------------------------------------------------------
 
+function _modifier_str:GetData(property)
+  return self.data[property].bonus
+end
+
 function _modifier_str:SetForceCrit(chance, damage)
   self.force_crit_chance = chance
   self.force_crit_damage = damage
@@ -161,6 +157,26 @@ function _modifier_str:UpdateSubBonus(property)
   for _,modifier in pairs(mods) do value = value + modifier.kv[property] end
 
   self.data["sub_stat_"..property].bonus = value
+end
+
+function _modifier_str:LoadData()
+  if self.parent:IsIllusion() then
+    for _, hero in pairs(HeroList:GetAllHeroes()) do
+      if hero:IsIllusion() == false and hero:GetUnitName() == self.parent:GetUnitName() then
+        local mod = hero:FindModifierByName(self:GetName())
+        for property, table in pairs(self.data) do
+          self.data[property].bonus = mod:GetData(property)
+        end
+
+        self.ability:SetLevel(mod:GetAbility():GetLevel())
+        return
+      end
+    end
+  else
+    for property, table in pairs(self.data) do
+      self.data[property].bonus = 0
+    end
+  end
 end
 
 -- EFFECTS --------------------------------------------------------------------------------
