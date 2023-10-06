@@ -88,7 +88,7 @@ function TalentTree:OnPortraitUpdate(event)
     physical_damage = MainStats(entity, "STR"):GetPhysicalDamageAmp(),
     attack_speed = entity:GetDisplayAttackSpeed(),
     armor = entity:GetPhysicalArmorValue(false),
-    evasion = MainStats(entity, "AGI"):GetDodge(),
+    evasion = MainStats(entity, "AGI"):GetEvasion(),
     crit_chance = MainStats(entity, "STR"):GetCriticalChance(),
 
     attack_damage = entity:GetAverageTrueAttackDamage(nil),

@@ -130,14 +130,16 @@ end
 
 function _modifier_int:GetCalculedDataStack(property, bScalar)
   local value = self.data[property].mult * (math.floor(self.ability:GetLevel() / 5))
+  value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
-  return value + self.data[property].bonus
+  return value
 end
 
 function _modifier_int:GetCalculedData(property, bScalar)
   local value = self.data[property].mult * (self.ability:GetLevel() + self.main_bonus)
+  value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
-  return value + self.data[property].bonus
+  return value
 end
 
 function _modifier_int:UpdateMainBonus(value)

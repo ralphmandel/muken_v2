@@ -45,36 +45,45 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("fleaman_1__precision_rank_21") then
+      if value_name == "attack_speed" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_1__precision_rank_22") then
+      if value_name == "evasion" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_1__precision_rank_31") then
+      if value_name == "special_damage" then return 1 end
+      if value_name == "special_pulses" then return 1 end
+      if value_name == "special_aoe" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_1__precision_rank_32") then
+      if value_name == "special_purge" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "fleaman_2__speed" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "stack_duration" then return 1 end
+		if value_name == "min_ms" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_12") then
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_21") then
+      if value_name == "ms_gain" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_22") then
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_31") then
+      if value_name == "max_ms" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_32") then
@@ -192,17 +201,42 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability_level < 1 then ability_level = 1 end
 
 	if ability:GetAbilityName() == "fleaman_1__precision" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then
+      local cost = 180
+      if caster:FindAbilityByName("fleaman_1__precision_rank_12") then
+        cost = cost - (cost * 0.25) 
+      end
+      return cost
+    end
+
     if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCharges" then return 3 end
-    if value_name == "AbilityChargeRestoreTime" then return 15 end
-		if value_name == "duration" then return 12 + (value_level * 0.5) end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("fleaman_1__precision_rank_11") then
+        return 4
+      end
+      return 3
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then return 20 end
+		if value_name == "duration" then return 15 + (value_level * 0.5) end
+
+    if value_name == "attack_speed" then return 50 end
+    if value_name == "evasion" then return 5 end
+    if value_name == "special_damage" then return 175 end
+    if value_name == "special_pulses" then return 7 end
+    if value_name == "special_aoe" then return 325 end
+    if value_name == "special_purge" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_2__speed" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "stack_duration" then return 6 + (value_level * 0.25) end
+		if value_name == "min_ms" then return 30 + math.floor(value_level * 5) end
+
+    if value_name == "duration" then return 4 end
+    if value_name == "ms_gain" then return 10 end
+    if value_name == "max_ms" then return 180 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_3__jump" then

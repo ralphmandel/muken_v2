@@ -15,6 +15,18 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
     end)
   end
 
+  function fleaman_1__precision:GetBehavior()
+    if self:GetSpecialValueFor("special_purge") == 1 then
+      return 137441052676
+    end
+
+    return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE
+  end
+
+  function fleaman_1__precision:GetAOERadius()
+    return self:GetSpecialValueFor("special_aoe")
+  end
+
 -- SPELL START
 
   function fleaman_1__precision:OnSpellStart()
@@ -27,7 +39,10 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 
     self:StartCooldown(0.4)
 
-    --caster:Purge(false, true, false, false, false)
+    if self:GetSpecialValueFor("special_purge") == 1 then
+      caster:Purge(false, true, false, true, false)
+    end
+
     AddModifier(caster, self, "fleaman_1_modifier_precision",  {}, false)
 
     Timers:CreateTimer(0.35, function()

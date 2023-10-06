@@ -34,10 +34,10 @@ function fleaman_1_modifier_precision:OnStackCountChanged(old)
 	if old == self:GetStackCount() then return end
 	if self:GetStackCount() == 0 then self:Destroy() return end
 
-  RemoveSubStats(self.parent, self.ability, {"attack_speed", "dodge"})
+  RemoveSubStats(self.parent, self.ability, {"attack_speed", "evasion"})
   AddModifier(self.parent, self.ability, "sub_stat_modifier", {
     attack_speed = self:GetStackCount() * self.ability:GetSpecialValueFor("attack_speed"),
-    dodge = self:GetStackCount() * self.ability:GetSpecialValueFor("dodge")
+    evasion = self:GetStackCount() * self.ability:GetSpecialValueFor("evasion")
   }, false)
 end
 

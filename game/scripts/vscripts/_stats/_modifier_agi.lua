@@ -18,7 +18,7 @@ function _modifier_agi:OnCreated(kv)
   self.data = {
     sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed")},
     sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed")},
-    sub_stat_dodge = {mult = self.ability:GetSpecialValueFor("sub_stat_dodge")},
+    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion")},
     sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction")},
     sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen")},
     sub_stat_movespeed_increase = {mult = 0},
@@ -98,8 +98,8 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
   if keys.attacker:HasModifier("ancient_1_modifier_passive") then return 0 end
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
-  local target_dodge = (crit == false and RandomFloat(0, 100) < self:GetDodge())
-  if attacker_missing or target_dodge then return 1 end
+  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
+  if attacker_missing or target_evasion then return 1 end
 
   return 0
 end
@@ -122,8 +122,8 @@ function _modifier_agi:OnAttack(keys)
   end
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
-  local target_dodge = (crit == false and RandomFloat(0, 100) < self:GetDodge())
-  attacker_str.missing = (attacker_missing or target_dodge)
+  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
+  attacker_str.missing = (attacker_missing or target_evasion)
 end
 
 function _modifier_agi:GetModifierPercentageCooldown()
@@ -148,8 +148,8 @@ function _modifier_agi:GetPercentMS()
   return self:GetCalculedData("sub_stat_movespeed_percent_increase", false) - self:GetCalculedData("sub_stat_movespeed_percent_decrease", false)
 end
 
-function _modifier_agi:GetDodge()
-  return self:GetCalculedData("sub_stat_dodge", true)
+function _modifier_agi:GetEvasion()
+  return self:GetCalculedData("sub_stat_evasion", true)
 end
 
 function _modifier_agi:UpdateMS(property)
@@ -162,14 +162,16 @@ end
 
 function _modifier_agi:GetCalculedDataStack(property, bScalar)
   local value = self.data[property].mult * (math.floor(self.ability:GetLevel() / 5))
+  value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
-  return value + self.data[property].bonus
+  return value
 end
 
 function _modifier_agi:GetCalculedData(property, bScalar)
   local value = self.data[property].mult * (self.ability:GetLevel() + self.main_bonus)
+  value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
-  return value + self.data[property].bonus
+  return value
 end
 
 function _modifier_agi:UpdateMainBonus(value)

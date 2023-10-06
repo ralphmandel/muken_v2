@@ -73,4 +73,5 @@ function fleaman__precache:Precache(context)
   PrecacheResource( "particle", "particles/fleaman/smoke/fleaman_smoke.vpcf", context )
   PrecacheResource( "particle", "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_ambient.vpcf", context )
   PrecacheResource( "particle", "particles/econ/items/slark/slark_head_immortal/slark_head_immortal_ambient.vpcf", context )
+  PrecacheResource( "particle", "particles/econ/items/slark/slark_head_immortal/slark_immortal_dark_pact_pulses.vpcf", context )
 end

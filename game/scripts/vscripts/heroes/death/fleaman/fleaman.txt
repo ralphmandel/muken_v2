@@ -33,8 +33,12 @@
     "AbilityValues"
 		{
 			"attack_speed"  "30"
-			"dodge"         "5"
+			"evasion"       "3"
       "duration"		  "1 2 3 4 5 6 7"
+      "special_damage"  "0"
+      "special_pulses"  "0"
+      "special_aoe"     "0"
+      "special_purge"   "0"
 		}
 	}
 
@@ -52,8 +56,10 @@
 
     "AbilityValues"
 		{
-			"ms"              "20"
-			"stack_duration"  "1 2 3 4 5 6 7"
+			"duration"  "3"
+			"ms_gain"   "5"
+			"max_ms"    "120"
+			"min_ms"    "1 2 3 4 5 6 7"
 		}
 	}
 

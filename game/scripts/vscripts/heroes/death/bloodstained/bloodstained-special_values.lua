@@ -252,7 +252,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 
     if value_name == "ms" then return 300 end
     if value_name == "special_purge" then return 1 end
-    if value_name == "status_res" then return 60 end
+    if value_name == "status_res" then return 50 end
     if value_name == "special_bleeding_duration" then return 3 end
     if value_name == "attack_speed" then return 100 end
     if value_name == "special_cleave" then return 100 end
