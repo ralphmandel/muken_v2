@@ -73,6 +73,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_12") then
+      if value_name == "special_phase" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_21") then
@@ -80,6 +81,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_22") then
+      if value_name == "special_stun_duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_31") then
@@ -87,6 +89,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_32") then
+      if value_name == "special_unslow" then return 1 end
 		end
 	end
 
@@ -232,11 +235,14 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "fleaman_2__speed" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "min_ms" then return 30 + math.floor(value_level * 5) end
+		if value_name == "min_ms" then return value_level * 5 end
 
     if value_name == "duration" then return 4 end
+    if value_name == "special_phase" then return 1 end
     if value_name == "ms_gain" then return 10 end
-    if value_name == "max_ms" then return 180 end
+    if value_name == "special_stun_duration" then return 2 end
+    if value_name == "max_ms" then return 240 end
+    if value_name == "special_unslow" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_3__jump" then

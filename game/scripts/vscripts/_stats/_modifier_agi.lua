@@ -141,11 +141,23 @@ function _modifier_agi:GetData(property)
 end
 
 function _modifier_agi:GetBonusMS()
-  return self:GetCalculedData("sub_stat_movespeed_increase", false) - self:GetCalculedData("sub_stat_movespeed_decrease", false)
+  local result = self:GetCalculedData("sub_stat_movespeed_increase", false)
+
+  if self.parent:HasModifier("_modifier_unslowable") == false then
+    result = result - self:GetCalculedData("sub_stat_movespeed_decrease", false)
+  end
+
+  return result
 end
 
 function _modifier_agi:GetPercentMS()
-  return self:GetCalculedData("sub_stat_movespeed_percent_increase", false) - self:GetCalculedData("sub_stat_movespeed_percent_decrease", false)
+  local result = self:GetCalculedData("sub_stat_movespeed_percent_increase", false)
+
+  if self.parent:HasModifier("_modifier_unslowable") == false then
+    result = result - self:GetCalculedData("sub_stat_movespeed_percent_decrease", false)
+  end
+
+  return result
 end
 
 function _modifier_agi:GetEvasion()

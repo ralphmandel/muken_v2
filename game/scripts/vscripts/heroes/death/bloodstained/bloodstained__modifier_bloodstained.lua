@@ -31,7 +31,10 @@ end
 
 function bloodstained__modifier_bloodstained:OnRefresh(kv)
   if IsServer() then
-    self.target_mod:SetStackCount(kv.hp_stolen)
+    self.target_mod:Destroy()
+    self.target_mod = AddModifier(self.parent, self.ability, "bloodstained__modifier_bloodloss", {
+      hp_stolen = kv.hp_stolen
+    }, false)
   end
 end
 
