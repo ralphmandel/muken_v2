@@ -167,7 +167,10 @@ end
 function _modifier_agi:UpdateMS(property)
   local value = 0
   local mods = self.parent:FindAllModifiersByName(property)
-  for _,modifier in pairs(mods) do value = value + modifier.value end
+
+  if mods then
+    for _,modifier in pairs(mods) do value = value + modifier.value end
+  end
 
   self.data[property].bonus = value
 end
@@ -193,7 +196,13 @@ end
 function _modifier_agi:UpdateSubBonus(property)
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
-  for _,modifier in pairs(mods) do value = value + modifier.kv[property] end
+  if mods then
+    for _,modifier in pairs(mods) do
+      if modifier.kv[property] then
+        value = value + modifier.kv[property]
+      end
+    end
+  end
 
   self.data["sub_stat_"..property].bonus = value
 end

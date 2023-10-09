@@ -156,9 +156,8 @@
 
     "AbilityValues"
 		{
-			"max_stack"		    "8"
-			"stack_duration"  "1 2 3 4 5 6 7"
-			"rank"			      "1 2 3 4 5 6 7"
+      "damage_steal" "3"
+			"duration"     "1 2 3 4 5 6 7"
 		}
 	}
 

@@ -171,7 +171,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "fleaman_u__steal" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "stack_duration" then return 1 end
+    if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_11") then
 		end
@@ -269,7 +269,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "fleaman_u__steal" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "stack_duration" then return 30 + math.floor(value_level * 2.5) end
+    if value_name == "duration" then return 15 + math.floor(value_level * 0.5) end
 	end
 
 	return 0

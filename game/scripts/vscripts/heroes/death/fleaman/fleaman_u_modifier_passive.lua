@@ -35,27 +35,35 @@ function fleaman_u_modifier_passive:OnAttackLanded(keys)
 	if self.parent:PassivesDisabled() then return end
   if self.parent:IsIllusion() then return end
 
-  local mod_steal = keys.target:FindModifierByNameAndCaster("fleaman_u_modifier_steal", self.caster)
+  local damage_steal = self.ability:GetSpecialValueFor("damage_steal")
+  local duration = self.ability:GetSpecialValueFor("duration")
 
-  if mod_steal then
-    if mod_steal:GetStackCount() >= self.ability:GetSpecialValueFor("max_stack") then
-      return
-    end
-  end
-
-  mod_steal = AddModifier(keys.target, self.ability, "fleaman_u_modifier_steal", {
-    duration = self.ability:GetSpecialValueFor("stack_duration")
-  }, true)
+  local modifier = AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    duration = duration, attack_damage = damage_steal
+  }, false)
+  
+  AddModifier(keys.target, self.ability, "sub_stat_modifier", {
+    duration = duration, attack_damage = -damage_steal
+  }, false)
 
   if IsServer() then
-    self:IncrementStackCount()
+    self:SetStackCount(self:GetStackCount() + damage_steal)
     self:PlayEfxHit(keys.target)
   end
-  
-  local stat_modifier = AddBonus(self.ability, "STR", self.parent, 1, 0, mod_steal:GetDuration())
 
-  stat_modifier:SetEndCallback(function(interrupted)
-    if IsServer() then self:DecrementStackCount() end
+  modifier:SetEndCallback(function(interrupted)
+    local modifiers = self.parent:FindAllModifiersByName("sub_stat_modifier")
+    local stacks = 0
+
+    if modifiers then
+      for k, mod in pairs(modifiers) do
+        if mod.kv.attack_damage and mod:GetAbility() == self.ability then
+          stacks = stacks + mod.kv.attack_damage
+        end
+      end      
+    end
+
+    if IsServer() then self:SetStackCount(stacks) end
   end)
 end
 
