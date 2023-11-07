@@ -45,6 +45,7 @@ require("internal/rank_system")
 
     self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
     self.ranks_name = GetRanksList(self.abilities_name)
+    self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
     self.max_level = 15
 
@@ -72,6 +73,30 @@ require("internal/rank_system")
         end
       end
     end
+  end
+
+  function base_hero:GetRanksException()
+    local caster = self:GetCaster()
+    local name = GetHeroName(caster:GetUnitName())
+    local team = GetHeroTeam(caster:GetUnitName())
+    local data = LoadKeyValues("scripts/vscripts/heroes/"..team.."/"..name.."/"..name..".txt")
+    local result = {}
+
+    for ability_name, ability_data in pairs(data) do
+      if ability_name ~= "Version" then
+        local exception = true
+
+        for k, v in pairs(ability_data) do
+          if k == "AbilityTextureName" then
+            exception = false
+          end
+        end
+  
+        result[ability_name] = exception        
+      end
+    end
+
+    return result
   end
 
   function base_hero:ApplyStatBonusLevel()
@@ -178,6 +203,7 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     local rank_name = self.ranks_name[skill_id][tier][path]
     if caster:HasAbility(rank_name) then return "StateUpgraded" end
+    if self.ranks_exception[rank_name] == true then return "StateDisabled" end
     if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
     return "StateDisabled"
   end
@@ -247,6 +273,8 @@ require("internal/rank_system")
 		local level = caster:GetLevel()
 		if caster:IsIllusion() then return end
 
+    caster:SetAbilityPoints(self.ability_points)
+
 		if level == 8 then
 			local ultimate = caster:FindAbilityByName(self.abilities_name[6])
 			if ultimate then
@@ -292,7 +320,7 @@ require("internal/rank_system")
 			local skill = caster:FindAbilityByName(self.abilities_name[i])
 			if skill then
 				if skill:IsTrained() == false then
-					skill:SetHidden(self.ability_points < 1)
+					--skill:SetHidden(self.ability_points < 1)
 				end
 			end
 		end

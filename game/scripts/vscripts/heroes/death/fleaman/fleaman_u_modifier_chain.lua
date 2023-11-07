@@ -42,7 +42,8 @@ function fleaman_u_modifier_chain:OnIntervalThink()
 
   local new_target = nil
 	local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(), self.current_target:GetOrigin(), nil, 700,
+		self.parent:GetTeamNumber(), self.current_target:GetOrigin(), nil,
+    self.ability:GetSpecialValueFor("special_chain_radius"),
 		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
     DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false
 	)

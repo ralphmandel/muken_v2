@@ -119,7 +119,7 @@
 		"AbilityTextureName"     		"fleaman_smoke"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"1"
-		"RequiredLevel"         	 	"1"
+		"RequiredLevel"         	 	"0"
 		"LevelsBetweenUpgrades"  		"25"
     "ActiveSpell"               "1"
 
@@ -157,11 +157,15 @@
 
     "AbilityValues"
 		{
-      "damage_steal" "4"
-			"duration"     "1 2 3 4 5 6 7"
+      "attack_steal"  "3"
+			"duration"      "1 2 3 4 5 6 7"
+      "special_respawn_mult" "0"
+      "special_lifesteal"    "0"
+      "special_manasteal"    "0"
+      "special_chain_chance" "0"
       "special_chain_hits"   "0"
       "special_chain_damage" "0"
-      "special_chain_chance" "0"
+      "special_chain_radius" "0"
 		}
 	}
 
@@ -449,7 +453,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-      "AbilityTextureName"  "fleaman_steal"
+      //"AbilityTextureName"  "fleaman_steal"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

@@ -174,25 +174,30 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_11") then
+      if value_name == "special_respawn_mult" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_12") then
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_21") then
+      if value_name == "special_lifesteal" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_22") then
+      if value_name == "special_manasteal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_31") then
-      if value_name == "special_chain_hits" then return 1 end
-      if value_name == "special_chain_damage" then return 1 end
-      if value_name == "special_chain_chance" then return 1 end
+      if value_name == "attack_steal" then return 1 end
     end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_32") then
-		end
+      if value_name == "special_chain_chance" then return 1 end
+      if value_name == "special_chain_hits" then return 1 end
+      if value_name == "special_chain_damage" then return 1 end
+      if value_name == "special_chain_radius" then return 1 end
+    end
 	end
 
 	return 0
@@ -280,11 +285,16 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       return 0
     end
     
-    if value_name == "duration" then return 12 + (value_level * 0.3) end
+    if value_name == "duration" then return 15 + (value_level * 0.5) end
     
+    if value_name == "special_respawn_mult" then return 0.5 end
+    if value_name == "special_lifesteal" then return 20 end
+    if value_name == "special_manasteal" then return 15 end
+    if value_name == "attack_steal" then return 4 end
+    if value_name == "special_chain_chance" then return 25 end
     if value_name == "special_chain_hits" then return 4 end
     if value_name == "special_chain_damage" then return 100 end
-    if value_name == "special_chain_chance" then return 25 end
+    if value_name == "special_chain_radius" then return 700 end
 	end
 
 	return 0
