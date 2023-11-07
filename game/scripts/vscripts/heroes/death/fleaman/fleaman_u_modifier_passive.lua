@@ -34,9 +34,13 @@ function fleaman_u_modifier_passive:OnAttackLanded(keys)
   if keys.target:GetTeamNumber() == self.parent:GetTeamNumber() then return end
 	if self.parent:PassivesDisabled() then return end
   if self.parent:IsIllusion() then return end
+  if keys.target:FindAbilityByName("_ability_str") == nil then return end
 
   local damage_steal = self.ability:GetSpecialValueFor("damage_steal")
   local duration = self.ability:GetSpecialValueFor("duration")
+  local chain_hits = self.ability:GetSpecialValueFor("special_chain_hits")
+  local chain_damage = self.ability:GetSpecialValueFor("special_chain_damage")
+  local chain_chance = self.ability:GetSpecialValueFor("special_chain_chance")
 
   local modifier = AddModifier(self.parent, self.ability, "sub_stat_modifier", {
     duration = duration, attack_damage = damage_steal
@@ -60,11 +64,16 @@ function fleaman_u_modifier_passive:OnAttackLanded(keys)
         if mod.kv.attack_damage and mod:GetAbility() == self.ability then
           stacks = stacks + mod.kv.attack_damage
         end
-      end      
+      end
     end
 
     if IsServer() then self:SetStackCount(stacks) end
   end)
+
+  if RandomFloat(0, 100) < chain_chance and self.ability:IsCooldownReady() then
+    AddModifier(self.parent, self.ability, "fleaman_u_modifier_chain", {target_index = keys.target:GetEntityIndex()}, false)
+    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+  end
 end
 
 function fleaman_u_modifier_passive:OnStackCountChanged(old)

@@ -186,7 +186,10 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_31") then
-		end
+      if value_name == "special_chain_hits" then return 1 end
+      if value_name == "special_chain_damage" then return 1 end
+      if value_name == "special_chain_chance" then return 1 end
+    end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_32") then
 		end
@@ -268,8 +271,20 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "fleaman_u__steal" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "duration" then return 15 + math.floor(value_level * 0.5) end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("fleaman_u__steal_rank_31") then
+        return 1
+      end
+
+      return 0
+    end
+    
+    if value_name == "duration" then return 12 + (value_level * 0.3) end
+    
+    if value_name == "special_chain_hits" then return 4 end
+    if value_name == "special_chain_damage" then return 100 end
+    if value_name == "special_chain_chance" then return 25 end
 	end
 
 	return 0

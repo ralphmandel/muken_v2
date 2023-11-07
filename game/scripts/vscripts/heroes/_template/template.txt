@@ -269,7 +269,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_11"
+    "template_3__sk3_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -278,7 +278,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_12"
+    "template_3__sk3_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -287,7 +287,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_21"
+    "template_3__sk3_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -296,7 +296,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_22"
+    "template_3__sk3_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -305,7 +305,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_31"
+    "template_3__sk3_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -314,7 +314,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_3_sk3_rank_32"
+    "template_3__sk3_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -323,7 +323,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_11"
+    "template_4__sk4_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -332,7 +332,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_12"
+    "template_4__sk4_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -341,7 +341,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_21"
+    "template_4__sk4_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -350,7 +350,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_22"
+    "template_4__sk4_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -359,7 +359,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_31"
+    "template_4__sk4_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -368,7 +368,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_4_sk4_rank_32"
+    "template_4__sk4_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -377,7 +377,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }    
 
-    "template_5_sk5_rank_11"
+    "template_5__sk5_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -386,7 +386,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_5_sk5_rank_12"
+    "template_5__sk5_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -395,7 +395,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_5_sk5_rank_21"
+    "template_5__sk5_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -404,7 +404,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_5_sk5_rank_22"
+    "template_5__sk5_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -413,7 +413,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_5_sk5_rank_31"
+    "template_5__sk5_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -422,7 +422,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_5_sk5_rank_32"
+    "template_5__sk5_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -431,7 +431,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_11"
+    "template_u__sk6_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -440,7 +440,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_12"
+    "template_u__sk6_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -449,7 +449,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_21"
+    "template_u__sk6_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -458,7 +458,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_22"
+    "template_u__sk6_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -467,7 +467,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_31"
+    "template_u__sk6_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"
@@ -476,7 +476,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "template_u_sk6_rank_32"
+    "template_u__sk6_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/id_team/template/template-ranks_lua"

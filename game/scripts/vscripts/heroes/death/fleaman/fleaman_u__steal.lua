@@ -1,5 +1,6 @@
 fleaman_u__steal = class({})
 LinkLuaModifier("fleaman_u_modifier_passive", "heroes/death/fleaman/fleaman_u_modifier_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modifier_chain", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
