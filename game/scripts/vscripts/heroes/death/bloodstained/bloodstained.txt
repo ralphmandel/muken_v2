@@ -305,7 +305,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_11"
+    "bloodstained_3__curse_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -314,7 +314,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_12"
+    "bloodstained_3__curse_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -323,7 +323,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_21"
+    "bloodstained_3__curse_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -332,7 +332,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_22"
+    "bloodstained_3__curse_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -341,7 +341,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_31"
+    "bloodstained_3__curse_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -350,7 +350,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_3_curse_rank_32"
+    "bloodstained_3__curse_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -359,7 +359,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_11"
+    "bloodstained_4__tear_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -368,7 +368,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_12"
+    "bloodstained_4__tear_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -377,7 +377,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_21"
+    "bloodstained_4__tear_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -386,7 +386,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_22"
+    "bloodstained_4__tear_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -395,7 +395,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_31"
+    "bloodstained_4__tear_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -404,7 +404,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_4_tear_rank_32"
+    "bloodstained_4__tear_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -413,7 +413,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }    
 
-    "bloodstained_5_lifesteal_rank_11"
+    "bloodstained_5__lifesteal_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -422,7 +422,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_5_lifesteal_rank_12"
+    "bloodstained_5__lifesteal_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -431,7 +431,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_5_lifesteal_rank_21"
+    "bloodstained_5__lifesteal_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -440,7 +440,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_5_lifesteal_rank_22"
+    "bloodstained_5__lifesteal_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -449,7 +449,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_5_lifesteal_rank_31"
+    "bloodstained_5__lifesteal_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -458,7 +458,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_5_lifesteal_rank_32"
+    "bloodstained_5__lifesteal_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -467,7 +467,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_11"
+    "bloodstained_u__seal_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -476,7 +476,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_12"
+    "bloodstained_u__seal_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -485,7 +485,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_21"
+    "bloodstained_u__seal_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -494,7 +494,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_22"
+    "bloodstained_u__seal_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -503,7 +503,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_31"
+    "bloodstained_u__seal_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
@@ -512,7 +512,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "bloodstained_u_seal_rank_32"
+    "bloodstained_u__seal_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"

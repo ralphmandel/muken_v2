@@ -4,6 +4,10 @@ LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modi
 
 -- INIT
 
+  function fleaman_u__steal:Spawn()
+    self.origin = nil
+  end
+
   function fleaman_u__steal:GetIntrinsicModifierName()
     return "fleaman_u_modifier_passive"
   end
@@ -13,16 +17,51 @@ LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modi
   function fleaman_u__steal:OnOwnerDied()
     local caster = self:GetCaster()
     local passive = caster:FindModifierByName(self:GetIntrinsicModifierName())
-    local mult = self:GetSpecialValueFor("special_respawn_mult")
+    local mult = self:GetSpecialValueFor("special_respawn_self")
 
     if caster:IsIllusion() then return end
     if passive == nil then return end
     if mult == 0 then return end
 
     local respawn = caster:GetRespawnTime() - (passive:GetStackCount() * mult)
-    if respawn < 0 then respawn = 0 end
+
+    if respawn < 1 then
+      self.origin = caster:GetOrigin()
+      respawn = 0
+    end
 
     caster:SetTimeUntilRespawn(respawn)
+  end
+
+  function fleaman_u__steal:OnOwnerSpawned()
+    local caster = self:GetCaster()
+
+    if self.origin then
+      caster:SetOrigin(self.origin)
+      FindClearSpaceForUnit(caster, self.origin, true)
+    end
+
+    self.origin = nil
+  end
+
+  function fleaman_u__steal:OnHeroDiedNearby(unit, attacker, table)
+    local caster = self:GetCaster()
+    local mult = self:GetSpecialValueFor("special_respawn_enemy")
+    local modifiers = unit:FindAllModifiersByName("sub_stat_modifier")
+
+    if unit:GetTeamNumber() == caster:GetTeamNumber() then return end
+    if modifiers == nil then return end
+    if mult == 0 then return end
+
+    local total = 0
+
+    for _, mod in pairs(modifiers) do
+      if mod.kv.attack_damage and mod:GetAbility() == self then
+        total = total + mod.kv.attack_damage
+      end
+    end
+
+    unit:SetTimeUntilRespawn(unit:GetRespawnTime() - (total * mult))
   end
 
 -- EFFECTS

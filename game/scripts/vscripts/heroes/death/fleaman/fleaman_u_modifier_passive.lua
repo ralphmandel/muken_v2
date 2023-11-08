@@ -62,7 +62,7 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
     local stacks = 0
 
     if modifiers then
-      for k, mod in pairs(modifiers) do
+      for _, mod in pairs(modifiers) do
         if mod.kv.attack_damage and mod:GetAbility() == self.ability then
           stacks = stacks + mod.kv.attack_damage
         end

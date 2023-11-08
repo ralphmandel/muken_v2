@@ -174,10 +174,11 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_11") then
-      if value_name == "special_respawn_mult" then return 1 end
+      if value_name == "special_respawn_self" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_12") then
+      if value_name == "special_respawn_enemy" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_21") then
@@ -287,7 +288,8 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     
     if value_name == "duration" then return 15 + (value_level * 0.5) end
     
-    if value_name == "special_respawn_mult" then return 0.5 end
+    if value_name == "special_respawn_self" then return 0.5 end
+    if value_name == "special_respawn_enemy" then return 0.5 end
     if value_name == "special_lifesteal" then return 20 end
     if value_name == "special_manasteal" then return 15 end
     if value_name == "attack_steal" then return 4 end

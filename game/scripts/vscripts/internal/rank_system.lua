@@ -68,7 +68,6 @@ function RankSystem:OnRanksTableRequest(event)
   if (not hero) then RankSystem:OnButtonsStateRequest(event) return end
   if BaseHero(hero) == nil then RankSystem:OnButtonsStateRequest(event) return end
 
-
   BaseHero(hero):UpdatePanoramaRanksByName(player, event.skill_name)
 end
 
