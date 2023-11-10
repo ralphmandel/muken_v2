@@ -51,6 +51,30 @@ end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
+function fleaman_5_modifier_aura_effect:CheckState()
+	local state = {}
+
+  if self:GetParent() == self:GetCaster() then
+    table.insert(state, MODIFIER_STATE_NO_HEALTH_BAR_FOR_ENEMIES, true)
+  end
+
+	return state
+end
+
+function fleaman_5_modifier_aura_effect:DeclareFunctions()
+	local funcs = {}
+
+  if self:GetParent() == self:GetCaster() then
+    table.insert(funcs, MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS)
+  end
+
+	return funcs
+end
+
+function fleaman_5_modifier_aura_effect:GetActivityTranslationModifiers()
+  return "shadow_dance"
+end
+
 function fleaman_5_modifier_aura_effect:OnIntervalThink()
 	if self.effect_cast then ParticleManager:SetParticleControl(self.effect_cast, 1, self.parent:GetOrigin()) end
 	if IsServer() then self:StartIntervalThink(FrameTime()) end
@@ -75,5 +99,4 @@ function fleaman_5_modifier_aura_effect:PlayEfxStart()
 	self:AddParticle(effect_cast_1, false, false, -1, false, false)
 
 	self.effect_cast = effect_cast_1
-	if IsServer() then self.parent:EmitSound("Fleaman.Shadow.Start") end
 end

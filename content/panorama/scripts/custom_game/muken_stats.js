@@ -20,8 +20,8 @@ var isPlusHover = false;
   function SetOpenState(isOpen) {
     STATS_WINDOW.SetHasClass("WindowIn", isOpen);
     PTS_TOTAL.SetHasClass("PtsIn", isOpen);
-    INFO_WINDOW.SetHasClass("InfoIn", isOpen);
-    INFO_WINDOW.SetHasClass("InfoOut", !isOpen);
+    // INFO_WINDOW.SetHasClass("InfoIn", isOpen);
+    // INFO_WINDOW.SetHasClass("InfoOut", !isOpen);
     STATS_LAYOUT["STAT_BASE"].SetHasClass("Hide", !isOpen);
     STATS_LAYOUT["STAT_BONUS"].SetHasClass("Hide", !isOpen);
     STATS_LAYOUT["STAT_TOTAL"].SetHasClass("Hide", isOpen);
@@ -180,12 +180,14 @@ var isPlusHover = false;
   function OnStatOver(statId, disabled) {
     isPlusHover = true;
     Game.EmitSound("Config.Move");
+    SetInfoState(statId, true);
     STATS_LAYOUT["STAT_NAME"][statId]["Active"].SetHasClass("StatRowSelected", true);
     STATS_LAYOUT["STAT_NAME"][statId]["Active"].SetHasClass("Animate2", true);
   }
 
   function OnStatOut(statId, disabled) {
     isPlusHover = false;
+    SetInfoState(statId, false);
     STATS_LAYOUT["STAT_NAME"][statId]["Active"].SetHasClass("StatRowSelected", false);
     STATS_LAYOUT["STAT_NAME"][statId]["Active"].SetHasClass("Animate2", false);
   }
@@ -193,20 +195,27 @@ var isPlusHover = false;
 // NAME INFO
   function OnNameOver(statId, disabled) {
     Game.EmitSound("Config.Move");
-    INFO_WINDOW.GetChild(0).text = $.Localize("#tooltip_" + statId);
-    INFO_WINDOW.SetHasClass("Hide", false);
-
-    for (const [stat, name] of Object.entries(labels_name)) {
-      var enabled = false;
-      var string = stat + '_info';
-
-      if (stat == statId) {enabled = true}
-      INFO_WINDOW.SetHasClass(string, enabled);
-    }
+    SetInfoState(statId, true);
   }
 
   function OnNameOut(statId, disabled) {
-    INFO_WINDOW.SetHasClass("Hide", true);
+    SetInfoState(statId, false);
+  }
+
+  function SetInfoState(statId, enabled) {
+    INFO_WINDOW.SetHasClass("Hide", !enabled);
+
+    if (enabled == true) {
+      INFO_WINDOW.GetChild(0).text = $.Localize("#tooltip_" + statId);
+
+      for (const [stat, name] of Object.entries(labels_name)) {
+        var hide = true;
+        var string = stat + '_info';
+  
+        if (stat == statId) {hide = false}
+        INFO_WINDOW.SetHasClass(string, !hide);
+      }
+    }
   }
 
 (function() {	

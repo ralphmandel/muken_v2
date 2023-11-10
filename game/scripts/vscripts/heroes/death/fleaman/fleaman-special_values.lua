@@ -303,7 +303,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "miss_chance" then return 35 end
     if value_name == "duration" then return 25 end
     if value_name == "special_hp_regen" then return 50 end
-    if value_name == "special_hide" then return 3 end
+    if value_name == "special_hide" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_u__steal" then
