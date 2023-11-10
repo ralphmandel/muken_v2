@@ -12,7 +12,6 @@ function cosmetics:OnUpgrade()
     for team = DOTA_TEAM_CUSTOM_MIN, DOTA_TEAM_CUSTOM_MIN + 3 do
       if self:GetCaster():GetTeamNumber() == team then
         Timers:CreateTimer(team, function()
-					self:GetCaster():AddNoDraw()
           self:LoadCosmetics()
         end)
       end

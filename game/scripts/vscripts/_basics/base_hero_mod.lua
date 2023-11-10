@@ -151,7 +151,7 @@ function base_hero_mod:LoadModel()
 					self.parent:SetHealthBarOffsetOverride(350 * self.parent:GetModelScale())
 				end
 				if self.hero_name == "vulture" then
-					self.model_scale = 1.3
+					self.model_scale = 1.0
 					self.parent:SetHealthBarOffsetOverride(350 * self.parent:GetModelScale())
 				end
 				if self.model_scale ~= nil then
