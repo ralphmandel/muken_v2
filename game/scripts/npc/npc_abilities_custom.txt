@@ -453,8 +453,9 @@
 //DEATH
 #base "../vscripts/heroes/death/fleaman/fleaman.txt"
 #base "../vscripts/heroes/death/bloodstained/bloodstained.txt"
-#base "../vscripts/heroes/death/bocuse/bocuse.txt"
 #base "../vscripts/heroes/death/lawbreaker/lawbreaker.txt"
+#base "../vscripts/heroes/death/bocuse/bocuse.txt"
+#base "../vscripts/heroes/death/vulture/vulture.txt"
 
 //SUN
 #base "../vscripts/heroes/sun/paladin/paladin.txt"

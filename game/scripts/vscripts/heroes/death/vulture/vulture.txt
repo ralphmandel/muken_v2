@@ -1,0 +1,487 @@
+// Dota Ability vulture
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+  "vulture__precache"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+    "AbilityTextureName"    		"vulture__precache"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"99"
+		"RequiredLevel"         	 	"-200"
+
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"vulture_1__sk1"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_1__sk1"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"vulture_sk1"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"vulture_2__sk2"
+	{  
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_2__sk2"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"vulture_sk2"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"vulture_3__sk3"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_3__sk3"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"vulture_sk3"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"vulture_4__sk4"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_4__sk4"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"vulture_sk4"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"vulture_5__sk5"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_5__sk5"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"vulture_sk5"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"vulture_u__sk6"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/vulture/vulture_u__sk6"
+		"AbilityTextureName"     		"vulture_sk6"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"8"
+		"LevelsBetweenUpgrades"  		"25"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+  //RANKS
+    "vulture_1__sk1_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_1__sk1_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_1__sk1_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_1__sk1_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_1__sk1_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_1__sk1_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk1"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_2__sk2_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk2"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_3__sk3_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk3"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_4__sk4_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk4"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }    
+
+    "vulture_5__sk5_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_5__sk5_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_5__sk5_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_5__sk5_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_5__sk5_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_5__sk5_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk5"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "vulture_u__sk6_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/vulture/vulture-ranks_lua"
+      "AbilityTextureName"  "vulture_sk6"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+}

@@ -1,0 +1,9 @@
+"skills"
+{
+	"1" "vulture_1__sk1"
+	"2" "vulture_2__sk2"
+	"3" "vulture_3__sk3"
+	"4" "vulture_4__sk4"
+	"5" "vulture_5__sk5"
+	"6" "vulture_u__sk6"
+}

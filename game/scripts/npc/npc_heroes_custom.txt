@@ -67,8 +67,9 @@
 //DEATH
 #base "../vscripts/heroes/death/fleaman/fleaman-props.txt"
 #base "../vscripts/heroes/death/bloodstained/bloodstained-props.txt"
-#base "../vscripts/heroes/death/bocuse/bocuse-props.txt"
 #base "../vscripts/heroes/death/lawbreaker/lawbreaker-props.txt"
+#base "../vscripts/heroes/death/bocuse/bocuse-props.txt"
+#base "../vscripts/heroes/death/vulture/vulture-props.txt"
 
 //SUN
 #base "../vscripts/heroes/sun/paladin/paladin-props.txt"

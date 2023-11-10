@@ -1,0 +1,10 @@
+"Cosmetics"
+{
+   // "models/items/batrider/the_plague_burner_belt/the_plague_burner_belt.vmdl" "nil"
+
+   // "models/items/batrider/the_plague_burner_head/the_plague_burner_head.vmdl" "nil"
+
+   // "models/items/batrider/the_plague_burner_shoulder/the_plague_burner_shoulder.vmdl" "nil"
+
+    "models/items/batrider/the_plague_burner_mount/the_plague_burner_mount.vmdl" "nil"
+}
