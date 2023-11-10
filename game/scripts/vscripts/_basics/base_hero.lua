@@ -356,9 +356,15 @@ require("internal/rank_system")
 
   function base_hero:UpdatePanoramaPathWindow()
     local caster = self:GetCaster()
-    CustomGameEventManager:Send_ServerToAllClients("update_path_window_from_lua", {
+    if caster:IsHero() == false then return end
+    if caster:IsIllusion() then return end
+
+    local player = caster:GetPlayerOwner()
+    if (not player) then return end
+
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_path_window_from_lua", {
       path_states = self.chosen_path, path_points = self.path_points
-    })    
+    })
 	end
 
 -- PATH SYSTEM

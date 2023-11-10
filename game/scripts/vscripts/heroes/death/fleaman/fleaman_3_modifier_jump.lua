@@ -74,14 +74,23 @@ end
 function fleaman_3_modifier_jump:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   if keys.target:IsMagicImmune() then return end
-  
-  AddModifier(keys.target, self.ability, "_modifier_silence", {
-    duration = self.ability:GetSpecialValueFor("debuff_duration"), special = 3
-  }, true)
 
-  AddModifier(keys.target, self.ability, "_modifier_root", {
-    duration = self.ability:GetSpecialValueFor("debuff_duration"), effect = 2
+  AddModifier(keys.target, self.ability, "sub_stat_movespeed_percent_decrease", {
+    value = self.ability:GetSpecialValueFor("slow_percent"),
+    duration = self.ability:GetSpecialValueFor("debuff_duration")
   }, true)
+  
+  if self.ability:GetSpecialValueFor("special_root") == 1 then
+    AddModifier(keys.target, self.ability, "_modifier_root", {
+      duration = self.ability:GetSpecialValueFor("debuff_duration"), effect = 2
+    }, true)  
+  end
+
+  -- if self.ability:GetSpecialValueFor("special_silence") == 1 then
+  --   AddModifier(keys.target, self.ability, "_modifier_silence", {
+  --     duration = self.ability:GetSpecialValueFor("debuff_duration"), special = 3
+  --   }, true)    
+  -- end
 
   self:PlayEfxHit(keys.target)
 end
@@ -104,6 +113,8 @@ end
 function fleaman_3_modifier_jump:PerformImpact(point)
 	self.parent:FadeGesture(ACT_DOTA_SLARK_POUNCE)
 
+  local critical_damage = MainStats(self.parent, "STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_critical_damage")
+
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), point, nil, self.radius,
 		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(), self.ability:GetAbilityTargetFlags(),
@@ -114,7 +125,7 @@ function fleaman_3_modifier_jump:PerformImpact(point)
 		if enemy:IsIllusion() then
       enemy:Kill(self.ability, nil)
 		else
-      MainStats(self.parent, "STR"):SetForceCrit(100, nil)
+      MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
 			self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
 		end
 	end

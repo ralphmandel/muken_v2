@@ -7,10 +7,6 @@ LinkLuaModifier("_modifier_root", "_modifiers/_modifier_root", LUA_MODIFIER_MOTI
 
 -- INIT
 
-  function fleaman_3__jump:GetIntrinsicModifierName()
-    return "flea_3_modifier_passive"
-  end
-
   function fleaman_3__jump:OnOwnerSpawned()
     self:SetActivated(true)
   end

@@ -98,12 +98,14 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
-		if value_name == "distance" then return 1 end
+		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_11") then
+      if value_name == "debuff_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_3__jump_rank_12") then
+      if value_name == "special_root" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_21") then
@@ -113,9 +115,11 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_31") then
+      if value_name == "distance" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_3__jump_rank_32") then
+      if value_name == "special_critical_damage" then return 1 end
 		end
 	end
 
@@ -266,11 +270,34 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "fleaman_3__jump" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then return 160 end
     if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCharges" then return 2 end
-    if value_name == "AbilityChargeRestoreTime" then return 12 end
-    if value_name == "distance" then return 600 + (value_level * 25) end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("fleaman_3__jump_rank_21") then
+        return 3
+      end
+  
+      if caster:FindAbilityByName("fleaman_3__jump_rank_22") then
+        return 1
+      end
+
+      return 2
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("fleaman_3__jump_rank_22") then
+        return 10
+      end
+      return 15
+    end
+
+    if value_name == "radius" then return 270 + (value_level * 15) end
+
+    if value_name == "debuff_duration" then return 3.5 end
+    if value_name == "special_root" then return 1 end
+    if value_name == "distance" then return 900 end
+    if value_name == "special_critical_damage" then return 150 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_4__strip" then
