@@ -41,23 +41,27 @@
 }
 
 .PlusBox {
-  border: 1.5px solid white;
+  /* border: 1.5px solid white; */
   width: 18px;
   height: 18px;
   margin-bottom: 6px;
-  border-radius: 30%;
+  margin-right: 6px;
+  /* border-radius: 30%; */
   background-image: none;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url("file://{images}/custom_game/Rank_button_off_edited.png");
 }
 
 .PlusBox:hover {
-  background-color: white;
+  background-image: url("file://{images}/custom_game/Rank_button_on_edited.png");
   transition: 0.2s;
 }
 
 .PlusBox:active {
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-image: url("file://{images}/custom_game/Rank_button_on_small.png");
+  background-image: url("file://{images}/custom_game/Rank_button_off_edited.png");
 }
 
 .PlusCrossX
@@ -66,9 +70,6 @@
   margin: 1px;
   width: 15px;
   height: 15px;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-image: url("file://{images}/custom_game/Rank_button_on_small.png");
 }
 
 .PlusCrossY{
@@ -82,7 +83,20 @@
    */
 }
 
+#StatsWindowContainer
+{
+  margin-top: 172px;
+  horizontal-align: left;
+  /* width: fit-children;
+  height: fit-children; */
+  /* background-color: gradient( linear, 100% 0%, 100% 100%, from( #001017 ), to( #192229 ) ); */
+  flow-children: right;
+}
 
+#StatsContainer
+{
+  background-color: #1922292c;
+}
 
 #StatsColumnContainer
 {
@@ -98,7 +112,6 @@
   /* width: fit-children; */
   /* height: fit-children; */
   flow-children: down;
-  margin-right: 5px;
 }
 
 .TitleLabel
@@ -113,7 +126,7 @@
 .StatValues
 {
   height: 19px;
-  width: 20px;
+  width: 30px;
   margin-bottom: 5px;
 }
 
@@ -181,18 +194,8 @@
 .NeutralStats
 {
   text-shadow: 0 0 3px rgb(150, 150, 150);
-}
-
-
-#StatsWindowContainer
-{
-  margin-top: 172px;
-  horizontal-align: left;
-  /* width: fit-children;
-  height: fit-children; */
-  background-color: #1922292c;
-  /* background-color: gradient( linear, 100% 0%, 100% 100%, from( #001017 ), to( #192229 ) ); */
-  flow-children: right;
+  horizontal-align: right;
+  margin-right: 5px;
 }
 
 #PtsTotalContainer
@@ -200,7 +203,7 @@
   horizontal-align: left;
   vertical-align: top;
   margin-bottom: 5px;
-  margin-top: 417px;
+  margin-top: 273px;
   
   font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
   font-size: 16px;
@@ -233,7 +236,7 @@
   font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
   font-size: 16px;
   color: white;
-  width: fit-children;
+  width: 400px;
   height: fit-children;
   background-color: gradient( linear, 100% 0%, 100% 100%, from( #2b3b46cd ), to( #002332cd ) );
   /* border: 1px solid dimgray; */
@@ -255,62 +258,32 @@
 
 .InfoOut
 {
-  margin-left: 75px;
+  /* margin-left: 75px; */
 }
 
 .InfoIn
 {
-  margin-left: 230px;
+  /* margin-left: 230px; */
 }
 
 .STR_info
 {
-  margin-top: 175px;
+  margin-top: 4px;
 }
 
 .AGI_info
 {
-  margin-top: 199px;
+  margin-top: 28px;
 }
 
 .INT_info
 {
-  margin-top: 223px;
+  margin-top: 52px;
 }
 
-.CON_info
+.VIT_info
 {
-  margin-top: 247px;
-}
-
-.DEX_info
-{
-  margin-top: 271px;
-}
-
-.DEF_info
-{
-  margin-top: 295px;
-}
-
-.RES_info
-{
-  margin-top: 319px;
-}
-
-.REC_info
-{
-  margin-top: 353px;
-}
-
-.LCK_info
-{
-  margin-top: 367px;
-}
-
-.MND_info
-{
-  margin-top: 391px;
+  margin-top: 76px;
 }
 
 #StatsWindowButton

@@ -21,9 +21,12 @@
         <Panel class="RankTier" id="Tier1" hittest="false">
         </Panel>
         
-        <Panel class="RankName" id="Title" hittest="false">
-          <Label id="SkillName" text=""/>
-          <Label text="RANK LEVEL"/>
+        <Panel id="RankNameContainer" hittest="false">
+          <Label class="RankName" id="SkillName" text=""/>
+        </Panel>
+        <Panel id="RankLevelContainer" hittest="false">
+          <Label class="RankLevel" text="RANK LEVEL"/>
+          <Label class="RankCurrentLevel" id="SkillLevel" text="6"/>
         </Panel>
 
       </Panel>

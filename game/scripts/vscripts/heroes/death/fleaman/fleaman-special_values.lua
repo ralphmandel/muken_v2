@@ -36,7 +36,6 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
-		if value_name == "rank" then return 1 end
 		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_1__precision_rank_11") then
@@ -46,52 +45,51 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("fleaman_1__precision_rank_21") then
+      if value_name == "attack_speed" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_1__precision_rank_22") then
+      if value_name == "evasion" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_1__precision_rank_31") then
+      if value_name == "special_damage" then return 1 end
+      if value_name == "special_pulses" then return 1 end
+      if value_name == "special_aoe" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_1__precision_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_1__precision_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_1__precision_rank_42") then
+      if value_name == "special_purge" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "fleaman_2__speed" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "rank" then return 1 end
-		if value_name == "stack_duration" then return 1 end
+		if value_name == "min_ms" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_12") then
+      if value_name == "special_phase" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_21") then
+      if value_name == "ms_gain" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_22") then
+      if value_name == "special_stun_duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_2__speed_rank_31") then
+      if value_name == "max_ms" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_2__speed_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_2__speed_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_2__speed_rank_42") then
+      if value_name == "special_unslow" then return 1 end
 		end
 	end
 
@@ -100,13 +98,14 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
-		if value_name == "rank" then return 1 end
-		if value_name == "distance" then return 1 end
+		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_11") then
+      if value_name == "debuff_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_3__jump_rank_12") then
+      if value_name == "special_root" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_21") then
@@ -116,46 +115,41 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("fleaman_3__jump_rank_31") then
+      if value_name == "distance" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_3__jump_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_3__jump_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_3__jump_rank_42") then
+      if value_name == "special_critical_damage" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "fleaman_4__strip" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "rank" then return 1 end
     if value_name == "chance" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_11") then
+      if value_name == "special_break" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_12") then
+      if value_name == "special_bleeding" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_21") then
+      if value_name == "armor" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_22") then
+      if value_name == "special_evasion" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_31") then
+      if value_name == "special_silence" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_4__strip_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_4__strip_rank_42") then
+      if value_name == "special_damage" then return 1 end
 		end
 	end
 
@@ -163,63 +157,63 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "rank" then return 1 end
 		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_11") then
+      if value_name == "blind" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_12") then
+      if value_name == "miss_chance" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_21") then
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_22") then
+      if value_name == "duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_31") then
+      if value_name == "special_hp_regen" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_5__smoke_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_5__smoke_rank_42") then
+      if value_name == "special_hide" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "fleaman_u__steal" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "rank" then return 1 end
-    if value_name == "stack_duration" then return 1 end
+    if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_11") then
+      if value_name == "special_respawn_self" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_12") then
+      if value_name == "special_respawn_enemy" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_21") then
+      if value_name == "special_lifesteal" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_22") then
+      if value_name == "special_manasteal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_u__steal_rank_31") then
-		end
+      if value_name == "attack_steal" then return 1 end
+    end
 
     if caster:FindAbilityByName("fleaman_u__steal_rank_32") then
-		end
-
-		if caster:FindAbilityByName("fleaman_u__steal_rank_41") then
-		end
-
-    if caster:FindAbilityByName("fleaman_u__steal_rank_42") then
-		end
+      if value_name == "special_chain_chance" then return 1 end
+      if value_name == "special_chain_hits" then return 1 end
+      if value_name == "special_chain_damage" then return 1 end
+      if value_name == "special_chain_radius" then return 1 end
+    end
 	end
 
 	return 0
@@ -234,50 +228,133 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability_level < 1 then ability_level = 1 end
 
 	if ability:GetAbilityName() == "fleaman_1__precision" then
-		if value_name == "AbilityManaCost" then return 175 * (1 + ((ability_level - 1) * 0.05)) end
+		if value_name == "AbilityManaCost" then
+      local cost = 180
+      if caster:FindAbilityByName("fleaman_1__precision_rank_12") then
+        cost = cost - (cost * 0.25) 
+      end
+      return cost
+    end
+
     if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCharges" then return 3 end
-    if value_name == "AbilityChargeRestoreTime" then return 15 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
-		if value_name == "duration" then return 12 + (value_level * 0.5) end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("fleaman_1__precision_rank_11") then
+        return 4
+      end
+      return 3
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then return 20 end
+		if value_name == "duration" then return 15 + (value_level * 0.5) end
+
+    if value_name == "attack_speed" then return 50 end
+    if value_name == "evasion" then return 5 end
+    if value_name == "special_damage" then return 175 end
+    if value_name == "special_pulses" then return 7 end
+    if value_name == "special_aoe" then return 325 end
+    if value_name == "special_purge" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_2__speed" then
-		if value_name == "AbilityManaCost" then return 0 * (1 + ((ability_level - 1) * 0.05)) end
+		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
-		if value_name == "stack_duration" then return 6 + (value_level * 0.25) end
+		if value_name == "min_ms" then return value_level * 5 end
+
+    if value_name == "duration" then return 4 end
+    if value_name == "special_phase" then return 1 end
+    if value_name == "ms_gain" then return 10 end
+    if value_name == "special_stun_duration" then return 2 end
+    if value_name == "max_ms" then return 240 end
+    if value_name == "special_unslow" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_3__jump" then
-		if value_name == "AbilityManaCost" then return 150 * (1 + ((ability_level - 1) * 0.05)) end
+		if value_name == "AbilityManaCost" then return 160 end
     if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCharges" then return 2 end
-    if value_name == "AbilityChargeRestoreTime" then return 12 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
-    if value_name == "distance" then return 600 + (value_level * 25) end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("fleaman_3__jump_rank_21") then
+        return 3
+      end
+  
+      if caster:FindAbilityByName("fleaman_3__jump_rank_22") then
+        return 1
+      end
+
+      return 2
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("fleaman_3__jump_rank_22") then
+        return 10
+      end
+      return 15
+    end
+
+    if value_name == "radius" then return 270 + (value_level * 15) end
+
+    if value_name == "debuff_duration" then return 3.5 end
+    if value_name == "special_root" then return 1 end
+    if value_name == "distance" then return 900 end
+    if value_name == "special_critical_damage" then return 150 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_4__strip" then
-		if value_name == "AbilityManaCost" then return 0 * (1 + ((ability_level - 1) * 0.05)) end
+		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
-    if value_name == "chance" then return 7.5 + (value_level * 0.25) end
+    if value_name == "chance" then return 9 + (value_level * 0.5) end
+
+    if value_name == "special_break" then return 1 end
+    if value_name == "special_bleeding" then return 1 end
+    if value_name == "armor" then return -6.5 end
+    if value_name == "special_evasion" then return -2 end
+    if value_name == "special_silence" then return 1 end
+    if value_name == "special_damage" then return 20 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_5__smoke" then
-		if value_name == "AbilityManaCost" then return 325 * (1 + ((ability_level - 1) * 0.05)) end
-		if value_name == "AbilityCooldown" then return 30 end
+		if value_name == "AbilityManaCost" then return 275 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("fleaman_5__smoke_rank_21") then
+        return 20
+      end
+      return 25
+    end
+
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
-		if value_name == "rank" then return 9 + (value_level * 1) end
-		if value_name == "radius" then return 500 + (value_level * 25) end
+		if value_name == "radius" then return 450 + (value_level * 25) end
+
+    if value_name == "blind" then return 90 end
+    if value_name == "miss_chance" then return 35 end
+    if value_name == "duration" then return 25 end
+    if value_name == "special_hp_regen" then return 50 end
+    if value_name == "special_hide" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_u__steal" then
-		if value_name == "AbilityManaCost" then return 0 * (1 + ((ability_level - 1) * 0.05)) end
-		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
-    if value_name == "stack_duration" then return 30 + math.floor(value_level * 2.5) end
+		if value_name == "AbilityManaCost" then return 0 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("fleaman_u__steal_rank_31") then
+        return 1
+      end
+
+      return 0
+    end
+    
+    if value_name == "duration" then return 15 + (value_level * 0.5) end
+    
+    if value_name == "special_respawn_self" then return 0.5 end
+    if value_name == "special_respawn_enemy" then return 0.5 end
+    if value_name == "special_lifesteal" then return 20 end
+    if value_name == "special_manasteal" then return 15 end
+    if value_name == "attack_steal" then return 4 end
+    if value_name == "special_chain_chance" then return 25 end
+    if value_name == "special_chain_hits" then return 4 end
+    if value_name == "special_chain_damage" then return 100 end
+    if value_name == "special_chain_radius" then return 700 end
 	end
 
 	return 0

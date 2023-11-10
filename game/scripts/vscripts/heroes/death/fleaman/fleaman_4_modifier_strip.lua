@@ -10,8 +10,28 @@ function fleaman_4_modifier_strip:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddBonus(self.ability, "DEF", self.parent, self.ability:GetSpecialValueFor("def"), 0, nil)
-  AddBonus(self.ability, "DEX", self.parent, self.ability:GetSpecialValueFor("dex"), 0, nil)
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    armor = self.ability:GetSpecialValueFor("armor"),
+    evasion = self.ability:GetSpecialValueFor("special_evasion")
+  }, false)
+
+  if self.ability:GetSpecialValueFor("special_break") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_break", {}, false)
+  end
+
+  if self.ability:GetSpecialValueFor("special_bleeding") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_bleeding", {}, false)
+  end
+
+  if self.ability:GetSpecialValueFor("special_silence") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_silence", {}, false)
+  end
+
+  self.damageTable = {
+    victim = self.parent, attacker = self.caster, damage = 0,
+    damage_type = self.ability:GetAbilityDamageType(),
+    ability = self.ability
+  }
 
 	if IsServer() then self:PlayEfxStart() end
 end
@@ -20,11 +40,33 @@ function fleaman_4_modifier_strip:OnRefresh(kv)
 end
 
 function fleaman_4_modifier_strip:OnRemoved()
-  RemoveBonus(self.ability, "DEF", self.parent)
-  RemoveBonus(self.ability, "DEX", self.parent)
+  RemoveSubStats(self.parent, self.ability, {"armor", "evasion"})
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_break", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bleeding", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
+
+  if self.damageTable.damage > 0 then
+    self:PlayEfxEnd()
+    ApplyDamage(self.damageTable)
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
+
+function fleaman_4_modifier_strip:DeclareFunctions()
+	local funcs = {
+		MODIFIER_EVENT_ON_TAKEDAMAGE
+	}
+
+	return funcs
+end
+
+function fleaman_4_modifier_strip:OnTakeDamage(keys)
+  if keys.unit ~= self.parent then return end
+  
+  local damage_percent = self.ability:GetSpecialValueFor("special_damage")
+  self.damageTable.damage = self.damageTable.damage + (keys.damage * damage_percent * 0.01)
+end
 
 -- UTILS -----------------------------------------------------------
 

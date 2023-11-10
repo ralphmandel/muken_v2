@@ -21,7 +21,7 @@ LinkLuaModifier("_modifier_invi_level", "_modifiers/_modifier_invi_level", LUA_M
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseStats(self:GetCaster()):AddManaExtra(self)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

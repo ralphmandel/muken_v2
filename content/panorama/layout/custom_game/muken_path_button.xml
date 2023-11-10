@@ -11,7 +11,7 @@
     }
   </script>
 
-  <Button class="StateDisabled PathPanel" onactivate="OnPathClick()">
+  <Button class="StateDisabled PathPanel" onactivate="OnPathClick()" onmouseover="Game.EmitSound('Config.Move')">
     <DOTAAbilityImage id="PathImage" abilityname="" />
   </Button>
 </root>

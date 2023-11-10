@@ -40,10 +40,6 @@
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 	}
 
-
-
-
-
 	"slot_1"
 	{
 		"BaseClass"						"ability_lua"
@@ -445,6 +441,7 @@
 }
 
 //BASICS
+#base "../vscripts/_stats/_stats.txt"
 #base "../vscripts/_basics/_basics.txt"
 
 //HEROES

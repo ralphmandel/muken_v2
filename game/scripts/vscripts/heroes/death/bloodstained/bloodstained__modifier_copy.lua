@@ -6,23 +6,24 @@ function bloodstained__modifier_copy:IsPurgable() return false end
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function bloodstained__modifier_copy:OnCreated(kv)
-  if not IsServer() then return end
-
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
   self.hp_stolen = kv.hp_stolen
   self.target = EntIndexToHScript(kv.target_index)
+  self.target_team = self.target:GetTeamNumber()
 
   AddStatusEfx(self.ability, "bloodstained__modifier_copy_status_efx", self.caster, self.parent)
-  AddBonus(self.ability, "CON", self.parent, -9999, 0, nil)
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {value = 100}, false)
 
   self.max_barrier = 100
   self.barrier = self.max_barrier
 
   self:SetHasCustomTransmitterData(true)
   self:SetStackCount(self.hp_stolen)
+
+  if IsServer() then self:OnIntervalThink() end
 end
 
 function bloodstained__modifier_copy:OnRefresh(kv)
@@ -30,7 +31,6 @@ end
 
 function bloodstained__modifier_copy:OnRemoved()
   RemoveStatusEfx(self.ability, "bloodstained__modifier_copy_status_efx", self.caster, self.parent)
-  RemoveBonus(self.ability, "CON", self.parent)
 
   if self.target then
     if IsValidEntity(self.target) then
@@ -74,7 +74,6 @@ end
 function bloodstained__modifier_copy:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_MIN_HEALTH,
-    MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
     MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_CONSTANT,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
     MODIFIER_EVENT_ON_DEATH
@@ -85,10 +84,6 @@ end
 
 function bloodstained__modifier_copy:GetMinHealth(keys)
 	return self:GetParent():GetMaxHealth()
-end
-
-function bloodstained__modifier_copy:GetModifierMoveSpeedBonus_Percentage(target)
-	return 100
 end
 
 function bloodstained__modifier_copy:GetModifierIncomingPhysicalDamageConstant(keys)  
@@ -132,6 +127,11 @@ function bloodstained__modifier_copy:OnStackCountChanged(old)
   AddModifier(self.target, self.ability, "bloodstained__modifier_bloodstained", {
     hp_stolen = self:GetStackCount()
   }, false)
+end
+
+function bloodstained__modifier_copy:OnIntervalThink()
+  AddFOWViewer(self.target_team, self.parent:GetOrigin(), 100, 0.3, false)
+  if IsServer() then self:StartIntervalThink(0.2) end
 end
 
 -- UTILS -----------------------------------------------------------

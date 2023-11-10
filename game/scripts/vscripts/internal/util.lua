@@ -122,16 +122,20 @@
     end
   end
 
--- CALCS
+-- STATS/MODIFIERS
+
+  function MainStats(baseNPC, stat)
+    return baseNPC:FindModifierByName("_modifier_"..string.lower(stat))
+  end
 
   function CalcStatus(duration, caster, target)
     if caster == nil or target == nil then return duration end
     if IsValidEntity(caster) == false or IsValidEntity(target) == false then return duration end
 
     if caster:GetTeamNumber() == target:GetTeamNumber() then
-      if BaseStats(caster) then duration = duration * (1 + BaseStats(caster):GetBuffAmp()) end
+      if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
     else
-      if BaseStats(caster) then duration = duration * (1 + BaseStats(caster):GetDebuffAmp()) end
+      if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
       CalcStatusResistance(duration, target)
     end
     
@@ -139,7 +143,7 @@
   end
 
   function CalcStatusResistance(duration, target)
-    if BaseStats(target) then duration = duration * (1 - (BaseStats(target):GetStatusResistPercent() * 0.01)) end
+    if MainStats(target, "INT") then duration = duration * (1 - MainStats(target, "INT"):GetStatusResist()) end
     return duration
   end
 
@@ -153,6 +157,23 @@
     end
 
     return target:AddNewModifier(caster, ability, modifier_name, table)
+  end
+
+  function RemoveSubStats(target, ability, list)
+    local mod = target:FindAllModifiersByName("sub_stat_modifier")
+    for _,modifier in pairs(mod) do
+      local bPass = true
+
+      for _, sub_stat in pairs(list) do
+        if modifier.kv[sub_stat] == nil then
+          bPass = false
+        end
+      end
+
+      if bPass == true and (modifier:GetAbility() == ability or ability == nil) then
+        modifier:Destroy()
+      end
+    end
   end
 
   function AddBonus(ability, string, target, bonus, base, time)
@@ -190,6 +211,52 @@
     end
 
     return false
+  end
+
+  function UpdatePanoramaStat(baseNPC, stat)
+    if baseNPC:IsHero() == false then return end
+    if baseNPC:IsIllusion() then return end
+    
+    local player = baseNPC:GetPlayerOwner()
+    if (not player) then return end
+
+    local modifier = baseNPC:FindModifierByName("_modifier_"..stat)
+    if modifier == nil then return end
+
+    local value = 0
+    local mods = baseNPC:FindAllModifiersByName("main_stat_modifier")
+    for _,mod in pairs(mods) do
+      if mod.kv[stat] then value = value + mod.kv[stat] end
+    end
+
+    modifier:UpdateMainBonus(value)
+
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_stat_from_lua", {
+      stat = string.upper(stat),
+      base = modifier:GetAbility():GetLevel(),
+      bonus = modifier.main_bonus,
+      total = modifier:GetAbility():GetLevel() + modifier.main_bonus
+    })
+  end
+
+  function UpdateStatKV(baseNPC, kv)
+    for _, main in pairs({"str", "agi", "int", "vit"}) do
+      local modifier = baseNPC:FindModifierByName("_modifier_"..main)
+      if modifier then
+        for property, value in pairs(kv) do
+          if modifier.data["sub_stat_"..property] then
+            modifier:UpdateSubBonus(property)
+          end
+        end
+      end
+    end
+  end
+
+  function UpdateMovespeed(baseNPC, name)
+    local modifier = baseNPC:FindModifierByName("_modifier_agi")
+    if modifier then
+      modifier:UpdateMS(name)
+    end
   end
 
 -- HEROES UTIL
@@ -299,7 +366,11 @@
 -- HEAL / MANA
 
   function CalcHeal(caster, amount)
-    if BaseStats(caster) then return amount * BaseStats(caster):GetHealPower() else return amount end
+    if MainStats(caster, "INT") then
+      return amount * (1 + MainStats(caster, "INT"):GetHealPower())
+    else
+      return amount
+    end
   end
 
   function IncreaseMana(target, amount)
@@ -392,10 +463,6 @@
   end
 
 -- BASES
-
-  function BaseStats(baseNPC)
-    return baseNPC:FindAbilityByName("base_stats")
-  end
 
   function BaseHero(baseNPC)
     return baseNPC:FindAbilityByName("base_hero")

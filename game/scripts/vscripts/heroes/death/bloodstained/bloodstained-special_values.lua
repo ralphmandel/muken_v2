@@ -55,11 +55,11 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("bloodstained_1__rage_rank_31") then
-      if value_name == "str_gain" then return 1 end
+      if value_name == "damage_gain" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_1__rage_rank_32") then
-      if value_name == "special_str_init" then return 1 end
+      if value_name == "special_damage_init" then return 1 end
 		end
 	end
 
@@ -85,7 +85,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("bloodstained_2__frenzy_rank_31") then
-      if value_name == "agi" then return 1 end
+      if value_name == "attack_speed" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_2__frenzy_rank_32") then
@@ -97,24 +97,31 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
     if value_name == "max_range" then return 1 end
+		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_11") then
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_12") then
+      if value_name == "special_slow_percent" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_21") then
+      if value_name == "shared_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_22") then
+      if value_name == "special_max_hp_steal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
 		end
 
     if caster:FindAbilityByName("bloodstained_3__curse_rank_32") then
+      if value_name == "special_kill_reset" then return 1 end
 		end
 	end
 
@@ -168,13 +175,15 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_22") then
-      if value_name == "special_lifesteal_allies" then return 1 end
+      if value_name == "special_max_hp_regen" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_31") then
+      if value_name == "special_min_heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_5__lifesteal_rank_32") then
+      if value_name == "special_max_heal" then return 1 end
 		end
 	end
 
@@ -182,24 +191,31 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "duration" then return 1 end
+		if value_name == "steal_duration" then return 1 end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_12") then
+      if value_name == "slow_duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_21") then
+      if value_name == "special_break" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_22") then
+      if value_name == "hp_stolen" then return 1 end
 		end
 
 		if caster:FindAbilityByName("bloodstained_u__seal_rank_31") then
+      if value_name == "special_kill" then return 1 end
+      if value_name == "special_bleed_in" then return 1 end
 		end
 
     if caster:FindAbilityByName("bloodstained_u__seal_rank_32") then
+      if value_name == "special_bleed_out" then return 1 end
 		end
 	end
 
@@ -225,28 +241,54 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "call_duration" then return 6 end
     if value_name == "radius" then return 375 end
     if value_name == "special_blink" then return 300 end
-    if value_name == "str_gain" then return 2 end 
-    if value_name == "special_str_init" then return 20 end
+    if value_name == "damage_gain" then return 10 end
+    if value_name == "special_damage_init" then return 100 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 3 end
+		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "duration" then return 3 + (value_level * 0.25) end
 
     if value_name == "ms" then return 300 end
     if value_name == "special_purge" then return 1 end
-    if value_name == "status_res" then return 60 end
+    if value_name == "status_res" then return 50 end
     if value_name == "special_bleeding_duration" then return 3 end
-    if value_name == "agi" then return 20 end
+    if value_name == "attack_speed" then return 100 end
     if value_name == "special_cleave" then return 100 end
   end
 
 	if ability:GetAbilityName() == "bloodstained_3__curse" then
-		if value_name == "AbilityManaCost" then return 450 end
-		if value_name == "AbilityCooldown" then return 30 end
-    if value_name == "AbilityCastRange" then return 350 end
-		if value_name == "max_range" then return 700 + (value_level * 50) end
+		if value_name == "AbilityManaCost" then return 550 end
+		if value_name == "AbilityCooldown" then return 0 end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
+        return 2
+      end
+      return 1
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_31") then
+        return 45
+      end
+      return 60
+    end
+    
+    if value_name == "AbilityCastRange" then
+      if caster:FindAbilityByName("bloodstained_3__curse_rank_11") then
+        return 550
+      end
+      return 350
+    end
+
+		if value_name == "max_range" then return ability:GetSpecialValueFor("AbilityCastRange") + 350 end
+		if value_name == "duration" then return 30 + (value_level * 5) end
+		if value_name == "special_slow_percent" then return 20 end
+    if value_name == "shared_damage" then return 80 end
+    if value_name == "special_max_hp_steal" then return 20 end
+    if value_name == "special_kill_reset" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_4__tear" then
@@ -263,7 +305,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "blood_percent" then return 8 + (value_level * 0.25) end
     if value_name == "special_copy_leech" then return 1 end
     if value_name == "blood_duration" then return 30 end
-    if value_name == "special_init_loss" then return 20 end
+    if value_name == "special_init_loss" then return 30 end
     if value_name == "hp_lost" then return 2 end
     if value_name == "tick" then return 0.75 end
     if value_name == "radius" then return 500 end
@@ -279,14 +321,24 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "special_self_hp_creep" then return 2 end
     if value_name == "special_heal_radius" then return 500 end
     if value_name == "max_heal" then return 50 end
-    if value_name == "special_lifesteal_allies" then return 30 end
+    if value_name == "special_max_hp_regen" then return 40 end
+    if value_name == "special_min_heal" then return 25 end
+    if value_name == "special_max_heal" then return 40 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_u__seal" then
 		if value_name == "AbilityManaCost" then return 850 end
 		if value_name == "AbilityCooldown" then return 100 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") - 50 end
-    if value_name == "duration" then return 12 + (value_level * 0.5) end
+    if value_name == "steal_duration" then return 90 + (value_level * 10) end
+
+    if value_name == "duration" then return 15 end
+    if value_name == "slow_duration" then return 3 end
+    if value_name == "special_break" then return 1 end
+    if value_name == "hp_stolen" then return 15 end
+    if value_name == "special_kill" then return 20 end
+    if value_name == "special_bleed_in" then return 1 end
+    if value_name == "special_bleed_out" then return 1 end
 	end
 
 	return 0

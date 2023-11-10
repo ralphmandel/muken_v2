@@ -9,27 +9,25 @@ function bloodstained_1_modifier_rage:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  self.str = self.ability:GetSpecialValueFor("special_str_init")
+  self.damage = self.ability:GetSpecialValueFor("special_damage_init")
 
 	self.ability:EndCooldown()
 	self.ability:SetActivated(false)
 
   AddStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
-  AddBonus(self.ability, "LCK", self.parent, self.ability:GetSpecialValueFor("lck"), 0, nil)
 
-  if IsServer() then self:SetStackCount(self.str) end
+  if IsServer() then self:SetStackCount(self.damage) end
 end
 
 function bloodstained_1_modifier_rage:OnRefresh(kv)
-  self.str = 0
+  self.damage = self.ability:GetSpecialValueFor("special_damage_init")
 end
 
 function bloodstained_1_modifier_rage:OnRemoved()
 	if IsServer() then self.parent:StopSound("Bloodstained.rage") end
 
   RemoveStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
-	RemoveBonus(self.ability, "LCK", self.parent)
-	RemoveBonus(self.ability, "STR", self.parent)
+	RemoveSubStats(self.parent, self.ability, {"attack_damage"})
 
 	self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 	self.ability:SetActivated(true)
@@ -70,20 +68,20 @@ function bloodstained_1_modifier_rage:OnDeath(keys)
 end
 
 function bloodstained_1_modifier_rage:OnStackCountChanged(old)
-	RemoveBonus(self.ability, "STR", self.parent)
-  AddBonus(self.ability, "STR", self.parent, self:GetStackCount(), 0, nil)	
+	RemoveSubStats(self.parent, self.ability, {"attack_damage"})
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_damage = self:GetStackCount()}, false)
 end
 
 -- UTILS -----------------------------------------------------------
 
 function bloodstained_1_modifier_rage:FilterDamage(amount)
-  self:CalcGain(amount * self.ability:GetSpecialValueFor("str_gain") * 0.01)
+  self:CalcGain(amount * self.ability:GetSpecialValueFor("damage_gain") * 0.01)
 end
 
 function bloodstained_1_modifier_rage:CalcGain(gain)
 	if IsServer() then
-    self.str = self.str + gain
-    self:SetStackCount(math.floor(self.str))
+    self.damage = self.damage + gain
+    self:SetStackCount(math.floor(self.damage))
   end
 end
 

@@ -8,7 +8,7 @@ LinkLuaModifier("bloodstained_5_modifier_passive_status_efx", "heroes/death/bloo
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseStats(self:GetCaster()):AddManaExtra(self)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

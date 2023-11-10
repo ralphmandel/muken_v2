@@ -8,16 +8,16 @@
     <Button hittest="false" class="MukenStatsRoot">
       <!-- RANK WINDOW -->
       <Panel hittest="false" id="StatsWindowContainer" onactivate=''>
-        <Panel id="StatsColumnContainer"/>
+        <Panel hittest="false" id="StatsContainer" onactivate=''>
+          <Panel id="StatsColumnContainer"/>
+        </Panel>
+        <Panel hittest="false" id="InfoWindowContainer" onactivate=''>
+          <Label text="" />
+        </Panel>
       </Panel>
 
       <!-- PTS WINDOW -->
       <Panel hittest="false" id="PtsTotalContainer" onactivate=''>
-        <Label text="" />
-      </Panel>
-
-      <!-- INFO WINDOW -->
-      <Panel hittest="false" id="InfoWindowContainer" onactivate=''>
         <Label text="" />
       </Panel>
       

@@ -9,7 +9,7 @@ LinkLuaModifier("_modifier_heal_amp", "_modifiers/_modifier_heal_amp", LUA_MODIF
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseStats(self:GetCaster()):AddManaExtra(self)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
 

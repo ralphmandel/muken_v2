@@ -12,7 +12,7 @@ LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseStats(self:GetCaster()):AddManaExtra(self)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

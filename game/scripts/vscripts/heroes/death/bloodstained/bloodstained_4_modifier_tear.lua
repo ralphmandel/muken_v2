@@ -12,9 +12,7 @@ function bloodstained_4_modifier_tear:OnCreated(kv)
 
 	self.tick = self.ability:GetSpecialValueFor("tick")
 	self.blood_duration = self.ability:GetSpecialValueFor("blood_duration")
-	self.init_loss = self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("special_init_loss") * 0.01
-
-  if self.parent:GetHealth() <= self.init_loss then self.init_loss = self.parent:GetHealth() - 1 end
+	self.init_loss = self.parent:GetHealth() * self.ability:GetSpecialValueFor("special_init_loss") * 0.01
 
 	if IsServer() then
 		self:PlayEfxStart(self.ability:GetAOERadius())
@@ -95,7 +93,7 @@ function bloodstained_4_modifier_tear:ApplyHaemorrhage(keys)
 	if keys.attacker:IsBaseNPC() == false then return end
 	if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return end
 	if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return end
-	if BaseStats(keys.attacker).has_crit ~= true then return end
+	--BaseStats(keys.attacker).has_crit ~= true then return end
 
 	local point = (keys.attacker:GetAbsOrigin() - keys.unit:GetAbsOrigin()):Normalized()
 	self:CreateBlood(keys.unit, keys.damage, keys.unit:GetAbsOrigin() - (point * 175))
@@ -131,7 +129,7 @@ function bloodstained_4_modifier_tear:PullBlood()
 	end
 
   total_blood = total_blood + self:PullCopies()
-  total_blood = total_blood * BaseStats(self.caster):GetHealPower()
+  --total_blood = total_blood * BaseStats(self.caster):GetHealPower()
 
 
 	if total_blood >= 1 then

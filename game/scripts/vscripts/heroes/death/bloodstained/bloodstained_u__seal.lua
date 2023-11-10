@@ -7,7 +7,6 @@ LinkLuaModifier("bloodstained__modifier_bloodstained", "heroes/death/bloodstaine
 LinkLuaModifier("bloodstained__modifier_bloodgain", "heroes/death/bloodstained/bloodstained__modifier_bloodgain", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained__modifier_bloodloss", "heroes/death/bloodstained/bloodstained__modifier_bloodloss", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_generic_custom_indicator", "_modifiers/_modifier_generic_custom_indicator", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_percent_movespeed_debuff", "_modifiers/_modifier_percent_movespeed_debuff", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_bleeding", "_modifiers/_modifier_bleeding", LUA_MODIFIER_MOTION_NONE)
 
 

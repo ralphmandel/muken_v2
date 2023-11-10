@@ -385,10 +385,6 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
 					[2] = DOTA_TEAM_CUSTOM_2,
 					[3] = DOTA_TEAM_CUSTOM_3,
 					[4] = DOTA_TEAM_CUSTOM_4,
-					-- [5] = DOTA_TEAM_CUSTOM_5,
-					-- [6] = DOTA_TEAM_CUSTOM_6,
-					-- [7] = DOTA_TEAM_CUSTOM_7,
-					-- [8] = DOTA_TEAM_CUSTOM_8
 				}
 			
 				for _, teamNum in pairs(teams) do
@@ -475,7 +471,7 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
 				local player = self:GetCaster():GetPlayerOwner()
 				if (not player) then return end
 
-				CustomGameEventManager:Send_ServerToPlayer(player, "stats_state_from_server", {
+				CustomGameEventManager:Send_ServerToPlayer(player, "update_stat_from_lua", {
 					stat = stat,
 					base = self.stat_base[stat],
 					bonus = self.stat_bonus[stat],
@@ -507,7 +503,7 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
           --stats_fraction[stat] = self.stat_fraction["plus_up"][stat]["value"] == 3
 				end
 
-				CustomGameEventManager:Send_ServerToPlayer(player, "points_state_from_server", {
+				CustomGameEventManager:Send_ServerToPlayer(player, "update_stats_point_from_lua", {
 					total_points = self.total_points,
 					stats = stats,
           stats_fraction = stats_fraction,

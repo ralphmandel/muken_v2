@@ -32,9 +32,13 @@
 
     "AbilityValues"
 		{
-			"agi"         "6"
-      "duration"		"1 2 3 4 5 6 7"
-			"rank"			  "1 2 3 4 5 6 7"
+			"attack_speed"  "30"
+			"evasion"       "3"
+      "duration"		  "1 2 3 4 5 6 7"
+      "special_damage"  "0"
+      "special_pulses"  "0"
+      "special_aoe"     "0"
+      "special_purge"   "0"
 		}
 	}
 
@@ -52,9 +56,13 @@
 
     "AbilityValues"
 		{
-			"ms"              "20"
-			"stack_duration"  "1 2 3 4 5 6 7"
-			"rank"			      "1 2 3 4 5 6 7"
+			"duration"  "3"
+			"ms_gain"   "5"
+			"max_ms"    "120"
+			"min_ms"    "1 2 3 4 5 6 7"
+      "special_phase"         "0"
+      "special_stun_duration" "0"
+      "special_unslow"        "0"
 		}
 	}
 
@@ -76,11 +84,13 @@
 
     "AbilityValues"
 		{
-      "debuff_duration"	  "2"
+      "distance"	        "600"
       "speed_mult"	      "2"
-      "radius"	          "275"
-      "distance"	        "1 2 3 4 5 6 7"
-			"rank"			        "1 2 3 4 5 6 7"
+      "debuff_duration"	  "2.5"
+      "slow_percent"	    "70"
+      "radius"	          "1 2 3 4 5 6 7"
+      "special_root"            "0"
+      "special_critical_damage" "0"
 		}
 	}
 
@@ -94,15 +104,19 @@
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
 
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "AbilityValues"
 		{
-			"duration"		"4"
-			"def"		      "-10"
-			"dex"		      "-10"
+			"duration"		"5"
+			"armor"		    "-5"
 			"chance"		  "1 2 3 4 5 6 7"
-		  "rank"			  "1 2 3 4 5 6 7"
+      "special_break"     "0"
+      "special_bleeding"  "0"
+      "special_evasion"   "0"
+      "special_silence"   "0"
+      "special_damage"    "0"
 		}
 	}
 
@@ -113,7 +127,7 @@
 		"AbilityTextureName"     		"fleaman_smoke"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"1"
-		"RequiredLevel"         	 	"1"
+		"RequiredLevel"         	 	"0"
 		"LevelsBetweenUpgrades"  		"25"
     "ActiveSpell"               "1"
 
@@ -127,13 +141,13 @@
 
     "AbilityValues"
 		{
-			"cast_range"	  "750"
-			"duration"		  "10"
-			"blind"		      "60"
-			"slow_percent"  "30"
-			"delay"		      "1"
-			"radius"		    "1 2 3 4 5 6 7"
-			"rank"			    "1 2 3 4 5 6 7"
+			"cast_range"  "600"
+			"duration"		"15"
+			"blind"		    "75"
+			"miss_chance" "25"
+			"radius"		  "1 2 3 4 5 6 7"
+      "special_hp_regen"  "0"
+      "special_hide"      "0"
 		}
 	}
 
@@ -147,1459 +161,346 @@
 		"RequiredLevel"         	 	"8"
     "LevelsBetweenUpgrades"  		"25"
 
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "AbilityValues"
 		{
-			"max_stack"		    "8"
-			"stack_duration"  "1 2 3 4 5 6 7"
-			"rank"			      "1 2 3 4 5 6 7"
+      "attack_steal"  "3"
+			"duration"      "1 2 3 4 5 6 7"
+      "special_respawn_self" "0"
+      "special_respawn_enemy""0"
+      "special_lifesteal"    "0"
+      "special_manasteal"    "0"
+      "special_chain_chance" "0"
+      "special_chain_hits"   "0"
+      "special_chain_damage" "0"
+      "special_chain_radius" "0"
 		}
 	}
 
-    //RANKS 1
-        "fleaman_1__precision_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_1__precision_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_precision"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"1"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-    //RANKS 2
-        "fleaman_2__speed_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_2__speed_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_speed"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"2"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-    //RANKS 3
-        "fleaman_3__jump_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_3__jump_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_jump"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"3"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-    //RANKS 4
-        "fleaman_4__strip_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_4__strip_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_strip"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"4"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-      //RANKS 5
-        "fleaman_5__smoke_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-        
-        "fleaman_5__smoke_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_5__smoke_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_smoke"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"5"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-    //RANKS U
-        "fleaman_u__steal_rank_11"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"11"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_12"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"1"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"12"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_21"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"21"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_22"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"2"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"22"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_31"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"31"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_32"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"3"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"32"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_41"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"41"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
-
-        "fleaman_u__steal_rank_42"{
-            "BaseClass"						"ability_lua"
-            "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
-            "AbilityTextureName"    		"fleaman_steal"
-            "FightRecapLevel"				"1"
-            "MaxLevel"						"4"	
-            
-            "AbilityType"					"ABILITY_TYPE_BASIC"
-            "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-            "AbilitySpecial"
-            {
-                "01"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "skill"					"6"
-                }
-                "02"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "id"					"42"
-                }
-                "03"
-                {
-                    "var_type"				"FIELD_FLOAT"
-                    "permanent"				"0"
-                }
-            }
-        }
+  //RANKS
+    "fleaman_1__precision_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_1__precision_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_1__precision_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_1__precision_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_1__precision_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_1__precision_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_precision"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_2__speed_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_speed"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_3__jump_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_jump"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_4__strip_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_strip"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }    
+
+    "fleaman_5__smoke_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_5__smoke_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_5__smoke_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_5__smoke_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_5__smoke_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_5__smoke_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_smoke"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "fleaman_u__steal_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/fleaman/fleaman-ranks_lua"
+      "AbilityTextureName"  "fleaman_steal"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
 }

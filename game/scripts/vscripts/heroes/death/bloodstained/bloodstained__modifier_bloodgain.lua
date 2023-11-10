@@ -36,7 +36,7 @@ function bloodstained__modifier_bloodgain:GetModifierHealthBonus()
 end
 
 function bloodstained__modifier_bloodgain:OnStackCountChanged(old)
-	local void = self:GetParent():FindAbilityByName("_void")
+	local void = self:GetCaster():FindAbilityByName("bloodstained__precache")
 	if void then void:SetLevel(1) end
 end
 
