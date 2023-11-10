@@ -28,7 +28,7 @@
     var Glyph = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("minimap_container");
     var Killcam = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("KillCam");
     var NoStrategyScreen = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("ScreenContainer").FindChildTraverse("StrategyScreen");
-    //var NoPickScreen = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents");
+    var RightColumnHeight = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("ScreenContainer").FindChildTraverse("HeroPickScreen").FindChildTraverse("MainHeroPickScreenContents");
     
     //FindChildrenWithClassTraverse
 
@@ -44,8 +44,11 @@
     Glyph.FindChildTraverse("minimap_block").style.boxShadow = "0px 0px 10px 1px #000000de";
     HeroDescription.FindChildTraverse("HeroSimpleDescription").style.visibility = "collapse";
     NoStrategyScreen.FindChildTraverse("RightContainer").style.visibility = "collapse";
-    //NoPickScreen.FindChildTraverse("ScreenContainer").style.visibility = "collapse";
-
+    RightColumnHeight.FindChildTraverse("HeroPickRightColumn").style.height = "990px";
+    var HeroInspect = RightColumnHeight.FindChildrenWithClassTraverse("HeroInspectContainer");
+      HeroInspect.forEach(HeroInspectContainer => {
+      HeroInspectContainer.style.height = "730px";
+    });
     // Time Panel:
     
     TimeofDay.FindChildTraverse("TimeOfDayBG").style.backgroundImage = "url('file://{images}/custom_game/bg_timer_edited.png')";
@@ -147,12 +150,15 @@
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/selection.xml" />
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_stats.xml"/>
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_info.xml"/>
+
     <CustomUIElement type="HudTopBar" layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml"/>
-    <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/muken_hero_info.xml"/>
     <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/ui_econ_set_preview.xml"/>
+    <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/muken_hero_info.xml"/>
+    <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/muken_stats_pentagon.xml"/>
     <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml"/>
-    <CustomUIElement type="FlyoutScoreboard"    layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml"/>
     <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/muken_hero_selection.xml"/>
+    <CustomUIElement type="FlyoutScoreboard"    layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml"/>
+
     
    
 
