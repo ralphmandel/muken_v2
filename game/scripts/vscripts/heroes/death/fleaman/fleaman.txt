@@ -101,14 +101,19 @@
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
 
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "AbilityValues"
 		{
-			"duration"		"4"
-			"def"		      "-10"
-			"dex"		      "-10"
+			"duration"		"5"
+			"armor"		    "-5"
 			"chance"		  "1 2 3 4 5 6 7"
+      "special_break"     "0"
+      "special_bleeding"  "0"
+      "special_evasion"   "0"
+      "special_silence"   "0"
+      "special_damage"    "0"
 		}
 	}
 
@@ -133,12 +138,13 @@
 
     "AbilityValues"
 		{
-			"cast_range"	  "750"
-			"duration"		  "10"
-			"blind"		      "60"
-			"slow_percent"  "30"
-			"delay"		      "1"
-			"radius"		    "1 2 3 4 5 6 7"
+			"cast_range"  "600"
+			"duration"		"15"
+			"blind"		    "75"
+			"miss_chance" "25"
+			"radius"		  "1 2 3 4 5 6 7"
+      "special_hp_regen"  "0"
+      "special_hide"      "0"
 		}
 	}
 

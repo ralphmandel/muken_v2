@@ -10,6 +10,8 @@ function fleaman_5_modifier_shadow:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  AddModifier(self.parent, self.ability, "_modifier_invisible", {attack_break = 0}, false)
+
 	if IsServer() then
 		self:PlayEfxStart()
 		self:OnIntervalThink()
@@ -21,6 +23,8 @@ end
 
 function fleaman_5_modifier_shadow:OnRemoved()
   if IsServer() then self.parent:StopSound("Fleaman.Shadow.Start") end
+
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_invisible", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -35,15 +39,11 @@ end
 
 function fleaman_5_modifier_shadow:DeclareFunctions()
 	local funcs = {
-    -- MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
 		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS
 	}
 
 	return funcs
 end
-
--- function fleaman_5_modifier_shadow:GetModifierConstantHealthRegen()
--- end
 
 function fleaman_5_modifier_shadow:GetActivityTranslationModifiers()
 	return "shadow_dance"

@@ -125,21 +125,27 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "chance" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_11") then
+      if value_name == "special_break" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_12") then
+      if value_name == "special_bleeding" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_21") then
+      if value_name == "armor" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_22") then
+      if value_name == "special_evasion" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_4__strip_rank_31") then
+      if value_name == "special_silence" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_4__strip_rank_32") then
+      if value_name == "special_damage" then return 1 end
 		end
 	end
 
@@ -150,21 +156,26 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_11") then
+      if value_name == "blind" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_12") then
+      if value_name == "miss_chance" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_21") then
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_22") then
+      if value_name == "duration" then return 1 end
 		end
 
 		if caster:FindAbilityByName("fleaman_5__smoke_rank_31") then
+      if value_name == "special_hp_regen" then return 1 end
 		end
 
     if caster:FindAbilityByName("fleaman_5__smoke_rank_32") then
+      if value_name == "special_hide" then return 1 end
 		end
 	end
 
@@ -265,14 +276,34 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "fleaman_4__strip" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "chance" then return 7.5 + (value_level * 0.25) end
+    if value_name == "chance" then return 9 + (value_level * 0.5) end
+
+    if value_name == "special_break" then return 1 end
+    if value_name == "special_bleeding" then return 1 end
+    if value_name == "armor" then return -6.5 end
+    if value_name == "special_evasion" then return -2 end
+    if value_name == "special_silence" then return 1 end
+    if value_name == "special_damage" then return 20 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_5__smoke" then
-		if value_name == "AbilityManaCost" then return 325 end
-		if value_name == "AbilityCooldown" then return 30 end
+		if value_name == "AbilityManaCost" then return 275 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("fleaman_5__smoke_rank_21") then
+        return 20
+      end
+      return 25
+    end
+
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
-		if value_name == "radius" then return 500 + (value_level * 25) end
+		if value_name == "radius" then return 450 + (value_level * 25) end
+
+    if value_name == "blind" then return 90 end
+    if value_name == "miss_chance" then return 35 end
+    if value_name == "duration" then return 25 end
+    if value_name == "special_hp_regen" then return 50 end
+    if value_name == "special_hide" then return 3 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_u__steal" then

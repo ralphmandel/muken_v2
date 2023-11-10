@@ -93,8 +93,8 @@ function TalentTree:OnPortraitUpdate(event)
 
     attack_damage = entity:GetAverageTrueAttackDamage(nil),
     movespeed = entity:GetIdealSpeed(),
-    block = 0,
     hp_regen = entity:GetHealthRegen(),
+    miss_chance = MainStats(entity, "STR"):GetMissChance(),
     crit_damage = MainStats(entity, "STR"):GetCriticalDamage(),
 
     magical_damage = MainStats(entity, "INT"):GetMagicalDamageAmp(),

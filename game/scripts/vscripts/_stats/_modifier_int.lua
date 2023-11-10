@@ -182,7 +182,7 @@ end
 
 -- EFFECTS --------------------------------------------------------------------------------
 
-function _modifier_int:PopupBleeding(damage, target)
+function _modifier_int:PopupBleedDamage(damage, target)
   if damage <= 0 then return end
   local digits = 1 + #tostring(damage)
 
@@ -191,7 +191,7 @@ function _modifier_int:PopupBleeding(damage, target)
   ParticleManager:SetParticleControl(pidx, 4, Vector(1, digits, 0))
 end
 
-function _modifier_int:PopupDamage(damage, color, target)
+function _modifier_int:PopupHolyDamage(damage, color, target)
   if damage < 1 then return end
 
   local digits = 1
