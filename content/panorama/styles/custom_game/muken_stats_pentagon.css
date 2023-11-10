@@ -1,0 +1,121 @@
+.graph_root {
+  width: 250px;
+  height: 200px;
+  horizontal-align: right;
+  vertical-align: middle;
+  margin: 530px 265px 0px 0px;
+  padding: 0;
+  opacity: 0.7;
+}
+
+.graph_root:hover {opacity: 0.9;}
+
+.text_label
+{
+  color: white;
+  text-align: center;
+  /* text-shadow: 0 0 2px greenyellow; */
+  font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+  font-size: 16px;
+  text-shadow: 0px 0px 3px 3 rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+ 
+}
+
+#spider-graph-container {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  vertical-align: middle;
+  horizontal-align: center;
+  background-image: url("file://{images}/custom_game/decagon_graph_ps.png");
+  background-position: 50% 50%;
+  background-size: contain;
+}
+
+#spider-graph {
+  width: 100%;
+  height: width-percentage(100%);
+  z-index: 5;
+  border-radius: 50%;
+  horizontal-align: center;
+  vertical-align: middle;
+
+
+}
+
+.segment {
+  position: 0px 0px 0px;
+  width: 8px;
+  height: 8px;
+  background-image: url("file://{images}/custom_game/dot_graph.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  border-radius: 50%;
+  transform: translateX(-27%) translateY(-27%);
+}
+
+.line {
+  position: 0px 0px 0px;
+  border: 1px solid #755f29c3; /* Adjust the line color as needed */
+  transform-origin: 0 0;
+  transform: translateX(-27%) translateY(-27%);
+}
+
+#spider-line {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: 0px 0px 0px;
+}
+
+#str.text_label{
+  position: 43px 1px 0px;
+  visibility: visible;
+}
+
+#agi.text_label{
+  position: 120px 1px 0px;
+  visibility: visible;
+}
+
+#int.text_label{
+  position: 170px 40px 0px;
+  visibility: visible;
+}
+
+#con.text_label{
+  position: 185px 90px 0px;
+  visibility: visible;
+}
+
+#dex.text_label{
+  position: 168px 145px 0px;
+  visibility: visible;
+}
+
+#def.text_label{
+  position: 120px 180px 0px;
+  visibility: visible;
+}
+
+#res.text_label{
+  position: 53px 180px 0px;
+  visibility: visible;
+}
+
+#rec.text_label{
+  position: 0px 145px 0px;
+  visibility: visible;
+}
+
+#lck.text_label{
+  position: -19px 90px 0px;
+  visibility: visible;
+}
+
+#mnd.text_label{
+  position: -10px 40px 0px;
+  visibility: visible;
+}

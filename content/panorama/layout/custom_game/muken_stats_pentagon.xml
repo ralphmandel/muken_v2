@@ -1,0 +1,27 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_stats_pentagon.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/muken_stats_pentagon.js"/>
+  </scripts>
+
+  <Button class="graph_root" hittest="true">
+    <Panel id="spider-graph-container">
+      <Label id="str" class="text_label" text="STR"/> 
+      <Label id="agi" class="text_label" text="AGI"/> 
+      <Label id="int" class="text_label" text="INT"/> 
+      <Label id="con" class="text_label" text="CON"/> 
+      <Label id="dex" class="text_label" text="DEX"/> 
+      <Label id="def" class="text_label" text="DEF"/> 
+      <Label id="res" class="text_label" text="RES"/> 
+      <Label id="rec" class="text_label" text="REC"/> 
+      <Label id="lck" class="text_label" text="LCK"/> 
+      <Label id="mnd" class="text_label" text="MND"/> 
+      <Panel id="spider-graph">
+      </Panel>
+      <Panel id="spider-line">
+      </Panel>     
+    </Panel>
+  </Button>
+</root>
