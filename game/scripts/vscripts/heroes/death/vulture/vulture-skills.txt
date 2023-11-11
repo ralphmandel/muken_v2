@@ -1,6 +1,6 @@
 "skills"
 {
-	"1" "vulture_1__sk1"
+	"1" "vulture_1__tree"
 	"2" "vulture_2__sk2"
 	"3" "vulture_3__sk3"
 	"4" "vulture_4__sk4"
