@@ -14,14 +14,16 @@ function lawbreaker_2_modifier_combo:OnCreated(kv)
   self.type = 1
 
   self.bot_script = self.parent:FindModifierByName("_general_script")
-  
-  AddBonus(self.ability, "AGI", self.parent, self.ability:GetSpecialValueFor("agi"), 0, nil)
-  AddModifier(self.parent, self.ability, "_modifier_percent_movespeed_debuff", {
-    percent = self.ability:GetSpecialValueFor("slow_percent")
+  self.speed_mult = self.ability:GetSpecialValueFor("speed_mult")
+
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = self.speed_mult * 100}, false)
+
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {
+    value = self.ability:GetSpecialValueFor("slow_percent")
   }, false)
   
   if IsServer() then
-    self:StartIntervalThink(1 / self:GetAS()) 
+    self:StartIntervalThink(1 / self.speed_mult)
   end
 end
 
@@ -29,8 +31,8 @@ function lawbreaker_2_modifier_combo:OnRefresh(kv)
 end
 
 function lawbreaker_2_modifier_combo:OnRemoved()
-	RemoveBonus(self.ability,"AGI", self.parent)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_percent_movespeed_debuff", self.ability)
+  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -51,7 +53,7 @@ function lawbreaker_2_modifier_combo:GetModifierDisableTurning()
 end
 
 function lawbreaker_2_modifier_combo:GetModifierAttackRangeBonus()
-  return self:GetAbility():GetSpecialValueFor("atk_range")
+  return self:GetAbility():GetSpecialValueFor("attack_range")
 end
 
 function lawbreaker_2_modifier_combo:OnStateChanged(keys)
@@ -76,8 +78,10 @@ function lawbreaker_2_modifier_combo:OnOrder(keys)
 end
 
 function lawbreaker_2_modifier_combo:OnIntervalThink()
+  if self.ability:GetCurrentAbilityCharges() <= 0 then self:Destroy() return end
+
   local front = self.parent:GetForwardVector():Normalized()
-  local point = self.parent:GetOrigin() + front * self.parent:Script_GetAttackRange()
+  local point = self.parent:GetOrigin() + front * self.ability:GetSpecialValueFor("attack_range")
   local direction = point - self.parent:GetOrigin()
 	direction.z = 0
 	direction = direction:Normalized()
@@ -106,30 +110,27 @@ function lawbreaker_2_modifier_combo:OnIntervalThink()
     iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
     
     EffectName = "particles/lawbreaker/lawbreaker_skill2_bullets.vpcf",
-    fDistance = self.parent:Script_GetAttackRange(),
+    fDistance = self.ability:GetSpecialValueFor("attack_range"),
     fStartRadius = 50,
     fEndRadius = 50,
     vVelocity = direction * self.parent:GetProjectileSpeed(),
 
-    bProvidesVision = false,
-    iVisionRadius = 0,
+    bProvidesVision = true,
+    iVisionRadius = 50,
     iVisionTeamNumber = self.parent:GetTeamNumber()
   })
 
   if IsServer() then
     self.parent:EmitSound("Hero_Snapfire.ExplosiveShellsBuff.Attack")
-    self.parent:FindModifierByName(self.ability:GetIntrinsicModifierName()):DecrementStackCount()
-    self:StartIntervalThink(1 / self:GetAS()) 
+    self.ability:SetCurrentAbilityCharges(self.ability:GetCurrentAbilityCharges() - 1)
+    self:StartIntervalThink(1 / self.speed_mult)
   end
 end
 
 -- UTILS -----------------------------------------------------------
 
-function lawbreaker_2_modifier_combo:GetAS()
-  --local attack_speed1 = 100 + (BaseStats(self.parent):GetSpecialValueFor("attack_speed") * (BaseStats(self.parent):GetStatTotal("AGI") + 1))
-  local attack_speed = (BaseStats(self.parent):GetStatTotal("AGI") + 1)
-  attack_speed = 100 + (BaseStats(self.parent):GetSpecialValueFor("attack_speed") * attack_speed)
-  return attack_speed / 100 * BaseStats(self.parent):GetSpecialValueFor("base_attack_time")
+function lawbreaker_2_modifier_combo:GetAS()  
+  return MainStats(self.parent, "AGI"):GetTotalAttackSpeed() / 100 * self.parent:GetBaseAttackTime()
 end
 
 function lawbreaker_2_modifier_combo:CalcPosition(target)
@@ -142,10 +143,10 @@ function lawbreaker_2_modifier_combo:CalcPosition(target)
   local angle = VectorToAngles(direction)
   local angle_diff = AngleDiff(self.parent:GetAngles().y, angle.y)
   local distance_diff = CalcDistanceBetweenEntityOBB(target, self.parent)
-  local atk_range = self.parent:Script_GetAttackRange() - 100
+  local attack_range = self.ability:GetSpecialValueFor("attack_range") - 100
   local vDest = target:GetOrigin()
 
-  if distance_diff <= atk_range then
+  if distance_diff <= attack_range then
     if angle_diff >= -5 and angle_diff <= 5 then return end
     direction = self.parent:GetForwardVector():Normalized()
 

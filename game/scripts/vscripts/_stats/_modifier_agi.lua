@@ -75,16 +75,11 @@ function _modifier_agi:GetModifierTurnRate_Percentage()
 end
 
 function _modifier_agi:GetModifierAttackSpeedBonus_Constant()
-  if self.parent:HasModifier("ancient_1_modifier_passive") then return 0 end
-  return self:GetCalculedData("sub_stat_attack_speed", false)
+  return self:GetTotalAttackSpeed()
 end
 
-function _modifier_agi:GetModifierBaseAttackTimeConstant()
-  if self.parent:IsRangedAttacker() then
-    return self.const_base_attack_time + self:GetCalculedData("sub_stat_attack_time", false) + 0.2
-  end
-  
-  return self.const_base_attack_time + self:GetCalculedData("sub_stat_attack_time", false)
+function _modifier_agi:GetModifierBaseAttackTimeConstant()  
+  return self:GetBAT()
 end
 
 function _modifier_agi:GetModifierDodgeProjectile(keys)
@@ -99,7 +94,9 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
   local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
-  if attacker_missing or target_evasion then return 1 end
+  if attacker_missing or target_evasion then self.proj_miss_attacker = keys.attacker return 1 end
+
+  self.proj_miss_attacker = nil
 
   return 0
 end
@@ -158,6 +155,19 @@ function _modifier_agi:GetPercentMS()
   end
 
   return result
+end
+
+function _modifier_agi:GetTotalAttackSpeed()
+  if self.parent:HasModifier("ancient_1_modifier_passive") then return 0 end
+  return 100 + self:GetCalculedData("sub_stat_attack_speed", false)
+end
+
+function _modifier_agi:GetBAT()
+  if self.parent:IsRangedAttacker() then
+    return self.const_base_attack_time + self:GetCalculedData("sub_stat_attack_time", false) + 0.2
+  end
+  
+  return self.const_base_attack_time + self:GetCalculedData("sub_stat_attack_time", false)
 end
 
 function _modifier_agi:GetEvasion()

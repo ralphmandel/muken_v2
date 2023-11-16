@@ -7,8 +7,8 @@
 		"DisableWearables" "1"
 
 		//ABILITIES
-			"Ability1"						"lawbreaker_1__combo"
-			"Ability2"						"lawbreaker_2__dual"
+			"Ability1"						"lawbreaker_1__dual"
+			"Ability2"						"lawbreaker_2__combo"
 			"Ability3"						"lawbreaker_3__grenade"
 			"Ability4"						"lawbreaker_4__rain"
 			"Ability5"						"lawbreaker_5__blink"

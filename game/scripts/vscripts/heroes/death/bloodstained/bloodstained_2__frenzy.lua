@@ -5,10 +5,10 @@ LinkLuaModifier("_modifier_bleeding", "_modifiers/_modifier_bleeding", LUA_MODIF
 
 -- INIT
 
--- SPELL START
-
   function bloodstained_2__frenzy:GetIntrinsicModifierName()
     return "bloodstained_2_modifier_passive"
   end
+
+-- SPELL START
 
 -- EFFECTS

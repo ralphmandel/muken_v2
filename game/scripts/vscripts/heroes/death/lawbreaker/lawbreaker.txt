@@ -16,51 +16,61 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 	}
 
-	"lawbreaker_1__combo"
-	{ 
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"heroes/death/lawbreaker/lawbreaker_1__combo"
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityTextureName"     		"lawbreaker_combo"
-		"MaxLevel"               		"1"
-		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
-
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
-
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
-
-    "AbilityValues"
-		{
-		}
-	}
-
-	"lawbreaker_2__dual"
+	"lawbreaker_1__dual"
 	{  
 		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"heroes/death/lawbreaker/lawbreaker_2__dual"
+		"ScriptFile"            		"heroes/death/lawbreaker/lawbreaker_1__dual"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityTextureName"     		"lawbreaker_dual"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+    "AbilityValues"
+		{
+			"max_hit"			"4"
+      "lifesteal"		"1 2 3 4 5 6 7"
+      "special_attack_range"    "0"
+      "special_critical_chance" "0"
+		}
+	}
+
+  "lawbreaker_2__combo"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/lawbreaker/lawbreaker_2__combo"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"lawbreaker_combo"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCastPoint"       		"0.2"
 
     "AbilityValues"
 		{
+      "damage"            "75"
+			"speed_mult"			  "5.75"
+      "attack_range"			"700"
+      "slow_percent"	    "30"
+      "fast_reload"	      "0.5"
+      "fast_reload_delay" "0.5"
+      "min_shots"			    "6"
+      "max_shots"			    "1 2 3 4 5 6 7"
+      "special_pierce"    "0"
 		}
 	}
 
@@ -73,18 +83,29 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_RESET"
+		"AbilityCastPoint"       		"0.45"
 
     "AbilityValues"
 		{
+			"damage"			"200"
+      "radius"			"300"
+      "proj_radius"	"60"
+      "proj_speed"	"1500"
+      "delay"	      "1.5"
+      "cast_range"	"900"
+      "armor"			  "-3"
+      "miss_chance"	"20"      
+      "duration"		"1 2 3 4 5 6 7"
+      "special_stun_duration" "0"
 		}
 	}
 
@@ -97,18 +118,26 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_RESET"
+		"AbilityCastPoint"       		"0.4"
 
     "AbilityValues"
 		{
+			"damage"			"100"
+      "slow"			  "100"
+      "interval"		"0.5"
+      "delay"		    "0.5"
+      "duration"	  "6"
+      "cast_range"	"600"
+      "radius"			"1 2 3 4 5 6 7"
 		}
 	}
 
@@ -121,18 +150,14 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_OPTIONAL_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
-
-    "AbilityValues"
+		"AbilityValues"
 		{
+			"range"			    "300"
+      "restore_time"  "1 2 3 4 5 6 7"
 		}
 	}
 
@@ -145,77 +170,26 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
 		"LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"       		"0"
 
-    "AbilityValues"
+		"AbilityValues"
 		{
+			"transform_duration"  "0.35"
+			"model_scale"         "30"
+			"duration"			      "1 2 3 4 5 6 7"
 		}
 	}
 
   //RANKS
-    "lawbreaker_1__combo_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_1__combo_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_1__combo_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_1__combo_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_1__combo_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_1__combo_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_combo"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "lawbreaker_2__dual_rank_11"
+    "lawbreaker_1__dual_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
@@ -224,7 +198,16 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "lawbreaker_2__dual_rank_12"
+    "lawbreaker_1__dual_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      //"AbilityTextureName"  "lawbreaker_dual"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_1__dual_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
@@ -233,7 +216,16 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "lawbreaker_2__dual_rank_21"
+    "lawbreaker_1__dual_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      //"AbilityTextureName"  "lawbreaker_dual"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_1__dual_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
@@ -242,29 +234,65 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "lawbreaker_2__dual_rank_22"
+    "lawbreaker_1__dual_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_dual"
+      //"AbilityTextureName"  "lawbreaker_dual"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "lawbreaker_2__dual_rank_31"
+    "lawbreaker_2__combo_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_dual"
+      "AbilityTextureName"  "lawbreaker_combo"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "lawbreaker_2__dual_rank_32"
+    "lawbreaker_2__combo_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_dual"
+      //"AbilityTextureName"  "lawbreaker_combo"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_2__combo_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      "AbilityTextureName"  "lawbreaker_combo"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_2__combo_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      //"AbilityTextureName"  "lawbreaker_combo"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_2__combo_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      "AbilityTextureName"  "lawbreaker_combo"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "lawbreaker_2__combo_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
+      //"AbilityTextureName"  "lawbreaker_combo"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -282,7 +310,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_grenade"
+      //"AbilityTextureName"  "lawbreaker_grenade"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -300,7 +328,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_grenade"
+      //"AbilityTextureName"  "lawbreaker_grenade"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -318,7 +346,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_grenade"
+      //"AbilityTextureName"  "lawbreaker_grenade"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -336,7 +364,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_rain"
+      //"AbilityTextureName"  "lawbreaker_rain"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -354,7 +382,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_rain"
+      //"AbilityTextureName"  "lawbreaker_rain"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -372,7 +400,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_rain"
+      //"AbilityTextureName"  "lawbreaker_rain"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }    
@@ -390,7 +418,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_blink"
+      //"AbilityTextureName"  "lawbreaker_blink"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -408,7 +436,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_blink"
+      //"AbilityTextureName"  "lawbreaker_blink"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -426,7 +454,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_blink"
+      //"AbilityTextureName"  "lawbreaker_blink"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -444,7 +472,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_form"
+      //"AbilityTextureName"  "lawbreaker_form"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -462,7 +490,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_form"
+      //"AbilityTextureName"  "lawbreaker_form"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -480,7 +508,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/death/lawbreaker/lawbreaker-ranks_lua"
-      "AbilityTextureName"  "lawbreaker_form"
+      //"AbilityTextureName"  "lawbreaker_form"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
