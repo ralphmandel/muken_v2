@@ -34,6 +34,10 @@ function vulture_special_values:GetModifierOverrideAbilitySpecial(keys)
   --"AbilityCharges"
   --"AbilityChargeRestoreTime"
 
+	if value_name == "rot_duration" then return 1 end
+	if value_name == "rot_damage" then return 1 end
+	if value_name == "rot_stats" then return 1 end
+
 	if ability:GetAbilityName() == "vulture_1__tree" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
@@ -183,6 +187,10 @@ function vulture_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local value_level = keys.ability_special_level
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
+
+	if value_name == "rot_duration" then return 12 end
+	if value_name == "rot_damage" then return 75 end
+	if value_name == "rot_stats" then return -15 end
 
 	if ability:GetAbilityName() == "vulture_1__tree" then
 		if value_name == "AbilityManaCost" then return 100 end

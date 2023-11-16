@@ -27,7 +27,7 @@
     "LevelsBetweenUpgrades"  		"25"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
-		"AbilityBehavior"				    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"				    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
     "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_PREFER_ENEMIES"
@@ -39,6 +39,13 @@
     "AbilityValues"
 		{
       "duration"                "10"
+      "interval"                "2"
+      "radius"                  "400"
+      "damage"                  "100"
+      "stack"                   "20"
+      "rot_duration"            "0"
+      "rot_damage"              "0"
+      "rot_stats"               "0"
 		}
 	}
 
