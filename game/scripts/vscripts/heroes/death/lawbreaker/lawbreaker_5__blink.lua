@@ -2,6 +2,14 @@ lawbreaker_5__blink = class({})
 
 -- INIT
 
+  function lawbreaker_5__blink:GetBehavior()
+    if self:GetSpecialValueFor("special_cast_silence") == 1 then
+      return 137439497216
+    end
+
+    return DOTA_ABILITY_BEHAVIOR_OPTIONAL_POINT + DOTA_ABILITY_BEHAVIOR_DIRECTIONAL + DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES
+  end
+
 -- SPELL START
 
 	function lawbreaker_5__blink:OnSpellStart()
@@ -9,12 +17,25 @@ lawbreaker_5__blink = class({})
     local origin = caster:GetOrigin()
     local direction = (origin - self:GetCursorPosition()):Normalized()
     local blink_point = origin - (direction * self:GetSpecialValueFor("range"))
+    local illusion_duration = self:GetSpecialValueFor("special_illusion_duration")
 
 		ProjectileManager:ProjectileDodge(caster)
     FindClearSpaceForUnit(caster, blink_point, true)
 
     if caster:IsCommandRestricted() == false then
       caster:MoveToPosition(self:GetCursorPosition())
+    end
+
+    if illusion_duration > 0 then
+      local illu_array = CreateIllusions(caster, caster, {
+        outgoing_damage = -50,
+        incoming_damage = 400,
+        bounty_base = 0,
+        bounty_growth = 0,
+        duration = illusion_duration
+      }, 1, 64, false, true)
+
+      FindClearSpaceForUnit(illu_array[1], origin, true)
     end
 
     if IsServer() then self:PlayEfxBlink(origin, caster:GetOrigin()) end

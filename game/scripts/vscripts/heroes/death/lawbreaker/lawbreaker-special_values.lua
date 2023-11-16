@@ -99,6 +99,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "lawbreaker_3__grenade" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
 		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("lawbreaker_3__grenade_rank_11") then
@@ -161,12 +162,14 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "restore_time" then return 1 end
 
 		if caster:FindAbilityByName("lawbreaker_5__blink_rank_11") then
+      if value_name == "special_cast_silence" then return 1 end
 		end
 
     if caster:FindAbilityByName("lawbreaker_5__blink_rank_12") then
 		end
 
 		if caster:FindAbilityByName("lawbreaker_5__blink_rank_21") then
+      if value_name == "special_illusion_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("lawbreaker_5__blink_rank_22") then
@@ -265,8 +268,8 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     if value_name == "special_stun_duration" then return 1 end
     if value_name == "miss_chance" then return 40 end
-    if value_name == "damage" then return 350 end
-    if value_name == "delay" then return 1 end
+    if value_name == "damage" then return 400 end
+    if value_name == "delay" then return 0.7 end
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_4__rain" then
@@ -276,7 +279,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "radius" then return 360 + (value_level * 15) end
 
-    if value_name == "cast_range" then return -1 end
+    if value_name == "cast_range" then return 0 end
     if value_name == "duration" then return 9 end
     if value_name == "damage" then return 150 end
 	end
@@ -285,10 +288,20 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 150 end
     if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("range") end
-    if value_name == "AbilityCharges" then return 3 end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("lawbreaker_5__blink_rank_31") then
+        return 6
+      end
+      return 3
+    end
+
     if value_name == "AbilityChargeRestoreTime" then return ability:GetSpecialValueFor("restore_time") end
     
 		if value_name == "restore_time" then return 15 - (value_level * 0.5) end
+
+    if value_name == "special_cast_silence" then return 1 end
+    if value_name == "special_illusion_duration" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_u__form" then
