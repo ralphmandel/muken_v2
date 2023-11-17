@@ -90,7 +90,10 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 
-  if keys.attacker:HasModifier("ancient_3_modifier_passive") then return 0 end
+  if keys.attacker:HasModifier("ancient_3_modifier_passive")
+  or self.parent:HasModifier("ancient_3_modifier_passive") then
+    return 0
+  end
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
   local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
@@ -113,7 +116,8 @@ function _modifier_agi:OnAttack(keys)
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 
-  if keys.attacker:HasModifier("ancient_3_modifier_passive") then
+  if keys.attacker:HasModifier("ancient_3_modifier_passive")
+  or self.parent:HasModifier("ancient_3_modifier_passive") then
     attacker_str.missing = false
     return
   end
