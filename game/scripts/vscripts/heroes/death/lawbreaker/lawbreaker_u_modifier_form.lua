@@ -11,6 +11,7 @@ function lawbreaker_u_modifier_form:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
   self.transforming = 1
+  self.interval = 0.5
 
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
@@ -25,6 +26,16 @@ function lawbreaker_u_modifier_form:OnCreated(kv)
     AddModifier(enemy, self.ability, "_modifier_break", {duration = self:GetDuration()}, false)
   end
 
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    status_resist_stack = self.ability:GetSpecialValueFor("special_status_resist")
+  }, false)
+
+  self.damageTable = {
+    victim = nil, attacker = self.caster, ability = self.ability,
+    damage = self.ability:GetSpecialValueFor("special_burn_damage") * self.interval,
+    damage_type = self.ability:GetAbilityDamageType()
+  }
+
   if IsServer() then
     self:StartIntervalThink(self.ability:GetSpecialValueFor("transform_duration"))
     self:PlayEfxStart()
@@ -35,6 +46,8 @@ function lawbreaker_u_modifier_form:OnRefresh(kv)
 end
 
 function lawbreaker_u_modifier_form:OnRemoved()
+  RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
+
   self.parent:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
   self.ability:SetActivated(true)
   self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
@@ -51,6 +64,10 @@ function lawbreaker_u_modifier_form:CheckState()
 
   if self.transforming == 1 then
 		table.insert(state, MODIFIER_STATE_STUNNED, true)
+	end
+
+  if self:GetAbility():GetSpecialValueFor("special_fly") == 1 then
+		table.insert(state, MODIFIER_STATE_FORCED_FLYING_VISION, true)
 	end
 
 	return state
@@ -92,7 +109,20 @@ end
 function lawbreaker_u_modifier_form:OnIntervalThink()
   self.transforming = 0
 
-  if IsServer() then self:StartIntervalThink(-1) end
+  if self.damageTable.damage > 0 then
+    local enemies = FindUnitsInRadius(
+      self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, -1,
+      self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
+      self.ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
+    )
+  
+    for _,enemy in pairs(enemies) do
+      self.damageTable.victim = enemy
+      ApplyDamage(self.damageTable)
+    end
+  end
+
+  if IsServer() then self:StartIntervalThink(self.interval) end
 end
 
 -- UTILS -----------------------------------------------------------

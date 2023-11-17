@@ -136,7 +136,7 @@
       if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
     else
       if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
-      CalcStatusResistance(duration, target)
+      duration = CalcStatusResistance(duration, target)
     end
     
     return duration

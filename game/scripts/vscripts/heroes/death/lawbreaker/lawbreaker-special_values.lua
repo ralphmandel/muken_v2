@@ -188,18 +188,21 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("lawbreaker_u__form_rank_11") then
+      if value_name == "special_fly" then return 1 end
 		end
 
     if caster:FindAbilityByName("lawbreaker_u__form_rank_12") then
 		end
 
 		if caster:FindAbilityByName("lawbreaker_u__form_rank_21") then
+      if value_name == "special_status_resist" then return 1 end
 		end
 
     if caster:FindAbilityByName("lawbreaker_u__form_rank_22") then
 		end
 
 		if caster:FindAbilityByName("lawbreaker_u__form_rank_31") then
+      if value_name == "special_burn_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("lawbreaker_u__form_rank_32") then
@@ -309,6 +312,10 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 60 end
 
 		if value_name == "duration" then return 17 + (value_level * 0.5) end
+
+    if value_name == "special_fly" then return 1 end
+    if value_name == "special_status_resist" then return 50 end
+    if value_name == "special_burn_damage" then return 30 end
 	end
 
 	return 0

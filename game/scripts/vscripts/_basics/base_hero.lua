@@ -135,7 +135,7 @@ require("internal/rank_system")
     for stat, bool in pairs(stats) do
       local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
       if ability_stat then
-        stats[stat] = ability_stat:GetLevel() < 30 + (caster:GetLevel() * 5) and self.stat_points > 0
+        stats[stat] = ability_stat:GetLevel() < 30 + (caster:GetLevel() * 4) and self.stat_points > 0
       end
     end
 
@@ -287,7 +287,7 @@ require("internal/rank_system")
 
     if level % 1 == 0 then
       self:ApplyStatBonusLevel()
-      self:UpdateStatPoints(5, "nil")
+      self:UpdateStatPoints(3, "nil")
     end
 
     if (level + 1) % 2 == 0 then
