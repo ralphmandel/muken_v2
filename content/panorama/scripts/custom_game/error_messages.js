@@ -4,8 +4,8 @@ let panelMsg = $.GetContextPanel().FindChildTraverse("ErrorMessages")
 let panelText;
 //let text = panelMsg.GetChild(panelMsg.GetChildCount() - 1)
 let timer;
-let interval = 5;
-let labels = ["You Can't Target This Tree", "Magic Imune Target"];
+let interval = 3;
+const labels = ["You Can't Target This Tree", "Magic Imune Target"];
 
 
 (function () {
@@ -20,7 +20,7 @@ function addErrorMessage(tabela){
       panelMsg.RemoveClass("PopOutEffect")
     }
     panelMsg.AddClass("PopOutEffect");
-    timer = $.Schedule(5, function(){
+    timer = $.Schedule(interval, function(){
       panelMsg.RemoveClass("ShowErrorMsg")
       panelMsg.AddClass("Hidden");
       panelText.DeleteAsync(0);
@@ -39,7 +39,7 @@ function addErrorMessage(tabela){
     } 
     panelMsg.AddClass("ShowErrorMsg");
     panelMsg.AddClass("PopOutEffect");
-    timer = $.Schedule(5, function(){
+    timer = $.Schedule(interval, function(){
       panelMsg.RemoveClass("ShowErrorMsg")
       panelMsg.AddClass("Hidden");
       panelText.DeleteAsync(0);

@@ -26,7 +26,7 @@ LinkLuaModifier("_modifier_stun", "_modifiers/_modifier_stun", LUA_MODIFIER_MOTI
 	function vulture_1__tree:OnAbilityPhaseStart()
 		for id, tree in pairs(self.tree_root) do
 			if tree == self:GetCursorTarget() then
-				-- self:FireGameEvent("error_message_from_server", {text = 0})
+				-- CustomGameEventManager:FireGameEvent("error_message_from_server", {text = 0})
 				CustomGameEventManager:Send_ServerToPlayer(self:GetCaster():GetPlayerOwner(), "error_message_from_server", {text = 0})
 				return false
 			end
@@ -90,8 +90,7 @@ LinkLuaModifier("_modifier_stun", "_modifiers/_modifier_stun", LUA_MODIFIER_MOTI
 				end
 
 			end
-
-			table.insert(self.tree_root, self.projectiles[id].tree)
+			table.insert(self.tree_root, self.projectiles[id].tree:entindex(), self.projectiles[id].tree)
 			ProjectileManager:DestroyLinearProjectile(id)
 			self.projectiles[id] = nil
 		end

@@ -48,6 +48,7 @@ function vulture_1_modifier_tree:OnRemoved()
     if self.tree:IsStanding() then
       self.tree:CutDown(self.caster:GetTeamNumber())
     end
+    self.ability.tree_root[self.tree:entindex()] = nil
   end
 end
 
