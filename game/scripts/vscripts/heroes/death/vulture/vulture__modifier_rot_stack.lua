@@ -10,15 +10,18 @@ function vulture__modifier_rot_stack:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if self.parent:HasModifier("vulture__modifier_rot") then self:Destroy() end
-
-  local stack = CalcStatus(kv.stack, self.caster, self.parent)
-  self.stack = math.floor(stack)
-
-  if IsServer() then
-    self:SetStackCount(self.stack)
-    self:StartIntervalThink(0.5)
+  if self.parent:HasModifier("vulture__modifier_rot") then self:Destroy() 
+  else  
+    local stack = CalcStatus(kv.stack, self.caster, self.parent)
+    self.stack = math.floor(stack)
+  
+    if IsServer() then
+      self:SetStackCount(self.stack)
+      self:StartIntervalThink(0.5)
+    end
   end
+
+ 
 end
 
 function vulture__modifier_rot_stack:OnRefresh(kv)
@@ -44,6 +47,7 @@ end
 
 function vulture__modifier_rot_stack:OnStackCountChanged(iStackCount)
   if self:GetStackCount() >= 100 then
+    print(self.ability:GetSpecialValueFor("rot_duration"))
     AddModifier(self.parent, self.ability, "vulture__modifier_rot", {duration = self.ability:GetSpecialValueFor("rot_duration")}, true)
     self:Destroy()
   end
