@@ -71,7 +71,7 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
     self.target:RespawnHero(false, false)
     self.target:SetHealth(self.target:GetMaxHealth() * self:GetSpecialValueFor("percent") * 0.01)
 
-    if self.target:HasModifier("ancient_1_modifier_passive") == false then
+    if self.target:HasModifier("ancient_3_modifier_passive") == false then
       self.target:SetMana(self.target:GetMaxMana() * self:GetSpecialValueFor("percent") * 0.01)
     end
     

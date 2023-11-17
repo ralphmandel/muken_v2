@@ -51,7 +51,7 @@ function item_rare_killer_dagger_mod_passive:OnAttack(keys)
 	if keys.attacker ~= self.parent then return end
 	if keys.target:GetTeamNumber() == self.parent:GetTeamNumber() then return end
 
-	local ancient_mod = self.parent:FindModifierByName("ancient_1_modifier_passive")
+	local ancient_mod = self.parent:FindModifierByName("ancient_3_modifier_passive")
 	if ancient_mod then
 		-- if RandomFloat(0, 100) < self.chance then
 		-- 	ancient_mod:SetMultipleHits(2)

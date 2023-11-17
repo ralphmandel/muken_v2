@@ -18,8 +18,6 @@ function _modifier_int:OnCreated(kv)
     sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
     sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
     sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
-    sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
-    sub_stat_status_resist_stack = {mult = 0, bonus = 0}
   }
 
   self:LoadData()
@@ -35,7 +33,6 @@ function _modifier_int:DeclareFunctions()
     MODIFIER_PROPERTY_MANA_BONUS,
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
-    MODIFIER_PROPERTY_STATUS_RESISTANCE,
     MODIFIER_EVENT_ON_TAKEDAMAGE
   }
 
@@ -43,7 +40,7 @@ function _modifier_int:DeclareFunctions()
 end
 
 function _modifier_int:GetModifierManaBonus()
-  if self.parent:HasModifier("ancient_1_modifier_passive") then
+  if self.parent:HasModifier("ancient_3_modifier_passive") then
     if self.parent:HasModifier("ancient_u_modifier_passive") == false then
       return 0
     else
@@ -70,10 +67,6 @@ end
 
 function _modifier_int:GetModifierMagicalResistanceBonus()
   return self:GetCalculedData("sub_stat_magic_resist", true)
-end
-
-function _modifier_int:GetModifierStatusResistance()
-  return self:GetCalculedData("sub_stat_status_resist", true)
 end
 
 function _modifier_int:OnTakeDamage(keys)
@@ -119,13 +112,6 @@ end
 
 function _modifier_int:GetDebuffAmp()
   return self:GetCalculedData("sub_stat_debuff_amp", false) * 0.01
-end
-
-function _modifier_int:GetStatusResist()
-  if self.parent:IsHero() then return self:GetCaster():GetStatusResistance() end
-  local base = self:GetCalculedData("sub_stat_status_resist", true)
-  --local total = base + ((100 - base) * self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.01)
-  return base * 0.01
 end
 
 function _modifier_int:GetCalculedDataStack(property, bScalar)

@@ -15,7 +15,9 @@ function _modifier_vit:OnCreated(kv)
     sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
     sub_stat_health_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_health_regen"), bonus = 0},
     sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
-    sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0}
+    sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0},
+    sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
+    sub_stat_status_resist_stack = {mult = 0, bonus = 0}
   }
 
   self:LoadData()
@@ -32,6 +34,7 @@ function _modifier_vit:DeclareFunctions()
     MODIFIER_PROPERTY_HEALTH_BONUS,
     MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
     MODIFIER_PROPERTY_HEAL_AMPLIFY_PERCENTAGE_TARGET,
+    MODIFIER_PROPERTY_STATUS_RESISTANCE,
     MODIFIER_EVENT_ON_HEAL_RECEIVED,
   }
 
@@ -62,6 +65,10 @@ function _modifier_vit:GetModifierHealAmplify_PercentageTarget()
   return self:GetCalculedDataStack("sub_stat_incoming_heal", false)
 end
 
+function _modifier_vit:GetModifierStatusResistance()
+  return self:GetCalculedData("sub_stat_status_resist", true)
+end
+
 function _modifier_vit:OnHealReceived(keys)
   if keys.unit ~= self.parent then return end
   if keys.inflictor == nil then return end
@@ -86,6 +93,13 @@ end
 
 function _modifier_vit:GetIncomingBuff()
   return self:GetCalculedData("sub_stat_incoming_buff", false) * 0.01
+end
+
+function _modifier_vit:GetStatusResist()
+  if self.parent:IsHero() then return self:GetCaster():GetStatusResistance() end
+  local base = self:GetCalculedData("sub_stat_status_resist", true)
+  --local total = base + ((100 - base) * self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.01)
+  return base * 0.01
 end
 
 function _modifier_vit:GetCalculedDataStack(property, bScalar)

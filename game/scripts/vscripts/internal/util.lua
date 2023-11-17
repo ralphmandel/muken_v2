@@ -143,7 +143,7 @@
   end
 
   function CalcStatusResistance(duration, target)
-    if MainStats(target, "INT") then duration = duration * (1 - MainStats(target, "INT"):GetStatusResist()) end
+    if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist()) end
     return duration
   end
 
@@ -584,7 +584,7 @@
 
     if attacker:IsHero() then
       if attacker:GetAttackCapability() == DOTA_UNIT_CAP_MELEE_ATTACK then hit = 4 else hit = 2 end
-      if attacker:HasModifier("ancient_1_modifier_passive") then hit = 6 end
+      if attacker:HasModifier("ancient_3_modifier_passive") then hit = 6 end
     end
 
     return hit

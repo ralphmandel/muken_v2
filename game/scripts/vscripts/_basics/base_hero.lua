@@ -104,9 +104,11 @@ require("internal/rank_system")
 		local level = caster:GetLevel()
 
     for stat, value in pairs(self.stat_bonus) do
-      local up = 0
-      if value % 1 ~= 0 and level % 2 == 0 then up = up + 1 end
-      if value >= 1 then up = up + math.floor(value) end
+      local up = math.floor(value)
+      local old = math.fmod(value, 1) * (level - 1)
+      local new = math.fmod(value, 1) * level
+      if math.floor(new + 0.01) - math.floor(old + 0.01) > 0 then up = up + 1 end
+
       local ability_stat = caster:FindAbilityByName("_ability_"..stat)
       if ability_stat then ability_stat:SetLevel(ability_stat:GetLevel() + up) end
     end

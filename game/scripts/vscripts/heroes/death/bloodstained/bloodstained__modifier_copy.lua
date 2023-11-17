@@ -92,7 +92,7 @@ function bloodstained__modifier_copy:GetModifierIncomingPhysicalDamageConstant(k
   if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
 
   local damage = 12.5
-  if self:GetParent():HasModifier("ancient_1_modifier_passive") then damage = 25 end
+  if self:GetParent():HasModifier("ancient_3_modifier_passive") then damage = 25 end
 
   self.barrier = self.barrier - damage
   self:SendBuffRefreshToClients()

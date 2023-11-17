@@ -148,7 +148,7 @@ end
 
 function shrine_modifier:ActiveteMP(mod)
   if mod:GetParent():GetManaPercent() > 50
-  or mod:GetParent():HasModifier("ancient_1_modifier_passive")
+  or mod:GetParent():HasModifier("ancient_3_modifier_passive")
   or mod:GetParent():HasModifier("shrine_refresh_mp_modifier") then
     Timers:CreateTimer(FrameTime(), function()
       if IsServer() then self.parent:StopSound("Shrine.Cast") end

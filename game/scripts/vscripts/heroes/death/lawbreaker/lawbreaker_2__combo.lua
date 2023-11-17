@@ -17,7 +17,17 @@ LinkLuaModifier("lawbreaker_2_modifier_combo", "heroes/death/lawbreaker/lawbreak
 
   function lawbreaker_2__combo:OnUpgrade()
     local caster = self:GetCaster()
-    caster:FindModifierByName(self:GetIntrinsicModifierName()):PlayEfxStart()
+    self:PlayEfxStart(true)
+  end
+
+  function lawbreaker_2__combo:OnOwnerDied()
+    local caster = self:GetCaster()
+    self:PlayEfxStart(false)
+  end
+
+  function lawbreaker_2__combo:OnOwnerSpawned()
+    local caster = self:GetCaster()
+    self:PlayEfxStart(true)
   end
 
 -- SPELL START
@@ -130,3 +140,15 @@ LinkLuaModifier("lawbreaker_2_modifier_combo", "heroes/death/lawbreaker/lawbreak
   end
 
 -- EFFECTS
+
+  function lawbreaker_2__combo:PlayEfxStart(bCreate)
+    if self.particle then ParticleManager:DestroyParticle(self.particle, true) end
+
+    if bCreate then
+      local caster = self:GetCaster()
+      local string = "particles/lawbreaker/shots_count/lawbreaker_shots_overhead.vpcf"
+      self.particle = ParticleManager:CreateParticle(string, PATTACH_OVERHEAD_FOLLOW, caster)
+      ParticleManager:SetParticleControl(self.particle, 1, Vector(self:GetSpecialValueFor("max_shots"), 0, 0))
+      self:AddParticle(self.particle, false, false, -1, false, false)
+    end
+  end

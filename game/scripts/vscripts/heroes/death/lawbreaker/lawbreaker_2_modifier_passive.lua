@@ -11,7 +11,7 @@ function lawbreaker_2_modifier_passive:OnCreated(kv)
   self.ability = self:GetAbility()
 
   if IsServer() then
-    self:PlayEfxStart()
+    self.ability:PlayEfxStart(true)
     self:StartIntervalThink(FrameTime())
   end
 end
@@ -37,11 +37,11 @@ function lawbreaker_2_modifier_passive:OnIntervalThink()
     AddModifier(self.caster, self.ability, "lawbreaker_2_modifier_delay_reload", {}, false)
   end
 
-  if self.particle then
+  if self.ability.particle then
     for bar = 1, self.ability:GetSpecialValueFor("max_shots") do
       local value = 1
       if bar > self.ability:GetCurrentAbilityCharges() then value = 0 end
-      ParticleManager:SetParticleControl(self.particle, bar + 1, Vector(value, 0, 0))
+      ParticleManager:SetParticleControl(self.ability.particle, bar + 1, Vector(value, 0, 0))
     end
   end
 
@@ -56,11 +56,3 @@ end
 -- UTILS -----------------------------------------------------------
 
 -- EFFECTS -----------------------------------------------------------
-
-function lawbreaker_2_modifier_passive:PlayEfxStart()
-  if self.particle then ParticleManager:DestroyParticle(self.particle, true) end
-  local string = "particles/lawbreaker/shots_count/lawbreaker_shots_overhead.vpcf"
-  self.particle = ParticleManager:CreateParticle(string, PATTACH_OVERHEAD_FOLLOW, self.parent)
-  ParticleManager:SetParticleControl(self.particle, 1, Vector(self.ability:GetSpecialValueFor("max_shots"), 0, 0))
-  self:AddParticle(self.particle, false, false, -1, false, false)
-end

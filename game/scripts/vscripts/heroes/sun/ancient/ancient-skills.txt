@@ -1,9 +1,9 @@
 "skills"
 {
-	"1" "ancient_1__smash"
-	"2" "ancient_2__leap"
-	"3" "ancient_3__roar"
-	"4" "ancient_4__walk"
-	"5" "ancient_5__flesh"
+	"1" "ancient_1__leap"
+	"2" "ancient_2__roar"
+	"3" "ancient_3__flesh"
+	"4" "ancient_4__vitality"
+	"5" "ancient_5__walk"
 	"6" "ancient_u__fissure"
 }

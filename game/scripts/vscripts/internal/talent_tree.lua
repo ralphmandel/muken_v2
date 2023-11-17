@@ -105,7 +105,7 @@ function TalentTree:OnPortraitUpdate(event)
 
     heal_power = 100 + (MainStats(entity, "INT"):GetHealPower() * 100),
     heal_amp = MainStats(entity, "VIT"):GetIncomingHeal(),
-    status_resist = MainStats(entity, "INT"):GetStatusResist() * 100,
+    status_resist = MainStats(entity, "VIT"):GetStatusResist() * 100,
     cd_reduction = entity:GetCooldownReduction() * 100,
     buff_amp = MainStats(entity, "VIT"):GetIncomingBuff() * 100
 
