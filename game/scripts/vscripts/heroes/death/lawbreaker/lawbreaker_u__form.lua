@@ -1,6 +1,5 @@
 lawbreaker_u__form = class({})
 LinkLuaModifier("lawbreaker_u_modifier_form", "heroes/death/lawbreaker/lawbreaker_u_modifier_form", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_break", "_modifiers/_modifier_break", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

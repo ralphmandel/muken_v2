@@ -50,6 +50,8 @@ function lawbreaker_3_modifier_detonate:DetonadeGrenade()
 
   for _,enemy in pairs(enemies) do
     if enemy:IsMagicImmune() == false then
+      enemy:Interrupt()
+      
       AddModifier(enemy, self.ability, "sub_stat_movespeed_percent_decrease", {
         value = 100, duration = 0.5
       }, true)

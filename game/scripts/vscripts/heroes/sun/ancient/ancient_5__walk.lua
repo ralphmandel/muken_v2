@@ -3,8 +3,6 @@ LinkLuaModifier("ancient_5_modifier_walk", "heroes/sun/ancient/ancient_5_modifie
 LinkLuaModifier("ancient_5_modifier_casting", "heroes/sun/ancient/ancient_5_modifier_casting", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_5_modifier_efx_hands", "heroes/sun/ancient/ancient_5_modifier_efx_hands", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_5_modifier_debuff", "heroes/sun/ancient/ancient_5_modifier_debuff", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_petrified", "_modifiers/_modifier_petrified", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_petrified_status_efx", "_modifiers/_modifier_petrified_status_efx", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
@@ -27,6 +25,10 @@ LinkLuaModifier("_modifier_petrified_status_efx", "_modifiers/_modifier_petrifie
   function ancient_5__walk:OnAbilityPhaseStart()
     local caster = self:GetCaster()
     local time = self:GetChannelTime()
+
+    if caster:HasModifier("ancient_2_modifier_pre") then
+      return false
+    end
 
     caster:RemoveModifierByName("ancient_5_modifier_walk")
     caster:RemoveModifierByName("ancient_5_modifier_casting")

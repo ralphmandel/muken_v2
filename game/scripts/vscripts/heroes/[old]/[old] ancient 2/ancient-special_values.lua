@@ -279,7 +279,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "ancient_u__fissure" then
-		if value_name == "AbilityManaCost" then  
+		if value_name == "AbilityManaCost" then
       local total_min_cost = caster:GetMaxMana() * ability:GetSpecialValueFor("min_cost") * 0.01
       if total_min_cost > caster:GetMana() then return total_min_cost else return caster:GetMana() end
     end

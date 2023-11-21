@@ -68,20 +68,23 @@
     "LevelsBetweenUpgrades"  		"25"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-    "AbilityCastPoint"       		"1.8"
-		"AnimationPlaybackRate"  		"1"
+		//"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+    "AbilityCastPoint"       		"0.0"
+		//"AnimationPlaybackRate"  		"1"
 
     "AbilityValues"
 		{
-      "damage"      "500"
-      "width"       "275"
-			"cast_range"  "1 2 3 4 5 6 7"
+      "cast_time"       "2.6"
+      "max_charge_time" "3"
+      "turn_rate"       "60"
+      "damage"          "500"
+      "width"           "200"
+			"cast_range"      "1 2 3 4 5 6 7"
 		}
 	}
 
@@ -168,18 +171,26 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
 		"LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastPoint"       		"0.4"
 
-    "AbilityValues"
+		"AbilityValues"
 		{
+      "min_cost"	        "60"
+      "crack_width"	      "315"
+      "cast_range_mult"	  "250"
+      "energy_gain"	      "5"
+      "energy_loss_tick"  "0.2"
+      "damage"	          "120"
+      "crack_time"	      "1 2 3 4 5 6 7"
 		}
 	}
 

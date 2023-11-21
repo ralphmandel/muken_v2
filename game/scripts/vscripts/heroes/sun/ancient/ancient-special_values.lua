@@ -160,6 +160,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_u__fissure" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "crack_time" then return 1 end
 
 		if caster:FindAbilityByName("ancient_u__fissure_rank_11") then
 		end
@@ -219,7 +220,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 24 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
-		if value_name == "cast_range" then return 750 + (value_level * 25) end
+		if value_name == "cast_range" then return 900 + (value_level * 50) end
 	end
 
 	if ability:GetAbilityName() == "ancient_3__flesh" then
@@ -243,9 +244,13 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "ancient_u__fissure" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		--if value_name == "rank" then return 9 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then
+      local total_min_cost = caster:GetMaxMana() * ability:GetSpecialValueFor("min_cost") * 0.01
+      if total_min_cost > caster:GetMana() then return total_min_cost else return caster:GetMana() end
+    end
+
+		if value_name == "AbilityCooldown" then return 0 end
+		if value_name == "crack_time" then return 3.14 + (value_level * 0.1) end
 	end
 
 	return 0

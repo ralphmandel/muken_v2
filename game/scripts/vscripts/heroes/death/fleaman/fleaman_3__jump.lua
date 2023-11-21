@@ -1,9 +1,6 @@
 fleaman_3__jump = class({})
 LinkLuaModifier("fleaman_3_modifier_jump", "heroes/death/fleaman/fleaman_3_modifier_jump", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("fleaman_3_modifier_effect", "heroes/death/fleaman/fleaman_3_modifier_effect", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA_MODIFIER_MOTION_BOTH)
-LinkLuaModifier("_modifier_silence", "_modifiers/_modifier_silence", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_root", "_modifiers/_modifier_root", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

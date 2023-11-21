@@ -54,7 +54,7 @@
 
 		"AbilityValues"
 		{
-      "sub_stat_max_mana"       "10"
+      "sub_stat_max_mana"       "15"
       "sub_stat_magical_damage" "2" //%
       "sub_stat_holy_damage"    "0.5" //%
       "sub_stat_heal_power"     "2" //%

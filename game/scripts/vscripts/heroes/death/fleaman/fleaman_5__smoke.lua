@@ -2,11 +2,6 @@ fleaman_5__smoke = class({})
 LinkLuaModifier("fleaman_5_modifier_smoke", "heroes/death/fleaman/fleaman_5_modifier_smoke", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("fleaman_5_modifier_aura_effect", "heroes/death/fleaman/fleaman_5_modifier_aura_effect", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("fleaman_5_modifier_shadow", "heroes/death/fleaman/fleaman_5_modifier_shadow", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_invisible", "_modifiers/_modifier_invisible", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_invi_level", "_modifiers/_modifier_invi_level", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_no_vision_attacker", "_modifiers/_modifier_no_vision_attacker", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_blind", "_modifiers/_modifier_blind", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_blind_stack", "_modifiers/_modifier_blind_stack", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

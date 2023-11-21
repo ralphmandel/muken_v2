@@ -3,7 +3,6 @@ LinkLuaModifier("ancient_1_modifier_charges", "heroes/sun/ancient/ancient_1_modi
 LinkLuaModifier("ancient_1_modifier_refresh", "heroes/sun/ancient/ancient_1_modifier_refresh", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_1_modifier_leap", "heroes/sun/ancient/ancient_1_modifier_leap", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_1_modifier_jump", "heroes/sun/ancient/ancient_1_modifier_jump", LUA_MODIFIER_MOTION_HORIZONTAL)
-LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA_MODIFIER_MOTION_BOTH)
 
 -- INIT
 
@@ -63,6 +62,10 @@ LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA
         end)
       end
     else
+      if caster:HasModifier("ancient_2_modifier_pre") then
+        return false
+      end
+      
       caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_5, 1)
       if IsServer() then caster:EmitSound("Hero_ElderTitan.PreAttack") end
     end
@@ -88,7 +91,7 @@ LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA
 
     if self:GetCastRange(nil, nil) > 0 then
       AddModifier(caster, self, "ancient_1_modifier_refresh", {
-        duration = self:GetAbilityChargeRestoreTime(self:GetLevel()),
+        duration = self:GetAbilityChargeRestoreTime(self:GetLevel()) * self:GetCurrentAbilityCharges(),
         stack = self:GetCurrentAbilityCharges()
       }, false)
       
