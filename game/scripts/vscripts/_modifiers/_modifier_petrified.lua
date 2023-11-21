@@ -28,6 +28,8 @@ function _modifier_petrified:OnCreated(kv)
   AddStatusEfx(self:GetAbility(), "_modifier_petrified_status_efx", self:GetCaster(), self:GetParent())
   
   local special = kv.special or 0
+  self.physical_block = kv.physical_block
+  self.magical_block = kv.magical_block
 
 	if IsServer() then self:PlayEfxStart(special) end
 end
@@ -63,14 +65,14 @@ function _modifier_petrified:GetModifierPhysical_ConstantBlock(keys)
 
   if IsServer() then self:GetParent():EmitSound("Generic.Petrified.Block") end
 
-	return keys.damage * 0.5
+	return self.physical_block
 end
 
 function _modifier_petrified:GetModifierMagical_ConstantBlock(keys)
 	if keys.damage_flags == DOTA_DAMAGE_FLAG_BYPASSES_BLOCK then return 0 end
   if IsServer() then self:GetParent():EmitSound("Generic.Petrified.Block") end
 
-	return keys.damage * 0.5
+	return self.magical_block
 end
 
 --------------------------------------------------------------------------------

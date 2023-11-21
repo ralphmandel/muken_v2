@@ -68,9 +68,17 @@ function ancient__precache:Precache(context)
   PrecacheResource("particle", "particles/econ/items/pugna/pugna_ward_golden_nether_lord/pugna_gold_ambient.vpcf", context)
   PrecacheResource("particle", "particles/ancient/ancient_aura_pulses.vpcf", context)
   PrecacheResource("particle", "particles/ancient/flesh/ancient_flesh_lvl2.vpcf", context)
+  PrecacheResource("particle", "particles/ancient/flesh/ancient_aura.vpcf", context)
+  PrecacheResource("particle", "particles/ancient/flesh/ancient_aura_effect.vpcf", context)
   PrecacheResource("particle", "particles/units/heroes/hero_magnataur/magnataur_shockwave_cast.vpcf", context)
   PrecacheResource("particle", "particles/units/heroes/hero_elder_titan/elder_titan_earth_splitter.vpcf", context)
   PrecacheResource("particle", "particles/ancient/ancient_aura_alt.vpcf", context)
   PrecacheResource("particle", "particles/ancient/ancient_back.vpcf", context)
   PrecacheResource("particle", "particles/ancient/ancient_weapon.vpcf", context)
+end
+
+ancient__jump = class ({})
+
+function ancient__jump:Spawn()
+	if self:IsTrained() == false then self:UpgradeAbility(true) end
 end

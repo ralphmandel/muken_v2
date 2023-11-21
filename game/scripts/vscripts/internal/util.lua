@@ -354,6 +354,22 @@
 		end)
   end
 
+  function PlayEfxAncientStun(target, damage, isCrit)
+    local particle_shake = "particles/osiris/poison_alt/osiris_poison_splash_shake.vpcf"
+    local effect = ParticleManager:CreateParticle(particle_shake, PATTACH_ABSORIGIN, target)
+    ParticleManager:SetParticleControl(effect, 0, target:GetOrigin())
+    ParticleManager:SetParticleControl(effect, 1, Vector(damage * 2, 0, 0))
+  
+    if isCrit == true then
+      if target:GetPlayerOwner() then
+        local particle_screen = "particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_aftershock_screen.vpcf"
+        local effect_screen = ParticleManager:CreateParticleForPlayer(particle_screen, PATTACH_WORLDORIGIN, nil, target:GetPlayerOwner())      
+      end
+  
+      if IsServer() then target:EmitSound("Ancient.Stun.Crit") end
+    end
+  end
+
   function UpdateForcedTime()
     local thinkers = Entities:FindAllByClassname("npc_dota_thinker")
   

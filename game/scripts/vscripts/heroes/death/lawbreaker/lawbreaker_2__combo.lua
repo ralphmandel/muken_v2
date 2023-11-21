@@ -144,11 +144,13 @@ LinkLuaModifier("lawbreaker_2_modifier_combo", "heroes/death/lawbreaker/lawbreak
   function lawbreaker_2__combo:PlayEfxStart(bCreate)
     if self.particle then ParticleManager:DestroyParticle(self.particle, true) end
 
-    if bCreate then
-      local caster = self:GetCaster()
+    local caster = self:GetCaster()
+    local modifier = caster:FindModifierByName(self:GetIntrinsicModifierName())
+
+    if bCreate and modifier then
       local string = "particles/lawbreaker/shots_count/lawbreaker_shots_overhead.vpcf"
       self.particle = ParticleManager:CreateParticle(string, PATTACH_OVERHEAD_FOLLOW, caster)
       ParticleManager:SetParticleControl(self.particle, 1, Vector(self:GetSpecialValueFor("max_shots"), 0, 0))
-      self:AddParticle(self.particle, false, false, -1, false, false)
+      modifier:AddParticle(self.particle, false, false, -1, false, false)
     end
   end

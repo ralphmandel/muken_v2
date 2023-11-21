@@ -21,7 +21,7 @@
 			"Ability12"						"base_hero"
 			"Ability13"						"_channel"
 			"Ability14"						"ancient__precache"
-			"Ability15"						"null"
+			"Ability15"						"ancient__jump"
 			"Ability16"						"null"
 			"Ability17"						"null"
 			"Ability18"						"null"

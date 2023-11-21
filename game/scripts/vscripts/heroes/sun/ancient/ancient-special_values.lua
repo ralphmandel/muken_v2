@@ -37,6 +37,10 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_1__leap" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
+    if value_name == "jump_distance" then return 1 end
+		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("ancient_1__leap_rank_11") then
 		end
@@ -60,6 +64,8 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_2__roar" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+		if value_name == "cast_range" then return 1 end
 
 		if caster:FindAbilityByName("ancient_2__roar_rank_11") then
 		end
@@ -106,6 +112,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_4__vitality" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("ancient_4__vitality_rank_11") then
 		end
@@ -129,6 +136,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_5__walk" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("ancient_5__walk_rank_11") then
 		end
@@ -185,38 +193,59 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "ancient_1__leap" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCharges" then return 3 end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:HasModifier("ancient_1_modifier_jump")
+      or caster:HasModifier("ancient_1_modifier_leap") then
+        return 0
+      end
+      return 6
+    end
+    
+    if value_name == "jump_distance" then
+      if caster:HasModifier("ancient_1_modifier_refresh") then
+        return 0
+      end
+      return 100 + (caster:FindAbilityByName("ancient__jump"):GetLevel() * ability:GetCurrentAbilityCharges() * 0.5)
+    end
+
+		if value_name == "radius" then return 300 + (value_level * 10) end
 	end
 
 	if ability:GetAbilityName() == "ancient_2__roar" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityCooldown" then return 24 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+
+		if value_name == "cast_range" then return 750 + (value_level * 25) end
 	end
 
 	if ability:GetAbilityName() == "ancient_3__flesh" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		--if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "ancient_4__vitality" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+
+		if value_name == "radius" then return 700 + (value_level * 50) end
 	end
 
 	if ability:GetAbilityName() == "ancient_5__walk" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityCooldown" then return 30 end
+
+		if value_name == "duration" then return 18 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "ancient_u__fissure" then
 		if value_name == "AbilityManaCost" then return 100 end
 		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 9 + (value_level * 1) end
+		--if value_name == "rank" then return 9 + (value_level * 1) end
 	end
 
 	return 0
