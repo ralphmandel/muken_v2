@@ -55,6 +55,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("ancient_1__leap_rank_31") then
+      if value_name == "damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_1__leap_rank_32") then
@@ -195,24 +196,46 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "ancient_1__leap" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCharges" then return 3 end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("ancient_1__leap_rank_11") then
+        return 4
+      end
+      if caster:FindAbilityByName("ancient_1__leap_rank_12") then
+        return 2
+      end
+
+      return 3
+    end
 
     if value_name == "AbilityChargeRestoreTime" then
       if caster:HasModifier("ancient_1_modifier_jump")
       or caster:HasModifier("ancient_1_modifier_leap") then
         return 0
       end
+      if caster:FindAbilityByName("ancient_1__leap_rank_12") then
+        return 5
+      end
+
       return 6
     end
     
     if value_name == "jump_distance" then
+      local distance = 100 + (caster:FindAbilityByName("ancient__jump"):GetLevel() * ability:GetCurrentAbilityCharges() * 0.5)
+      
       if caster:HasModifier("ancient_1_modifier_refresh") then
         return 0
       end
-      return 100 + (caster:FindAbilityByName("ancient__jump"):GetLevel() * ability:GetCurrentAbilityCharges() * 0.5)
+      if caster:FindAbilityByName("ancient_1__leap_rank_21") then
+        return distance * 1.25
+      end
+
+      return distance
     end
 
 		if value_name == "radius" then return 300 + (value_level * 10) end
+
+    if value_name == "damage" then return 175 end
 	end
 
 	if ability:GetAbilityName() == "ancient_2__roar" then

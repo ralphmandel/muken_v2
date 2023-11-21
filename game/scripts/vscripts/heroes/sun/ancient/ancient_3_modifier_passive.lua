@@ -1,6 +1,6 @@
 ancient_3_modifier_passive = class({})
 
-function ancient_3_modifier_passive:IsHidden() return false end
+function ancient_3_modifier_passive:IsHidden() return true end
 function ancient_3_modifier_passive:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------

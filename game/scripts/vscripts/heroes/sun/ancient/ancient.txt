@@ -226,7 +226,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_leap"
+      //"AbilityTextureName"  "ancient_leap"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -244,7 +244,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_leap"
+      //"AbilityTextureName"  "ancient_leap"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
