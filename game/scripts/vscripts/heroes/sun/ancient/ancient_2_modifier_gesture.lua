@@ -9,7 +9,7 @@ function ancient_2_modifier_gesture:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  self.step = 1
+  self.step = self.ability:GetSpecialValueFor("step")
 
   self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
 

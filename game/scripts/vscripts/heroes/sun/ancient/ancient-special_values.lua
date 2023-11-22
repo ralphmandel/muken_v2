@@ -69,27 +69,37 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "cast_range" then return 1 end
 
 		if caster:FindAbilityByName("ancient_2__roar_rank_11") then
+      if value_name == "turn_rate" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_2__roar_rank_12") then
+      if value_name == "step" then return 1 end
+      if value_name == "cast_time" then return 1 end
 		end
 
 		if caster:FindAbilityByName("ancient_2__roar_rank_21") then
+      if value_name == "damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_2__roar_rank_22") then
 		end
 
 		if caster:FindAbilityByName("ancient_2__roar_rank_31") then
+      if value_name == "special_debuff_duration" then return 1 end
+      if value_name == "special_disarm" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_2__roar_rank_32") then
+      if value_name == "special_debuff_duration" then return 1 end
+      if value_name == "special_armor" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "ancient_3__flesh" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "stun_duration" then return 1 end
+		if value_name == "hp_regen_percent" then return 1 end
 
 		if caster:FindAbilityByName("ancient_3__flesh_rank_11") then
 		end
@@ -244,12 +254,22 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
 		if value_name == "cast_range" then return 900 + (value_level * 50) end
+
+    if value_name == "turn_rate" then return 100 end
+    if value_name == "step" then return 3 end
+    if value_name == "cast_time" then return 1.8 end
+    if value_name == "damage" then return 650 end
+    if value_name == "special_debuff_duration" then return 7 end
+    if value_name == "special_disarm" then return 1 end
+    if value_name == "special_armor" then return -10 end
 	end
 
 	if ability:GetAbilityName() == "ancient_3__flesh" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		--if value_name == "rank" then return 6 + (value_level * 1) end
+
+    if value_name == "stun_duration" then return 0.2 + (value_level * 0.01) end
+		if value_name == "hp_regen_percent" then return 0.5 + (value_level * 0.02) end
 	end
 
 	if ability:GetAbilityName() == "ancient_4__vitality" then

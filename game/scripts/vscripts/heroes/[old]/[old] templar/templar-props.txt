@@ -8,19 +8,19 @@
 
 		//ABILITIES
 			"Ability1"						"templar_1__shield"
-			"Ability2"						"templar_2__protection"
-			"Ability3"						"templar_3__hammer"
-			"Ability4"						"templar_4__revenge"
+			"Ability2"						"templar_2__barrier"
+			"Ability3"						"templar_3__circle"
+			"Ability4"						"templar_4__hammer"
 			"Ability5"						"templar_5__reborn"
 			"Ability6"						"templar_u__praise"
-			"Ability7"						"_ability_str"
-			"Ability8"						"_ability_agi"
-			"Ability9"						"_ability_int"
-			"Ability10"						"_ability_vit"
-			"Ability11"						"cosmetics"
-			"Ability12"						"base_hero"
-			"Ability13"						"_channel"
-			"Ability14"						"templar__precache"
+			"Ability7"						"cosmetics"
+			"Ability8"						"base_hero"
+			"Ability9"						"base_stats"
+			"Ability10"						"_channel"
+			"Ability11"						"_void"
+			"Ability12"						"templar__precache"
+			"Ability13"						"null"
+			"Ability14"						"null"
 			"Ability15"						"null"
 			"Ability16"						"null"
 			"Ability17"						"null"
@@ -40,7 +40,7 @@
 			"Ability31"						"null"		
 			"Ability32"						"null"
 
-		"AttributePrimary"				"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_ALL"
 		"AttributeBaseStrength"			"0"            // Base strength
 		"AttributeStrengthGain"			"0"            // Strength bonus per level.
 		"AttributeBaseAgility"			"0"            // Base agility

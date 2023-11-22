@@ -79,12 +79,16 @@
 
     "AbilityValues"
 		{
+      "step"            "1"
       "cast_time"       "2.6"
       "max_charge_time" "3"
       "turn_rate"       "60"
       "damage"          "500"
       "width"           "200"
 			"cast_range"      "1 2 3 4 5 6 7"
+      "special_debuff_duration" "0"
+      "special_disarm"          "0"
+      "special_armor"           "0"
 		}
 	}
 
@@ -104,9 +108,9 @@
     "AbilityValues"
 		{
       "damage_percent"    "50"
-      "hp_regen_percent"  "0.5"
       "attack_time"       "0.7"
       "stun_duration"     "0.2"
+      "hp_regen_percent"  "0.5"
 		}
 	}
 
@@ -280,7 +284,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_roar"
+      //"AbilityTextureName"  "ancient_roar"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

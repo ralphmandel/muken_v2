@@ -5,10 +5,15 @@ LinkLuaModifier("_modifier_heal_amp", "_modifiers/_modifier_heal_amp", LUA_MODIF
 
 -- INIT
 
-  function templar_1__shield:OnUpgrade()
-    if self:GetLevel() == 1 then
-      self:SetCurrentAbilityCharges(CYCLE_NIGHT)
-    end
+  function templar_1__shield:Spawn()
+    Timers:CreateTimer(0.2, function()
+      if self:IsTrained() == false then
+        self:UpgradeAbility(true)
+        BaseHero(self:GetCaster()):AddManaExtra(self)
+      end
+    end)
+
+    self:SetCurrentAbilityCharges(CYCLE_NIGHT)
   end
 
   function templar_1__shield:GetAOERadius()
@@ -29,7 +34,7 @@ LinkLuaModifier("_modifier_heal_amp", "_modifiers/_modifier_heal_amp", LUA_MODIF
     if not IsServer() then return end
 
     local caster = self:GetCaster()
-    local hero_count = 0
+    local hero_count = 1
 
     for _, hero in pairs(HeroList:GetAllHeroes()) do
       if hero:GetTeamNumber() == caster:GetTeamNumber()
@@ -39,7 +44,6 @@ LinkLuaModifier("_modifier_heal_amp", "_modifiers/_modifier_heal_amp", LUA_MODIF
     end
 
     if caster:PassivesDisabled() then hero_count = 0 end
-    if hero_count > 0 then hero_count = hero_count + self:GetSpecialValueFor("base") end
 
     for _, hero in pairs(HeroList:GetAllHeroes()) do
       if hero:GetTeamNumber() == caster:GetTeamNumber() then

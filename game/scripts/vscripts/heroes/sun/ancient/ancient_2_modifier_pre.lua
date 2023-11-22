@@ -17,7 +17,7 @@ function ancient_2_modifier_pre:OnCreated(kv)
 
 	self.charge = self.ability:GetSpecialValueFor("max_charge_time")
 	self.interval = 0.03
-	self:StartIntervalThink(0.1)
+	self:StartIntervalThink(0.12)
 
 	if not IsServer() then return end
 
@@ -69,6 +69,29 @@ function ancient_2_modifier_pre:OnRemoved()
     
       if enemy then
         if IsValidEntity(enemy) then
+          local disarm = self.ability:GetSpecialValueFor("special_disarm")
+          local armor = self.ability:GetSpecialValueFor("special_armor")
+
+          if disarm == 1 then
+            AddModifier(enemy, self.ability, "_modifier_disarm", {
+              duration = self.ability:GetSpecialValueFor("special_debuff_duration")
+            }, true)
+          end
+
+          if armor < 0 then
+            local modifier = AddModifier(enemy, self.ability, "sub_stat_modifier", {
+              duration = self.ability:GetSpecialValueFor("special_debuff_duration"),
+              armor = armor
+            }, true)
+
+            if modifier then
+              modifier:AddParticle(
+                ParticleManager:CreateParticle("particles/items3_fx/star_emblem.vpcf", PATTACH_OVERHEAD_FOLLOW, enemy),
+                false, false, -1, false, false
+              )
+            end
+          end
+
           AddModifier(enemy, self.ability, "modifier_knockback", {
             center_x = self.parent:GetAbsOrigin().x + 1,
             center_y = self.parent:GetAbsOrigin().y + 1,
@@ -77,7 +100,7 @@ function ancient_2_modifier_pre:OnRemoved()
             duration = (damage_result * distance_percent) / knockback_mult,
             knockback_duration = (damage_result * distance_percent) / knockback_mult,
             knockback_distance = (damage_result * distance_percent * self.projectile_range) / (knockback_mult * 0.8)
-          }, true)          
+          }, true)
         end
       end
     end

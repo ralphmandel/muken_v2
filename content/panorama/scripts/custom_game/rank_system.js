@@ -125,7 +125,7 @@ function UpdateRankPosition() {
 function ShowRankTooltip(id, tier, path) {
   var rank_image = RANK_PANELS[tier][path].GetChild(0);
   $.DispatchEvent("DOTAShowAbilityTooltip", rank_image, rank_image.abilityname);
-  Game.EmitSound("Config.Move");
+  //Game.EmitSound("Config.Move");
 
   rank_image.SetHasClass("ShowAbility", true);
   RANK_PANELS[tier][path].SetHasClass("ShowAbilityLeft", true);
@@ -134,7 +134,7 @@ function ShowRankTooltip(id, tier, path) {
 function HideRankTooltip(id, tier, path) {
   var rank_image = RANK_PANELS[tier][path].GetChild(0);
   $.DispatchEvent("DOTAHideAbilityTooltip", rank_image);
-  Game.EmitSound("Config.Move");
+  //Game.EmitSound("Config.Move");
 
   rank_image.SetHasClass("ShowAbility", false);
   RANK_PANELS[tier][path].SetHasClass("ShowAbilityLeft", false);
