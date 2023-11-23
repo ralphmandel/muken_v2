@@ -76,8 +76,10 @@
 						"value"
 						{
 							//"value0"	"sounds/cross.vsnd"
-							"value0"	"sounds/templar_combo_1.vsnd"
-							"value1"	"sounds/templar_combo_2.vsnd"
+							"value0"	"sounds/cross_magnus_hit3.vsnd"
+							"value1"	"sounds/cross_magnus_hit4.vsnd"
+							"value1"	"sounds/cross_magnus_hit5.vsnd"
+							"value1"	"sounds/cross_magnus_hit6.vsnd"
 						}
 					}
 

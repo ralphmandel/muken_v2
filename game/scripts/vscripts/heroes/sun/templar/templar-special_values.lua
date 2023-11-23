@@ -86,6 +86,8 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "templar_3__hammer" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+		if value_name == "cast_range" then return 1 end
 
 		if caster:FindAbilityByName("templar_3__hammer_rank_11") then
 		end
@@ -109,6 +111,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "templar_4__revenge" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "revenge_chance" then return 1 end
 
 		if caster:FindAbilityByName("templar_4__revenge_rank_11") then
 		end
@@ -194,23 +197,27 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_2__protection" then
-		if value_name == "AbilityManaCost" then return 100 end
+		if value_name == "AbilityManaCost" then return 200 end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
-		if value_name == "cooldown" then return 20 + (value_level * 0.5) end
+		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
 	end
 
 	if ability:GetAbilityName() == "templar_3__hammer" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityCooldown" then return 13 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+
+		if value_name == "cast_range" then return 700 + (value_level * 50) end
 	end
 
 	if ability:GetAbilityName() == "templar_4__revenge" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 400 end
+		if value_name == "AbilityCooldown" then return 40 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+
+		if value_name == "revenge_chance" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then

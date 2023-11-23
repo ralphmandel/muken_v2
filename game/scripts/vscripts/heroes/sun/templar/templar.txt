@@ -80,18 +80,27 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NO_INVIS"
 
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"       		"0.3"
 
     "AbilityValues"
 		{
+			"proj_speed"	    "1500"
+      "bounce_range"    "500"
+      "hits"            "2"
+      "damage"          "300"
+      "interval"        "0.6"
+      "slow_start"      "75"
+      "reduction"       "20"
+      "cast_range"      "1 2 3 4 5 6 7"
 		}
 	}
 
@@ -104,18 +113,33 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"       		"0.5"
 
     "AbilityValues"
 		{
+      "cast_range"      "400"
+      "duration"        "30"
+      "stack"           "7" 
+      "chance"          "7"
+    //REVENGE
+      "delay"           "0.8"
+      "hits"            "7"
+      "damage_hit"      "25"
+      "microstun"       "0.1"
+      "stun_interval"   "0.15"
+    //CURSE
+      "curse_chance"    "7"
+      "curse_duration"  "7"
+      "revenge_chance"  "1 2 3 4 5 6 7"
 		}
 	}
 

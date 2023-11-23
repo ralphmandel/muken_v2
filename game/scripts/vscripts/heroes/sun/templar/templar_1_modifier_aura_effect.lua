@@ -9,7 +9,7 @@ function templar_1_modifier_aura_effect:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  self.day_time = self.ability:GetCurrentAbilityCharges() == CYCLE_DAY
+  --self.day_time = self.ability:GetCurrentAbilityCharges() == CYCLE_DAY
 
   if IsServer() then
     self:SetStackCount(0)
