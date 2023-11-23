@@ -13,6 +13,9 @@ function templar_4_modifier_buff:OnCreated(kv)
   if IsServer() then
     self:SetStackCount(self.ability:GetSpecialValueFor("stack"))
     self:PlayEfxStart()
+    self:PlayEfxBuff()
+    self:PlayEfxBuff()
+    self:PlayEfxBuff()
   end
 end
 
@@ -56,6 +59,18 @@ end
 -- EFFECTS -----------------------------------------------------------
 
 function templar_4_modifier_buff:PlayEfxStart()
+  local particle_shake = "particles/osiris/poison_alt/osiris_poison_splash_shake.vpcf"
+  local effect = ParticleManager:CreateParticle(particle_shake, PATTACH_ABSORIGIN, self.parent)
+  ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
+  ParticleManager:SetParticleControl(effect, 1, Vector(100, 0, 0))
+
+  if IsServer() then
+    self.parent:EmitSound("Ancient.Aura.Cast")
+    self.parent:EmitSound("Hero_Chen.HandOfGodHealHero")
+  end
+end
+
+function templar_4_modifier_buff:PlayEfxBuff()
 	local particle = "particles/econ/items/pugna/pugna_ward_golden_nether_lord/pugna_gold_ambient.vpcf"
 	local effect_caster = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN_FOLLOW, self.parent)
 	ParticleManager:SetParticleControl(effect_caster, 0, self.parent:GetOrigin())
@@ -64,8 +79,7 @@ function templar_4_modifier_buff:PlayEfxStart()
 	ParticleManager:SetParticleControl(effect_caster, 4, self.parent:GetOrigin())
 	self:AddParticle(effect_caster, false, false, -1, false, false)
 
-  if IsServer() then
-    self.parent:EmitSound("Ancient.Aura.Cast")
-    self.parent:EmitSound("Ancient.Aura.Effect")
-  end
+  local particle_pre = "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf"
+  local pfx = ParticleManager:CreateParticle(particle_pre, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+  ParticleManager:SetParticleControl(pfx, 0, self.parent:GetOrigin())
 end

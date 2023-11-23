@@ -111,6 +111,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "templar_4__revenge" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "AbilityCastRange" then return 1 end
 		if value_name == "revenge_chance" then return 1 end
 
 		if caster:FindAbilityByName("templar_4__revenge_rank_11") then
@@ -217,7 +218,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
-		if value_name == "revenge_chance" then return 6 + (value_level * 1) end
+		if value_name == "revenge_chance" then return 7 + (value_level * 0.5) end
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then
