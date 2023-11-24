@@ -1,6 +1,6 @@
 ancient_3_modifier_passive = class({})
 
-function ancient_3_modifier_passive:IsHidden() return true end
+function ancient_3_modifier_passive:IsHidden() return false end
 function ancient_3_modifier_passive:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -10,16 +10,14 @@ function ancient_3_modifier_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    attack_time = self.ability:GetSpecialValueFor("attack_time")
-  }, false)
+  if IsServer() then self:SetStackCount(0) end
 end
 
 function ancient_3_modifier_passive:OnRefresh(kv)
 end
 
 function ancient_3_modifier_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, "attack_time")
+  RemoveSubStats(self.parent, self.ability, {"attack_time"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -28,6 +26,8 @@ function ancient_3_modifier_passive:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE,
     MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+    MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+    MODIFIER_EVENT_ON_ATTACKED,
     MODIFIER_EVENT_ON_TAKEDAMAGE
 	}
 
@@ -40,6 +40,35 @@ end
 
 function ancient_3_modifier_passive:GetModifierConstantHealthRegen(keys)
   return self:GetParent():GetMaxHealth() * self:GetAbility():GetSpecialValueFor("hp_regen_percent") * 0.01
+end
+
+function ancient_3_modifier_passive:GetModifierAttackSpeedBonus_Constant()
+  if self:GetStackCount() == 0 then return 0 end
+  return 400
+end
+
+function ancient_3_modifier_passive:OnAttacked(keys)
+  if keys.target == self.parent then
+    return
+  end
+
+  if keys.attacker ~= self.parent then return end
+  if IsServer() then self:DecrementStackCount() end
+
+  if keys.attacker:PassivesDisabled() then return end
+  
+  if keys.target:IsMagicImmune() == false and self.ability:IsCooldownReady() then
+    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+
+    AddModifier(keys.target, self.ability, "_modifier_break", {
+      duration = self.ability:GetSpecialValueFor("special_break_duration")
+    }, true)
+  end
+
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_double_chance")
+  and MainStats(self.parent, "STR").has_crit == false then
+    if IsServer() then self:IncrementStackCount() end
+  end
 end
 
 function ancient_3_modifier_passive:OnTakeDamage(keys)
@@ -60,6 +89,15 @@ function ancient_3_modifier_passive:OnTakeDamage(keys)
   }, false)
 
   PlayEfxAncientStun(keys.unit, keys.damage, crit)
+end
+
+function ancient_3_modifier_passive:OnStackCountChanged(old)
+  local attack_time = self.ability:GetSpecialValueFor("attack_time")
+
+  if self:GetStackCount() > 0 then attack_time = 0 end
+
+  RemoveSubStats(self.parent, self.ability, {"attack_time"})
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_time = attack_time}, false)
 end
 
 -- UTILS -----------------------------------------------------------

@@ -102,18 +102,23 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "hp_regen_percent" then return 1 end
 
 		if caster:FindAbilityByName("ancient_3__flesh_rank_11") then
+      if value_name == "special_break_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_3__flesh_rank_12") then
 		end
 
 		if caster:FindAbilityByName("ancient_3__flesh_rank_21") then
+      if value_name == "damage_percent" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_3__flesh_rank_22") then
+      if value_name == "special_double_chance" then return 1 end
 		end
 
 		if caster:FindAbilityByName("ancient_3__flesh_rank_31") then
+      if value_name == "special_return_chance" then return 1 end
+      if value_name == "special_return_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_3__flesh_rank_32") then
@@ -266,11 +271,23 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "ancient_3__flesh" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 0 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("ancient_3__flesh_rank_11") then
+        return 15
+      end
+      return 0
+    end
 
     if value_name == "stun_duration" then return 0.2 + (value_level * 0.01) end
 		if value_name == "hp_regen_percent" then return 0.5 + (value_level * 0.02) end
-	end
+
+    if value_name == "special_break_duration" then return 3 end
+    if value_name == "damage_percent" then return 70 end
+    if value_name == "special_double_chance" then return 25 end
+    if value_name == "special_return_chance" then return 10 end
+    if value_name == "special_return_damage" then return 200 end
+  end
 
 	if ability:GetAbilityName() == "ancient_4__vitality" then
 		if value_name == "AbilityManaCost" then return 0 end
