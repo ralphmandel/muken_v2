@@ -44,7 +44,7 @@ function templar_4_modifier_buff:OnTakeDamage(keys)
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("revenge_chance") then
     AddModifier(keys.attacker, self.ability, "templar_4_modifier_revenge", {duration = 5}, false)
     if IsServer() then self:DecrementStackCount() end
   end

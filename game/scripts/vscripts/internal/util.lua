@@ -133,9 +133,9 @@
     if IsValidEntity(caster) == false or IsValidEntity(target) == false then return duration end
 
     if caster:GetTeamNumber() == target:GetTeamNumber() then
-      if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
+      duration = CalcBuffAmp(duration, target)
     else
-      if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
+      duration = CalcDebuffAmp(duration, caster)
       duration = CalcStatusResistance(duration, target)
     end
     
@@ -144,6 +144,16 @@
 
   function CalcStatusResistance(duration, target)
     if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist()) end
+    return duration
+  end
+
+  function CalcBuffAmp(duration, target)
+    if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
+    return duration
+  end
+
+  function CalcDebuffAmp(duration, caster)
+    if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
     return duration
   end
 
