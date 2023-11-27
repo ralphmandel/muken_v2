@@ -152,24 +152,30 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "ancient_5__walk" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "duration" then return 1 end
+		if value_name == "waves" then return 1 end
+		if value_name == "interval" then return 1 end
 
 		if caster:FindAbilityByName("ancient_5__walk_rank_11") then
+      if value_name == "cast_point" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_5__walk_rank_12") then
 		end
 
 		if caster:FindAbilityByName("ancient_5__walk_rank_21") then
+      if value_name == "block_physical" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_5__walk_rank_22") then
+      if value_name == "block_magical" then return 1 end
 		end
 
 		if caster:FindAbilityByName("ancient_5__walk_rank_31") then
+      if value_name == "special_petrify_chance" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_5__walk_rank_32") then
+      if value_name == "special_bkb_chance" then return 1 end
 		end
 	end
 
@@ -298,9 +304,21 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "ancient_5__walk" then
 		if value_name == "AbilityManaCost" then return 0 end
-		if value_name == "AbilityCooldown" then return 30 end
 
-		if value_name == "duration" then return 18 + (value_level * 1) end
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("ancient_5__walk_rank_12") then
+        return 15
+      end
+      return 30
+    end
+
+		if value_name == "waves" then return 12 + (value_level * 1) end
+		if value_name == "interval" then return 1.75 - (value_level * 0.05) end
+    if value_name == "cast_point" then return 1.5 end
+    if value_name == "block_physical" then return 40 end
+    if value_name == "block_magical" then return 40 end
+    if value_name == "special_petrify_chance" then return 15 end
+    if value_name == "special_bkb_chance" then return 15 end
 	end
 
 	if ability:GetAbilityName() == "ancient_u__fissure" then

@@ -49,6 +49,14 @@ end
 
 function ancient_3_modifier_passive:OnAttacked(keys)
   if keys.target == self.parent then
+    if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_return_chance") then
+      ApplyDamage({
+        damage = keys.original_damage * self.ability:GetSpecialValueFor("special_return_damage") * 0.01,
+        damage_type = DAMAGE_TYPE_PHYSICAL,
+        attacker = self.caster, victim = keys.attacker, ability = self.ability,
+        damage_flags = 31 --DOTA_DAMAGE_FLAG_REFLECTION
+      })
+    end
     return
   end
 

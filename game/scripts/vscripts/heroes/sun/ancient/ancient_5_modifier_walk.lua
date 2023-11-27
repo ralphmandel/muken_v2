@@ -14,10 +14,11 @@ function ancient_5_modifier_walk:OnCreated(kv)
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
 
-  local block = self.ability:GetSpecialValueFor("block")
+  local block_physical = self.ability:GetSpecialValueFor("block_physical")
+  local block_magical = self.ability:GetSpecialValueFor("block_magical")
 
   AddModifier(self.parent, self.ability, "_modifier_petrified", {
-    special = 1, physical_block = block, magical_block = block
+    special = 1, physical_block = block_physical, magical_block = block_magical
   }, false)
 
   AddModifier(self.parent, self.ability, "sub_stat_modifier", {
@@ -25,6 +26,7 @@ function ancient_5_modifier_walk:OnCreated(kv)
   }, false)
 
 	if IsServer() then
+    self:SetStackCount(self.ability:GetSpecialValueFor("waves"))
     self:PlayEfxStart()
     self:OnIntervalThink()
   end
@@ -69,14 +71,37 @@ function ancient_5_modifier_walk:OnIntervalThink()
 	self:ApplyDebuff()
 
 	if IsServer() then
+    self:DecrementStackCount()
 		self:PlayEfxTick()
 		self:StartIntervalThink(self.ability:GetSpecialValueFor("interval"))
 	end
 end
 
+function ancient_5_modifier_walk:OnStackCountChanged(old)
+  if self:GetStackCount() ~= old and self:GetStackCount() == 0 then self:Destroy() end
+end
+
 -- UTILS -----------------------------------------------------------
 
 function ancient_5_modifier_walk:ApplyDebuff()
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_bkb_chance") then
+    local allies = FindUnitsInRadius(
+      self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius(),
+      DOTA_UNIT_TARGET_TEAM_FRIENDLY, self.ability:GetAbilityTargetType(),
+      self.ability:GetAbilityTargetFlags(), 0, false
+    )
+  
+    for _,ally in pairs(allies) do
+      if ally ~= self.parent then
+        ally:Purge(false, true, false, true, false)
+        RemoveAllModifiersByNameAndAbility(ally, "_modifier_bkb", self.ability)
+        AddModifier(ally, self.ability, "_modifier_bkb", {
+          duration = self.ability:GetSpecialValueFor("special_duration")
+        }, true)        
+      end
+    end
+  end
+
   local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius(),
     self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
@@ -84,6 +109,13 @@ function ancient_5_modifier_walk:ApplyDebuff()
 	)
 
 	for _,enemy in pairs(enemies) do
+    if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_petrify_chance") then
+      RemoveAllModifiersByNameAndAbility(enemy, "_modifier_petrified", self.ability)
+      AddModifier(enemy, self.ability, "_modifier_petrified", {
+        duration = self.ability:GetSpecialValueFor("special_duration")
+      }, true)
+    end
+    
     AddModifier(enemy, self.ability, "ancient_5_modifier_debuff", {
       duration = self.ability:GetSpecialValueFor("debuff_duration")
     }, false)

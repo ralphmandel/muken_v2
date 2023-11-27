@@ -47,7 +47,7 @@ LinkLuaModifier("ancient_5_modifier_debuff", "heroes/sun/ancient/ancient_5_modif
     local caster = self:GetCaster()
 
     caster:RemoveModifierByName("ancient_5_modifier_casting")
-    AddModifier(caster, self, "ancient_5_modifier_walk", {duration = self:GetSpecialValueFor("duration")}, true)
+    AddModifier(caster, self, "ancient_5_modifier_walk", {}, false)
   end
 
 -- EFFECTS

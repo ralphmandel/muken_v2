@@ -28,8 +28,8 @@ function _modifier_petrified:OnCreated(kv)
   AddStatusEfx(self:GetAbility(), "_modifier_petrified_status_efx", self:GetCaster(), self:GetParent())
   
   local special = kv.special or 0
-  self.physical_block = kv.physical_block
-  self.magical_block = kv.magical_block
+  self.physical_block = kv.physical_block or 50
+  self.magical_block = kv.magical_block or 50
 
 	if IsServer() then self:PlayEfxStart(special) end
 end
