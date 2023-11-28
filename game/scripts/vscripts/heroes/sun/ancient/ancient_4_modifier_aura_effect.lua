@@ -11,20 +11,17 @@ function ancient_4_modifier_aura_effect:OnCreated(kv)
 	self.ability = self:GetAbility()
 
   AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    max_health = self.ability:GetSpecialValueFor("max_health")
+    max_health = self.ability:GetSpecialValueFor("max_health"),
+    incoming_heal = self.ability:GetSpecialValueFor("special_heal_amp"),
+    incoming_buff = self.ability:GetSpecialValueFor("special_buff_amp")
   }, false)
 end
 
 function ancient_4_modifier_aura_effect:OnRefresh(kv)
-  RemoveSubStats(self.parent, self.ability, "max_health")
-
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    max_health = self.ability:GetSpecialValueFor("max_health")
-  }, false)
 end
 
 function ancient_4_modifier_aura_effect:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"max_health"})
+  RemoveSubStats(self.parent, self.ability, {"max_health", "incoming_heal", "incoming_buff"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

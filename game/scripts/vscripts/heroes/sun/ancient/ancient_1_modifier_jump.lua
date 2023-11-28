@@ -16,20 +16,24 @@ function ancient_1_modifier_jump:OnCreated( kv )
     fix_duration = false, isStun = true, --activity = ACT_DOTA_FLAIL
   }, false)
 
-	self.arc:SetEndCallback(function(interrupted)
-		self:Destroy()	
-
-    if IsServer() then
-      self.parent:StopSound("Ancient.Jump")
-      if interrupted then
-        --self.parent:FindModifierByName(self.ability:GetIntrinsicModifierName()):SetStackCount(0)
-        return
+  if self.arc then
+    self.arc:SetEndCallback(function(interrupted)
+      self:Destroy()	
+  
+      if IsServer() then
+        self.parent:StopSound("Ancient.Jump")
+        if interrupted then
+          --self.parent:FindModifierByName(self.ability:GetIntrinsicModifierName()):SetStackCount(0)
+          return
+        end
+        if self.ability.duration >= 0.6 then self.parent:EmitSound("Ability.TossImpact") end
       end
-      if self.ability.duration >= 0.6 then self.parent:EmitSound("Ability.TossImpact") end
-    end
-
-    AddModifier(self.parent, self.ability, "ancient_1_modifier_leap", {}, false)
-	end)
+  
+      AddModifier(self.parent, self.ability, "ancient_1_modifier_leap", {}, false)
+    end)
+  else
+    self:Destroy()    
+  end
 
 	if self.ability.distance == 0 then self.ability.distance = 1 end
 	self.speed = self.ability.distance / self.ability.duration

@@ -137,6 +137,8 @@
 		{
       "max_health" "1000"
       "radius"     "1 2 3 4 5 6 7"
+      "special_heal_amp" "0"
+      "special_buff_amp" "0"
 		}
 	}
 
@@ -201,8 +203,10 @@
       "cast_range_mult"	  "250"
       "energy_gain"	      "5"
       "energy_loss_tick"  "0.2"
-      "damage"	          "120"
+      "damage"	          "125"
       "crack_time"	      "1 2 3 4 5 6 7"
+      "special_heal"              "0"
+      "special_silence_duration"  "0"
 		}
 	}
 
@@ -382,7 +386,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_vitality"
+      //"AbilityTextureName"  "ancient_vitality"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -400,7 +404,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_vitality"
+      //"AbilityTextureName"  "ancient_vitality"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -418,7 +422,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/ancient/ancient-ranks_lua"
-      "AbilityTextureName"  "ancient_vitality"
+      //"AbilityTextureName"  "ancient_vitality"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }    

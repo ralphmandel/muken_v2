@@ -70,6 +70,7 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
         enemy:Interrupt()
         FindClearSpaceForUnit(enemy, self:FindNearestPointFromLine(caster_position, caster_fw, enemy:GetAbsOrigin()), false)
         AddModifier(enemy, self, "sub_stat_movespeed_percent_decrease", {value = 100, duration = 1}, true)
+        AddModifier(enemy, self, "_modifier_silence", {duration = self:GetSpecialValueFor("special_silence_duration")}, true)
 
         ApplyDamage({
           victim = enemy, attacker = caster,

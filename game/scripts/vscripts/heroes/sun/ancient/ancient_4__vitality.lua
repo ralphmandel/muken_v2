@@ -12,6 +12,10 @@ LinkLuaModifier("ancient_4_modifier_aura_effect", "heroes/sun/ancient/ancient_4_
     return self:GetSpecialValueFor("radius")
   end
 
+  function ancient_4__vitality:OnUpgrade()
+    self:OnToggle()
+  end
+
 -- SPELL START
 
   function ancient_4__vitality:OnToggle()

@@ -26,7 +26,8 @@ end
 
 function ancient_u_modifier_passive:DeclareFunctions()
 	local funcs = {
-    MODIFIER_EVENT_ON_TAKEDAMAGE
+    MODIFIER_EVENT_ON_TAKEDAMAGE,
+    MODIFIER_EVENT_ON_DEATH
 	}
 
 	return funcs
@@ -34,6 +35,12 @@ end
 
 function ancient_u_modifier_passive:OnTakeDamage(keys)
 	if self.parent:PassivesDisabled() then return end
+
+  if keys.inflictor == self.ability and keys.unit:IsAlive() == false
+  and keys.unit:GetTeamNumber() ~= self.parent:GetTeamNumber()
+  and keys.unit:IsHero() and keys.unit:IsIllusion() == false then
+    self.parent:Heal(keys.damage * self.ability:GetSpecialValueFor("special_heal") * 0.01, self.ability)
+  end
 
   if (keys.attacker == self.parent and keys.damage_type == DAMAGE_TYPE_PHYSICAL)
   or keys.unit == self.parent then

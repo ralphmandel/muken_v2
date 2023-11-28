@@ -131,18 +131,21 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("ancient_4__vitality_rank_11") then
+      if value_name == "special_heal_amp" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_4__vitality_rank_12") then
 		end
 
 		if caster:FindAbilityByName("ancient_4__vitality_rank_21") then
+      if value_name == "special_buff_amp" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_4__vitality_rank_22") then
 		end
 
 		if caster:FindAbilityByName("ancient_4__vitality_rank_31") then
+      if value_name == "max_health" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_4__vitality_rank_32") then
@@ -185,21 +188,27 @@ function ancient_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "crack_time" then return 1 end
 
 		if caster:FindAbilityByName("ancient_u__fissure_rank_11") then
+      if value_name == "cast_range_mult" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_u__fissure_rank_12") then
 		end
 
 		if caster:FindAbilityByName("ancient_u__fissure_rank_21") then
+      if value_name == "energy_loss_tick" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_u__fissure_rank_22") then
 		end
 
 		if caster:FindAbilityByName("ancient_u__fissure_rank_31") then
+      if value_name == "damage" then return 1 end
+      if value_name == "special_heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("ancient_u__fissure_rank_32") then
+      if value_name == "min_cost" then return 1 end
+      if value_name == "special_silence_duration" then return 1 end
 		end
 	end
 
@@ -300,6 +309,9 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 0 end
 
 		if value_name == "radius" then return 700 + (value_level * 50) end
+    if value_name == "special_heal_amp" then return 10 end
+		if value_name == "special_buff_amp" then return 20 end
+		if value_name == "max_health" then return 1500 end
 	end
 
 	if ability:GetAbilityName() == "ancient_5__walk" then
@@ -329,6 +341,13 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "crack_time" then return 3.14 + (value_level * 0.1) end
+
+    if value_name == "cast_range_mult" then return 375 end
+    if value_name == "energy_loss_tick" then return 0.3 end
+    if value_name == "damage" then return 150 end
+    if value_name == "special_heal" then return 50 end
+    if value_name == "min_cost" then return 30 end
+    if value_name == "special_silence_duration" then return 5 end
 	end
 
 	return 0
