@@ -43,6 +43,8 @@ function templar_4_modifier_buff:OnTakeDamage(keys)
   if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end
+  if keys.attacker:IsOutOfGame() then return end
+  if keys.attacker:IsMagicImmune() then return end
 
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("revenge_chance") then
     AddModifier(keys.attacker, self.ability, "templar_4_modifier_revenge", {duration = 5}, false)

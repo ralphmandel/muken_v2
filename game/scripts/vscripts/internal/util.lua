@@ -142,6 +142,11 @@
     return duration
   end
 
+  function CalcDebuffAmp(duration, caster)
+    if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
+    return duration
+  end
+
   function CalcStatusResistance(duration, target)
     if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist()) end
     return duration
@@ -149,11 +154,6 @@
 
   function CalcBuffAmp(duration, target)
     if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
-    return duration
-  end
-
-  function CalcDebuffAmp(duration, caster)
-    if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
     return duration
   end
 

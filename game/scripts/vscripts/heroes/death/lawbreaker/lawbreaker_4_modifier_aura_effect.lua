@@ -15,7 +15,7 @@ function lawbreaker_4_modifier_aura_effect:OnCreated(kv)
   self.interval = self.ability:GetSpecialValueFor("interval")
 
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_decrease", {
-    value = self.ability:GetSpecialValueFor("slow")
+    value = CalcStatus(self.ability:GetSpecialValueFor("slow"), self.caster, self.parent)
   }, false)
 
   if IsServer() then self:OnIntervalThink() end

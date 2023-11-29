@@ -48,12 +48,14 @@ templar_3__hammer.hits = {}
     AddFOWViewer(caster:GetTeamNumber(), target:GetOrigin(), 150, 1, true)
     AddModifier(target, self, "templar_3_modifier_hammer", {interval = self:GetSpecialValueFor("interval") * percent}, false)
 
-    ApplyDamage({
+    local total_damage = ApplyDamage({
       victim = target, attacker = caster,
       damage = self:GetSpecialValueFor("damage") * percent,
       damage_type = self:GetAbilityDamageType(),
       ability = self
     })
+
+    caster:Heal(total_damage * self:GetSpecialValueFor("special_heal") * 0.01, self)
   end
 
   function templar_3__hammer:CreateProj(source, target, attach)

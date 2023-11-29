@@ -79,6 +79,7 @@ function templar__precache:Precache(context)
   PrecacheResource("particle", "particles/econ/items/luna/luna_lucent_ti5_gold/luna_eclipse_cast_moonfall_gold.vpcf", context)
   PrecacheResource("particle", "particles/bioshadow/bioshadow_poison_hit_shake.vpcf", context)
   PrecacheResource("particle", "particles/econ/items/luna/luna_lucent_ti5_gold/luna_eclipse_impact_notarget_moonfall_gold.vpcf", context)
-  PrecacheResource("particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf", context)
   PrecacheResource("particle", "particles/econ/items/pugna/pugna_ward_golden_nether_lord/pugna_gold_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf", context)
+  PrecacheResource("particle", "particles/templar/pillar/templar_pillar.vpcf", context)
 end

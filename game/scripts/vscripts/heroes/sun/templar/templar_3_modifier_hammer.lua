@@ -38,9 +38,14 @@ end
 function templar_3_modifier_hammer:OnStackCountChanged(old)
   if self:GetStackCount() ~= old and self:GetStackCount() == 0 then self:Destroy() return end
 
-  local slow = CalcStatus(self.ability:GetSpecialValueFor("slow_start") * 0.1 * self:GetStackCount(), self.caster, self.parent)
+  local slow = CalcStatus(self.ability:GetSpecialValueFor("slow_start"), self.caster, self.parent) * 0.1 * self:GetStackCount()
+  local as = self.ability:GetSpecialValueFor("special_as_start") * 0.1 * self:GetStackCount()
+
   RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
+  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
+  
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {value = slow}, false)
+  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = as})
 end
 
 -- UTILS -----------------------------------------------------------

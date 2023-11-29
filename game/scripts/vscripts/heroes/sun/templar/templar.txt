@@ -98,14 +98,16 @@
 
     "AbilityValues"
 		{
-			"proj_speed"	    "1500"
-      "bounce_range"    "500"
-      "hits"            "2"
-      "damage"          "300"
-      "interval"        "0.6"
-      "slow_start"      "75"
-      "reduction"       "20"
-      "cast_range"      "1 2 3 4 5 6 7"
+			"proj_speed"	  "1500"
+      "bounce_range"  "500"
+      "hits"          "2"
+      "damage"        "300"
+      "interval"      "0.6"
+      "slow_start"    "75"
+      "reduction"     "20"
+      "cast_range"    "1 2 3 4 5 6 7"
+      "special_heal"      "0"
+      "special_as_start"  "0"
 		}
 	}
 
@@ -133,17 +135,16 @@
 		{
       "cast_range"      "400"
       "duration"        "30"
-      "stack"           "7" 
+      "stack"           "7"
     //REVENGE
       "delay"           "1.2"
       "hits"            "7"
       "damage_hit"      "25"
-      "microstun"       "0.1"
-      "stun_interval"   "0.2"
-    //CURSE
-      "curse_chance"    "7"
-      "curse_duration"  "7"
+      "dmg_interval"    "0.2"
+      "blind"           "70"
       "revenge_chance"  "1 2 3 4 5 6 7"
+      "special_microstun" "0"
+      "special_autocast"  "0"
 		}
 	}
 

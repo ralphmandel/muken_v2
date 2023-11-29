@@ -95,24 +95,32 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
 		if value_name == "cast_range" then return 1 end
 
 		if caster:FindAbilityByName("templar_3__hammer_rank_11") then
+      if value_name == "damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_3__hammer_rank_12") then
+      if value_name == "special_heal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_3__hammer_rank_21") then
+      if value_name == "hits" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_3__hammer_rank_22") then
 		end
 
 		if caster:FindAbilityByName("templar_3__hammer_rank_31") then
+      if value_name == "slow_start" then return 1 end
+      if value_name == "interval" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_3__hammer_rank_32") then
+      if value_name == "special_as_start" then return -50 end
 		end
 	end
 
@@ -123,21 +131,27 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "revenge_chance" then return 1 end
 
 		if caster:FindAbilityByName("templar_4__revenge_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_4__revenge_rank_12") then
+      if value_name == "stack" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_4__revenge_rank_21") then
+      if value_name == "delay" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_4__revenge_rank_22") then
+      if value_name == "special_microstun" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_4__revenge_rank_31") then
+      if value_name == "damage_hit" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_4__revenge_rank_32") then
+      if value_name == "special_autocast" then return 1 end
 		end
 	end
 
@@ -230,17 +244,32 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
     if value_name == "cast_range" then return 750 end
-    if value_name == "special_ms" then return 150 end
+    if value_name == "special_ms" then return 100 end
     if value_name == "special_heal" then return 60 end
-    if value_name == "special_hp_cap" then return 60 end
+    if value_name == "special_hp_cap" then return 75 end
 	end
 
 	if ability:GetAbilityName() == "templar_3__hammer" then
 		if value_name == "AbilityManaCost" then return 150 end
-		if value_name == "AbilityCooldown" then return 13 end
+		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("templar_3__hammer_rank_22") then
+        return 2
+      end
+      return 1
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then return 13 end
+
 		if value_name == "cast_range" then return 700 + (value_level * 50) end
+    if value_name == "damage" then return 375 end
+    if value_name == "special_heal" then return 30 end
+    if value_name == "hits" then return 3 end
+    if value_name == "slow_start" then return 100 end
+    if value_name == "interval" then return 0.9 end
+    if value_name == "special_as_start" then return -50 end
 	end
 
 	if ability:GetAbilityName() == "templar_4__revenge" then
@@ -249,6 +278,12 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
 		if value_name == "revenge_chance" then return 7 + (value_level * 0.5) end
+    if value_name == "duration" then return 50 end
+    if value_name == "stack" then return 9 end
+    if value_name == "delay" then return 2.2 end
+    if value_name == "special_microstun" then return 0.1 end
+    if value_name == "damage_hit" then return 50 end
+    if value_name == "special_autocast" then return 7 end
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then
