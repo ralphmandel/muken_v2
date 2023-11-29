@@ -40,18 +40,22 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "res_stack" then return 1 end
 
     if caster:FindAbilityByName("templar_1__shield_rank_11") then
+      if value_name == "radius" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_1__shield_rank_12") then
 		end
 
 		if caster:FindAbilityByName("templar_1__shield_rank_21") then
+      if value_name == "base" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_1__shield_rank_22") then
+      if value_name == "special_armor" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_1__shield_rank_31") then
+      if value_name == "special_return" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_1__shield_rank_32") then
@@ -65,18 +69,22 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "cooldown" then return 1 end
 
 		if caster:FindAbilityByName("templar_2__protection_rank_11") then
+      if value_name == "cast_range" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_2__protection_rank_12") then
 		end
 
 		if caster:FindAbilityByName("templar_2__protection_rank_21") then
+      if value_name == "special_ms" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_2__protection_rank_22") then
 		end
 
 		if caster:FindAbilityByName("templar_2__protection_rank_31") then
+      if value_name == "special_heal" then return 1 end
+      if value_name == "special_hp_cap" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_2__protection_rank_32") then
@@ -164,23 +172,28 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "hp_cap" then return 1 end
 
 		if caster:FindAbilityByName("templar_u__praise_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_u__praise_rank_12") then
 		end
 
 		if caster:FindAbilityByName("templar_u__praise_rank_21") then
+      if value_name == "special_bkb" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_u__praise_rank_22") then
+      if value_name == "special_ethereal" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_u__praise_rank_31") then
+      if value_name == "heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_u__praise_rank_32") then
+      if value_name == "special_mana" then return 1 end
 		end
-	end
+  end
 
 	return 0
 end
@@ -197,7 +210,17 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
 
+    if value_name == "radius" then
+      if ability:GetCurrentAbilityCharges() == CYCLE_DAY then
+        return -1
+      end
+      return 1000
+    end
+
 		if value_name == "res_stack" then return 12 + (value_level * 0.5) end
+    if value_name == "base" then return 2 end
+    if value_name == "special_armor" then return 0.5 end
+    if value_name == "special_return" then return 20 end
 	end
 
 	if ability:GetAbilityName() == "templar_2__protection" then
@@ -206,6 +229,10 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
 		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
+    if value_name == "cast_range" then return 750 end
+    if value_name == "special_ms" then return 150 end
+    if value_name == "special_heal" then return 60 end
+    if value_name == "special_hp_cap" then return 60 end
 	end
 
 	if ability:GetAbilityName() == "templar_3__hammer" then
@@ -234,9 +261,20 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "templar_u__praise" then
 		if value_name == "AbilityManaCost" then return 950 end
-		if value_name == "AbilityCooldown" then return 120 end
+    
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("templar_u__praise_rank_12") then
+        return 100
+      end
+      return 120
+    end
 
     if value_name == "hp_cap" then return 60 + (value_level * 2.5) end
+    if value_name == "duration" then return 10 end
+    if value_name == "heal" then return 80 end
+    if value_name == "special_bkb" then return 1 end
+    if value_name == "special_ethereal" then return 1 end
+    if value_name == "special_mana" then return 30 end
 	end
 
 	return 0

@@ -24,7 +24,7 @@ end
 function templar_1_modifier_aura_effect:OnRemoved(kv)
   if IsServer() then self.parent:EmitSound("Hero_Medusa.ManaShield.Off") end
 
-	RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
+	RemoveSubStats(self.parent, self.ability, {"status_resist_stack", "armor"})
 
   self.ability:UpdateCount()
 end
@@ -35,37 +35,38 @@ function templar_1_modifier_aura_effect:OnStackCountChanged(old)
 	RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
 
   AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    status_resist_stack = self.ability:GetSpecialValueFor("res_stack") * self:GetStackCount()
+    status_resist_stack = self.ability:GetSpecialValueFor("res_stack") * self:GetStackCount(),
+    armor = self.ability:GetSpecialValueFor("special_armor") * self:GetStackCount()
   }, false)
 
   if IsServer() then self:PlayEfxStart() end
 end
 
--- function templar_1_modifier_aura_effect:DeclareFunctions()
--- 	local funcs = {
---     MODIFIER_EVENT_ON_TAKEDAMAGE
--- 	}
+function templar_1_modifier_aura_effect:DeclareFunctions()
+	local funcs = {
+    MODIFIER_EVENT_ON_TAKEDAMAGE
+	}
 
--- 	return funcs
--- end
+	return funcs
+end
 
--- function templar_1_modifier_aura_effect:OnTakeDamage(keys)
--- 	if keys.unit ~= self.parent then return end
--- 	if keys.attacker == nil then return end
--- 	if keys.attacker:IsBaseNPC() == false then return end
+function templar_1_modifier_aura_effect:OnTakeDamage(keys)
+	if keys.unit ~= self.parent then return end
+	if keys.attacker == nil then return end
+	if keys.attacker:IsBaseNPC() == false then return end
 
--- 	local return_damage = keys.damage * self.ability:GetSpecialValueFor("return_damage") * 0.01
+	local return_damage = keys.damage * self.ability:GetSpecialValueFor("special_return") * 0.01
 
--- 	if keys.damage_flags ~= 31 then
--- 		if IsServer() then keys.attacker:EmitSound("DOTA_Item.BladeMail.Damage") end
+	if keys.damage_flags ~= 31 then
+		--if IsServer() then keys.attacker:EmitSound("DOTA_Item.BladeMail.Damage") end
     
--- 		ApplyDamage({
--- 			damage = return_damage, damage_type = keys.damage_type,
--- 			attacker = self.caster, victim = keys.attacker, ability = self.ability,
--- 			damage_flags = 31 --DOTA_DAMAGE_FLAG_REFLECTION
--- 		})
--- 	end
--- end
+		ApplyDamage({
+			damage = return_damage, damage_type = keys.damage_type,
+			attacker = self.caster, victim = keys.attacker, ability = self.ability,
+			damage_flags = 31 --DOTA_DAMAGE_FLAG_REFLECTION
+		})
+	end
+end
 
 -- function templar_1_modifier_aura_effect:OnIntervalThink()
 --   if self.day_time == true then

@@ -13,6 +13,14 @@ function templar_u_modifier_praise:OnCreated(kv)
 
   AddStatusEfx(self.ability, "templar_u_modifier_praise_status_efx", self.caster, self.parent)
 
+  if self.ability:GetSpecialValueFor("special_bkb") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_bkb", {}, false)
+  end
+
+  if self.ability:GetSpecialValueFor("special_ethereal") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_ethereal", {}, false)
+  end
+
   if IsServer() then
     self:PlayEfxStart()
     self:OnIntervalThink()
@@ -23,6 +31,8 @@ function templar_u_modifier_praise:OnRefresh(kv)
 end
 
 function templar_u_modifier_praise:OnRemoved()
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bkb", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_ethereal", self.ability)
   RemoveStatusEfx(self.ability, "templar_u_modifier_praise_status_efx", self.caster, self.parent)
 end
 
@@ -46,8 +56,13 @@ function templar_u_modifier_praise:OnIntervalThink()
     local random_ally = allies[RandomInt(1, #allies)]
     random_ally:Purge(false, true, false, true, false)
     random_ally:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("heal")), self.ability)
+    IncreaseMana(random_ally, CalcHeal(self.caster, self.ability:GetSpecialValueFor("special_mana")))
 
-    interval = self.ability:GetSpecialValueFor("interval_base")
+    if GameRules:IsDaytime() then
+      interval = self.ability:GetSpecialValueFor("interval_base_day")
+    else
+      interval = self.ability:GetSpecialValueFor("interval_base_night")
+    end
 
     if IsServer() then self:StartEfxBeam(random_ally) end
   end
