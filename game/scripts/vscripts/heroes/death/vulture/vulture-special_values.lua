@@ -62,26 +62,26 @@ function vulture_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 	end
 
-	if ability:GetAbilityName() == "vulture_2__sk2" then
+	if ability:GetAbilityName() == "vulture_2__trail" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 
-		if caster:FindAbilityByName("vulture_2__sk2_rank_11") then
+		if caster:FindAbilityByName("vulture_2__trail_rank_11") then
 		end
 
-    if caster:FindAbilityByName("vulture_2__sk2_rank_12") then
+    if caster:FindAbilityByName("vulture_2__trail_rank_12") then
 		end
 
-		if caster:FindAbilityByName("vulture_2__sk2_rank_21") then
+		if caster:FindAbilityByName("vulture_2__trail_rank_21") then
 		end
 
-    if caster:FindAbilityByName("vulture_2__sk2_rank_22") then
+    if caster:FindAbilityByName("vulture_2__trail_rank_22") then
 		end
 
-		if caster:FindAbilityByName("vulture_2__sk2_rank_31") then
+		if caster:FindAbilityByName("vulture_2__trail_rank_31") then
 		end
 
-    if caster:FindAbilityByName("vulture_2__sk2_rank_32") then
+    if caster:FindAbilityByName("vulture_2__trail_rank_32") then
 		end
 	end
 
@@ -199,7 +199,7 @@ function vulture_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
-	if ability:GetAbilityName() == "vulture_2__sk2" then
+	if ability:GetAbilityName() == "vulture_2__trail" then
 		if value_name == "AbilityManaCost" then return 100 end
 		if value_name == "AbilityCooldown" then return 10 end
 		if value_name == "rank" then return 6 + (value_level * 1) end

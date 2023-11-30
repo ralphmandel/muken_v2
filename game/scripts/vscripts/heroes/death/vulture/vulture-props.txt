@@ -8,7 +8,7 @@
 
 		//ABILITIES
 			"Ability1"						"vulture_1__tree"
-			"Ability2"						"vulture_2__sk2"
+			"Ability2"						"vulture_2__trail"
 			"Ability3"						"vulture_3__sk3"
 			"Ability4"						"vulture_4__sk4"
 			"Ability5"						"vulture_5__sk5"
