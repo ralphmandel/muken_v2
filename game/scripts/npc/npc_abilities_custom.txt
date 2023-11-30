@@ -466,6 +466,7 @@
 //MOON
 #base "../vscripts/heroes/moon/icebreaker/icebreaker.txt"
 #base "../vscripts/heroes/moon/genuine/genuine.txt"
+#base "../vscripts/heroes/moon/trickster/trickster.txt"
 
 //NEUTRALS
 #base "../vscripts/_neutrals/_neutrals.txt"

@@ -1,0 +1,11 @@
+"Cosmetics"
+{
+  "models/items/pangolier/masked_swordsman_armor/masked_swordsman_armor.vmdl" "nil"
+  "models/items/pangolier/masked_swordsman_head/masked_swordsman_head.vmdl" "nil"
+  "models/items/pangolier/masked_swordsman_off_hand/masked_swordsman_off_hand.vmdl" "nil"
+  
+  "models/items/pangolier/masked_swordsman_weapon/masked_swordsman_weapon.vmdl"
+  {
+    "particles/units/heroes/hero_pangolier/pangolier_weapon_ambient.vpcf" ""
+  }
+}

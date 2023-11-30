@@ -13,6 +13,7 @@
     "npc_dota_hero_bristleback"         "1"
     "npc_dota_hero_elder_titan"         "1"
     "npc_dota_hero_batrider"            "1"
+    "npc_dota_hero_pangolier"           "1"
     
     //"npc_dota_hero_furion"              "1"
 }

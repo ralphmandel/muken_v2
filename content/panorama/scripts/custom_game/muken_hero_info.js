@@ -15,12 +15,14 @@ function OnUpdateHeroSelection() {
   if (hero == "muerta") {sound_name = "Lawbreaker"}
   if (hero == "slark") {sound_name = "Fleaman"}
   if (hero == "shadow_demon") {sound_name = "Bloodstained"}
+  if (hero == "batrider") {sound_name = "Vulture"}
 
   if (hero == "sniper") {sound_name = "Hunter"}
   if (hero == "shadow_shaman") {sound_name = "Dasdingo"}
 
   if (hero == "riki") {sound_name = "Icebreaker"}
   if (hero == "drow_ranger") {sound_name = "Genuine"}
+  if (hero == "pangolier") {sound_name = "Trickster"}
 
   if (hero == "elder_titan") {sound_name = "Ancient"}
   if (hero == "dawnbreaker") {sound_name = "Paladin"}

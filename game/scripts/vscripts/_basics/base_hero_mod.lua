@@ -72,7 +72,7 @@ function base_hero_mod:OnAttack(keys)
 	if IsServer() then self.parent:EmitSound(self.attack_sound) end
 end
 
-function base_hero_mod:OnAttackLanded(keys)
+function base_hero_mod:OnAttackLanded(keys)  
 	if keys.attacker ~= self.parent then return end
 	if IsServer() then keys.target:EmitSound(self.attack_landed_sound) end
 end
@@ -186,6 +186,7 @@ function base_hero_mod:LoadSounds()
 	if self.hero_name == "ancient" then self.attack_landed_sound = "Hero_ElderTitan.Attack" end
 	if self.hero_name == "hunter" then self.attack_landed_sound = "Hero_Sniper.MKG_impact" end
 	if self.hero_name == "templar" then self.attack_landed_sound = "Hero_Omniknight.Attack" end
+	if self.hero_name == "trickster" then self.attack_landed_sound = "Trickster.Hit" end
 
 	-- if self.hero_name == "krieger" then self.attack_landed_sound = "krieger.Attack" end
 end

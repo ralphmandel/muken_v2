@@ -1,0 +1,481 @@
+// Dota Ability trickster
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+  "trickster__precache"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+    "AbilityTextureName"    		"trickster__precache"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"99"
+		"RequiredLevel"         	 	"-200"
+
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"trickster_1__double"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_1__double"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"trickster_double"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+		{
+      "chance"  "1 2 3 4 5 6 7"
+		}
+	}
+
+	"trickster_2__dodge"
+	{  
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_2__dodge"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"trickster_dodge"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"trickster_3__hide"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_3__hide"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"trickster_hide"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"trickster_4__heart"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_4__heart"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"trickster_heart"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"trickster_5__teleport"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_5__teleport"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"trickster_teleport"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"25"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+	"trickster_u__autocast"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/moon/trickster/trickster_u__autocast"
+		"AbilityTextureName"     		"trickster_autocast"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"8"
+		"LevelsBetweenUpgrades"  		"25"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+	}
+
+  //RANKS
+    "trickster_1__double_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_1__double_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_1__double_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_1__double_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_1__double_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_1__double_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_double"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_2__dodge_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_dodge"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_3__hide_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_hide"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_4__heart_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_heart"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }    
+
+    "trickster_5__teleport_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_5__teleport_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_5__teleport_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_5__teleport_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_5__teleport_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_5__teleport_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_teleport"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "trickster_u__autocast_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
+      "AbilityTextureName"  "trickster_autocast"
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+}

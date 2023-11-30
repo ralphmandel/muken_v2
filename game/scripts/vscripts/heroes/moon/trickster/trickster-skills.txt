@@ -1,0 +1,9 @@
+"skills"
+{
+	"1" "trickster_1__double"
+	"2" "trickster_2__dodge"
+	"3" "trickster_3__hide"
+	"4" "trickster_4__heart"
+	"5" "trickster_5__teleport"
+	"6" "trickster_u__autocast"
+}
