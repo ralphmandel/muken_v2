@@ -162,21 +162,27 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "cooldown" then return 1 end
 
 		if caster:FindAbilityByName("templar_5__reborn_rank_11") then
+      if value_name == "special_refresh" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_5__reborn_rank_12") then
+      if value_name == "special_bkb" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_5__reborn_rank_21") then
+      if value_name == "cast_point" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_5__reborn_rank_22") then
+      if value_name == "cast_range" then return 1 end
 		end
 
 		if caster:FindAbilityByName("templar_5__reborn_rank_31") then
+      if value_name == "percent" then return 1 end
 		end
 
     if caster:FindAbilityByName("templar_5__reborn_rank_32") then
+      if value_name == "special_reborn" then return 1 end
 		end
 	end
 
@@ -289,9 +295,15 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "templar_5__reborn" then
 		if value_name == "AbilityManaCost" then return 700 end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
-		if value_name == "AbilityCastRange" then return 300 end
+		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
     
 		if value_name == "cooldown" then return 75 - (value_level * 2.5) end
+    if value_name == "special_refresh" then return 1 end
+    if value_name == "special_bkb" then return 10 end
+    if value_name == "cast_point" then return 2 end
+    if value_name == "cast_range" then return 900 end
+    if value_name == "percent" then return 75 end
+    if value_name == "special_reborn" then return 20 end
 	end
 
 	if ability:GetAbilityName() == "templar_u__praise" then

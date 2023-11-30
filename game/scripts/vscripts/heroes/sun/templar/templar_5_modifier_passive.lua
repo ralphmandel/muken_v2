@@ -22,11 +22,20 @@ end
 
 function templar_5_modifier_passive:DeclareFunctions()
 	local funcs = {
+    MODIFIER_PROPERTY_REINCARNATION,
     MODIFIER_EVENT_ON_DEATH,
     MODIFIER_EVENT_ON_RESPAWN
 	}
 
 	return funcs
+end
+
+function templar_5_modifier_passive:ReincarnateTime(keys)
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_reborn") then
+    return 5
+  end
+
+  return 0
 end
 
 function templar_5_modifier_passive:OnDeath(keys)

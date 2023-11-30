@@ -3,6 +3,10 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
 
 -- INIT
 
+  function templar_5__reborn:GetCastPoint()
+    return self:GetSpecialValueFor("cast_point")
+  end
+
   function templar_5__reborn:GetIntrinsicModifierName()
     return "templar_5_modifier_passive"
   end
@@ -74,6 +78,17 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
     if self.target:HasModifier("ancient_3_modifier_passive") == false then
       self.target:SetMana(self.target:GetMaxMana() * self:GetSpecialValueFor("percent") * 0.01)
     end
+
+    if self:GetSpecialValueFor("special_refresh") == 1 then
+      for i = 0, 6, 1 do
+        local ability = self.target:GetAbilityByIndex(i)
+        if ability then ability:EndCooldown() end
+      end
+    end
+
+    AddModifier(self.target, self, "_modifier_bkb", {
+      duration = self:GetSpecialValueFor("special_bkb")
+    }, true)
     
     FindClearSpaceForUnit(self.target, self:GetCursorPosition(), false)
 
