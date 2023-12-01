@@ -85,6 +85,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "trickster_3__hide" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("trickster_3__hide_rank_11") then
 		end
@@ -198,9 +199,9 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_3__hide" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 275 end
+		if value_name == "AbilityCooldown" then return 18 end
+		if value_name == "duration" then return 6 + (value_level * 0.25) end
 	end
 
 	if ability:GetAbilityName() == "trickster_4__heart" then
