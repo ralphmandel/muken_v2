@@ -177,7 +177,11 @@ function _modifier_agi:GetBAT()
 end
 
 function _modifier_agi:GetEvasion()
-  return self:GetCalculedData("sub_stat_evasion", true)
+  local evasion = self:GetCalculedData("sub_stat_evasion", true)
+  if evasion < 0 then evasion = 0 end
+  if evasion > 100 then evasion = 100 end
+
+  return evasion
 end
 
 function _modifier_agi:UpdateMS(property)

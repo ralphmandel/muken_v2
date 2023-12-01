@@ -56,7 +56,7 @@ function _modifier_str:GetModifierSpellAmplify_Percentage(keys)
   if keys.damage_flags == 31 then return 0 end
   if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
 
-  return self:GetCalculedDataStack("sub_stat_physical_damage", false)
+  return self:GetCalculedData("sub_stat_physical_damage", false)
 end
 
 function _modifier_str:GetModifierPhysicalArmorBonus()
@@ -122,12 +122,16 @@ function _modifier_str:GetMissChance()
 end
 
 function _modifier_str:GetPhysicalDamageAmp()
-  return self:GetCalculedDataStack("sub_stat_physical_damage", false) + 100
+  return self:GetCalculedData("sub_stat_physical_damage", false) + 100
 end
 
 function _modifier_str:GetCriticalChance()
-  if self.force_crit_chance then return self.force_crit_chance end
-  return self:GetCalculedData("sub_stat_critical_chance", true)
+  local chance = self:GetCalculedDataStack("sub_stat_critical_chance", true)
+  if self.force_crit_chance then chance = self.force_crit_chance end
+  if chance < 0 then chance = 0 end
+  if chance > 100 then chance = 100 end
+
+  return chance
 end
 
 function _modifier_str:GetCriticalDamage()

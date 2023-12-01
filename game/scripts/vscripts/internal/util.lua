@@ -169,6 +169,10 @@
     return target:AddNewModifier(caster, ability, modifier_name, table)
   end
 
+  function AddSubStats(target, ability, table, bCalcStatus)
+    AddModifier(target, ability, "sub_stat_modifier", table, bCalcStatus)
+  end
+
   function RemoveSubStats(target, ability, list)
     local mod = target:FindAllModifiersByName("sub_stat_modifier")
     for _,modifier in pairs(mod) do

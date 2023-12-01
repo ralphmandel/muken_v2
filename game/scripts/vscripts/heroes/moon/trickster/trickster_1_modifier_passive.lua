@@ -9,10 +9,8 @@ function trickster_1_modifier_passive:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  self.doubled = false
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = 150}, false)
 
-  self.time = GameRules:GetGameTime()
+  --self.time = GameRules:GetGameTime()
 end
 
 function trickster_1_modifier_passive:OnRefresh(kv)
@@ -25,38 +23,52 @@ end
 
 function trickster_1_modifier_passive:DeclareFunctions()
 	local funcs = {
-		MODIFIER_EVENT_ON_ATTACK_LANDED
+		MODIFIER_EVENT_ON_ATTACK_START
 	}
 
 	return funcs
 end
 
-function trickster_1_modifier_passive:OnAttackLanded(keys)
+function trickster_1_modifier_passive:OnAttackStart(keys)
+  --print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
+  --self.time = GameRules:GetGameTime()
   if keys.attacker ~= self.parent then return end
-  print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
-  self.time = GameRules:GetGameTime()
-  if self.doubled == true then self.doubled = false return end
+  if self.parent:PassivesDisabled() then return end
+  if not IsServer() then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
-    Timers:CreateTimer(0.2, function()
-      self.parent:AttackNoEarlierThan((1 / (self.parent:GetAttacksPerSecond() + 0.5)) - 0.1, 1)
-      self.doubled = true
-      -- self.parent:FadeGesture(ACT_DOTA_ATTACK)
-      -- self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK, 6)
+  if RandomFloat(0, 100) < 30 then
+    local speed = self.parent:GetAttacksPerSecond()
+    self.parent:AttackNoEarlierThan((1 / speed) + 0.2, 20)
+    self.parent:FadeGesture(ACT_DOTA_ATTACK)
+    self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, speed)
 
-      if self.parent:IsAlive() and self.parent:IsStunned() == false and self.parent:IsHexed() == false
-      and self.parent:IsFrozen() == false and self.parent:IsOutOfGame() == false then
-        if keys.target then
-          if IsValidEntity(keys.target) then
-            if keys.target:IsAlive() then
-              MainStats(self.parent, "str"):SetForceCrit(0, nil)
-              self.parent:PerformAttack(keys.target, false, true, true, false, false, false, true)
-            end
-          end
-        end
-      end
+    Timers:CreateTimer((1 / speed), function()
+      self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    end)
+  
+    Timers:CreateTimer((1 / speed) * 0.25, function()
+      self:PerformHit(keys.target)
+    end)
+
+    Timers:CreateTimer((1 / speed) * 0.39, function()
+      self:PerformHit(keys.target)
     end)
   end
+end
+
+function trickster_1_modifier_passive:PerformHit(target)
+  if self.parent:IsAlive() == false then return end
+  if self.parent:IsStunned() then return end
+  if self.parent:IsHexed() then return end
+  if self.parent:IsFrozen() then return end
+  if self.parent:IsOutOfGame() then return end
+  if target == nil then return end
+  if IsValidEntity(target) == false then return end
+  if target:IsAlive() == false then return end
+
+  MainStats(self.parent, "str"):SetForceCrit(0, nil)
+  self.parent:PerformAttack(target, false, true, true, false, false, false, true)
 end
 
 -- UTILS -----------------------------------------------------------

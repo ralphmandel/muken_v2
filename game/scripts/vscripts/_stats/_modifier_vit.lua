@@ -99,6 +99,9 @@ function _modifier_vit:GetStatusResist()
   if self.parent:IsHero() then return self:GetCaster():GetStatusResistance() end
   local base = self:GetCalculedData("sub_stat_status_resist", true)
   --local total = base + ((100 - base) * self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.01)
+  if base < 0 then base = 0 end
+  if base > 100 then base = 100 end
+  
   return base * 0.01
 end
 
