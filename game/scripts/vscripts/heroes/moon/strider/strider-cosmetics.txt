@@ -1,0 +1,23 @@
+"Cosmetics"
+{
+    "models/items/juggernaut/jugg_year_beast_slayer_head/jugg_year_beast_slayer_head.vmdl"
+    {
+      "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_head_ambient.vpcf" ""
+    }
+    "models/items/juggernaut/jugg_year_beast_slayer_back/jugg_year_beast_slayer_back.vmdl"
+    {
+      "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_back_ambient.vpcf" ""
+    }
+    "models/items/juggernaut/jugg_year_beast_slayer_arms/jugg_year_beast_slayer_arms.vmdl"
+    {
+      "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_arms_ambient.vpcf" ""
+    }
+    "models/items/juggernaut/jugg_year_beast_slayer_legs/jugg_year_beast_slayer_legs.vmdl"
+    {
+      "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_legs_ambient.vpcf" ""
+    }
+    "models/items/juggernaut/generic_wep_jadesword.vmdl"
+    {
+      "particles/econ/items/juggernaut/jugg_sword_jade/jugg_weapon_glow_variation_jade.vpcf" ""
+    }
+}

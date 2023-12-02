@@ -187,6 +187,8 @@ function base_hero_mod:LoadSounds()
 	if self.hero_name == "hunter" then self.attack_landed_sound = "Hero_Sniper.MKG_impact" end
 	if self.hero_name == "templar" then self.attack_landed_sound = "Hero_Omniknight.Attack" end
 	if self.hero_name == "trickster" then self.attack_landed_sound = "Trickster.Hit" end
+	if self.hero_name == "strider" then self.attack_landed_sound = "Hero_Juggernaut.Attack" end
+	
 
 	-- if self.hero_name == "krieger" then self.attack_landed_sound = "krieger.Attack" end
 end

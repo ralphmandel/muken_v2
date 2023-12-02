@@ -81,3 +81,4 @@
 #base "../vscripts/heroes/moon/icebreaker/icebreaker-props.txt"
 #base "../vscripts/heroes/moon/genuine/genuine-props.txt"
 #base "../vscripts/heroes/moon/trickster/trickster-props.txt"
+#base "../vscripts/heroes/moon/strider/strider-props.txt"
