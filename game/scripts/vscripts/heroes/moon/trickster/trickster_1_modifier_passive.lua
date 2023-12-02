@@ -36,9 +36,9 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
   if self.parent:PassivesDisabled() then return end
   if not IsServer() then return end
 
-  if RandomFloat(0, 100) < 30 then
+  if self:HasHit(keys.target) == true and RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
     local speed = self.parent:GetAttacksPerSecond()
-    self.parent:AttackNoEarlierThan((1 / speed) + 0.2, 20)
+    self.parent:AttackNoEarlierThan((1 / speed) + 0.12, 20)
     self.parent:FadeGesture(ACT_DOTA_ATTACK)
     self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
     self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, speed)
@@ -57,6 +57,20 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
   end
 end
 
+-- UTILS -----------------------------------------------------------
+
+function trickster_1_modifier_passive:HasHit(target)
+  local attacker_missing = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetMissChance()
+  local target_evasion = false
+
+  if MainStats(target, "AGI") then
+    local crit = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetCriticalChance()
+    target_evasion = (crit == false and RandomFloat(0, 100) < MainStats(target, "AGI"):GetEvasion())
+  end
+
+  return (attacker_missing == false and target_evasion == false)
+end
+
 function trickster_1_modifier_passive:PerformHit(target)
   if self.parent:IsAlive() == false then return end
   if self.parent:IsStunned() then return end
@@ -67,10 +81,8 @@ function trickster_1_modifier_passive:PerformHit(target)
   if IsValidEntity(target) == false then return end
   if target:IsAlive() == false then return end
 
-  MainStats(self.parent, "str"):SetForceCrit(0, nil)
+  MainStats(self.parent, "STR"):SetForceCrit(0, nil)
   self.parent:PerformAttack(target, false, true, true, false, false, false, true)
 end
-
--- UTILS -----------------------------------------------------------
 
 -- EFFECTS -----------------------------------------------------------
