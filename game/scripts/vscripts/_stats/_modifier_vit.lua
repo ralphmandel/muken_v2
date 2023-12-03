@@ -17,7 +17,8 @@ function _modifier_vit:OnCreated(kv)
     sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
     sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0},
     sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
-    sub_stat_status_resist_stack = {mult = 0, bonus = 0}
+    sub_stat_status_resist_stack = {mult = 0, bonus = 0},
+    sub_stat_max_health_percent = {mult = 0, bonus = 0}
   }
 
   self:LoadData()
@@ -43,7 +44,7 @@ end
 
 function _modifier_vit:GetModifierExtraHealthBonus()
   if self:GetParent():IsHero() == false then
-    return self:GetCalculedData("sub_stat_max_health", false)
+    return self:GetBonusHP()
   end
 
   return 0
@@ -51,7 +52,7 @@ end
 
 function _modifier_vit:GetModifierHealthBonus()
   if self:GetParent():IsHero() then
-    return self:GetCalculedData("sub_stat_max_health", false)
+    return self:GetBonusHP()
   end
 
   return 0
@@ -85,6 +86,22 @@ end
 
 function _modifier_vit:GetData(property)
   return self.data[property].bonus
+end
+
+function _modifier_vit:GetBonusHP()
+  local base_hp = 5000
+  local bonus_hp = self:GetCalculedData("sub_stat_max_health", false)
+  local hp_percent = self:GetCalculedData("sub_stat_max_health_percent", false)
+  if hp_percent < -90 then hp_percent = -90 end
+
+  if self.parent:IsHero() == false then base_hp = self.parent:GetBaseMaxHealth() end
+
+  local total = bonus_hp + ((base_hp + bonus_hp) * hp_percent * 0.01)
+  if base_hp + total < 100 then total = 100 - base_hp end
+
+  print("kubo", base_hp, bonus_hp, hp_percent, total)
+
+  return total
 end
 
 function _modifier_vit:GetIncomingHeal()

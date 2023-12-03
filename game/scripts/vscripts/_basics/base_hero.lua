@@ -413,7 +413,7 @@ require("internal/rank_system")
     self.chosen_path[path] = true
 
     if path == "Path_1" then
-      self:UpdateAbilityPoints(2)
+      self:UpdateAbilityPoints(1)
     end
 
     if path == "Path_2" then
