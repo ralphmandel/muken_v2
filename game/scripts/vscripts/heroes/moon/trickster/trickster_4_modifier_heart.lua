@@ -10,7 +10,11 @@ function trickster_4_modifier_heart:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if IsServer() then self:SetStackCount(1) end
+  if IsServer() then
+    self:SetStackCount(1)
+    self:PlayEfxHeart()
+    self.parent:EmitSound("Hero_Pangolier.HeartPiercer.Creep")
+  end
 end
 
 function trickster_4_modifier_heart:OnRefresh(kv)
@@ -27,6 +31,12 @@ end
 function trickster_4_modifier_heart:OnStackCountChanged(old)
   if self:GetStackCount() > self.ability:GetSpecialValueFor("max_stack") then self:SetStackCount(old) return end
 
+  if IsServer() and self:GetStackCount() > old then
+    if self.efx then
+      ParticleManager:SetParticleControl(self.efx, 1, Vector(75 + (self:GetStackCount() * 4), 0, self:GetStackCount() + 25))
+    end
+  end
+
   RemoveSubStats(self.parent, self.ability, {"max_health_percent"})
 
   AddSubStats(self.parent, self.ability, {
@@ -38,10 +48,14 @@ end
 
 -- EFFECTS -----------------------------------------------------------
 
-function trickster_4_modifier_heart:GetEffectName()
-	return "particles/units/heroes/hero_pangolier/pangolier_heartpiercer_debuff.vpcf"
-end
+function trickster_4_modifier_heart:PlayEfxHeart()
+  if self.efx then
+    ParticleManager:DestroyParticle(self.efx, true)
+    self.efx = nil
+  end
 
-function trickster_4_modifier_heart:GetEffectAttachType()
-	return PATTACH_OVERHEAD_FOLLOW
+  local particle_cast = "particles/trickster/bloodloss/trickster_bloodloss.vpcf"
+  self.efx = ParticleManager:CreateParticle(particle_cast, PATTACH_OVERHEAD_FOLLOW, self.parent)
+  ParticleManager:SetParticleControl(self.efx, 1, Vector(75 + (self:GetStackCount() * 4), 0, self:GetStackCount() + 25))
+  self:AddParticle(self.efx, false, false, -1, true, false)
 end
