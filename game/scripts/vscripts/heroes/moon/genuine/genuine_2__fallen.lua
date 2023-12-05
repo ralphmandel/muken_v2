@@ -51,10 +51,10 @@ LinkLuaModifier("_modifier_break", "_modifiers/_modifier_break", LUA_MODIFIER_MO
 	end
 
   function genuine_2__fallen:OnProjectileThinkHandle(iProjectileHandle)
+    local caster = self:GetCaster()
     local radius = ProjectileManager:GetLinearProjectileRadius(iProjectileHandle)
     local loc = ProjectileManager:GetLinearProjectileLocation(iProjectileHandle)
     local trees = GridNav:GetAllTreesAroundPoint(loc, radius, true)
-		local caster = self:GetCaster()
 
     if trees then
       for _,tree in pairs(trees) do

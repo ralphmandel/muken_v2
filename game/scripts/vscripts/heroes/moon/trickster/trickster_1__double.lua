@@ -13,10 +13,6 @@ LinkLuaModifier("trickster_1_modifier_aspd", "heroes/moon/trickster/trickster_1_
     end)
   end
 
-  function trickster_1__double:GetAOERadius()
-		return self:GetSpecialValueFor("radius")
-	end
-
   function trickster_1__double:GetIntrinsicModifierName()
 		return "trickster_1_modifier_passive"
 	end

@@ -13,6 +13,8 @@ function trickster_1_modifier_aspd:OnCreated(kv)
   AddSubStats(self.parent, self.ability, {
     attack_speed = self.ability:GetSpecialValueFor("attack_speed")
   }, false)
+
+  if IsServer() then self:StartIntervalThink(0.1) end
 end
 
 function trickster_1_modifier_aspd:OnRefresh(kv)
@@ -27,6 +29,12 @@ function trickster_1_modifier_aspd:OnRemoved()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
+
+function trickster_1_modifier_aspd:OnIntervalThink()
+  if self.parent:IsAttacking() == false then self:Destroy() end
+
+  if IsServer() then self:StartIntervalThink(0.1) end
+end
 
 -- UTILS -----------------------------------------------------------
 
