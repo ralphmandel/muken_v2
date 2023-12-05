@@ -102,10 +102,10 @@
 		}
 	}
 
-	"strider_4__sk4"
+	"strider_4__shuriken"
 	{ 
 		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"heroes/moon/strider/strider_4__sk4"
+		"ScriptFile"            		"heroes/moon/strider/strider_4__shuriken"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityTextureName"     		"strider_shuriken"
 		"MaxLevel"               		"1"
@@ -113,16 +113,20 @@
     "LevelsBetweenUpgrades"  		"25"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
+		"AbilityCastPoint"       		"0.13"
 
     "AbilityValues"
 		{
+      "blink_range"             "600"
+      "damage"                  "20"
+      "shuriken_amount"         "20"
+      "vector_target"           "1"
 		}
 	}
 
@@ -337,7 +341,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_11"
+    "strider_4__shuriken_rank_11"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
@@ -346,7 +350,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_12"
+    "strider_4__shuriken_rank_12"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
@@ -355,7 +359,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_21"
+    "strider_4__shuriken_rank_21"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
@@ -364,7 +368,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_22"
+    "strider_4__shuriken_rank_22"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
@@ -373,7 +377,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_31"
+    "strider_4__shuriken_rank_31"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
@@ -382,7 +386,7 @@
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
 
-    "strider_4__sk4_rank_32"
+    "strider_4__shuriken_rank_32"
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"

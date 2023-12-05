@@ -10,7 +10,7 @@
 			"Ability1"						"strider_1__silence"
 			"Ability2"						"strider_2__spin"
 			"Ability3"						"strider_3__smoke"
-			"Ability4"						"strider_4__sk4"
+			"Ability4"						"strider_4__shuriken"
 			"Ability5"						"strider_5__aspd"
 			"Ability6"						"strider_u__sk6"
 			"Ability7"						"_ability_str"

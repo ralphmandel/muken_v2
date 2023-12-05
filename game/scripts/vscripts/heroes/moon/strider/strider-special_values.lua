@@ -107,26 +107,27 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 	end
 
-	if ability:GetAbilityName() == "strider_4__sk4" then
+	if ability:GetAbilityName() == "strider_4__shuriken" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "AbilityCastRange" then return 1 end
 
-		if caster:FindAbilityByName("strider_4__sk4_rank_11") then
+		if caster:FindAbilityByName("strider_4__shuriken_rank_11") then
 		end
 
-    if caster:FindAbilityByName("strider_4__sk4_rank_12") then
+    if caster:FindAbilityByName("strider_4__shuriken_rank_12") then
 		end
 
-		if caster:FindAbilityByName("strider_4__sk4_rank_21") then
+		if caster:FindAbilityByName("strider_4__shuriken_rank_21") then
 		end
 
-    if caster:FindAbilityByName("strider_4__sk4_rank_22") then
+    if caster:FindAbilityByName("strider_4__shuriken_rank_22") then
 		end
 
-		if caster:FindAbilityByName("strider_4__sk4_rank_31") then
+		if caster:FindAbilityByName("strider_4__shuriken_rank_31") then
 		end
 
-    if caster:FindAbilityByName("strider_4__sk4_rank_32") then
+    if caster:FindAbilityByName("strider_4__shuriken_rank_32") then
 		end
 	end
 
@@ -208,9 +209,10 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
-	if ability:GetAbilityName() == "strider_4__sk4" then
+	if ability:GetAbilityName() == "strider_4__shuriken" then
 		if value_name == "AbilityManaCost" then return 50 end
-		if value_name == "AbilityCooldown" then return 5 end
+		if value_name == "AbilityCooldown" then return 3 end
+		if value_name == "AbilityCastRange" then return 600 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
