@@ -2,8 +2,8 @@
 {
 	"1" "strider_1__silence"
 	"2" "strider_2__spin"
-	"3" "strider_3__sk3"
+	"3" "strider_3__smoke"
 	"4" "strider_4__sk4"
-	"5" "strider_5__sk5"
+	"5" "strider_5__aspd"
 	"6" "strider_u__sk6"
 }

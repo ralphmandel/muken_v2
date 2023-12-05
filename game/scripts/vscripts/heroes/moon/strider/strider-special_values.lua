@@ -83,26 +83,27 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 	end
 
-	if ability:GetAbilityName() == "strider_3__sk3" then
+	if ability:GetAbilityName() == "strider_3__smoke" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "AbilityCastRange" then return 1 end
 
-		if caster:FindAbilityByName("strider_3__sk3_rank_11") then
+		if caster:FindAbilityByName("strider_3__smoke_rank_11") then
 		end
 
-    if caster:FindAbilityByName("strider_3__sk3_rank_12") then
+    if caster:FindAbilityByName("strider_3__smoke_rank_12") then
 		end
 
-		if caster:FindAbilityByName("strider_3__sk3_rank_21") then
+		if caster:FindAbilityByName("strider_3__smoke_rank_21") then
 		end
 
-    if caster:FindAbilityByName("strider_3__sk3_rank_22") then
+    if caster:FindAbilityByName("strider_3__smoke_rank_22") then
 		end
 
-		if caster:FindAbilityByName("strider_3__sk3_rank_31") then
+		if caster:FindAbilityByName("strider_3__smoke_rank_31") then
 		end
 
-    if caster:FindAbilityByName("strider_3__sk3_rank_32") then
+    if caster:FindAbilityByName("strider_3__smoke_rank_32") then
 		end
 	end
 
@@ -129,26 +130,26 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 	end
 
-	if ability:GetAbilityName() == "strider_5__sk5" then
+	if ability:GetAbilityName() == "strider_5__aspd" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 
-		if caster:FindAbilityByName("strider_5__sk5_rank_11") then
+		if caster:FindAbilityByName("strider_5__aspd_rank_11") then
 		end
 
-    if caster:FindAbilityByName("strider_5__sk5_rank_12") then
+    if caster:FindAbilityByName("strider_5__aspd_rank_12") then
 		end
 
-		if caster:FindAbilityByName("strider_5__sk5_rank_21") then
+		if caster:FindAbilityByName("strider_5__aspd_rank_21") then
 		end
 
-    if caster:FindAbilityByName("strider_5__sk5_rank_22") then
+    if caster:FindAbilityByName("strider_5__aspd_rank_22") then
 		end
 
-		if caster:FindAbilityByName("strider_5__sk5_rank_31") then
+		if caster:FindAbilityByName("strider_5__aspd_rank_31") then
 		end
 
-    if caster:FindAbilityByName("strider_5__sk5_rank_32") then
+    if caster:FindAbilityByName("strider_5__aspd_rank_32") then
 		end
 	end
 
@@ -188,33 +189,34 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "strider_1__silence" then
 		--if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "AbilityCastRange" then return 700 end
+		if value_name == "AbilityCooldown" then return 12 end
+		if value_name == "AbilityCastRange" then return 600 end
 		if value_name == "AbilityHealthCost" then return 200 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "strider_2__spin" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 3 end
+		if value_name == "AbilityManaCost" then return 60 end
+		if value_name == "AbilityCooldown" then return 8 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
-	if ability:GetAbilityName() == "strider_3__sk3" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
+	if ability:GetAbilityName() == "strider_3__smoke" then
+		if value_name == "AbilityManaCost" then return 120 end
+		if value_name == "AbilityCooldown" then return 20 end
+		if value_name == "AbilityCastRange" then return 300 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "strider_4__sk4" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
+		if value_name == "AbilityManaCost" then return 50 end
+		if value_name == "AbilityCooldown" then return 5 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
-	if ability:GetAbilityName() == "strider_5__sk5" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
+	if ability:GetAbilityName() == "strider_5__aspd" then
+		if value_name == "AbilityManaCost" then return 80 end
+		if value_name == "AbilityCooldown" then return 15 end
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 

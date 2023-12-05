@@ -106,6 +106,7 @@ function base_hero_mod:LoadActivity()
 		if self.hero_name == "fleaman" then self.activity = "latch" end
 		if self.hero_name == "hunter" then self.activity = "MGC" end
 		if self.hero_name == "templar" then self.activity = "ti8_taunt" end
+		if self.hero_name == "strider" then self.activity = "ti8" end
     --if self.hero_name == "druid" then self.activity = "when_nature_attacks" end
 	end)
 end

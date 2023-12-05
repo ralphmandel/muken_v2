@@ -5,15 +5,24 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 
 -- SPELL START
 
-	-- function strider_1__silence:OnAbilityPhaseStart()
-	-- 	local caster = self:GetCaster()
-	-- 	caster:StartGestureWithPlaybackRate(ACT_DOTA_IDLE_RARE, 2)
-	-- end
+	function strider_1__silence:OnAbilityPhaseStart()
+		local caster = self:GetCaster()
+		caster:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, 1)
+		return true
+	end
+
+	function strider_1__silence:OnAbilityPhaseInterrupted()
+		local caster = self:GetCaster()
+		caster:FadeGesture(ACT_DOTA_IDLE_RARE)
+	end
 
 	function strider_1__silence:OnSpellStart()
 		local caster = self:GetCaster()
 		local self_damage = self:GetSpecialValueFor("self_damage")
 		local target = self:GetCursorTarget()
+		Timers:CreateTimer(0.7, function()
+			caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
+		end)
 		
 		-- local damageTable = {
 		-- 	victim = caster,
@@ -26,7 +35,7 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 		
 		local projectile = {
 			Target = target, Source = caster, Ability = self,
-      EffectName = "particles/econ/items/phantom_assassin/pa_ti8_immortal_head/pa_ti8_immortal_stifling_dagger.vpcf",
+      EffectName = "particles/shadowmancer/dagger/shadowmancer_stifling_dagger_arcana_combined.vpcf",
       iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_2,
       iMoveSpeed = self:GetSpecialValueFor("proj_speed"),
       bDodgeable = false, bProvidesVision = true, iVisionRadius = 150, iVisionTeamNumber = caster:GetTeamNumber()

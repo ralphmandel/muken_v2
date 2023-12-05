@@ -1,0 +1,73 @@
+"Strider.smoke"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/strider_smoke.vsnd"
+						}
+					}
+					"volume"            
+					{   
+						"value"     "1"  
+					}
+					"volume_fade_out"
+					{
+						"value"		"10"
+					}
+					"memory_type"
+					{
+						"value"			"0"
+					}
+				}
+			}
+		}
+	}
+}
+
+"Strider.aspdbuff"
+{
+	"operator_stacks"
+	{
+		"update_stack"
+		{
+			"reference_operator"
+			{
+				"operator"				"sos_reference_stack"
+				"reference_stack"		"dota_update_default"
+				"operator_variables"
+				{
+					"vsnd_files"
+					{
+						"value"
+						{
+							"value0"	"sounds/strider_aspd_buff_cast.vsnd"
+						}
+					}
+					"volume"            
+					{   
+						"value"     "1"  
+					}
+					"volume_fade_out"
+					{
+						"value"		"10"
+					}
+					"memory_type"
+					{
+						"value"			"0"
+					}
+				}
+			}
+		}
+	}
+}

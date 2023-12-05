@@ -9,12 +9,13 @@ function strider_1_modifier_silence:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+	self.purge = true
 
   if IsServer() then
-
+		self:StartIntervalThink(self:GetDuration())
     self:PlayEfxStart()
-    if not self.parent.damage_received then
-			self.parent.damage_received = 0
+    if not self.damage_received then
+			self.damage_received = 0
 		end
   end
 end
@@ -25,41 +26,31 @@ function strider_1_modifier_silence:OnRefresh(kv)
   end
 end
 
-function strider_1_modifier_silence:OnRemoved()
+function strider_1_modifier_silence:OnRemoved(bDeath)
 --	if self.particle_silence then ParticleManager:DestroyParticle(self.particle_silence, true) end
-	if IsServer() then
-		-- Parameters
-		local caster = self:GetCaster()
-		local owner = self:GetParent()
-		local ability = self:GetAbility()
 
-
-		-- If damage was taken, play the effect and damage the owner
-		if self.parent.damage_received > 0 then
+		-- If damage was taken, play the effect and damage the self.parent
+		if self.damage_received > 0 then
 
 			-- Calculate and heal strider
 			local heal_base = self.ability:GetSpecialValueFor("heal_base")
 			local heal_bonus = self.ability:GetSpecialValueFor("heal_bonus")
-			local heal_amount = (self.parent.damage_received * (heal_bonus / 100)) -- + heal_base -  TALENT UPGRADE
+			local heal_amount = (self.damage_received * (heal_bonus / 100)) -- + heal_base -  TALENT UPGRADE
 
 			-- Fire damage particle
-			local orchid_end_pfx = ParticleManager:CreateParticle("particles/items2_fx/orchid_pop.vpcf", PATTACH_OVERHEAD_FOLLOW, owner)
-			ParticleManager:SetParticleControl(orchid_end_pfx, 0, owner:GetAbsOrigin())
+			local orchid_end_pfx = ParticleManager:CreateParticle("particles/items2_fx/orchid_pop.vpcf", PATTACH_OVERHEAD_FOLLOW, self.parent)
+			ParticleManager:SetParticleControl(orchid_end_pfx, 0, self.parent:GetAbsOrigin())
 			ParticleManager:SetParticleControl(orchid_end_pfx, 1, Vector(100, 0, 0))
 			ParticleManager:ReleaseParticleIndex(orchid_end_pfx)
 
 			-- Heal Strider based on target amount damage received
-			if owner:HasModifier("strider_1_modifier_silence") then 
+			if self.purge == false or bDeath == true then
 				self.caster:Heal(heal_amount, self.ability)
 			end
 
-		end
-
 	-- Clear damage taken variable
-		self.parent.damage_received = nil
+		self.damage_received = nil
 	end
-end
-
 end
 
 -- function strider_1_modifier_silence:OnDestroy()
@@ -69,7 +60,7 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function strider_1_modifier_silence:OnIntervalThink()
-
+	self.purge = false
 end
 
 
@@ -85,7 +76,7 @@ function strider_1_modifier_silence:OnTakeDamage(keys)
 
 		-- If this unit is the one suffering damage, store it
 		if self.parent == target then
-			self.parent.damage_received = self.parent.damage_received + keys.damage
+			self.damage_received = self.damage_received + keys.damage
 		end
 	end
 end

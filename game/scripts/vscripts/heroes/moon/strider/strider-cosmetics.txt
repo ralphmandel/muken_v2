@@ -18,6 +18,6 @@
     }
     "models/items/juggernaut/generic_wep_jadesword.vmdl"
     {
-      "particles/econ/items/juggernaut/jugg_sword_jade/jugg_weapon_glow_variation_jade.vpcf" ""
+      "particles/econ/items/juggernaut/jugg_sword_jade/jugg_weapon_glow_variation_jade.vpcf" "blade_attachment"
     }
 }
