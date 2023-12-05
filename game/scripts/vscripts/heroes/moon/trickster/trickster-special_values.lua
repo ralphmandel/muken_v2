@@ -213,8 +213,8 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
+		if value_name == "AbilityManaCost" then return 450 end
+		if value_name == "AbilityCooldown" then return 45 end
     if value_name == "AbilityCastRange" then return 150 end
 
 		if value_name == "rank" then return 6 + (value_level * 1) end
