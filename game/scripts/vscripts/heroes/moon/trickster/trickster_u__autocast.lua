@@ -3,6 +3,7 @@ LinkLuaModifier("trickster_u_modifier_passive", "heroes/moon/trickster/trickster
 LinkLuaModifier("trickster_u_modifier_autocast", "heroes/moon/trickster/trickster_u_modifier_autocast", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("trickster_u_modifier_last", "heroes/moon/trickster/trickster_u_modifier_last", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("fleaman_special_values", "heroes/death/fleaman/fleaman-special_values", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

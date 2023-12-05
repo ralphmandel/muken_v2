@@ -174,6 +174,9 @@
   end
 
   function RemoveSubStats(target, ability, list)
+    if target == nil then return end
+    if IsValidEntity(target) == false then return end
+
     local mod = target:FindAllModifiersByName("sub_stat_modifier")
     for _,modifier in pairs(mod) do
       local bPass = true

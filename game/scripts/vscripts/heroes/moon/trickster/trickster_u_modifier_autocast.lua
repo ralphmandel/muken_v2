@@ -9,6 +9,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+  self.targets = {}
 
   if IsServer() then
     local target = EntIndexToHScript(kv.target_index)
@@ -19,7 +20,6 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
     self.stolen_ability:UpgradeAbility(true)
     self.stolen_ability:SetHidden(false)
-    self.modifiers = {}
 
     self:SetStackCount(math.ceil(self:GetChance()))
   end
@@ -29,8 +29,17 @@ function trickster_u_modifier_autocast:OnRefresh(kv)
 end
 
 function trickster_u_modifier_autocast:OnRemoved()
-  for _, modifier in pairs(self.modifiers) do
-    if modifier.Destroy() then modifier:Destroy() end
+  for _, target in pairs(self.targets) do
+    if target then
+      if IsValidEntity(target) then
+        local mods = target:FindAllModifiers()
+        for _, mod in pairs(mods) do
+          if mod:GetAbility() == self.stolen_ability then
+            mod:Destroy()
+          end
+        end
+      end
+    end
   end
 
   self.parent:RemoveModifierByName(self.special_kv_name)
@@ -50,12 +59,13 @@ end
 
 function trickster_u_modifier_autocast:OnModifierAdded(keys)
   if keys.added_buff:GetAbility() == self.stolen_ability then
-    table.insert(self.modifiers, keys.added_buff)
+    table.insert(self.targets, keys.unit)
   end
 end
 
 function trickster_u_modifier_autocast:OnAttackLanded(keys)
   if keys.attacker ~= self.parent then return end
+  if self.stolen_ability:IsActivated() == false then return end
 
   local chance = self:GetChance()
 
@@ -63,6 +73,7 @@ function trickster_u_modifier_autocast:OnAttackLanded(keys)
 
   if RandomFloat(0, 100) < chance then
     self.parent:SetCursorCastTarget(keys.target)
+    self.parent:SetCursorPosition(keys.target:GetOrigin())
     self.stolen_ability:OnSpellStart()
   end
 end

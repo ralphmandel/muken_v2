@@ -43,7 +43,9 @@ function trickster_u_modifier_passive:IsListed(ability)
   local ability_name = ability:GetAbilityName()
 
   local list = {
-    "templar_3__hammer"
+    "templar_3__hammer",
+    "templar_u__praise",
+    "fleaman_3__jump"
   }
 
   for _, name in pairs(list) do
