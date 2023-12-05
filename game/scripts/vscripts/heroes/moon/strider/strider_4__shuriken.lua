@@ -6,6 +6,7 @@ LinkLuaModifier("strider_4_modifier_shuriken", "heroes/moon/strider/strider_4_mo
 -- SPELL START
 
 	function strider_4__shuriken:OnAbilityPhaseStart()
+		print("zzz 1")
 		if not self:CheckVectorTargetPosition() then return false end
 		if IsServer() then
 			self:PlayEfx_2()
@@ -36,9 +37,10 @@ LinkLuaModifier("strider_4_modifier_shuriken", "heroes/moon/strider/strider_4_mo
 	end
 
 	function strider_4__shuriken:PlayEfx_2()
+		local caster = self:GetCaster()
 		local string_2 = "particles/strider/shuriken/strider_cast_body_smoke.vpcf"
-		local particle_2 = ParticleManager:CreateParticle(string_2, PATTACH_ABSORIGIN_FOLLOW, self.caster)
-		ParticleManager:SetParticleControl(particle_2, 0, self.caster:GetOrigin())
+		local particle_2 = ParticleManager:CreateParticle(string_2, PATTACH_ABSORIGIN_FOLLOW, caster)
+		ParticleManager:SetParticleControl(particle_2, 0, caster:GetOrigin())
 		ParticleManager:ReleaseParticleIndex( particle_2 )
 	end
 

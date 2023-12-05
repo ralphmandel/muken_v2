@@ -5,7 +5,7 @@ var init_pos = null;
 var isTargeting = false;
 function StartVectorTarget( location, ability ) {
 	// Get Data
-	var particle_cast = "particles/ui_mouseactions/range_finder_cone.vpcf";
+	var particle_cast = "particles/strider/shuriken/strider_range_finder_cone.vpcf";
 	var caster = Abilities.GetCaster( ability );
 
 	// Create Range Finder
@@ -24,15 +24,25 @@ function StartVectorTarget( location, ability ) {
 }
 
 function LoopVectorTarget( effect_cast, ability, location ) {
+	if (GameUI.GetScreenWorldPosition( GameUI.GetCursorPosition() ) == null){
+		var playerID = Players.GetLocalPlayer()
+		Players.PlayerPortraitClicked( playerID, false, false )
+		Particles.DestroyParticleEffect( effect_cast, true );
+		Particles.ReleaseParticleIndex( effect_cast );
+		return;
+	}
+
 	// Get positions
+	var caster = Abilities.GetCaster( ability );
 	var end_pos = GameUI.GetScreenWorldPosition( GameUI.GetCursorPosition() )
+	
 	var direction = VectorMin( end_pos, location );
 	direction = Game.Normalized( direction );
 	var dist = Game.Length2D( end_pos, location );
 
 	// Calculate init direction
 	if (dist<0.05) {
-		var caster = Abilities.GetCaster( ability );
+	
 		direction = VectorMin( location, Entities.GetAbsOrigin( caster ) );
 		direction = Game.Normalized( direction );
 	}
@@ -43,6 +53,8 @@ function LoopVectorTarget( effect_cast, ability, location ) {
 	}
 
 	// set particle
+
+	end_pos = VectorAdd( location, VectorScale( direction, 600 ) );
 	Particles.SetParticleControl( effect_cast, 2, end_pos );
 
 	// check if should continue
@@ -71,6 +83,7 @@ function Init() {
 		// filter ability
 		var ability = Abilities.GetLocalPlayerActiveAbility()
 		var isVectorTarget = Abilities.GetSpecialValueFor( ability, "vector_target" )
+		$.Msg("yyy 2")
 		if ( isVectorTarget!=1 ) return CONTINUE_PROCESSING_EVENT;
 
 		// on press
@@ -87,6 +100,7 @@ function Init() {
 
 		// on release
 		else if ( eventName == "released" ) {
+			$.Msg("WWW")
 			// stop casting
 			Abilities.ExecuteAbility( ability, Players.GetLocalPlayerPortraitUnit(), true );
 
