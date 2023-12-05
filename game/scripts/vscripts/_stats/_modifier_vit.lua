@@ -99,8 +99,6 @@ function _modifier_vit:GetBonusHP()
   local total = bonus_hp + ((base_hp + bonus_hp) * hp_percent * 0.01)
   if base_hp + total < 100 then total = 100 - base_hp end
 
-  print("kubo", base_hp, bonus_hp, hp_percent, total)
-
   return total
 end
 
