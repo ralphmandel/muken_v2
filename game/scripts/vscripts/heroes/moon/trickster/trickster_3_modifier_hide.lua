@@ -10,15 +10,13 @@ function trickster_3_modifier_hide:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddModifier(self.parent, self.ability, "_modifier_invisible", {attack_break = 0, spell_break = 0}, false)
+  AddModifier(self.parent, self.ability, "_modifier_invisible", {delay = 0.5, attack_break = 0, spell_break = 0}, false)
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {value = self.ability:GetSpecialValueFor("ms")}, false)
 
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
 
-  if IsServer() then
-    self:PlayEfxStart()
-    self:StartIntervalThink(0.5)
-  end
+  if IsServer() then self:PlayEfxStart() end
 end
 
 function trickster_3_modifier_hide:OnRefresh(kv)
@@ -26,17 +24,13 @@ end
 
 function trickster_3_modifier_hide:OnRemoved()
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_invisible", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_increase", self.ability)
 
-  self.ability:SetActivated(false)
+  self.ability:SetActivated(true)
   self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
-
-function trickster_3_modifier_hide:OnIntervalThink()
-
-  if IsServer() then self:StartIntervalThink(-1) end
-end
 
 -- UTILS -----------------------------------------------------------
 

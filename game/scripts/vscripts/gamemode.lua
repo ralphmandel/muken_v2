@@ -123,6 +123,7 @@ function GameMode:OnHeroInGame(hero)
       else
         self.temp = self.temp + 1
         if self.temp > 7 then self.temp = 8 end
+        --self.temp = 6
         hero:SetTeam(self.temp)
       end      
     end

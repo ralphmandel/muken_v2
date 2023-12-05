@@ -39,6 +39,7 @@ end
 
 function trickster_2_modifier_passive:OnStateChanged(keys)
   if keys.unit ~= self.parent then return end
+  
   if self.passives_disabled == false and self.parent:PassivesDisabled() then
     RemoveSubStats(self.parent, self.ability, {"evasion"})
     self.passives_disabled = true

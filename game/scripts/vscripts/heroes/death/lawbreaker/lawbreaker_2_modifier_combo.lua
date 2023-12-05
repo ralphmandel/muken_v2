@@ -16,7 +16,7 @@ function lawbreaker_2_modifier_combo:OnCreated(kv)
   self.bot_script = self.parent:FindModifierByName("_general_script")
   self.speed_mult = self.ability:GetSpecialValueFor("speed_mult")
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = self.speed_mult * 100}, false)
+  --AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = self.speed_mult * 100}, false)
 
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {
     value = self.ability:GetSpecialValueFor("slow_percent")
@@ -31,7 +31,7 @@ function lawbreaker_2_modifier_combo:OnRefresh(kv)
 end
 
 function lawbreaker_2_modifier_combo:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
+  --RemoveSubStats(self.parent, self.ability, {"attack_speed"})
   RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
 end
 
@@ -88,7 +88,7 @@ function lawbreaker_2_modifier_combo:OnIntervalThink()
 
   self.parent:FadeGesture(self.gesture[self.type])
   if self.type == 1 then self.type = 2 else self.type = 1 end
-  self.parent:StartGestureWithPlaybackRate(self.gesture[self.type], self:GetAS())
+  self.parent:StartGestureWithPlaybackRate(self.gesture[self.type], 1 / self.speed_mult)
 
   local cross = CrossVectors(self.parent:GetOrigin() - point, Vector(0, 0, 1)):Normalized() * self.spawn_shot[self.type]
   local spawn_origin = self.parent:GetOrigin() + cross

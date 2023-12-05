@@ -17,7 +17,7 @@ function _modifier_int:OnCreated(kv)
     sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
     sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
     sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
-    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
+    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0}
   }
 
   self:LoadData()

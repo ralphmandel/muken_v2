@@ -1,5 +1,6 @@
 trickster_1__double = class({})
 LinkLuaModifier("trickster_1_modifier_passive", "heroes/moon/trickster/trickster_1_modifier_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("trickster_1_modifier_aspd", "heroes/moon/trickster/trickster_1_modifier_aspd", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

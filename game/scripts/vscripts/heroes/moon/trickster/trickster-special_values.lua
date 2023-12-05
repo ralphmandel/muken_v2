@@ -109,6 +109,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "trickster_4__heart" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "max_stack" then return 1 end
 
 		if caster:FindAbilityByName("trickster_4__heart_rank_11") then
 		end
@@ -132,6 +133,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "trickster_5__teleport" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "AbilityCastRange" then return 1 end
 
 		if caster:FindAbilityByName("trickster_5__teleport_rank_11") then
 		end
@@ -189,7 +191,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "trickster_1__double" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "chance" then return 60 + (value_level * 2.5) end
+		if value_name == "chance" then return 40 + math.ceil((10 / 6) * value_level) end
 	end
 
 	if ability:GetAbilityName() == "trickster_2__dodge" then
@@ -200,19 +202,21 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "trickster_3__hide" then
 		if value_name == "AbilityManaCost" then return 275 end
-		if value_name == "AbilityCooldown" then return 18 end
-		if value_name == "duration" then return 6 + (value_level * 0.25) end
+		if value_name == "AbilityCooldown" then return 15 end
+		if value_name == "duration" then return 7.5 + (value_level * 0.25) end
 	end
 
 	if ability:GetAbilityName() == "trickster_4__heart" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "max_stack" then return 24 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
+		if value_name == "AbilityManaCost" then return 450 end
+		if value_name == "AbilityCooldown" then return 45 end
+    if value_name == "AbilityCastRange" then return 150 end
+
 		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 

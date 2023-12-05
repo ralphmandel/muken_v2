@@ -11,6 +11,10 @@ function trickster_1_modifier_passive:OnCreated(kv)
   self.ability = self:GetAbility()
 
   --self.time = GameRules:GetGameTime()
+  --print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
+  --self.time = GameRules:GetGameTime()
+
+  if IsServer() then self:StartIntervalThink(0.2) end
 end
 
 function trickster_1_modifier_passive:OnRefresh(kv)
@@ -30,30 +34,46 @@ function trickster_1_modifier_passive:DeclareFunctions()
 end
 
 function trickster_1_modifier_passive:OnAttackStart(keys)
-  --print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
-  --self.time = GameRules:GetGameTime()
   if keys.attacker ~= self.parent then return end
-  if self.parent:PassivesDisabled() then return end
-  if not IsServer() then return end
 
-  if self:HasHit(keys.target) == true and RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
-    local speed = self.parent:GetAttacksPerSecond()
-    self.parent:AttackNoEarlierThan((1 / speed) + 0.12, 20)
-    self.parent:FadeGesture(ACT_DOTA_ATTACK)
-    self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-    self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, speed)
+  local count = 0
 
-    Timers:CreateTimer((1 / speed), function()
+  local enemies = FindUnitsInRadius(
+    keys.target:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetSpecialValueFor("radius"),
+    DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+    DOTA_UNIT_TARGET_FLAG_NONE, 0, false
+  )
+
+  for _, enemy in pairs(enemies) do
+    count = count + 1
+  end
+
+  if count > 1 or self.parent:PassivesDisabled() then
+    self.parent:RemoveModifierByName("trickster_1_modifier_aspd")
+  else
+    AddModifier(self.parent, self.ability, "trickster_1_modifier_aspd", {}, false)
+  end
+
+  if IsServer() and self.parent:PassivesDisabled() == false then
+    if self:HasHit(keys.target) == true and RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+      local speed = self.parent:GetAttacksPerSecond()
+      self.parent:AttackNoEarlierThan((1 / speed) + 0.12, 20)
+      self.parent:FadeGesture(ACT_DOTA_ATTACK)
       self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-    end)
+      self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, speed)
   
-    Timers:CreateTimer((1 / speed) * 0.25, function()
-      self:PerformHit(keys.target)
-    end)
-
-    Timers:CreateTimer((1 / speed) * 0.39, function()
-      self:PerformHit(keys.target)
-    end)
+      Timers:CreateTimer((1 / speed), function()
+        self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+      end)
+    
+      Timers:CreateTimer((1 / speed) * 0.25, function()
+        self:PerformHit(keys.target)
+      end)
+  
+      Timers:CreateTimer((1 / speed) * 0.39, function()
+        self:PerformHit(keys.target)
+      end)
+    end
   end
 end
 

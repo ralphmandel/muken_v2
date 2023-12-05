@@ -16,16 +16,16 @@ function _modifier_agi:OnCreated(kv)
   self.const_base_mana_regen = self.ability:GetSpecialValueFor("const_base_mana_regen")
 
   self.data = {
-    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed")},
-    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed")},
-    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion")},
-    sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction")},
-    sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen")},
-    sub_stat_movespeed_increase = {mult = 0},
-    sub_stat_movespeed_decrease = {mult = 0},
-    sub_stat_movespeed_percent_increase = {mult = 0},
-    sub_stat_movespeed_percent_decrease = {mult = 0},
-    sub_stat_attack_time = {mult = 0}
+    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
+    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
+    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
+    sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
+    sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
+    sub_stat_movespeed_increase = {mult = 0, bonus = 0},
+    sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
+    sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
+    sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
+    sub_stat_attack_time = {mult = 0, bonus = 0}
   }
   
   self:LoadData()

@@ -38,6 +38,10 @@ function _modifier_invisible:OnCreated( kv )
 		end
 
     AddModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level", {level = 1})
+
+    if self.attack_break == false and self:GetParent():GetAttackTarget() then
+      self:GetParent():MoveToTargetToAttack(self:GetParent():GetAttackTarget())
+    end
 	end
 end
 
