@@ -126,6 +126,7 @@
       "blink_range"             "600"
       "damage"                  "20"
       "shuriken_amount"         "20"
+      "shuriken_distance"       "600"
       "vector_target"           "1"
 		}
 	}

@@ -27,7 +27,7 @@ function VectorTargetCallback( eventSourceIndex, args )
 	data.init_pos = init_pos
 	data.end_pos = end_pos
 	data.direction = direction
-
+	print("yyy 1")
 	-- store data
 	if not ability:IsInAbilityPhase() then
 		VectorTarget[ ability ] = data
@@ -35,9 +35,10 @@ function VectorTargetCallback( eventSourceIndex, args )
 end
 
 function CDOTABaseAbility:CheckVectorTargetPosition()
+	print("zzz 2")
 	if not VectorTarget[ self ] then return false end
 	local data = VectorTarget[ self ]
-
+	print("zzz 3")
 	-- check current cast's target
 	local target = self:GetCaster():GetCursorPosition()
 	if (target-data.end_pos):Length2D()<(target-data.init_pos):Length2D() then

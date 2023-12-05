@@ -3,6 +3,7 @@
     <include src="file://{resources}/scripts/playertables/playertables_base.js" />
 		<include src="file://{resources}/scripts/custom_game/rank_system.js" />
 		<include src="file://{resources}/scripts/custom_game/muken_path.js" />
+    <include src="file://{resources}/scripts/custom_game/vector_target.js" />
   </scripts>
   <script>
     GameUI.CustomUIConfig().team_logo_xml = "file://{resources}/layout/custom_game/muken_team_icon.xml";
