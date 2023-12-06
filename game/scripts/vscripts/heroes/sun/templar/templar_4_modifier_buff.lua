@@ -61,6 +61,10 @@ end
 -- EFFECTS -----------------------------------------------------------
 
 function templar_4_modifier_buff:PlayEfxStart()
+  local particle_pre = "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf"
+  local pfx = ParticleManager:CreateParticle(particle_pre, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+  ParticleManager:SetParticleControl(pfx, 0, self.parent:GetOrigin())
+
   local particle_shake = "particles/osiris/poison_alt/osiris_poison_splash_shake.vpcf"
   local effect = ParticleManager:CreateParticle(particle_shake, PATTACH_ABSORIGIN, self.parent)
   ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
@@ -80,8 +84,4 @@ function templar_4_modifier_buff:PlayEfxBuff()
 	ParticleManager:SetParticleControl(effect_caster, 2, self.parent:GetOrigin())
 	ParticleManager:SetParticleControl(effect_caster, 4, self.parent:GetOrigin())
 	self:AddParticle(effect_caster, false, false, -1, false, false)
-
-  local particle_pre = "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf"
-  local pfx = ParticleManager:CreateParticle(particle_pre, PATTACH_ABSORIGIN_FOLLOW, self.parent)
-  ParticleManager:SetParticleControl(pfx, 0, self.parent:GetOrigin())
 end

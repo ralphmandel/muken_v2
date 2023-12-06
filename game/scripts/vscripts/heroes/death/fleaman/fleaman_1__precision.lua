@@ -33,7 +33,13 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
     local caster = self:GetCaster()
 
     caster:RemoveModifierByName("fleaman_1_modifier_gesture")
-    caster:AttackNoEarlierThan(10, 20)
+
+    if GetHeroName(caster:GetUnitName()) == "trickster" then
+      caster:AttackNoEarlierThan(0.4, 20)
+    else
+      caster:AttackNoEarlierThan(10, 20)
+    end
+
     caster:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
     caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_1, 2)
 
@@ -47,7 +53,9 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 
     Timers:CreateTimer(0.35, function()
       if caster:IsAlive() then
-        caster:AttackNoEarlierThan(1, 1)
+        if GetHeroName(caster:GetUnitName()) ~= "trickster" then
+          caster:AttackNoEarlierThan(1, 1)
+        end
         AddModifier(caster, self, "fleaman_1_modifier_gesture",  {duration = 0.6}, false)
       end
     end)

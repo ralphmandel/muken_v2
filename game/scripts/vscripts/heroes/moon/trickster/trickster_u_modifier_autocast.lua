@@ -2,6 +2,16 @@ trickster_u_modifier_autocast = class({})
 
 function trickster_u_modifier_autocast:IsHidden() return false end
 function trickster_u_modifier_autocast:IsPurgable() return false end
+function trickster_u_modifier_autocast:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
+function trickster_u_modifier_autocast:GetTexture()
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 101 then return "fleaman_precision" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 102 then return "fleaman_jump" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 103 then return "fleaman_smoke" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 104 then return "bloodstained_rage" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 401 then return "templar_hammer" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 402 then return "templar_revenge" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 403 then return "templar_praise" end
+end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
@@ -12,8 +22,12 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.targets = {}
 
   if IsServer() then
-    local target = EntIndexToHScript(kv.target_index)
-    self.special_kv_name = GetHeroName(target:GetUnitName()).."_special_values"
+    self.target = EntIndexToHScript(kv.target_index)
+
+    if self.target:IsHero() then
+      self.special_kv_name = GetHeroName(self.target:GetUnitName()).."_special_values"
+    end
+
     AddModifier(self.caster, self.ability, self.special_kv_name, {}, false)
 
     local ability = EntIndexToHScript(kv.ability_index)
@@ -21,7 +35,8 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     self.stolen_ability:UpgradeAbility(true)
     self.stolen_ability:SetHidden(true)
 
-    self:SetStackCount(math.ceil(self:GetChance()))
+    --self:SetStackCount(math.ceil(self:GetChance()))
+    self:CheckAbility()
   end
 end
 
@@ -42,8 +57,9 @@ function trickster_u_modifier_autocast:OnRemoved()
     end
   end
 
-  self.parent:RemoveModifierByName(self.special_kv_name)
+  if self.special_kv_name then self.parent:RemoveModifierByName(self.special_kv_name) end
   self.parent:RemoveAbilityByHandle(self.stolen_ability)
+  self:CheckAbility()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -69,10 +85,16 @@ function trickster_u_modifier_autocast:OnAttackLanded(keys)
 
   local chance = self:GetChance()
 
-  if IsServer() then self:SetStackCount(math.ceil(chance)) end
+  --if IsServer() then self:SetStackCount(math.ceil(chance)) end
 
   if RandomFloat(0, 100) < chance then
-    self.parent:SetCursorCastTarget(keys.target)
+    local target = keys.target
+
+    if self.stolen_ability:GetAbilityTargetTeam() == DOTA_UNIT_TARGET_TEAM_FRIENDLY then
+      target = self.parent
+    end
+
+    self.parent:SetCursorCastTarget(target)
     self.parent:SetCursorPosition(keys.target:GetOrigin())
     self.stolen_ability:OnSpellStart()
   end
@@ -89,6 +111,15 @@ function trickster_u_modifier_autocast:GetChance()
 
   chance = chance * self.ability:GetSpecialValueFor("chance_mult")
   return chance
+end
+
+function trickster_u_modifier_autocast:CheckAbility()
+  if self.target then
+    if IsValidEntity(self.target) then
+      local last_mod = self.target:FindModifierByName("trickster_u_modifier_last")
+      if last_mod then last_mod:CheckAbility() end
+    end
+  end
 end
 
 -- EFFECTS -----------------------------------------------------------
