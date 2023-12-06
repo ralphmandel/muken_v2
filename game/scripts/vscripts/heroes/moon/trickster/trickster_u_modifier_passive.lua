@@ -47,6 +47,7 @@ function trickster_u_modifier_passive:IsListed(ability)
     "fleaman_3__jump",
     "fleaman_5__smoke",
     "bloodstained_1__rage",
+    "bloodstained_u__seal",
     "templar_3__hammer",
     "templar_4__revenge",
     "templar_u__praise"

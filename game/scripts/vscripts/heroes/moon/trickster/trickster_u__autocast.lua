@@ -3,9 +3,9 @@ LinkLuaModifier("trickster_u_modifier_passive", "heroes/moon/trickster/trickster
 LinkLuaModifier("trickster_u_modifier_autocast", "heroes/moon/trickster/trickster_u_modifier_autocast", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("trickster_u_modifier_last", "heroes/moon/trickster/trickster_u_modifier_last", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("trickster_u_modifier_used", "heroes/moon/trickster/trickster_u_modifier_used", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("fleaman_special_values", "heroes/death/fleaman/fleaman-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloodstained-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
@@ -71,7 +71,14 @@ LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloods
       return
     end
 
-    RemoveAllModifiersByNameAndAbility(caster, "trickster_u_modifier_autocast", self)
+    local autocast_mods = caster:FindAllModifiersByName("trickster_u_modifier_autocast")
+    local ability_name = EntIndexToHScript(modifier.ability_index):GetAbilityName()
+
+    for _, autocast_mod in pairs(autocast_mods) do
+      if autocast_mod.stolen_ability:GetAbilityName() ~= ability_name then
+        if IsServer() then autocast_mod:OnIntervalThink() end
+      end
+    end
 
     ProjectileManager:CreateTrackingProjectile({
       Target = caster,
@@ -99,16 +106,33 @@ LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloods
   function trickster_u__autocast:OnProjectileHit_ExtraData(hTarget, vLocation, table)
     local caster = self:GetCaster()
     local texture = self:GetTextureID(table.ability_index)
+
+    if IsServer() then caster:EmitSound("Hero_Rubick.SpellSteal.Complete") end
+
+    local autocast_mods = caster:FindAllModifiersByName("trickster_u_modifier_autocast")
+    local ability_name = EntIndexToHScript(table.ability_index):GetAbilityName()
+
+    for _, autocast_mod in pairs(autocast_mods) do
+      if autocast_mod.stolen_ability:GetAbilityName() == ability_name then
+        autocast_mod.enabled = true
+
+        if IsServer() then
+          local duration = CalcStatus(self:GetSpecialValueFor("duration"), caster, caster)
+          autocast_mod:SetDuration(duration + 0.5, true)
+          autocast_mod:StartIntervalThink(duration)
+          return
+        end
+      end
+    end
+
     caster:FindAbilityByName("trickster__precache"):SetLevel(texture)
 
     AddModifier(caster, self, "trickster_u_modifier_autocast", {
-      duration = self:GetSpecialValueFor("duration"),
+      duration = CalcStatus(self:GetSpecialValueFor("duration"), caster, caster) + 0.5,
       ability_index = table.ability_index,
       target_index = table.target_index,
       texture = 1
-    }, true)
-  
-    if IsServer() then caster:EmitSound("Hero_Rubick.SpellSteal.Complete") end
+    }, false)
   end
 
   function trickster_u__autocast:GetTextureID(ability_index)
@@ -119,6 +143,7 @@ LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloods
       ["fleaman_3__jump"] = 102,
       ["fleaman_5__smoke"] = 103,
       ["bloodstained_1__rage"] = 104,
+      ["bloodstained_u__seal"] = 105,
       ["templar_3__hammer"] = 401,
       ["templar_4__revenge"] = 402,
       ["templar_u__praise"] = 403,

@@ -8,6 +8,7 @@ function trickster_u_modifier_autocast:GetTexture()
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 102 then return "fleaman_jump" end
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 103 then return "fleaman_smoke" end
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 104 then return "bloodstained_rage" end
+  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 105 then return "bloodstained_seal" end
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 401 then return "templar_hammer" end
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 402 then return "templar_revenge" end
   if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 403 then return "templar_praise" end
@@ -20,6 +21,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
   self.targets = {}
+  self.enabled = true
 
   if IsServer() then
     self.target = EntIndexToHScript(kv.target_index)
@@ -35,8 +37,8 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     self.stolen_ability:UpgradeAbility(true)
     self.stolen_ability:SetHidden(true)
 
-    --self:SetStackCount(math.ceil(self:GetChance()))
-    self:CheckAbility()
+    self:StartIntervalThink(self:GetDuration() - 0.5)
+    self:CheckLast()
   end
 end
 
@@ -44,22 +46,9 @@ function trickster_u_modifier_autocast:OnRefresh(kv)
 end
 
 function trickster_u_modifier_autocast:OnRemoved()
-  for _, target in pairs(self.targets) do
-    if target then
-      if IsValidEntity(target) then
-        local mods = target:FindAllModifiers()
-        for _, mod in pairs(mods) do
-          if mod:GetAbility() == self.stolen_ability then
-            mod:Destroy()
-          end
-        end
-      end
-    end
-  end
-
   if self.special_kv_name then self.parent:RemoveModifierByName(self.special_kv_name) end
   self.parent:RemoveAbilityByHandle(self.stolen_ability)
-  self:CheckAbility()
+  self:CheckLast()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -75,6 +64,10 @@ end
 
 function trickster_u_modifier_autocast:OnModifierAdded(keys)
   if keys.added_buff:GetAbility() == self.stolen_ability then
+    for _, target in pairs(self.targets) do
+      if target == keys.unit then return end
+    end
+
     table.insert(self.targets, keys.unit)
   end
 end
@@ -82,12 +75,9 @@ end
 function trickster_u_modifier_autocast:OnAttackLanded(keys)
   if keys.attacker ~= self.parent then return end
   if self.stolen_ability:IsActivated() == false then return end
+  if not self.enabled then return end
 
-  local chance = self:GetChance()
-
-  --if IsServer() then self:SetStackCount(math.ceil(chance)) end
-
-  if RandomFloat(0, 100) < chance then
+  if RandomFloat(0, 100) < self:GetChance() then
     local target = keys.target
 
     if self.stolen_ability:GetAbilityTargetTeam() == DOTA_UNIT_TARGET_TEAM_FRIENDLY then
@@ -98,6 +88,31 @@ function trickster_u_modifier_autocast:OnAttackLanded(keys)
     self.parent:SetCursorPosition(keys.target:GetOrigin())
     self.stolen_ability:OnSpellStart()
   end
+end
+
+function trickster_u_modifier_autocast:OnIntervalThink()
+  self.enabled = false
+
+  for _, target in pairs(self.targets) do
+    if target then
+      if IsValidEntity(target) then
+        local mods = target:FindAllModifiers()
+        for _, mod in pairs(mods) do
+          if mod:GetAbility() == self.stolen_ability then
+            if self.stolen_ability:GetIntrinsicModifierName() ~= mod:GetName() then
+              if IsServer() then
+                self:SetDuration(-1, true)
+                self:StartIntervalThink(0.5)
+                return
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  self:Destroy()
 end
 
 -- UTILS -----------------------------------------------------------
@@ -113,7 +128,7 @@ function trickster_u_modifier_autocast:GetChance()
   return chance
 end
 
-function trickster_u_modifier_autocast:CheckAbility()
+function trickster_u_modifier_autocast:CheckLast()
   if self.target then
     if IsValidEntity(self.target) then
       local last_mod = self.target:FindModifierByName("trickster_u_modifier_last")
