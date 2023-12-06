@@ -44,8 +44,10 @@ function trickster_u_modifier_passive:IsListed(ability)
 
   local list = {
     "templar_3__hammer",
+    "templar_4__revenge",
     "templar_u__praise",
-    "fleaman_3__jump"
+    "fleaman_1__precision",
+    "fleaman_3__jump",
   }
 
   for _, name in pairs(list) do

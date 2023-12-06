@@ -19,7 +19,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     local ability = EntIndexToHScript(kv.ability_index)
     self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
     self.stolen_ability:UpgradeAbility(true)
-    self.stolen_ability:SetHidden(false)
+    self.stolen_ability:SetHidden(true)
 
     self:SetStackCount(math.ceil(self:GetChance()))
   end

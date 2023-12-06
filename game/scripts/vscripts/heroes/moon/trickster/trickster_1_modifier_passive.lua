@@ -60,17 +60,19 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
       self.parent:AttackNoEarlierThan((1 / speed) + 0.12, 20)
       self.parent:FadeGesture(ACT_DOTA_ATTACK)
       self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-      self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, speed)
+
+      local gesture_speed = speed * 0.444
+      self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, gesture_speed)
   
       Timers:CreateTimer((1 / speed), function()
         self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
       end)
     
-      Timers:CreateTimer((1 / speed) * 0.25, function()
+      Timers:CreateTimer((1 / gesture_speed) * 0.25, function()
         self:PerformHit(keys.target)
       end)
   
-      Timers:CreateTimer((1 / speed) * 0.39, function()
+      Timers:CreateTimer((1 / gesture_speed) * 0.39, function()
         self:PerformHit(keys.target)
       end)
     end

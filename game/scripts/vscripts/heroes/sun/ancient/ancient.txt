@@ -82,7 +82,7 @@
       "step"            "1"
       "cast_time"       "2.6"
       "max_charge_time" "3"
-      "turn_rate"       "60"
+      "turn_rate"       "40"
       "damage"          "500"
       "width"           "200"
 			"cast_range"      "1 2 3 4 5 6 7"

@@ -275,7 +275,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "cast_range" then return 900 + (value_level * 50) end
 
-    if value_name == "turn_rate" then return 100 end
+    if value_name == "turn_rate" then return 80 end
     if value_name == "step" then return 3 end
     if value_name == "cast_time" then return 1.8 end
     if value_name == "damage" then return 650 end

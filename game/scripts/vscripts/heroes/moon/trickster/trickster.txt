@@ -142,7 +142,7 @@
     "AbilityValues"
 		{
       "duration"    "30"
-      "chance_mult" "1"
+      "chance_mult" "1.3"
 		}
 	}
 
