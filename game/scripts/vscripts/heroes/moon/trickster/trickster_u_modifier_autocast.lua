@@ -9,6 +9,9 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 103 then return "fleaman_smoke" end
   if self.texture == 104 then return "bloodstained_rage" end
   if self.texture == 105 then return "bloodstained_seal" end
+  if self.texture == 106 then return "lawbreaker_grenade" end
+  if self.texture == 107 then return "lawbreaker_rain" end
+  if self.texture == 108 then return "lawbreaker_form" end
   if self.texture == 401 then return "templar_hammer" end
   if self.texture == 402 then return "templar_revenge" end
   if self.texture == 403 then return "templar_praise" end
@@ -25,6 +28,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.ability = self:GetAbility()
   self.targets = {}
   self.enabled = true
+  self.timer = true
 
   self.texture = self:GetParent():FindAbilityByName("trickster__precache"):GetLevel()
 
@@ -40,7 +44,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     local ability = EntIndexToHScript(kv.ability_index)
     self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
     self.stolen_ability:SetLevel(self.ability:GetSpecialValueFor("ability_level"))
-    self.stolen_ability:SetHidden(false)
+    self.stolen_ability:SetHidden(true)
 
     self:StartIntervalThink(self:GetDuration() - 0.5)
     self:CheckLast()
@@ -122,6 +126,28 @@ function trickster_u_modifier_autocast:OnIntervalThink()
             end
           end
         end
+      end
+    end
+  end
+
+  if self.timer == true then
+    self.timer = false
+
+    if IsServer() then
+      if self.stolen_ability:GetAbilityName() == "fleaman_1__precision" then
+        self:SetDuration(-1, true)
+        self:StartIntervalThink(1.5)
+        return
+      end
+      if self.stolen_ability:GetAbilityName() == "lawbreaker_4__rain" then
+        self:SetDuration(-1, true)
+        self:StartIntervalThink(15)
+        return
+      end
+      if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then
+        self:SetDuration(-1, true)
+        self:StartIntervalThink(3.5)
+        return
       end
     end
   end

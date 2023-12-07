@@ -75,18 +75,21 @@ end
 
 function lawbreaker_u_modifier_form:DeclareFunctions()
 	local funcs = {
-		MODIFIER_PROPERTY_MODEL_CHANGE,
 		MODIFIER_PROPERTY_MODEL_SCALE,
 		MODIFIER_PROPERTY_PROJECTILE_NAME,
 		MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND,
     MODIFIER_EVENT_ON_RESPAWN
 	}
 
+  if GetHeroName(self:GetParent()) ~= "trickster" then
+    table.insert(funcs, MODIFIER_PROPERTY_MODEL_CHANGE)
+  end
+
 	return funcs
 end
 
 function lawbreaker_u_modifier_form:GetModifierModelChange()
-	return "models/heroes/muerta/muerta_ult.vmdl"
+  return "models/heroes/muerta/muerta_ult.vmdl"
 end
 
 function lawbreaker_u_modifier_form:GetModifierModelScale()

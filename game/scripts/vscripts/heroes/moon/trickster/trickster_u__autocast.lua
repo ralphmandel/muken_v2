@@ -5,6 +5,7 @@ LinkLuaModifier("trickster_u_modifier_last", "heroes/moon/trickster/trickster_u_
 LinkLuaModifier("trickster_u_modifier_used", "heroes/moon/trickster/trickster_u_modifier_used", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("fleaman_special_values", "heroes/death/fleaman/fleaman-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloodstained-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("lawbreaker_special_values", "heroes/death/lawbreaker/lawbreaker-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_values", LUA_MODIFIER_MOTION_NONE)
 
@@ -77,7 +78,9 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
 
     for _, autocast_mod in pairs(autocast_mods) do
       if autocast_mod.stolen_ability:GetAbilityName() ~= ability_name then
-        if IsServer() then autocast_mod:OnIntervalThink() end
+        if autocast_mod.enabled == true then
+          if IsServer() then autocast_mod:OnIntervalThink() end
+        end
       end
     end
 
@@ -116,6 +119,7 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
     for _, autocast_mod in pairs(autocast_mods) do
       if autocast_mod.stolen_ability:GetAbilityName() == ability_name then
         autocast_mod.enabled = true
+        autocast_mod.timer = true
 
         if IsServer() then
           local duration = CalcStatus(self:GetSpecialValueFor("duration"), caster, caster)
@@ -145,6 +149,9 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
       ["fleaman_5__smoke"] = 103,
       ["bloodstained_1__rage"] = 104,
       ["bloodstained_u__seal"] = 105,
+      ["lawbreaker_3__grenade"] = 106,
+      ["lawbreaker_4__rain"] = 107,
+      ["lawbreaker_u__form"] = 108,
       ["templar_3__hammer"] = 401,
       ["templar_4__revenge"] = 402,
       ["templar_u__praise"] = 403,

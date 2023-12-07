@@ -340,7 +340,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "crack_time" then return 3.14 + (value_level * 0.1) end
+		if value_name == "crack_time" then return 3.14 - (value_level * 0.1) end
 
     if value_name == "cast_range_mult" then return 375 end
     if value_name == "energy_loss_tick" then return 0.3 end

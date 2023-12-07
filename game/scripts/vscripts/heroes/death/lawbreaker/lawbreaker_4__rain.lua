@@ -33,6 +33,8 @@ LinkLuaModifier("lawbreaker_4_modifier_aura_effect", "heroes/death/lawbreaker/la
     caster:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
     self:PlayEfxStart(point)
 
+    if delay > 5 then delay = 5 end
+
     Timers:CreateTimer(delay, function()
       CreateModifierThinker(caster, self, "lawbreaker_4_modifier_rain", {
         duration = self:GetSpecialValueFor("duration")
