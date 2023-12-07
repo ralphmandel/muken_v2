@@ -424,6 +424,112 @@
 			}
 		}
 
+		"strider_shadow"
+		{
+			"Model"											"models/heroes/juggernaut/juggernaut.vmdl"
+			"BaseClass"									"npc_dota_creature"
+			"SoundSet"									"Hero_Juggernaut"
+			"GameSoundsFile"						""
+			"Level"						 				 	"0"
+			"BoundsHullName"            "DOTA_HULL_SIZE_REGULAR"
+			"MovementCapabilities"			"DOTA_UNIT_CAP_MOVE_NONE"
+			"AttackCapabilities"				"DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackRange"								"150"
+			// "HealthBarOffset"						"100"
+			"ModelScale" 							  "1"
+			"VisionDaytimeRange"        	"350"        // Range of vision during day light.
+			"VisionNighttimeRange"      	"450"        // Range of vision at night time.
+			
+			"Ability1"						"strider_1__silence"
+			"Ability2"						"strider_2__spin"
+			"Ability3"						"strider_3__smoke"
+			"Ability4"						"strider_4__shuriken"
+			"Ability5"						"strider_5__aspd"
+			"Ability6"						"strider_u__shadow"
+			"Ability7"						"_ability_str"
+			"Ability8"						"_ability_agi"
+			"Ability9"						"_ability_int"
+			"Ability10"						"_ability_vit"
+			"Ability11"						"cosmetics"
+			"Ability12"						"base_hero"
+			"Ability13"						"_channel"
+			"Ability14"						"strider__precache"
+
+			"RingRadius"				    "100"
+			"BountyXP"					    "0"
+			"TeamName"					    "DOTA_TEAM_NEUTRALS"
+			"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+			"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+			"UnitRelationshipClass" "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+			"IsNeutralUnitType" 		"1"
+			"WakesNeutrals" 			  "1"
+
+			"ArmorPhysical"				  "0"
+			"MagicalResistance"     "0"
+			"StatusHealth"				  "1"
+			"StatusHealthRegen"			"0"
+			"StatusMana"				    "0" 
+			"StatusManaRegen"			  "0"
+			"MovementSpeed"         "9999"
+			"AttackDamageMin"			  "45"
+			"AttackDamageMax"			  "55"
+			"AttackRate"				    "1"
+			"AttackAnimationPoint"		"0.5"
+			"AttackAcquisitionRange"	"500"
+			"BaseAttackSpeed"			"100"
+			"MovementTurnRate"          "0.3"
+			"AttackSpeedActivityModifiers"
+			{
+				"fast"		"170"
+				"faster"		"275"
+				"fastest"		"350"
+			}
+
+			"Stats"
+			{
+				"STR" {"base" "20" "bonus" "1.5"}
+				"AGI" {"base" "26" "bonus" "2.0"}
+				"INT" {"base" "22" "bonus" "1.5"}
+				"VIT" {"base" "20" "bonus" "1.0"}
+			}
+
+			"Creature"
+			{
+				"HPGain"					"0"
+				"DamageGain"				"0"
+				"ArmorGain"					"0"
+				"MagicResistGain"			"0"
+				"MoveSpeedGain"				"0"
+				"BountyGain"				"0"
+				"XPGain"					"0"
+				"AttachWearables"
+				{
+					"head"
+					{
+						"ItemDef"		"13492"
+					}
+					"back"
+					{
+						"ItemDef"		"13495"
+					}
+					"arms"
+					{
+						"ItemDef"		"13491"
+					}
+					"legs"
+					{
+						"ItemDef"		"13496"
+					}
+				
+					"weapon"
+					{
+						"ItemDef"		"4100"
+					}
+				}
+			}			
+		}
+
+
 		// "tribal_ward"
 		// {
 		// 	"Model"						"models/items/witchdoctor/wd_ward/wd_father_of_spirits_death_ward/wd_father_of_spirits_death_ward.vmdl"

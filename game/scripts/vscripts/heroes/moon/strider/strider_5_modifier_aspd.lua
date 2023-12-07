@@ -13,10 +13,6 @@ function strider_5_modifier_aspd:OnCreated(kv)
 	AddSubStats(self.parent, self.ability, {attack_speed = kv.aspd_bonus}, false)
 	AddModifier(self.parent, self.ability,"sub_stat_movespeed_increase",{value = kv.ms_bonus}, false)
 
-	if IsServer() then
-		self:PlayEffects()
-  end
-
 end
 
 function strider_5_modifier_aspd:OnRefresh(kv)
@@ -39,11 +35,7 @@ end
 -- UTILS -----------------------------------------------------------
 
 -- EFFECTS -----------------------------------------------------------
-function strider_5_modifier_aspd:PlayEffects()
-	-- MOD PARTICLE
-	local string = "particles/strider/aspd_buff/strider_aspd_buff_resistance_buff.vpcf"
-	local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	ParticleManager:SetParticleControl(particle, 0, self.parent:GetOrigin())
-	self:AddParticle(particle, false, false, -1, false, false)
 
+function strider_5_modifier_aspd:GetEffectName()
+	return "particles/strider/aspd_buff/strider_aspd_buff_resistance_buff.vpcf"
 end

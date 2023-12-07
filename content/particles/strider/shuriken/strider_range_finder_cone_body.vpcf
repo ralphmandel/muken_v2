@@ -232,15 +232,15 @@
 					[
 						{
 							x = 0.0
-							y = 0.29896
-							m_flSlopeIncoming = 0.70104
-							m_flSlopeOutgoing = 0.70104
+							y = 67.265999
+							m_flSlopeIncoming = 157.734009
+							m_flSlopeOutgoing = 157.734009
 						},
 						{
 							x = 1.0
-							y = 1.0
-							m_flSlopeIncoming = 0.70104
-							m_flSlopeOutgoing = 0.70104
+							y = 225.0
+							m_flSlopeIncoming = 157.734009
+							m_flSlopeOutgoing = 157.734009
 						},
 					]
 					m_tangents = 
@@ -255,7 +255,7 @@
 						},
 					]
 					m_vDomainMins = [ 0.0, 0.0 ]
-					m_vDomainMaxs = [ 1.0, 1.0 ]
+					m_vDomainMaxs = [ 1.0, 225.0 ]
 				}
 			}
 		},

@@ -12,7 +12,7 @@
 			"Ability3"						"strider_3__smoke"
 			"Ability4"						"strider_4__shuriken"
 			"Ability5"						"strider_5__aspd"
-			"Ability6"						"strider_u__sk6"
+			"Ability6"						"strider_u__shadow"
 			"Ability7"						"_ability_str"
 			"Ability8"						"_ability_agi"
 			"Ability9"						"_ability_int"
@@ -50,12 +50,12 @@
 		"Level"							"0"
 
 		"AttackAcquisitionRange"        "200"     // Range within a target can be acquired.
-		"AttackRange"                   "120"     // Range within a target can be attacked.
+		"AttackRange"                   "140"     // Range within a target can be attacked.
 		"AttackRangeBuffer"             "200"     // Extra range the target can move without canceling the attack
 		//"ProjectileModel"          	""
 		//"ProjectileSpeed"          	"900"
-		"VisionDaytimeRange"        	"900"        // Range of vision during day light.
-		"VisionNighttimeRange"      	"750"        // Range of vision at night time.
+		"VisionDaytimeRange"        	"700"        // Range of vision during day light.
+		"VisionNighttimeRange"      	"900"        // Range of vision at night time.
 
 		//STRENGTH
 			"AttackDamageMax" "55"

@@ -154,26 +154,29 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 	end
 
-	if ability:GetAbilityName() == "strider_u__sk6" then
+	if ability:GetAbilityName() == "strider_u__shadow" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
 
-		if caster:FindAbilityByName("strider_u__sk6_rank_11") then
+		if caster:FindAbilityByName("strider_u__shadow_rank_11") then
 		end
 
-    if caster:FindAbilityByName("strider_u__sk6_rank_12") then
+    if caster:FindAbilityByName("strider_u__shadow_rank_12") then
 		end
 
-		if caster:FindAbilityByName("strider_u__sk6_rank_21") then
+		if caster:FindAbilityByName("strider_u__shadow_rank_21") then
 		end
 
-    if caster:FindAbilityByName("strider_u__sk6_rank_22") then
+    if caster:FindAbilityByName("strider_u__shadow_rank_22") then
 		end
 
-		if caster:FindAbilityByName("strider_u__sk6_rank_31") then
+		if caster:FindAbilityByName("strider_u__shadow_rank_31") then
 		end
 
-    if caster:FindAbilityByName("strider_u__sk6_rank_32") then
+    if caster:FindAbilityByName("strider_u__shadow_rank_32") then
 		end
 	end
 
@@ -193,7 +196,6 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 12 end
 		if value_name == "AbilityCastRange" then return 600 end
 		if value_name == "AbilityHealthCost" then return 200 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "strider_2__spin" then
@@ -206,26 +208,27 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 120 end
 		if value_name == "AbilityCooldown" then return 20 end
 		if value_name == "AbilityCastRange" then return 300 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then
 		if value_name == "AbilityManaCost" then return 50 end
 		if value_name == "AbilityCooldown" then return 3 end
 		if value_name == "AbilityCastRange" then return 600 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "strider_5__aspd" then
 		if value_name == "AbilityManaCost" then return 80 end
 		if value_name == "AbilityCooldown" then return 15 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
 	end
 
-	if ability:GetAbilityName() == "strider_u__sk6" then
+	if ability:GetAbilityName() == "strider_u__shadow" then
 		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 9 + (value_level * 1) end
+		if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCastRange" then return 500 end
+    if value_name == "AbilityCharges" then return 2 end
+    if value_name == "AbilityChargeRestoreTime" then return 30 end
+
+
 	end
 
 	return 0
