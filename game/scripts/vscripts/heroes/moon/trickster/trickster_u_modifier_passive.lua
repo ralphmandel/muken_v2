@@ -50,7 +50,10 @@ function trickster_u_modifier_passive:IsListed(ability)
     "bloodstained_u__seal",
     "templar_3__hammer",
     "templar_4__revenge",
-    "templar_u__praise"
+    "templar_u__praise",
+    "ancient_2__roar",
+    "ancient_5__walk",
+    "ancient_u__fissure",
   }
 
   for _, name in pairs(list) do

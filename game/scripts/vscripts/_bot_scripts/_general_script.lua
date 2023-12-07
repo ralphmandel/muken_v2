@@ -549,7 +549,7 @@ _general_script = class({})
     if base_hero == nil or base_stats == nil then return end
 
     while base_hero.ability_points > 0 do
-      local skills_data = LoadKeyValues("scripts/vscripts/heroes/"..GetHeroTeam(self.parent:GetUnitName()).."/"..GetHeroName(self.parent:GetUnitName()).."/"..GetHeroName(self.parent:GetUnitName()).."-skills.txt")
+      local skills_data = LoadKeyValues("scripts/vscripts/heroes/"..GetHeroTeam(self.parent).."/"..GetHeroName(self.parent).."/"..GetHeroName(self.parent).."-skills.txt")
       local available_abilities = {}
       local i = 0
   
@@ -593,7 +593,7 @@ _general_script = class({})
       up = false
   
       for hero_name, table in pairs(data) do
-        if hero_name == GetHeroName(self.parent:GetUnitName()) then
+        if hero_name == GetHeroName(self.parent) then
           for group, stats in pairs(table) do
             if group == "MAIN" then
               local index = 1
@@ -648,30 +648,30 @@ _general_script = class({})
       [2] = ACTION_FLEE_GO_TO_FOUNTAIN,
     }
 
-    if GetHeroName(self.parent:GetUnitName()) == "bloodstained" then
+    if GetHeroName(self.parent) == "bloodstained" then
       self.low_health = CUSTOM_HEALTH_PERCENT_BLOODSTAINED
       return bloodstained
     end
 
-    if GetHeroName(self.parent:GetUnitName()) == "baldur" then
+    if GetHeroName(self.parent) == "baldur" then
       self.low_health = CUSTOM_HEALTH_PERCENT_BALDUR
       return baldur
     end
 
-    if GetHeroName(self.parent:GetUnitName()) == "ancient" then
+    if GetHeroName(self.parent) == "ancient" then
       self.low_mana = CUSTOM_ENERGY_PERCENT
       self.mid_mana = CUSTOM_ENERGY_PERCENT
       
       return ancient
     end
 
-    if GetHeroName(self.parent:GetUnitName()) == "lawbreaker" then return lawbreaker end
-    if GetHeroName(self.parent:GetUnitName()) == "bocuse" then return bocuse end
-    if GetHeroName(self.parent:GetUnitName()) == "fleaman" then return fleaman end
-    if GetHeroName(self.parent:GetUnitName()) == "dasdingo" then return dasdingo end
-    if GetHeroName(self.parent:GetUnitName()) == "hunter" then return hunter end
-    if GetHeroName(self.parent:GetUnitName()) == "genuine" then return genuine end
-    if GetHeroName(self.parent:GetUnitName()) == "icebreaker" then return icebreaker end
-    if GetHeroName(self.parent:GetUnitName()) == "paladin" then return paladin end
-    if GetHeroName(self.parent:GetUnitName()) == "templar" then return templar end
+    if GetHeroName(self.parent) == "lawbreaker" then return lawbreaker end
+    if GetHeroName(self.parent) == "bocuse" then return bocuse end
+    if GetHeroName(self.parent) == "fleaman" then return fleaman end
+    if GetHeroName(self.parent) == "dasdingo" then return dasdingo end
+    if GetHeroName(self.parent) == "hunter" then return hunter end
+    if GetHeroName(self.parent) == "genuine" then return genuine end
+    if GetHeroName(self.parent) == "icebreaker" then return icebreaker end
+    if GetHeroName(self.parent) == "paladin" then return paladin end
+    if GetHeroName(self.parent) == "templar" then return templar end
   end

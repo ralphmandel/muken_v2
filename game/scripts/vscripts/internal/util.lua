@@ -527,20 +527,24 @@
 		end
 	end
 
-  function GetHeroName(unit_name)
+  function GetHeroName(name_or_npc)
 		local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
 
+    if type(name_or_npc) == "table" then
+      name_or_npc = name_or_npc:GetUnitName()
+    end
+
 		for name, id_name in pairs(heroes_name_data) do
-			if unit_name == id_name then return name end
+			if name_or_npc == id_name then return name end
 		end
 	end
 
-  function GetHeroTeam(unit_name)
+  function GetHeroTeam(name_or_npc)
 		local heroes_team_data = LoadKeyValues("scripts/kv/heroes_team.kv")
 
     for team, hero_list in pairs(heroes_team_data) do
       for _, hero_name in pairs(hero_list) do
-        if GetHeroName(unit_name) == hero_name then
+        if GetHeroName(name_or_npc) == hero_name then
           return team
         end
       end

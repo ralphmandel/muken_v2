@@ -59,7 +59,7 @@ require("internal/rank_system")
 		if caster:IsIllusion() then return end
 
 		if self:GetLevel() == 1 then
-      self.ability_points = GetHeroInitPts(GetHeroName(self:GetCaster():GetUnitName()))
+      self.ability_points = GetHeroInitPts(GetHeroName(self:GetCaster()))
 
       self:ResetData()
 
@@ -99,7 +99,7 @@ require("internal/rank_system")
     local stats_data = LoadKeyValues("scripts/kv/heroes_stats.kv")
 
     for hero_name, stats in pairs(stats_data) do
-      if hero_name == GetHeroName(caster:GetUnitName()) then
+      if hero_name == GetHeroName(caster) then
         for stat, types_table in pairs(stats) do
           for type, value in pairs(types_table) do
             if type == "base" then
@@ -116,8 +116,8 @@ require("internal/rank_system")
 
   function base_hero:GetRanksException()
     local caster = self:GetCaster()
-    local name = GetHeroName(caster:GetUnitName())
-    local team = GetHeroTeam(caster:GetUnitName())
+    local name = GetHeroName(caster)
+    local team = GetHeroTeam(caster)
     local data = LoadKeyValues("scripts/vscripts/heroes/"..team.."/"..name.."/"..name..".txt")
     local result = {}
 
@@ -291,8 +291,8 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     if caster:IsHero() == false then return end
 
-    local hero_name = GetHeroName(caster:GetUnitName())
-    local hero_team = GetHeroTeam(caster:GetUnitName())
+    local hero_name = GetHeroName(caster)
+    local hero_team = GetHeroTeam(caster)
     local abilities_data = LoadKeyValues("scripts/vscripts/heroes/"..hero_team.."/"..hero_name.."/"..hero_name..".txt")
     if abilities_data == nil then return end
 

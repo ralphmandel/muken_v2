@@ -9,6 +9,8 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
   end
 
   function ancient_u__fissure:OnOwnerSpawned()
+    if GetHeroName(self:GetCaster()) == "trickster" then return end
+
     self:GetCaster():SetMana(self.current_energy)
     self:UpdateParticles()
   end
@@ -50,9 +52,10 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
 
     local effect_delay = self:GetSpecialValueFor("crack_time")
     local crack_width = self:GetSpecialValueFor("crack_width")
-    local crack_distance = self.distance
+    local crack_distance = self.distance or self:GetCastRange(self:GetCursorPosition(), nil)
     local caster_fw = caster:GetForwardVector()
     local crack_ending = caster_position + caster_fw * crack_distance
+    local damage = self.damage or caster:GetMana() * self:GetSpecialValueFor("damage") * 0.01
 
     GridNav:DestroyTreesAroundPoint(target_point, crack_width, false)
     ChangeActivity(caster, "et_2021")
@@ -74,7 +77,7 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
 
         ApplyDamage({
           victim = enemy, attacker = caster,
-          ability = self, damage = self.damage,
+          ability = self, damage = damage,
           damage_type = self:GetAbilityDamageType()
         })
       end
@@ -100,20 +103,21 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
 
   function ancient_u__fissure:PlayEfxPre()
     local caster = self:GetCaster()
-
     local particle_cast = "particles/units/heroes/hero_magnataur/magnataur_shockwave_cast.vpcf"
-    local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, caster)
-    ParticleManager:SetParticleControlEnt(effect_cast, 1, caster, PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true)
-    self.effect_cast = effect_cast
+    self.pre_efx = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, caster)
+    ParticleManager:SetParticleControlEnt(self.pre_efx, 1, caster, PATTACH_POINT_FOLLOW, "attach_attack1", Vector(0,0,0), true)
     self.casting = true
 
     if IsServer() then caster:EmitSound("Ancient.Final.Pre") end
   end
 
   function ancient_u__fissure:StopEfxPre(interrupted)
-    local caster = self:GetCaster()
-    ParticleManager:DestroyParticle(self.effect_cast, interrupted)
-    ParticleManager:ReleaseParticleIndex(self.effect_cast)
+    if self.pre_efx then
+      ParticleManager:DestroyParticle(self.pre_efx, interrupted)
+      ParticleManager:ReleaseParticleIndex(self.pre_efx)
+      self.pre_efx = nil
+    end
+
     self.casting = false
   end
 

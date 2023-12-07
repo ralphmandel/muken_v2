@@ -9,7 +9,7 @@ LinkLuaModifier("ancient_5_modifier_debuff", "heroes/sun/ancient/ancient_5_modif
   function ancient_5__walk:GetCastPoint()
     local channel = self:GetCaster():FindAbilityByName("_channel")
     local channel_time = self:GetSpecialValueFor("cast_point")
-    return channel_time * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
+    return channel_time-- * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
   end
 
   function ancient_5__walk:GetAOERadius()

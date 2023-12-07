@@ -34,7 +34,7 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 
     caster:RemoveModifierByName("fleaman_1_modifier_gesture")
 
-    if GetHeroName(caster:GetUnitName()) == "trickster" then
+    if GetHeroName(caster) == "trickster" then
       caster:AttackNoEarlierThan(0.4, 20)
     else
       caster:AttackNoEarlierThan(10, 20)
@@ -53,7 +53,7 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 
     Timers:CreateTimer(0.35, function()
       if caster:IsAlive() then
-        if GetHeroName(caster:GetUnitName()) ~= "trickster" then
+        if GetHeroName(caster) ~= "trickster" then
           caster:AttackNoEarlierThan(1, 1)
         end
         AddModifier(caster, self, "fleaman_1_modifier_gesture",  {duration = 0.6}, false)

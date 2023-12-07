@@ -84,8 +84,8 @@ require("internal/talent_tree")
 
 -- LOAD DATA
 	function base_hero:LoadHeroesData()
-    self.hero_name = GetHeroName(self:GetCaster():GetUnitName())
-    self.hero_team = GetHeroTeam(self:GetCaster():GetUnitName())
+    self.hero_name = GetHeroName(self:GetCaster())
+    self.hero_team = GetHeroTeam(self:GetCaster())
 
     if self.skill_points == nil then
 			self.skill_points = 3

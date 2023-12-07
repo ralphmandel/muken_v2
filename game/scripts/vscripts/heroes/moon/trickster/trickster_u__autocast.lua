@@ -6,6 +6,7 @@ LinkLuaModifier("trickster_u_modifier_used", "heroes/moon/trickster/trickster_u_
 LinkLuaModifier("fleaman_special_values", "heroes/death/fleaman/fleaman-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloodstained-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_values", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
@@ -147,6 +148,9 @@ LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_va
       ["templar_3__hammer"] = 401,
       ["templar_4__revenge"] = 402,
       ["templar_u__praise"] = 403,
+      ["ancient_2__roar"] = 404,
+      ["ancient_5__walk"] = 405,
+      ["ancient_u__fissure"] = 406,
     }
   
     return list[ability_name]

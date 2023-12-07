@@ -10,8 +10,8 @@ function base_hero_mod:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.hero_name = GetHeroName(self:GetCaster():GetUnitName())
-  self.hero_team = GetHeroTeam(self:GetCaster():GetUnitName())
+  self.hero_name = GetHeroName(self:GetCaster())
+  self.hero_team = GetHeroTeam(self:GetCaster())
 
 	self:LoadActivity()
 	self:LoadModel()
@@ -51,6 +51,7 @@ function base_hero_mod:DeclareFunctions()
 end
 
 function base_hero_mod:GetModifierPercentageManacost(keys)
+  if keys.ability:GetAbilityName() == "ancient_u__fissure" then return 0 end
   if self:GetParent():IsHero() == false then return 0 end
   return 100 - (100 / (self:GetAbility():GetLevel() * 0.5))
 end

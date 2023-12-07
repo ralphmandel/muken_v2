@@ -152,9 +152,11 @@ function trickster_1_modifier_passive:PerformHit(target)
   if self.parent:IsHexed() then return end
   if self.parent:IsFrozen() then return end
   if self.parent:IsOutOfGame() then return end
+  if self.parent:IsDisarmed() then return end
   if target == nil then return end
   if IsValidEntity(target) == false then return end
   if target:IsAlive() == false then return end
+  if target:IsAttackImmune() then return end
 
   MainStats(self.parent, "STR"):SetForceCrit(0, nil)
   self.parent:PerformAttack(target, false, true, true, false, false, false, true)

@@ -12,6 +12,9 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 401 then return "templar_hammer" end
   if self.texture == 402 then return "templar_revenge" end
   if self.texture == 403 then return "templar_praise" end
+  if self.texture == 404 then return "ancient_roar" end
+  if self.texture == 405 then return "ancient_walk" end
+  if self.texture == 406 then return "ancient_fissure" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -29,15 +32,15 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     self.target = EntIndexToHScript(kv.target_index)
 
     if self.target:IsHero() then
-      self.special_kv_name = GetHeroName(self.target:GetUnitName()).."_special_values"
+      self.special_kv_name = GetHeroName(self.target).."_special_values"
     end
 
     AddModifier(self.caster, self.ability, self.special_kv_name, {}, false)
 
     local ability = EntIndexToHScript(kv.ability_index)
     self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
-    self.stolen_ability:UpgradeAbility(true)
-    self.stolen_ability:SetHidden(true)
+    self.stolen_ability:SetLevel(self.ability:GetSpecialValueFor("ability_level"))
+    self.stolen_ability:SetHidden(false)
 
     self:StartIntervalThink(self:GetDuration() - 0.5)
     self:CheckLast()
@@ -48,7 +51,16 @@ function trickster_u_modifier_autocast:OnRefresh(kv)
 end
 
 function trickster_u_modifier_autocast:OnRemoved()
-  if self.special_kv_name then self.parent:RemoveModifierByName(self.special_kv_name) end
+  local autocast_mods = self.parent:FindAllModifiersByName(self:GetName())
+  local special_remove = true
+
+  for _, mod in pairs(autocast_mods) do
+    if mod.special_kv_name == self.special_kv_name then
+      special_remove = false
+    end
+  end
+
+  if self.special_kv_name and special_remove then self.parent:RemoveModifierByName(self.special_kv_name) end
   self.parent:RemoveAbilityByHandle(self.stolen_ability)
   self:CheckLast()
 end
@@ -122,12 +134,13 @@ end
 function trickster_u_modifier_autocast:GetChance()
   local cooldown = self.stolen_ability:GetCooldown(self.stolen_ability:GetLevel())
   local restore_time = self.stolen_ability:GetAbilityChargeRestoreTime(self.stolen_ability:GetLevel())
+  local mana_cost = self.stolen_ability:GetManaCost(self.stolen_ability:GetLevel()) * 0.1
 
   local chance = 100 / cooldown
   if restore_time > 0 then chance = 100 / restore_time end
+  if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then chance = 100 / mana_cost end
 
-  chance = chance * self.ability:GetSpecialValueFor("chance_mult")
-  return chance
+  return chance * self.ability:GetSpecialValueFor("chance_mult")
 end
 
 function trickster_u_modifier_autocast:CheckLast()

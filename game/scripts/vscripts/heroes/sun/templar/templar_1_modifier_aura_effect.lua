@@ -96,23 +96,23 @@ function templar_1_modifier_aura_effect:PlayEfxStart()
   local size = 0
   local shield_count = self:GetStackCount()
 
-  if GetHeroName(self.parent:GetUnitName()) == "lawbreaker" then size = 185 end
-  if GetHeroName(self.parent:GetUnitName()) == "bloodstained" then size = 210 end
-  if GetHeroName(self.parent:GetUnitName()) == "bocuse" then size = 210 end
-  if GetHeroName(self.parent:GetUnitName()) == "fleaman" then size = 155 end
-  if GetHeroName(self.parent:GetUnitName()) == "vulture" then size = 250 end
+  if GetHeroName(self.parent) == "lawbreaker" then size = 185 end
+  if GetHeroName(self.parent) == "bloodstained" then size = 210 end
+  if GetHeroName(self.parent) == "bocuse" then size = 210 end
+  if GetHeroName(self.parent) == "fleaman" then size = 155 end
+  if GetHeroName(self.parent) == "vulture" then size = 250 end
 
-  if GetHeroName(self.parent:GetUnitName()) == "dasdingo" then size = 175 end
-  if GetHeroName(self.parent:GetUnitName()) == "druid" then size = 185 end
-  if GetHeroName(self.parent:GetUnitName()) == "hunter" then size = 165 end
+  if GetHeroName(self.parent) == "dasdingo" then size = 175 end
+  if GetHeroName(self.parent) == "druid" then size = 185 end
+  if GetHeroName(self.parent) == "hunter" then size = 165 end
 
-  if GetHeroName(self.parent:GetUnitName()) == "genuine" then size = 185 end
-  if GetHeroName(self.parent:GetUnitName()) == "icebreaker" then size = 155 end
+  if GetHeroName(self.parent) == "genuine" then size = 185 end
+  if GetHeroName(self.parent) == "icebreaker" then size = 155 end
 
-  if GetHeroName(self.parent:GetUnitName()) == "ancient" then size = 250 end
-  if GetHeroName(self.parent:GetUnitName()) == "paladin" then size = 215 end
-  if GetHeroName(self.parent:GetUnitName()) == "templar" then size = 235 end
-  if GetHeroName(self.parent:GetUnitName()) == "baldur" then size = 175 end
+  if GetHeroName(self.parent) == "ancient" then size = 250 end
+  if GetHeroName(self.parent) == "paladin" then size = 215 end
+  if GetHeroName(self.parent) == "templar" then size = 235 end
+  if GetHeroName(self.parent) == "baldur" then size = 175 end
 
   if self.effect_cast then ParticleManager:DestroyParticle(self.effect_cast, true) end
 

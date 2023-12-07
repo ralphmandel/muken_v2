@@ -11,7 +11,13 @@ function ancient_2_modifier_gesture:OnCreated(kv)
   self.ability = self:GetAbility()
   self.step = self.ability:GetSpecialValueFor("step")
 
-  self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+  if GetHeroName(self.parent) == "trickster" then
+    self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    self.parent:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_2, 1.16) -- 1 / 0.86
+  else
+    self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+  end
+
 
   if IsServer() then self:StartIntervalThink(0.5) end
 end
@@ -31,13 +37,31 @@ function ancient_2_modifier_gesture:OnIntervalThink()
       self.step = 2
       self:PlayEfxPre()
       self:StartIntervalThink(0.3)
+
     elseif self.step == 2 then
       self.step = 3
-      self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
-      self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+
+      if GetHeroName(self.parent) == "trickster" then
+        self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_2)
+        self.parent:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_2, 1.16) -- 1 / 0.86
+      else
+        self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
+        self.parent:StartGesture(ACT_DOTA_CAST_ABILITY_1)
+      end
+
       self:StartIntervalThink(0.5)
-    else
+    elseif self.step == 3 then
+      self.step = 4
       self:PlayEfxPre()
+
+      if GetHeroName(self.parent) == "trickster" then
+        self:StartIntervalThink(0.3)
+      else
+        self:StartIntervalThink(-1)
+      end
+    else
+      self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_2)
+      self.parent:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_1, 0.5)
       self:StartIntervalThink(-1)
     end
   end

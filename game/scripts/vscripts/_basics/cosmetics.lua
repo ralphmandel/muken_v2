@@ -32,28 +32,28 @@ end
 			-- [6] = "models/items/rikimaru/riki_scarlet_fox_tail/riki_scarlet_fox_tail.vmdl"
 		}
 	
-		local cosmetics_data = LoadKeyValues("scripts/vscripts/heroes/"..GetHeroTeam(caster:GetUnitName()).."/"..GetHeroName(caster:GetUnitName()).."/"..GetHeroName(caster:GetUnitName()).."-cosmetics.txt")
+		local cosmetics_data = LoadKeyValues("scripts/vscripts/heroes/"..GetHeroTeam(caster).."/"..GetHeroName(caster).."/"..GetHeroName(caster).."-cosmetics.txt")
 		if cosmetics_data ~= nil then self:ApplyCosmetics(cosmetics_data) end
 	
-		if GetHeroName(caster:GetUnitName()) == "icebreaker" then
+		if GetHeroName(caster) == "icebreaker" then
 			--self:SetStatusEffect(caster, nil, "icebreaker_1_modifier_passive_status_efx", true)
 		end
 
-		if GetHeroName(caster:GetUnitName()) == "bloodstained" then
+		if GetHeroName(caster) == "bloodstained" then
 			self:SetStatusEffect(caster, nil, "bloodstained_1_modifier_passive_status_efx", true)
 		end
 		
-		if GetHeroName(caster:GetUnitName()) == "krieger" then
+		if GetHeroName(caster) == "krieger" then
 			self:SetStatusEffect(caster, nil, "krieger_1_modifier_passive_status_efx", true)
 		end
 
 		self:ChangeTeam(caster:GetTeamNumber())
 
-    if GetHeroName(caster:GetUnitName()) == "templar" then
+    if GetHeroName(caster) == "templar" then
       if IsServer() then self:PlayEfxHammer() end
 		end
 
-    if GetHeroName(caster:GetUnitName()) == "lawbreaker" then
+    if GetHeroName(caster) == "lawbreaker" then
       if IsServer() then self:PlayEfxGuns() end
 		end
 	end
