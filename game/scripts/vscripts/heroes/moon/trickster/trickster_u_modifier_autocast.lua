@@ -1,17 +1,17 @@
 trickster_u_modifier_autocast = class({})
 
-function trickster_u_modifier_autocast:IsHidden() return false end
+function trickster_u_modifier_autocast:IsHidden() return self.enabled == false end
 function trickster_u_modifier_autocast:IsPurgable() return false end
 function trickster_u_modifier_autocast:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 function trickster_u_modifier_autocast:GetTexture()
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 101 then return "fleaman_precision" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 102 then return "fleaman_jump" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 103 then return "fleaman_smoke" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 104 then return "bloodstained_rage" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 105 then return "bloodstained_seal" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 401 then return "templar_hammer" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 402 then return "templar_revenge" end
-  if self:GetParent():FindAbilityByName("trickster__precache"):GetLevel() == 403 then return "templar_praise" end
+  if self.texture == 101 then return "fleaman_precision" end
+  if self.texture == 102 then return "fleaman_jump" end
+  if self.texture == 103 then return "fleaman_smoke" end
+  if self.texture == 104 then return "bloodstained_rage" end
+  if self.texture == 105 then return "bloodstained_seal" end
+  if self.texture == 401 then return "templar_hammer" end
+  if self.texture == 402 then return "templar_revenge" end
+  if self.texture == 403 then return "templar_praise" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -22,6 +22,8 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.ability = self:GetAbility()
   self.targets = {}
   self.enabled = true
+
+  self.texture = self:GetParent():FindAbilityByName("trickster__precache"):GetLevel()
 
   if IsServer() then
     self.target = EntIndexToHScript(kv.target_index)

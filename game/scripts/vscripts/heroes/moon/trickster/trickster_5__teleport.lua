@@ -5,39 +5,46 @@ LinkLuaModifier("trickster_5_modifier_teleport", "heroes/moon/trickster/trickste
 
 -- SPELL START
 
-  function trickster_5__teleport:OnAbilityPhaseStart()
+  function trickster_5__teleport:OnSpellStart()
     local caster = self:GetCaster()
+    self.target = self:GetCursorTarget()
+
+    if self.target:TriggerSpellAbsorb(self) then return end
+
+    self.rate = self:GetChannelTime() / 1.3
+
     caster:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_4, 1 / self.rate)
+    AddModifier(caster, self, "_modifier_restrict", {}, false)
+
     if IsServer() then caster:EmitSound("Hero_Wisp.Relocate.Arc") end
-
-    return true
   end
 
-  function trickster_5__teleport:OnAbilityPhaseInterrupted()
-    local caster = self:GetCaster()
-    if IsServer() then caster:StopSound("Hero_Wisp.Relocate.Arc") end
-  end
-
-	function trickster_5__teleport:OnSpellStart()
+	function trickster_5__teleport:OnChannelFinish(bInterrupted)
 		local caster = self:GetCaster()
-		local target = self:GetCursorTarget()
     local point = Vector(RandomInt(-3200, 3200), RandomInt(-3200, 3200), 0)
 
+    caster:FadeGesture(ACT_DOTA_CAST_ABILITY_4)
+    RemoveAllModifiersByNameAndAbility(caster, "_modifier_restrict", self)
     if IsServer() then caster:StopSound("Hero_Wisp.Relocate.Arc") end
 
-    if target:TriggerSpellAbsorb(self) then return end
+    if bInterrupted then
+      self:EndCooldown()
+      self:StartCooldown(3.5)
+      return
+    end
 
-    if IsServer() then self:PlayEfxStart(caster, target, point) end
+    if IsServer() then self:PlayEfxStart(caster, self.target, point) end
 
-    caster:AttackNoEarlierThan(0.47, 20)
-    caster:StartGesture(ACT_DOTA_CAST_ABILITY_4_END)
+    caster:AttackNoEarlierThan(0.47 * self.rate, 20)
+    caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_4_END, 1 / self.rate)
 
-    local caster_point = point + RandomVector(50)
+    local caster_point = point + RandomVector(130)
     local direction = (point - caster_point):Normalized()
-    local target_point = caster_point + (point - caster_point):Normalized() * 100
+    local target_point = point --caster_point + direction * 100
 
     FindClearSpaceForUnit(caster, caster_point, true)
-    FindClearSpaceForUnit(target, target_point, true)
+    FindClearSpaceForUnit(self.target, target_point, true)
 
     local trees = GridNav:GetAllTreesAroundPoint(point, 150, true)
 
@@ -48,13 +55,20 @@ LinkLuaModifier("trickster_5_modifier_teleport", "heroes/moon/trickster/trickste
       end
     end
 
-    caster:SetForwardVector(direction)
-    target:Interrupt()
+    AddModifier(caster, self, "_modifier_turn_disabled", {}, false)
+    
+    Timers:CreateTimer(0.1, function()
+      caster:SetForwardVector((self.target:GetOrigin() - caster:GetOrigin()):Normalized())
+      caster:MoveToTargetToAttack(self.target)
+      RemoveAllModifiersByNameAndAbility(caster, "_modifier_turn_disabled", self)
+    end)
+
+    self.target:Interrupt()
 
 		if caster:GetPlayerOwnerID() then CenterCameraOnUnit(caster:GetPlayerOwnerID(), caster) end
-		if target:GetPlayerOwnerID() then CenterCameraOnUnit(target:GetPlayerOwnerID(), target) end
+		if self.target:GetPlayerOwnerID() then CenterCameraOnUnit(self.target:GetPlayerOwnerID(), self.target) end
 
-    if IsServer() then self:PlayEfxEnd(caster, target, point) end
+    if IsServer() then self:PlayEfxEnd(caster, self.target, point) end
 	end
 
 -- EFFECTS

@@ -134,6 +134,8 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityChannelTime" then return 1 end
+		if value_name == "channel_time" then return 1 end
 
 		if caster:FindAbilityByName("trickster_5__teleport_rank_11") then
 		end
@@ -216,11 +218,12 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
-		if value_name == "AbilityManaCost" then return 450 end
-		if value_name == "AbilityCooldown" then return 45 end
+		if value_name == "AbilityManaCost" then return 400 end
+		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return 150 end
+    if value_name == "AbilityChannelTime" then return ability:GetSpecialValueFor("channel_time") end
 
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "channel_time" then return 1.8 - (value_level * 0.1) end
 	end
 
 	if ability:GetAbilityName() == "trickster_u__autocast" then

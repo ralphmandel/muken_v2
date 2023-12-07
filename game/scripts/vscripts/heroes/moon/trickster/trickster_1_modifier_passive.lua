@@ -10,6 +10,8 @@ function trickster_1_modifier_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  self.cancel = false
+  self.gesture_speed = 0
   self.time_added = 0.12
   self.cycle = 0.6
   self.delay_min = 0.2
@@ -35,19 +37,39 @@ end
 
 function trickster_1_modifier_passive:DeclareFunctions()
 	local funcs = {
+		MODIFIER_EVENT_ON_ORDER,
 		MODIFIER_EVENT_ON_ATTACK_START
 	}
 
 	return funcs
 end
 
+function trickster_1_modifier_passive:OnOrder(keys)
+  if keys.unit ~= self.parent then return end
+  if self.cancel == false then return end
+
+  if keys.order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION
+  or keys.order_type == DOTA_UNIT_ORDER_HOLD_POSITION then
+    self.ability:StartCooldown(self.gesture_speed)
+    self.cancel = false
+  end
+end
+
 function trickster_1_modifier_passive:OnAttackStart(keys)
   if keys.attacker ~= self.parent then return end
 
+  self.cancel = true
+  self:CheckBonusAS(keys.target)
+  self:CheckDoubleAtk(keys.target)
+end
+
+-- UTILS -----------------------------------------------------------
+
+function trickster_1_modifier_passive:CheckBonusAS(target)
   local count = 0
 
   local enemies = FindUnitsInRadius(
-    keys.target:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetSpecialValueFor("radius"),
+    target:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetSpecialValueFor("radius"),
     DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
     DOTA_UNIT_TARGET_FLAG_NONE, 0, false
   )
@@ -61,33 +83,40 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
   else
     AddModifier(self.parent, self.ability, "trickster_1_modifier_aspd", {}, false)
   end
-
-  if IsServer() and self.parent:PassivesDisabled() == false then
-    if self:HasHit(keys.target) == true and RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
-      local delay_speed = self:GetDelaySpeed()
-      local gesture_speed = self:GetGestureSpeed(delay_speed)
-
-      self.parent:AttackNoEarlierThan(delay_speed + self.time_added, 20)
-      self.parent:FadeGesture(ACT_DOTA_ATTACK)
-      self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-      self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, 1 / gesture_speed)
-  
-      Timers:CreateTimer((delay_speed * 0.88) + self.time_added, function()
-        self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
-      end)
-    
-      Timers:CreateTimer(gesture_speed * 0.30, function()
-        self:PerformHit(keys.target)
-      end)
-  
-      Timers:CreateTimer(gesture_speed * 0.47, function()
-        self:PerformHit(keys.target)
-      end)
-    end
-  end
 end
 
--- UTILS -----------------------------------------------------------
+function trickster_1_modifier_passive:CheckDoubleAtk(target)
+  if self.ability:IsCooldownReady() == false then return end
+  if self.parent:PassivesDisabled() then return end
+  if self:HasHit(target) == false then return end
+  if not IsServer() then return end
+
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+    local delay_speed = self:GetDelaySpeed()
+    self.gesture_speed = self:GetGestureSpeed(delay_speed)
+
+    self.parent:AttackNoEarlierThan(delay_speed + self.time_added, 20)
+    self.parent:FadeGesture(ACT_DOTA_ATTACK)
+    self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    self.parent:StartGestureWithPlaybackRate(ACT_DOTA_ATTACK_EVENT, 1 / self.gesture_speed)
+
+    Timers:CreateTimer((delay_speed * 0.88) + self.time_added, function()
+      self.parent:FadeGesture(ACT_DOTA_ATTACK_EVENT)
+    end)
+  
+    Timers:CreateTimer(self.gesture_speed * 0.30, function()
+      if self.ability:IsCooldownReady() then
+        self:PerformHit(target)
+      end
+    end)
+
+    Timers:CreateTimer(self.gesture_speed * 0.47, function()
+      if self.ability:IsCooldownReady() then
+        self:PerformHit(target)
+      end
+    end)
+  end
+end
 
 function trickster_1_modifier_passive:GetDelaySpeed()
   local delay_speed = 1 / self.parent:GetAttacksPerSecond()

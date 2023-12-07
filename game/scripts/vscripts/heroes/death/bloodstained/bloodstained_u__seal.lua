@@ -23,11 +23,6 @@ LinkLuaModifier("bloodstained__modifier_bloodloss", "heroes/death/bloodstained/b
       {duration = self:GetSpecialValueFor("duration")},
       self:GetCursorPosition(), caster:GetTeamNumber(), false
     )
-
-    if IsServer() then
-      caster:EmitSound("hero_bloodseeker.bloodRite")
-      caster:EmitSound("hero_bloodseeker.rupture.cast")
-    end
   end
 
 -- EFFECTS

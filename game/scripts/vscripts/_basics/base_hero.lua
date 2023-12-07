@@ -38,6 +38,7 @@ LinkLuaModifier("_modifier_silence", "_modifiers/_modifier_silence", LUA_MODIFIE
 LinkLuaModifier("_modifier_stun", "_modifiers/_modifier_stun", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_tracking", "_modifiers/_modifier_tracking", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_truesight", "_modifiers/_modifier_truesight", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_turn_disabled", "_modifiers/_modifier_turn_disabled", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_unslowable", "_modifiers/_modifier_unslowable", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_untargetable", "_modifiers/_modifier_untargetable", LUA_MODIFIER_MOTION_NONE)
 
