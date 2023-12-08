@@ -39,3 +39,14 @@ end
 function strider_5_modifier_aspd:GetEffectName()
 	return "particles/strider/aspd_buff/strider_aspd_buff_resistance_buff.vpcf"
 end
+
+
+-- function strider_5_modifier_aspd:PlayEfxStart()
+--   local owner = self:GetParent()
+--   local string = "particles/strider/aspd_buff/strider_aspd_buff_shadow_track.vpcf"
+-- 	local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, owner)
+-- 	ParticleManager:SetParticleControl(particle, 0, owner:GetOrigin())
+-- 	ParticleManager:ReleaseParticleIndex( particle )
+--   print('EFEITO FUNFOU')
+
+-- end
