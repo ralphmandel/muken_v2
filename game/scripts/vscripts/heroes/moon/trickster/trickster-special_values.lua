@@ -144,12 +144,15 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("trickster_5__teleport_rank_21") then
+      if value_name == "cast_range" then return 1 end
+      if value_name == "special_blink" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_5__teleport_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_5__teleport_rank_31") then
+      if value_name == "special_stun_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_5__teleport_rank_32") then
@@ -219,12 +222,22 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
-		if value_name == "AbilityManaCost" then return 400 end
-		if value_name == "AbilityCooldown" then return 40 end
-    if value_name == "AbilityCastRange" then return 150 end
+		if value_name == "AbilityManaCost" then return 500 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("trickster_5__teleport_rank_11") then
+        return 40
+      end
+      return 50
+    end
+
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
     if value_name == "AbilityChannelTime" then return ability:GetSpecialValueFor("channel_time") end
 
-		if value_name == "channel_time" then return 1.8 - (value_level * 0.1) end
+		if value_name == "channel_time" then return 2 - (value_level * 0.1) end
+    if value_name == "cast_range" then return 750 end
+    if value_name == "special_blink" then return 1 end
+    if value_name == "special_stun_duration" then return 4 end
 	end
 
 	if ability:GetAbilityName() == "trickster_u__autocast" then
@@ -232,7 +245,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return 400 end
 		if value_name == "AbilityCharges" then return 2 end
-		if value_name == "AbilityChargeRestoreTime" then return 100 end
+		if value_name == "AbilityChargeRestoreTime" then return 120 end
 
 		if value_name == "ability_level" then return 1 + (value_level * 1) end
 	end

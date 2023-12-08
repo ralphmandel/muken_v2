@@ -113,11 +113,14 @@
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
 		"AbilityCastAnimation"   		"ACT_RESET" //ACT_DOTA_CAST_ABILITY_4
-		"AbilityCastPoint"       		"0" //1.3
+		"AbilityCastPoint"       		"0.1" //1.3
 
     "AbilityValues"
 		{
+      "cast_range"    "150"
       "channel_time"	"1 2 3 4 5 6 7"
+      "special_blink"         "0"
+      "special_stun_duration" "0"
 		}
 	}
 
@@ -378,7 +381,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
-      "AbilityTextureName"  "trickster_teleport"
+      //"AbilityTextureName"  "trickster_teleport"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -396,7 +399,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
-      "AbilityTextureName"  "trickster_teleport"
+      //"AbilityTextureName"  "trickster_teleport"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -414,7 +417,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
-      "AbilityTextureName"  "trickster_teleport"
+      //"AbilityTextureName"  "trickster_teleport"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
