@@ -44,7 +44,16 @@ LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider
 			self.disable = 0
 			
 		end)
-		AddModifier(caster, self, "strider_4_modifier_shuriken_slow", {duration = 0.5}, false)
+		AddModifier(caster, self, "strider_4_modifier_shuriken_slow", {
+			duration = 0.5,
+			init_x = init_pos.x,
+			init_y = init_pos.y,
+			init_z = init_pos.z,
+			end_x = end_pos.x,
+			end_y = end_pos.y,
+			end_z = end_pos.z,
+			
+		}, false)
 
 		ProjectileManager:ProjectileDodge(caster)
 
@@ -52,6 +61,26 @@ LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider
 			self:PlayEfx_2(origin, direction)
 		end
 		
+	end
+
+	function strider_4__shuriken:OnProjectileHit(hTarget, vLocation)
+		print("TESTE PROJETIL")
+		local caster = self:GetCaster()
+		AddModifier(hTarget, self,"sub_stat_movespeed_decrease",{value = self:GetSpecialValueFor("slow_amount"), duration = self:GetSpecialValueFor("slow_duration")}, true)
+
+		if IsServer() then
+			self:PlayEfxTarget(hTarget)
+		end
+
+		local damageTable = {
+			victim = hTarget,
+			attacker = caster,
+			damage = self:GetSpecialValueFor("damage"),
+			damage_type = self:GetAbilityDamageType(),
+			ability = self, --Optional.
+		}
+
+		ApplyDamage(damageTable)
 	end
 
 -- EFFECTS
@@ -86,10 +115,11 @@ LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider
 		caster:EmitSound("Hero_Antimage.Blink_out")
 	end
 
+	function strider_4__shuriken:PlayEfxTarget(enemy)
+		local particle_cast = "particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf"
+		local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, enemy )
+		ParticleManager:ReleaseParticleIndex( effect_cast )
 
-
-	-- function strider_4__shuriken( keys )
-
-	-- 	local hTreant = CreateUnitByName( treantName, hTarget:GetOrigin(), true, self:GetCaster(), self:GetCaster():GetOwner(), self:GetCaster():GetTeamNumber() )
-	-- 	dummy:ForceKill( true )
-	-- end
+		local sound_cast_dag = "Hero_Mirana.ProjectileImpact"
+		EmitSoundOn( sound_cast_dag, enemy )
+	end

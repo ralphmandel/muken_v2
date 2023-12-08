@@ -124,11 +124,11 @@
     "AbilityValues"
 		{
       "blink_range"             "600"
-      "damage"                  "20"
+      "damage"                  "50"
       "shuriken_amount"         "30"
       "shuriken_distance"       "600"
       "shuriken_speed"          "1500"
-      "slow_amount"             "3"
+      "slow_amount"             "15"
       "slow_duration"           "3"
       "vector_target"           "1"
 		}
