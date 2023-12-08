@@ -158,8 +158,52 @@ function trickster_1_modifier_passive:PerformHit(target)
   if target:IsAlive() == false then return end
   if target:IsAttackImmune() then return end
 
+  if IsServer() then target:EmitSound("Hero_Riki.Backstab") end
+
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_bleeding_chance") then
+    RemoveAllModifiersByNameAndAbility(target, "_modifier_bleeding", self)
+    AddModifier(target, self.ability, "_modifier_bleeding", {
+      duration = self.ability:GetSpecialValueFor("special_bleeding_duration")
+    }, true)
+  end
+
+  if self:IsBack(target) then
+    AddModifier(self.parent, self.ability, "trickster_1_modifier_bonus_damage", {}, false)
+    if self.ability:GetSpecialValueFor("special_bonus_damage") > 0 then
+      self:PlayEfxBackAttack(target)
+    end
+  end
+
   MainStats(self.parent, "STR"):SetForceCrit(0, nil)
   self.parent:PerformAttack(target, false, true, true, false, false, false, true)
+  self.parent:RemoveModifierByName("trickster_1_modifier_bonus_damage")
+end
+
+function  trickster_1_modifier_passive:IsBack(target)
+  local victim_angle = target:GetAnglesAsVector().y
+  local origin_difference = target:GetAbsOrigin() - self.parent:GetAbsOrigin()
+  local origin_difference_radian = math.atan2(origin_difference.y, origin_difference.x)
+  origin_difference_radian = origin_difference_radian * 180
+
+  local attacker_angle = origin_difference_radian / math.pi
+  attacker_angle = attacker_angle + 180.0 + 30.0
+
+  local result_angle = attacker_angle - victim_angle
+  result_angle = math.abs(result_angle)
+
+  if result_angle >= (180 - (self.ability:GetSpecialValueFor("back_angle") / 2))
+  and result_angle <= (180 + (self.ability:GetSpecialValueFor("back_angle") / 2)) then
+    return true
+  end
+
+  return false
 end
 
 -- EFFECTS -----------------------------------------------------------
+
+function trickster_1_modifier_passive:PlayEfxBackAttack(target)
+  local string = "particles/units/heroes/hero_riki/riki_backstab.vpcf"
+  local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, target)
+  ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+  ParticleManager:ReleaseParticleIndex(particle)
+end
