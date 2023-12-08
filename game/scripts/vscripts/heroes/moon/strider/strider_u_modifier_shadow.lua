@@ -52,7 +52,7 @@ end
 
 function strider_u_modifier_shadow:OnAttackLanded(keys)
 	if keys.attacker ~= self.unit then return end
-	if IsServer() then self.unit:EmitSound("Hero_Broodmother.Attack") end
+	if IsServer() then self.unit:EmitSound("Hero_Juggernaut.Attack") end
 end
 
 function strider_u_modifier_shadow:GetAttackSound(keys)
@@ -106,7 +106,6 @@ function strider_u_modifier_shadow:PlayEffects()
 	ParticleManager:SetParticleControl(particle, 0, self.parent:GetOrigin())
 	self:AddParticle(particle, false, false, -1, false, false)
 	ParticleManager:ReleaseParticleIndex( particle )
-	print('EFEITO BLUR')
 
 end
 

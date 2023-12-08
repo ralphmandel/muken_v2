@@ -53,8 +53,8 @@ function LoopVectorTarget( effect_cast, ability, location ) {
 	}
 
 	// set particle
-
-	end_pos = VectorAdd( location, VectorScale( direction, 600 ) );
+	const particle_distance = 600;
+	end_pos = VectorAdd( location, VectorScale( direction, particle_distance ) );	//particle distance
 	Particles.SetParticleControl( effect_cast, 2, end_pos );
 
 	// check if should continue

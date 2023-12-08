@@ -101,7 +101,6 @@ end
 
 
 function strider_2_modifier_spin:PlayEffects2(target)
-	print("HAJIME999999999999999999999")
 	local particle_cast = "particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf"
 	local effect_cast = ParticleManager:CreateParticle( particle_cast, PATTACH_ABSORIGIN_FOLLOW, target )
 	ParticleManager:ReleaseParticleIndex( effect_cast )

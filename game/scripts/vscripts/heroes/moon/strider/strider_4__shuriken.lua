@@ -1,6 +1,7 @@
 strider_4__shuriken = class({})
 LinkLuaModifier("strider_4_modifier_shuriken", "heroes/moon/strider/strider_4_modifier_shuriken", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifier_turn", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider_4_modifier_shuriken_slow", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 	function strider_4__shuriken:GetIntrinsicModifierName()
@@ -37,16 +38,20 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 
 		FindClearSpaceForUnit(caster, init_pos, true)
 		caster:SetForwardVector(direction)
+
 		Timers:CreateTimer(0.2, function()
 			caster:MoveToPosition(caster:GetOrigin())
 			self.disable = 0
+			
 		end)
+		AddModifier(caster, self, "strider_4_modifier_shuriken_slow", {duration = 0.5}, false)
 
 		ProjectileManager:ProjectileDodge(caster)
 
 		if IsServer() then
 			self:PlayEfx_2(origin, direction)
 		end
+		
 	end
 
 -- EFFECTS
@@ -77,7 +82,6 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		ParticleManager:SetParticleControl( effect_cast_a, 0, origin )
 		-- ParticleManager:SetParticleControlForward( effect_cast_a, 0, direction:Normalized() )
 		ParticleManager:ReleaseParticleIndex( effect_cast_a )
-		print("ISHIDA")
 
 		caster:EmitSound("Hero_Antimage.Blink_out")
 	end
