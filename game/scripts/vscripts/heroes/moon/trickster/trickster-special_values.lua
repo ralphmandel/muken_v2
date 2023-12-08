@@ -40,18 +40,22 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "chance" then return 1 end
 
 		if caster:FindAbilityByName("trickster_1__double_rank_11") then
+      if value_name == "attack_speed" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_1__double_rank_12") then
 		end
 
 		if caster:FindAbilityByName("trickster_1__double_rank_21") then
+      if value_name == "special_bonus_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_1__double_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_1__double_rank_31") then
+      if value_name == "special_bleeding_chance" then return 1 end
+      if value_name == "special_bleeding_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_1__double_rank_32") then
@@ -201,6 +205,11 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "chance" then return 40 + math.ceil((10 / 6) * value_level) end
+
+    if value_name == "attack_speed" then return 100 end
+    if value_name == "special_bonus_damage" then return 30 end
+    if value_name == "special_bleeding_chance" then return 10 end
+    if value_name == "special_bleeding_duration" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "trickster_2__dodge" then
