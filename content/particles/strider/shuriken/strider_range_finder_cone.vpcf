@@ -60,5 +60,8 @@
 		{
 			m_ChildRef = resource:"particles/strider/shuriken/strider_range_finder_cone_arrows.vpcf"
 		},
+		{
+			m_ChildRef = resource:"particles/strider/shuriken/strider_range_finder_cone_body_rounded.vpcf"
+		},
 	]
 }

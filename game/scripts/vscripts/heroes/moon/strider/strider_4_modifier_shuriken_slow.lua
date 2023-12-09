@@ -15,7 +15,8 @@ function strider_4_modifier_shuriken_slow:OnCreated(kv)
 	
   if IsServer() then
 		Timers:CreateTimer(0.26, function()
-			self:StartIntervalThink(0.05)
+			self:StartIntervalThink(0.02)
+			EmitSoundOn( "Hero_Terrorblade.PreAttack", self.parent )
 		end)
 		
   end
@@ -40,12 +41,14 @@ function strider_4_modifier_shuriken_slow:OnCreated(kv)
 		bProvidesVision = false
 	}
 		-- get projectile main direction
-		local point = Vector(kv.x, kv.y, kv.z)
-		self.direction = point-self:GetCaster():GetOrigin()
+		local point_init = Vector(kv.init_x, kv.init_y, kv.init_z)
+		local point_end = Vector(kv.end_x, kv.end_y, kv.end_z)
+		
+		self.direction = point_end - point_init
 		self.direction.z = self.direction.z + 90
 		self.direction = self.direction:Normalized()
 		self.current_amount = 0
-		self.angle = 50
+		self.angle = 19
 end
 
 function strider_4_modifier_shuriken_slow:OnRefresh(kv)
@@ -55,7 +58,7 @@ end
 
 function strider_4_modifier_shuriken_slow:OnRemoved(kv)
   if IsServer() then
-		self.caster:FadeGesture((ACT_DOTA_GENERIC_CHANNEL_1)
+		self.caster:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
   end
 end
 
@@ -76,21 +79,13 @@ function strider_4_modifier_shuriken_slow:OnIntervalThink()
 	
 		ProjectileManager:CreateLinearProjectile(self.info)
 		self.amount = self.amount + 1
+	else
+		if IsServer() then
+			self:StartIntervalThink(-1)
+		end
 	end
 
-end
 
-
-function strider_4_modifier_shuriken_slow:DeclareFunctions()
-	return {
-		MODIFIER_EVENT_ON_TAKEDAMAGE
-	}
-end
-
-function strider_4_modifier_shuriken_slow:OnTakeDamage(keys)
-	if IsServer() then
-
-	end
 end
 
 function strider_4_modifier_shuriken_slow:CheckState()
@@ -103,34 +98,3 @@ end
 -- UTILS -----------------------------------------------------------
 
 -- EFFECTS -----------------------------------------------------------
-
--- function strider_4_modifier_shuriken_slow:GetEffectName()
--- 	return "particles/items2_fx/orchid.vpcf"
--- end
-
--- function strider_4_modifier_shuriken_slow:GetEffectAttachType()
--- 	return PATTACH_OVERHEAD_FOLLOW
--- end
-
-function strider_4_modifier_shuriken_slow:PlayEfxStart()
-  if IsServer() then self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target") end
-
-end
-
-function strider_4_modifier_shuriken_slow:GetEffectName()
-	return "particles/econ/items/phantom_assassin/pa_ti8_immortal_head/pa_ti8_immortal_dagger_debuff.vpcf"
-end
-
-function strider_4_modifier_shuriken_slow:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
-end
-
-
--- function strider_4_modifier_shuriken_slow:PlayEfxEnemy()
---   local particle_cast = "particles/econ/items/phantom_assassin/pa_ti8_immortal_head/pa_ti8_immortal_dagger_debuff.vpcf"
---   local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
---   ParticleManager:SetParticleControl(effect_cast, 2, Vector(radius, radius, radius))
--- end
-
-
-
