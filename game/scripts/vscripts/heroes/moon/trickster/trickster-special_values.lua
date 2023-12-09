@@ -68,21 +68,27 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "evasion" then return 1 end
 
 		if caster:FindAbilityByName("trickster_2__dodge_rank_11") then
+      if value_name == "critical_chance" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_2__dodge_rank_12") then
+      if value_name == "special_attack_time" then return 1 end
 		end
 
 		if caster:FindAbilityByName("trickster_2__dodge_rank_21") then
+      if value_name == "special_linkens_chance" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_2__dodge_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_2__dodge_rank_31") then
+      if value_name == "special_health_regen" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_2__dodge_rank_32") then
+      if value_name == "special_disarm_chance" then return 1 end
+      if value_name == "special_disarm_duration" then return 1 end
 		end
 	end
 
@@ -216,6 +222,13 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "evasion" then return 1.5 + (value_level * 0.25) end
+
+    if value_name == "critical_chance" then return -6 end
+    if value_name == "special_attack_time" then return 0.2 end
+    if value_name == "special_linkens_chance" then return 5 end
+    if value_name == "special_health_regen" then return 30 end
+    if value_name == "special_disarm_chance" then return 5 end
+    if value_name == "special_disarm_duration" then return 3 end
 	end
 
 	if ability:GetAbilityName() == "trickster_3__hide" then

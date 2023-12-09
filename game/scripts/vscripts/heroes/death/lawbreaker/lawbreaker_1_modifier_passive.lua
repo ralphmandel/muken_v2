@@ -20,10 +20,7 @@ end
 
 function lawbreaker_1_modifier_passive:OnRefresh(kv)
   RemoveSubStats(self.parent, self.ability, {"critical_chance"})
-
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    critical_chance = self.ability:GetSpecialValueFor("special_critical_chance")
-  }, false)
+  AddSubStats(self.parent, self.ability, {critical_chance = self.ability:GetSpecialValueFor("special_critical_chance")}, false)
 end
 
 function lawbreaker_1_modifier_passive:OnRemoved()

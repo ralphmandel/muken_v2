@@ -16,7 +16,7 @@ function lawbreaker_2_modifier_combo:OnCreated(kv)
   self.bot_script = self.parent:FindModifierByName("_general_script")
   self.speed_mult = self.ability:GetSpecialValueFor("speed_mult")
 
-  --AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = self.speed_mult * 100}, false)
+  --AddSubStats(self.parent, self.ability, {attack_speed = self.speed_mult * 100}, false)
 
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {
     value = self.ability:GetSpecialValueFor("slow_percent")

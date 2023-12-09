@@ -107,7 +107,7 @@ function ancient_3_modifier_passive:OnStackCountChanged(old)
   if self:GetStackCount() > 0 then attack_time = 0 end
 
   RemoveSubStats(self.parent, self.ability, {"attack_time"})
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_time = attack_time}, false)
+  AddSubStats(self.parent, self.ability, {attack_time = attack_time}, false)
 end
 
 -- UTILS -----------------------------------------------------------

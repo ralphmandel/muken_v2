@@ -11,8 +11,8 @@ function bloodstained_2_modifier_frenzy:OnCreated(kv)
   self.ability = self:GetAbility()
 
 	self.parent:SetForceAttackTarget(self.ability.target)
-	
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+
+  AddSubStats(self.parent, self.ability, {
     status_resist_stack = self.ability:GetSpecialValueFor("status_res"),
     attack_speed = self.ability:GetSpecialValueFor("attack_speed")
   }, false)

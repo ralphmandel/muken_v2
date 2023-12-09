@@ -12,7 +12,7 @@ function fleaman_5_modifier_aura_effect:OnCreated(kv)
 
   if self.caster:GetTeamNumber() == self.parent:GetTeamNumber() then
     RemoveAllModifiersByNameAndAbility(self.parent, "fleaman_5_modifier_shadow", self.ability)
-    AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    AddSubStats(self.parent, self.ability, {
       health_regen = self.ability:GetSpecialValueFor("special_hp_regen")
     }, false)
 
@@ -27,7 +27,7 @@ function fleaman_5_modifier_aura_effect:OnCreated(kv)
       percent = self.ability:GetSpecialValueFor("blind")
     }, false)
 
-    AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+    AddSubStats(self.parent, self.ability, {
       miss_chance = self.ability:GetSpecialValueFor("miss_chance")
     }, false)
   end

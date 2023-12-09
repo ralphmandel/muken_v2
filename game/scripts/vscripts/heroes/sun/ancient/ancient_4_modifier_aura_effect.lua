@@ -10,7 +10,7 @@ function ancient_4_modifier_aura_effect:OnCreated(kv)
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     max_health = self.ability:GetSpecialValueFor("max_health"),
     incoming_heal = self.ability:GetSpecialValueFor("special_heal_amp"),
     incoming_buff = self.ability:GetSpecialValueFor("special_buff_amp")

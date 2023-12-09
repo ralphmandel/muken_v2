@@ -42,10 +42,10 @@ function templar_3_modifier_hammer:OnStackCountChanged(old)
   local as = self.ability:GetSpecialValueFor("special_as_start") * 0.1 * self:GetStackCount()
 
   RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
-  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
-  
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {value = slow}, false)
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_speed = as})
+
+  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
+  AddSubStats(self.parent, self.ability, {attack_speed = as})
 end
 
 -- UTILS -----------------------------------------------------------

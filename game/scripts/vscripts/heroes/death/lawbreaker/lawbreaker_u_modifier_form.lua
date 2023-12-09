@@ -26,7 +26,7 @@ function lawbreaker_u_modifier_form:OnCreated(kv)
     AddModifier(enemy, self.ability, "_modifier_break", {duration = self:GetDuration()}, false)
   end
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     status_resist_stack = self.ability:GetSpecialValueFor("special_status_resist")
   }, false)
 

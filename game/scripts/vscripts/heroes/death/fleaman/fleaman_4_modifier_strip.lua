@@ -10,7 +10,7 @@ function fleaman_4_modifier_strip:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     armor = self.ability:GetSpecialValueFor("armor"),
     evasion = self.ability:GetSpecialValueFor("special_evasion")
   }, false)

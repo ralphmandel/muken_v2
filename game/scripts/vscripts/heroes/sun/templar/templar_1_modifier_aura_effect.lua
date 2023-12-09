@@ -34,7 +34,7 @@ end
 function templar_1_modifier_aura_effect:OnStackCountChanged(old)
 	RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     status_resist_stack = self.ability:GetSpecialValueFor("res_stack") * self:GetStackCount(),
     armor = self.ability:GetSpecialValueFor("special_armor") * self:GetStackCount()
   }, false)

@@ -10,7 +10,7 @@ function lawbreaker_3_modifier_grenade:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
   
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     armor = self.ability:GetSpecialValueFor("armor"),
     miss_chance = self.ability:GetSpecialValueFor("miss_chance"),
   }, false)
@@ -21,7 +21,7 @@ end
 function lawbreaker_3_modifier_grenade:OnRefresh(kv)
   RemoveSubStats(self.parent, self.ability, {"armor", "miss_chance"})
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     armor = self.ability:GetSpecialValueFor("armor"),
     miss_chance = self.ability:GetSpecialValueFor("miss_chance"),
   }, false)

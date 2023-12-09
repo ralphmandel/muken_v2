@@ -43,14 +43,8 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
   local chain_chance = self.ability:GetSpecialValueFor("special_chain_chance")
   local manasteal = keys.original_damage * self.ability:GetSpecialValueFor("special_manasteal") * 0.01
   local lifesteal = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal") * 0.01
-
-  local modifier = AddModifier(self.parent, self.ability, "sub_stat_modifier", {
-    duration = duration, attack_damage = attack_steal
-  }, false)
-  
-  AddModifier(keys.target, self.ability, "sub_stat_modifier", {
-    duration = duration, attack_damage = -attack_steal
-  }, false)
+  local modifier = AddSubStats(self.parent, self.ability, {duration = duration, attack_damage = attack_steal}, false)
+  AddSubStats(keys.target, self.ability, {duration = duration, attack_damage = -attack_steal}, false)
 
   if IsServer() then
     self:SetStackCount(self:GetStackCount() + attack_steal)

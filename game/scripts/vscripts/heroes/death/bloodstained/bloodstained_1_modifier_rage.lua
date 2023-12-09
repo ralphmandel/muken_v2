@@ -69,7 +69,7 @@ end
 
 function bloodstained_1_modifier_rage:OnStackCountChanged(old)
 	RemoveSubStats(self.parent, self.ability, {"attack_damage"})
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {attack_damage = self:GetStackCount()}, false)
+  AddSubStats(self.parent, self.ability, {attack_damage = self:GetStackCount()}, false)
 end
 
 -- UTILS -----------------------------------------------------------

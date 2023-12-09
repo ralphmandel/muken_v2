@@ -21,7 +21,7 @@ function ancient_5_modifier_walk:OnCreated(kv)
     special = 1, physical_block = block_physical, magical_block = block_magical
   }, false)
 
-  AddModifier(self.parent, self.ability, "sub_stat_modifier", {
+  AddSubStats(self.parent, self.ability, {
     status_resist_stack = self.ability:GetSpecialValueFor("status_resist_stack")
   }, false)
 

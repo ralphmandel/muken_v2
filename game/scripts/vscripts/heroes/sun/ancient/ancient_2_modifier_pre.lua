@@ -79,7 +79,7 @@ function ancient_2_modifier_pre:OnRemoved()
           end
 
           if armor < 0 then
-            local modifier = AddModifier(enemy, self.ability, "sub_stat_modifier", {
+            local modifier = AddSubStats(enemy, self.ability, {
               duration = self.ability:GetSpecialValueFor("special_debuff_duration"),
               armor = armor
             }, true)

@@ -91,7 +91,7 @@ function bloodstained_5_modifier_passive:OnIntervalThink()
 
   if hp_regen > 0 then
     RemoveSubStats(self.parent, self.ability, {"health_regen"})
-    AddModifier(self.parent, self.ability, "sub_stat_modifier", {health_regen = hp_regen}, false)
+    AddSubStats(self.parent, self.ability, {health_regen = hp_regen}, false)
   end
 
 	if IsServer() then
