@@ -28,12 +28,12 @@ function strider_4_modifier_shuriken_slow:OnCreated(kv)
 	self.info = {
 		Source = self.caster,
 		Ability = self.ability,
-		vSpawnOrigin = self.caster:GetAttachmentOrigin( self.caster:ScriptLookupAttachment( "attach_attack1" ) ),
-		bDeleteOnHit = true,
+		vSpawnOrigin = self.caster:GetOrigin(),
 		iUnitTargetTeam = self.ability:GetAbilityTargetTeam(),
 		iUnitTargetType = self.ability:GetAbilityTargetType(),
 		iUnitTargetFlags = self.ability:GetAbilityTargetFlags(),
 		EffectName = self.projectile_name,
+		bDeleteOnHit = true,
 		fDistance = self.distance,
 		fStartRadius = 50,
 		fEndRadius = 50,
@@ -65,7 +65,7 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function strider_4_modifier_shuriken_slow:OnIntervalThink()
-	if self.current_amount <= self.amount then
+	if self.current_amount < self.amount then
 	
 		local angle_random = math.random(-self.angle, self.angle)
 		--   -self.angle/2 + self.current_arrows*step
@@ -78,7 +78,7 @@ function strider_4_modifier_shuriken_slow:OnIntervalThink()
 		self.info.vVelocity = projectile_direction * self.speed
 	
 		ProjectileManager:CreateLinearProjectile(self.info)
-		self.amount = self.amount + 1
+		self.current_amount = self.current_amount + 1
 	else
 		if IsServer() then
 			self:StartIntervalThink(-1)

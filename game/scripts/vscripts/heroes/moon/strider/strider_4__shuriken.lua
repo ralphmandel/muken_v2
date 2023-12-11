@@ -64,7 +64,6 @@ LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider
 	end
 
 	function strider_4__shuriken:OnProjectileHit(hTarget, vLocation)
-		print("TESTE PROJETIL")
 		local caster = self:GetCaster()
 		AddModifier(hTarget, self,"sub_stat_movespeed_decrease",{value = self:GetSpecialValueFor("slow_amount"), duration = self:GetSpecialValueFor("slow_duration")}, true)
 
