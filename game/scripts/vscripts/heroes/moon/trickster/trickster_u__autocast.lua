@@ -115,11 +115,17 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
 
     local autocast_mods = caster:FindAllModifiersByName("trickster_u_modifier_autocast")
     local ability_name = EntIndexToHScript(table.ability_index):GetAbilityName()
+    local target = EntIndexToHScript(table.target_index)
 
     for _, autocast_mod in pairs(autocast_mods) do
       if autocast_mod.stolen_ability:GetAbilityName() == ability_name then
         autocast_mod.enabled = true
         autocast_mod.timer = true
+
+        RemoveSubStats(caster, self, {"magical_damage"})
+        RemoveSubStats(target, self, {"manacost"})
+        AddSubStats(caster, self, {magical_damage = self:GetSpecialValueFor("magical_damage")}, false)
+        AddSubStats(target, self, {manacost = self:GetSpecialValueFor("special_manacost")}, false)
 
         if IsServer() then
           local duration = CalcStatus(self:GetSpecialValueFor("duration"), caster, caster)

@@ -52,4 +52,20 @@ function trickster__precache:Spawn()
 end
 
 function trickster__precache:Precache(context)
+  PrecacheResource("model", "models/items/pangolier/masked_swordsman_armor/masked_swordsman_armor.vmdl", context)
+  PrecacheResource("model", "models/items/pangolier/masked_swordsman_head/masked_swordsman_head.vmdl", context)
+  PrecacheResource("model", "models/items/pangolier/masked_swordsman_off_hand/masked_swordsman_off_hand.vmdl", context)
+  PrecacheResource("model", "models/items/pangolier/masked_swordsman_weapon/masked_swordsman_weapon.vmdl", context)
+
+  PrecacheResource("particle", "particles/units/heroes/hero_pangolier/pangolier_weapon_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/units/heroes/hero_riki/riki_backstab.vpcf", context)
+  PrecacheResource("particle", "particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf", context)
+  PrecacheResource("particle", "particles/shadowmancer/blur/shadowmancer_blur_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/shadowmancer/blur/shadowmancer_blur_start.vpcf", context)
+  PrecacheResource("particle", "particles/trickster/bloodloss/trickster_bloodloss.vpcf", context)
+  PrecacheResource("particle", "particles/econ/events/spring_2021/blink_dagger_spring_2021_end_godray_godray.vpcf", context)
+  PrecacheResource("particle", "particles/econ/events/spring_2021/blink_dagger_spring_2021_end_lvl2.vpcf", context)
+  PrecacheResource("particle", "particles/econ/events/spring_2021/blink_dagger_spring_2021_start_lvl2.vpcf", context)
+  PrecacheResource("particle", "particles/econ/items/tinker/boots_of_travel/teleport_end_bots.vpcf", context)
+  PrecacheResource("particle", "particles/trickster/spell_steal/trickster_spell_steal.vpcf", context)
 end

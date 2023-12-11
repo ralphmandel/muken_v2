@@ -10,22 +10,17 @@ function trickster_2_modifier_debuff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    critical_chance = self.ability:GetSpecialValueFor("critical_chance"),
-    attack_time = self.ability:GetSpecialValueFor("special_attack_time")
-  }, false)
+  AddSubStats(self.parent, self.ability, {critical_chance = self.ability:GetSpecialValueFor("critical_chance")}, false)
 end
 
 function trickster_2_modifier_debuff:OnRefresh(kv)
-  RemoveSubStats(self.parent, self.ability, {"critical_chance", "attack_time"})
-  AddSubStats(self.parent, self.ability, {
-    critical_chance = self.ability:GetSpecialValueFor("critical_chance"),
-    attack_time = self.ability:GetSpecialValueFor("special_attack_time")
-  }, false)
+  RemoveSubStats(self.parent, self.ability, {"critical_chance"})
+  AddSubStats(self.parent, self.ability, {critical_chance = self.ability:GetSpecialValueFor("critical_chance")}, false)
+
 end
 
 function trickster_2_modifier_debuff:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"critical_chance", "attack_time"})
+  RemoveSubStats(self.parent, self.ability, {"critical_chance"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

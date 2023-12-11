@@ -22,7 +22,8 @@ function trickster_4_modifier_heart:OnRefresh(kv)
 end
 
 function trickster_4_modifier_heart:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"max_health_percent"})
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_decrease", self.ability)
+  RemoveSubStats(self.parent, self.ability, {"max_health_percent", "armor"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -37,10 +38,15 @@ function trickster_4_modifier_heart:OnStackCountChanged(old)
     end
   end
 
-  RemoveSubStats(self.parent, self.ability, {"max_health_percent"})
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_decrease", self.ability)
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_decrease", {
+    value = self.ability:GetSpecialValueFor("special_slow_stack") * self:GetStackCount()
+  }, false)
 
+  RemoveSubStats(self.parent, self.ability, {"max_health_percent", "armor"})
   AddSubStats(self.parent, self.ability, {
-    max_health_percent = self.ability:GetSpecialValueFor("percent_stack") * self:GetStackCount()
+    max_health_percent = self.ability:GetSpecialValueFor("percent_stack") * self:GetStackCount(),
+    armor = self.ability:GetSpecialValueFor("special_armor_stack") * self:GetStackCount()
   }, false)
 end
 

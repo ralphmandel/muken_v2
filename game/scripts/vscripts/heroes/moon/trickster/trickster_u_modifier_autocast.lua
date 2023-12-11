@@ -35,6 +35,9 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   if IsServer() then
     self.target = EntIndexToHScript(kv.target_index)
 
+    AddSubStats(self.parent, self.ability, {magical_damage = self.ability:GetSpecialValueFor("magical_damage")}, false)
+    AddSubStats(self.target, self.ability, {manacost = self.ability:GetSpecialValueFor("special_manacost")}, false)
+
     if self.target:IsHero() then
       self.special_kv_name = GetHeroName(self.target).."_special_values"
     end
@@ -109,7 +112,15 @@ function trickster_u_modifier_autocast:OnAttackLanded(keys)
 end
 
 function trickster_u_modifier_autocast:OnIntervalThink()
+  RemoveSubStats(self.parent, self.ability, {"magical_damage"})
   self.enabled = false
+
+  if self.target then
+    if IsValidEntity(self.target) then
+      RemoveSubStats(self.target, self.ability, {"manacost"})
+    end
+  end
+
 
   for _, target in pairs(self.targets) do
     if target then

@@ -170,7 +170,7 @@
   end
 
   function AddSubStats(target, ability, table, bCalcStatus)
-    AddModifier(target, ability, "sub_stat_modifier", table, bCalcStatus)
+    return AddModifier(target, ability, "sub_stat_modifier", table, bCalcStatus)
   end
 
   function RemoveSubStats(target, ability, list)

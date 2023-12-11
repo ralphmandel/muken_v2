@@ -95,24 +95,28 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "trickster_3__hide" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "duration" then return 1 end
+		if value_name == "cooldown" then return 1 end
 
 		if caster:FindAbilityByName("trickster_3__hide_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_3__hide_rank_12") then
 		end
 
 		if caster:FindAbilityByName("trickster_3__hide_rank_21") then
+      if value_name == "ms" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_3__hide_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_3__hide_rank_31") then
+      if value_name == "hits" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_3__hide_rank_32") then
+      if value_name == "special_lifesteal" then return 1 end
 		end
 	end
 
@@ -122,18 +126,21 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "max_stack" then return 1 end
 
 		if caster:FindAbilityByName("trickster_4__heart_rank_11") then
+      if value_name == "special_slow_stack" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_4__heart_rank_12") then
 		end
 
 		if caster:FindAbilityByName("trickster_4__heart_rank_21") then
+      if value_name == "special_armor_stack" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_4__heart_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_4__heart_rank_31") then
+      if value_name == "percent_stack" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_4__heart_rank_32") then
@@ -178,21 +185,25 @@ function trickster_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "ability_level" then return 1 end
 
 		if caster:FindAbilityByName("trickster_u__autocast_rank_11") then
+      if value_name == "magical_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_u__autocast_rank_12") then
 		end
 
 		if caster:FindAbilityByName("trickster_u__autocast_rank_21") then
+      if value_name == "special_manacost" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_u__autocast_rank_22") then
 		end
 
 		if caster:FindAbilityByName("trickster_u__autocast_rank_31") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("trickster_u__autocast_rank_32") then
+      if value_name == "duration" then return 1 end
 		end
 	end
 
@@ -232,15 +243,24 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_3__hide" then
-		if value_name == "AbilityManaCost" then return 275 end
-		if value_name == "AbilityCooldown" then return 15 end
-		if value_name == "duration" then return 7.5 + (value_level * 0.25) end
+		if value_name == "AbilityManaCost" then return 350 end
+		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
+		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
+
+    if value_name == "duration" then return 12 end
+    if value_name == "ms" then return 150 end
+    if value_name == "hits" then return 25 end
+    if value_name == "special_lifesteal" then return 50 end
 	end
 
 	if ability:GetAbilityName() == "trickster_4__heart" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
 		if value_name == "max_stack" then return 24 + (value_level * 1) end
+
+    if value_name == "special_slow_stack" then return 3 end
+    if value_name == "special_armor_stack" then return -0.1 end
+    if value_name == "percent_stack" then return -1 end
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
@@ -266,10 +286,40 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return 400 end
-		if value_name == "AbilityCharges" then return 2 end
-		if value_name == "AbilityChargeRestoreTime" then return 120 end
+
+		if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("trickster_u__autocast_rank_31") then
+        return 1
+      end
+      if caster:FindAbilityByName("trickster_u__autocast_rank_32") then
+        return 5
+      end
+      return 2
+    end
+
+		if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("trickster_u__autocast_rank_31") then
+        return 240
+      end
+      if caster:FindAbilityByName("trickster_u__autocast_rank_32") then
+        return 60
+      end
+      return 120
+    end
 
 		if value_name == "ability_level" then return 1 + (value_level * 1) end
+
+    if value_name == "magical_damage" then return 50 end
+    if value_name == "special_manacost" then return -25 end
+
+    if value_name == "duration" then
+      if caster:FindAbilityByName("trickster_u__autocast_rank_31") then
+        return 120
+      end
+      if caster:FindAbilityByName("trickster_u__autocast_rank_32") then
+        return 20
+      end
+    end
 	end
 
 	return 0

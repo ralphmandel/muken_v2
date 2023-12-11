@@ -17,7 +17,8 @@ function _modifier_int:OnCreated(kv)
     sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
     sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
     sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
-    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0}
+    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
+    sub_stat_manacost = {mult = 0, bonus = 0}
   }
 
   self:LoadData()
@@ -31,6 +32,7 @@ end
 function _modifier_int:DeclareFunctions()
   local funcs = {
     MODIFIER_PROPERTY_MANA_BONUS,
+    MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
     MODIFIER_EVENT_ON_TAKEDAMAGE
@@ -49,6 +51,11 @@ function _modifier_int:GetModifierManaBonus()
   end
   
   return self:GetCalculedDataStack("sub_stat_max_mana", false)
+end
+
+function _modifier_int:GetModifierPercentageManacost(keys)
+  if keys.ability:GetAbilityName() == "ancient_u__fissure" then return 0 end
+  return self:GetCalculedDataStack("sub_stat_manacost", false)
 end
 
 function _modifier_int:GetModifierSpellAmplify_Percentage(keys)

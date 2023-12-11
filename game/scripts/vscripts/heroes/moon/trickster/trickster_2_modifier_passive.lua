@@ -23,6 +23,7 @@ end
 
 function trickster_2_modifier_passive:OnRemoved()
   RemoveSubStats(self.parent, self.ability, {"evasion"})
+  RemoveSubStats(self.parent, self.ability, {"health_regen"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -55,11 +56,13 @@ function trickster_2_modifier_passive:OnStateChanged(keys)
 end
 
 function trickster_2_modifier_passive:OnAttackRecord(keys)
+  RemoveSubStats(keys.attacker, self.ability, {"attack_time"})
   if keys.target ~= self.parent then return end
 
   self.records[keys.record] = keys.attacker
 
   AddModifier(keys.attacker, self.ability, "trickster_2_modifier_debuff", {}, false)
+  AddSubStats(keys.attacker, self.ability, {attack_time = self.ability:GetSpecialValueFor("special_attack_time")}, false)
 end
 
 
@@ -85,7 +88,7 @@ function trickster_2_modifier_passive:OnAttackLanded(keys)
     }, true)
   end
 
-  RemoveSubStats(self.parent, self.ability, {"evasion"})
+  RemoveSubStats(self.parent, self.ability, {"health_regen"})
 
   if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("last_hit_delay")) end
 end
