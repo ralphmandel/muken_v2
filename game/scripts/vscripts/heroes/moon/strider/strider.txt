@@ -21,12 +21,11 @@
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_1__silence"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityTextureName"     		"strider_kunai"
+		"AbilityTextureName"     		"strider_silence"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
 
-   "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -38,11 +37,10 @@
 
     "AbilityValues"
 		{
-      "duration"                "3"
-      "proj_speed"              "1400"
-      "self_damage"             "200"
-      "heal_base"               "200"
-      "heal_bonus"              "20"
+      "duration"    "5"
+      "proj_speed"  "1400"
+      "heal_bonus"  "50"
+      "cast_range"  "1 2 3 4 5 6 7"  
 		}
 	}
 
@@ -55,23 +53,21 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"       		"0.2"
-    "AbilityCastRange"				  "250"
 
     "AbilityValues"
 		{
-      "duration"                "0.23"
-      "radius"                  "250"
-      "bleeding_damage"         "20"
-      "bleeding_duration"       "3"
+      "spin_duration"     "0.23"
+      "radius"            "250"
+      "bleeding_duration" "1 2 3 4 5 6 7"
 		}
 	}
 
@@ -84,6 +80,7 @@
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
+    "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -96,9 +93,9 @@
     "AbilityValues"
 		{
       "duration"                "8"
-      "radius"                  "300"
       "flee_bonus"              "5"
       "fade_inv"                "1"
+      "radius"                  "1 2 3 4 5 6 7"
 		}
 	}
 
@@ -139,7 +136,7 @@
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_5__aspd"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityTextureName"     		"strider_slow1"
+		"AbilityTextureName"     		"strider_aspd"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
@@ -162,7 +159,7 @@
 	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_u__shadow"
-		"AbilityTextureName"     		"strider_clone"
+		"AbilityTextureName"     		"strider_shadow"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"

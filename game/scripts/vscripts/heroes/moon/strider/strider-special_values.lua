@@ -35,11 +35,11 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
   --"AbilityChargeRestoreTime"
 
 	if ability:GetAbilityName() == "strider_1__silence" then
-		--if value_name == "AbilityManaCost" then return 1 end
+		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
 		if value_name == "AbilityHealthCost" then return 1 end
-		
+		if value_name == "cast_range" then return 1 end		
 
 		if caster:FindAbilityByName("strider_1__silence_rank_11") then
 		end
@@ -63,6 +63,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "strider_2__spin" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "bleeding_duration" then return 1 end
 
 		if caster:FindAbilityByName("strider_2__spin_rank_11") then
 		end
@@ -87,6 +88,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
+		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("strider_3__smoke_rank_11") then
 		end
@@ -192,22 +194,24 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability_level < 1 then ability_level = 1 end
 
 	if ability:GetAbilityName() == "strider_1__silence" then
-		--if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 12 end
-		if value_name == "AbilityCastRange" then return 600 end
-		if value_name == "AbilityHealthCost" then return 200 end
+		if value_name == "AbilityManaCost" then return 0 end
+		if value_name == "AbilityCooldown" then return 15 end
+		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+		if value_name == "AbilityHealthCost" then return 300 + (caster:GetLevel() * 20) end
+    if value_name == "cast_range" then return 600 + (value_level * 50) end
 	end
 
 	if ability:GetAbilityName() == "strider_2__spin" then
-		if value_name == "AbilityManaCost" then return 60 end
-		if value_name == "AbilityCooldown" then return 8 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 80 end
+		if value_name == "AbilityCooldown" then return 7 end
+		if value_name == "bleeding_duration" then return 3 + (value_level * 0.1) end
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
-		if value_name == "AbilityManaCost" then return 120 end
-		if value_name == "AbilityCooldown" then return 20 end
-		if value_name == "AbilityCastRange" then return 300 end
+		if value_name == "AbilityManaCost" then return 250 end
+		if value_name == "AbilityCooldown" then return 22 end
+		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
+    if value_name == "radius" then return 300 + (value_level * 10) end
 	end
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then

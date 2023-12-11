@@ -18,7 +18,8 @@ function OnUpdateHeroSelection() {
     if (hero == "riki") {sound_name = "Icebreaker"}
     if (hero == "drow_ranger") {sound_name = "Genuine"}
     if (hero == "pangolier") {sound_name = "Trickster"}
-  
+    if (hero == "juggernaut") {sound_name = "Strider"}
+
     if (hero == "elder_titan") {sound_name = "Ancient"}
     if (hero == "dawnbreaker") {sound_name = "Paladin"}
     if (hero == "omniknight") {sound_name = "Templar"}

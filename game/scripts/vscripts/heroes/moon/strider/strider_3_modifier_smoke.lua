@@ -12,7 +12,7 @@ function strider_3_modifier_smoke:GetAuraRadius() return self.radius end
 function strider_3_modifier_smoke:GetAuraSearchTeam() return self:GetAbility():GetAbilityTargetTeam() end
 function strider_3_modifier_smoke:GetAuraSearchType() return self:GetAbility():GetAbilityTargetType() end
 function strider_3_modifier_smoke:GetAuraSearchFlags() return self:GetAbility():GetAbilityTargetFlags() end
-function strider_3_modifier_smoke:GetAuraEntityReject(hEntity)  return false end
+function strider_3_modifier_smoke:GetAuraEntityReject(hEntity) return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
@@ -27,16 +27,10 @@ function strider_3_modifier_smoke:OnCreated(kv)
 end
 
 function strider_3_modifier_smoke:OnRefresh(kv)
-	if IsServer() then
-		self.parent:StopSound( "Hero_Wisp.Spirits.Muerta.Layer")
-		self.parent:EmitSound("Hero_Wisp.Spirits.Muerta.Layer")
-	end
 end
 
 function strider_3_modifier_smoke:OnRemoved()
-	if IsServer() then
-		self.parent:StopSound( "Hero_Wisp.Spirits.Muerta.Layer")
-	end
+	if IsServer() then self.parent:StopSound( "Hero_Wisp.Spirits.Muerta.Layer") end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -55,6 +49,3 @@ function strider_3_modifier_smoke:PlayEfxStart()
 
 	if IsServer() then self.parent:EmitSound("Hero_Wisp.Spirits.Muerta.Layer") end
 end
-
-
---LOOP SOUND Hero_Wisp.Spirits.Muerta.Layer

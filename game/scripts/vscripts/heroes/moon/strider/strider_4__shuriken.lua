@@ -80,6 +80,8 @@ LinkLuaModifier("strider_4_modifier_shuriken_slow", "heroes/moon/strider/strider
 		}
 
 		ApplyDamage(damageTable)
+
+    return true
 	end
 
 -- EFFECTS
