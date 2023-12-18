@@ -91,7 +91,11 @@ function trickster_1_modifier_passive:CheckDoubleAtk(target)
   if self:HasHit(target) == false then return end
   if not IsServer() then return end
 
+  print("kubo 1")
+
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+    print("kubo 2")
+
     local delay_speed = self:GetDelaySpeed()
     self.gesture_speed = self:GetGestureSpeed(delay_speed)
 
@@ -119,7 +123,7 @@ function trickster_1_modifier_passive:CheckDoubleAtk(target)
 end
 
 function trickster_1_modifier_passive:GetDelaySpeed()
-  local delay_speed = 1 / self.parent:GetAttacksPerSecond()
+  local delay_speed = 1 / self.parent:GetAttacksPerSecond(true)
 
   if delay_speed < self.delay_min then delay_speed = self.delay_min end
   if delay_speed > self.delay_max then delay_speed = self.delay_max end
@@ -157,6 +161,8 @@ function trickster_1_modifier_passive:PerformHit(target)
   if IsValidEntity(target) == false then return end
   if target:IsAlive() == false then return end
   if target:IsAttackImmune() then return end
+
+  print("kubo 3")
 
   if IsServer() then target:EmitSound("Hero_Riki.Backstab") end
 

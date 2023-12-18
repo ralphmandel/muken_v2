@@ -37,20 +37,29 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "paladin_1__link" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
+		if value_name == "rank" then return 1 end
+		if value_name == "cast_range" then return 1 end
+		if value_name == "max_range" then return 1 end
 
 		if caster:FindAbilityByName("paladin_1__link_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_1__link_rank_12") then
 		end
 
 		if caster:FindAbilityByName("paladin_1__link_rank_21") then
+      if value_name == "pure_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_1__link_rank_22") then
 		end
 
 		if caster:FindAbilityByName("paladin_1__link_rank_31") then
+      if value_name == "absorption" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_1__link_rank_32") then
@@ -184,15 +193,32 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability_level < 1 then ability_level = 1 end
 
 	if ability:GetAbilityName() == "paladin_1__link" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 250 end
+		if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("paladin_1__link_rank_31") then
+        return 2
+      end
+
+      return 1
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then return 60 end
+
+    if value_name == "cast_range" then return 600 + (value_level * 50) end
+		if value_name == "max_range" then return 900 + (value_level * 50) end
+    if value_name == "duration" then return 35 end
+    if value_name == "pure_damage" then return 30 end
+    if value_name == "absorption" then return 75 end
 	end
 
 	if ability:GetAbilityName() == "paladin_2__shield" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 225 end
+		if value_name == "AbilityCooldown" then return 18 end
+
+		if value_name == "duration" then return 18 + (value_level * 1) end
 	end
 
 	if ability:GetAbilityName() == "paladin_3__hammer" then
