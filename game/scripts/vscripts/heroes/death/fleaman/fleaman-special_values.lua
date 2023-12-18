@@ -229,11 +229,10 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "fleaman_1__precision" then
 		if value_name == "AbilityManaCost" then
-      local cost = 180
       if caster:FindAbilityByName("fleaman_1__precision_rank_12") then
-        cost = cost - (cost * 0.25) 
+        return 80
       end
-      return cost
+      return 100
     end
 
     if value_name == "AbilityCooldown" then return 0 end
@@ -270,7 +269,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "fleaman_3__jump" then
-		if value_name == "AbilityManaCost" then return 160 end
+		if value_name == "AbilityManaCost" then return 75 end
     if value_name == "AbilityCooldown" then return 0 end
 
     if value_name == "AbilityCharges" then
@@ -314,7 +313,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "fleaman_5__smoke" then
-		if value_name == "AbilityManaCost" then return 275 end
+		if value_name == "AbilityManaCost" then return 125 end
 
 		if value_name == "AbilityCooldown" then
       if caster:FindAbilityByName("fleaman_5__smoke_rank_21") then

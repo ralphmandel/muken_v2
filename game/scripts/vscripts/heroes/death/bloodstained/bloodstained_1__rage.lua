@@ -10,7 +10,6 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

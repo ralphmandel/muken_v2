@@ -7,7 +7,6 @@ LinkLuaModifier("ancient_3_modifier_passive", "heroes/sun/ancient/ancient_3_modi
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

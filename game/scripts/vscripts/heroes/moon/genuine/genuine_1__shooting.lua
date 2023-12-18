@@ -12,7 +12,6 @@ LinkLuaModifier("_modifier_percent_movespeed_debuff", "_modifiers/_modifier_perc
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

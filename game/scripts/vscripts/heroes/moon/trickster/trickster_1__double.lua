@@ -9,7 +9,6 @@ LinkLuaModifier("trickster_1_modifier_bonus_damage", "heroes/moon/trickster/tric
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

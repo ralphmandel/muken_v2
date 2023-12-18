@@ -237,9 +237,9 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "max_hit" then return 3 end
 	end
 
-  	if ability:GetAbilityName() == "lawbreaker_2__combo" then
+  if ability:GetAbilityName() == "lawbreaker_2__combo" then
     if value_name == "AbilityManaCost" then
-      return ability:GetCurrentAbilityCharges() * 15
+      return ability:GetCurrentAbilityCharges() * 10
     end
 
 		if value_name == "AbilityCooldown" then return 0 end
@@ -263,7 +263,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_3__grenade" then
-		if value_name == "AbilityManaCost" then return 175 end
+		if value_name == "AbilityManaCost" then return 100 end
 		if value_name == "AbilityCooldown" then return 14 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -276,7 +276,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_4__rain" then
-		if value_name == "AbilityManaCost" then return 200 end
+		if value_name == "AbilityManaCost" then return 125 end
 		if value_name == "AbilityCooldown" then return 16 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -288,7 +288,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_5__blink" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then return 80 end
     if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("range") end
 
@@ -308,7 +308,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_u__form" then
-		if value_name == "AbilityManaCost" then return 700 end
+		if value_name == "AbilityManaCost" then return 250 end
 		if value_name == "AbilityCooldown" then return 60 end
 
 		if value_name == "duration" then return 17 + (value_level * 0.5) end

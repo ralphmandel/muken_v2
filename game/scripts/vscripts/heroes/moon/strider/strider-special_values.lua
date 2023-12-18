@@ -202,13 +202,13 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "strider_2__spin" then
-		if value_name == "AbilityManaCost" then return 80 end
+		if value_name == "AbilityManaCost" then return 50 end
 		if value_name == "AbilityCooldown" then return 7 end
 		if value_name == "bleeding_duration" then return 3 + (value_level * 0.1) end
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
-		if value_name == "AbilityManaCost" then return 250 end
+		if value_name == "AbilityManaCost" then return 120 end
 		if value_name == "AbilityCooldown" then return 22 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
     if value_name == "radius" then return 300 + (value_level * 10) end

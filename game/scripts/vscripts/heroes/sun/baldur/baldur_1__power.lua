@@ -7,7 +7,6 @@ LinkLuaModifier("baldur_1_modifier_passive", "heroes/sun/baldur/baldur_1_modifie
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
-        BaseHero(self:GetCaster()):AddManaExtra(self)
       end
     end)
   end

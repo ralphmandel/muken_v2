@@ -175,7 +175,7 @@ function trickster_u_modifier_autocast:GetChance()
 
   local chance = 100 / cooldown
   if restore_time > 0 then chance = 100 / restore_time end
-  if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then chance = 100 / mana_cost end
+  if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then chance = 200 / mana_cost end
 
   return chance * self.ability:GetSpecialValueFor("chance_mult")
 end

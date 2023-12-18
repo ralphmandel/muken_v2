@@ -1,25 +1,25 @@
 "DOTAHeroes"
 {
-	"dasdingo"
+	"paladin"
 	{
-		"override_hero"					"npc_dota_hero_shadow_shaman"
+		"override_hero"					"npc_dota_hero_dawnbreaker"
 		//"SoundSet"						""
 		"DisableWearables" "1"
 
 		//ABILITIES
-			"Ability1"						"dasdingo_1__field"
-			"Ability2"						"dasdingo_2__tree"
-			"Ability3"						"dasdingo_3__leech"
-			"Ability4"						"dasdingo_4__tribal"
-			"Ability5"						"dasdingo_5__hex"
-			"Ability6"						"dasdingo_u__curse"
+			"Ability1"						"paladin_1__link"
+			"Ability2"						"paladin_2__shield"
+			"Ability3"						"paladin_3__hammer"
+			"Ability4"						"paladin_4__magnus"
+			"Ability5"						"paladin_5__smite"
+			"Ability6"						"paladin_u__faith"
 			"Ability7"						"cosmetics"
 			"Ability8"						"base_hero"
 			"Ability9"						"base_stats"
 			"Ability10"						"_channel"
 			"Ability11"						"_void"
-			"Ability12"						"dasdingo__precache"
-			"Ability13"						"dasdingo__bind"
+			"Ability12"						"paladin__precache"
+			"Ability13"						"null"
 			"Ability14"						"null"
 			"Ability15"						"null"
 			"Ability16"						"null"
@@ -40,7 +40,7 @@
 			"Ability31"						"null"		
 			"Ability32"						"null"
 
-		"AttributePrimary"				"DOTA_ATTRIBUTE_AGILITY"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_ALL"
 		"AttributeBaseStrength"			"0"            // Base strength
 		"AttributeStrengthGain"			"0"            // Strength bonus per level.
 		"AttributeBaseAgility"			"0"            // Base agility
@@ -50,12 +50,12 @@
 		"Level"							"0"
 
 		"AttackAcquisitionRange"        "200"     // Range within a target can be acquired.
-		"AttackRange"                   "500"     // Range within a target can be attacked.
+		"AttackRange"                   "150"     // Range within a target can be attacked.
 		"AttackRangeBuffer"             "200"     // Extra range the target can move without canceling the attack
-		"ProjectileModel"          	    "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation.vpcf"
-		"ProjectileSpeed"          	    "1200"
-		"VisionDaytimeRange"        	"900"        // Range of vision during day light.
-		"VisionNighttimeRange"      	"750"        // Range of vision at night time.
+		//"ProjectileModel"          	""
+		//"ProjectileSpeed"          	"900"
+		"VisionDaytimeRange"        	"1000"        // Range of vision during day light.
+		"VisionNighttimeRange"      	"700"        // Range of vision at night time.
 
 		//STRENGTH
 			"AttackDamageMax" "55"

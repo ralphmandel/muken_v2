@@ -38,7 +38,7 @@ function base_hero_mod:DeclareFunctions()
 	local funcs = {
     -- MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
 		-- MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
-    MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
+    -- MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
 		MODIFIER_PROPERTY_PRE_ATTACK,
 		MODIFIER_EVENT_ON_ATTACK,
@@ -50,11 +50,11 @@ function base_hero_mod:DeclareFunctions()
 	return funcs
 end
 
-function base_hero_mod:GetModifierPercentageManacost(keys)
-  if keys.ability:GetAbilityName() == "ancient_u__fissure" then return 0 end
-  if self:GetParent():IsHero() == false then return 0 end
-  return 100 - (100 / (self:GetAbility():GetLevel() * 0.5))
-end
+-- function base_hero_mod:GetModifierPercentageManacost(keys)
+--   if keys.ability:GetAbilityName() == "ancient_u__fissure" then return 0 end
+--   if self:GetParent():IsHero() == false then return 0 end
+--   return 100 - (100 / (self:GetAbility():GetLevel() * 0.5))
+-- end
 
 function base_hero_mod:OnTakeDamage(keys)
 	if self.parent:IsIllusion() then return end
