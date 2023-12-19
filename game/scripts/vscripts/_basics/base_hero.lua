@@ -316,6 +316,10 @@ require("internal/rank_system")
 
     caster:SetAbilityPoints(self.ability_points)
 
+    if level == 2 or level == 4 then
+      self:UpdateAbilityPoints(1)
+    end
+
 		if level == 8 then
 			local ultimate = caster:FindAbilityByName(self.abilities_name[6])
 			if ultimate then

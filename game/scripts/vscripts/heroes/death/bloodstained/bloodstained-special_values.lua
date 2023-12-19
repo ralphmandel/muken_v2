@@ -230,8 +230,10 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then return 120 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("special_blink") end
 		if value_name == "cooldown" then return 16 - (value_level * 1) end
@@ -259,7 +261,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
   end
 
 	if ability:GetAbilityName() == "bloodstained_3__curse" then
-		if value_name == "AbilityManaCost" then return 200 end
+		if value_name == "AbilityManaCost" then return 150 * mana_mult end
 		if value_name == "AbilityCooldown" then return 0 end
 
     if value_name == "AbilityCharges" then
@@ -294,7 +296,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	if ability:GetAbilityName() == "bloodstained_4__tear" then
 		if value_name == "AbilityManaCost" then
       if ability:GetCurrentAbilityCharges() == 1 then
-        return 175
+        return 100 * mana_mult
       end
       return 0
     end
@@ -332,7 +334,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	end
 
 	if ability:GetAbilityName() == "bloodstained_u__seal" then
-		if value_name == "AbilityManaCost" then return 300 end
+		if value_name == "AbilityManaCost" then return 250 * mana_mult end
 		if value_name == "AbilityCooldown" then return 100 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") - 50 end
     if value_name == "steal_duration" then return 90 + (value_level * 10) end

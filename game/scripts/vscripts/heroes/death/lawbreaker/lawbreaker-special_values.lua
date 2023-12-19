@@ -220,6 +220,8 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
   if value_name == "double_shot_chance" then
     if ability:GetCurrentAbilityCharges() == 1 then
       return 100
@@ -239,7 +241,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "lawbreaker_2__combo" then
     if value_name == "AbilityManaCost" then
-      return ability:GetCurrentAbilityCharges() * 10
+      return ability:GetCurrentAbilityCharges() * 10 * mana_mult
     end
 
 		if value_name == "AbilityCooldown" then return 0 end
@@ -263,7 +265,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_3__grenade" then
-		if value_name == "AbilityManaCost" then return 100 end
+		if value_name == "AbilityManaCost" then return 120 * mana_mult end
 		if value_name == "AbilityCooldown" then return 14 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -276,7 +278,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_4__rain" then
-		if value_name == "AbilityManaCost" then return 125 end
+		if value_name == "AbilityManaCost" then return 150 * mana_mult end
 		if value_name == "AbilityCooldown" then return 16 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -288,7 +290,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_5__blink" then
-		if value_name == "AbilityManaCost" then return 80 end
+		if value_name == "AbilityManaCost" then return 80 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("range") end
 
@@ -308,7 +310,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "lawbreaker_u__form" then
-		if value_name == "AbilityManaCost" then return 250 end
+		if value_name == "AbilityManaCost" then return 200 * mana_mult end
 		if value_name == "AbilityCooldown" then return 60 end
 
 		if value_name == "duration" then return 17 + (value_level * 0.5) end

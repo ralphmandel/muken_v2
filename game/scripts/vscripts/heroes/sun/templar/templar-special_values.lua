@@ -226,6 +226,8 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
 	if ability:GetAbilityName() == "templar_1__shield" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
@@ -244,7 +246,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_2__protection" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then return 200 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -256,7 +258,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_3__hammer" then
-		if value_name == "AbilityManaCost" then return 120 + (value_level * 3) end
+		if value_name == "AbilityManaCost" then return 125 * mana_mult end
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -279,7 +281,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_4__revenge" then
-		if value_name == "AbilityManaCost" then return 200 + (value_level * 3) end
+		if value_name == "AbilityManaCost" then return 175 * mana_mult end
 		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -293,7 +295,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then
-		if value_name == "AbilityManaCost" then return 250 + (value_level * 3) end
+		if value_name == "AbilityManaCost" then return 250 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
     
@@ -307,7 +309,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "templar_u__praise" then
-		if value_name == "AbilityManaCost" then return 400 + (value_level * 3) end
+		if value_name == "AbilityManaCost" then return 400 * mana_mult end
     
 		if value_name == "AbilityCooldown" then
       if caster:FindAbilityByName("templar_u__praise_rank_12") then

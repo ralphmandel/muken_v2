@@ -218,6 +218,8 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
 	if ability:GetAbilityName() == "trickster_1__double" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
@@ -243,7 +245,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_3__hide" then
-		if value_name == "AbilityManaCost" then return 150 end
+		if value_name == "AbilityManaCost" then return 175 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
 
@@ -264,7 +266,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "trickster_5__teleport" then
-		if value_name == "AbilityManaCost" then return 100 end
+		if value_name == "AbilityManaCost" then return 150 * mana_mult end
 
 		if value_name == "AbilityCooldown" then
       if caster:FindAbilityByName("trickster_5__teleport_rank_11") then

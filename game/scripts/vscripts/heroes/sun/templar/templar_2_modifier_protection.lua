@@ -18,6 +18,10 @@ function templar_2_modifier_protection:OnCreated(kv)
     self.parent:Purge(false, true, false, true, false)
     self.parent:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("special_heal")), self.ability)
     self:StartEfxBeam(self.parent)
+
+    self.caster:Purge(false, true, false, true, false)
+    self.caster:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("special_heal")), self.ability)
+    self:StartEfxBeam(self.caster)
   end
 
   if IsServer() then self:PlayEfxStart() end

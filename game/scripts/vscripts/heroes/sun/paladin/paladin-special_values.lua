@@ -214,8 +214,10 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
 	if ability:GetAbilityName() == "paladin_1__link" then
-		if value_name == "AbilityManaCost" then return 250 end
+		if value_name == "AbilityManaCost" then return 200 * mana_mult end
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
@@ -237,7 +239,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "paladin_2__shield" then
-		if value_name == "AbilityManaCost" then return 125 end
+		if value_name == "AbilityManaCost" then return 120 * mana_mult end
 
 		if value_name == "AbilityCooldown" then
       if caster:FindAbilityByName("paladin_2__shield_rank_11") then
@@ -262,9 +264,9 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "paladin_3__hammer" then
 		if value_name == "AbilityManaCost" then
       if caster:FindAbilityByName("paladin_3__hammer_rank_11") then
-        return 120
+        return 150 * mana_mult
       end
-      return 150
+      return 180 * mana_mult
     end
 
 		if value_name == "AbilityCooldown" then return 0 end
