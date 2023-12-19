@@ -39,7 +39,7 @@
       "sub_stat_mana_regen"         "0.1"
       "const_base_movespeed"        "300"
       "const_base_attack_time"      "1.3"
-      "const_base_mana_regen"       "10"
+      "const_base_mana_regen"       "5"
 		}
 	}
 
