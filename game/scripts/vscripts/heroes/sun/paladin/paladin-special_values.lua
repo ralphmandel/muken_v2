@@ -137,6 +137,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "paladin_4__magnus" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+		if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("paladin_4__magnus_rank_11") then
 		end
@@ -293,7 +294,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "special_stun_duration" then return 1.5 end
     if value_name == "special_purge" then return 1 end
     if value_name == "max_mult" then return 4 end
-    if value_name == "radius" then return 450 end
+    if value_name == "radius" then return 400 end
 
     if value_name == "target_mult" then
       if caster:FindAbilityByName("paladin_3__hammer_rank_31") then return 3 end
@@ -302,9 +303,10 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "paladin_4__magnus" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 300 * mana_mult end
+		if value_name == "AbilityCooldown" then return 45 end
+
+		if value_name == "duration" then return 4 + (value_level * 0.2) end
 	end
 
 	if ability:GetAbilityName() == "paladin_5__smite" then
