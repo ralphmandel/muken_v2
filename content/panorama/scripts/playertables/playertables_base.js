@@ -278,10 +278,14 @@ function CreateRunePanel(){
 }
 
 function CreateItemSlotPanel(){
-  var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block").FindChildTraverse("inventory");
-  var ItemSlot = $.CreatePanel( "Panel", CenterPanel, "" );
+  var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
+  var SlotContainer = CenterPanel.FindChildTraverse("inventory");
+  var ItemSlot = $.CreatePanel( "Panel", SlotContainer, "" );
   ItemSlot.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_container.xml", false, false );
-  //CenterPanel.MoveChildBefore(ItemSlot, CenterPanel.GetChild(26));
+
+  // var TooltipContainer = $.CreatePanel( "Panel", CenterPanel, "" );
+  // TooltipContainer.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_tooltip.xml", false, false );
+  //CenterPanel.MoveChildBefore(TooltipContainer, CenterPanel.GetChild(26));
 }
 
 function OnTeamNameUpdate() {
