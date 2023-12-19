@@ -1,0 +1,43 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/item_slot_container.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/item_slot_container.js"/>
+  </scripts>
+    <Panel class="itemTooltip" hittest="false">
+      
+          <Panel class="slot-container" id="container-head">
+            <Panel class="text-container" id="container-head">
+              <Label class="TitleLabel" text="Helm Slot" />
+              <Label class="TextLabel" text="Any helm type equipament can be equipped on this slot." />
+            </Panel>
+            <Panel class="left-arrow" id="left-arrow-head"></Panel>
+          </Panel>
+
+          <Panel class="slot-container" id="container-armo">
+            <Panel class="text-container" id="container-armo">
+              <Label class="TitleLabel" text="Armo Slot" />
+              <Label class="TextLabel" text="Any armo type equipament can be equipped on this slot." />
+            </Panel>
+            <Panel class="left-arrow" id="left-arrow-armo"></Panel>
+          </Panel>
+
+          <Panel class="slot-container" id="container-weapon">
+            <Panel class="text-container" id="container-weapon">
+              <Label class="TitleLabel" text="Weapon Slot" />
+              <Label class="TextLabel" text="Any weapon type equipament can be equipped on this slot." />
+            </Panel>
+            <Panel class="left-arrow" id="left-arrow-weapon"></Panel>
+          </Panel>
+
+          <Panel class="slot-container" id="container-misc">
+            <Panel class="text-container" id="container-misc">
+              <Label class="TitleLabel" text="Miscellaneous Slot" />
+              <Label class="TextLabel" text="Any miscellaneous type equipament can be equipped on this slot." />
+            </Panel>
+            <Panel class="left-arrow" id="left-arrow-misc"></Panel>
+          </Panel>
+
+    </Panel>
+</root>
