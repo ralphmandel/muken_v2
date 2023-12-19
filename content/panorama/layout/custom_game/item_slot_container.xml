@@ -1,0 +1,26 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/item_slot_container.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/item_slot_container.js"/>
+  </scripts>
+    <Panel class="item_slot_container" hittest="false">
+        <Panel class="slot_item" id="head" hittest="false">
+          <Panel class="item_equipped">
+          </Panel>
+        </Panel>
+          <Panel class="slot_item" id="armo" hittest="false">
+          <Panel class="item_equipped">
+          </Panel>
+        </Panel>
+          <Panel class="slot_item" id="weapon" hittest="false">
+          <Panel class="item_equipped">
+          </Panel>
+        </Panel>
+          <Panel class="slot_item" id="misc" hittest="false">
+          <Panel class="item_equipped">
+          </Panel>
+        </Panel>
+    </Panel>
+</root>

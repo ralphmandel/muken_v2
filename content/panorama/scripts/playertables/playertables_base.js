@@ -238,6 +238,7 @@ function DeleteTableKeys(msg)
   GameEvents.Subscribe("team_name_from_server", OnTeamNameUpdate);
   GameEvents.Subscribe("game_points_from_server", CreatePointsPanel);
   GameEvents.Subscribe("rune_panel_from_server", CreateRunePanel);
+  GameEvents.Subscribe("item_slot_from_lua", CreateItemSlotPanel);
   //GameEvents.Subscribe("dota_player_hero_selection_dirty", OnUpdateHeroSelection1);
   GameEvents.Subscribe("rank_xp_bar_from_server", CreateRankXpBar);
   GameEvents.Subscribe("notifications_from_server", Notifications);
@@ -274,9 +275,13 @@ function CreateRunePanel(){
   CenterPanel.MoveChildBefore(RuneContainer, CenterPanel.GetChild(24));
   CenterPanel.FindChildTraverse("power").checked = true;
   $.Msg("skillet", BuffPanel.FindChildTraverse("buffs").style.transform == 0);
+}
 
-  
-  
+function CreateItemSlotPanel(){
+  var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block").FindChildTraverse("inventory");
+  var ItemSlot = $.CreatePanel( "Panel", CenterPanel, "" );
+  ItemSlot.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_container.xml", false, false );
+  //CenterPanel.MoveChildBefore(ItemSlot, CenterPanel.GetChild(26));
 }
 
 function OnTeamNameUpdate() {

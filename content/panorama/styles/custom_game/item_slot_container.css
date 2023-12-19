@@ -1,0 +1,147 @@
+.item_slot_container {
+  width: 205px;
+  height: 100%;
+  vertical-align: bottom;  
+  horizontal-align: left;
+  z-index: -1;
+  background-image: url("file://{images}/custom_game/inventory_bg1.png");
+}
+
+
+.slot_item{
+  wash-color: #828282db;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ffffff;
+  border-brush: gradient ( linear, 0% 0%, 55% 55%, from ( #ffffff ) , to ( #8e8c92 ) ) ;
+  box-shadow: inset #000000cc 0px 0px 3px;
+}
+.item_equipped{
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #fff ), to( #586e6c) );
+ 
+  width: 52px;
+  height: 52px;
+  vertical-align: middle;
+  horizontal-align: center;
+  box-shadow: inset #000000cc 1px 1px 8px 1px;
+}
+#head{
+  background-image: url("file://{images}/custom_game/slot_head.png");
+  background-size: cover;
+  position: 72px 10px 0px;
+}
+#armo{
+  background-image: url("file://{images}/custom_game/slot_armo.png");
+  background-size: cover;
+  position: 5px 50px 0px;
+}
+#weapon{
+  background-image: url("file://{images}/custom_game/slot_weapon.png");
+  background-size: cover;
+  position: 139px 50px 0px;
+}
+#misc{
+  background-image: url("file://{images}/custom_game/slot_misc.png");
+  background-size: cover;
+  position: 72px 82px 0px;
+}
+
+
+
+#RunesContainer .hasAbility{
+  transform: translateY(30px);
+}
+
+.bottom-button-container{
+
+  border-bottom: 2px solid black;
+  horizontal-align: center;
+  margin-left: 5px;
+ 
+ }
+
+ .runes-container{
+  /* overflow: clip; */
+  flow-children: right;
+  horizontal-align: center;
+
+  width: 90px;
+ }
+
+ .runes-container Image{
+  wash-color: #767676;
+ }
+
+
+
+ .RuneName{
+  font-size: 12px;
+  vertical-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0px 1px 4px 3.0 #000000;
+  margin-left: 5px;
+  letter-spacing: 1px;
+  wash-color: #767676;
+ }
+
+ .runes-container:hover {
+ 
+ }
+
+ .runes-container:Selected Label{
+  brightness: 1;
+  wash-color: none;
+  text-shadow: 0px 0px 10px #44495c;
+ }
+ 
+ .runes-container:Selected Image{
+  opacity: 1;
+  wash-color: none;
+ }
+
+ .runes-container:Selected{
+  wash-color: none;
+ }
+
+ #HotkeyContainer{
+  position: 195px 30px 0px;
+  width: 400px;
+  height: 20px;
+  flow-children: right;
+  z-index: 10;
+ }
+
+ .HotkeyRow{
+  width: 90px;
+
+ }
+
+ .Hotkey{
+  z-index: 16;
+  border-radius: 20%;
+  width: 90px
+  min-width: 6px;
+  min-height: 6px;
+  max-width: 10px;
+  max-height: 10px;
+
+
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( #393939 ), to( #414849 ) );
+  border: 1px solid #ffffff05;
+  box-shadow: fill black 2px 1px 1px 2px;
+ }
+
+ #HotkeyText{
+
+  color: #bba995;
+   text-shadow: 1px 1px 0px 2 #000000;
+     font-size: 10px;
+     font-weight: normal;
+  text-align: center;
+  horizontal-align: center;
+  margin: 0px 0px -2px 0px;
+ }

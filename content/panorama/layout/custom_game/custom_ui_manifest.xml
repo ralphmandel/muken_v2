@@ -87,8 +87,10 @@
     HeroPanel.FindChildTraverse("left_flare").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/side_flare_tall_psd.vtex')";
     HeroPanel.FindChildTraverse("right_flare").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/right_flare_bg_psd.vtex')";
     HeroPanel.FindChildTraverse("center_bg").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/ability_bg_psd.vtex')";
-    HeroPanel.FindChildTraverse("InventoryBG").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/inventory_bg_psd.vtex')";
-    HeroPanel.FindChildTraverse("inventory_items").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/inventory_bg_psd.vtex')";
+    //HeroPanel.FindChildTraverse("InventoryBG").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/inventory_bg_psd.vtex')";
+    //HeroPanel.FindChildTraverse("inventory_items").style.backgroundImage = "url('s2r://panorama/images/hud/reborn/hud_custom_ti10/inventory_bg_psd.vtex')";
+    HeroPanel.FindChildTraverse("inventory_items").style.visibility = "collapse";
+    
     HeroPanel.FindChildTraverse("stragiint").style.visibility = "collapse";
     Killcountbar.FindChildTraverse("quickstats").style.visibility = "collapse";
     // Uncomment any of the following lines in order to disable that portion of the default UI
@@ -100,7 +102,7 @@
     //GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_MINIMAP, false );     //Minimap.
     //GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PANEL, false );      //Entire Inventory UI
     GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_SHOP, false );     //Shop portion of the Inventory. 
-    //GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_ITEMS, false );      //Player items.
+    GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_ITEMS, false );      //Player items.
     GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUICKBUY, false );     //Quickbuy.
     GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_COURIER, false );      //Courier controls.
     GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PROTECT, false );      //Glyph.

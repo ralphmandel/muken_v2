@@ -33,6 +33,7 @@ function GameMode:OnGameRulesStateChange(keys)
       CustomGameEventManager:Send_ServerToAllClients("muken_path_layout_from_lua", {})
       CustomGameEventManager:Send_ServerToAllClients("rank_xp_bar_from_server", {})
       CustomGameEventManager:Send_ServerToAllClients("notifications_from_server", {})
+      CustomGameEventManager:Send_ServerToAllClients("item_slot_from_lua", {})
     end)
   end
 
