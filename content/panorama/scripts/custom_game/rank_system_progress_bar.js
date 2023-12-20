@@ -2,12 +2,13 @@ var XP_LABEL, PROGRESS_BAR_LABEL, PROGRESS_BAR_CIRCULAR;
 
 var current_portrait_entity = "";
 var panels_init = false;
-var manaBar = null, manaBarFire = null;
+var manaBar = null, manaBarFire = null, manaBarParent = null;
 var mana_style = {};
 var energy_style = {};
 var rage_style = {};
-
-
+var original_style_remain = "gradient( linear, 0% 0%, 0% 100%, from( #101932 ), color-stop( 0.2, #172447 ), color-stop( .5, #162244), to( #101932 ) )";
+var rage_style_remain = "gradient( linear, 0% 0%, 0% 100%, from( #120000 ), color-stop( 0.2, #1c0000 ), color-stop( .5, #1f0000), to( #120000 ) )";
+var energy_style_remain = "gradient( linear, 0% 0%, 0% 100%, from( #2e3333 ), color-stop( 0.2, #3d4d4d ), color-stop( .5, #475959), to( #2e3333 ) )";
 
 function OnUpdateSelectedUnit() {
   var nEntityIndex = Players.GetLocalPlayerPortraitUnit();
@@ -26,10 +27,23 @@ function OnPortraitChanged(nEntityIndex) {
     manaBar.style.backgroundColor = rage_style.color;
     manaBarFire.style.opacity = rage_style.opacity;
     manaBarFire.style.hueRotation = rage_style.hue;
+    manaBarRemain.forEach(ProgressBarRight => {
+      ProgressBarRight.style.backgroundColor = rage_style_remain;
+     });
+  } else if (Entities.GetUnitName(current_portrait_entity) == "npc_dota_hero_muerta"){
+    manaBar.style.backgroundColor = energy_style.color;
+    manaBarFire.style.opacity = energy_style.opacity;
+    manaBarFire.style.hueRotation = energy_style.hue;
+    manaBarRemain.forEach(ProgressBarRight => {
+      ProgressBarRight.style.backgroundColor = energy_style_remain;
+     });
   } else {
     manaBar.style.backgroundColor = mana_style.color;
     manaBarFire.style.opacity = mana_style.opacity;
     manaBarFire.style.hueRotation = mana_style.hue;
+    manaBarRemain.forEach(ProgressBarRight => {
+      ProgressBarRight.style.backgroundColor = original_style_remain;
+     });
   }
   
 }
@@ -52,7 +66,10 @@ function OnBarUpdate(event) {
   GameEvents.Subscribe("dota_player_update_selected_unit", OnUpdateSelectedUnit);
   GameEvents.Subscribe("dota_player_update_query_unit", OnUpdateQueryUnit);
 
-  manaBar = $.GetContextPanel().GetParent().FindChildTraverse("health_mana").FindChildTraverse("ManaContainer").FindChildTraverse("ManaProgress").FindChildTraverse("ManaProgress_Left");
+  manaBarParent = $.GetContextPanel().GetParent().FindChildTraverse("health_mana").FindChildTraverse("ManaContainer").FindChildTraverse("ManaProgress");
+  manaBarRemain = manaBarParent.FindChildrenWithClassTraverse("ProgressBarRight");
+
+  manaBar = manaBarParent.FindChildTraverse("ManaProgress_Left")
   manaBarFire = manaBar.FindChildTraverse("ManaBurner");
   mana_style = {
     color: manaBar.style.backgroundColor, 
@@ -60,12 +77,12 @@ function OnBarUpdate(event) {
     hue: manaBarFire.style.hueRotation
   }
   energy_style = {
-    color: "gradient( linear, 0% 0%, 0% 100%, from( #7a8787 ), color-stop( 0.2, #a5cfcf ), color-stop( .5, #bcebeb), to( #7a8787 ) )", 
-    opacity: "0.7", 
+    color: "gradient( linear, 0% 0%, 0% 100%, from( #7f8787 ), color-stop( 0.2, #b6cfcf ), color-stop( .5, #ceebeb), to( #7f8787 ) )", 
+    opacity: "0.5", 
     hue: "120deg"
   }
   rage_style = {
-    color: "gradient( linear, 0% 0%, 0% 100%, from( #0d0d0d ), color-stop( 0.2, #141414 ), color-stop( .5, #171717), to( #0d0d0d ) )", 
+    color: "gradient( linear, 0% 0%, 0% 100%, from( #141414 ), color-stop( 0.2, #1f1f1f ), color-stop( .5, #212121), to( #141414 ) )", 
     opacity: "0.4", 
     hue: "240deg"
   }
