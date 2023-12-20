@@ -35,22 +35,22 @@
   background-image: url("file://{images}/custom_game/slot_head.png");
   background-size: cover;
   background-position: 0px 0px;
-  position: 72px 10px 0px;
+  position: 72px 8px 0px;
 }
 #armo{
   background-image: url("file://{images}/custom_game/slot_armo.png");
   background-size: cover;
-  position: 5px 50px 0px;
+  position: 5px 42.5px 0px;
 }
 #weapon{
   background-image: url("file://{images}/custom_game/slot_weapon.png");
   background-size: cover;
-  position: 139px 50px 0px;
+  position: 139px 42.50px 0px;
 }
 #misc{
   background-image: url("file://{images}/custom_game/slot_misc.png");
   background-size: cover;
-  position: 72px 82px 0px;
+  position: 72px 77px 0px;
 }
 
 .item-equipped{

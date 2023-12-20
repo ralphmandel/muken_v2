@@ -17,7 +17,7 @@ function base_hero_mod:OnCreated(kv)
 	self:LoadModel()
 	self:LoadSounds()
 
-	if IsServer() then self:StartIntervalThink(FrameTime()) end
+	if IsServer() then self:StartIntervalThink(0.5) end
 end
 
 function base_hero_mod:OnRefresh(kv)
