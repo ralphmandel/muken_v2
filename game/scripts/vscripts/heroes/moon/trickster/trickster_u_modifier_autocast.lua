@@ -18,6 +18,9 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 404 then return "ancient_roar" end
   if self.texture == 405 then return "ancient_walk" end
   if self.texture == 406 then return "ancient_fissure" end
+  if self.texture == 407 then return "paladin_shield" end
+  if self.texture == 408 then return "paladin_hammer" end
+  if self.texture == 409 then return "paladin_magnus" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -35,8 +38,7 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   if IsServer() then
     self.target = EntIndexToHScript(kv.target_index)
 
-    AddSubStats(self.parent, self.ability, {magical_damage = self.ability:GetSpecialValueFor("magical_damage")}, false)
-    AddSubStats(self.target, self.ability, {manacost = self.ability:GetSpecialValueFor("special_manacost")}, false)
+    --AddSubStats(self.target, self.ability, {manacost = self.ability:GetSpecialValueFor("special_manacost")}, false)
 
     if self.target:IsHero() then
       self.special_kv_name = GetHeroName(self.target).."_special_values"
@@ -48,6 +50,15 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
     self.stolen_ability:SetLevel(self.ability:GetSpecialValueFor("ability_level"))
     self.stolen_ability:SetHidden(true)
+
+    for tier = 1, 3, 1 do
+      for path = 1, 2, 1 do
+        local rank_name = "_rank_"..tier..path
+        if self.ability:GetSpecialValueFor(rank_name) == 1 then
+          self.ability.ranks[rank_name] = self.parent:AddAbility(ability:GetAbilityName()..rank_name)
+        end
+      end
+    end
 
     self:StartIntervalThink(self:GetDuration() - 0.5)
     self:CheckLast()
@@ -68,7 +79,15 @@ function trickster_u_modifier_autocast:OnRemoved()
   end
 
   if self.special_kv_name and special_remove then self.parent:RemoveModifierByName(self.special_kv_name) end
+
   self.parent:RemoveAbilityByHandle(self.stolen_ability)
+  
+  for _,rank in pairs(self.ability.ranks) do
+    self.parent:RemoveAbilityByHandle(rank)
+  end
+
+  self.ability.ranks = {}
+  
   self:CheckLast()
 end
 
@@ -96,6 +115,8 @@ end
 function trickster_u_modifier_autocast:OnAttackLanded(keys)
   if keys.attacker ~= self.parent then return end
   if self.stolen_ability:IsActivated() == false then return end
+  if self.stolen_ability:IsOwnersManaEnough() == false then return end
+  if self.stolen_ability:IsOwnersManaEnough() == false then return end
   if not self.enabled then return end
 
   if RandomFloat(0, 100) < self:GetChance() then
@@ -108,11 +129,11 @@ function trickster_u_modifier_autocast:OnAttackLanded(keys)
     self.parent:SetCursorCastTarget(target)
     self.parent:SetCursorPosition(keys.target:GetOrigin())
     self.stolen_ability:OnSpellStart()
+    self.stolen_ability:UseResources(true, true, true, false)
   end
 end
 
 function trickster_u_modifier_autocast:OnIntervalThink()
-  RemoveSubStats(self.parent, self.ability, {"magical_damage"})
   self.enabled = false
 
   if self.target then

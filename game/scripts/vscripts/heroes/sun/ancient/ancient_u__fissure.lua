@@ -78,7 +78,8 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
         ApplyDamage({
           victim = enemy, attacker = caster,
           ability = self, damage = damage,
-          damage_type = self:GetAbilityDamageType()
+          damage_type = self:GetAbilityDamageType(),
+          damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
         })
       end
 

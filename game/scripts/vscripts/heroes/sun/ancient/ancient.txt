@@ -202,7 +202,7 @@
       "cast_range_mult"	  "250"
       "energy_gain"	      "10"
       "energy_loss_tick"  "0.1"
-      "damage"	          "50"
+      "damage"	          "70"
       "crack_time"	      "1 2 3 4 5 6 7"
       "special_heal"              "0"
       "special_silence_duration"  "0"

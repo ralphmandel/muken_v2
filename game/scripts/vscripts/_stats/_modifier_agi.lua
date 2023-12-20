@@ -132,7 +132,7 @@ function _modifier_agi:GetModifierPercentageCooldown()
 end
 
 function _modifier_agi:GetModifierConstantManaRegen()
-  if self.parent:HasModifier("ancient_3_modifier_passive") then return 0 end
+  if self.parent:HasModifier("ancient_u_modifier_passive") then return 0 end
   
   return self.const_base_mana_regen + self:GetCalculedData("sub_stat_mana_regen", false)
 end

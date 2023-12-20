@@ -57,6 +57,9 @@ function trickster_u_modifier_passive:IsListed(ability)
     "ancient_2__roar",
     "ancient_5__walk",
     "ancient_u__fissure",
+    "paladin_2__shield",
+    "paladin_3__hammer",
+    "paladin_4__magnus"
   }
 
   for _, name in pairs(list) do

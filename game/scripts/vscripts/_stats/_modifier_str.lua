@@ -72,20 +72,9 @@ function _modifier_str:GetModifierMiss_Percentage(keys)
 end
 
 function _modifier_str:GetModifierTotalDamageOutgoing_Percentage(keys)
-  if keys.damage_flags ~= 1024 then
-    if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
-
-    if keys.damage_flags ~= 31 then
-      if self.has_crit == true then
-        local crit_damage = self:GetCriticalDamage()
-        self.force_crit_damage = nil
-        return crit_damage - 100
-      end
-    end
-  end
-
-  if keys.damage_flags ~= 31 then
-    if self.has_crit == true then
+  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
+    if keys.damage_flags ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+    and keys.damage_flags ~= 31 and self.has_crit == true then
       local crit_damage = self:GetCriticalDamage()
       self.force_crit_damage = nil
       return crit_damage - 100
@@ -101,7 +90,7 @@ function _modifier_str:OnTakeDamage(keys)
   if keys.attacker ~= self.parent then return end
   if self.has_crit == false then return end
 
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK or keys.damage_flags == 1024 then
+  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     self:PopupSpellCrit(keys.damage, keys.unit, DAMAGE_TYPE_PHYSICAL)
   end
 end

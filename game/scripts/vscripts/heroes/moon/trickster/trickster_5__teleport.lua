@@ -126,5 +126,3 @@ LinkLuaModifier("trickster_5_modifier_teleport", "heroes/moon/trickster/trickste
 
     if IsServer() then caster:EmitSound("Hero_Antimage.Blink_out") end
   end
-
-  

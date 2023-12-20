@@ -161,9 +161,15 @@
 		{
       "duration"        "30"
       "chance_mult"     "1.3"
-      "magical_damage"  "30"
       "ability_level"   "1 2 3 4 5 6 7"
-      "special_manacost"  "0"
+      "_rank_11" "0"
+      "_rank_12" "0"
+      "_rank_21" "0"
+      "_rank_22" "0"
+      "_rank_31" "0"
+      "_rank_32" "0"
+      // "special_manacost"  "0"
+      // "special_cd_mult"   "0"
 		}
 	}
 
@@ -451,7 +457,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
-      //"AbilityTextureName"  "trickster_autocast"
+      "AbilityTextureName"  "trickster_autocast"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -469,7 +475,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/trickster/trickster-ranks_lua"
-      //"AbilityTextureName"  "trickster_autocast"
+      "AbilityTextureName"  "trickster_autocast"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

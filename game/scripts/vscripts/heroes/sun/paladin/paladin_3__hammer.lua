@@ -61,9 +61,11 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
 
   function paladin_3__hammer:PlayEfxHammer(target, radius)
     local caster = self:GetCaster()
+
     local particle = "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"
     local effect = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN_FOLLOW, target)
-    ParticleManager:SetParticleControl(effect, 0, target:GetOrigin())
+    ParticleManager:SetParticleControl(effect, 1, Vector(radius, radius, radius))
+    ParticleManager:ReleaseParticleIndex(effect)
 
     local particle2 = "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_immortal_cast.vpcf"
     local effect2 = ParticleManager:CreateParticle(particle2, PATTACH_ABSORIGIN_FOLLOW, caster)

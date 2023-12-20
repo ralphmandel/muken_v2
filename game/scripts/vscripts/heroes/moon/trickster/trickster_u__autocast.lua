@@ -8,11 +8,13 @@ LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloods
 LinkLuaModifier("lawbreaker_special_values", "heroes/death/lawbreaker/lawbreaker-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_values", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
   function trickster_u__autocast:Spawn()
     self.texture = 1
+    self.ranks = {}
   end
 
   function trickster_u__autocast:GetIntrinsicModifierName()
@@ -117,15 +119,31 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
     local ability_name = EntIndexToHScript(table.ability_index):GetAbilityName()
     local target = EntIndexToHScript(table.target_index)
 
+    -- local ability_target = target:FindAbilityByName(ability_name)
+    -- if ability_target then
+    --   local add_cd = ability_target:GetCooldown(ability_target:GetLevel()) * self:GetSpecialValueFor("special_cd_mult")
+    --   ability_target:StartCooldown(ability_target:GetCooldownTimeRemaining() + add_cd)
+    -- end
+
     for _, autocast_mod in pairs(autocast_mods) do
       if autocast_mod.stolen_ability:GetAbilityName() == ability_name then
+        autocast_mod.stolen_ability:SetLevel(self:GetSpecialValueFor("ability_level"))
         autocast_mod.enabled = true
         autocast_mod.timer = true
 
-        RemoveSubStats(caster, self, {"magical_damage"})
-        RemoveSubStats(target, self, {"manacost"})
-        AddSubStats(caster, self, {magical_damage = self:GetSpecialValueFor("magical_damage")}, false)
-        AddSubStats(target, self, {manacost = self:GetSpecialValueFor("special_manacost")}, false)
+        for tier = 1, 3, 1 do
+          for path = 1, 2, 1 do
+            local rank_name = "_rank_"..tier..path
+            if self:GetSpecialValueFor(rank_name) == 1 then
+              if caster:HasAbility(ability_name..rank_name) == false then
+                self.ranks[rank_name] = caster:AddAbility(ability_name..rank_name)
+              end
+            end
+          end
+        end
+
+        -- RemoveSubStats(target, self, {"manacost"})
+        -- AddSubStats(target, self, {manacost = self:GetSpecialValueFor("special_manacost")}, false)
 
         if IsServer() then
           local duration = CalcStatus(self:GetSpecialValueFor("duration"), caster, caster)
@@ -164,6 +182,9 @@ LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_va
       ["ancient_2__roar"] = 404,
       ["ancient_5__walk"] = 405,
       ["ancient_u__fissure"] = 406,
+      ["paladin_2__shield"] = 407,
+      ["paladin_3__hammer"] = 408,
+      ["paladin_4__magnus"] = 409
     }
   
     return list[ability_name]

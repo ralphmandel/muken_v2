@@ -346,7 +346,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "cast_range_mult" then return 375 end
     if value_name == "energy_loss_tick" then return 0.2 end
     if value_name == "energy_gain" then return 12 end
-    if value_name == "damage" then return 60 end
+    if value_name == "damage" then return 80 end
     if value_name == "special_heal" then return 50 end
     if value_name == "min_cost" then return 30 end
     if value_name == "special_silence_duration" then return 5 end

@@ -46,7 +46,7 @@ function _modifier_int:GetModifierManaBonus()
     if self.parent:HasModifier("ancient_u_modifier_passive") == false then
       return 0
     else
-      return 750 + self:GetCalculedDataStack("sub_stat_max_mana", false)
+      return 1000 + self:GetCalculedDataStack("sub_stat_max_mana", false)
     end
   end
   
@@ -77,7 +77,7 @@ function _modifier_int:GetModifierMagicalResistanceBonus()
 end
 
 function _modifier_int:OnTakeDamage(keys)
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK or keys.damage_flags == 1024 then return end
+  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return end
   if keys.unit ~= self.parent then return end
 
   if keys.damage_type == DAMAGE_TYPE_MAGICAL then
