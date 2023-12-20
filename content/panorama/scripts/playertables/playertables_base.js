@@ -239,6 +239,7 @@ function DeleteTableKeys(msg)
   GameEvents.Subscribe("game_points_from_server", CreatePointsPanel);
   GameEvents.Subscribe("rune_panel_from_server", CreateRunePanel);
   GameEvents.Subscribe("item_slot_from_lua", CreateItemSlotPanel);
+  GameEvents.Subscribe("item_slot_from_lua", CreateInventoryPanel);
   //GameEvents.Subscribe("dota_player_hero_selection_dirty", OnUpdateHeroSelection1);
   GameEvents.Subscribe("rank_xp_bar_from_server", CreateRankXpBar);
   GameEvents.Subscribe("notifications_from_server", Notifications);
@@ -282,6 +283,16 @@ function CreateItemSlotPanel(){
   var SlotContainer = CenterPanel.FindChildTraverse("inventory");
   var ItemSlot = $.CreatePanel( "Panel", SlotContainer, "" );
   ItemSlot.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_container.xml", false, false );
+
+  // var TooltipContainer = $.CreatePanel( "Panel", CenterPanel, "" );
+  // TooltipContainer.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_tooltip.xml", false, false );
+  //CenterPanel.MoveChildBefore(TooltipContainer, CenterPanel.GetChild(26));
+}
+
+function CreateInventoryPanel(){
+  var centerPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
+  var inventorySlot = $.CreatePanel( "Panel", centerPanel, "" );
+  inventorySlot.BLoadLayout( "file://{resources}/layout/custom_game/muken_inventory.xml", false, false );
 
   // var TooltipContainer = $.CreatePanel( "Panel", CenterPanel, "" );
   // TooltipContainer.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_tooltip.xml", false, false );

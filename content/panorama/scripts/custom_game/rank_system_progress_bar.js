@@ -27,6 +27,7 @@ function OnPortraitChanged(nEntityIndex) {
     manaBar.style.backgroundColor = rage_style.color;
     manaBarFire.style.opacity = rage_style.opacity;
     manaBarFire.style.hueRotation = rage_style.hue;
+    manaBarFire.style.saturation = 1;
     manaBarRemain.forEach(ProgressBarRight => {
       ProgressBarRight.style.backgroundColor = rage_style_remain;
      });
@@ -34,6 +35,7 @@ function OnPortraitChanged(nEntityIndex) {
     manaBar.style.backgroundColor = energy_style.color;
     manaBarFire.style.opacity = energy_style.opacity;
     manaBarFire.style.hueRotation = energy_style.hue;
+    manaBarFire.style.saturation = 0.5;
     manaBarRemain.forEach(ProgressBarRight => {
       ProgressBarRight.style.backgroundColor = energy_style_remain;
      });
@@ -41,6 +43,7 @@ function OnPortraitChanged(nEntityIndex) {
     manaBar.style.backgroundColor = mana_style.color;
     manaBarFire.style.opacity = mana_style.opacity;
     manaBarFire.style.hueRotation = mana_style.hue;
+    manaBarFire.style.saturation = 1;
     manaBarRemain.forEach(ProgressBarRight => {
       ProgressBarRight.style.backgroundColor = original_style_remain;
      });

@@ -1,0 +1,67 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_inventory.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/muken_inventory.js"/>
+  </scripts>
+    <Panel class="inventory_root" hittest="false">
+
+      <Panel id="inventory_items" hittest="false" require-composition-layer="true" always-cache-composition-layer="true" >
+        <Panel id="text-header">
+          <Label class="TitleLabel" text="INVENTORY" />
+        </Panel>
+
+        <Panel id="InventoryContainer">
+          <Panel id="inventory_list_container" hittest="false">
+            <Panel id="inventory_row1" hittest="false">
+              <Panel class="slot">
+              
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+            </Panel>
+            <Panel id="inventory_row2" hittest="false">
+              <Panel class="slot">
+              
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+            </Panel>
+            <Panel id="inventory_row3" hittest="false">
+              <Panel class="slot">
+              
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+              <Panel class="slot">
+                
+              </Panel>
+            </Panel>
+          </Panel>
+        </Panel>
+
+        <Panel id="order_by" hittest="false">
+          <Label id="text-header" text="Order by:" />
+          <Panel class="btn-radio">
+            <Button class="checkbox" id="checkbox-name" onactivate="RadioSelect()"></Button>
+            <Label text="Name"/>
+             <Button class="checkbox selected" id="checkbox-tier" onactivate="RadioSelect()"></Button>
+            <Label text="Tier"/>
+          </Panel>
+         
+        
+        </Panel>
+      </Panel>		
+
+    </Panel>
+</root>
