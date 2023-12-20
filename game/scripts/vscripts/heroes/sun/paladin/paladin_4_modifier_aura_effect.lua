@@ -41,7 +41,7 @@ function paladin_4_modifier_aura_effect:OnIntervalThink()
     victim = self.parent, attacker = self.caster,
     damage = self.caster:GetMaxHealth() * self.ability:GetSpecialValueFor("damage_percent") * self.interval * 0.01,
     damage_type = self.ability:GetAbilityDamageType(),
-    ability = self.ability
+    ability = self.ability, damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 end
 
