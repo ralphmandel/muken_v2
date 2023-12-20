@@ -34,7 +34,7 @@ function ancient_u_modifier_passive:DeclareFunctions()
 end
 
 function ancient_u_modifier_passive:OnTakeDamage(keys)
-  if GetHeroName(self.parent) == "trickster" then return end
+  --if GetHeroName(self.parent) == "trickster" then return end
 	if self.parent:PassivesDisabled() then return end
 
   if keys.inflictor == self.ability and keys.unit:IsAlive() == false
@@ -54,10 +54,10 @@ end
 function ancient_u_modifier_passive:OnIntervalThink()
   self.ability:UpdateParticles()
 
-  if GetHeroName(self.parent) == "trickster" then
-    if IsServer() then self:StartIntervalThink(0.1) end
-    return
-  end
+  -- if GetHeroName(self.parent) == "trickster" then
+  --   if IsServer() then self:StartIntervalThink(0.1) end
+  --   return
+  -- end
 
   ReduceMana(self.parent, self.ability, 1, false)
 

@@ -168,6 +168,10 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "paladin_5__smite" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 1 end
+		if value_name == "damage" then return 1 end
 
 		if caster:FindAbilityByName("paladin_5__smite_rank_11") then
 		end
@@ -332,9 +336,13 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "paladin_5__smite" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 6 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 50 * mana_mult end
+		if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCastRange" then return caster:Script_GetAttackRange() end
+    if value_name == "AbilityCharges" then return 3 end
+    if value_name == "AbilityChargeRestoreTime" then return 5 end
+
+		if value_name == "damage" then return 120 + (value_level * 5) end
 	end
 
 	if ability:GetAbilityName() == "paladin_u__faith" then

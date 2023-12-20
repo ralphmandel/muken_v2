@@ -9,7 +9,7 @@ LinkLuaModifier("ancient_u_modifier_passive", "heroes/sun/ancient/ancient_u_modi
   end
 
   function ancient_u__fissure:OnOwnerSpawned()
-    if GetHeroName(self:GetCaster()) == "trickster" then return end
+    --if GetHeroName(self:GetCaster()) == "trickster" then return end
 
     self:GetCaster():SetMana(self.current_energy)
     self:UpdateParticles()
