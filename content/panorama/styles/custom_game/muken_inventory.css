@@ -1,0 +1,215 @@
+.inventory_root {
+	tooltip-position: right;
+	tooltip-body-position: 100% 90%;
+	tooltip-arrow-position: 100% 90%;
+  width: 300px;
+  height: 221px;
+  visibility: visible;
+  vertical-align: bottom;
+  horizontal-align: right;
+  margin-right: 250px;
+  z-index: -3;
+}
+
+.HIDE_INVENTORY_ITEMS #inventory_items,
+.HIDE_INVENTORY_ITEMS #BackPackLabel {
+	visibility: collapse;
+}
+
+#inventory_list_container {
+	flow-children: down;
+	padding: 2px;
+	z-index: 1;
+  background-image: url("file://{images}/custom_game/inventory_bg_container1.png");
+  background-size: 100%;
+	border-bottom: 1px solid #000e;
+	background-repeat: no-repeat;
+}
+
+.Reborn.CustomHUDSkin #inventory_list_container {
+	background-color: #ffffff05;
+}
+
+.QueryUnit #inventory_list_container {
+	padding: 0px;
+}
+
+#inventory_row1,
+#inventory_row2,
+#inventory_row3 {
+	flow-children: right;
+	width: 196px;
+	padding: 0px;
+	width: 200px;
+	height: 50px;
+}
+
+#inventory_row2,
+#inventory_row3 {
+	margin-top: -2px;
+}
+
+.QueryUnit #inventory_row1,
+.QueryUnit #inventory_row2,
+.QueryUnit #inventory_row3 {
+	height: fit-children;
+}
+
+.Reborn #InventoryBG {
+	width: 100%;
+	height: 105px;
+	background-image: url("s2r://panorama/images/hud/reborn/inventory_bg_psd.vtex");
+	background-size: 100%;
+	border-bottom: 1px solid #000e;
+	background-repeat: no-repeat;
+}
+
+.Reborn .QueryUnit #InventoryBG {
+	background-size: 100%;
+}
+
+.Reborn .UnitDead #InventoryBG {
+	brightness: 2;
+	saturation: 1;
+	wash-color: #64aa9Daa;
+}
+
+.Reborn #inventory_items {
+	width: 202px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	flow-children: none;
+	horizontal-align: center;
+	height: 220px;
+	horizontal-align: left;
+  background-image: url("file://{images}/custom_game/inventory_bg.png");
+  background-size: 100%;
+  border: 1px solid black;
+  padding: 6px;
+  box-shadow: #00000066 0px 0px 8px 0px;
+  background-color: #10171c;
+	flow-children: down;
+	vertical-align: top;
+  box-shadow:  #000000cc 0px 0px 8px -1px;
+  opacity: 0.9;
+}
+
+.Reborn .QueryUnit #inventory_items {
+	flow-children: down;
+	margin-left: 0px;
+	margin-top: 0px;
+	horizontal-align: left;
+}
+
+.Reborn .QueryUnit #inventory_row1,
+.Reborn .QueryUnit #inventory_row2,
+.Reborn .QueryUnit #inventory_row3 {
+	padding: 2px;
+	padding-top: 2px;
+	padding: 0px;
+}
+
+.QueryUnit #inventory_slot_6,
+.QueryUnit #inventory_slot_7,
+.QueryUnit #inventory_slot_8 {
+	margin: 0px;
+}
+
+#inventory_slot_6 #ItemImage,
+#inventory_slot_7 #ItemImage,
+#inventory_slot_8 #ItemImage {
+	horizontal-align: center;
+}
+
+.HIDE_TOP_MENU_BUTTONS #SettingsButton,
+.HIDE_TOP_MENU_BUTTONS #ToggleScoreboardButton,
+.HIDE_TOP_MENU_BUTTONS #SettingsButton {
+	visibility: collapse;
+}
+
+#InventoryContainer {
+	width: 100%;
+	height: 149px;
+  margin-top: 2px;
+}
+
+.QueryUnit #stats {
+	visibility: collapse;
+}
+
+#inventory_items > #text-header{
+  width: 100%;
+  horizontal-align: center;
+  border-bottom: 2px solid #29353b;
+  margin-bottom: 2px;
+}
+
+.TitleLabel{
+  font-size: 18px;
+  color: #e1e1e1;
+  horizontal-align: center;
+  text-overflow: shrink;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 0px 1.0 #00000090;
+  font-weight: semi-bold;
+  text-transform: uppercase;
+  font-family: titleFont;
+  margin-bottom: 1px;
+}
+
+.slot{
+  width: 59px;
+  height: 45px;
+  background-size: cover;
+  overflow: noclip;
+  background-color: #1a1c1d88;
+  background-image: url("file://{images}/custom_game/inventory_bg_slot.png");
+  background-size: 100%;
+  border: 2px solid #1a1c1dc5;
+  margin: 0px 0.5px 0px 1px;
+  padding: 0px;
+  box-shadow: inset #000000cc 0px 0px 2px;
+}
+
+
+
+#order_by {
+  width: 100%;
+  flow-children: right;
+  margin-top: 6px;
+}
+
+#order_by Label{
+  color: white;
+  margin-left: 5px;
+  margin-right: 2px;
+  font-size: 14px;
+  font-family: defaultFont;
+}
+
+.btn-radio{
+  flow-children: right;
+  horizontal-align: left;
+  wash-color: #99999970;
+  margin-left: 10px;
+ }
+
+.checkbox{
+  width: 17px;
+  height: 100%;
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( #4c5561 ), to( #6c7d88 ) );
+  wash-color: #0e1d2092;
+  margin: 0px;
+  border: 2px solid #29353b;
+  brightness: 0.6;
+}
+
+.checkbox:hover
+{
+    wash-color: #ffffff;
+}
+
+.selected{
+  wash-color: #74e9fee8;
+  brightness: 2;
+}
