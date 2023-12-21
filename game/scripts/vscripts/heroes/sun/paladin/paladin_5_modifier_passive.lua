@@ -53,7 +53,25 @@ function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
   if IsServer() then
     self:PlayEfxHit(keys.target)
     self:PlayEfxScreenShake(keys.target)
-  end  
+  end
+
+  local stun_mods = keys.target:FindAllModifiersByName("_modifier_stun")
+  local stun_duration = CalcStatus(self.ability:GetSpecialValueFor("special_stun_duration"), self.caster, keys.target)
+
+  for _, mod in pairs(stun_mods) do
+    if mod:GetCaster() == self.caster and mod:GetAbility() == self.ability then
+      stun_duration = stun_duration + mod:GetRemainingTime()
+    end
+  end
+
+  RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_stun", self.ability)
+  AddModifier(keys.target, self.ability, "_modifier_stun", {duration = stun_duration}, false)
+
+  if self.ability:GetSpecialValueFor("special_hits") > 0 then
+    AddModifier(self.parent, self.ability, "paladin_5_modifier_sonicblow", {target = keys.target:entindex()}, false)
+  end
+
+  local target_max_hp = keys.target:GetMaxHealth()
 
   local damage_result = ApplyDamage({
     victim = keys.target, attacker = self.caster,
@@ -62,7 +80,11 @@ function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
     ability = self.ability
   })
 
-  self.parent:Heal(damage_result * self.ability:GetSpecialValueFor("heal") * 0.01, self.ability)
+  local base = damage_result
+
+  if self.ability:GetSpecialValueFor("special_hp_based") == 1 then base = target_max_hp end
+
+  self.parent:Heal(base * self.ability:GetSpecialValueFor("heal") * 0.01, self.ability)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -79,7 +101,10 @@ function paladin_5_modifier_passive:ShouldLaunch(target)
     self.cast = (nResult == UF_SUCCESS)
   end
 
-	if self.cast == true and self.parent:IsSilenced() == false and self.ability:IsFullyCastable() then return true end
+	if self.cast == true and self.parent:IsSilenced() == false and self.ability:IsFullyCastable()
+  and self.parent:HasModifier("paladin_5_modifier_sonicblow") == false then
+    return true
+  end
 
 	return false
 end

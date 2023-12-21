@@ -180,15 +180,20 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("paladin_5__smite_rank_21") then
+      if value_name == "heal" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_5__smite_rank_22") then
+      if value_name == "heal" then return 1 end
+      if value_name == "special_hp_based" then return 1 end
 		end
 
 		if caster:FindAbilityByName("paladin_5__smite_rank_31") then
+      if value_name == "special_stun_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_5__smite_rank_32") then
+      if value_name == "special_hits" then return 1 end
 		end
 	end
 
@@ -336,13 +341,47 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "paladin_5__smite" then
-		if value_name == "AbilityManaCost" then return 50 * mana_mult end
+		if value_name == "AbilityManaCost" then
+      if caster:FindAbilityByName("paladin_5__smite_rank_32") then
+        return 60 * mana_mult
+      end
+      return 50 * mana_mult
+    end
+
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return caster:Script_GetAttackRange() end
-    if value_name == "AbilityCharges" then return 3 end
-    if value_name == "AbilityChargeRestoreTime" then return 5 end
+
+    if value_name == "AbilityCharges" then
+      if caster:FindAbilityByName("paladin_5__smite_rank_11") then
+        return 4
+      end
+      if caster:FindAbilityByName("paladin_5__smite_rank_12") then
+        return 2
+      end
+      return 3
+    end
+
+    if value_name == "AbilityChargeRestoreTime" then
+      if caster:FindAbilityByName("paladin_5__smite_rank_12") then
+        return 4
+      end
+      return 5
+    end
 
 		if value_name == "damage" then return 120 + (value_level * 5) end
+
+    if value_name == "heal" then
+      if caster:FindAbilityByName("paladin_5__smite_rank_21") then
+        return 100
+      end
+      if caster:FindAbilityByName("paladin_5__smite_rank_22") then
+        return 3
+      end
+    end
+
+    if value_name == "special_hp_based" then return 1 end
+    if value_name == "special_stun_duration" then return 1.2 end
+    if value_name == "special_hits" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "paladin_u__faith" then
