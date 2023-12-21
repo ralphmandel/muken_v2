@@ -234,18 +234,26 @@ function miscItemChange(){
     squareMisc = $.GetContextPanel().GetChild(6);
 
 		squareHead.BLoadLayoutSnippet("SquareRare");
+    squareHead.BLoadLayoutSnippet("SquareEpic");
+    squareHead.BLoadLayoutSnippet("SquareLegendary");
 
-
+    squareArmo.BLoadLayoutSnippet("SquareRare");
     squareArmo.BLoadLayoutSnippet("SquareEpic");
+    squareArmo.BLoadLayoutSnippet("SquareLegendary");
 
+    squareWeapon.BLoadLayoutSnippet("SquareRare");
+    squareWeapon.BLoadLayoutSnippet("SquareEpic");
     squareWeapon.BLoadLayoutSnippet("SquareLegendary");
 
     squareMisc.BLoadLayoutSnippet("SquareRare");
+    squareMisc.BLoadLayoutSnippet("SquareEpic");
+    squareMisc.BLoadLayoutSnippet("SquareLegendary");
+    
 
-    squareMisc.GetChild(0).DeleteAsync(0);
-
+    headItemChange()
+    armoItemChange()
+    weaponItemChange()
+    miscItemChange()
+    
 })()
 
-// $.Schedule(5, () => {
-//   particle.DeleteAsync(0);
-// });

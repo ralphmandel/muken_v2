@@ -2,12 +2,12 @@
 	tooltip-position: right;
 	tooltip-body-position: 100% 90%;
 	tooltip-arrow-position: 100% 90%;
-  width: 300px;
-  height: 221px;
+  width: 400px;
+  height: 625px;
   visibility: visible;
   vertical-align: bottom;
   horizontal-align: right;
-  margin-right: 250px;
+  margin-right: 130px;
   z-index: -3;
 }
 
@@ -24,6 +24,7 @@
   background-size: 100%;
 	border-bottom: 1px solid #000e;
 	background-repeat: no-repeat;
+  width: 100%;
 }
 
 .Reborn.CustomHUDSkin #inventory_list_container {
@@ -34,13 +35,11 @@
 	padding: 0px;
 }
 
-#inventory_row1,
-#inventory_row2,
-#inventory_row3 {
+#inventory_row1, #inventory_row2, #inventory_row3, #inventory_row4, #inventory_row5, #inventory_row6, #inventory_row7, #inventory_row8, #inventory_row9, #inventory_row10
+{
 	flow-children: right;
-	width: 196px;
 	padding: 0px;
-	width: 200px;
+	width: 100%;
 	height: 50px;
 }
 
@@ -49,9 +48,7 @@
 	margin-top: -2px;
 }
 
-.QueryUnit #inventory_row1,
-.QueryUnit #inventory_row2,
-.QueryUnit #inventory_row3 {
+.QueryUnit #inventory_row1,.QueryUnit #inventory_row2,.QueryUnit #inventory_row3,.QueryUnit #inventory_row4,.QueryUnit #inventory_row5,.QueryUnit #inventory_row6,.QueryUnit #inventory_row7,.QueryUnit #inventory_row8,.QueryUnit #inventory_row9,.QueryUnit #inventory_row10{
 	height: fit-children;
 }
 
@@ -75,12 +72,12 @@
 }
 
 .Reborn #inventory_items {
-	width: 202px;
+	width: 320px;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	flow-children: none;
 	horizontal-align: center;
-	height: 220px;
+	height: 565px;
 	horizontal-align: left;
   background-image: url("file://{images}/custom_game/inventory_bg.png");
   background-size: 100%;
@@ -101,9 +98,8 @@
 	horizontal-align: left;
 }
 
-.Reborn .QueryUnit #inventory_row1,
-.Reborn .QueryUnit #inventory_row2,
-.Reborn .QueryUnit #inventory_row3 {
+.Reborn .QueryUnit #inventory_row1, .Reborn .QueryUnit #inventory_row2, .Reborn .QueryUnit #inventory_row3, .Reborn .QueryUnit #inventory_row4, .Reborn .QueryUnit #inventory_row5, .Reborn .QueryUnit #inventory_row6, .Reborn .QueryUnit #inventory_row7, .Reborn .QueryUnit #inventory_row8, .Reborn .QueryUnit #inventory_row9, .Reborn .QueryUnit #inventory_row10
+{
 	padding: 2px;
 	padding-top: 2px;
 	padding: 0px;
@@ -129,7 +125,7 @@
 
 #InventoryContainer {
 	width: 100%;
-	height: 149px;
+	height: 500px;
   margin-top: 2px;
 }
 
