@@ -5,23 +5,42 @@
   <scripts>
     <include src="file://{resources}/scripts/custom_game/item_slot_container.js"/>
   </scripts>
-    <Panel class="slotContainer" hittest="false">
-        <Panel class="slot_item item-equipped" id="head" hittest="false">
-          <Panel class="item_equipped item-rare">
-          </Panel>
-        </Panel>
-        <Panel class="slot_item item-equipped" id="armo" hittest="false">
-          <Panel class="item_equipped item-epic">
-          </Panel>
-        </Panel>
-        <Panel class="slot_item item-equipped" id="weapon" hittest="false">
-          <Panel class="item_equipped item-legendary">
-          </Panel>
-        </Panel>
-        <Panel class="slot_item" id="misc" hittest="false">
-          <Panel class="item_equipped">
-          </Panel>
-        </Panel>
+  <snippets>
+    <snippet name="SquareRare">
+			<Panel id="rare" class="square-panel">
+				<DOTAScenePanel class="square-scene" map="scenes/hud/autocasting" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>
+			 </Panel>
+		</snippet>
+    <snippet name="SquareEpic">
+			<Panel id="epic" class="square-panel">
+				<DOTAScenePanel class="square-scene" map="scenes/hud/autocasting" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>
+			 </Panel>
+		</snippet>
+    <snippet name="SquareLegendary">
+			<Panel id="legendary" class="square-panel">
+		    <DOTAScenePanel class="square-scene" map="scenes/hud/autocasting" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>
+			</Panel>
+		</snippet>
+  </snippets>
 
+    
+  <Panel class="slotContainer" hittest="false">
+    <Panel class="square-container" id="square-head"/>
+    <Panel class="slot_item item-equipped" id="head" hittest="false">
+      <Panel class="item_equipped item-rare"></Panel>
     </Panel>
+    <Panel class="square-container" id="square-armo"/>
+    <Panel class="slot_item item-equipped" id="armo" hittest="false">
+      <Panel class="item_equipped item-epic"></Panel>
+    </Panel>
+    <Panel class="square-container" id="square-weapon"/>
+    <Panel class="slot_item item-equipped" id="weapon" hittest="false">
+      <Panel class="item_equipped item-legendary"></Panel>
+    </Panel>
+    <Panel class="square-container" id="square-misc"/>
+    <Panel class="slot_item" id="misc" hittest="false">
+      <Panel class="item_equipped"></Panel>
+    </Panel>
+  </Panel>
+
 </root>

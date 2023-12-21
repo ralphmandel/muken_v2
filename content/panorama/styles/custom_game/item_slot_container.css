@@ -32,6 +32,43 @@
   box-shadow: inset #000000cc 0px 0px 6px 2px;
 
 }
+
+.square-container{
+  width: 70px;
+  height: 70px;
+  z-index: -1;
+}
+
+#square-head{
+  position: 67px 4px 0px;
+}
+#square-armo{
+  position: 0px 37.5px 0px;
+}
+#square-weapon{
+  position: 134px 37.50px 0px;
+}
+#square-misc{
+  position: 67px 72px 0px;
+}
+
+.square-scene{
+  width: 100%;
+  height: 100%;
+}
+.square-panel{
+  visibility: visible;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  opacity: 1;
+}
+.square-hidden{
+  opacity: 0;
+  visibility: collapse;
+}
+
+
 #head{
   background-image: url("file://{images}/custom_game/slot_head.png");
   background-size: cover;
