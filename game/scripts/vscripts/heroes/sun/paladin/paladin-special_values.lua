@@ -200,20 +200,26 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "paladin_u__faith" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "max_health" then return 1 end
 
 		if caster:FindAbilityByName("paladin_u__faith_rank_11") then
+      if value_name == "special_magic_resist" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_u__faith_rank_12") then
 		end
 
 		if caster:FindAbilityByName("paladin_u__faith_rank_21") then
+      if value_name == "holy_reduction" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_u__faith_rank_22") then
+      if value_name == "special_aura_radius" then return 1 end
 		end
 
 		if caster:FindAbilityByName("paladin_u__faith_rank_31") then
+      if value_name == "special_mana" then return 1 end
+      if value_name == "special_hp_cap" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_u__faith_rank_32") then
@@ -385,9 +391,22 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "paladin_u__faith" then
-		if value_name == "AbilityManaCost" then return 100 end
-		if value_name == "AbilityCooldown" then return 10 end
-		if value_name == "rank" then return 9 + (value_level * 1) end
+		if value_name == "AbilityManaCost" then return 0 end
+
+		if value_name == "AbilityCooldown" then
+      if caster:FindAbilityByName("paladin_u__faith_rank_31") then
+        return 120
+      end
+      return 0
+    end
+
+		if value_name == "max_health" then return 1500 + (value_level * 50) end
+
+    if value_name == "special_magic_resist" then return 2 end
+    if value_name == "holy_reduction" then return 30 end
+    if value_name == "special_aura_radius" then return 900 end
+    if value_name == "special_mana" then return 10 end
+    if value_name == "special_hp_cap" then return 20 end
 	end
 
 	return 0

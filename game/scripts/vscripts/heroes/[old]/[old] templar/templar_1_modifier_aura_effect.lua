@@ -45,7 +45,7 @@ function templar_1_modifier_aura_effect:OnTakeDamage(keys)
 
 	local return_damage = keys.damage * self.ability:GetSpecialValueFor("return_damage") * 0.01
 
-	if keys.damage_flags ~= 31 then
+	if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
 		if IsServer() then keys.attacker:EmitSound("DOTA_Item.BladeMail.Damage") end
     
 		ApplyDamage({

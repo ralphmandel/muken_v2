@@ -1,6 +1,6 @@
 paladin_4_modifier_aura = class({})
 
-function paladin_4_modifier_aura:IsHidden() return false end
+function paladin_4_modifier_aura:IsHidden() return true end
 function paladin_4_modifier_aura:IsPurgable() return false end
 
 -- AURA -----------------------------------------------------------

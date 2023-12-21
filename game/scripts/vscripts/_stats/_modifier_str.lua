@@ -74,7 +74,7 @@ end
 function _modifier_str:GetModifierTotalDamageOutgoing_Percentage(keys)
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     if keys.damage_flags ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
-    and keys.damage_flags ~= 31 and self.has_crit == true then
+    and keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 and self.has_crit == true then
       local crit_damage = self:GetCriticalDamage()
       self.force_crit_damage = nil
       return crit_damage - 100

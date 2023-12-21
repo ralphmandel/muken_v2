@@ -127,10 +127,6 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
 
     for _, autocast_mod in pairs(autocast_mods) do
       if autocast_mod.stolen_ability:GetAbilityName() == ability_name then
-        autocast_mod.stolen_ability:SetLevel(self:GetSpecialValueFor("ability_level"))
-        autocast_mod.enabled = true
-        autocast_mod.timer = true
-
         for tier = 1, 3, 1 do
           for path = 1, 2, 1 do
             local rank_name = "_rank_"..tier..path
@@ -141,6 +137,10 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
             end
           end
         end
+
+        autocast_mod.stolen_ability:SetLevel(self:GetSpecialValueFor("ability_level"))
+        autocast_mod.enabled = true
+        autocast_mod.timer = true
 
         -- RemoveSubStats(target, self, {"manacost"})
         -- AddSubStats(target, self, {manacost = self:GetSpecialValueFor("special_manacost")}, false)

@@ -1,12 +1,17 @@
 paladin_u__faith = class({})
-LinkLuaModifier("paladin_u_modifier_faith", "heroes/sun/paladin/paladin_u_modifier_faith", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("paladin_u_modifier_passive", "heroes/sun/paladin/paladin_u_modifier_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("paladin_u_modifier_aura_effect", "heroes/sun/paladin/paladin_u_modifier_aura_effect", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 
--- SPELL START
+  function paladin_u__faith:GetAOERadius()
+    return self:GetSpecialValueFor("special_aura_radius")
+  end
 
-	function paladin_u__faith:OnSpellStart()
-		local caster = self:GetCaster()
-	end
+  function paladin_u__faith:GetIntrinsicModifierName()
+    return "paladin_u_modifier_passive"
+  end
+
+-- SPELL START
 
 -- EFFECTS

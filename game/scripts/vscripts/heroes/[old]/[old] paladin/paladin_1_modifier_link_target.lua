@@ -59,14 +59,13 @@ function paladin_1_modifier_link_target:GetModifierIncomingDamageConstant(keys)
   if not IsServer() then return 0 end
   if keys.damage == 0 then return 0 end
 
-  if keys.damage_flags ~= 31 then
+  if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
     local damage = keys.damage * self:GetAbility():GetSpecialValueFor("absorption") * 0.01
     
     local damageTable = {
       victim = self.caster, attacker = keys.attacker, damage = damage,
       damage_type = keys.damage_type, ability = keys.inflictor,
-      damage_flags = DOTA_DAMAGE_FLAG_IGNORES_MAGIC_ARMOR + DOTA_DAMAGE_FLAG_IGNORES_PHYSICAL_ARMOR
-      + DOTA_DAMAGE_FLAG_BYPASSES_INVULNERABILITY + DOTA_DAMAGE_FLAG_BYPASSES_BLOCK + DOTA_DAMAGE_FLAG_REFLECTION
+      damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTA_DAMAGE_FLAG_REFLECTION
     }
   
     --if keys.damage_flags ~= DOTA_DAMAGE_FLAG_REFLECTION then	
