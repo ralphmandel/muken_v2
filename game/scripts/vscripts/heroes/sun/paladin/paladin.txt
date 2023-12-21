@@ -177,18 +177,20 @@
 		"RequiredLevel"         	 	"8"
 		"LevelsBetweenUpgrades"  		"25"
 
-		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
-
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_DEAD"
 
     "AbilityValues"
 		{
-		}
+			"holy_reduction"  "20"
+			"max_health"      "1 2 3 4 5 6 7"
+      "special_magic_resist"  "0"
+      "special_aura_radius"   "0"
+      "special_mana"          "0"
+      "special_hp_cap"        "0"
+    }
 	}
 
   //RANKS

@@ -36,20 +36,14 @@ function trickster_u_modifier_autocast:OnCreated(kv)
   self.texture = self:GetParent():FindAbilityByName("trickster__precache"):GetLevel()
 
   if IsServer() then
+    local ability = EntIndexToHScript(kv.ability_index)
     self.target = EntIndexToHScript(kv.target_index)
-
-    --AddSubStats(self.target, self.ability, {manacost = self.ability:GetSpecialValueFor("special_manacost")}, false)
 
     if self.target:IsHero() then
       self.special_kv_name = GetHeroName(self.target).."_special_values"
     end
 
     AddModifier(self.caster, self.ability, self.special_kv_name, {}, false)
-
-    local ability = EntIndexToHScript(kv.ability_index)
-    self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
-    self.stolen_ability:SetLevel(self.ability:GetSpecialValueFor("ability_level"))
-    self.stolen_ability:SetHidden(true)
 
     for tier = 1, 3, 1 do
       for path = 1, 2, 1 do
@@ -59,6 +53,10 @@ function trickster_u_modifier_autocast:OnCreated(kv)
         end
       end
     end
+
+    self.stolen_ability = self.parent:AddAbility(ability:GetAbilityName())
+    self.stolen_ability:SetLevel(self.ability:GetSpecialValueFor("ability_level"))
+    self.stolen_ability:SetHidden(true)
 
     self:StartIntervalThink(self:GetDuration() - 0.5)
     self:CheckLast()

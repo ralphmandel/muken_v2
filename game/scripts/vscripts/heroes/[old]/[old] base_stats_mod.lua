@@ -141,7 +141,7 @@ base_stats_mod = class ({})
   function base_stats_mod:GetModifierSpellAmplify_Percentage(keys)
     if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
 
-    if keys.damage_flags ~= 31 then
+    if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
       if keys.damage_type == DAMAGE_TYPE_PHYSICAL then
         return self.ability:GetTotalPhysicalDamagePercent() - 100
       end
@@ -158,7 +158,7 @@ base_stats_mod = class ({})
     if keys.damage_flags ~= 1024 then
       if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
 
-      if keys.damage_flags ~= 31 then
+      if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
         if self.ability.has_crit == true then
           local crit_damage = self.ability:GetTotalCriticalDamage()
           self.ability.force_crit_damage = nil
@@ -167,7 +167,7 @@ base_stats_mod = class ({})
       end
     end
 
-    if keys.damage_flags ~= 31 then
+    if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
       if self.ability.has_crit == true then
         local crit_damage = self.ability:GetTotalCriticalDamage()
         self.ability.force_crit_damage = nil

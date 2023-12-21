@@ -1,6 +1,6 @@
 paladin_4_modifier_aura_effect = class({})
 
-function paladin_4_modifier_aura_effect:IsHidden() return false end
+function paladin_4_modifier_aura_effect:IsHidden() return true end
 function paladin_4_modifier_aura_effect:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------

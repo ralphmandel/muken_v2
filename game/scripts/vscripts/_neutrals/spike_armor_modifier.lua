@@ -39,7 +39,7 @@ function spike_armor_modifier:OnTakeDamage(keys)
 	if keys.attacker:IsBaseNPC() == false then return end
 	local return_percent = self.ability:GetSpecialValueFor("return_percent") * 0.01
 
-	if keys.damage_flags ~= 31 then
+	if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
 		local damageTable = {
 			damage = keys.damage * return_percent,
 			damage_type = keys.damage_type,
