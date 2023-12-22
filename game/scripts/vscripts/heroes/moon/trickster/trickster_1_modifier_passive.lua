@@ -139,8 +139,8 @@ function trickster_1_modifier_passive:HasHit(target)
   local target_evasion = false
 
   if MainStats(target, "AGI") then
-    local crit = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetCriticalChance()
-    target_evasion = (crit == false and RandomFloat(0, 100) < MainStats(target, "AGI"):GetEvasion())
+    local crit = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetCriticalChance(true)
+    target_evasion = (crit == false and RandomFloat(0, 100) < MainStats(target, "AGI"):GetEvasion(true))
   end
 
   return (attacker_missing == false and target_evasion == false)

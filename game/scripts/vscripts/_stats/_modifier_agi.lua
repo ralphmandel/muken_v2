@@ -86,7 +86,7 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
   local attacker_str = MainStats(keys.attacker, "STR")
   if attacker_str == nil then return end
 
-  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance()
+  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance(true)
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 
@@ -96,7 +96,7 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
   end
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
-  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
+  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion(true))
   if attacker_missing or target_evasion then self.proj_miss_attacker = keys.attacker return 1 end
 
   self.proj_miss_attacker = nil
@@ -112,7 +112,7 @@ function _modifier_agi:OnAttack(keys)
   if keys.attacker:GetAttackCapability() ~= DOTA_UNIT_CAP_MELEE_ATTACK
   and keys.no_attack_cooldown == false then return end
 
-  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance()
+  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance(true)
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 
@@ -123,7 +123,7 @@ function _modifier_agi:OnAttack(keys)
   end
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
-  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion())
+  local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion(true))
   attacker_str.missing = (attacker_missing or target_evasion)
 end
 
@@ -176,10 +176,13 @@ function _modifier_agi:GetBAT()
   return self.const_base_attack_time + self:GetCalculedData("sub_stat_attack_time", false)
 end
 
-function _modifier_agi:GetEvasion()
-  local evasion = self:GetCalculedData("sub_stat_evasion", true)
-  if evasion < 0 then evasion = 0 end
-  if evasion > 100 then evasion = 100 end
+function _modifier_agi:GetEvasion(bPercent)
+  local evasion = self:GetCalculedData("sub_stat_evasion", bPercent)
+
+  if bPercent then
+    if evasion < 0 then evasion = 0 end
+    if evasion > 100 then evasion = 100 end
+  end
 
   return evasion
 end
@@ -193,6 +196,10 @@ function _modifier_agi:UpdateMS(property)
   end
 
   self.data[property].bonus = value
+end
+
+function _modifier_agi:GetCooldownReduction()
+  return self:GetCalculedData("sub_stat_cooldown_reduction", false)
 end
 
 function _modifier_agi:GetCalculedDataStack(property, bScalar)

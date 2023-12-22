@@ -88,8 +88,10 @@ function TalentTree:OnPortraitUpdate(event)
     physical_damage = MainStats(entity, "STR"):GetPhysicalDamageAmp(),
     attack_speed = entity:GetDisplayAttackSpeed(),
     armor = entity:GetPhysicalArmorValue(false),
-    evasion = MainStats(entity, "AGI"):GetEvasion(),
-    crit_chance = MainStats(entity, "STR"):GetCriticalChance(),
+    evasion = MainStats(entity, "AGI"):GetEvasion(false),
+    evasion_percent = MainStats(entity, "AGI"):GetEvasion(true),
+    crit_chance = MainStats(entity, "STR"):GetCriticalChance(false),
+    crit_chance_percent = MainStats(entity, "STR"):GetCriticalChance(true),
 
     attack_damage = entity:GetAverageTrueAttackDamage(nil),
     movespeed = entity:GetIdealSpeed(),
@@ -99,21 +101,24 @@ function TalentTree:OnPortraitUpdate(event)
 
     magical_damage = MainStats(entity, "INT"):GetMagicalDamageAmp(),
     current_vision = entity:GetCurrentVisionRange(),
-    magical_resist = entity:Script_GetMagicalArmorValue(false, MainStats(entity, "INT")) * 100,
+    magical_resist = MainStats(entity, "INT"):GetMagicalResist(),
+    magical_resist_percent = entity:Script_GetMagicalArmorValue(false, MainStats(entity, "INT")) * 100,
     mp_regen = entity:GetManaRegen(),
     debuff_amp = MainStats(entity, "INT"):GetDebuffAmp() * 100,
 
     heal_power = 100 + (MainStats(entity, "INT"):GetHealPower() * 100),
     heal_amp = MainStats(entity, "VIT"):GetIncomingHeal(),
-    status_resist = MainStats(entity, "VIT"):GetStatusResist() * 100,
-    cd_reduction = entity:GetCooldownReduction() * 100,
+    status_resist = MainStats(entity, "VIT"):GetStatusResist(false),
+    status_resist_percent = MainStats(entity, "VIT"):GetStatusResist(true) * 100,
+    cd_reduction = MainStats(entity, "AGI"):GetCooldownReduction(),
+    cd_reduction_percent = entity:GetCooldownReduction() * 100,
     buff_amp = MainStats(entity, "VIT"):GetIncomingBuff() * 100
 
     -- physical_damage = BaseStats(entity):GetTotalPhysicalDamagePercent(),
     -- attack_speed = entity:GetDisplayAttackSpeed(),
     -- armor = entity:GetPhysicalArmorValue(false),
     -- evasion = BaseStats(entity):GetDodgePercent(),
-    -- crit_chance = BaseStats(entity):GetCriticalChance(),
+    -- crit_chance = BaseStats(entity):GetCriticalChance(true),
 
     -- attack_damage = entity:GetAverageTrueAttackDamage(nil),
     -- movespeed = entity:GetIdealSpeed(),

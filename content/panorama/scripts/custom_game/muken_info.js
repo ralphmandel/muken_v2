@@ -1,5 +1,7 @@
 var INFO_WINDOW, INFO_CONTAINER = {}, INFO_LAYOUT = {};
 var isWindowOpened = true;
+var alt_pressed = false;
+var current_info = {};
 
 // LAYOUT CREATION
   function CreateLayout() {
@@ -19,8 +21,8 @@ var isWindowOpened = true;
       CreateRow(tab, column, "physical_damage", '%');
       CreateRow(tab, column, "attack_speed", '');
       CreateRow(tab, column, "armor", '');
-      CreateRow(tab, column, "evasion", '%');
-      CreateRow(tab, column, "crit_chance", '%');
+      CreateRow(tab, column, "evasion", '');
+      CreateRow(tab, column, "crit_chance", '');
     }
     if (tab == 2) {
       CreateRow(tab, column, "attack_damage", '');
@@ -32,15 +34,15 @@ var isWindowOpened = true;
     if (tab == 3) {
       CreateRow(tab, column, "magical_damage", '%');
       CreateRow(tab, column, "current_vision", '');
-      CreateRow(tab, column, "magical_resist", '%');
+      CreateRow(tab, column, "magical_resist", '');
       CreateRow(tab, column, "mp_regen", '');
       CreateRow(tab, column, "debuff_amp", '%');
     }
     if (tab == 4) {
       CreateRow(tab, column, "heal_power", '%');
       CreateRow(tab, column, "heal_amp", '%');
-      CreateRow(tab, column, "status_resist", '%');
-      CreateRow(tab, column, "cd_reduction", '%');
+      CreateRow(tab, column, "status_resist", '');
+      CreateRow(tab, column, "cd_reduction", '');
       CreateRow(tab, column, "buff_amp", '%');
     }
   }
@@ -74,6 +76,8 @@ var isWindowOpened = true;
 
 // UPDATE FUNCTIONS
   function OnInfoUpdate(event) {
+    current_info = event;
+
     for (const [name, value] of Object.entries(event)) {
       if (name == "unit_name"){
         INFO_BUTTON.GetChild(1).text = $.Localize("#" + value);
@@ -81,9 +85,15 @@ var isWindowOpened = true;
 
       for (let tab = 1; tab <= 4; tab++) {
         for (const [layout_name, layout_value] of Object.entries(INFO_LAYOUT[tab]["INFO_VALUE"])) {
-          if (name == layout_name) {
-            var text = Number((value).toFixed(2)) + INFO_LAYOUT[tab]["INFO_VALUE"][name]["string"];
-            INFO_LAYOUT[tab]["INFO_VALUE"][name]["label"].text = text;            
+          if (alt_pressed == true && (layout_name == "evasion" || layout_name == "crit_chance" ||
+          layout_name == "magical_resist" || layout_name == "status_resist" || layout_name == "cd_reduction")) {
+            if (name == layout_name + "_percent") {
+              var text = Number((value).toFixed(2)) + "%";
+              INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text; 
+            }  
+          } else if (name == layout_name) {
+            var text = Number((value).toFixed(2)) + INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["string"];
+            INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text;            
           }
         }
       }
@@ -111,3 +121,14 @@ var isWindowOpened = true;
     CreateLayout()
     // SetOpenState(isWindowOpened)
   })();
+
+  $.RegisterForUnhandledEvent("DOTAHudUpdate", () => {
+    if (GameUI.IsAltDown()) {
+      alt_pressed = true;
+      OnInfoUpdate(current_info);
+    }  
+    if (GameUI.IsAltDown() == false) {
+      alt_pressed = false;
+      OnInfoUpdate(current_info);
+    }
+  });

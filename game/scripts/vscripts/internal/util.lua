@@ -148,7 +148,7 @@
   end
 
   function CalcStatusResistance(duration, target)
-    if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist()) end
+    if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist(true)) end
     return duration
   end
 

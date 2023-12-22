@@ -110,9 +110,11 @@ function _modifier_vit:GetIncomingBuff()
   return self:GetCalculedData("sub_stat_incoming_buff", false) * 0.01
 end
 
-function _modifier_vit:GetStatusResist()
+function _modifier_vit:GetStatusResist(bPercent)
+  local base = self:GetCalculedData("sub_stat_status_resist", bPercent)
+  if bPercent == false then return base end
+
   if self.parent:IsHero() then return self:GetCaster():GetStatusResistance() end
-  local base = self:GetCalculedData("sub_stat_status_resist", true)
   --local total = base + ((100 - base) * self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.01)
   if base < 0 then base = 0 end
   if base > 100 then base = 100 end

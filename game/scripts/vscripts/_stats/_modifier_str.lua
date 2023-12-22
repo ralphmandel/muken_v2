@@ -114,11 +114,14 @@ function _modifier_str:GetPhysicalDamageAmp()
   return self:GetCalculedData("sub_stat_physical_damage", false) + 100
 end
 
-function _modifier_str:GetCriticalChance()
-  local chance = self:GetCalculedDataStack("sub_stat_critical_chance", true)
-  if self.force_crit_chance then chance = self.force_crit_chance end
-  if chance < 0 then chance = 0 end
-  if chance > 100 then chance = 100 end
+function _modifier_str:GetCriticalChance(bPercent)
+  local chance = self:GetCalculedDataStack("sub_stat_critical_chance", bPercent)
+
+  if bPercent then
+    if self.force_crit_chance then chance = self.force_crit_chance end
+    if chance < 0 then chance = 0 end
+    if chance > 100 then chance = 100 end    
+  end
 
   return chance
 end

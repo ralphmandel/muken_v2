@@ -120,6 +120,10 @@ function _modifier_int:GetDebuffAmp()
   return self:GetCalculedData("sub_stat_debuff_amp", false) * 0.01
 end
 
+function _modifier_int:GetMagicalResist()
+  return self:GetCalculedData("sub_stat_magic_resist", false)
+end
+
 function _modifier_int:GetCalculedDataStack(property, bScalar)
   local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.main_bonus) / 5))
   value = value + self.data[property].bonus
