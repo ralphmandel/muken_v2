@@ -3,6 +3,8 @@
 
 var init_pos = null;
 var isTargeting = false;
+const particle_distance = 600;
+
 function StartVectorTarget( location, ability ) {
 	// Get Data
 	var particle_cast = "particles/strider/shuriken/strider_range_finder_cone.vpcf";
@@ -53,7 +55,6 @@ function LoopVectorTarget( effect_cast, ability, location ) {
 	}
 
 	// set particle
-	const particle_distance = 600;
 	end_pos = VectorAdd( location, VectorScale( direction, particle_distance ) );	//particle distance
 	Particles.SetParticleControl( effect_cast, 2, end_pos );
 
@@ -83,7 +84,6 @@ function Init() {
 		// filter ability
 		var ability = Abilities.GetLocalPlayerActiveAbility()
 		var isVectorTarget = Abilities.GetSpecialValueFor( ability, "vector_target" )
-		$.Msg("yyy 2")
 		if ( isVectorTarget!=1 ) return CONTINUE_PROCESSING_EVENT;
 
 		// on press
@@ -100,7 +100,6 @@ function Init() {
 
 		// on release
 		else if ( eventName == "released" ) {
-			$.Msg("WWW")
 			// stop casting
 			Abilities.ExecuteAbility( ability, Players.GetLocalPlayerPortraitUnit(), true );
 
@@ -118,6 +117,8 @@ function Init() {
 			}
 			direction[2] = 0;
 			direction = Game.Normalized( direction );
+
+      end_pos = VectorAdd( init_pos, VectorScale( direction, particle_distance ) );	//particle distance
 
 			// send data
 			var data = {};

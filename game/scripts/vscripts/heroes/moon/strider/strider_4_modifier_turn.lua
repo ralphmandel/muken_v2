@@ -1,6 +1,6 @@
 strider_4_modifier_turn = class({})
 
-function strider_4_modifier_turn:IsHidden() return false end
+function strider_4_modifier_turn:IsHidden() return true end
 function strider_4_modifier_turn:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -39,14 +39,37 @@ function strider_4_modifier_turn:GetModifierIgnoreCastAngle()
 end
 
 function strider_4_modifier_turn:OnOrder(keys)
+  if not IsServer() then return end
 	if keys.unit ~= self.parent then return end
+  if self.parent:HasModifier("strider_4_modifier_shuriken") then return end
+
 	if keys.order_type == DOTA_UNIT_ORDER_CAST_POSITION then
-		if keys.ability == self.ability then 
-			self.ability.disable = 1
+		if keys.ability == self.ability then
+      if (self.parent:GetOrigin() - keys.new_pos):Length2D() > self.ability:GetSpecialValueFor("blink_range") + 50 then
+        self.new_pos = keys.new_pos
+        self:OnIntervalThink()
+      else
+        self.ability.disable = 1
+        self:StartIntervalThink(-1)
+      end
+      return
 		end
 	end
+
+  self.ability.disable = 0
+  self:StartIntervalThink(-1)
 end
 
+function strider_4_modifier_turn:OnIntervalThink()
+  if not IsServer() then return end
+
+  if (self.parent:GetOrigin() - self.new_pos):Length2D() < self.ability:GetSpecialValueFor("blink_range") + 50 then
+    self.ability.disable = 1
+    self:StartIntervalThink(-1)
+  else
+    self:StartIntervalThink(0.1)
+  end
+end
 
 -- UTILS -----------------------------------------------------------
 
