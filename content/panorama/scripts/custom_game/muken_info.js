@@ -75,6 +75,14 @@ var current_info = {};
   }
 
 // UPDATE FUNCTIONS
+  function OnUpdateSelectedUnit() {
+    OnUnitInfoUpdate(null);
+  }
+
+  function OnUpdateQueryUnit() {
+    OnUnitInfoUpdate(null);
+  }
+
   function OnInfoUpdate(event) {
     current_info = event;
 
@@ -117,6 +125,8 @@ var current_info = {};
 
     GameEvents.Subscribe("unit_info_from_lua", OnInfoUpdate);
     GameEvents.Subscribe("unit_info_request_from_lua", OnUnitInfoUpdate);
+    GameEvents.Subscribe("dota_player_update_selected_unit", OnUpdateSelectedUnit);
+    GameEvents.Subscribe("dota_player_update_query_unit", OnUpdateQueryUnit);
 
     CreateLayout()
     // SetOpenState(isWindowOpened)

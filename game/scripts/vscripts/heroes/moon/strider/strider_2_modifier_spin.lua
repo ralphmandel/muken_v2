@@ -11,6 +11,7 @@ function strider_2_modifier_spin:OnCreated(kv)
   self.ability = self:GetAbility()
 
 	self.caster:StartGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+  self.radius = self.ability:GetAOERadius()
 
 	if IsServer() then
     self:PlayEfxStart()
@@ -36,8 +37,10 @@ function strider_2_modifier_spin:CheckState()
 end
 
 function strider_2_modifier_spin:OnIntervalThink()
+  local critical_damage = MainStats(self.parent, "STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_crit_damage")
+
   local enemies = FindUnitsInRadius(
-    self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius(),
+    self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, self.radius,
     self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
     self.ability:GetAbilityTargetFlags(), 0, false
   )
@@ -47,8 +50,12 @@ function strider_2_modifier_spin:OnIntervalThink()
       duration = self.ability:GetSpecialValueFor("bleeding_duration")
     }, true)
 
+    if self.ability:GetSpecialValueFor("special_crit_damage") > 0 then
+      MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
+    end
+
     self:PlayEfxHit(enemy)
-    self.parent:PerformAttack(enemy, false, true, true, false, false, false, true)
+    self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
   end
 
 	if IsServer() then self:StartIntervalThink(-1) end
@@ -61,6 +68,7 @@ end
 function strider_2_modifier_spin:PlayEfxStart()
 	local particle_cast = "particles/strider/spin/strider_bloodchaser.vpcf"
 	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
+  ParticleManager:SetParticleControl(effect_cast, 1, Vector(self.radius, 0, 0))
 	self:AddParticle(effect_cast, false, false, -1, false, false)
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 

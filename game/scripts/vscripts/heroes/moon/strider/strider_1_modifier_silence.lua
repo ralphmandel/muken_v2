@@ -12,6 +12,13 @@ function strider_1_modifier_silence:OnCreated(kv)
 
 	self.purge = true
   self.damage_received = 0
+  self.health_cost = kv.health_cost
+
+  AddModifier(self.parent, self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2}, false)
+
+  if self.ability:GetSpecialValueFor("special_disarm") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_disarm", {}, false)
+  end
 
   if IsServer() then
     self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
@@ -20,6 +27,21 @@ function strider_1_modifier_silence:OnCreated(kv)
 end
 
 function strider_1_modifier_silence:OnRefresh(kv)
+  self:CalcDebuff(false)
+
+  self.purge = true
+  self.damage_received = 0
+  self.health_cost = kv.health_cost
+
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_disarm", self.ability)
+
+  AddModifier(self.parent, self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2}, false)
+
+  if self.ability:GetSpecialValueFor("special_disarm") == 1 then
+    AddModifier(self.parent, self.ability, "_modifier_disarm", {}, false)
+  end
+
   if IsServer() then
     self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
 		self:StartIntervalThink(self:GetDuration())
@@ -27,10 +49,9 @@ function strider_1_modifier_silence:OnRefresh(kv)
 end
 
 function strider_1_modifier_silence:OnRemoved(bDeath)
-  if self.damage_received > 0 and (self.purge == false or bDeath == true) then
-    self.caster:Heal(self.damage_received * self.ability:GetSpecialValueFor("heal_bonus") * 0.01, self.ability)    
-    self:PlayEfxEnd()
-  end
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
+  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_disarm", self.ability)
+  self:CalcDebuff(bDeath)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -43,15 +64,11 @@ end
 
 function strider_1_modifier_silence:OnTakeDamage(keys)
   if keys.unit ~= self.parent then return end
+  if keys.attacker == nil then return end
+  if IsValidEntity(keys.attacker) == false then return end
+  if keys.attacker:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
+
   self.damage_received = self.damage_received + keys.damage
-end
-
-function strider_1_modifier_silence:CheckState()
-	local state = {
-		[MODIFIER_STATE_SILENCED] = true
-	}
-
-	return state
 end
 
 function strider_1_modifier_silence:OnIntervalThink()
@@ -59,6 +76,34 @@ function strider_1_modifier_silence:OnIntervalThink()
 end
 
 -- UTILS -----------------------------------------------------------
+
+function strider_1_modifier_silence:CalcDebuff(bDeath)
+  if self.damage_received > 0 and (self.purge == false or bDeath == true) then
+    local stun_mult = self.ability:GetSpecialValueFor("special_stun_mult")
+    local damage_mult = self.ability:GetSpecialValueFor("special_damage_mult")
+
+    if stun_mult > 0 then
+      AddModifier(self.parent, self.ability, "_modifier_stun", {
+        duration = self.damage_received / (self.health_cost* stun_mult)
+      }, false)
+    end
+
+    if damage_mult > 0 then
+      print("kubo", self.damage_received, self.health_cost, damage_mult)
+      print("kubo", self.damage_received / (self.health_cost * damage_mult))
+      print("kubo ------------------------------------")
+      ApplyDamage({
+        victim = self.parent, attacker = self.caster, ability = self.ability,
+        damage = self.damage_received / (self.health_cost * damage_mult),
+        damage_type = self.ability:GetAbilityDamageType(),
+        damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+      })
+    end
+
+    self.caster:Heal(self.damage_received * self.ability:GetSpecialValueFor("heal_bonus") * 0.01, self.ability)    
+    self:PlayEfxEnd()
+  end
+end
 
 -- EFFECTS -----------------------------------------------------------
 

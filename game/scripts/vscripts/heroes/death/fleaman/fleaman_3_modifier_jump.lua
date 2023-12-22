@@ -122,12 +122,8 @@ function fleaman_3_modifier_jump:PerformImpact(point)
 	)
 
 	for _,enemy in pairs(enemies) do
-		if enemy:IsIllusion() then
-      enemy:Kill(self.ability, nil)
-		else
-      MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
-			self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
-		end
+    MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
+    self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
 	end
 
 	CreateModifierThinker(self.caster, self.ability, "fleaman_3_modifier_effect", {

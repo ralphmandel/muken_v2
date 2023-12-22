@@ -477,7 +477,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
+      //"AbilityTextureName"  "paladin_faith"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -513,7 +513,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
+      //"AbilityTextureName"  "paladin_faith"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

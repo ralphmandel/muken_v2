@@ -35,16 +35,22 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
       bDodgeable = false,
       bProvidesVision = true,
       iVisionRadius = 150,
-      iVisionTeamNumber = caster:GetTeamNumber()
+      iVisionTeamNumber = caster:GetTeamNumber(),
+      ExtraData = {
+        health_cost = self:GetHealthCost(self:GetLevel())
+      }
 		})
 
 		if IsServer() then self:PlayEfxStart() end
 	end
 
-	function strider_1__silence:OnProjectileHitHandle(target, location, handle)
-    if (not target) or target:IsInvulnerable() or target:TriggerSpellAbsorb(self) then return end
+	function strider_1__silence:OnProjectileHit_ExtraData(hTarget, vLocation, table)
+    if (not hTarget) or hTarget:IsInvulnerable() or hTarget:TriggerSpellAbsorb(self) then return end
 
-		AddModifier(target, self, "strider_1_modifier_silence", {duration = self:GetSpecialValueFor("duration")}, true)
+		AddModifier(hTarget, self, "strider_1_modifier_silence", {
+      duration = self:GetSpecialValueFor("duration"),
+      health_cost = table.health_cost
+    }, true)
 	end
 
 -- EFFECTS

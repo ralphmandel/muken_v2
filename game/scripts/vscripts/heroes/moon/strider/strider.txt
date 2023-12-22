@@ -26,21 +26,25 @@
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"25"
 
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NO_INVIS"
-    "AbilityHealthCost"         "200"
+    "AbilityHealthCost"         "1"
 
 		"AbilityCastAnimation"   		"ACT_RESET"
 		"AbilityCastPoint"       		"0.3"
 
     "AbilityValues"
 		{
-      "duration"    "5"
-      "proj_speed"  "1400"
+      "proj_speed"  "1500"
+      "cast_range"  "600"  
       "heal_bonus"  "50"
-      "cast_range"  "1 2 3 4 5 6 7"  
+      "duration"    "1 2 3 4 5 6 7"
+      "special_damage_mult" "0"
+      "special_disarm"      "0"
+      "special_stun_mult"   "0"
 		}
 	}
 
@@ -66,7 +70,10 @@
 		{
       "spin_duration"     "0.23"
       "radius"            "250"
-      "bleeding_duration" "1 2 3 4 5 6 7"
+      "bleeding_duration" "3"
+      "cooldown"          "1 2 3 4 5 6 7"
+      "special_crit_damage"   "0"
+      "special_bleed_chance"  "0"
 		}
 	}
 
@@ -183,7 +190,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      "AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -192,7 +199,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      //"AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -201,7 +208,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      "AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -210,7 +217,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      "AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -219,7 +226,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      "AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -228,7 +235,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk1"
+      "AbilityTextureName"  "strider_silence"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -237,7 +244,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      "AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -246,7 +253,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      //"AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -255,7 +262,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      "AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -264,7 +271,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      //"AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -273,7 +280,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      "AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -282,7 +289,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk2"
+      "AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -291,7 +298,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -300,7 +307,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -309,7 +316,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -318,7 +325,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -327,7 +334,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -336,7 +343,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk3"
+      "AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -345,7 +352,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -354,7 +361,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -363,7 +370,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -372,7 +379,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -381,7 +388,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -390,7 +397,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk4"
+      "AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }    
@@ -399,7 +406,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -408,7 +415,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -417,7 +424,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -426,7 +433,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -435,7 +442,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -444,7 +451,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk5"
+      "AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -453,7 +460,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -462,7 +469,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -471,7 +478,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -480,7 +487,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -489,7 +496,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -498,7 +505,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_sk6"
+      "AbilityTextureName"  "strider_shadow"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
