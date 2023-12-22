@@ -13,6 +13,7 @@ function ancient_u_modifier_passive:OnCreated(kv)
 	if IsServer() then
     self:PlayEfxBuff()
 		self:OnIntervalThink()
+    CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", BaseHero(self.parent):GetProgressBarInfo())
 	end
 end
 
@@ -20,6 +21,9 @@ function ancient_u_modifier_passive:OnRefresh(kv)
 end
 
 function ancient_u_modifier_passive:OnRemoved()
+  if IsServer() then
+    CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", BaseHero(self.parent):GetProgressBarInfo())
+	end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

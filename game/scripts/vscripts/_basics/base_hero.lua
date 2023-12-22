@@ -266,6 +266,7 @@ require("internal/rank_system")
   function base_hero:GetProgressBarInfo()
     local caster = self:GetCaster()
     local level = 0
+    local style = "mana"
 
     for skill = 1, 6, 1 do
       for tier = 1, 3, 1 do
@@ -277,11 +278,16 @@ require("internal/rank_system")
       end
     end
 
+    if caster:HasModifier("ancient_u_modifier_passive") then
+      style = "energy"
+    end
+
     return {
       entity = caster:entindex(),
       points = self.rank_points,
       rank_level = level,
-      max_level = self.max_level
+      max_level = self.max_level,
+      style = style
     }
   end
 
@@ -396,7 +402,7 @@ require("internal/rank_system")
 
   function base_hero:UpdatePanoramaProgressBar()
     local caster = self:GetCaster()
-    CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", self:GetProgressBarInfo())    
+    CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", self:GetProgressBarInfo())
 	end
 
   function base_hero:UpdatePanoramaPathWindow()

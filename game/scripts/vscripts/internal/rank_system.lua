@@ -42,11 +42,27 @@ function RankSystem:OnProgressBarRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local hero = EntIndexToHScript(event.entity)
-  if (not hero) then return end
-  if BaseHero(hero) == nil then return end
+  local event = {
+    entity = event.entity,
+    points = 0,
+    rank_level = "0",
+    max_level = 0,
+    style = "mana"
+  }
 
-  CustomGameEventManager:Send_ServerToPlayer(player, "update_bar_from_lua", BaseHero(hero):GetProgressBarInfo())
+  local unit = EntIndexToHScript(event.entity)
+
+  if unit:HasModifier("ancient_u_modifier_passive") then
+    event.style = "energy"
+  end
+
+  if unit then
+    if BaseHero(unit) then
+      event = BaseHero(unit):GetProgressBarInfo()
+    end
+  end
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_bar_from_lua", event)
 end
 
 function RankSystem:OnSkillNameRequest(event)

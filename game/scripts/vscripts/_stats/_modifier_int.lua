@@ -54,7 +54,6 @@ function _modifier_int:GetModifierManaBonus()
 end
 
 function _modifier_int:GetModifierPercentageManacost(keys)
-  if keys.ability:GetAbilityName() == "ancient_u__fissure" then return 0 end
   return self:GetCalculedDataStack("sub_stat_manacost", false)
 end
 
