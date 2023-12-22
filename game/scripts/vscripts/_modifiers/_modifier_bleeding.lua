@@ -13,7 +13,7 @@ function _modifier_bleeding:OnCreated(kv)
   self.ability = self:GetAbility()
 
 	if IsServer() then
-		self:StartIntervalThink(0.3)
+		self:StartIntervalThink(0.2)
 		self:PlayEfxStart()
 	end
 end
@@ -29,7 +29,7 @@ end
 
 function _modifier_bleeding:OnIntervalThink()
   local damage = 0
-  if self.parent:IsMoving() then damage = 30 else damage = 10 end
+  if self.parent:IsMoving() then damage = 25 else damage = 10 end
 
   ApplyDamage({
 		victim = self.parent,
@@ -37,10 +37,10 @@ function _modifier_bleeding:OnIntervalThink()
     ability = self.ability,
 		damage = damage,
 		damage_type = DAMAGE_TYPE_PURE,
-		damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
+		damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION 
 	})
 
-  if IsServer() then self:StartIntervalThink(0.3) end
+  if IsServer() then self:StartIntervalThink(0.2) end
 end
 
 -- UTILS -----------------------------------------------------------

@@ -12,6 +12,8 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 106 then return "lawbreaker_grenade" end
   if self.texture == 107 then return "lawbreaker_rain" end
   if self.texture == 108 then return "lawbreaker_form" end
+  if self.texture == 301 then return "strider_silence" end
+  if self.texture == 302 then return "strider_spin" end
   if self.texture == 401 then return "templar_hammer" end
   if self.texture == 402 then return "templar_revenge" end
   if self.texture == 403 then return "templar_praise" end
@@ -21,6 +23,7 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 407 then return "paladin_shield" end
   if self.texture == 408 then return "paladin_hammer" end
   if self.texture == 409 then return "paladin_magnus" end
+  if self.texture == 410 then return "paladin_smite" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -94,7 +97,7 @@ end
 function trickster_u_modifier_autocast:DeclareFunctions()
 	local funcs = {
     MODIFIER_EVENT_ON_MODIFIER_ADDED,
-		MODIFIER_EVENT_ON_ATTACK_LANDED
+		MODIFIER_EVENT_ON_ATTACK
 	}
 
 	return funcs
@@ -110,11 +113,13 @@ function trickster_u_modifier_autocast:OnModifierAdded(keys)
   end
 end
 
-function trickster_u_modifier_autocast:OnAttackLanded(keys)
+function trickster_u_modifier_autocast:OnAttack(keys)
   if keys.attacker ~= self.parent then return end
   if self.stolen_ability:IsActivated() == false then return end
   if self.stolen_ability:IsOwnersManaEnough() == false then return end
-  if self.stolen_ability:IsOwnersManaEnough() == false then return end
+  if self.parent:HasModifier("paladin_5_modifier_sonicblow") then return end
+  if self.parent:HasModifier("strider_2_modifier_spin") then return end
+  if self.parent:HasModifier("flea_3_modifier_jump") then return end
   if not self.enabled then return end
 
   if RandomFloat(0, 100) < self:GetChance() then
@@ -174,6 +179,11 @@ function trickster_u_modifier_autocast:OnIntervalThink()
         self:StartIntervalThink(15)
         return
       end
+      if self.stolen_ability:GetAbilityName() == "strider_1__silence" then
+        self:SetDuration(-1, true)
+        self:StartIntervalThink(1)
+        return
+      end
       if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then
         self:SetDuration(-1, true)
         self:StartIntervalThink(3.5)
@@ -192,11 +202,11 @@ function trickster_u_modifier_autocast:GetChance()
   local restore_time = self.stolen_ability:GetAbilityChargeRestoreTime(self.stolen_ability:GetLevel())
   local mana_cost = self.stolen_ability:GetManaCost(self.stolen_ability:GetLevel()) * 0.1
 
-  local chance = 100 / cooldown
-  if restore_time > 0 then chance = 100 / restore_time end
-  if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then chance = 200 / mana_cost end
+  local chance = cooldown
+  if restore_time > 0 then chance = restore_time end
+  if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then chance = mana_cost / 2 end
 
-  return chance * self.ability:GetSpecialValueFor("chance_mult")
+  return (100 / chance) * self.ability:GetSpecialValueFor("chance_mult")
 end
 
 function trickster_u_modifier_autocast:CheckLast()

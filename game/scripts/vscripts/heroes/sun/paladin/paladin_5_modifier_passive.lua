@@ -45,10 +45,21 @@ end
 function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
   if self:ShouldLaunch(keys.target) == false then return end
 
-  self.ability:UseResources(true, false, false, true)
-  self.ability:SetCurrentAbilityCharges(self.ability:GetCurrentAbilityCharges() - 1)
+  if GetHeroName(self.parent) == "trickster" then
+    self.cast = false
+  else
+    self.ability:UseResources(true, false, false, true)
+    self.ability:SetCurrentAbilityCharges(self.ability:GetCurrentAbilityCharges() - 1)
+  end
 
   if keys.target:TriggerSpellAbsorb(self) then return end
+
+  local last_mod = self.parent:FindModifierByName("trickster_u_modifier_last")
+  if last_mod then
+    AddModifier(self.parent, last_mod.ability, "trickster_u_modifier_last", {
+      ability_index = self.ability:entindex()
+    }, false)
+  end
 
   if IsServer() then
     self:PlayEfxHit(keys.target)
@@ -99,6 +110,10 @@ function paladin_5_modifier_passive:ShouldLaunch(target)
     )
 
     self.cast = (nResult == UF_SUCCESS)
+  end
+
+  if self.cast == true and GetHeroName(self.parent) == "trickster" then
+    return true
   end
 
 	if self.cast == true and self.parent:IsSilenced() == false and self.ability:IsFullyCastable()

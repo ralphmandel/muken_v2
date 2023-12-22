@@ -6,6 +6,7 @@ LinkLuaModifier("trickster_u_modifier_used", "heroes/moon/trickster/trickster_u_
 LinkLuaModifier("fleaman_special_values", "heroes/death/fleaman/fleaman-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloodstained-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("lawbreaker_special_values", "heroes/death/lawbreaker/lawbreaker-special_values", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("strider_special_values", "heroes/moon/strider/strider-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("templar_special_values", "heroes/sun/templar/templar-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("ancient_special_values", "heroes/sun/ancient/ancient-special_values", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_values", LUA_MODIFIER_MOTION_NONE)
@@ -176,6 +177,8 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
       ["lawbreaker_3__grenade"] = 106,
       ["lawbreaker_4__rain"] = 107,
       ["lawbreaker_u__form"] = 108,
+      ["strider_1__silence"] = 301,
+      ["strider_2__spin"] = 302,
       ["templar_3__hammer"] = 401,
       ["templar_4__revenge"] = 402,
       ["templar_u__praise"] = 403,
@@ -184,7 +187,8 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
       ["ancient_u__fissure"] = 406,
       ["paladin_2__shield"] = 407,
       ["paladin_3__hammer"] = 408,
-      ["paladin_4__magnus"] = 409
+      ["paladin_4__magnus"] = 409,
+      ["paladin_5__smite"] = 410,
     }
   
     return list[ability_name]

@@ -9,11 +9,19 @@ function strider_2_modifier_spin:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+  self.aggro = nil
 
-	self.caster:StartGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
-  self.radius = self.ability:GetAOERadius()
+  if IsServer() then
+    if kv.aggro then self.aggro = EntIndexToHScript(kv.aggro) end
+    self.parent:Hold()
 
-	if IsServer() then
+    if GetHeroName(self.parent) == "trickster" then
+      self.caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_4_END, 1.7)
+    else
+      self.caster:StartGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+    end
+
+    self.radius = self.ability:GetAOERadius()
     self:PlayEfxStart()
     self:StartIntervalThink(0.1)
   end
@@ -23,7 +31,17 @@ function strider_2_modifier_spin:OnRefresh(kv)
 end
 
 function strider_2_modifier_spin:OnRemoved()
-	self.caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+  if self.aggro then
+    if IsValidEntity(self.aggro) then
+      self.parent:MoveToTargetToAttack(self.aggro)
+    end
+  end
+
+  if GetHeroName(self.parent) == "trickster" then
+    self.caster:FadeGesture(ACT_DOTA_CAST_ABILITY_4_END)
+  else
+    self.caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -46,6 +64,8 @@ function strider_2_modifier_spin:OnIntervalThink()
   )
 
   for _,enemy in pairs(enemies) do
+    RemoveAllModifiersByNameAndAbility(enemy, "_modifier_bleeding", self.ability)
+
     AddModifier(enemy, self.ability, "_modifier_bleeding", {
       duration = self.ability:GetSpecialValueFor("bleeding_duration")
     }, true)

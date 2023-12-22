@@ -60,7 +60,7 @@ end
 function _modifier_int:GetModifierSpellAmplify_Percentage(keys)
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
   if keys.damage_flags == 31 then return 0 end
-  if keys.damage_type == DAMAGE_TYPE_PURE and keys.damage_flags == 2048 then return 0 end
+  if keys.damage_type == DAMAGE_TYPE_PURE then return 0 end
 
   if keys.damage_type == DAMAGE_TYPE_MAGICAL then
     return self:GetCalculedData("sub_stat_magical_damage", false)
@@ -94,7 +94,7 @@ function _modifier_int:OnTakeDamage(keys)
   end
 
   if keys.damage_type == DAMAGE_TYPE_PURE then
-    if keys.damage_flags == DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN then
+    if keys.damage_flags == DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION then
       self:PopupBleedDamage(math.floor(keys.damage), self.parent)
     else
       self:PopupHolyDamage(math.floor(keys.damage), Vector(255, 225, 175), self.parent)

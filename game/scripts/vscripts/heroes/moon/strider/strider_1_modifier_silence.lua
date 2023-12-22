@@ -27,7 +27,7 @@ function strider_1_modifier_silence:OnCreated(kv)
 end
 
 function strider_1_modifier_silence:OnRefresh(kv)
-  self:CalcDebuff(false)
+  self:CalcDebuff(true)
 
   self.purge = true
   self.damage_received = 0
@@ -89,9 +89,6 @@ function strider_1_modifier_silence:CalcDebuff(bDeath)
     end
 
     if damage_mult > 0 then
-      print("kubo", self.damage_received, self.health_cost, damage_mult)
-      print("kubo", self.damage_received / (self.health_cost * damage_mult))
-      print("kubo ------------------------------------")
       ApplyDamage({
         victim = self.parent, attacker = self.caster, ability = self.ability,
         damage = self.damage_received / (self.health_cost * damage_mult),

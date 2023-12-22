@@ -51,6 +51,8 @@ function trickster_u_modifier_passive:IsListed(ability)
     "lawbreaker_3__grenade",
     "lawbreaker_4__rain",
     "lawbreaker_u__form",
+    "strider_1__silence",
+    "strider_2__spin",
     "templar_3__hammer",
     "templar_4__revenge",
     "templar_u__praise",
@@ -59,7 +61,8 @@ function trickster_u_modifier_passive:IsListed(ability)
     "ancient_u__fissure",
     "paladin_2__shield",
     "paladin_3__hammer",
-    "paladin_4__magnus"
+    "paladin_4__magnus",
+    "paladin_5__smite"
   }
 
   for _, name in pairs(list) do

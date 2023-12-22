@@ -71,14 +71,14 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "cooldown" then return 1 end
 
 		if caster:FindAbilityByName("strider_2__spin_rank_11") then
-      if value_name == "special_crit_damage" then return 1 end
+      if value_name == "radius" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_12") then
 		end
 
-		if caster:FindAbilityByName("strider_2__spin_rank_21") then
-      if value_name == "radius" then return 1 end
+    if caster:FindAbilityByName("strider_2__spin_rank_21") then
+      if value_name == "special_crit_damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_22") then
@@ -202,6 +202,8 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
 	if ability:GetAbilityName() == "strider_1__silence" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 15 end
@@ -217,12 +219,12 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "strider_2__spin" then
-		if value_name == "AbilityManaCost" then return 50 end
+		if value_name == "AbilityManaCost" then return 40 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "cooldown" then return 7.5 - (value_level * 0.25) end
 
-    if value_name == "special_crit_damage" then return 50 end
     if value_name == "radius" then return 350 end
+    if value_name == "special_crit_damage" then return 100 end
     if value_name == "bleeding_duration" then return 5 end
     if value_name == "special_bleed_chance" then return 10 end
 	end

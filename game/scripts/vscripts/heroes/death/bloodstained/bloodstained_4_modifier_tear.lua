@@ -22,7 +22,7 @@ function bloodstained_4_modifier_tear:OnCreated(kv)
 			ApplyDamage({
 				attacker = self.caster, victim = self.parent, ability = self.ability,
 				damage = self.init_loss, damage_type = self.ability:GetAbilityDamageType(),
-				damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
+				damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
 			})
 		end
 	end
@@ -77,14 +77,14 @@ function bloodstained_4_modifier_tear:ApplyDrain(damage)
 		ApplyDamage({
 			attacker = self.caster, victim = enemy, ability = self.ability,
 			damage = damage, damage_type = self.ability:GetAbilityDamageType(),
-			damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
+			damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
 		})
 	end
 
 	ApplyDamage({
 		attacker = self.caster, victim = self.parent, ability = self.ability,
 		damage = damage, damage_type = self.ability:GetAbilityDamageType(),
-		damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN
+		damage_flags = 	DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
 	})
 end
 
