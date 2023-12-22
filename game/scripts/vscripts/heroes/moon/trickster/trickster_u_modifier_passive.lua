@@ -53,6 +53,7 @@ function trickster_u_modifier_passive:IsListed(ability)
     "lawbreaker_u__form",
     "strider_1__silence",
     "strider_2__spin",
+    "strider_3__smoke",
     "templar_3__hammer",
     "templar_4__revenge",
     "templar_u__praise",

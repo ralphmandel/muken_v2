@@ -179,6 +179,7 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
       ["lawbreaker_u__form"] = 108,
       ["strider_1__silence"] = 301,
       ["strider_2__spin"] = 302,
+      ["strider_3__smoke"] = 303,
       ["templar_3__hammer"] = 401,
       ["templar_4__revenge"] = 402,
       ["templar_u__praise"] = 403,

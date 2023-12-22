@@ -14,6 +14,7 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 108 then return "lawbreaker_form" end
   if self.texture == 301 then return "strider_silence" end
   if self.texture == 302 then return "strider_spin" end
+  if self.texture == 303 then return "strider_smoke" end
   if self.texture == 401 then return "templar_hammer" end
   if self.texture == 402 then return "templar_revenge" end
   if self.texture == 403 then return "templar_praise" end

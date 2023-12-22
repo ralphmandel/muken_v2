@@ -97,10 +97,11 @@
 
     "AbilityValues"
 		{
-      "duration"                "8"
-      "flee_bonus"              "5"
-      "fade_inv"                "1"
-      "radius"                  "1 2 3 4 5 6 7"
+      "duration"  "8"
+      "evasion"   "5"
+      "fade_inv"  "1.5"
+      "radius"    "1 2 3 4 5 6 7"
+      "special_armor" "0"
 		}
 	}
 
@@ -325,7 +326,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_smoke"
+      //"AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -343,7 +344,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_smoke"
+      //"AbilityTextureName"  "strider_smoke"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

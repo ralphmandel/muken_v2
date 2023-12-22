@@ -9,7 +9,7 @@ function strider_3_modifier_smoke:IsAura() return true end
 function strider_3_modifier_smoke:GetAuraDuration() return 0 end
 function strider_3_modifier_smoke:GetModifierAura() return "strider_3_modifier_aura_effect" end
 function strider_3_modifier_smoke:GetAuraRadius() return self.radius end
-function strider_3_modifier_smoke:GetAuraSearchTeam() return self:GetAbility():GetAbilityTargetTeam() end
+function strider_3_modifier_smoke:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_BOTH end
 function strider_3_modifier_smoke:GetAuraSearchType() return self:GetAbility():GetAbilityTargetType() end
 function strider_3_modifier_smoke:GetAuraSearchFlags() return self:GetAbility():GetAbilityTargetFlags() end
 function strider_3_modifier_smoke:GetAuraEntityReject(hEntity) return false end

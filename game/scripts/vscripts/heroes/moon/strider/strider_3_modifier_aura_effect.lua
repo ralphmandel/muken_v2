@@ -9,11 +9,15 @@ function strider_3_modifier_aura_effect:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-  
-  AddModifierOnAllCosmetics(self.parent, self.ability, "_modifier_invi_level", {level = 1})
-  AddSubStats(self.parent, self.ability, {evasion = self.ability:GetSpecialValueFor("flee_bonus")}, false)
 
-  if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv")) end
+  if self.parent:GetTeamNumber() == self.caster:GetTeamNumber() then
+    AddModifierOnAllCosmetics(self.parent, self.ability, "_modifier_invi_level", {level = 1})
+    AddSubStats(self.parent, self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")}, false)
+  
+    if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv")) end
+  else
+    AddSubStats(self.parent, self.ability, {armor = self.ability:GetSpecialValueFor("special_armor")}, false)
+  end
 end
 
 function strider_3_modifier_aura_effect:OnRefresh(kv)
@@ -23,6 +27,7 @@ function strider_3_modifier_aura_effect:OnRemoved()
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_invisible", self.ability)
   RemoveModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level")
   RemoveSubStats(self.parent, self.ability, {"evasion"})
+  RemoveSubStats(self.parent, self.ability, {"armor"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -50,6 +55,7 @@ end
 
 function strider_3_modifier_aura_effect:OnAttack(keys)
 	if keys.attacker ~= self.parent then return end
+  if self.parent:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
   
   if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv")) end
 end

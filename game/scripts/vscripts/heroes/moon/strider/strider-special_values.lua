@@ -100,18 +100,22 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "radius" then return 1 end
 
 		if caster:FindAbilityByName("strider_3__smoke_rank_11") then
+      if value_name == "duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_3__smoke_rank_12") then
+      if value_name == "fade_inv" then return 1 end
 		end
 
 		if caster:FindAbilityByName("strider_3__smoke_rank_21") then
+      if value_name == "evasion" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_3__smoke_rank_22") then
 		end
 
 		if caster:FindAbilityByName("strider_3__smoke_rank_31") then
+      if value_name == "special_armor" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_3__smoke_rank_32") then
@@ -230,10 +234,15 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
-		if value_name == "AbilityManaCost" then return 120 end
+		if value_name == "AbilityManaCost" then return 160 * mana_mult end
 		if value_name == "AbilityCooldown" then return 22 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
     if value_name == "radius" then return 300 + (value_level * 10) end
+
+    if value_name == "duration" then return 10 end
+    if value_name == "fade_inv" then return 0.75 end
+    if value_name == "evasion" then return 7.5 end
+    if value_name == "special_armor" then return -5 end
 	end
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then
