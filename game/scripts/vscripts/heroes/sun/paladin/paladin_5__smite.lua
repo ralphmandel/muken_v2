@@ -10,13 +10,4 @@ LinkLuaModifier("paladin_5_modifier_sonicblow", "heroes/sun/paladin/paladin_5_mo
 
 -- SPELL START
 
-  function paladin_5__smite:OnSpellStart()
-    local caster = self:GetCaster()
-    
-    if GetHeroName(caster) == "trickster" then
-      local passive = caster:FindModifierByName(self:GetIntrinsicModifierName())
-      if passive then passive.cast = true end
-    end
-  end
-
 -- EFFECTS

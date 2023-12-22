@@ -23,7 +23,6 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 407 then return "paladin_shield" end
   if self.texture == 408 then return "paladin_hammer" end
   if self.texture == 409 then return "paladin_magnus" end
-  if self.texture == 410 then return "paladin_smite" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------

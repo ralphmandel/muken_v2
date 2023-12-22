@@ -188,7 +188,6 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
       ["paladin_2__shield"] = 407,
       ["paladin_3__hammer"] = 408,
       ["paladin_4__magnus"] = 409,
-      ["paladin_5__smite"] = 410,
     }
   
     return list[ability_name]

@@ -62,7 +62,6 @@ function trickster_u_modifier_passive:IsListed(ability)
     "paladin_2__shield",
     "paladin_3__hammer",
     "paladin_4__magnus",
-    "paladin_5__smite"
   }
 
   for _, name in pairs(list) do
