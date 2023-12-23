@@ -1,0 +1,23 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_inventory.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/muken_inventory.js"/>
+  </scripts>
+    <Panel class="inventory_button_root" hittest="false">
+
+      <Panel id="HotkeyContainer" hittest="false">
+        <Panel class="Hotkey">
+          <Label id="HotkeyText" text="!" html="true" />
+        </Panel>
+      </Panel>
+
+      <Panel id="inventory-container" hittest="false">
+        <Panel id="inventory-button" class="inventory-closed" hittest="true" acceptsfocus="true" onactivate="toggleInventory()">
+          
+        </Panel>
+      </Panel>		
+
+    </Panel>
+</root>

@@ -33,6 +33,12 @@
             "Command"   "RuneShadowCommand"
             "Name"      "Rune Shadow"
         }
+         "05"
+        {
+            "Key"       "'"
+            "Command"   "OpenInventory"
+            "Name"      "Open Inventory"
+        }
     }
   // "muken_arena_turbo"
   // {

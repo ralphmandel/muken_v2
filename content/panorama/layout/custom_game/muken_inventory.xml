@@ -7,7 +7,7 @@
   </scripts>
     <Panel class="inventory_root" hittest="false">
 
-      <Panel id="inventory_items" hittest="false" require-composition-layer="true" always-cache-composition-layer="true" >
+      <Panel id="muken_inventory_items" class="inventory_visibility Hidden" hittest="true" acceptsfocus="true" onactivate="$.GetContextPanel().GetChild(0).SetFocus()">
         <Panel id="text-header">
           <Label class="TitleLabel" text="INVENTORY" />
         </Panel>
@@ -63,66 +63,6 @@
               </Panel>
             </Panel>
             <Panel id="inventory_row5" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row6" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row7" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row8" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row9" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row10" hittest="false">
               <Panel class="slot">
               </Panel>
               <Panel class="slot">

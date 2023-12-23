@@ -284,9 +284,7 @@ function CreateItemSlotPanel(){
   var ItemSlot = $.CreatePanel( "Panel", SlotContainer, "" );
   ItemSlot.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_container.xml", false, false );
 
-  // var TooltipContainer = $.CreatePanel( "Panel", CenterPanel, "" );
-  // TooltipContainer.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_tooltip.xml", false, false );
-  //CenterPanel.MoveChildBefore(TooltipContainer, CenterPanel.GetChild(26));
+
 }
 
 function CreateInventoryPanel(){
@@ -294,8 +292,11 @@ function CreateInventoryPanel(){
   var inventorySlot = $.CreatePanel( "Panel", centerPanel, "" );
   inventorySlot.BLoadLayout( "file://{resources}/layout/custom_game/muken_inventory.xml", false, false );
 
-  // var TooltipContainer = $.CreatePanel( "Panel", CenterPanel, "" );
-  // TooltipContainer.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_tooltip.xml", false, false );
+  var inventoryStash = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block").FindChildTraverse("inventory_composition_layer_container");
+  inventoryStash.FindChildTraverse("inventory_neutral_slot_container").style.visibility = "collapse";
+  var inventoryButton = $.CreatePanel( "Panel", inventoryStash, "" );
+  inventoryButton.BLoadLayout( "file://{resources}/layout/custom_game/muken_inventory_button.xml", false, false );
+  
   //CenterPanel.MoveChildBefore(TooltipContainer, CenterPanel.GetChild(26));
 }
 
