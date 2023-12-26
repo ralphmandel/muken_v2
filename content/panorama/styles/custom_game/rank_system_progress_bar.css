@@ -3,9 +3,21 @@
   tooltip-position: top;
   tooltip-body-position: 0% 50%;
   horizontal-align: left;
-  margin-top: 120px;
+  margin-top: 100px;
   z-index: 55;
   margin-left: -20px;
+  height: 80px;
+}
+
+.level-container{
+   height: fit-children;
+   width: fit-children;
+   margin-left: 26px;
+   margin-top: 20px;
+}
+
+.level-container:hover #LevelLabel, .level-container:hover #RankXPProgressBlur,.level-container:hover #RankXPProgress{
+   brightness: 2;
 }
 
  #LevelLabel{
@@ -38,13 +50,13 @@
  #RankXPLabel{
 
   width: 103px;
-  vertical-align: bottom;
+  vertical-align: top;
      font-size: 15px;
      color: #dce0e4;
      font-weight: bold;
      text-align: center;
   text-shadow: 1px 1px 8px 4 black;
-  margin-bottom:40px;
+  margin-top: 5px;
   opacity: 0;
  }
 
@@ -69,11 +81,12 @@
 
 
 #RankXPProgressBlur,#RankXPProgress{
-
-
   visibility: visible;
  }
 
+ #RankXPProgressBlur:hover,#RankXPProgress:hover, #LevelLabel:hover{
+ brightness: 2;
+}
  #LevelBackground{
 
   horizontal-align: center;

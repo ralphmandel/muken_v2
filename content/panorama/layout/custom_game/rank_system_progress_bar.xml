@@ -6,10 +6,12 @@
     <include src="file://{resources}/scripts/custom_game/rank_system_progress_bar.js"/>
   </scripts>
     <Panel class="root" hittest="false">
-      <Panel id="LevelBackground" onactivate="DOTAHUDXPBarClicked();" />
-      <Label id="LevelLabel" class="MonoNumbersFont" text="0" hittest="false" />
-      <CircularProgressBar id="RankXPProgress" onactivate="DOTAHUDXPBarClicked();" />
-      <CircularProgressBar id="RankXPProgressBlur" hittest="false" />
+      <Panel class="level-container" id="xpContainer">
+        <Panel id="LevelBackground" onactivate="DOTAHUDXPBarClicked();" />
+        <Label id="LevelLabel" class="MonoNumbersFont" text="0" hittest="false" />
+        <CircularProgressBar id="RankXPProgress" onactivate="DOTAHUDXPBarClicked();" />
+        <CircularProgressBar id="RankXPProgressBlur" hittest="false" />
+      </Panel>
       <Label id="RankXPLabel" text="0 / 15" hittest="false" />
       <Label id="LifetimeLabel" class="MonoNumbersFont" text="#DOTA_Hud_Lifetime" hittest="false" />
       <ProgressBar id="LifetimeProgress" class="MonoNumbersFont" hittest="false" />

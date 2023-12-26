@@ -20,8 +20,7 @@ var inventoryButton = null;
   mukenItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("muken_inventory_items");
   buttonContainer = $.GetContextPanel().FindChildTraverse("inventory-container");
   inventoryButton = $.GetContextPanel().FindChildTraverse("inventory-button");
-  $.Msg("ICHIGO", buttonContainer);
-  $.Msg("INOUe", inventoryButton);
+
   buttonContainer.SetPanelEvent(
     "onmouseover", 
     function(){
@@ -47,13 +46,12 @@ var inventoryButton = null;
   });
 
   Game.AddCommand("OpenInventory", toggleInventory, "", 0 );
-
 })()
 
 
 function toggleInventory(){
   Game.EmitSound("ui.inv_equip_metalarmour");
-  $.Msg("OLA MUNDO", inventoryButton)
+
   if (inventoryButton.BHasClass("inventory-opened")){
     inventoryButton.RemoveClass("inventory-opened");
     mukenItems.AddClass("Hidden");
