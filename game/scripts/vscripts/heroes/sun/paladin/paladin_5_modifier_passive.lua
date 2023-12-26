@@ -55,17 +55,19 @@ function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
     self:PlayEfxScreenShake(keys.target)
   end
 
-  local stun_mods = keys.target:FindAllModifiersByName("_modifier_stun")
-  local stun_duration = CalcStatus(self.ability:GetSpecialValueFor("special_stun_duration"), self.caster, keys.target)
-
-  for _, mod in pairs(stun_mods) do
-    if mod:GetCaster() == self.caster and mod:GetAbility() == self.ability then
-      stun_duration = stun_duration + mod:GetRemainingTime()
+  if keys.target:IsMagicImmune() == false then
+    local stun_mods = keys.target:FindAllModifiersByName("_modifier_stun")
+    local stun_duration = CalcStatus(self.ability:GetSpecialValueFor("special_stun_duration"), self.caster, keys.target)
+  
+    for _, mod in pairs(stun_mods) do
+      if mod:GetCaster() == self.caster and mod:GetAbility() == self.ability then
+        stun_duration = stun_duration + mod:GetRemainingTime()
+      end
     end
+    
+    RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_stun", self.ability)
+    AddModifier(keys.target, self.ability, "_modifier_stun", {duration = stun_duration}, false)
   end
-
-  RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_stun", self.ability)
-  AddModifier(keys.target, self.ability, "_modifier_stun", {duration = stun_duration}, false)
 
   if self.ability:GetSpecialValueFor("special_hits") > 0 then
     AddModifier(self.parent, self.ability, "paladin_5_modifier_sonicblow", {target = keys.target:entindex()}, false)

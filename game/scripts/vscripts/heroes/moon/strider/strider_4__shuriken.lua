@@ -56,9 +56,21 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		if IsServer() then self:PlayEfxTarget(hTarget) end
 
     if hTarget:IsMagicImmune() == false then
-      AddModifier(hTarget, self,"sub_stat_movespeed_decrease", {
-        value = self:GetSpecialValueFor("slow_amount"), duration = self:GetSpecialValueFor("slow_duration")
+      AddModifier(hTarget, self, "sub_stat_movespeed_decrease", {
+        value = self:GetSpecialValueFor("slow"), duration = self:GetSpecialValueFor("slow_duration")
       }, true)
+
+      local stun_mods = hTarget:FindAllModifiersByName("_modifier_stun")
+      local stun_duration = CalcStatus(self:GetSpecialValueFor("special_stun_duration"), caster, hTarget)
+    
+      for _, mod in pairs(stun_mods) do
+        if mod:GetCaster() == caster and mod:GetAbility() == self then
+          stun_duration = stun_duration + mod:GetRemainingTime()
+        end
+      end
+    
+      RemoveAllModifiersByNameAndAbility(hTarget, "_modifier_stun", self)
+      AddModifier(hTarget, self, "_modifier_stun", {duration = stun_duration}, false)
     end
 
 		ApplyDamage({

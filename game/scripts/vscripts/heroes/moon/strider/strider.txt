@@ -17,7 +17,7 @@
 	}
 
 	"strider_1__silence"
-	{ 
+	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_1__silence"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
@@ -49,7 +49,7 @@
 	}
 
 	"strider_2__spin"
-	{  
+	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_2__spin"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
@@ -72,6 +72,7 @@
       "radius"            "250"
       "bleeding_duration" "3"
       "cooldown"          "1 2 3 4 5 6 7"
+      "special_bash_duration" "0"
       "special_crit_damage"   "0"
       "special_bleed_chance"  "0"
 		}
@@ -106,7 +107,7 @@
 	}
 
 	"strider_4__shuriken"
-	{ 
+	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"heroes/moon/strider/strider_4__shuriken"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
@@ -128,14 +129,15 @@
 		{
       "blink_range"       "600"
       "damage"            "30"
-      "slow_amount"       "10"
-      "slow_duration"     "5"
+      "slow"              "15"
+      "slow_duration"     "6"
       "angle"             "19"
-      "interval"          "0.04"
+      "interval"          "0.03"
       "ms_limit"          "150"
-      "shuriken_distance" "600"
+      "particle_distance" "600"
       "shuriken_speed"    "1500"
       "shuriken_amount"   "1 2 3 4 5 6 7"
+      "special_stun_duration" "0"
       "vector_target"     "1"
 		}
 	}
@@ -158,9 +160,10 @@
 
     "AbilityValues"
 		{
-      "duration"                "4"
-      "aspd_bonus"              "100"
-      "ms_bonus"                "100"
+      "attack_speed"  "100"
+      "duration"      "1 2 3 4 5 6 7"
+      "special_movespeed" "0"
+      "special_bkb"       "0"
 		}
 	}
 
@@ -257,7 +260,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      //"AbilityTextureName"  "strider_spin"
+      "AbilityTextureName"  "strider_spin"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -383,7 +386,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_shuriken"
+      //"AbilityTextureName"  "strider_shuriken"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -419,7 +422,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_aspd"
+      //"AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -437,7 +440,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_aspd"
+      //"AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }
@@ -455,7 +458,7 @@
     {
       "BaseClass"						"ability_lua"
       "ScriptFile"					"heroes/moon/strider/strider-ranks_lua"
-      "AbilityTextureName"  "strider_aspd"
+      //"AbilityTextureName"  "strider_aspd"
       "AbilityType"					"ABILITY_TYPE_BASIC"
       "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
     }

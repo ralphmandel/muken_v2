@@ -27,10 +27,12 @@ function strider_4_modifier_shuriken:OnCreated(kv)
 		iUnitTargetFlags = self.ability:GetAbilityTargetFlags(),
 		EffectName = "particles/strider/shuriken/strider_shuriken_base.vpcf",
 		bDeleteOnHit = true,
-		fDistance = self.ability:GetSpecialValueFor("shuriken_distance"),
+		fDistance = self.ability:GetSpecialValueFor("particle_distance"),
 		fStartRadius = 30,
 		fEndRadius = 30,
-		bProvidesVision = false
+		bProvidesVision = true,
+    iVisionRadius = 50,
+    iVisionTeamNumber = self.caster:GetTeamNumber()
 	}
 
   if IsServer() then

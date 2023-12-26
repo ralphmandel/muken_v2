@@ -75,6 +75,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_12") then
+      if value_name == "special_bash_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_21") then
@@ -129,41 +130,50 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "shuriken_amount" then return 1 end
 
 		if caster:FindAbilityByName("strider_4__shuriken_rank_11") then
+      if value_name == "damage" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_4__shuriken_rank_12") then
+      if value_name == "blink_range" then return 1 end
 		end
 
 		if caster:FindAbilityByName("strider_4__shuriken_rank_21") then
+      if value_name == "particle_distance" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_4__shuriken_rank_22") then
 		end
 
 		if caster:FindAbilityByName("strider_4__shuriken_rank_31") then
+      if value_name == "slow_duration" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_4__shuriken_rank_32") then
+      if value_name == "special_stun_duration" then return 1 end
 		end
 	end
 
 	if ability:GetAbilityName() == "strider_5__aspd" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+    if value_name == "duration" then return 1 end
 
 		if caster:FindAbilityByName("strider_5__aspd_rank_11") then
+      if value_name == "special_movespeed" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_5__aspd_rank_12") then
 		end
 
 		if caster:FindAbilityByName("strider_5__aspd_rank_21") then
+      if value_name == "attack_speed" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_5__aspd_rank_22") then
 		end
 
 		if caster:FindAbilityByName("strider_5__aspd_rank_31") then
+      if value_name == "special_bkb" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_5__aspd_rank_32") then
@@ -229,6 +239,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "cooldown" then return 7.5 - (value_level * 0.25) end
 
     if value_name == "radius" then return 350 end
+    if value_name == "special_bash_duration" then return 0.5 end
     if value_name == "special_crit_damage" then return 100 end
     if value_name == "bleeding_duration" then return 5 end
     if value_name == "special_bleed_chance" then return 10 end
@@ -252,11 +263,22 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("blink_range") end
 
     if value_name == "shuriken_amount" then return 24 + (value_level * 1) end
+
+    if value_name == "damage" then return 45 end
+    if value_name == "blink_range" then return 800 end
+    if value_name == "particle_distance" then return 900 end
+    if value_name == "slow_duration" then return 10 end
+    if value_name == "special_stun_duration" then return 0.2 end
 	end
 
 	if ability:GetAbilityName() == "strider_5__aspd" then
-		if value_name == "AbilityManaCost" then return 80 end
-		if value_name == "AbilityCooldown" then return 15 end
+		if value_name == "AbilityManaCost" then return 120 * mana_mult end
+		if value_name == "AbilityCooldown" then return 12 end
+    if value_name == "duration" then return 6 + (value_level * 0.25) end
+
+    if value_name == "special_movespeed" then return 100 end
+    if value_name == "attack_speed" then return 125 end
+    if value_name == "special_bkb" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_u__shadow" then

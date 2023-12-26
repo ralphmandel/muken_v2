@@ -3,12 +3,13 @@
 
 var init_pos = null;
 var isTargeting = false;
-const particle_distance = 600;
+var particle_distance = 0;
 
 function StartVectorTarget( location, ability ) {
 	// Get Data
 	var particle_cast = "particles/strider/shuriken/strider_range_finder_cone.vpcf";
 	var caster = Abilities.GetCaster( ability );
+  particle_distance = Abilities.GetSpecialValueFor( ability, "particle_distance" );
 
 	// Create Range Finder
 	var effect_cast = Particles.CreateParticle( particle_cast, ParticleAttachment_t.PATTACH_WORLDORIGIN, caster );
@@ -18,6 +19,7 @@ function StartVectorTarget( location, ability ) {
 	Particles.SetParticleControl( effect_cast, 3, [125, 125, 125] );
 	Particles.SetParticleControl( effect_cast, 4, [0, 255, 0] );
 	Particles.SetParticleControl( effect_cast, 6, [1, 0, 0] );
+	Particles.SetParticleControl( effect_cast, 7, [particle_distance, 0, 0] );
 
 	// Loop
 	$.Schedule( 0.01, function() {

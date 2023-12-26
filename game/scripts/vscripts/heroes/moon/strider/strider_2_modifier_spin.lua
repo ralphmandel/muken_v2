@@ -70,6 +70,24 @@ function strider_2_modifier_spin:OnIntervalThink()
       duration = self.ability:GetSpecialValueFor("bleeding_duration")
     }, true)
 
+    local distance_percent = 1 - ((self.parent:GetOrigin() - enemy:GetOrigin()):Length2D() / self.ability:GetAOERadius())
+
+    if enemy:IsMagicImmune() == false then
+      local bash = AddModifier(enemy, self.ability, "modifier_knockback", {
+        center_x = self.parent:GetAbsOrigin().x + 1,
+        center_y = self.parent:GetAbsOrigin().y + 1,
+        center_z = self.parent:GetAbsOrigin().z,
+        knockback_height = 15,
+        duration = self.ability:GetSpecialValueFor("special_bash_duration") * distance_percent,
+        knockback_duration = self.ability:GetSpecialValueFor("special_bash_duration") * distance_percent,
+        knockback_distance = self.ability:GetAOERadius() * distance_percent
+      }, true)
+  
+      if bash then
+        if IsServer() then enemy:EmitSound("Hero_Spirit_Breaker.Charge.Impact") end
+      end      
+    end
+
     if self.ability:GetSpecialValueFor("special_crit_damage") > 0 then
       MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
     end
