@@ -97,6 +97,8 @@ function GameMode:OnItemPickedUp(keys)
   local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local itemname = keys.itemname
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "add_item_inventory_from_lua", {itemname = itemname})
 end
 
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change

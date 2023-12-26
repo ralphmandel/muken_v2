@@ -11,6 +11,8 @@
   z-index: -3;
 }
 
+DOTAItemImage{width: 100%; height: 100%;}
+
 .HIDE_INVENTORY_ITEMS #muken_inventory_items,
 .HIDE_INVENTORY_ITEMS #BackPackLabel {
 	visibility: collapse;
