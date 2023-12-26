@@ -1,3 +1,7 @@
+@define monospaceNumbersFont: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define titleFont: Reaver,Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540;
+@define monospaceFont: Courier New,Courier;
+
 .root{
 
   tooltip-position: top;
@@ -12,7 +16,7 @@
 .level-container{
    height: fit-children;
    width: fit-children;
-   margin-left: 26px;
+   margin-left: 28px;
    margin-top: 20px;
 }
 
@@ -33,6 +37,7 @@
   horizontal-align: center;
      z-index: 50;
   margin-bottom: 12px;
+  margin-right: 1px;
  }
 
 #LevelLabel{
