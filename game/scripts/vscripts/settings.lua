@@ -99,6 +99,7 @@ TEAM_COLORS[DOTA_TEAM_CUSTOM_1] = { 172, 0, 32 }  --
 TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 61, 210, 150 }   --    
 TEAM_COLORS[DOTA_TEAM_CUSTOM_3] = { 140, 42, 244 }   --   
 TEAM_COLORS[DOTA_TEAM_CUSTOM_4] = { 199, 228, 13 }  --   
+TEAM_COLORS[DOTA_TEAM_CUSTOM_5] = { 66, 133, 244 }  --   
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_1] = { 61, 210, 150 }  --    Teal
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 243, 201, 9 }   --    Yellow
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_3] = { 197, 77, 168 }  --    Pink
@@ -124,8 +125,7 @@ CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_4] = 4
 -- CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_7] = 4
 -- CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_CUSTOM_8] = 4
 
-INITIAL_XP = 1 
--- LVL 30(MAX): 55300
+INITIAL_XP = 1 -- LVL 30(MAX): 55300
 
 SCORE_LIMIT = 50
 SCORE_KILL = 2
@@ -168,104 +168,65 @@ BOT_STATE_FLEE = 2
 BOT_STATE_FARMING = 3
 BOT_STATE_AGGRESSIVE_FIND_TARGET = 10
 
+RARITY_COMMON = 0
+RARITY_RARE = 1
+RARITY_EPIC = 2
+RARITY_LEGENDARY = 3
+
+TIER_TEAMS = {
+  [RARITY_COMMON] = DOTA_TEAM_NEUTRALS,
+  [RARITY_RARE] = DOTA_TEAM_CUSTOM_5,
+  [RARITY_EPIC] = DOTA_TEAM_CUSTOM_6,
+  [RARITY_LEGENDARY] = DOTA_TEAM_CUSTOM_7,
+}
+
 SPAWNER_MOBS = {
 -- TIER 1
-  {["tier"] = 1, ["units"] = {
-    "neutral_basic_chameleon", "neutral_basic_chameleon",
-    "neutral_basic_chameleon_b", "neutral_basic_chameleon_b"
+  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    "neutral_common_chameleon_a", "neutral_common_chameleon_b",
+    "neutral_common_chameleon_a", "neutral_common_chameleon_b"
   }},
-  {["tier"] = 1, ["units"] = {
-    "neutral_basic_crocodilian", "neutral_basic_crocodilian_b"
+  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
   }},
-  {["tier"] = 1, ["units"] = {
-    "neutral_basic_gargoyle", "neutral_basic_gargoyle_b", "neutral_basic_gargoyle_b"
+  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    "neutral_common_gargoyle", "neutral_common_gargoyle",
+    "neutral_common_great_gargoyle"
   }},
-  {["tier"] = 1, ["units"] = {
-    "neutral_crocodile"
+  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = {
+    "neutral_rare_crocodile"
   }},
-  {["tier"] = 1, ["units"] = {
-    "neutral_frostbitten"
-  }},
--- TIER 2
-  {["tier"] = 2, ["units"] = {
-    "neutral_igneo"
-  }},
-  {["tier"] = 2, ["units"] = {
-    "neutral_crocodile", "neutral_crocodile"
-  }},
-  {["tier"] = 2, ["units"] = {
-    "neutral_basic_crocodilian", "neutral_basic_crocodilian",
-    "neutral_basic_crocodilian_b", "neutral_basic_crocodilian_b"
-  }},
--- TIER 3
-  {["tier"] = 3, ["units"] = {
-    "neutral_crocodile", "neutral_crocodile", "neutral_crocodile"
-  }},
-  {["tier"] = 3, ["units"] = {
-    "neutral_skydragon", "neutral_dragon"
-  }},
-  {["tier"] = 3, ["units"] = {
-    "neutral_lamp"
-  }},
--- TIER 4
-  {["tier"] = 4, ["units"] = {
-    "neutral_igneo", "neutral_igneo"
-  }},
-  {["tier"] = 4, ["units"] = {
-    "neutral_igor", "neutral_frostbitten", "neutral_frostbitten"
-  }},
--- TIER 5
-  {["tier"] = 5, ["units"] = {
-    "neutral_spider"
-  }},
-  {["tier"] = 5, ["units"] = {
-    "neutral_frostbitten", "neutral_frostbitten", "neutral_frostbitten", "neutral_frostbitten", "neutral_frostbitten"
-  }},
--- TIER BOSS
-  {["tier"] = 8, ["units"] = {
-    "boss_gorillaz"
-  }}
-}
-
-SPAWNER_SPOTS_A = {
-  [1] = { ["mob"] = {}, ["origin"] = Vector(-1264, -5247, 0), ["respawn"] = -90 },
-  [2] = { ["mob"] = {}, ["origin"] = Vector(-631, -5971, 0), ["respawn"] = -90 },
-  [3] = { ["mob"] = {}, ["origin"] = Vector(-1175, -7170, 0), ["respawn"] = -90 },
-  [4] = { ["mob"] = {}, ["origin"] = Vector(299, -6840, 0), ["respawn"] = -90 },
-  [5] = { ["mob"] = {}, ["origin"] = Vector(144, -5266, 0), ["respawn"] = -90 },
-  [6] = { ["mob"] = {}, ["origin"] = Vector(1380, -5030, 0), ["respawn"] = -90 },
-  [7] = { ["mob"] = {}, ["origin"] = Vector(1059, -6249, 0), ["respawn"] = -90 },
-  [8] = { ["mob"] = {}, ["origin"] = Vector(1541, -7312, 0), ["respawn"] = -90 }
-}
-
-SPAWNER_SPOTS_B = {
-  [1] = { ["mob"] = {}, ["origin"] = Vector(-1273, 5143, 0), ["respawn"] = -90 },
-  [2] = { ["mob"] = {}, ["origin"] = Vector(-865, 6067, 0), ["respawn"] = -90 },
-  [3] = { ["mob"] = {}, ["origin"] = Vector(-1228, 7106, 0), ["respawn"] = -90 },
-  [4] = { ["mob"] = {}, ["origin"] = Vector(-60, 6605, 0), ["respawn"] = -90 },
-  [5] = { ["mob"] = {}, ["origin"] = Vector(28, 5359, 0), ["respawn"] = -90 },
-  [6] = { ["mob"] = {}, ["origin"] = Vector(1430, 5222, 0), ["respawn"] = -90 },
-  [7] = { ["mob"] = {}, ["origin"] = Vector(1126, 5855, 0), ["respawn"] = -90 },
-  [8] = { ["mob"] = {}, ["origin"] = Vector(1125, 6785, 0), ["respawn"] = -90 }
 }
 
 SPAWNER_SPOTS = {
-  [1] = { ["mob"] = {}, ["origin"] = Vector(-3195, 379, 0), ["respawn"] = -90 },
-  [2] = { ["mob"] = {}, ["origin"] = Vector(-2048, 2872, 0), ["respawn"] = -90 },
-  [3] = { ["mob"] = {}, ["origin"] = Vector(-761, 1587, 0), ["respawn"] = -90 },
-  [4] = { ["mob"] = {}, ["origin"] = Vector(-701, 3193, 0), ["respawn"] = -90 },
-  [5] = { ["mob"] = {}, ["origin"] = Vector(507, 1276, 0), ["respawn"] = -90 },
-  [6] = { ["mob"] = {}, ["origin"] = Vector(638, 3195, 0), ["respawn"] = -90 },
-  [7] = { ["mob"] = {}, ["origin"] = Vector(2163, 2170, 0), ["respawn"] = -90 },
-  [8] = { ["mob"] = {}, ["origin"] = Vector(3195, 1528, 0), ["respawn"] = -90 },
-  [9] = { ["mob"] = {}, ["origin"] = Vector(1607, 386, 0), ["respawn"] = -90 },
-  [10] = { ["mob"] = {}, ["origin"] = Vector(3203, -771, 0), ["respawn"] = -90 },
-  [11] = { ["mob"] = {}, ["origin"] = Vector(1412, -1863, 0), ["respawn"] = -90 },
-  [12] = { ["mob"] = {}, ["origin"] = Vector(1602, -3146, 0), ["respawn"] = -90 },
-  [13] = { ["mob"] = {}, ["origin"] = Vector(329, -1352, 0), ["respawn"] = -90 },
-  [14] = { ["mob"] = {}, ["origin"] = Vector(131, -2949, 0), ["respawn"] = -90 },
-  [15] = { ["mob"] = {}, ["origin"] = Vector(-2621, -2115, 0), ["respawn"] = -90 },
-  [16] = { ["mob"] = {}, ["origin"] = Vector(-1409, -835, 0), ["respawn"] = -90 }
+  ["death"] = {
+    [1] = { ["mob"] = {}, ["origin"] = Vector(1043.112671, -2866.549316, 0.000000), ["respawn"] = -90 },
+    [2] = { ["mob"] = {}, ["origin"] = Vector(84.746513, -3119.543457, 0.000000), ["respawn"] = -90 },
+    [3] = { ["mob"] = {}, ["origin"] = Vector(-1436.207153, -2662.348633, 0.000000), ["respawn"] = -90 },
+    [4] = { ["mob"] = {}, ["origin"] = Vector(-806.645142, -1629.660645, 0.000000), ["respawn"] = -90 },
+    [5] = { ["mob"] = {}, ["origin"] = Vector(471.747162, -1815.814453, 0.000000), ["respawn"] = -90 },
+  },
+  ["nature"] = {
+    [1] = { ["mob"] = {}, ["origin"] = Vector(-458.524475, 2276.512207, 0.000000), ["respawn"] = -90 },
+    [2] = { ["mob"] = {}, ["origin"] = Vector(45.256325, 3225.523682, 0.000000), ["respawn"] = -90 },
+    [3] = { ["mob"] = {}, ["origin"] = Vector(291.189697, 864.622437, 0.000000), ["respawn"] = -90 },
+    [4] = { ["mob"] = {}, ["origin"] = Vector(1476.522583, 2448.850098, 0.000000), ["respawn"] = -90 },
+    [5] = { ["mob"] = {}, ["origin"] = Vector(2758.485596, 1504.205933, 0.000000), ["respawn"] = -90 },
+  },
+  ["moon"] = {
+    [1] = { ["mob"] = {}, ["origin"] = Vector(-3139.694092, 569.087036, 128.000000), ["respawn"] = -90 },
+    [2] = { ["mob"] = {}, ["origin"] = Vector(-2075.637939, 1354.958740, 128.000000), ["respawn"] = -90 },
+    [3] = { ["mob"] = {}, ["origin"] = Vector(-1075.118896, 180.366470, 128.000000), ["respawn"] = -90 },
+    [4] = { ["mob"] = {}, ["origin"] = Vector(-2835.726318, -404.650146, 128.000000), ["respawn"] = -90 },
+    [5] = { ["mob"] = {}, ["origin"] = Vector(-1515.097168, -685.532654, 128.000000), ["respawn"] = -90 },
+  },
+  ["sun"] = {
+    [1] = { ["mob"] = {}, ["origin"] = Vector(2889.883301, 605.660278, 128.000000), ["respawn"] = -90 },
+    [2] = { ["mob"] = {}, ["origin"] = Vector(1549.846191, 243.432129, 128.000000), ["respawn"] = -90 },
+    [3] = { ["mob"] = {}, ["origin"] = Vector(3222.945312, -636.734619, 128.000000), ["respawn"] = -90 },
+    [4] = { ["mob"] = {}, ["origin"] = Vector(1954.839600, -894.835815, 128.000000), ["respawn"] = -90 },
+    [5] = { ["mob"] = {}, ["origin"] = Vector(2242.126953, -1821.577393, 128.000000), ["respawn"] = -90 },
+  }
 }
 
 SPAWNER_BOSS_SPOTS = {
@@ -273,7 +234,8 @@ SPAWNER_BOSS_SPOTS = {
   [2] = { ["mob"] = {}, ["origin"] = Vector(6500, 0, 0), ["respawn"] = -300},
 }
 
-MAX_MOB_COUNT = 3
+MAX_MOB_COUNT_TOTAL = 10
+MAX_MOB_COUNT_PER_AREA = 3
 MAX_BOSS_COUNT = 1
 
 BALDUR_CHARGING = 0

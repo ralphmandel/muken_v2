@@ -1,8 +1,5 @@
 "use strict"
 
-var mukenItems = null;
-var buttonContainer = null;
-var inventoryButton = null;
 var ROWS = {}, SLOTS = {};
 
 function CreateLayout(){
@@ -26,52 +23,6 @@ function OnItemIventoryAdded(event){
 }
 
 (function(){
-  mukenItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("muken_inventory_items");
-
-  if ($.GetContextPanel().layoutfile == "panorama\\layout\\custom_game\\muken_inventory.xml") {
-    GameEvents.Subscribe("add_item_inventory_from_lua", OnItemIventoryAdded);
-    CreateLayout();
-
-  } else {
-    inventoryButton = $.GetContextPanel().FindChildTraverse("inventory-button");
-    buttonContainer = $.GetContextPanel().FindChildTraverse("inventory-container");
-
-    buttonContainer.SetPanelEvent(
-      "onmouseover",
-      function(){
-        $.DispatchEvent("DOTAShowTitleTextTooltip", buttonContainer, "Inventory", "Click to Open/Close your inventory.");
-      }
-    )
-
-    buttonContainer.SetPanelEvent(
-      "onmouseout",
-      function(){
-        $.DispatchEvent("DOTAHideTitleTextTooltip", buttonContainer);
-      }
-    )
-
-    $.RegisterKeyBind(inventoryButton, "key_escape", () => {
-      if (inventoryButton.BHasClass("inventory-opened")){
-        toggleInventory();
-      }
-    });
-  }
-
-  Game.AddCommand("OpenInventory", toggleInventory, "", 0 );
+  GameEvents.Subscribe("add_item_inventory_from_lua", OnItemIventoryAdded);
+  CreateLayout();
 })()
-
-
-function toggleInventory(){  
-  if (inventoryButton != null) {
-    Game.EmitSound("ui.inv_equip_metalarmour");
-
-    if (inventoryButton.BHasClass("inventory-opened")){
-      inventoryButton.RemoveClass("inventory-opened");
-      mukenItems.AddClass("Hidden");
-    } else{
-      inventoryButton.SetFocus();
-      inventoryButton.AddClass("inventory-opened");
-      mukenItems.RemoveClass("Hidden");
-    }
-  }
-}

@@ -225,6 +225,9 @@ function GameMode:_CaptureGameMode()
 
 		mode:SetModifyExperienceFilter(
 			function(ctx, event)
+        local source = EntIndexToHScript(event.source_entindex_const)
+        local hero = EntIndexToHScript(event.hero_entindex_const)
+
 				return false
 			end
 		, self)

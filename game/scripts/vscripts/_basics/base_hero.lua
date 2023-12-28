@@ -68,7 +68,7 @@ require("internal/rank_system")
           Timers:CreateTimer(team, function()
             caster:RemoveAbilityByHandle(caster:FindAbilityByName("ability_capture"))
             caster:RemoveAbilityByHandle(caster:FindAbilityByName("abyssal_underlord_portal_warp"))
-            caster:AddExperience(INITIAL_XP, 0, false, false)
+            if INITIAL_XP > 0 then caster:AddExperience(INITIAL_XP, 0, false, false) end
           end)
         end
       end

@@ -90,6 +90,30 @@
 		}
 	}
 
+	"neutral_strike"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_strike"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"     		"neutrals/strike"
+
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"MaxLevel"               		"2"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"25"
+
+		"AbilityCooldown"				"5"
+
+		"AbilityValues"
+    {
+      "critical_damage" "500"
+      "evasion"         "20"
+      "ms"              "200"
+    }
+	}
+
+  //////////////////////////////////////////////////////////////////////////////////////
+
 	"_neutral_lamp"
 	{
 		"BaseClass"              		"ability_lua"
@@ -393,30 +417,6 @@
 			{
 				"var_type"			"FIELD_FLOAT"
 				"slow"				  "70"
-			}
-		}
-	}
-
-	"strike"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/strike"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     		"strike"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"3"
-		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
-
-		"AbilityCooldown"				"5"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"strike_damage"		"750"
 			}
 		}
 	}

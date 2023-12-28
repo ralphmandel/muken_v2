@@ -85,7 +85,7 @@ function shrine_modifier:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "mp_heal_pct" then return 0 end
       if value_name == "mp_heal_growth" then return 0 end
       if value_name == "hp_heal" then return 500 end
-      if value_name == "hp_heal_pct" then return 10 end
+      if value_name == "hp_heal_pct" then return 20 end
     end
     if self.name == "mp_filler" then
       if value_name == "AbilityCooldown" then return 150 end
@@ -94,7 +94,7 @@ function shrine_modifier:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "hp_heal_pct" then return 0 end
       if value_name == "hp_heal_growth" then return 0 end
       if value_name == "mp_heal" then return 100 end
-      if value_name == "mp_heal_pct" then return 10 end
+      if value_name == "mp_heal_pct" then return 20 end
     end
 	end
 

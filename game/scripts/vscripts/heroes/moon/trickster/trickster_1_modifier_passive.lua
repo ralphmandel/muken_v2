@@ -24,7 +24,7 @@ function trickster_1_modifier_passive:OnCreated(kv)
   --print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
   --self.time = GameRules:GetGameTime()
 
-  if IsServer() then self:StartIntervalThink(0.2) end
+  --if IsServer() then self:StartIntervalThink(0.2) end
 end
 
 function trickster_1_modifier_passive:OnRefresh(kv)
@@ -61,6 +61,10 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
   self.cancel = true
   self:CheckBonusAS(keys.target)
   self:CheckDoubleAtk(keys.target)
+end
+
+function trickster_1_modifier_passive:OnIntervalThink()
+  print("kubo loc ->", self.parent:GetOrigin())
 end
 
 -- UTILS -----------------------------------------------------------

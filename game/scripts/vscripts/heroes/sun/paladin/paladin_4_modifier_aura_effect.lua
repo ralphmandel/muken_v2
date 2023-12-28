@@ -19,13 +19,16 @@ function paladin_4_modifier_aura_effect:OnRefresh(kv)
 end
 
 function paladin_4_modifier_aura_effect:OnRemoved(bDeath)
-  if self.parent:IsAlive() == false and self.parent:IsIllusion() == false then
-    self:PlayEfxHeal()
+  local heal_hero = self.ability:GetSpecialValueFor("special_heal_hero")
+  local heal_unit = self.ability:GetSpecialValueFor("special_heal_unit")
 
+  if self.parent:IsAlive() == false and self.parent:IsIllusion() == false then
     if self.parent:IsHero() then
-      self.caster:Heal(self.caster:GetMaxHealth() * self.ability:GetSpecialValueFor("special_heal_hero") * 0.01, self.ability)
+      self.caster:Heal(self.caster:GetMaxHealth() * heal_hero * 0.01, self.ability)
+      if heal_hero > 0 then self:PlayEfxHeal() end
     else
-      self.caster:Heal(self.caster:GetMaxHealth() * self.ability:GetSpecialValueFor("special_heal_unit") * 0.01, self.ability)
+      self.caster:Heal(self.caster:GetMaxHealth() * heal_unit * 0.01, self.ability)
+      if heal_unit > 0 then self:PlayEfxHeal() end
     end
   end
 end

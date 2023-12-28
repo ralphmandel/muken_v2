@@ -373,40 +373,33 @@ function GameMode:OnEntityKilled( keys )
         if IsServer() then killedUnit:EmitSound("Creature.Kill") end
       end
 
-      if killedUnit:GetTeamNumber() == DOTA_TEAM_NEUTRALS then
-        RollDrops(killedUnit, killerEntity)
+      if killedUnit:GetTeamNumber() == DOTA_TEAM_NEUTRALS
+      or killedUnit:GetTeamNumber() > DOTA_TEAM_CUSTOM_4 then
+        --RollDrops(killedUnit, killerEntity)
 
-        if killerAbility == nil and killerEntity ~= nil then
-          if killerEntity:GetPlayerOwner() ~= nil then
-            if killerEntity:GetPlayerOwner():GetAssignedHero() ~= nil then
-              local gold = 0
+        if killerEntity then
+          if killerEntity:GetPlayerOwner() then
+            if killerEntity:GetPlayerOwner():GetAssignedHero() then
               local number = 0
 
               local allies = FindUnitsInRadius(
                 killerEntity:GetPlayerOwner():GetAssignedHero():GetTeamNumber(),
-                killedUnit:GetOrigin(), nil, 750, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-                DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, 0, false
+                killedUnit:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+                DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, 0, false
               )
             
               for _,ally in pairs(allies) do
-                if ally:IsIllusion() == false then
-                  number = number + 1
-                end
+                number = number + 1
               end
             
-              local average_gold_bounty = RandomInt(XP_BOUNTY_MIN * killedUnit:GetLevel(), XP_BOUNTY_MAX * killedUnit:GetLevel())
-              gold = average_gold_bounty / number
+              local xp = math.floor((killedUnit:GetDeathXP() / number) * killedUnit.xp_mult)
             
-              if math.floor(gold) > 0 and number > 0 then
+              if xp > 0 and number > 0 then
                 for _,ally in pairs(allies) do
-                  if ally:IsIllusion() == false then
-                    ally:ModifyGold(math.floor(gold), false, 18)
-                    SendOverheadEventMessage(ally:GetPlayerOwner(), OVERHEAD_ALERT_GOLD, ally, gold, ally)
-                    --if BaseHero(ally) then BaseHero(ally):AddGold(gold) end
-                    ally:AddExperience(gold, 0, false, false)
-                  end
+                  SendOverheadEventMessage(ally:GetPlayerOwner(), OVERHEAD_ALERT_XP, ally, xp, ally)
+                  ally:AddExperience(xp, 0, false, false)
                 end
-              end              
+              end
             end
           end
         end
@@ -417,7 +410,7 @@ function GameMode:OnEntityKilled( keys )
         and killerAbility == nil and killerEntity ~= nil then
           player[2] = 0
     
-          if killerEntity:GetTeamNumber() == DOTA_TEAM_NEUTRALS
+          if killerEntity:GetTeamNumber() == DOTA_TEAM_NEUTRALS or killerEntity:GetTeamNumber() > DOTA_TEAM_CUSTOM_4
           and math.floor(GameRules:GetDOTATime(false, true)) >= self.vo_time then
             self.vo = self.vo + 1
             Timers:CreateTimer((1.5), function()

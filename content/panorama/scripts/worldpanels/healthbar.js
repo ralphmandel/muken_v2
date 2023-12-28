@@ -20,6 +20,7 @@ if (!teamColors) {
 
 teamColors[DOTATeam_t.DOTA_TEAM_NEUTRALS] = teamColors[DOTATeam_t.DOTA_TEAM_NEUTRALS] || "#cccccc;";
 teamColors[DOTATeam_t.DOTA_TEAM_NOTEAM]   = teamColors[DOTATeam_t.DOTA_TEAM_NOTEAM]   || "#cccccc;";
+teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_5] = teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_5] || "#4285f4;";
 
 function HealthCheck()
 {

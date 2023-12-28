@@ -11,51 +11,41 @@ function _modifier__ai:IsHidden()
 end
 
 function _modifier__ai:OnCreated(params)
-    -- Only do AI on server
-    if IsServer() then
-        -- Set initial state
-        self.state = AI_STATE_IDLE
+  -- Only do AI on server
+  if IsServer() then
+    self.state = AI_STATE_IDLE
+    self.aggroRange = 450
+    self.leashRange = 1000
+    self.unit = self:GetParent()
 
-        -- Store parameters from AI creation:
-        -- unit:AddNewModifier(caster, ability, "_modifier__ai", { aggroRange = X, leashRange = Y })
-        self.aggroRange = 450
-        self.leashRange = 1000
+    Timers:CreateTimer((0.2), function()
+      self.spawnPos = self.unit:GetOrigin()
+      self:ChangeModelScale()
+      self.unit:GiveMana(9999)
+    end)
 
-        -- Store unit handle so we don't have to call self:GetParent() every time
-        self.unit = self:GetParent() 
-        Timers:CreateTimer((0.2), function()
-			self.spawnPos = self.unit:GetOrigin()
-            self:ChangeModelScale()
-            self.unit:GiveMana(9999)
-		end)
+    self.stateActions = {
+      [AI_STATE_IDLE] = self.IdleThink,
+      [AI_STATE_AGGRESSIVE] = self.AggressiveThink,
+      [AI_STATE_RETURNING] = self.ReturningThink,
+    }
 
-        -- Set state -> action mapping
-        self.stateActions = {
-            [AI_STATE_IDLE] = self.IdleThink,
-            [AI_STATE_AGGRESSIVE] = self.AggressiveThink,
-            [AI_STATE_RETURNING] = self.ReturningThink,
-        }
-
-        -- Start thinking
-        self:StartIntervalThink(AI_THINK_INTERVAL)
-    end
+    self:StartIntervalThink(AI_THINK_INTERVAL)
+  end
 end
 
 function _modifier__ai:OnIntervalThink()
-    -- Execute action corresponding to the current state
-    if self.unit:IsDominated() then
-      RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_immunity", self:GetAbility())
-      RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
-      return
-    end
+  if self.unit:IsDominated() then
+    RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
+    return
+  end
 
-    self.stateActions[self.state](self)
+  self.stateActions[self.state](self)
 end
 
 function _modifier__ai:IdleThink()
   RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
 
-  -- Find any enemy units around the AI unit inside the aggroRange
   local units = FindUnitsInRadius(
     self.unit:GetTeam(), self.spot_origin, nil, self.aggroRange,
     DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL,
@@ -63,22 +53,14 @@ function _modifier__ai:IdleThink()
     FIND_ANY_ORDER, false
   )
 
-  -- If one or more units were found, start attacking the first one
-  -- if #units > 0 then
-  --     --self.spawnPos = self.unit:GetAbsOrigin() -- Remember position to return to
-  --     self.aggroTarget = units[1] -- Remember who to attack
-  --     self.unit:MoveToTargetToAttack(self.aggroTarget) --Start attacking
-  --     self.state = AI_STATE_AGGRESSIVE --State transition
-  --     return -- Stop processing this state
-  -- end
-
 	for _,unit in pairs(units) do
-		if unit:IsIllusion() == false then
-      self.aggroTarget = unit -- Remember who to attack
-      self.unit:MoveToTargetToAttack(self.aggroTarget) --Start attacking
-      self.state = AI_STATE_AGGRESSIVE --State transition
-      
-      return -- Stop processing this state
+    if unit:GetTeamNumber() < DOTA_TEAM_CUSTOM_5 then
+      if unit:IsIllusion() == false then
+        self.aggroTarget = unit
+        self.unit:MoveToTargetToAttack(self.aggroTarget)
+        self.state = AI_STATE_AGGRESSIVE
+        return
+      end
     end
 	end
 
@@ -86,10 +68,6 @@ function _modifier__ai:IdleThink()
     self.aggroTarget = self.unit:GetAggroTarget()
     self.state = AI_STATE_AGGRESSIVE
     return
-  end
-
-  if self.unit:HasModifier("_modifier_immunity") == false then
-    self.unit:AddNewModifier(self.unit, self:GetAbility(), "_modifier_immunity", {})
   end
 end
 
@@ -120,48 +98,40 @@ function _modifier__ai:AggressiveThink()
     end
   end
 
-  -- Check if the unit has walked outside its leash range
   if (self.spawnPos - self.unit:GetAbsOrigin()):Length() > self.leashRange then
-    self.unit:MoveToPosition(self.spawnPos) --Move back to the spawnpoint
-    self.state = AI_STATE_RETURNING --Transition the state to the 'Returning' state(!)
-    return -- Stop processing this state
+    self.unit:MoveToPosition(self.spawnPos)
+    self.state = AI_STATE_RETURNING
+    return
   end
     
-  -- Check if the target has died
   if not self.aggroTarget:IsAlive() then
-    self.unit:MoveToPosition(self.spawnPos) --Move back to the spawnpoint
-    self.state = AI_STATE_RETURNING --Transition the state to the 'Returning' state(!)
-    return -- Stop processing this state
+    self.unit:MoveToPosition(self.spawnPos)
+    self.state = AI_STATE_RETURNING
+    return
   end
 
-  -- Check if the target is invisible or out of game
   if self.aggroTarget:IsOutOfGame() or self.aggroTarget:IsInvisible() then
-    self.unit:MoveToPosition(self.spawnPos) --Move back to the spawnpoint
-    self.state = AI_STATE_RETURNING --Transition the state to the 'Returning' state(!)
-    return -- Stop processing this state
+    self.unit:MoveToPosition(self.spawnPos)
+    self.state = AI_STATE_RETURNING
+    return
   end
-    
-  -- Still in the aggressive state, so do some aggressive stuff.
+
   if self.unit:GetAggroTarget() ~= nil then
     if self.unit:GetAggroTarget() ~= self.aggroTarget then
       self.aggroTarget = self.unit:GetAggroTarget()
       self.unit:MoveToTargetToAttack(self.aggroTarget)
     end
   end
-  --self.unit:MoveToTargetToAttack(self.aggroTarget)
   
-  RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_immunity", self:GetAbility())
   RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
 end
 
 function _modifier__ai:ReturningThink()
-  -- Check if the AI unit has reached its spawn location yet
   if (self.spawnPos - self.unit:GetAbsOrigin()):Length() < 10 then
-    self.state = AI_STATE_IDLE -- Transition the state to the 'Idle' state(!)
-    return -- Stop processing this state
+    self.state = AI_STATE_IDLE
+    return
   end
 
-  -- If not at return position yet, try to move there again
   self.unit:Purge(false, true, false, true, false)
   self.unit:MoveToPosition(self.spawnPos)
 
@@ -175,7 +145,7 @@ function _modifier__ai:CheckState()
 	local state = {}
 
     if self.state == AI_STATE_IDLE then
-        state = {[MODIFIER_STATE_MAGIC_IMMUNE] = true}
+      state = {[MODIFIER_STATE_MAGIC_IMMUNE] = true}
     end
 
 	return state
@@ -183,7 +153,7 @@ end
 
 function _modifier__ai:DeclareFunctions()
 	local funcs = {
-        MODIFIER_EVENT_ON_ATTACK,
+    MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 		MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND
 	}
@@ -194,31 +164,33 @@ end
 function _modifier__ai:OnAttack(keys)
 	if keys.attacker ~= self.unit then return end
     local sound = ""
+    if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+    if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+
     if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.attack" end
     if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle" then sound = "Hero_LoneDruid.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle_b" then sound = "Hero_LoneDruid.Attack" end
 
 	if IsServer() then self.unit:EmitSound(sound) end
 end
 
 function _modifier__ai:OnAttackLanded(keys)
 	if keys.attacker ~= self.unit then return end
-    local sound = ""
-    if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
-    if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
-    if self.unit:GetUnitName() == "neutral_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
-    if self.unit:GetUnitName() == "neutral_skydragon" then sound = "Hero_Magnataur.Attack" end
-    if self.unit:GetUnitName() == "neutral_dragon" then sound = "Hero_Magnataur.Attack" end
-    if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
-    if self.unit:GetUnitName() == "neutral_frostbitten" then sound = "Hero_DarkSeer.Attack" end
-    if self.unit:GetUnitName() == "neutral_crocodile" then sound = "Hero_Slardar.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_chameleon" then sound = "Hero_Meepo.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_chameleon_b" then sound = "Hero_Meepo.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_crocodilian" then sound = "Hero_Slardar.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_crocodilian_b" then sound = "Hero_Slardar.Attack" end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle_b" then sound = "Hero_LoneDruid.ProjectileImpact" end
+  local sound = ""
+  if self.unit:GetUnitName() == "neutral_common_chameleon_a" then sound = "Hero_Meepo.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_chameleon_b" then sound = "Hero_Meepo.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_crocodilian_a" then sound = "Hero_Slardar.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_crocodilian_b" then sound = "Hero_Slardar.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
+
+  if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
+  if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
+  if self.unit:GetUnitName() == "neutral_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
+  if self.unit:GetUnitName() == "neutral_skydragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_dragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_frostbitten" then sound = "Hero_DarkSeer.Attack" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
@@ -228,17 +200,18 @@ function _modifier__ai:GetAttackSound(keys)
 end
 
 function _modifier__ai:ChangeModelScale()
-    if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
-    if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
-    if self.unit:GetUnitName() == "neutral_skydragon" then self.unit:SetModelScale(1) end
-    if self.unit:GetUnitName() == "neutral_dragon" then self.unit:SetModelScale(0.9) end
-    if self.unit:GetUnitName() == "neutral_igor" then self.unit:SetModelScale(1.5) end
-    if self.unit:GetUnitName() == "neutral_frostbitten" then self.unit:SetModelScale(1.1) end
-    if self.unit:GetUnitName() == "neutral_crocodile" then self.unit:SetModelScale(1.4) end
-    if self.unit:GetUnitName() == "neutral_basic_chameleon" then self.unit:SetModelScale(1) end
-    if self.unit:GetUnitName() == "neutral_basic_chameleon_b" then self.unit:SetModelScale(0.9) end
-    if self.unit:GetUnitName() == "neutral_basic_crocodilian" then self.unit:SetModelScale(1.3) end
-    if self.unit:GetUnitName() == "neutral_basic_crocodilian_b" then self.unit:SetModelScale(1.3) end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle" then self.unit:SetModelScale(1) end
-    if self.unit:GetUnitName() == "neutral_basic_gargoyle_b" then self.unit:SetModelScale(0.8) end
+  if self.unit:GetUnitName() == "neutral_common_chameleon_a" then self.unit:SetModelScale(0.9) end
+  if self.unit:GetUnitName() == "neutral_common_chameleon_b" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_common_crocodilian_a" then self.unit:SetModelScale(1.3) end
+  if self.unit:GetUnitName() == "neutral_common_crocodilian_b" then self.unit:SetModelScale(1.3) end
+  if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_common_gargoyle" then self.unit:SetModelScale(0.8) end
+  if self.unit:GetUnitName() == "neutral_rare_crocodile" then self.unit:SetModelScale(1.4) end
+
+  if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
+  if self.unit:GetUnitName() == "neutral_skydragon" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_dragon" then self.unit:SetModelScale(0.9) end
+  if self.unit:GetUnitName() == "neutral_igor" then self.unit:SetModelScale(1.5) end
+  if self.unit:GetUnitName() == "neutral_frostbitten" then self.unit:SetModelScale(1.1) end
 end

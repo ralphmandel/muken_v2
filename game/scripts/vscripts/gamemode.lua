@@ -151,10 +151,7 @@ function GameMode:OnGameInProgress()
 
   Timers:CreateTimer(1, -- Start this timer 30 game-time seconds later
     function()
-      --Spawner:SpawnNeutrals(SPAWNER_SPOTS)
-      --Spawner:SpawnNeutrals(SPAWNER_SPOTS_A)
-      --Spawner:SpawnNeutrals(SPAWNER_SPOTS_B)
-      --Spawner:SpawnBosses()
+      Spawner:SpawnNeutrals(SPAWNER_SPOTS)
 
       return 1 -- Rerun this timer every 30 game-time seconds 
     end)

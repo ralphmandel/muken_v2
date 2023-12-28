@@ -296,7 +296,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if value_name == "stun_duration" then return 0.2 + (value_level * 0.01) end
-		if value_name == "hp_regen_percent" then return 0.5 + (value_level * 0.02) end
+		if value_name == "hp_regen_percent" then return 0.3 + (value_level * 0.01) end
 
     if value_name == "special_break_duration" then return 3 end
     if value_name == "damage_percent" then return 70 end
