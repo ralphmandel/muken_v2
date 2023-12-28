@@ -141,7 +141,7 @@ function HideRankTooltip(id, tier, path) {
 }
 
 function OnRankClick(id, tier, path) {
-  if (Game.GetLocalPlayerInfo().player_selected_hero_entity_index == current_portrait_entity) {
+  if (Game.IsInToolsMode() || Game.GetLocalPlayerInfo().player_selected_hero_entity_index == current_portrait_entity) {
     if (RANK_PANELS[tier][path].BHasClass(rank_states[2])) {
       Game.EmitSound("Config.Ok");
       GameEvents.SendCustomGameEventToServer("rank_up_from_panorama", {

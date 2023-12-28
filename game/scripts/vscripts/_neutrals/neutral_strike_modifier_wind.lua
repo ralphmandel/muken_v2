@@ -10,6 +10,8 @@ function neutral_strike_modifier_wind:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  self.parent:AttackNoEarlierThan(1, 20)
+
   AddSubStats(self.parent, self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")}, false)
 
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {
