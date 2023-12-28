@@ -196,6 +196,14 @@ SPAWNER_MOBS = {
   {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = {
     "neutral_rare_crocodile"
   }},
+-- TIER 2
+  {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
+    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
+  }},
+  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = {
+    "neutral_rare_frostbitten"
+  }},
 }
 
 SPAWNER_SPOTS = {

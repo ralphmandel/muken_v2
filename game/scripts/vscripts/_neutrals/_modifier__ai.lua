@@ -183,6 +183,7 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
+  if self.unit:GetUnitName() == "neutral_rare_frostbitten" then sound = "Hero_DarkSeer.Attack" end
 
   if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
@@ -190,7 +191,6 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_skydragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
-  if self.unit:GetUnitName() == "neutral_frostbitten" then sound = "Hero_DarkSeer.Attack" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
@@ -207,11 +207,11 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then self.unit:SetModelScale(0.8) end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then self.unit:SetModelScale(1.4) end
+  if self.unit:GetUnitName() == "neutral_rare_frostbitten" then self.unit:SetModelScale(1.1) end
 
   if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_skydragon" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_dragon" then self.unit:SetModelScale(0.9) end
   if self.unit:GetUnitName() == "neutral_igor" then self.unit:SetModelScale(1.5) end
-  if self.unit:GetUnitName() == "neutral_frostbitten" then self.unit:SetModelScale(1.1) end
 end

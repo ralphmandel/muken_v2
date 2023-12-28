@@ -59,9 +59,8 @@ function Spawner:SpawnNeutrals(spawn_area)
 
     if current_mobs < MAX_MOB_COUNT_TOTAL then
       local map = free_spots[RandomInt(1, #free_spots)]
-      local tier = 1--self:RandomizeTier()
-      local mob = self:RandomizeMob(tier)
-      self:CreateMob(spawn_area, map, tier, mob, "_modifier__ai")
+      local mob = self:RandomizeMob()
+      self:CreateMob(spawn_area, map, mob, "_modifier__ai")
     end
   end
 end
@@ -93,7 +92,11 @@ function Spawner:IsSpotCooldown(spawner, spot, respawn_time)
   return (respawn_time > (current_time - spawner[spot]["respawn"]))
 end
 
-function Spawner:RandomizeTier()
+function Spawner:RandomizeMob()
+  local rand_mobs = {}
+  local index = 0
+  local rarity = RARITY_COMMON
+
   local hero_count = 0
   local hero_lvl_total = 0
 
@@ -104,23 +107,18 @@ function Spawner:RandomizeTier()
 
   local average_level = hero_lvl_total / hero_count
   local current_tier = math.ceil(average_level / 6)
-
-  return RandomInt(1, current_tier)
-end
-
-function Spawner:RandomizeMob(tier)
-  local rand_mobs = {}
-  local index = 0
-
-  local rarity = RARITY_COMMON
+  if current_tier > 2 then current_tier = 1 end -- !!! TESTING !!!
 
   if RandomFloat(0, 100) < 15 then
-    if tier > 2 then rarity = RARITY_LEGENDARY end
+    if current_tier > 2 then rarity = RARITY_LEGENDARY end
   elseif RandomFloat(0, 100) < 23.5 then
-    if tier > 1 then rarity = RARITY_EPIC end
+    if current_tier > 1 then rarity = RARITY_EPIC end
   elseif RandomFloat(0, 100) < 38.5 then
     rarity = RARITY_RARE
   end
+
+  local tier = RandomInt(rarity, current_tier)
+  if tier == 0 then tier = 1 end
 
   for _,mob in pairs(SPAWNER_MOBS) do
     if mob["rarity"] == rarity and mob["tier"] == tier then
@@ -132,7 +130,7 @@ function Spawner:RandomizeMob(tier)
   return rand_mobs[RandomInt(1, index)]
 end
 
-function Spawner:CreateMob(spawner, map, tier, mob, modifier)
+function Spawner:CreateMob(spawner, map, mob, modifier)
   local spawned_units = {}
   local area = map["area"]
   local spot = map["spot"]
@@ -147,7 +145,7 @@ function Spawner:CreateMob(spawner, map, tier, mob, modifier)
   end
 
   spawner[area][spot]["respawn"] = nil
-  spawner[area][spot]["mob"] = {["tier"] = tier, ["units"] = spawned_units}
+  spawner[area][spot]["mob"] = {["tier"] = mob["tier"], ["units"] = spawned_units}
 end
 
 function Spawner:RandomizePlayerSpawn(unit)

@@ -1,6 +1,6 @@
 neutral_strike_modifier_passive = class({})
 
-function neutral_strike_modifier_passive:IsHidden() return false end
+function neutral_strike_modifier_passive:IsHidden() return true end
 function neutral_strike_modifier_passive:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -11,7 +11,7 @@ function neutral_strike_modifier_passive:OnCreated(kv)
   self.ability = self:GetAbility()
   self.strike = false
 
-  if IsServer() then self:OnIntervalThink() end
+  if IsServer() then self:StartIntervalThink(2) end
 end
 
 function neutral_strike_modifier_passive:OnRefresh(kv)
@@ -49,6 +49,10 @@ function neutral_strike_modifier_passive:OnAttackLanded(keys)
 end
 
 function neutral_strike_modifier_passive:OnIntervalThink()
+  if self.parent:PassivesDisabled() then
+    if IsServer() then self:StartIntervalThink(0.5) end
+  end
+
   AddModifier(self.parent, self.ability, "neutral_strike_modifier_wind", {}, false)
   MainStats(self.parent, "STR"):SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
   self.strike = true

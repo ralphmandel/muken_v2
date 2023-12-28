@@ -22,7 +22,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "1"
-			"BountyXP"					    "60"
+			"BountyXP"					    "40"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -88,7 +88,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "2"
-			"BountyXP"					    "70"
+			"BountyXP"					    "50"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -154,7 +154,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "5"
-			"BountyXP"					    "100"
+			"BountyXP"					    "80"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -220,7 +220,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "5"
-			"BountyXP"					    "100"
+			"BountyXP"					    "80"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -274,7 +274,7 @@
 			"SoundSet"				"n_creep_Melee"
 			"GameSoundsFile"	"soundevents/game_sounds_creeps.vsndevts"
 
-			"Model"						      "models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl"
+			"Model"						      "models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl"
 			"TeamName"					    "DOTA_TEAM_NEUTRALS"
 			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_FLY"
 			"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -285,8 +285,8 @@
 			"VisionNighttimeRange"	"500"
 			"ProjectileModel"			  "particles/econ/items/visage/immortal_familiar/visage_immortal_ti5/visage_familiar_base_attack_ti5.vpcf"
 			"ProjectileSpeed"			  "1200"
-			"Level"						      "6"
-			"BountyXP"					    "110"
+			"Level"						      "5"
+			"BountyXP"					    "80"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -351,8 +351,8 @@
 			"VisionNighttimeRange"	"500"
 			"ProjectileModel"			  "particles/econ/items/visage/immortal_familiar/visage_immortal_ti5/visage_familiar_base_attack_ti5.vpcf"
 			"ProjectileSpeed"			  "1200"
-			"Level"						      "3"
-			"BountyXP"					    "80"
+			"Level"						      "2"
+			"BountyXP"					    "50"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -419,7 +419,7 @@
 			//"ProjectileModel"			  ""
 			//"ProjectileSpeed"			  "1200"
 			"Level"						      "15"
-			"BountyXP"					    "200"
+			"BountyXP"					    "180"
 
       "Ability5"          "neutral_strike"
 			"Ability6"					"_ability_str"
@@ -434,6 +434,73 @@
 				"agi" "0"
 				"int" "0"
 				"vit" "3"
+			}
+
+			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+			"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+			"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+			"UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+			"ConsideredHero" 	      "1"
+			"IsNeutralUnitType"     "1"
+			"WakesNeutrals" 	      "1"
+			"ArmorPhysical"				    "0"
+			"MagicalResistance"       "0"
+			"StatusHealth"				    "1000"
+			"StatusHealthRegen"	      "0"
+			"StatusMana"				      "500"
+			"StatusManaRegen"			    "0"
+			"MovementSpeed"           "9999"
+			"AttackDamageMax"			    "55"
+			"AttackDamageMin"			    "45"
+			"AttackRate"				      "1"
+			"AttackAnimationPoint"		"0.5"
+			"AttackAcquisitionRange"  "50"  
+			
+			"Creature"
+			{
+				"HPGain"					"0"
+				"DamageGain"			"0"
+				"ArmorGain"				"0"
+				"MagicResistGain" "0"
+				"MoveSpeedGain"		"0"
+				"BountyGain"			"0"
+				"XPGain"					"0"
+			}
+		}
+
+    "neutral_rare_frostbitten"
+		{
+			"BaseClass"			  "npc_dota_creature"
+			"SoundSet"				"n_creep_Melee"
+			"GameSoundsFile"	"soundevents/game_sounds_creeps.vsndevts"
+
+			"Model"						      "models/creeps/ice_biome/frostbitten/n_creep_frostbitten_swollen01.vmdl"
+			"TeamName"					    "DOTA_TEAM_CUSTOM_5"
+			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+			"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackRange"				    "120"
+			"HealthBarOffset"			  "200"
+			"RingRadius"				    "100"
+			"VisionDaytimeRange"		"600"
+			"VisionNighttimeRange"	"500"
+			//"ProjectileModel"			  ""
+			//"ProjectileSpeed"			  "1200"
+			"Level"						      "25"
+			"BountyXP"					    "280"
+
+      "Ability5"          "neutral_smash"
+			"Ability6"					"_ability_str"
+			"Ability7"					"_ability_agi"
+			"Ability8"					"_ability_int"
+			"Ability9"					"_ability_vit"
+			"Ability10"					"_neutral__ai"
+
+			"Stats"
+			{
+				"str" "4"
+				"agi" "0"
+				"int" "0"
+				"vit" "6"
 			}
 
 			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
