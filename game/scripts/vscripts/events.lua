@@ -394,7 +394,7 @@ function GameMode:OnEntityKilled( keys )
                 number = number + 1
               end
             
-              local xp_total = ((killedUnit:GetDeathXP() * (1 + (0.15 * killedUnit:GetLevel()))) + 30) * killedUnit.xp_mult
+              local xp_total = ((killedUnit:GetDeathXP() * (1 + (0.15 * killedUnit:GetLevel()))) + 50) * killedUnit.xp_mult
               local xp_per_unit = math.floor(xp_total / number)
             
               if xp_per_unit > 0 and number > 0 then

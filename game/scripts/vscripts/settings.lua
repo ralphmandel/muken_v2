@@ -187,28 +187,31 @@ SPAWNER_MOBS = {
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_chameleon_a", "neutral_common_chameleon_b",
     "neutral_common_chameleon_a", "neutral_common_chameleon_b"
-  }},
+  }}, -- 274 | 61 + 61 + 76 + 76
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
-  }},
+  }}, -- 274 | 137 + 137
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_gargoyle", "neutral_common_gargoyle",
     "neutral_common_great_gargoyle"
-  }},
-  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = {
-    "neutral_rare_crocodile"
-  }},
+  }}, -- 289 | 137 + 76 + 76
+  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- {x1.25}
+  "neutral_rare_frostbitten"
+  }}, -- 300 | 300 [375 | 375]
+
 -- TIER 2
   {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-  }},
-  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = {
-    "neutral_rare_frostbitten"
-  }},
-  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = {
+  }}, -- 548 | 137 + 137 + 137 + 137
+  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- {x1.25}
+    "neutral_rare_crocodile"
+  }}, -- 537 | 537 [671 | 671]
+  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- {x1.5}
     "neutral_epic_skydragon", "neutral_epic_dragon"
-  }},
+  }}, -- 686 | 386 + 300 [ 1,029 | 579 + 450]
+
+-- TIER 3
 }
 
 SPAWNER_SPOTS = {
