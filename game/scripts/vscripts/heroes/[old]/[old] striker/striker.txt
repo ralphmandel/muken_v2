@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"striker_blow"
 		"MaxLevel"               		"15"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -92,7 +92,7 @@
 		"AbilityTextureName"     		"striker_shield"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -158,7 +158,7 @@
 		"AbilityTextureName"     		"striker_portal"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
@@ -257,7 +257,7 @@
 		"AbilityTextureName"     		"striker_hammer"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_AOE"
@@ -326,7 +326,7 @@
 		"AbilityTextureName"     		"striker_sof"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
@@ -412,7 +412,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"7"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 

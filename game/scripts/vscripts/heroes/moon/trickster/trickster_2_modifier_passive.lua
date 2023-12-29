@@ -76,7 +76,11 @@ function trickster_2_modifier_passive:OnAttackRecordDestroy(keys)
     if attacker == target then return end
   end
 
-  attacker:RemoveModifierByNameAndCaster("trickster_2_modifier_debuff", self.caster)
+  if attacker then
+    if IsValidEntity(attacker) then
+      attacker:RemoveModifierByNameAndCaster("trickster_2_modifier_debuff", self.caster)
+    end
+  end
 end
 
 function trickster_2_modifier_passive:OnAttackLanded(keys)

@@ -384,20 +384,23 @@ function GameMode:OnEntityKilled( keys )
 
               local allies = FindUnitsInRadius(
                 killerEntity:GetPlayerOwner():GetAssignedHero():GetTeamNumber(),
-                killedUnit:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-                DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, 0, false
+                killedUnit:GetOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO,
+                DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS +
+                DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
+                0, false
               )
             
               for _,ally in pairs(allies) do
                 number = number + 1
               end
             
-              local xp = math.floor((killedUnit:GetDeathXP() / number) * killedUnit.xp_mult)
+              local xp_total = ((killedUnit:GetDeathXP() * (1 + (0.15 * killedUnit:GetLevel()))) + 30) * killedUnit.xp_mult
+              local xp_per_unit = math.floor(xp_total / number)
             
-              if xp > 0 and number > 0 then
+              if xp_per_unit > 0 and number > 0 then
                 for _,ally in pairs(allies) do
-                  SendOverheadEventMessage(ally:GetPlayerOwner(), OVERHEAD_ALERT_XP, ally, xp, ally)
-                  ally:AddExperience(xp, 0, false, false)
+                  SendOverheadEventMessage(ally:GetPlayerOwner(), OVERHEAD_ALERT_XP, ally, xp_per_unit, ally)
+                  ally:AddExperience(xp_per_unit, 0, false, false)
                 end
               end
             end

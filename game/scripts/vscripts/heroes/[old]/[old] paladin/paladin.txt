@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"paladin_link"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -54,7 +54,7 @@
 		"AbilityTextureName"     		"paladin_shield"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -78,7 +78,7 @@
 		"AbilityTextureName"     		"paladin_hammer"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
@@ -110,7 +110,7 @@
 		"AbilityTextureName"     		"paladin_magnus"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
@@ -137,7 +137,7 @@
 		"AbilityTextureName"     		"paladin_smite"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
@@ -162,7 +162,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"

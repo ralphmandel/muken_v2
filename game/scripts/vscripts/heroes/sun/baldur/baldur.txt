@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"baldur_power"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -44,7 +44,7 @@
 		"AbilityTextureName"     		"baldur_dash"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
@@ -74,7 +74,7 @@
 		"AbilityTextureName"     		"baldur_barrier"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
@@ -101,7 +101,7 @@
 		"AbilityTextureName"     		"baldur_rear"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -122,7 +122,7 @@
 		"AbilityTextureName"     		"baldur_fire"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -155,7 +155,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"

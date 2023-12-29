@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"bald_power"
 		"MaxLevel"               		"14"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -81,7 +81,7 @@
 		"AbilityTextureName"     		"bald_bash"
 		"MaxLevel"               		"13"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -142,7 +142,7 @@
 		"AbilityTextureName"     		"bald_inner"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
@@ -226,7 +226,7 @@
 		"AbilityTextureName"     		"bald_clean"
 		"MaxLevel"               		"9"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -269,7 +269,7 @@
 		"AbilityTextureName"     		"bald_spike"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -345,7 +345,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"8"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastAnimation"   		"ACT_DOTA_TAUNT"

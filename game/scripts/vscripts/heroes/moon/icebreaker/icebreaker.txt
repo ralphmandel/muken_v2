@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"icebreaker_frost"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
@@ -54,7 +54,7 @@
 		"AbilityTextureName"     		"icebreaker_wave"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -93,7 +93,7 @@
 		"AbilityTextureName"     		"icebreaker_skin"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -129,7 +129,7 @@
 		"AbilityTextureName"     		"icebreaker_shivas"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -162,7 +162,7 @@
 		"AbilityTextureName"     		"icebreaker_blink"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -195,7 +195,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"

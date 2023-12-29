@@ -25,10 +25,14 @@ function neutral_smash_modifier_passive:OnIntervalThink()
 	if self.ability:IsCooldownReady() == false then return end
 	if self.ability:IsOwnersManaEnough() == false then return end
 
+  local ai = self.parent:FindModifierByName("_modifier__ai")
+  if ai == nil then return end
+  if ai.state ~= 1 then return end
+
   local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius() - 100,
-		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false
+		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
+		self.ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
 	)
 
 	for _,enemy in pairs(enemies) do
@@ -36,7 +40,7 @@ function neutral_smash_modifier_passive:OnIntervalThink()
     break
 	end
   
-  if IsServer() then self:StartIntervalThink(1) end
+  if IsServer() then self:StartIntervalThink(self.ability:GetCastPoint() + 0.1) end
 end
 
 -- UTILS -----------------------------------------------------------

@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"bloodstained_rage"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -56,7 +56,7 @@
 		"AbilityTextureName"     		"bloodstained_frenzy"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -81,7 +81,7 @@
 		"AbilityTextureName"     		"bloodstained_curse"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_ALL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -110,7 +110,7 @@
 		"AbilityTextureName"     		"bloodstained_tear"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -141,7 +141,7 @@
 		"AbilityTextureName"     		"bloodstained_lifesteal"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -167,7 +167,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_BOTH"

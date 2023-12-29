@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"strider_silence"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -56,7 +56,7 @@
 		"AbilityTextureName"     		"strider_spin"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -86,7 +86,7 @@
 		"AbilityTextureName"     		"strider_smoke"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -114,7 +114,7 @@
 		"AbilityTextureName"     		"strider_shuriken"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING"
@@ -150,7 +150,7 @@
 		"AbilityTextureName"     		"strider_aspd"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
     "AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -175,7 +175,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"

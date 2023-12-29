@@ -1,20 +1,16 @@
 _modifier__ai = class({})
+function _modifier__ai:IsHidden() return true end
 
 local AI_STATE_IDLE = 0
 local AI_STATE_AGGRESSIVE = 1
 local AI_STATE_RETURNING = 2
-
 local AI_THINK_INTERVAL = 0.25
 
-function _modifier__ai:IsHidden()
-	return true
-end
-
-function _modifier__ai:OnCreated(params)
+function _modifier__ai:OnCreated(kv)
   -- Only do AI on server
   if IsServer() then
     self.state = AI_STATE_IDLE
-    self.aggroRange = 450
+    self.aggroRange = 400
     self.leashRange = 1000
     self.unit = self:GetParent()
 
@@ -31,6 +27,7 @@ function _modifier__ai:OnCreated(params)
     }
 
     self:StartIntervalThink(AI_THINK_INTERVAL)
+    self:PlayEfxStart()
   end
 end
 
@@ -184,12 +181,12 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then sound = "Hero_DarkSeer.Attack" end
+  if self.unit:GetUnitName() == "neutral_epic_skydragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_epic_dragon" then sound = "Hero_Magnataur.Attack" end
 
   if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
   if self.unit:GetUnitName() == "neutral_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
-  if self.unit:GetUnitName() == "neutral_skydragon" then sound = "Hero_Magnataur.Attack" end
-  if self.unit:GetUnitName() == "neutral_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
@@ -208,10 +205,24 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then self.unit:SetModelScale(0.8) end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then self.unit:SetModelScale(1.1) end
+  if self.unit:GetUnitName() == "neutral_epic_skydragon" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_epic_dragon" then self.unit:SetModelScale(0.9) end
 
   if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
-  if self.unit:GetUnitName() == "neutral_skydragon" then self.unit:SetModelScale(1) end
-  if self.unit:GetUnitName() == "neutral_dragon" then self.unit:SetModelScale(0.9) end
   if self.unit:GetUnitName() == "neutral_igor" then self.unit:SetModelScale(1.5) end
+end
+
+function _modifier__ai:PlayEfxStart()
+	local string = nil
+  if self.unit:GetTeamNumber() == TIER_TEAMS[RARITY_RARE] then string = "particles/neutral_auras/rare/aura_rare_lvl3.vpcf" end
+  if self.unit:GetTeamNumber() == TIER_TEAMS[RARITY_EPIC] then string = "particles/neutral_auras/epic/aura_epic_lvl3.vpcf" end
+  if self.unit:GetTeamNumber() == TIER_TEAMS[RARITY_LEGENDARY] then string = "particles/neutral_auras/legendary/aura_legendary_lvl3.vpcf" end
+
+  if string then
+    local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, self.unit)
+    ParticleManager:SetParticleControl(particle, 0, self.unit:GetOrigin())
+    ParticleManager:SetParticleControl(particle, 1, self.unit:GetAbsOrigin())
+    self:AddParticle(particle, false, false, -1, false, false)
+  end
 end

@@ -24,7 +24,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"13"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
@@ -76,7 +76,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"7"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 
@@ -111,7 +111,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"13"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilitySpecial"
 		{
@@ -168,7 +168,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityCastPoint"       		"0.2"
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_2"
@@ -216,7 +216,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"10"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityCastPoint"				"0.3"
         "AbilityCastAnimation"		    "ACT_DOTA_CAST_ABILITY_3"
@@ -261,7 +261,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"12"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"

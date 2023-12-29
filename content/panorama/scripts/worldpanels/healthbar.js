@@ -21,6 +21,8 @@ if (!teamColors) {
 teamColors[DOTATeam_t.DOTA_TEAM_NEUTRALS] = teamColors[DOTATeam_t.DOTA_TEAM_NEUTRALS] || "#cccccc;";
 teamColors[DOTATeam_t.DOTA_TEAM_NOTEAM]   = teamColors[DOTATeam_t.DOTA_TEAM_NOTEAM]   || "#cccccc;";
 teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_5] = teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_5] || "#4285f4;";
+teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_6] = teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_6] || "#bd42fb;";
+teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_7] = teamColors[DOTATeam_t.DOTA_TEAM_CUSTOM_7] || "#fbcc42;";
 
 function HealthCheck()
 {

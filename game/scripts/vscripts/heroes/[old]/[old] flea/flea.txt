@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"flea_precision"
 		"MaxLevel"               		"15"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -97,7 +97,7 @@
 		"AbilityTextureName"     		"flea_speed"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -149,7 +149,7 @@
 		"AbilityTextureName"     		"flea_jump"
 		"MaxLevel"               		"9"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
         "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
@@ -212,7 +212,7 @@
 		"AbilityTextureName"     		"flea_smoke"
 		"MaxLevel"               		"11"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
@@ -261,7 +261,7 @@
 		"AbilityTextureName"     		"flea_desolator"
 		"MaxLevel"               		"13"
 		"RequiredLevel"         	 	"0"
-        "LevelsBetweenUpgrades"  		"25"
+        "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -313,7 +313,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"7"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
 

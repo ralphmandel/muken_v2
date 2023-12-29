@@ -17,7 +17,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"15"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityCastPoint"       		"0.0"
 		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"

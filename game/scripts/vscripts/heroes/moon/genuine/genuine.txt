@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"genuine_shooting"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -54,7 +54,7 @@
 		"AbilityTextureName"     		"genuine_fallen"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -84,7 +84,7 @@
 		"AbilityTextureName"     		"genuine_travel"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -118,7 +118,7 @@
 		"AbilityTextureName"     		"genuine_under"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
@@ -140,7 +140,7 @@
 		"AbilityTextureName"     		"genuine_nightfall"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
@@ -174,7 +174,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"

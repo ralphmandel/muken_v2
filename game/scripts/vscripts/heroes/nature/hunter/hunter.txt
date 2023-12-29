@@ -24,7 +24,7 @@
 		"AbilityTextureName"     		"hunter_shot"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
@@ -55,7 +55,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
@@ -83,7 +83,7 @@
 		"AbilityTextureName"     		"hunter_radar"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -109,7 +109,7 @@
 		"AbilityTextureName"     		"hunter_bandage"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
     "AbilityBehavior"				    "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
@@ -136,7 +136,7 @@
 		"AbilityTextureName"     		"hunter_trap"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"0"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
     "ActiveSpell"               "1"
 
     "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
@@ -169,7 +169,7 @@
 		"AbilityTextureName"     		"hunter_camouflage"
 		"MaxLevel"               		"1"
 		"RequiredLevel"         	 	"8"
-    "LevelsBetweenUpgrades"  		"25"
+    "LevelsBetweenUpgrades"  		"50"
 
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
 

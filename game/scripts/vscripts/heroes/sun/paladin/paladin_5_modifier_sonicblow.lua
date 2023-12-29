@@ -9,8 +9,6 @@ function paladin_5_modifier_sonicblow:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
-
-  self.target = EntIndexToHScript(kv.target)
   self.ban = true
 
   -- MAX ASPD: 800
@@ -21,6 +19,7 @@ function paladin_5_modifier_sonicblow:OnCreated(kv)
 	self.parent:Stop()
 
   if IsServer() then
+    self.target = EntIndexToHScript(kv.target)
     self:SetStackCount(self.ability:GetSpecialValueFor("special_hits"))
     self:PlayEfxBlinkStart()
     self:StartIntervalThink(0.3)

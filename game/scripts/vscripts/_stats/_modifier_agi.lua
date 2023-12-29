@@ -221,6 +221,9 @@ function _modifier_agi:UpdateMainBonus(value)
 end
 
 function _modifier_agi:UpdateSubBonus(property)
+  if self.parent == nil then return end
+  if IsValidEntity(self.ability) == false then return end
+
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
   if mods then

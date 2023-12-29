@@ -17,7 +17,7 @@ function neutral_smash:GetIntrinsicModifierName()
 	return "neutral_smash_modifier_passive"
 end
 
-function smash:OnAbilityPhaseStart()
+function neutral_smash:OnAbilityPhaseStart()
   local caster = self:GetCaster()
   if IsServer() then caster:EmitSound("Generic.Jump") end
 
@@ -34,8 +34,8 @@ function neutral_smash:OnSpellStart()
 
 	local enemies = FindUnitsInRadius(
 		caster:GetTeamNumber(), caster:GetOrigin(), nil, self:GetAOERadius(),
-		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-		DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false
+		self:GetAbilityTargetTeam(), self:GetAbilityTargetType(),
+		self:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
 	)
 
 	for _,enemy in pairs(enemies) do		

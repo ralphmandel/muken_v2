@@ -22,7 +22,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "1"
-			"BountyXP"					    "40"
+			"BountyXP"					    "10"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -66,7 +66,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -88,7 +88,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "2"
-			"BountyXP"					    "50"
+			"BountyXP"					    "20"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -132,7 +132,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -154,7 +154,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "5"
-			"BountyXP"					    "80"
+			"BountyXP"					    "50"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -198,7 +198,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -220,7 +220,7 @@
 			//"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 			//"ProjectileSpeed"			"1500"
 			"Level"						      "5"
-			"BountyXP"					    "80"
+			"BountyXP"					    "50"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -264,7 +264,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -286,7 +286,7 @@
 			"ProjectileModel"			  "particles/econ/items/visage/immortal_familiar/visage_immortal_ti5/visage_familiar_base_attack_ti5.vpcf"
 			"ProjectileSpeed"			  "1200"
 			"Level"						      "5"
-			"BountyXP"					    "80"
+			"BountyXP"					    "50"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -330,7 +330,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -352,7 +352,7 @@
 			"ProjectileModel"			  "particles/econ/items/visage/immortal_familiar/visage_immortal_ti5/visage_familiar_base_attack_ti5.vpcf"
 			"ProjectileSpeed"			  "1200"
 			"Level"						      "2"
-			"BountyXP"					    "50"
+			"BountyXP"					    "20"
 
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
@@ -396,7 +396,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -419,9 +419,9 @@
 			//"ProjectileModel"			  ""
 			//"ProjectileSpeed"			  "1200"
 			"Level"						      "15"
-			"BountyXP"					    "180"
+			"BountyXP"					    "150"
 
-      "Ability5"          "neutral_strike"
+      "Ability1"          "neutral_strike"
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
 			"Ability8"					"_ability_int"
@@ -464,7 +464,7 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
 			}
 		}
 
@@ -486,9 +486,9 @@
 			//"ProjectileModel"			  ""
 			//"ProjectileSpeed"			  "1200"
 			"Level"						      "25"
-			"BountyXP"					    "280"
+			"BountyXP"					    "250"
 
-      "Ability5"          "neutral_smash"
+      "Ability1"          "neutral_smash"
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
 			"Ability8"					"_ability_int"
@@ -531,7 +531,142 @@
 				"MagicResistGain" "0"
 				"MoveSpeedGain"		"0"
 				"BountyGain"			"0"
-				"XPGain"					"0"
+				"XPGain"					"10"
+			}
+		}
+
+  // EPIC
+    "neutral_epic_skydragon"
+		{
+			"BaseClass"			  "npc_dota_creature"
+			"SoundSet"				"n_creep_Melee"
+			"GameSoundsFile"	"soundevents/game_sounds_creeps.vsndevts"
+
+			"Model"						      "models/creeps/neutral_creeps/n_creep_dragonspawn_a/n_creep_dragonspawn_a.vmdl"
+			"TeamName"					    "DOTA_TEAM_CUSTOM_6"
+			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+			"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackRange"				    "145"
+			"HealthBarOffset"			  "255"
+			"RingRadius"				    "100"
+			"VisionDaytimeRange"		"600"
+			"VisionNighttimeRange"	"500"
+			//"ProjectileModel"			  ""
+			//"ProjectileSpeed"			  "1200"
+			"Level"						      "15"
+			"BountyXP"					    "150"
+
+      "Ability1"          "neutral_fireball"
+			"Ability6"					"_ability_str"
+			"Ability7"					"_ability_agi"
+			"Ability8"					"_ability_int"
+			"Ability9"					"_ability_vit"
+			"Ability10"					"_neutral__ai"
+
+			"Stats"
+			{
+				"str" "2"
+				"agi" "1"
+				"int" "3"
+				"vit" "4"
+			}
+
+			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+			"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+			"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+			"UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+			"ConsideredHero" 	      "1"
+			"IsNeutralUnitType"     "1"
+			"WakesNeutrals" 	      "1"
+			"ArmorPhysical"				    "0"
+			"MagicalResistance"       "0"
+			"StatusHealth"				    "1000"
+			"StatusHealthRegen"	      "0"
+			"StatusMana"				      "500"
+			"StatusManaRegen"			    "0"
+			"MovementSpeed"           "9999"
+			"AttackDamageMax"			    "55"
+			"AttackDamageMin"			    "45"
+			"AttackRate"				      "1"
+			"AttackAnimationPoint"		"0.9"
+			"AttackAcquisitionRange"  "50"  
+			
+			"Creature"
+			{
+				"HPGain"					"0"
+				"DamageGain"			"0"
+				"ArmorGain"				"0"
+				"MagicResistGain" "0"
+				"MoveSpeedGain"		"0"
+				"BountyGain"			"0"
+				"XPGain"					"10"
+			}
+		}
+
+    "neutral_epic_dragon"
+		{
+			"BaseClass"			  "npc_dota_creature"
+			"SoundSet"				"n_creep_Melee"
+			"GameSoundsFile"	"soundevents/game_sounds_creeps.vsndevts"
+
+			"Model"						      "models/creeps/neutral_creeps/n_creep_dragonspawn_b/n_creep_dragonspawn_b.vmdl"
+			"TeamName"					    "DOTA_TEAM_CUSTOM_6"
+			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+			"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackRange"				    "135"
+			"HealthBarOffset"			  "235"
+			"RingRadius"				    "100"
+			"VisionDaytimeRange"		"600"
+			"VisionNighttimeRange"	"500"
+			//"ProjectileModel"			  ""
+			//"ProjectileSpeed"			  "1200"
+			"Level"						      "10"
+			"BountyXP"					    "100"
+
+      "Ability1"          "neutral_immunity"
+			"Ability6"					"_ability_str"
+			"Ability7"					"_ability_agi"
+			"Ability8"					"_ability_int"
+			"Ability9"					"_ability_vit"
+			"Ability10"					"_neutral__ai"
+
+			"Stats"
+			{
+				"str" "1"
+				"agi" "2"
+				"int" "4"
+				"vit" "3"
+			}
+
+			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+			"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+			"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+			"UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+			"ConsideredHero" 	      "1"
+			"IsNeutralUnitType"     "1"
+			"WakesNeutrals" 	      "1"
+			"ArmorPhysical"				    "0"
+			"MagicalResistance"       "0"
+			"StatusHealth"				    "1000"
+			"StatusHealthRegen"	      "0"
+			"StatusMana"				      "500"
+			"StatusManaRegen"			    "0"
+			"MovementSpeed"           "9999"
+			"AttackDamageMax"			    "55"
+			"AttackDamageMin"			    "45"
+			"AttackRate"				      "1"
+			"AttackAnimationPoint"		"0.9"
+			"AttackAcquisitionRange"  "50"  
+			
+			"Creature"
+			{
+				"HPGain"					"0"
+				"DamageGain"			"0"
+				"ArmorGain"				"0"
+				"MagicResistGain" "0"
+				"MoveSpeedGain"		"0"
+				"BountyGain"			"0"
+				"XPGain"					"10"
 			}
 		}
 }

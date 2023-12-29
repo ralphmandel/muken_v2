@@ -92,6 +92,10 @@ end
 -- UTILS -----------------------------------------------------------
 
 function paladin_5_modifier_passive:ShouldLaunch(target)
+  if target == nil then return end
+  if IsValidEntity(target) == false then return end
+  if target:IsAlive() == false then return end
+
 	if self.ability:GetAutoCastState() then
     local nResult = UnitFilter(
       target, self.ability:GetAbilityTargetTeam(),

@@ -100,6 +100,8 @@ TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 61, 210, 150 }   --
 TEAM_COLORS[DOTA_TEAM_CUSTOM_3] = { 140, 42, 244 }   --   
 TEAM_COLORS[DOTA_TEAM_CUSTOM_4] = { 199, 228, 13 }  --   
 TEAM_COLORS[DOTA_TEAM_CUSTOM_5] = { 66, 133, 244 }  --   
+TEAM_COLORS[DOTA_TEAM_CUSTOM_6] = { 189, 66, 251 }  --   
+TEAM_COLORS[DOTA_TEAM_CUSTOM_7] = { 251, 204, 66 }  --   
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_1] = { 61, 210, 150 }  --    Teal
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 243, 201, 9 }   --    Yellow
 -- TEAM_COLORS[DOTA_TEAM_CUSTOM_3] = { 197, 77, 168 }  --    Pink
@@ -203,6 +205,9 @@ SPAWNER_MOBS = {
   }},
   {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = {
     "neutral_rare_frostbitten"
+  }},
+  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = {
+    "neutral_epic_skydragon", "neutral_epic_dragon"
   }},
 }
 

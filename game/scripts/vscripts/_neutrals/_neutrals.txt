@@ -17,7 +17,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"15"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityCastPoint"       		"0.0"
 		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
@@ -94,13 +94,14 @@
 	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"_neutrals/neutral_strike"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"     		"neutrals/strike"
-
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
 		"MaxLevel"               		"2"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 		"AbilityCooldown"				"5"
 
@@ -116,24 +117,90 @@
 	{
 		"BaseClass"              		"ability_lua"
 		"ScriptFile"            		"_neutrals/neutral_smash"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"     		"neutrals/smash"
-
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
 		"MaxLevel"               		"2"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_3"
-		"AbilityCastPoint"       		"1.8"
 		"AbilityManaCost"         	"150"
+		"AbilityCooldown"				    "20"
+		"AbilityCastPoint"       		"1.8"
+
+		"AbilityValues"
+    {
+      "stun_radius"   "250"
+      "stun_duration" "4"
+      "stun_damage"   "300"
+    }
+	}
+
+  "neutral_fireball"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_fireball"
+		"AbilityTextureName"     		"neutrals/fireball"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"4"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NO_INVIS"
+
+		"AbilityManaCost"         	"100"
+		"AbilityCooldown"				    "12"
+		"AbilityCastRange"    		  "1200"
+
+		"AbilityCastPoint"       		"0.5"
+		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
+
+		"AbilityValues"
+    {
+      "targets"         "2"
+      "angle"				    "150"
+      "stun_duration"   "3"
+      "fireball_damage" "300"
+      "flame_duration"  "5"
+      "flame_damage"    "100"
+    }
+	}
+
+	"neutral_immunity"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_immunity"
+		"AbilityTextureName"     		"neutrals/immunity"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"2"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+    "AbilityManaCost"         	"300"
 		"AbilityCooldown"				    "20"
 
 		"AbilityValues"
     {
-      "stun_radius"   "500"
-      "stun_duration" "4"
-      "stun_damage"   "300"
+      "duration"  "10"
+      "radius"	  "500"
     }
 	}
 
@@ -289,7 +356,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"3"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityCastPoint"       		"0.0"
 
@@ -394,7 +461,7 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"3"
 		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"25"
+		"LevelsBetweenUpgrades"  		"50"
 
 		"AbilityManaCost"           "30"
 
@@ -475,81 +542,6 @@
 			{
 				"var_type"				"FIELD_FLOAT"
 				"def_reduction"			"10"
-			}
-		}
-	}
-
-	"fireball"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/fireball"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityTextureName"     		"_neutrals/fireball"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilityCastPoint"       		"0.5"
-		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
-
-		"AbilityManaCost"         		"175"
-		"AbilityCooldown"				      "25"
-		"AbilityCastRange"    		   	"1200"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"stun_duration"			"3"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"fireball_damage"		"200"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"flame_duration"		"7"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"flame_damage"			"75"
-			}
-		}
-	}
-
-	"immunity"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/immunity"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"     		"_neutrals/immunity"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilityCastPoint"       		"0.2"
-		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
-
-		"AbilityManaCost"         	"350"
-		"AbilityCooldown"				    "30"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"duration"				"12"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"radius"				  "500"
 			}
 		}
 	}

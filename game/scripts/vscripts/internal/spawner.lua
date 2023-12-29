@@ -12,12 +12,12 @@ function Spawner:SpawnFountains()
         shrine_ability:UpgradeAbility(true)
       end
     else
-      for i = 1, #TEAMS, 1 do
-        local loc = GetGroundPosition(TEAMS[i]["fountain_origin"], nil)
-        local fountain = CreateUnitByName("fountain_building", loc, true, nil, nil, TEAMS[i][1])
-        fountain:SetOrigin(loc)
-        FindClearSpaceForUnit(fountain, loc, true)
-      end
+      -- for i = 1, #TEAMS, 1 do
+      --   local loc = GetGroundPosition(TEAMS[i]["fountain_origin"], nil)
+      --   local fountain = CreateUnitByName("fountain_building", loc, true, nil, nil, TEAMS[i][1])
+      --   fountain:SetOrigin(loc)
+      --   FindClearSpaceForUnit(fountain, loc, true)
+      -- end
     end
   end
 
@@ -107,7 +107,7 @@ function Spawner:RandomizeMob()
 
   local average_level = hero_lvl_total / hero_count
   local current_tier = math.ceil(average_level / 6)
-  if current_tier > 2 then current_tier = 1 end -- !!! TESTING !!!
+  if current_tier > 2 then current_tier = 2 end -- !!! TESTING !!!
 
   if RandomFloat(0, 100) < 15 then
     if current_tier > 2 then rarity = RARITY_LEGENDARY end
@@ -138,7 +138,7 @@ function Spawner:CreateMob(spawner, map, mob, modifier)
 
   for _,unit in pairs(mob["units"]) do
     local spawned_unit = CreateUnitByName(unit, spawner[area][spot]["origin"], true, nil, nil, TIER_TEAMS[rarity])
-    spawned_unit.xp_mult = 1 + (rarity * 0.5)
+    spawned_unit.xp_mult = 1 + (rarity * 0.25)
     table.insert(spawned_units, spawned_unit)
     local ai = spawned_unit:FindModifierByName(modifier)
     if ai then ai.spot_origin = spawner[area][spot]["origin"] end
