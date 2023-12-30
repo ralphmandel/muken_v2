@@ -36,8 +36,10 @@ function neutral_smash_modifier_passive:OnIntervalThink()
 	)
 
 	for _,enemy in pairs(enemies) do
-    self.parent:CastAbilityNoTarget(self.ability, self.parent:GetPlayerOwnerID())
-    break
+    if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+      self.parent:CastAbilityNoTarget(self.ability, self.parent:GetPlayerOwnerID())
+      break
+    end
 	end
   
   if IsServer() then self:StartIntervalThink(self.ability:GetCastPoint() + 0.1) end

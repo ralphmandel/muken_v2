@@ -1,5 +1,6 @@
 neutral_immunity = class({})
 LinkLuaModifier("neutral_immunity_modifier_passive", "_neutrals/neutral_immunity_modifier_passive", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("neutral_immunity_modifier_buff", "_neutrals/neutral_immunity_modifier_buff", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_immunity:GetAOERadius()
   return self:GetSpecialValueFor("radius")
@@ -19,7 +20,7 @@ function neutral_immunity:OnSpellStart()
   )
 
 	for _,ally in pairs(allies) do
-    AddModifier(ally, self, "_modifier_immunity", {duration = self:GetSpecialValueFor("duration")}, true)
+    AddModifier(ally, self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration")}, true)
 	end
 
   if IsServer() then caster:EmitSound("Hero_Omniknight.GuardianAngel.Cast") end

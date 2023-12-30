@@ -18,6 +18,14 @@ function GameMode:OnGameRulesStateChange(keys)
 
   local newState = GameRules:State_Get()
 
+  if newState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
+    print(":::: Neutral XP Table ::::")
+    for i = 1, 30, 1 do
+      local xp_total = ((i * (1 + (0.15 * i)) * 7) + 35)
+      print("Level", i, "->", xp_total)
+    end
+  end
+
   if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
     Timers:CreateTimer(0.5, function()
       CustomGameEventManager:Send_ServerToAllClients("team_name_from_server", {})
@@ -139,7 +147,7 @@ function GameMode:OnNonPlayerUsedAbility(keys)
   DebugPrint('[BAREBONES] OnNonPlayerUsedAbility')
   DebugPrintTable(keys)
 
-  local abilityname=  keys.abilityname
+  local abilityname = keys.abilityname
 end
 
 -- A player changed their name
@@ -394,7 +402,7 @@ function GameMode:OnEntityKilled( keys )
                 number = number + 1
               end
             
-              local xp_total = ((killedUnit:GetDeathXP() * (1 + (0.15 * killedUnit:GetLevel()))) + 50) * killedUnit.xp_mult
+              local xp_total = ((killedUnit:GetLevel() * (1 + (0.15 * killedUnit:GetLevel())) * 7) + 35) * killedUnit.xp_mult
               local xp_per_unit = math.floor(xp_total / number)
             
               if xp_per_unit > 0 and number > 0 then

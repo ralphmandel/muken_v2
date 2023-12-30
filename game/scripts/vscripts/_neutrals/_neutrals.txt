@@ -150,7 +150,7 @@
 		"AbilityTextureName"     		"neutrals/fireball"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 
-		"MaxLevel"               		"4"
+		"MaxLevel"               		"2"
 		"RequiredLevel"         	 	"0"
 		"LevelsBetweenUpgrades"  		"50"
 
@@ -160,8 +160,8 @@
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NO_INVIS"
 
-		"AbilityManaCost"         	"100"
-		"AbilityCooldown"				    "12"
+		"AbilityManaCost"         	"120"
+		"AbilityCooldown"				    "15"
 		"AbilityCastRange"    		  "1200"
 
 		"AbilityCastPoint"       		"0.5"
@@ -173,8 +173,8 @@
       "angle"				    "150"
       "stun_duration"   "3"
       "fireball_damage" "300"
-      "flame_duration"  "5"
-      "flame_damage"    "100"
+      "flame_duration"  "6"
+      "flame_damage"    "150"
     }
 	}
 
@@ -199,8 +199,9 @@
 
 		"AbilityValues"
     {
-      "duration"  "10"
-      "radius"	  "500"
+      "magic_resist"  "15"
+      "duration"      "10"
+      "radius"	      "500"
     }
 	}
 

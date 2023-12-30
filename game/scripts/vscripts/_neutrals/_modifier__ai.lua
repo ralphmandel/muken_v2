@@ -1,17 +1,24 @@
 _modifier__ai = class({})
 function _modifier__ai:IsHidden() return true end
 
+-- if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+-- end
+
 local AI_STATE_IDLE = 0
 local AI_STATE_AGGRESSIVE = 1
 local AI_STATE_RETURNING = 2
 local AI_THINK_INTERVAL = 0.25
 
 function _modifier__ai:OnCreated(kv)
+  self.ability = self:GetAbility()
+
   -- Only do AI on server
   if IsServer() then
     self.state = AI_STATE_IDLE
     self.aggroRange = 400
     self.leashRange = 1000
+    self.returning_agressive = false
+
     self.unit = self:GetParent()
 
     Timers:CreateTimer((0.2), function()
@@ -33,7 +40,7 @@ end
 
 function _modifier__ai:OnIntervalThink()
   if self.unit:IsDominated() then
-    RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
+    RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
     return
   end
 
@@ -41,89 +48,83 @@ function _modifier__ai:OnIntervalThink()
 end
 
 function _modifier__ai:IdleThink()
-  RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
+  RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
 
-  local units = FindUnitsInRadius(
-    self.unit:GetTeam(), self.spot_origin, nil, self.aggroRange,
-    DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL,
-    DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS, 
-    FIND_ANY_ORDER, false
-  )
+  self:FindNewTarget()
 
-	for _,unit in pairs(units) do
-    if unit:GetTeamNumber() < DOTA_TEAM_CUSTOM_5 then
-      if unit:IsIllusion() == false then
-        self.aggroTarget = unit
-        self.unit:MoveToTargetToAttack(self.aggroTarget)
-        self.state = AI_STATE_AGGRESSIVE
-        return
-      end
-    end
-	end
-
-  if self.unit:GetAggroTarget() ~= nil then
-    self.aggroTarget = self.unit:GetAggroTarget()
+  if self.aggroTarget then
+    self.unit:MoveToTargetToAttack(self.aggroTarget)
     self.state = AI_STATE_AGGRESSIVE
     return
+  end
+
+  local aggro = self.unit:GetAggroTarget()
+
+  if aggro then
+    if aggro:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and aggro:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+      self.aggroTarget = self.unit:GetAggroTarget()
+      self.state = AI_STATE_AGGRESSIVE
+    else
+      self:SetReturning(false)
+    end
   end
 end
 
 function _modifier__ai:AggressiveThink()
-  if self.aggroTarget == nil then
-    self.unit:MoveToPosition(self.spawnPos)
-    self.state = AI_STATE_RETURNING
+  if (self.spawnPos - self.unit:GetAbsOrigin()):Length() > self.leashRange then
+    self:SetReturning(false)
     return
   end
 
-  if IsValidEntity(self.aggroTarget) == false then
-    self.unit:MoveToPosition(self.spawnPos)
-    self.state = AI_STATE_RETURNING
+  if self.aggroTarget == nil then self:FindNewTarget() end
+  if IsValidEntity(self.aggroTarget) == false then self:FindNewTarget() end
+  if not self.aggroTarget:IsAlive() then self:FindNewTarget() end
+
+  if self.unit:GetAggroTarget() then
+    if self.unit:GetAggroTarget() ~= self.aggroTarget then
+      self:FindNewTarget()
+    end
+  end
+
+  if self.aggroTarget:IsOutOfGame() or self.aggroTarget:IsInvisible() then self:FindNewTarget() end
+
+  if self.aggroTarget then
+    self.unit:MoveToTargetToAttack(self.aggroTarget)
+  else
+    self:SetReturning(true)
     return
   end
 
-  local units = FindUnitsInRadius(self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil,
-  self.leashRange, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE, 
-  FIND_ANY_ORDER, false)
+  local units = FindUnitsInRadius(
+    self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil, 1200,
+    DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_ANY_ORDER, false
+  )
 
   for _,unit in pairs(units) do
     local ai = unit:FindModifierByName("_modifier__ai")
-    if ai ~= nil then
+    if ai then
       if ai.state == AI_STATE_IDLE then
         ai.aggroTarget = self.aggroTarget
         ai.state = AI_STATE_AGGRESSIVE
       end
     end
   end
-
-  if (self.spawnPos - self.unit:GetAbsOrigin()):Length() > self.leashRange then
-    self.unit:MoveToPosition(self.spawnPos)
-    self.state = AI_STATE_RETURNING
-    return
-  end
-    
-  if not self.aggroTarget:IsAlive() then
-    self.unit:MoveToPosition(self.spawnPos)
-    self.state = AI_STATE_RETURNING
-    return
-  end
-
-  if self.aggroTarget:IsOutOfGame() or self.aggroTarget:IsInvisible() then
-    self.unit:MoveToPosition(self.spawnPos)
-    self.state = AI_STATE_RETURNING
-    return
-  end
-
-  if self.unit:GetAggroTarget() ~= nil then
-    if self.unit:GetAggroTarget() ~= self.aggroTarget then
-      self.aggroTarget = self.unit:GetAggroTarget()
-      self.unit:MoveToTargetToAttack(self.aggroTarget)
-    end
-  end
   
-  RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
+  RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
 end
 
 function _modifier__ai:ReturningThink()
+  if self.returning_agressive == true then
+    self:FindNewTarget()
+
+    if self.aggroTarget then
+      self.unit:MoveToTargetToAttack(self.aggroTarget)
+      self.state = AI_STATE_AGGRESSIVE
+      return
+    end
+  end
+
   if (self.spawnPos - self.unit:GetAbsOrigin()):Length() < 10 then
     self.state = AI_STATE_IDLE
     return
@@ -132,8 +133,29 @@ function _modifier__ai:ReturningThink()
   self.unit:Purge(false, true, false, true, false)
   self.unit:MoveToPosition(self.spawnPos)
 
-  RemoveAllModifiersByNameAndAbility(self.unit, "_modifier_movespeed_buff", self:GetAbility())
-  self.unit:AddNewModifier(self.unit, self:GetAbility(), "_modifier_movespeed_buff", {percent = 250})
+  RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
+  AddModifier(self.unit, self.ability, "sub_stat_movespeed_increase", {value = 300}, false)
+end
+
+function _modifier__ai:FindNewTarget()
+  local enemies = FindUnitsInRadius(
+    self.unit:GetTeam(), self.spot_origin, nil, self.aggroRange,
+    DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL,
+    DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS, 
+    FIND_ANY_ORDER, false
+  )
+
+	for _,enemy in pairs(enemies) do
+    if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+      if enemy:IsIllusion() == false then return enemy end
+    end
+	end
+end
+
+function _modifier__ai:SetReturning(aggressive)
+  self.unit:MoveToPosition(self.spawnPos)
+  self.returning_agressive = aggressive
+  self.state = AI_STATE_RETURNING
 end
 
 -----------------------------------------------------------
@@ -163,9 +185,9 @@ function _modifier__ai:OnAttack(keys)
     local sound = ""
     if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.Attack" end
     if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+    if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.Attack" end
 
     if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.attack" end
-    if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.Attack" end
 
 	if IsServer() then self.unit:EmitSound(sound) end
 end
@@ -181,13 +203,13 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then sound = "Hero_DarkSeer.Attack" end
-  if self.unit:GetUnitName() == "neutral_epic_skydragon" then sound = "Hero_Magnataur.Attack" end
-  if self.unit:GetUnitName() == "neutral_epic_dragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_rare_skydragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_rare_dragon" then sound = "Hero_Magnataur.Attack" end
+  if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
 
   if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
   if self.unit:GetUnitName() == "neutral_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
-  if self.unit:GetUnitName() == "neutral_igor" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
@@ -205,12 +227,12 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then self.unit:SetModelScale(0.8) end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then self.unit:SetModelScale(1.1) end
-  if self.unit:GetUnitName() == "neutral_epic_skydragon" then self.unit:SetModelScale(1) end
-  if self.unit:GetUnitName() == "neutral_epic_dragon" then self.unit:SetModelScale(0.9) end
+  if self.unit:GetUnitName() == "neutral_rare_skydragon" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_rare_dragon" then self.unit:SetModelScale(0.9) end
+  if self.unit:GetUnitName() == "neutral_rare_mage" then self.unit:SetModelScale(1.5) end
 
   if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
-  if self.unit:GetUnitName() == "neutral_igor" then self.unit:SetModelScale(1.5) end
 end
 
 function _modifier__ai:PlayEfxStart()

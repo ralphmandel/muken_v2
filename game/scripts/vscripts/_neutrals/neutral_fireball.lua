@@ -69,8 +69,14 @@ function neutral_fireball:FindTarget(list)
 
 	for _,enemy in pairs(enemies) do
     local pass = true
+
     for _,target in pairs(list) do
       if enemy == target then pass = false end
+    end
+
+    if enemy:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON]
+    or enemy:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE] then
+      pass = false
     end
 
     if pass == true then

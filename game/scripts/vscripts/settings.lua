@@ -187,31 +187,42 @@ SPAWNER_MOBS = {
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_chameleon_a", "neutral_common_chameleon_b",
     "neutral_common_chameleon_a", "neutral_common_chameleon_b"
-  }}, -- 274 | 61 + 61 + 76 + 76
+  }}, -- 192 | 43 + 43 + 53 + 53
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
-  }}, -- 274 | 137 + 137
+  }}, -- 192 | 96 + 96
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_gargoyle", "neutral_common_gargoyle",
     "neutral_common_great_gargoyle"
-  }}, -- 289 | 137 + 76 + 76
-  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- {x1.25}
+  }}, -- 185 | 53 + 53 + 79
+  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- [x1.25]
   "neutral_rare_frostbitten"
-  }}, -- 300 | 300 [375 | 375]
+  }}, -- 210 | 210 [262 | 262]
 
 -- TIER 2
   {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-  }}, -- 548 | 137 + 137 + 137 + 137
-  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- {x1.25}
+  }}, -- 384 | 96 + 96 + 96 + 96
+  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
     "neutral_rare_crocodile"
-  }}, -- 537 | 537 [671 | 671]
-  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- {x1.5}
-    "neutral_epic_skydragon", "neutral_epic_dragon"
-  }}, -- 686 | 386 + 300 [ 1,029 | 579 + 450]
+  }}, -- 376 | 376 [470 | 470]
 
 -- TIER 3
+  {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
+    "neutral_rare_skydragon", "neutral_rare_dragon"
+  }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
+
+-- TIER 4
+  {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
+  "neutral_rare_frostbitten", "neutral_rare_frostbitten",
+  "neutral_rare_mage"
+  }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
+
+-- TIER 5
+  {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
+  "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
+  }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
 }
 
 SPAWNER_SPOTS = {

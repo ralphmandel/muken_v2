@@ -38,14 +38,18 @@ function neutral_smash:OnSpellStart()
 		self:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
 	)
 
-	for _,enemy in pairs(enemies) do		
-		AddModifier(enemy, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
-
-    ApplyDamage({
-      attacker = caster, victim = enemy, ability = self,
-      damage = self:GetSpecialValueFor("stun_damage"),
-      damage_type = self:GetAbilityDamageType(),
-    })
+	for _,enemy in pairs(enemies) do
+    if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+      if enemy:IsMagicImmune() == false then
+        AddModifier(enemy, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
+      end
+      
+      ApplyDamage({
+        attacker = caster, victim = enemy, ability = self,
+        damage = self:GetSpecialValueFor("stun_damage"),
+        damage_type = self:GetAbilityDamageType(),
+      })
+    end
 	end
 
   self:PlayEfxStart()
