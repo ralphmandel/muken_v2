@@ -205,179 +205,109 @@
     }
 	}
 
-  //////////////////////////////////////////////////////////////////////////////////////
-
-	"_neutral_lamp"
+	"neutral_mana_burn"
 	{
 		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_lamp"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
+		"ScriptFile"            		"_neutrals/neutral_mana_burn"
+		"AbilityTextureName"     		"neutrals/mana_burn"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
 
-		"AbilitySpecial"
-		{
-		}
+		"MaxLevel"               		"2"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+    "AbilityManaCost"         	"20"
+		"AbilityCooldown"				    "0"
+
+		"AbilityValues"
+    {
+      "slow_percent"  "70"
+      "slow_duration" "3"
+      "mana_burn"	    "30"
+    }
 	}
 
-	"_neutral_spider"
+	"neutral_stun_hits"
 	{
 		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_spider"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
+		"ScriptFile"            		"_neutrals/neutral_stun_hits"
+		"AbilityTextureName"     		"neutrals/stun_hits"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
 
-		"AbilitySpecial"
-		{
-		}
-	}
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
 
-	"_neutral_skydragon"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_skydragon"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilitySpecial"
-		{
-		}
-	}
-
-	"_neutral_dragon"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_dragon"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilitySpecial"
-		{
-		}
-	}
-
-	"_neutral_igneo"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_igneo"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilitySpecial"
-		{
-		}
-	}
-
-  "_neutral_frostbitten"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/_neutral_frostbitten"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"     		"spellicon"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilitySpecial"
-		{
-		}
-	}
-
-	"lifesteal"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/lifesteal"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     		"_neutrals/lifesteal"
 
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
+    "AbilityManaCost"         	"0"
+		"AbilityCooldown"				    "0"
 
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"percent"		"15"
-			}
-		}
+		"AbilityValues"
+    {
+      "hits"          "7"
+      "stun_duration" "1.2"
+    }
 	}
 
-	"stun_hits"
+	"neutral_rage"
 	{
 		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/stun_hits"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     		"_neutrals/stun_hits"
-
+		"ScriptFile"            		"_neutrals/neutral_rage"
+		"AbilityTextureName"     		"neutrals/rage"
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
 
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"stun_crit"			"300"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"hits"				"5"
-			}
-			"03"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"stun_duration"		"1.2"
-			}
-		}
-	}
-
-	"spike_armor"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/spike_armor"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"     		"spike_armor"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"3"
 		"RequiredLevel"         	 	"0"
 		"LevelsBetweenUpgrades"  		"50"
 
-		"AbilityCastPoint"       		"0.0"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-		"AbilityManaCost"         		"125"
-		"AbilityCooldown"				"24"
+    "AbilityManaCost"         	"0"
+		"AbilityCooldown"				    "0"
 
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"duration"			"12"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"return_percent"	"300"
-			}
-		}
+		"AbilityValues"
+    {
+      "duration"      "2"
+      "chance"        "8"
+      "attack_speed"	"200"
+      "lifesteal"     "50"
+    }
 	}
+
+  "neutral_spike_armor"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_spike_armor"
+		"AbilityTextureName"     		"neutrals/spike_armor"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"2"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityManaCost"         	"100"
+		"AbilityCooldown"				    "8"
+
+		"AbilityValues"
+    {
+      "duration"        "6"
+      "return_percent"  "200"
+    }
+	}
+
+  //////////////////////////////////////////////////////////////////////////////////////
 
 	"burning_armor"
 	{
@@ -448,30 +378,6 @@
 			{
 				"var_type"		"FIELD_FLOAT"
 				"duration"		"15"
-			}
-		}
-	}
-
-	"mana_burn"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/mana_burn"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     		"mana_burn"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"3"
-		"RequiredLevel"         	 	"0"
-		"LevelsBetweenUpgrades"  		"50"
-
-		"AbilityManaCost"           "30"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"slow"				  "70"
 			}
 		}
 	}

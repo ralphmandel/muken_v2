@@ -56,7 +56,7 @@ function paladin_u_modifier_passive:OnTakeDamage(keys)
   if self.parent:IsAlive() == false then return end
   if self.ability:IsCooldownReady() == false then return end
 
-  if self.parent:GetHealthPercent() <= self.ability:GetSpecialValueFor("special_hp_cap") then
+  if self.parent:GetHealthPercent() < self.ability:GetSpecialValueFor("special_hp_cap") then
     IncreaseMana(self.parent, self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("special_mana") * 0.01)
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
     self:PlayEfxRestore()

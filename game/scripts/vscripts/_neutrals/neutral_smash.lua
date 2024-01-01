@@ -42,6 +42,18 @@ function neutral_smash:OnSpellStart()
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
       if enemy:IsMagicImmune() == false then
         AddModifier(enemy, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
+
+        local distance_percent = 1 - ((caster:GetOrigin() - enemy:GetOrigin()):Length2D() / self:GetAOERadius())
+
+        local bash = AddModifier(enemy, self, "modifier_knockback", {
+          center_x = caster:GetAbsOrigin().x + 1,
+          center_y = caster:GetAbsOrigin().y + 1,
+          center_z = caster:GetAbsOrigin().z,
+          knockback_height = 15,
+          duration = distance_percent * 0.2,
+          knockback_duration = distance_percent * 0.2,
+          knockback_distance = distance_percent * self:GetAOERadius()
+        }, true)
       end
       
       ApplyDamage({

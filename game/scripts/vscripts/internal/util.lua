@@ -409,7 +409,7 @@
   function IncreaseMana(target, amount)
     local mana_deficit = target:GetMaxMana() - target:GetMana()
     if amount > mana_deficit then amount = mana_deficit end
-    if amount <= 0 then return end
+    if amount <= 0 then return 0 end
     
     target:GiveMana(amount)
 
@@ -418,7 +418,8 @@
   end
 
   function ReduceMana(target, ability, amount, bMessage)
-    if amount <= 0 then return end
+    if target:GetMana() < amount then amount = target:GetMana() end
+    if amount <= 0 then return 0 end
 
     target:Script_ReduceMana(amount, ability)
     if bMessage then SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_LOSS, target, amount, nil) end

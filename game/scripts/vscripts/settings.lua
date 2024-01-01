@@ -196,10 +196,13 @@ SPAWNER_MOBS = {
     "neutral_common_great_gargoyle"
   }}, -- 185 | 53 + 53 + 79
   {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- [x1.25]
-  "neutral_rare_frostbitten"
+    "neutral_rare_frostbitten"
   }}, -- 210 | 210 [262 | 262]
 
 -- TIER 2
+  {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+    "neutral_common_drake"
+  }}, -- 376 | 376
   {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
     "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
@@ -207,21 +210,37 @@ SPAWNER_MOBS = {
   {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
     "neutral_rare_crocodile"
   }}, -- 376 | 376 [470 | 470]
+  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
+    "neutral_rare_crocodile"
+  }},
 
 -- TIER 3
+  {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
+    "neutral_common_great_gargoyle", "neutral_common_great_gargoyle", "neutral_common_great_gargoyle",
+    "neutral_common_drake"
+  }}, -- 613 | 79 + 79 + 79 + 376
   {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
     "neutral_rare_skydragon", "neutral_rare_dragon"
   }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
+  {["rarity"] = RARITY_EPIC, ["tier"] = 3, ["units"] = { -- [x1.5]
+    "neutral_epic_lamp"
+  }}, -- 595 | 595 [ 892 | 892]
+  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 3, ["units"] = { -- [x1.75]
+    "neutral_legendary_great_lamp"
+  }}, -- 595 | 595 [ 1,041 | 1,041]
 
 -- TIER 4
   {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
-  "neutral_rare_frostbitten", "neutral_rare_frostbitten",
-  "neutral_rare_mage"
+    "neutral_rare_frostbitten", "neutral_rare_frostbitten",
+    "neutral_rare_mage"
   }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
 
 -- TIER 5
+  {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
+    "neutral_common_drake", "neutral_common_drake", "neutral_common_drake"
+  }}, -- 1,128 | 376 + 376 + 376
   {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
-  "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
+    "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
   }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
 }
 

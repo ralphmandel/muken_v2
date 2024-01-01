@@ -61,7 +61,7 @@ function paladin_1_modifier_link:GetModifierIncomingDamageConstant(keys)
   if not IsServer() then return 0 end
   if keys.damage == 0 then return 0 end
 
-  if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
+  if keys.damage_flags ~= 1040 then
     local damage = keys.damage * self.ability:GetSpecialValueFor("absorption") * 0.01
     
     local damageTable = {

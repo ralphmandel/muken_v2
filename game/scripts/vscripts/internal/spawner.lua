@@ -107,7 +107,7 @@ function Spawner:RandomizeMob()
 
   local average_level = hero_lvl_total / hero_count
   local current_tier = math.ceil(average_level / 6)
-  if current_tier > 2 then current_tier = 2 end -- !!! TESTING !!!
+  if current_tier > 3 then current_tier = 3 end -- !!! TESTING !!!
 
   if RandomFloat(0, 100) < 15 then
     if current_tier > 2 then rarity = RARITY_LEGENDARY end

@@ -21,6 +21,8 @@ function _modifier__ai:OnCreated(kv)
 
     self.unit = self:GetParent()
 
+    self:ChangeModelColor()
+
     Timers:CreateTimer((0.2), function()
       self.spawnPos = self.unit:GetOrigin()
       self:ChangeModelScale()
@@ -61,12 +63,7 @@ function _modifier__ai:IdleThink()
   local aggro = self.unit:GetAggroTarget()
 
   if aggro then
-    if aggro:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and aggro:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
-      self.aggroTarget = self.unit:GetAggroTarget()
-      self.state = AI_STATE_AGGRESSIVE
-    else
-      self:SetReturning(false)
-    end
+    self.unit:MoveToPosition(self.spawnPos)
   end
 end
 
@@ -96,7 +93,7 @@ function _modifier__ai:AggressiveThink()
   end
 
   local units = FindUnitsInRadius(
-    self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil, 1200,
+    self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil, 800,
     DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
     FIND_ANY_ORDER, false
   )
@@ -147,7 +144,7 @@ function _modifier__ai:FindNewTarget()
 
 	for _,enemy in pairs(enemies) do
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
-      if enemy:IsIllusion() == false then return enemy end
+      if enemy:IsIllusion() == false then self.aggroTarget = enemy return end
     end
 	end
 end
@@ -185,6 +182,7 @@ function _modifier__ai:OnAttack(keys)
     local sound = ""
     if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.Attack" end
     if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+    if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ElderDragonShoot3.Attack" end
     if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.Attack" end
 
     if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.attack" end
@@ -201,15 +199,17 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_common_crocodilian_b" then sound = "Hero_Slardar.Attack" end
   if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then sound = "Hero_DarkSeer.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_epic_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
+  if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
 
   if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
-  if self.unit:GetUnitName() == "neutral_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
@@ -230,9 +230,14 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_rare_dragon" then self.unit:SetModelScale(0.9) end
   if self.unit:GetUnitName() == "neutral_rare_mage" then self.unit:SetModelScale(1.5) end
+  if self.unit:GetUnitName() == "neutral_epic_lamp" then self.unit:SetModelScale(1.4) end
+  if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then self.unit:SetModelScale(1.5) end
 
   if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
-  if self.unit:GetUnitName() == "neutral_lamp" then self.unit:SetModelScale(1.4) end
+end
+
+function _modifier__ai:ChangeModelColor()
+  if self.unit:GetUnitName() == "neutral_common_drake" then self.unit:SetMaterialGroup("3") end
 end
 
 function _modifier__ai:PlayEfxStart()
