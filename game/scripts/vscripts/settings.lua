@@ -211,8 +211,8 @@ SPAWNER_MOBS = {
     "neutral_rare_crocodile"
   }}, -- 376 | 376 [470 | 470]
   {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-    "neutral_rare_crocodile"
-  }},
+    "neutral_epic_igneo"
+  }}, -- 420 | 210 + 210 [630 | 315 + 315]
 
 -- TIER 3
   {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
@@ -230,10 +230,16 @@ SPAWNER_MOBS = {
   }}, -- 595 | 595 [ 1,041 | 1,041]
 
 -- TIER 4
+  {["rarity"] = RARITY_COMMON, ["tier"] = 4, ["units"] = {
+    "neutral_common_skeleton"
+  }}, -- 866 | 866
   {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
     "neutral_rare_frostbitten", "neutral_rare_frostbitten",
     "neutral_rare_mage"
   }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
+
+  -- IGNEO + 2x FLAME SKELETON
+  -- SPIDER
 
 -- TIER 5
   {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
@@ -242,6 +248,12 @@ SPAWNER_MOBS = {
   {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
     "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
   }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
+  {["rarity"] = RARITY_EPIC, ["tier"] = 5, ["units"] = { -- [x1.5]
+    "neutral_epic_lamp", "neutral_epic_lamp"
+  }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
+  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
+    "neutral_legendary_gorillaz"
+  }}, -- 1190 | 1190 [ 2,082 | 2,082]
 }
 
 SPAWNER_SPOTS = {

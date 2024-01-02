@@ -200,6 +200,7 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_common_skeleton" then sound = "Hero_SkeletonKing.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then sound = "Hero_Slardar.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then sound = "Hero_DarkSeer.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then sound = "Hero_Magnataur.Attack" end
@@ -207,6 +208,7 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
+  if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then sound = "Hero_LoneDruid.TrueForm.Attack" end
 
   if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
@@ -225,6 +227,7 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_common_crocodilian_b" then self.unit:SetModelScale(1.3) end
   if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then self.unit:SetModelScale(1) end
   if self.unit:GetUnitName() == "neutral_common_gargoyle" then self.unit:SetModelScale(0.8) end
+  if self.unit:GetUnitName() == "neutral_common_skeleton" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_rare_crocodile" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_rare_frostbitten" then self.unit:SetModelScale(1.1) end
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then self.unit:SetModelScale(1) end
@@ -232,6 +235,7 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_rare_mage" then self.unit:SetModelScale(1.5) end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then self.unit:SetModelScale(1.5) end
+  if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then self.unit:SetModelScale(1.2) end
 
   if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
 end

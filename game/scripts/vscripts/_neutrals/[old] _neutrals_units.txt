@@ -379,7 +379,7 @@
 			"AttackDamageMin"			"35"
 			"AttackDamageMax"			"45"
 			"AttackRate"				"1.2"
-			"AttackAnimationPoint"		"0.5"
+			"AttackAnimationPoint"		"1"
 			"AttackAcquisitionRange"	"50"
 
 			"Stats" //60 - [10][5]
