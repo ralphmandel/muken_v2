@@ -139,12 +139,11 @@ end
 function trickster_u_modifier_autocast:OnIntervalThink()
   self.enabled = false
 
-  if self.target then
-    if IsValidEntity(self.target) then
-      RemoveSubStats(self.target, self.ability, {"manacost"})
-    end
-  end
-
+  -- if self.target then
+  --   if IsValidEntity(self.target) then
+  --     RemoveSubStats(self.target, self.ability, {"manacost"})
+  --   end
+  -- end
 
   for _, target in pairs(self.targets) do
     if target then

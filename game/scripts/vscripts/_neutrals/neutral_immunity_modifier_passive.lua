@@ -31,7 +31,10 @@ function neutral_immunity_modifier_passive:OnIntervalThink()
 
   self.parent:CastAbilityNoTarget(self.ability, self.parent:GetPlayerOwnerID())
   
-  if IsServer() then self:StartIntervalThink(1) end
+  if IsServer() then
+    self:StartIntervalThink(1)
+    ai:StartIntervalThink(1)
+  end
 end
 
 -- UTILS -----------------------------------------------------------

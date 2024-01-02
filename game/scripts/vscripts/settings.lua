@@ -211,7 +211,7 @@ SPAWNER_MOBS = {
     "neutral_rare_crocodile"
   }}, -- 376 | 376 [470 | 470]
   {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-    "neutral_epic_igneo"
+    "neutral_epic_igneo", "neutral_epic_igneo"
   }}, -- 420 | 210 + 210 [630 | 315 + 315]
 
 -- TIER 3
@@ -238,8 +238,8 @@ SPAWNER_MOBS = {
     "neutral_rare_mage"
   }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
 
-  -- IGNEO + 2x FLAME SKELETON
-  -- SPIDER
+  -- DARK ROOT SPIDER
+  -- QUEEN OF THE DEATH
 
 -- TIER 5
   {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
@@ -252,7 +252,7 @@ SPAWNER_MOBS = {
     "neutral_epic_lamp", "neutral_epic_lamp"
   }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
   {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
-    "neutral_legendary_gorillaz"
+    "neutral_legendary_iron_golem"
   }}, -- 1190 | 1190 [ 2,082 | 2,082]
 }
 

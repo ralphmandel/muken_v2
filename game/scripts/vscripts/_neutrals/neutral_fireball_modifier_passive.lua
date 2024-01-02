@@ -22,12 +22,13 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_fireball_modifier_passive:OnIntervalThink()
-	if self.ability:IsCooldownReady() == false then return end
-	if self.ability:IsOwnersManaEnough() == false then return end
-
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
-  if ai.state ~= 1 then return end
+
+	if ai.state ~= 1 or self.ability:IsCooldownReady() == false or self.ability:IsOwnersManaEnough() == false then
+    if IsServer() then self:StartIntervalThink(1) end
+    return
+  end
 
   local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetCastRange(self.parent:GetOrigin(), nil),
@@ -42,7 +43,10 @@ function neutral_fireball_modifier_passive:OnIntervalThink()
     end
 	end
   
-  if IsServer() then self:StartIntervalThink(self.ability:GetCastPoint() + 0.1) end
+  if IsServer() then
+    self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+    ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+  end
 end
 
 -- UTILS -----------------------------------------------------------

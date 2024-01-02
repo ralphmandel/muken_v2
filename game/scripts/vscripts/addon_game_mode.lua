@@ -82,6 +82,7 @@ function Precache( context )
     PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_windrun.vpc", context )
     PrecacheResource( "particle", "particles/econ/items/visage/immortal_familiar/visage_immortal_ti5/visage_familiar_base_attack_ti5.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf", context )
+    PrecacheResource( "particle", "particles/units/heroes/hero_ember_spirit/ember_spirit_flameguard.vpcf", context )
 
   -- Models can also be precached by folder or individually
     -- PrecacheModel should generally used over PrecacheResource for individual models
@@ -106,6 +107,7 @@ function Precache( context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl", context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl", context )
     PrecacheResource( "model", "models/heroes/dragon_knight/dragon_knight_dragon.vmdl", context )
+    PrecacheResource( "model", "models/creeps/darkreef/gaoler/darkreef_gaoler.vmdl", context )
     PrecacheResource( "model", "models/items/wraith_king/frostivus_wraith_king/frostivus_wraith_king_skeleton.vmdl", context )
     PrecacheResource( "model", "models/items/lone_druid/bear/tarzan_and_kingkong_spirit/tarzan_and_kingkong_spirit.vmdl", context )
     PrecacheResource( "model", "models/props_structures/good_fountain001.vmdl", context )

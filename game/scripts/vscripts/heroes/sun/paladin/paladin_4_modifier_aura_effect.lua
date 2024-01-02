@@ -37,8 +37,7 @@ end
 
 function paladin_4_modifier_aura_effect:CheckState()
 	local state = {
-		[MODIFIER_STATE_SILENCED] = true,
-    [MODIFIER_STATE_DISARMED] = true,
+		[MODIFIER_STATE_SILENCED] = true
 	}
 
   --if self:GetParent():IsMagicImmune() then state = {} end

@@ -54,7 +54,7 @@ function _modifier_int:GetModifierManaBonus()
 end
 
 function _modifier_int:GetModifierPercentageManacost(keys)
-  return self:GetCalculedDataStack("sub_stat_manacost", false)
+  return self:GetCalculedData("sub_stat_manacost", false)
 end
 
 function _modifier_int:GetModifierSpellAmplify_Percentage(keys)

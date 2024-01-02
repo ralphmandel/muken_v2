@@ -11,7 +11,7 @@ function trickster_1_modifier_passive:OnCreated(kv)
   self.ability = self:GetAbility()
 
   --self.time = GameRules:GetGameTime()
-  --print("kuboo", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
+  --print("kubito", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
   --self.time = GameRules:GetGameTime()
 
   if IsServer() then self:StartIntervalThink(0.2) end

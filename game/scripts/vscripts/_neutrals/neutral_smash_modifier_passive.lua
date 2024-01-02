@@ -22,12 +22,13 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_smash_modifier_passive:OnIntervalThink()
-	if self.ability:IsCooldownReady() == false then return end
-	if self.ability:IsOwnersManaEnough() == false then return end
-
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
-  if ai.state ~= 1 then return end
+
+	if ai.state ~= 1 or self.ability:IsCooldownReady() == false or self.ability:IsOwnersManaEnough() == false then
+    if IsServer() then self:StartIntervalThink(1) end
+    return
+  end
 
   local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius() - 100,
@@ -38,11 +39,15 @@ function neutral_smash_modifier_passive:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
       self.parent:CastAbilityNoTarget(self.ability, self.parent:GetPlayerOwnerID())
+
+      if IsServer() then
+        self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+        ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+      end
+      
       break
     end
 	end
-  
-  if IsServer() then self:StartIntervalThink(self.ability:GetCastPoint() + 0.1) end
 end
 
 -- UTILS -----------------------------------------------------------

@@ -137,9 +137,9 @@
 
 		"AbilityValues"
     {
-      "stun_radius"   "250"
-      "stun_duration" "4"
-      "stun_damage"   "300"
+      "stun_radius"   "300"
+      "stun_duration" "5"
+      "stun_damage"   "500"
     }
 	}
 
@@ -304,83 +304,71 @@
     {
       "duration"        "6"
       "return_percent"  "200"
+      "ms_percent"      "100"
+    }
+	}
+
+  "neutral_burn_aura"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_burn_aura"
+		"AbilityTextureName"     		"neutrals/burn_aura"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityManaCost"         	"0"
+		"AbilityCooldown"				    "0"
+
+		"AbilityValues"
+    {
+      "radius"  "250"
+      "damage"  "50"
+    }
+	}
+
+  "neutral_doom"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_doom"
+		"AbilityTextureName"     		"neutrals/doom"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"3"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityManaCost"         	"250"
+		"AbilityCooldown"				    "30"
+		"AbilityCastRange"    		  "500"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_IDLE_RARE"
+		"AbilityCastPoint"       		"0.7"
+		"AnimationPlaybackRate"  		"2.6"
+
+		"AbilityValues"
+    {
+      "duration"  "12"
+      "damage"    "150"
+      "manacost"  "-100"
     }
 	}
 
   //////////////////////////////////////////////////////////////////////////////////////
-
-	"burning_armor"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/burning_armor"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"     		"_neutrals/burning_armor"
-
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"damage"		"50"
-			}
-			"02"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"tick"			"0.75"
-			}
-			"03"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"radius"		"225"
-			}
-		}
-	}
-
-	"doom"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/doom"
-		"AbilityTextureName"     		"_neutrals/doom"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-
-		"AbilityDamage"           		"300"
-        "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilityCastAnimation"   		"ACT_DOTA_IDLE_RARE"
-		"AbilityCastPoint"       		"0.9"
-		"AnimationPlaybackRate"  		"2"
-
-		"AbilityManaCost"         		"350"
-		"AbilityCooldown"				"30"
-		"AbilityCastRange"    		   	"750"
-
-		"AbilitySpecial"
-		{
-			"02"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"damage"		"30"
-			}
-			"03"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"tick"			"1.25"
-			}
-			"04"
-			{
-				"var_type"		"FIELD_FLOAT"
-				"duration"		"15"
-			}
-		}
-	}
 
 	"summon_spiders"
 	{

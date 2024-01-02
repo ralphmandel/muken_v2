@@ -41,10 +41,10 @@ function neutral_spike_armor_modifier_passive:OnTakeDamage(keys)
     if keys.attacker:IsBaseNPC() then
       if keys.attacker:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and keys.attacker:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
         self.parent:CastAbilityNoTarget(self.ability, self.parent:GetPlayerOwnerID())
-      end      
+        if IsServer() then ai:StartIntervalThink(0.5) end
+      end
     end
   end
-
 end
 
 -- UTILS -----------------------------------------------------------

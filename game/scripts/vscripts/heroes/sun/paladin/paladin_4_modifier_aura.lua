@@ -22,7 +22,8 @@ function paladin_4_modifier_aura:OnCreated(kv)
 
   self.radius = self.ability:GetAOERadius()
   self.interval = self.ability:GetSpecialValueFor("interval")
-  
+  self.disarmed = self.ability:GetSpecialValueFor("disarmed")
+
   if IsServer() then
     self:PlayEfxStart()
     self:StartIntervalThink(self.interval)
@@ -41,7 +42,7 @@ end
 function paladin_4_modifier_aura:CheckState()
 	local state = {
 		[MODIFIER_STATE_SILENCED] = true,
-		[MODIFIER_STATE_DISARMED] = true,
+		[MODIFIER_STATE_DISARMED] = self.disarmed == 1,
 	}
 
 	return state

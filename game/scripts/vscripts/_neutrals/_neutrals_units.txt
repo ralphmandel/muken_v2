@@ -402,7 +402,7 @@
 
 			"Model"						      "models/heroes/dragon_knight/dragon_knight_dragon.vmdl"
 			"TeamName"					    "DOTA_TEAM_NEUTRALS"
-			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_FLY"
+			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
 			"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
 			"AttackRange"				    "500"
 			"HealthBarOffset"			  "270"
@@ -1061,18 +1061,18 @@
 			}
 		}
 
-    "neutral_legendary_gorillaz"
+    "neutral_legendary_iron_golem"
 		{
 			"BaseClass"			  "npc_dota_creature"
 			"SoundSet"				"n_creep_Melee"
 			"GameSoundsFile"	"soundevents/game_sounds_creeps.vsndevts"
 
-			"Model"						      "models/items/lone_druid/bear/tarzan_and_kingkong_spirit/tarzan_and_kingkong_spirit.vmdl"
+			"Model"						      "models/creeps/darkreef/gaoler/darkreef_gaoler.vmdl"
 			"TeamName"					    "DOTA_TEAM_CUSTOM_7"
 			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
 			"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
 			"AttackRange"				    "200"
-			"HealthBarOffset"			  "250"
+			"HealthBarOffset"			  "270"
 			"RingRadius"				    "100"
 			"VisionDaytimeRange"		"600"
 			"VisionNighttimeRange"	"500"
@@ -1080,6 +1080,8 @@
 			//"ProjectileSpeed"			  "1200"
 			"Level"						      "30"
 
+      "Ability1"          "neutral_iron_guard" //LVL 4: Increases armor by receiving basic attack & Increases status resist equal to health deficit percent.
+      "Ability2"          "neutral_iron_blow" //LVL 2: Deals pure damage based on his health deficit.
 			"Ability6"					"_ability_str"
 			"Ability7"					"_ability_agi"
 			"Ability8"					"_ability_int"
@@ -1088,10 +1090,10 @@
 
 			"Stats"
 			{
-				"str" "4"
+				"str" "5"
 				"agi" "1"
-				"int" "2"
-				"vit" "3"
+				"int" "0"
+				"vit" "4"
 			}
 
 			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"

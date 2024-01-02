@@ -10,19 +10,19 @@ function neutral_fireball_modifier_burn:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
- local intervals = 0.5
+ local interval = 0.5
 
 	self.damageTable = {
     victim = self.parent,
     attacker = self.caster,
-    damage = self.ability:GetSpecialValueFor("flame_damage") * intervals,
+    damage = self.ability:GetSpecialValueFor("flame_damage") * interval,
     damage_type = self.ability:GetAbilityDamageType(),
     ability = self.ability
   }
 
 	if IsServer() then
     self.parent:EmitSound("Hero_Huskar.Burning_Spear")
-    self:StartIntervalThink(intervals)
+    self:StartIntervalThink(interval)
   end
 end
 

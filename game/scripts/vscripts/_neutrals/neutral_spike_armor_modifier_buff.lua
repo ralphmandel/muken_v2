@@ -10,6 +10,10 @@ function neutral_spike_armor_modifier_buff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {
+    value = self.ability:GetSpecialValueFor("ms_percent")
+  }, false)
+
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
 end
@@ -18,6 +22,8 @@ function neutral_spike_armor_modifier_buff:OnRefresh(kv)
 end
 
 function neutral_spike_armor_modifier_buff:OnRemoved()
+  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_increase", self.ability)
+
   self.ability:SetActivated(true)
   self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 end

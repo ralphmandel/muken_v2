@@ -146,6 +146,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("paladin_4__magnus_rank_12") then
+      if value_name == "disarmed" then return 1 end
 		end
 
 		if caster:FindAbilityByName("paladin_4__magnus_rank_21") then
@@ -338,6 +339,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "duration" then return 4.8 + (value_level * 0.2) end
 
+    if value_name == "disarmed" then return 0 end
     if value_name == "special_heal_unit" then return 1 end
     if value_name == "special_heal_hero" then return 5 end
     if value_name == "damage_percent" then return 2.75 end
@@ -348,8 +350,8 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "paladin_5__smite" then
 		if value_name == "AbilityManaCost" then
-      if caster:FindAbilityByName("paladin_5__smite_rank_32") then
-        return 60 * mana_mult
+      if caster:FindAbilityByName("paladin_5__smite_rank_11") then
+        return 40 * mana_mult
       end
       return 50 * mana_mult
     end
@@ -358,21 +360,16 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCastRange" then return caster:Script_GetAttackRange() end
 
     if value_name == "AbilityCharges" then
-      if caster:FindAbilityByName("paladin_5__smite_rank_11") then
-        return 4
+      if caster:FindAbilityByName("paladin_5__smite_rank_31") then
+        return 5
       end
-      if caster:FindAbilityByName("paladin_5__smite_rank_12") then
-        return 2
+      if caster:FindAbilityByName("paladin_5__smite_rank_32") then
+        return 3
       end
-      return 3
+      return 4
     end
 
-    if value_name == "AbilityChargeRestoreTime" then
-      if caster:FindAbilityByName("paladin_5__smite_rank_12") then
-        return 4
-      end
-      return 5
-    end
+    if value_name == "AbilityChargeRestoreTime" then return 5 end
 
 		if value_name == "damage" then return 120 + (value_level * 5) end
 
@@ -386,7 +383,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if value_name == "special_hp_based" then return 1 end
-    if value_name == "special_stun_duration" then return 1.2 end
+    if value_name == "special_stun_duration" then return 1 end
     if value_name == "special_hits" then return 5 end
 	end
 

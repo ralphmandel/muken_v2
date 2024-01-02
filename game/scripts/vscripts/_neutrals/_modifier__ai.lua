@@ -47,6 +47,7 @@ function _modifier__ai:OnIntervalThink()
   end
 
   self.stateActions[self.state](self)
+  if IsServer() then self:StartIntervalThink(AI_THINK_INTERVAL) end
 end
 
 function _modifier__ai:IdleThink()
@@ -147,6 +148,8 @@ function _modifier__ai:FindNewTarget()
       if enemy:IsIllusion() == false then self.aggroTarget = enemy return end
     end
 	end
+
+  self.aggroTarget = nil
 end
 
 function _modifier__ai:SetReturning(aggressive)
@@ -169,12 +172,31 @@ end
 
 function _modifier__ai:DeclareFunctions()
 	local funcs = {
+    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
+    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
+    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+
     MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 		MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND
 	}
 
 	return funcs
+end
+
+function _modifier__ai:GetAbsoluteNoDamagePhysical(keys)
+  if self.state == AI_STATE_IDLE then return 1 end
+  return 0
+end
+
+function _modifier__ai:GetAbsoluteNoDamageMagical(keys)
+  if self.state == AI_STATE_IDLE then return 1 end
+  return 0
+end
+
+function _modifier__ai:GetAbsoluteNoDamagePure(keys)
+  if self.state == AI_STATE_IDLE then return 1 end
+  return 0
 end
 
 function _modifier__ai:OnAttack(keys)
@@ -206,18 +228,19 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
+  if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
+  if self.unit:GetUnitName() == "neutral_legendary_iron_golem" then sound = "Krieger.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then sound = "Hero_LoneDruid.TrueForm.Attack" end
 
-  if self.unit:GetUnitName() == "neutral_igneo" then sound = "Hero_WarlockGolem.Attack" end
   if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
 
 function _modifier__ai:GetAttackSound(keys)
-    return ""
+  return ""
 end
 
 function _modifier__ai:ChangeModelScale()
