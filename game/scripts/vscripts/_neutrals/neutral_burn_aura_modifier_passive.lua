@@ -25,7 +25,7 @@ function neutral_burn_aura_modifier_passive:OnCreated(kv)
 
   if IsServer() then
     self:PlayEfxAmbient()
-    self:StartIntervalThink(5)
+    self:StartIntervalThink(2)
   end
 end
 

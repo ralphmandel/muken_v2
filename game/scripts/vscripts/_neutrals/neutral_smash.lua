@@ -50,9 +50,9 @@ function neutral_smash:OnSpellStart()
           center_y = caster:GetAbsOrigin().y + 1,
           center_z = caster:GetAbsOrigin().z,
           knockback_height = 15,
-          duration = distance_percent * 0.3,
-          knockback_duration = distance_percent * 0.3,
-          knockback_distance = distance_percent * self:GetAOERadius() * 1.2
+          duration = distance_percent * 0.35,
+          knockback_duration = distance_percent * 0.35,
+          knockback_distance = distance_percent * self:GetAOERadius() * 1.35
         }, true)
       end
       

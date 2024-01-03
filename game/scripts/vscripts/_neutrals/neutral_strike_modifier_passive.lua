@@ -32,6 +32,11 @@ end
 
 function neutral_strike_modifier_passive:OnAttackLanded(keys)
   if keys.attacker ~= self.parent then return end
+
+  if self.parent:HasModifier("neutral_strike_modifier_wind") then
+    if IsServer() then keys.target:EmitSound("Crocodile.Strike") end
+  end
+
   self.parent:RemoveModifierByName("neutral_strike_modifier_wind")
 
   local interval = 0

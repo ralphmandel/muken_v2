@@ -6,7 +6,7 @@ UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret S
 ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same hero as each other
 
 HERO_SELECTION_TIME = 9000.0              -- How long should we let people select their hero?
-PRE_GAME_TIME = 60.0                    -- How long after people select their heroes should the horn blow and the game start?
+PRE_GAME_TIME = 15.0                    -- How long after people select their heroes should the horn blow and the game start?
 POST_GAME_TIME = 60.0                   -- How long should we let people look at the scoreboard before closing the server automatically?
 TREE_REGROW_TIME = 60.0                 -- How long should it take individual trees to respawn after being cut down/destroyed?
 
@@ -183,6 +183,12 @@ TIER_TEAMS = {
 }
 
 SPAWNER_MOBS = {
+  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = { -- [x1.5]
+    "neutral_legendary_spider",
+  }}, -- 420 | 210 + 210 [630 | 315 + 315]
+}
+
+SPAWNER_MOBS_OLD = {
 -- TIER 1
   {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
     "neutral_common_chameleon_a", "neutral_common_chameleon_b",
@@ -237,9 +243,9 @@ SPAWNER_MOBS = {
     "neutral_rare_frostbitten", "neutral_rare_frostbitten",
     "neutral_rare_mage"
   }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
-
-  -- DARK ROOT SPIDER
-  -- QUEEN OF THE DEATH
+  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 4, ["units"] = { -- [x1.75]
+    "neutral_legendary_spider"
+  }}, -- 866 | 866 [1,515 | 1,515]
 
 -- TIER 5
   {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {

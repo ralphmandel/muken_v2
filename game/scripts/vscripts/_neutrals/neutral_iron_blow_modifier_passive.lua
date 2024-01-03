@@ -1,11 +1,11 @@
-neutral_smash_modifier_passive = class({})
+neutral_iron_blow_modifier_passive = class({})
 
-function neutral_smash_modifier_passive:IsHidden() return true end
-function neutral_smash_modifier_passive:IsPurgable() return false end
+function neutral_iron_blow_modifier_passive:IsHidden() return true end
+function neutral_iron_blow_modifier_passive:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function neutral_smash_modifier_passive:OnCreated(kv)
+function neutral_iron_blow_modifier_passive:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
@@ -13,15 +13,15 @@ function neutral_smash_modifier_passive:OnCreated(kv)
   if IsServer() then self:StartIntervalThink(1) end
 end
 
-function neutral_smash_modifier_passive:OnRefresh(kv)
+function neutral_iron_blow_modifier_passive:OnRefresh(kv)
 end
 
-function neutral_smash_modifier_passive:OnRemoved()
+function neutral_iron_blow_modifier_passive:OnRemoved()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function neutral_smash_modifier_passive:OnIntervalThink()
+function neutral_iron_blow_modifier_passive:OnIntervalThink()
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
 
@@ -31,7 +31,7 @@ function neutral_smash_modifier_passive:OnIntervalThink()
   end
 
   local enemies = FindUnitsInRadius(
-		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius() - 100,
+		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius() - 50,
 		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
 		self.ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
 	)

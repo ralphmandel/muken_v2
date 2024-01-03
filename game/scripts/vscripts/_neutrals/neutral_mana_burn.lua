@@ -1,5 +1,5 @@
 neutral_mana_burn = class({})
-LinkLuaModifier("neutral_mana_burn_modifier_orb", "heroes/moon/genuine/neutral_mana_burn_modifier_orb", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("neutral_mana_burn_modifier_orb", "_neutrals/neutral_mana_burn_modifier_orb", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_mana_burn:Spawn()
   Timers:CreateTimer((0.2), function()

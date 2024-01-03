@@ -38,12 +38,12 @@ end
 
 
 function neutral_mana_burn_modifier_orb:GetModifierProjectileName()
-	if not self.ability.GetProjectileName then return end
-
-	if self.proj_name == true then
-    self.proj_name = false
-		return self.ability:GetProjectileName()
-	end
+  if self:ShouldLaunch(self.parent:GetAggroTarget()) then return self.ability:GetProjectileName() end
+	-- if not self.ability.GetProjectileName then return end
+	-- if self.proj_name == true then
+  --   self.proj_name = false
+	-- 	return self.ability:GetProjectileName()
+	-- end
 end
 
 function neutral_mana_burn_modifier_orb:OnAttack(keys)
@@ -91,6 +91,8 @@ end
 -- UTILS -----------------------------------------------------------
 
 function neutral_mana_burn_modifier_orb:ShouldLaunch(target)
+  if target == nil then return false end
+
 	if self.ability:GetAutoCastState() then
 		local nResult = UnitFilter(
 			target, self.ability:GetAbilityTargetTeam(),

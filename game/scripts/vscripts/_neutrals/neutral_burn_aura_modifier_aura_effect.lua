@@ -10,7 +10,7 @@ function neutral_burn_aura_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  local interval = 0.5
+  local interval = 0.4
 
   self.damageTable = {
 		attacker = self.caster, victim = self.parent, ability = self.ability,

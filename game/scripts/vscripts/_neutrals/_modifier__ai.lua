@@ -175,6 +175,7 @@ function _modifier__ai:DeclareFunctions()
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
     MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+    MODIFIER_PROPERTY_PRE_ATTACK,
 
     MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
@@ -199,6 +200,16 @@ function _modifier__ai:GetAbsoluteNoDamagePure(keys)
   return 0
 end
 
+function _modifier__ai:GetModifierPreAttack(keys)
+	if keys.attacker ~= self.unit then return end
+  local sound = ""
+  
+  if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_WarlockGolem.PreAttack" end
+
+	if IsServer() then self.unit:EmitSound(sound) end
+end
+
+
 function _modifier__ai:OnAttack(keys)
 	if keys.attacker ~= self.unit then return end
     local sound = ""
@@ -206,8 +217,7 @@ function _modifier__ai:OnAttack(keys)
     if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
     if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ElderDragonShoot3.Attack" end
     if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.Attack" end
-
-    if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.attack" end
+    if self.unit:GetUnitName() == "neutral_legendary_spider" then sound = "hero_viper.attack" end
 
 	if IsServer() then self.unit:EmitSound(sound) end
 end
@@ -228,13 +238,12 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_rare_skydragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
-  if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_WarlockGolem.Attack" end
+  if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_Undying_Golem.Attack" end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_iron_golem" then sound = "Krieger.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then sound = "Hero_LoneDruid.TrueForm.Attack" end
-
-  if self.unit:GetUnitName() == "neutral_spider" then sound = "hero_viper.projectileImpact" end
+  if self.unit:GetUnitName() == "neutral_legendary_spider" then sound = "hero_viper.projectileImpact" end
 
 	if IsServer() then keys.target:EmitSound(sound) end
 end
@@ -258,9 +267,9 @@ function _modifier__ai:ChangeModelScale()
   if self.unit:GetUnitName() == "neutral_rare_mage" then self.unit:SetModelScale(1.5) end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then self.unit:SetModelScale(1.4) end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then self.unit:SetModelScale(1.5) end
+  if self.unit:GetUnitName() == "neutral_legendary_iron_golem" then self.unit:SetModelScale(1.2) end
   if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then self.unit:SetModelScale(1.2) end
-
-  if self.unit:GetUnitName() == "neutral_spider" then self.unit:SetModelScale(1) end
+  if self.unit:GetUnitName() == "neutral_legendary_spider" then self.unit:SetModelScale(1) end
 end
 
 function _modifier__ai:ChangeModelColor()

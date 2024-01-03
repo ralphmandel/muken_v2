@@ -158,7 +158,7 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
       local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
       local heroes_stats_data = LoadKeyValues("scripts/kv/heroes_stats.kv")
       local boss_list = LoadKeyValues("scripts/vscripts/_bosses/_bosses_units.txt")
-      local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutrals_units.txt")
+      local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutral_units.txt")
       local summon_list = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
       if heroes_name_data then

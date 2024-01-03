@@ -107,14 +107,14 @@ function Spawner:RandomizeMob()
 
   local average_level = hero_lvl_total / hero_count
   local current_tier = math.ceil(average_level / 6)
-  if current_tier > 3 then current_tier = 3 end -- !!! TESTING !!!
+  if current_tier > 1 then current_tier = 1 end -- !!! TESTING !!!
 
   if RandomFloat(0, 100) < 15 then
     if current_tier > 2 then rarity = RARITY_LEGENDARY end
   elseif RandomFloat(0, 100) < 23.5 then
     if current_tier > 1 then rarity = RARITY_EPIC end
   elseif RandomFloat(0, 100) < 38.5 then
-    rarity = RARITY_RARE
+    --rarity = RARITY_RARE
   end
 
   local tier = RandomInt(rarity, current_tier)

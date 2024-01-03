@@ -470,5 +470,5 @@
 #base "../vscripts/heroes/moon/strider/strider.txt"
 
 //NEUTRALS
-#base "../vscripts/_neutrals/_neutrals.txt"
+#base "../vscripts/_neutrals/_neutral_abilities.txt"
 #base "../vscripts/_bosses/_bosses.txt"

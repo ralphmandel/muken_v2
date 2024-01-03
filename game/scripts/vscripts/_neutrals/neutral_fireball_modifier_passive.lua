@@ -39,14 +39,14 @@ function neutral_fireball_modifier_passive:OnIntervalThink()
 	for _,enemy in pairs(enemies) do
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
       self.parent:CastAbilityOnTarget(enemy, self.ability, self.parent:GetPlayerOwnerID())
+
+      if IsServer() then
+        self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+        ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+      end
       break
     end
 	end
-  
-  if IsServer() then
-    self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
-    ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
-  end
 end
 
 -- UTILS -----------------------------------------------------------

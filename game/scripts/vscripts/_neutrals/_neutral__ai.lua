@@ -50,7 +50,7 @@ function _neutral__ai:Spawn()
 
   Timers:CreateTimer((0.2), function()
     if IsServer() then
-      local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutrals_units.txt")
+      local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutral_units.txt")
       local abilities_stats = {
         ["str"] = caster:FindAbilityByName("_ability_str"),
         ["agi"] = caster:FindAbilityByName("_ability_agi"),

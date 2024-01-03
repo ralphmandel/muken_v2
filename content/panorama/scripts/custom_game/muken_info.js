@@ -41,7 +41,7 @@ var current_info = {};
     if (tab == 4) {
       CreateRow(tab, column, "heal_power", '%');
       CreateRow(tab, column, "heal_amp", '%');
-      CreateRow(tab, column, "status_resist", '');
+      CreateRow(tab, column, "status_resist", '%');
       CreateRow(tab, column, "cd_reduction", '');
       CreateRow(tab, column, "buff_amp", '%');
     }
@@ -94,7 +94,7 @@ var current_info = {};
       for (let tab = 1; tab <= 4; tab++) {
         for (const [layout_name, layout_value] of Object.entries(INFO_LAYOUT[tab]["INFO_VALUE"])) {
           if (alt_pressed == true && (layout_name == "evasion" || layout_name == "crit_chance" ||
-          layout_name == "magical_resist" || layout_name == "status_resist" || layout_name == "cd_reduction")) {
+          layout_name == "magical_resist" || layout_name == "cd_reduction")) {
             if (name == layout_name + "_percent") {
               var text = Number((value).toFixed(2)) + "%";
               INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text; 

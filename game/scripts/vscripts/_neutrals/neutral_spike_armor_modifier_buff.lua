@@ -16,6 +16,8 @@ function neutral_spike_armor_modifier_buff:OnCreated(kv)
 
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
+
+  if IsServer() then self.parent:EmitSound("DOTA_Item.BladeMail.Activate") end
 end
 
 function neutral_spike_armor_modifier_buff:OnRefresh(kv)

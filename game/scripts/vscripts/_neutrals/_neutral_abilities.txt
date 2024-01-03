@@ -133,7 +133,8 @@
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_3"
 		"AbilityManaCost"         	"150"
 		"AbilityCooldown"				    "20"
-		"AbilityCastPoint"       		"1.8"
+		"AbilityCastPoint"       		"1.2"
+		"AnimationPlaybackRate"  		"1.5"
 
 		"AbilityValues"
     {
@@ -365,6 +366,93 @@
       "duration"  "12"
       "damage"    "150"
       "manacost"  "-100"
+    }
+	}
+
+  "neutral_iron_guard"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_iron_guard"
+		"AbilityTextureName"     		"neutrals/iron_guard"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"3"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilityManaCost"         	"0"
+		"AbilityCooldown"				    "0"
+		"AbilityCastRange"    		  "0"
+
+		"AbilityValues"
+    {
+      "armor"         "0.5"
+      "decrease_time" "3"
+    }
+	}
+
+  "neutral_iron_blow"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_iron_blow"
+		"AbilityTextureName"     		"neutrals/iron_blow"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"3"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+    "AbilityHealthCost"         "300"
+		"AbilityManaCost"         	"0"
+		"AbilityCooldown"				    "10"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.5"
+
+		"AbilityValues"
+    {
+      "radius"  "275"
+      "damage"  "20"
+    }
+	}
+
+  "neutral_acid_puddle"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"_neutrals/neutral_acid_puddle"
+		"AbilityTextureName"     		"neutrals/acid_puddle"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+
+		"MaxLevel"               		"2"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityManaCost"         	"250"
+		"AbilityCooldown"				    "40"
+		"AbilityCastRange"    		  "600"
+
+		"AbilityCastPoint"       		"0.2"
+		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
+
+		"AbilityValues"
+    {
+      "radius"    "350"
+      "duration"  "15"
+      "damage"    "150"
     }
 	}
 
