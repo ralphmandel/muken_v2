@@ -47,16 +47,16 @@ function SetRankButtonsVisibility(event) {
     }
   }
 
-  if (event.bEnable == false) {
-    var abilities_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("abilities");
-    for(var i = 0; i <= abilities_panel.GetChildCount() - 1; i++) {
-      if (abilities_panel.GetChild(i).BHasClass("level_secret") == true) {
-        abilities_panel.GetChild(i).RemoveClass("no_level");
-        abilities_panel.GetChild(i).RemoveClass("enemy");
-        abilities_panel.GetChild(i).RemoveClass("level_secret");
-      }
-    }
-  }
+  // if (event.bEnable == false) {
+  //   var abilities_panel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("abilities");
+  //   for(var i = 0; i <= abilities_panel.GetChildCount() - 1; i++) {
+  //     if (abilities_panel.GetChild(i).BHasClass("level_secret") == true) {
+  //       abilities_panel.GetChild(i).RemoveClass("no_level");
+  //       abilities_panel.GetChild(i).RemoveClass("enemy");
+  //       abilities_panel.GetChild(i).RemoveClass("level_secret");
+  //     }
+  //   }
+  // }
 }
 
 function OnRankButtonClick(id) {
