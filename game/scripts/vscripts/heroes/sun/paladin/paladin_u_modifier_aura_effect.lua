@@ -29,6 +29,9 @@ function paladin_u_modifier_aura_effect:DeclareFunctions()
 end
 
 function paladin_u_modifier_aura_effect:GetModifierIncomingDamage_Percentage(keys)
+  if keys.damage_type ~= DAMAGE_TYPE_PURE then return 0 end
+  if keys.damage_flags == DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION then return 0 end
+  
   return -self.ability:GetSpecialValueFor("holy_reduction")
 end
 

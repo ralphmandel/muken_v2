@@ -53,9 +53,10 @@ end
 function _modifier__ai:IdleThink()
   RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
 
-  self:FindNewTarget()
+  local target = self:FindNewTarget()
 
-  if self.aggroTarget then
+  if target then
+    self.aggroTarget = target
     self.unit:MoveToTargetToAttack(self.aggroTarget)
     self.state = AI_STATE_AGGRESSIVE
     return
@@ -68,30 +69,38 @@ function _modifier__ai:IdleThink()
   end
 end
 
+function _modifier__ai:CheckTarget(target)
+  if target == nil then return false end
+  if IsValidEntity(target) == false then return false end
+  if not target:IsAlive() then return false end
+  if target:IsOutOfGame() or target:IsInvisible() then return false end
+
+  if self.unit:GetAggroTarget() then
+    if self.unit:GetAggroTarget() ~= target then
+      return false
+    end
+  end
+
+  return true
+end
+
 function _modifier__ai:AggressiveThink()
   if (self.spawnPos - self.unit:GetAbsOrigin()):Length() > self.leashRange then
     self:SetReturning(false)
     return
   end
 
-  if self.aggroTarget == nil then self:FindNewTarget() end
-  if IsValidEntity(self.aggroTarget) == false then self:FindNewTarget() end
-  if not self.aggroTarget:IsAlive() then self:FindNewTarget() end
-
-  if self.unit:GetAggroTarget() then
-    if self.unit:GetAggroTarget() ~= self.aggroTarget then
-      self:FindNewTarget()
+  if self:CheckTarget(self.aggroTarget) == false then
+    local new_target = self:FindNewTarget()
+    if new_target then
+      self.aggroTarget = new_target
+    else
+      self:SetReturning(true)
+      return
     end
   end
 
-  if self.aggroTarget:IsOutOfGame() or self.aggroTarget:IsInvisible() then self:FindNewTarget() end
-
-  if self.aggroTarget then
-    self.unit:MoveToTargetToAttack(self.aggroTarget)
-  else
-    self:SetReturning(true)
-    return
-  end
+  self.unit:MoveToTargetToAttack(self.aggroTarget)
 
   local units = FindUnitsInRadius(
     self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil, 800,
@@ -114,9 +123,10 @@ end
 
 function _modifier__ai:ReturningThink()
   if self.returning_agressive == true then
-    self:FindNewTarget()
+    local target = self:FindNewTarget()
 
-    if self.aggroTarget then
+    if target then
+      self.aggroTarget = target
       self.unit:MoveToTargetToAttack(self.aggroTarget)
       self.state = AI_STATE_AGGRESSIVE
       return
@@ -145,11 +155,9 @@ function _modifier__ai:FindNewTarget()
 
 	for _,enemy in pairs(enemies) do
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
-      if enemy:IsIllusion() == false then self.aggroTarget = enemy return end
+      if enemy:IsIllusion() == false then return enemy end
     end
 	end
-
-  self.aggroTarget = nil
 end
 
 function _modifier__ai:SetReturning(aggressive)

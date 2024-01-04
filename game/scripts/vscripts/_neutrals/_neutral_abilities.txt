@@ -441,8 +441,8 @@
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityManaCost"         	"250"
-		"AbilityCooldown"				    "40"
+		"AbilityManaCost"         	"150"
+		"AbilityCooldown"				    "30"
 		"AbilityCastRange"    		  "600"
 
 		"AbilityCastPoint"       		"0.2"
@@ -450,8 +450,8 @@
 
 		"AbilityValues"
     {
-      "radius"    "350"
-      "duration"  "15"
+      "radius"    "450"
+      "duration"  "10"
       "damage"    "150"
     }
 	}
@@ -472,8 +472,8 @@
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
-		"AbilityManaCost"         	"100"
-		"AbilityCooldown"				    "20"
+		"AbilityManaCost"         	"200"
+		"AbilityCooldown"				    "45"
 		"AbilityCastRange"    		  "750"
 
 		"AbilityCastPoint"       		"0.2"
@@ -482,7 +482,7 @@
 		"AbilityValues"
     {
       "units"     "5"
-      "duration"  "30"
+      "duration"  "60"
     }
 	}
 

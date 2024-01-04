@@ -39,10 +39,10 @@ end
 
 -- EFFECTS -----------------------------------------------------------
 
-function venom_aoe_modifier:GetEffectName()
+function neutral_acid_puddle_modifier_aura_effect:GetEffectName()
 	return "particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
 end
 
-function venom_aoe_modifier:GetEffectAttachType()
+function neutral_acid_puddle_modifier_aura_effect:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
