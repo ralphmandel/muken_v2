@@ -1,0 +1,17 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_inventory.css"/>
+  </styles>
+    <Panel hittest="false" class="inventory_row">
+      <Panel id="slot0" class="slot" hittest="true" draggable="true">
+      </Panel>
+      <Panel id="slot1" class="slot" hittest="true" draggable="true">
+      </Panel>
+      <Panel id="slot2" class="slot" hittest="true" draggable="true">
+      </Panel>
+      <Panel id="slot3" class="slot" hittest="true" draggable="true">
+      </Panel>
+      <Panel id="slot4" class="slot" hittest="true" draggable="true">
+      </Panel>
+    </Panel>
+</root>

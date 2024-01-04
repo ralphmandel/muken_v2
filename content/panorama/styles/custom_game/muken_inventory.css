@@ -37,16 +37,12 @@ DOTAItemImage{width: 100%; height: 100%;}
 	padding: 0px;
 }
 
-#inventory_row1, #inventory_row2, #inventory_row3, #inventory_row4, #inventory_row5, #inventory_row6, #inventory_row7, #inventory_row8, #inventory_row9, #inventory_row10
+.inventory_row
 {
 	flow-children: right;
 	padding: 0px;
 	width: 100%;
 	height: 50px;
-}
-
-.QueryUnit #inventory_row1,.QueryUnit #inventory_row2,.QueryUnit #inventory_row3,.QueryUnit #inventory_row4,.QueryUnit #inventory_row5,.QueryUnit #inventory_row6,.QueryUnit #inventory_row7,.QueryUnit #inventory_row8,.QueryUnit #inventory_row9,.QueryUnit #inventory_row10{
-	height: fit-children;
 }
 
 .Reborn #muken_inventory_items {
@@ -81,32 +77,6 @@ DOTAItemImage{width: 100%; height: 100%;}
 .Hidden{
   opacity: 0;
   pre-transform-scale2d: 0.3;
-}
-
-.Reborn .QueryUnit #muken_inventory_items {
-	flow-children: down;
-	margin-left: 0px;
-	margin-top: 0px;
-	horizontal-align: left;
-}
-
-.Reborn .QueryUnit #inventory_row1, .Reborn .QueryUnit #inventory_row2, .Reborn .QueryUnit #inventory_row3, .Reborn .QueryUnit #inventory_row4, .Reborn .QueryUnit #inventory_row5, .Reborn .QueryUnit #inventory_row6, .Reborn .QueryUnit #inventory_row7, .Reborn .QueryUnit #inventory_row8, .Reborn .QueryUnit #inventory_row9, .Reborn .QueryUnit #inventory_row10
-{
-	padding: 2px;
-	padding-top: 2px;
-	padding: 0px;
-}
-
-.QueryUnit #inventory_slot_6,
-.QueryUnit #inventory_slot_7,
-.QueryUnit #inventory_slot_8 {
-	margin: 0px;
-}
-
-#inventory_slot_6 #ItemImage,
-#inventory_slot_7 #ItemImage,
-#inventory_slot_8 #ItemImage {
-	horizontal-align: center;
 }
 
 

@@ -1,7 +1,7 @@
 item_rare_arcane_hammer_mod_passive = class({})
 
 function item_rare_arcane_hammer_mod_passive:IsHidden()
-    return true
+    return false
 end
 
 function item_rare_arcane_hammer_mod_passive:IsPurgable()

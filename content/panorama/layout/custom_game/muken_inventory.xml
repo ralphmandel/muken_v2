@@ -14,66 +14,6 @@
 
         <Panel id="InventoryContainer">
           <Panel id="inventory_list_container" hittest="false">
-            <Panel id="inventory_row1" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row2" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row3" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row4" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
-            <Panel id="inventory_row5" hittest="false">
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-              <Panel class="slot">
-              </Panel>
-            </Panel>
           </Panel>
         </Panel>
 
@@ -86,7 +26,6 @@
             <Label text="Tier"/>
           </Panel>
          
-        
         </Panel>
       </Panel>		
 

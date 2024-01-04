@@ -701,11 +701,15 @@
 
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
-      local item = CreateItem("item_rare_arcane_hammer", nil, nil)
-      local pos = Vector(0, 0, 0)
-      local drop = CreateItemOnPositionSync(pos, item)
-      local pos_launch = pos + RandomVector(RandomInt(150,200))
-      item:LaunchLoot(false, 200, 0.75, pos_launch, nil)
+      local names = {[1] = "item_rare_emperor_crown", [2] = "item_rare_arcane_hammer"}
+
+      for i = 1, 10, 1 do
+        local item = CreateItem(names[RandomInt(1, 2)], nil, nil)
+        local pos = Vector(-2000, -2000, 0)
+        local drop = CreateItemOnPositionSync(pos, item)
+        local pos_launch = pos + RandomVector(RandomInt(100, 500))
+        item:LaunchLoot(false, 200, 0.75, pos_launch, nil)        
+      end
     end
 
     if IsInToolsMode() then
