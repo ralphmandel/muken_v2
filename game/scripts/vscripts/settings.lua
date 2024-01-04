@@ -183,81 +183,172 @@ TIER_TEAMS = {
 }
 
 SPAWNER_MOBS = {
--- TIER 1
-  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-    "neutral_common_chameleon_a", "neutral_common_chameleon_b",
-    "neutral_common_chameleon_a", "neutral_common_chameleon_b"
-  }}, -- 192 | 43 + 43 + 53 + 53
-  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
-  }}, -- 192 | 96 + 96
-  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-    "neutral_common_gargoyle", "neutral_common_gargoyle",
-    "neutral_common_great_gargoyle"
-  }}, -- 185 | 53 + 53 + 79
-  {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- [x1.25]
-    "neutral_rare_frostbitten"
-  }}, -- 210 | 210 [262 | 262]
+  -- TIER 1 | 96
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b"
+    }}, -- 96 | 43 + 53
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_crocodilian_a"
+    }}, -- 96 | 96
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_crocodilian_b"
+    }}, -- 114 | 114
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_great_gargoyle"
+    }}, -- 79 | 79
 
--- TIER 2
-  {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
-    "neutral_common_drake"
-  }}, -- 376 | 376
-  {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
-    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-    "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-  }}, -- 384 | 96 + 96 + 96 + 96
-  {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
-    "neutral_rare_crocodile"
-  }}, -- 376 | 376 [470 | 470]
-  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-    "neutral_epic_igneo", "neutral_epic_igneo"
-  }}, -- 420 | 210 + 210 [630 | 315 + 315]
+  -- TIER 2 | 210
+    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b",
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b"
+    }}, -- 192 | 43 + 43 + 53 + 53
+    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
+    }}, -- 210 | 96 + 114
+    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+      "neutral_common_gargoyle", "neutral_common_gargoyle",
+      "neutral_common_great_gargoyle"
+    }}, -- 209 | 65 + 65 + 79
+    {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
+      "neutral_rare_frostbitten"
+    }}, -- 210 | 210 [262 | 262]
 
--- TIER 3
-  {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
-    "neutral_common_great_gargoyle", "neutral_common_great_gargoyle", "neutral_common_great_gargoyle",
-    "neutral_common_drake"
-  }}, -- 613 | 79 + 79 + 79 + 376
-  {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
-    "neutral_rare_skydragon", "neutral_rare_dragon"
-  }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
-  {["rarity"] = RARITY_EPIC, ["tier"] = 3, ["units"] = { -- [x1.5]
-    "neutral_epic_lamp"
-  }}, -- 595 | 595 [ 892 | 892]
-  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 3, ["units"] = { -- [x1.75]
-    "neutral_legendary_great_lamp"
-  }}, -- 595 | 595 [ 1,041 | 1,041]
+  -- TIER 3 | 376
+    {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
+      "neutral_common_drake"
+    }}, -- 376 | 376
+    {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
+      "neutral_common_crocodilian_b", "neutral_common_crocodilian_b",
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b", "neutral_common_chameleon_b"
+    }}, -- 377 | 114 + 114 + 43 + 53 + 53
+    {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
+      "neutral_rare_crocodile"
+    }}, -- 376 | 376 [470 | 470]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 3, ["units"] = { -- [x1.5]
+      "neutral_epic_igneo", "neutral_epic_igneo"
+    }}, -- 366 | 183 + 183 [549 | 274 + 274]
 
--- TIER 4
-  {["rarity"] = RARITY_COMMON, ["tier"] = 4, ["units"] = {
-    "neutral_common_skeleton"
-  }}, -- 866 | 866
-  {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
-    "neutral_rare_frostbitten", "neutral_rare_frostbitten",
-    "neutral_rare_mage"
-  }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
-  {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-    "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo"
-  }}, -- 840 | 210 + 210 + 210 + 210 [1260 | 315 + 315 + 315 + 315]
-  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 4, ["units"] = { -- [x1.75]
-    "neutral_legendary_spider"
-  }}, -- 866 | 866 [1,515 | 1,515]
+  -- TIER 4 | 595
+    {["rarity"] = RARITY_COMMON, ["tier"] = 4, ["units"] = {
+      "neutral_common_gargoyle", "neutral_common_great_gargoyle", "neutral_common_great_gargoyle",
+      "neutral_common_drake"
+    }}, -- 599 | 65 + 79 + 79 + 376
+    {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
+      "neutral_rare_skydragon", "neutral_rare_dragon"
+    }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 4, ["units"] = { -- [x1.5]
+      "neutral_epic_lamp"
+    }}, -- 595 | 595 [ 892 | 892]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 4, ["units"] = { -- [x1.75]
+      "neutral_legendary_great_lamp"
+    }}, -- 595 | 595 [ 1,041 | 1,041]
 
--- TIER 5
-  {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
-    "neutral_common_drake", "neutral_common_drake", "neutral_common_drake"
-  }}, -- 1,128 | 376 + 376 + 376
-  {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
-    "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
-  }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
-  {["rarity"] = RARITY_EPIC, ["tier"] = 5, ["units"] = { -- [x1.5]
-    "neutral_epic_lamp", "neutral_epic_lamp"
-  }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
-  {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
-    "neutral_legendary_iron_golem"
-  }}, -- 1190 | 1190 [ 2,082 | 2,082]
-}
+  -- TIER 5 | 866
+    {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
+      "neutral_common_skeleton"
+    }}, -- 866 | 866
+    {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
+      "neutral_rare_frostbitten", "neutral_rare_frostbitten",
+      "neutral_rare_mage"
+    }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 5, ["units"] = { -- [x1.5]
+      "neutral_epic_great_igneo"
+    }}, -- 866 | 866 [1,299 | 1,299]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
+      "neutral_legendary_spider"
+    }}, -- 866 | 866 [1,515 | 1,515]
+
+  -- TIER 6 | 1190
+    {["rarity"] = RARITY_COMMON, ["tier"] = 6, ["units"] = {
+      "neutral_common_skeleton", "neutral_common_drake", "neutral_common_drake"
+    }}, -- 1,242 | 866 + 376
+    {["rarity"] = RARITY_RARE, ["tier"] = 6, ["units"] = { -- [x1.25]
+      "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_frostbitten", "neutral_rare_frostbitten"
+    }}, -- 1,172 | 376 + 376 + 210 + 210 [1,465 | 470 + 470 + 262 + 262]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 6, ["units"] = { -- [x1.5]
+      "neutral_epic_lamp", "neutral_epic_lamp"
+    }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 6, ["units"] = { -- [x1.75]
+      "neutral_legendary_iron_golem"
+    }}, -- 1190 | 1190 [ 2,082 | 2,082]
+  }
+
+SPAWNER_MOBS_OLD = {
+  -- TIER 1
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b",
+      "neutral_common_chameleon_a", "neutral_common_chameleon_b"
+    }}, -- 192 | 43 + 43 + 53 + 53
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
+    }}, -- 192 | 96 + 96
+    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+      "neutral_common_gargoyle", "neutral_common_gargoyle",
+      "neutral_common_great_gargoyle"
+    }}, -- 185 | 53 + 53 + 79
+    {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- [x1.25]
+      "neutral_rare_frostbitten"
+    }}, -- 210 | 210 [262 | 262]
+
+  -- TIER 2
+    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+      "neutral_common_drake"
+    }}, -- 376 | 376
+    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
+      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
+      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
+    }}, -- 384 | 96 + 96 + 96 + 96
+    {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
+      "neutral_rare_crocodile"
+    }}, -- 376 | 376 [470 | 470]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
+      "neutral_epic_igneo", "neutral_epic_igneo"
+    }}, -- 420 | 210 + 210 [630 | 315 + 315]
+
+  -- TIER 3
+    {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
+      "neutral_common_great_gargoyle", "neutral_common_great_gargoyle", "neutral_common_great_gargoyle",
+      "neutral_common_drake"
+    }}, -- 613 | 79 + 79 + 79 + 376
+    {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
+      "neutral_rare_skydragon", "neutral_rare_dragon"
+    }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 3, ["units"] = { -- [x1.5]
+      "neutral_epic_lamp"
+    }}, -- 595 | 595 [ 892 | 892]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 3, ["units"] = { -- [x1.75]
+      "neutral_legendary_great_lamp"
+    }}, -- 595 | 595 [ 1,041 | 1,041]
+
+  -- TIER 4
+    {["rarity"] = RARITY_COMMON, ["tier"] = 4, ["units"] = {
+      "neutral_common_skeleton"
+    }}, -- 866 | 866
+    {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
+      "neutral_rare_frostbitten", "neutral_rare_frostbitten",
+      "neutral_rare_mage"
+    }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
+      "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo"
+    }}, -- 840 | 210 + 210 + 210 + 210 [1260 | 315 + 315 + 315 + 315]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 4, ["units"] = { -- [x1.75]
+      "neutral_legendary_spider"
+    }}, -- 866 | 866 [1,515 | 1,515]
+
+  -- TIER 5
+    {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
+      "neutral_common_drake", "neutral_common_drake", "neutral_common_drake"
+    }}, -- 1,128 | 376 + 376 + 376
+    {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
+      "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
+    }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
+    {["rarity"] = RARITY_EPIC, ["tier"] = 5, ["units"] = { -- [x1.5]
+      "neutral_epic_lamp", "neutral_epic_lamp"
+    }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
+    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
+      "neutral_legendary_iron_golem"
+    }}, -- 1190 | 1190 [ 2,082 | 2,082]
+  }
 
 SPAWNER_SPOTS = {
   ["death"] = {

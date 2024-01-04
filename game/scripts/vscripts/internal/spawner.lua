@@ -102,25 +102,25 @@ function Spawner:RandomizeMob()
 
   for _, hero in pairs(HeroList:GetAllHeroes()) do
     hero_count = hero_count + 1
-    hero_lvl_total = hero_lvl_total + hero:GetLevel()
+    hero_lvl_total = hero_lvl_total + hero:GetLevel() + 1
   end
 
   local average_level = hero_lvl_total / hero_count
-  local current_tier = math.ceil(average_level / 6)
+  local current_tier = math.ceil(average_level / 5)
+  if current_tier > 6 then current_tier = 6 end
   
   if RandomFloat(0, 100) < 15 then
-    if current_tier > 2 then rarity = RARITY_LEGENDARY end
+    if current_tier > 3 then rarity = RARITY_LEGENDARY end
   elseif RandomFloat(0, 100) < 23.5 then
-    if current_tier > 1 then rarity = RARITY_EPIC end
+    if current_tier > 2 then rarity = RARITY_EPIC end
   elseif RandomFloat(0, 100) < 38.5 then
-    rarity = RARITY_RARE
+    if current_tier > 1 then rarity = RARITY_RARE end
   end
 
-  local tier = RandomInt(rarity, current_tier)
-  if tier == 0 then tier = 1 end
+  local random_tier = RandomInt(rarity + 1, current_tier)
 
   for _,mob in pairs(SPAWNER_MOBS) do
-    if mob["rarity"] == rarity and mob["tier"] == tier then
+    if mob["rarity"] == rarity and mob["tier"] == random_tier then
       index = index + 1
       rand_mobs[index] = mob
     end

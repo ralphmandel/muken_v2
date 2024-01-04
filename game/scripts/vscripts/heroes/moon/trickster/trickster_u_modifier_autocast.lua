@@ -51,7 +51,8 @@ function trickster_u_modifier_autocast:OnCreated(kv)
     for tier = 1, 3, 1 do
       for path = 1, 2, 1 do
         local rank_name = "_rank_"..tier..path
-        if self.ability:GetSpecialValueFor(rank_name) == 1 then
+        if self.ability:GetSpecialValueFor("_rank_"..tier) == 1
+        and self.target:HasAbility(ability:GetAbilityName()..rank_name) then
           self.ability.ranks[rank_name] = self.parent:AddAbility(ability:GetAbilityName()..rank_name)
         end
       end

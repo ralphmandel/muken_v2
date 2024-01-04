@@ -131,8 +131,9 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
         for tier = 1, 3, 1 do
           for path = 1, 2, 1 do
             local rank_name = "_rank_"..tier..path
-            if self:GetSpecialValueFor(rank_name) == 1 then
-              if caster:HasAbility(ability_name..rank_name) == false then
+            if self:GetSpecialValueFor("_rank_"..tier) == 1 then
+              if caster:HasAbility(ability_name..rank_name) == false
+              and target:HasAbility(ability_name..rank_name) then
                 self.ranks[rank_name] = caster:AddAbility(ability_name..rank_name)
               end
             end

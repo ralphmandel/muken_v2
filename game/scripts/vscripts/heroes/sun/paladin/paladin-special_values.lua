@@ -201,7 +201,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "paladin_u__faith" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "max_health" then return 1 end
+    if value_name == "holy_reduction" then return 1 end
 
 		if caster:FindAbilityByName("paladin_u__faith_rank_11") then
       if value_name == "special_magic_resist" then return 1 end
@@ -211,7 +211,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
 		if caster:FindAbilityByName("paladin_u__faith_rank_21") then
-      if value_name == "holy_reduction" then return 1 end
+      if value_name == "max_health" then return 1 end
 		end
 
     if caster:FindAbilityByName("paladin_u__faith_rank_22") then
@@ -314,7 +314,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "heal" then return 60 + math.floor(value_level * 2.5) end
 
     if value_name == "cast_range" then return 0 end
-    if value_name == "special_stun_duration" then return 1.5 end
+    if value_name == "special_stun_duration" then return 2.5 end
     if value_name == "special_purge" then return 1 end
     if value_name == "max_mult" then return 4 end
     if value_name == "radius" then return 450 end
@@ -397,10 +397,10 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       return 0
     end
 
-		if value_name == "max_health" then return 1500 + (value_level * 50) end
+		if value_name == "holy_reduction" then return 15 + (value_level * 2.5) end
 
     if value_name == "special_magic_resist" then return 2 end
-    if value_name == "holy_reduction" then return 30 end
+    if value_name == "max_health" then return 2500 end
     if value_name == "special_aura_radius" then return 900 end
     if value_name == "special_mana" then return 10 end
     if value_name == "special_hp_cap" then return 20 end

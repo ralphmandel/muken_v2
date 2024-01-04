@@ -213,6 +213,7 @@ function _modifier__ai:GetModifierPreAttack(keys)
   local sound = ""
   
   if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_WarlockGolem.PreAttack" end
+  if self.unit:GetUnitName() == "neutral_epic_great_igneo" then sound = "Hero_WarlockGolem.PreAttack" end
 
 	if IsServer() then self.unit:EmitSound(sound) end
 end
@@ -247,6 +248,7 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_rare_dragon" then sound = "Hero_Magnataur.Attack" end
   if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.ProjectileImpact" end
   if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_Undying_Golem.Attack" end
+  if self.unit:GetUnitName() == "neutral_epic_great_igneo" then sound = "Hero_Undying_Golem.Attack" end
   if self.unit:GetUnitName() == "neutral_epic_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_great_lamp" then sound = "Hero_Spirit_Breaker.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_iron_golem" then sound = "Krieger.Attack" end
