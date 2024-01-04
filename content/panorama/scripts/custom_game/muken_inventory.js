@@ -1,6 +1,7 @@
 "use strict"
 
 var ROWS = {}, SLOTS = {};
+const MAX_ROWS = 5;
 
 function OnDragStart(panelId, dragCallbacks) {
   var slot = panelId.id;
@@ -43,30 +44,38 @@ function OnDragEnd(panelId, draggedPanel) {
   return false;
 }
 
-function OnDragDrop(panelId, draggedPanel) {
-  $.Msg('OnDragDrop -> ', panelId.id, draggedPanel.m_OriginalPanel.id);
+function OnDragDrop(newPanel, draggedPanel) {
+  $.Msg('OnDragDrop -> ', newPanel.id, draggedPanel.m_OriginalPanel.id);
 
   var id = draggedPanel.itemname;
-  var row = panelId.GetParent().id;
-  var slot = panelId.id;
+  var row = newPanel.GetParent().id;
+  var slot = newPanel.id;
 
-  if (panelId.paneltype == "DOTAItemImage") {
-    row = panelId.GetParent().GetParent().id;
-    slot = panelId.GetParent().id;
+  if (newPanel.id == "item") {
+    row = newPanel.GetParent().GetParent().id;
+    slot = newPanel.GetParent().id;
   }
 
   var slot_index = parseInt(slot.substr(slot.length - 1));
   var context = ROWS[row].GetChild(slot_index);
 
   if (draggedPanel.row != row || draggedPanel.slot != slot) {
-    if (panelId.paneltype == "DOTAItemImage") {
+    Game.EmitSound("General.ButtonClickRelease");
+    //General.Buttonrollover
+    //Item.PickUpGemWorld
+    //Item.PickUpRingWorld
+
+    if (newPanel.id == "item") {
       SLOTS[draggedPanel.row][draggedPanel.slot].itemname = SLOTS[row][slot].itemname;
       SLOTS[row][slot].itemname = draggedPanel.itemname;
     } else {
+      SLOTS[draggedPanel.row][draggedPanel.slot] = null;
       draggedPanel.m_OriginalPanel.DeleteAsync(0);
       SLOTS[row][slot] = $.CreatePanel("DOTAItemImage", context, "item");
       SLOTS[row][slot].itemname = id;
     }
+  } else {
+    Game.EmitSound("General.Item_CantMove_Slot");
   }
 
 	return true;
@@ -89,21 +98,34 @@ function OnDragDrop(panelId, draggedPanel) {
 // }
 
 function OnItemIventoryAdded(event){
-  SLOTS["row2"]["slot3"] = $.CreatePanel("DOTAItemImage", ROWS["row2"].GetChild(3), "item");
-  SLOTS["row2"]["slot3"].itemname = event.itemname;
+  for (let row = 0; row < MAX_ROWS; row++) {
+    var row_id = "row" + row;
+    for(var i = 0; i < ROWS[row_id].GetChildCount(); i++) {
+      var slot_id = ROWS[row_id].GetChild(i).id;
+
+      if (SLOTS[row_id][slot_id] == null) {
+        Game.EmitSound("Item.PickUpWorld");
+        SLOTS[row_id][slot_id] = $.CreatePanel("DOTAItemImage", ROWS[row_id].GetChild(i), "item");
+        SLOTS[row_id][slot_id].itemname = event.itemname;
+        return;
+      }
+    }
+  }
 }
 
 (function(){
   var inventory_container = $.GetContextPanel().FindChildTraverse("inventory_list_container")
   
-  for (let row = 0; row < 5; row++) {
+  for (let row = 0; row < MAX_ROWS; row++) {
     var row_id = "row" + row;
     ROWS[row_id] = $.CreatePanel("Panel", inventory_container, row_id);
     ROWS[row_id].BLoadLayout("file://{resources}/layout/custom_game/muken_inventory_row.xml", false, false);
     SLOTS[row_id] = {};
 
-    for(var i = 0; i <= ROWS[row_id].GetChildCount() - 1; i++) {
-      SLOTS[row_id][ROWS[row_id].GetChild(i).id] = null;
+    for(var i = 0; i < ROWS[row_id].GetChildCount(); i++) {
+      var slot_id = ROWS[row_id].GetChild(i).id;
+      SLOTS[row_id][slot_id] = null;
+
       $.RegisterEventHandler('DragStart', ROWS[row_id].GetChild(i), OnDragStart);
       $.RegisterEventHandler('DragEnd', ROWS[row_id].GetChild(i), OnDragEnd);
       $.RegisterEventHandler('DragDrop', ROWS[row_id].GetChild(i), OnDragDrop);
