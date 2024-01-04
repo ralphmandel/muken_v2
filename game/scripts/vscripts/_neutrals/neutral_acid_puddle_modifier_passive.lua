@@ -33,7 +33,8 @@ function neutral_acid_puddle_modifier_passive:OnIntervalThink()
   local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetCastRange(self.parent:GetOrigin(), nil),
 		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
-		self.ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false
+		self.ability:GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS,
+    FIND_ANY_ORDER, false
 	)
 
 	for _,enemy in pairs(enemies) do

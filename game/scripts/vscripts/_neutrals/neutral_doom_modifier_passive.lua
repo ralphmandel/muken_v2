@@ -45,7 +45,7 @@ function neutral_doom_modifier_passive:OnTakeDamage(keys)
   local result = UnitFilter(
     keys.attacker, self.ability:GetAbilityTargetTeam(),
     self.ability:GetAbilityTargetType(),
-    self.ability:GetAbilityTargetFlags(),
+    self.ability:GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS,
     self.parent:GetTeamNumber()
   )
 

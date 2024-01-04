@@ -1,11 +1,11 @@
-neutral_fireball_modifier_passive = class({})
+neutral_spiders_modifier_passive = class({})
 
-function neutral_fireball_modifier_passive:IsHidden() return true end
-function neutral_fireball_modifier_passive:IsPurgable() return false end
+function neutral_spiders_modifier_passive:IsHidden() return true end
+function neutral_spiders_modifier_passive:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function neutral_fireball_modifier_passive:OnCreated(kv)
+function neutral_spiders_modifier_passive:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
@@ -13,15 +13,15 @@ function neutral_fireball_modifier_passive:OnCreated(kv)
   if IsServer() then self:StartIntervalThink(1) end
 end
 
-function neutral_fireball_modifier_passive:OnRefresh(kv)
+function neutral_spiders_modifier_passive:OnRefresh(kv)
 end
 
-function neutral_fireball_modifier_passive:OnRemoved()
+function neutral_spiders_modifier_passive:OnRemoved()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function neutral_fireball_modifier_passive:OnIntervalThink()
+function neutral_spiders_modifier_passive:OnIntervalThink()
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
 
