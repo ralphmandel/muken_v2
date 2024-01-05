@@ -1,9 +1,13 @@
+@define defaultFont: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define monospaceNumbersFont: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define titleFont: Reaver,Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540;
+
 .inventory_root {
 	tooltip-position: right;
 	tooltip-body-position: 100% 90%;
 	tooltip-arrow-position: 100% 90%;
-  width: 400px;
-  height: 400px;
+  width: 550px;
+  height: 450px;
   visibility: visible;
   vertical-align: bottom;
   horizontal-align: right;
@@ -11,11 +15,56 @@
   z-index: -3;
 }
 
-DOTAItemImage{width: 100%; height: 100%;}
+DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
 
-.HIDE_INVENTORY_ITEMS #muken_inventory_items,
-.HIDE_INVENTORY_ITEMS #BackPackLabel {
-	visibility: collapse;
+.Reborn.CustomHUDSkin #inventory_list_container {
+	background-color: #ffffff05;
+}
+
+.Reborn #muken_inventory_items {
+	margin-left: 150px;
+  margin-top: 50px;
+	flow-children: none;
+	horizontal-align: center;
+	horizontal-align: left;
+  background-image: url("file://{images}/custom_game/inventory_bg.png");
+  background-size: 100%;
+  border: 1px solid black;
+  padding: 6px;
+  box-shadow:  #000000cc 0px 0px 8px -1px;
+  background-color: #10171c;
+	flow-children: down;
+	vertical-align: top;
+
+}
+
+.inventory_visibility {
+  opacity: 0.9;
+  transition-property: opacity, pre-transform-scale2d;
+  transition-duration: 0.15s;
+  transform: translateX(0px);
+  transition-timing-function: ease-in-out;
+  perspective-origin: 60% 5% invert;
+  perspective: 1000;
+  width: 331px;
+  pre-transform-scale2d: 1;
+}
+
+.Hidden {
+  opacity: 0;
+  pre-transform-scale2d: 0.3;
+}
+
+.inventory_row {
+	flow-children: right;
+	padding: 0px;
+	width: 100%;
+	height: 48px;
+}
+
+#InventoryContainer {
+	width: 100%;
+  margin-top: 2px;
 }
 
 #inventory_list_container {
@@ -29,66 +78,6 @@ DOTAItemImage{width: 100%; height: 100%;}
   width: 100%;
 }
 
-.Reborn.CustomHUDSkin #inventory_list_container {
-	background-color: #ffffff05;
-}
-
-.QueryUnit #inventory_list_container {
-	padding: 0px;
-}
-
-.inventory_row
-{
-	flow-children: right;
-	padding: 0px;
-	width: 100%;
-	height: 50px;
-}
-
-.Reborn #muken_inventory_items {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	flow-children: none;
-	horizontal-align: center;
-	horizontal-align: left;
-  background-image: url("file://{images}/custom_game/inventory_bg.png");
-  background-size: 100%;
-  border: 1px solid black;
-  padding: 6px;
-  box-shadow: #00000066 0px 0px 8px 0px;
-  background-color: #10171c;
-	flow-children: down;
-	vertical-align: top;
-  box-shadow:  #000000cc 0px 0px 8px -1px;
-}
-
-.inventory_visibility{
-  opacity: 0.9;
-  transition-property: opacity, pre-transform-scale2d;
-  transition-duration: 0.15s;
-  transform: translateX(0px);
-  transition-timing-function: ease-in-out;
-  perspective-origin: 60% 5% invert;
-  perspective: 1000;
-  width: 320px;
-  pre-transform-scale2d: 1;
-}
-
-.Hidden{
-  opacity: 0;
-  pre-transform-scale2d: 0.3;
-}
-
-
-#InventoryContainer {
-	width: 100%;
-  margin-top: 2px;
-}
-
-.QueryUnit #stats {
-	visibility: collapse;
-}
-
 #muken_inventory_items > #text-header{
   width: 100%;
   horizontal-align: center;
@@ -97,7 +86,7 @@ DOTAItemImage{width: 100%; height: 100%;}
 }
 
 .TitleLabel{
-  font-size: 18px;
+  font-size: 17px;
   color: #e1e1e1;
   horizontal-align: center;
   text-overflow: shrink;
@@ -110,7 +99,7 @@ DOTAItemImage{width: 100%; height: 100%;}
 }
 
 .slot{
-  width: 59px;
+  width: 60px;
   height: 45px;
   background-size: cover;
   overflow: noclip;
@@ -118,12 +107,23 @@ DOTAItemImage{width: 100%; height: 100%;}
   background-image: url("file://{images}/custom_game/inventory_bg_slot.png");
   background-size: 100%;
   border: 2px solid #1a1c1dc5;
-  margin: 2px 0.5px 0px 1px;
-  padding: 0px;
+  margin: 1px;
   box-shadow: inset #000000cc 0px 0px 2px;
 }
 
+.dragHover{
+  opacity-mask: url("file://{images}/custom_game/slot_draghover.png");
+  brightness: 1.5;
+}
 
+.itemDragOff{
+  wash-color: #474747;
+}
+
+.itemDragOn{
+  border: 2px solid #ffffff;
+  border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) )
+}
 
 #order_by {
   width: 100%;
@@ -230,3 +230,59 @@ DOTAItemImage{width: 100%; height: 100%;}
  .inventory-closed:hover{
   /* sound: "Config.Move"; */
  }
+
+ #contextRoot{
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+ }
+
+ #contextContainer{
+  flow-children: right;
+  position: 28px 72px 0px;
+  visibility: collapse;
+ }
+
+ #contextMenu{
+  width: 120px;
+  height: 88px;
+  background-image: url("file://{images}/custom_game/ability_bg.png");
+  background-size: 100%;
+  border: 1px solid #6d6d6d;
+  border-radius: 4px;
+  padding: 4px;
+  flow-children: down;
+  opacity: 0.99;
+ }
+
+ .buttonContext{
+  width: 100%;
+  height: 26px;
+  padding: 0px;
+  border: 1px solid black;
+  background-color: #182128;
+ }
+
+ .buttonContext:hover{
+  background-color: #8ea3c922;
+}
+
+ .contextLabel{
+  font-size: 14px;
+  color: #acaaaa;
+  horizontal-align: center;
+  vertical-align: middle;
+  text-overflow: shrink;
+  letter-spacing: 0px;
+  text-shadow: 2px 2px 0px 1.0 #00000090;
+  font-family: defaultFont;
+  text-align: center;
+}
+
+#arrowImg{
+  vertical-align: middle;
+  wash-color: #6d6d6d;
+  width: 22px;
+  height: 22px;
+  margin-left: -4px;
+}
