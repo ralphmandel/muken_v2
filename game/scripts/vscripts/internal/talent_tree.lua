@@ -25,7 +25,8 @@ function TalentTree:InitPanaromaEvents()
   CustomGameEventManager:RegisterListener("request_unit_info_from_panorama", Dynamic_Wrap(TalentTree, 'OnPortraitUpdate'))
   CustomGameEventManager:RegisterListener("game_points_from_server", Dynamic_Wrap(TalentTree, 'GamePointsUpdate'))
   CustomGameEventManager:RegisterListener("dota_time_from_panorama", Dynamic_Wrap(TalentTree, 'Notifications'))
-  
+  CustomGameEventManager:RegisterListener("equip_item_from_panorama", Dynamic_Wrap(TalentTree, 'OnItemEquipped'))
+  CustomGameEventManager:RegisterListener("unequip_item_from_panorama", Dynamic_Wrap(TalentTree, 'OnItemUnequipped'))
 end
 
 function TalentTree:Notifications(params)
@@ -34,6 +35,28 @@ end
 
 function TalentTree:GamePointsUpdate(params)
   SCORE_LIMIT = params.match_points
+end
+
+function TalentTree:OnItemEquipped(event)
+  if (not event or not event.PlayerID) then return end
+  
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+
+  local unit = EntIndexToHScript(event.unit)
+  local item = CreateItem(event.itemname, player, nil)  
+  unit:AddItem(item)
+end
+
+function TalentTree:OnItemUnequipped(event)
+  if (not event or not event.PlayerID) then return end
+  
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+
+  local unit = EntIndexToHScript(event.unit)
+  local item = unit:FindItemInInventory(event.itemname)
+  unit:RemoveItem(item)
 end
 
 function TalentTree:OnRoleBarRequest(event)

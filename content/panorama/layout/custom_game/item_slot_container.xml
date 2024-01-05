@@ -27,19 +27,19 @@
   <Panel class="slotContainer" hittest="false">
     <Panel class="square-container" id="square-head"/>
     <Panel class="slot_item item-equipped" id="head" hittest="false">
-      <Panel class="item_equipped item-rare"></Panel>
+      <Panel class="item_equipped item-rare" hittest="true" draggable="true"></Panel>
     </Panel>
-    <Panel class="square-container" id="square-armo"/>
-    <Panel class="slot_item item-equipped" id="armo" hittest="false">
-      <Panel class="item_equipped item-epic"></Panel>
+    <Panel class="square-container" id="square-armor"/>
+    <Panel class="slot_item item-equipped" id="armor" hittest="false">
+      <Panel class="item_equipped item-epic" hittest="true" draggable="true"></Panel>
     </Panel>
     <Panel class="square-container" id="square-weapon"/>
     <Panel class="slot_item item-equipped" id="weapon" hittest="false">
-      <Panel class="item_equipped item-legendary"></Panel>
+      <Panel class="item_equipped item-legendary" hittest="true" draggable="true"></Panel>
     </Panel>
     <Panel class="square-container" id="square-misc"/>
     <Panel class="slot_item" id="misc" hittest="false">
-      <Panel class="item_equipped"></Panel>
+      <Panel class="item_equipped" hittest="true" draggable="true"></Panel>
     </Panel>
   </Panel>
 

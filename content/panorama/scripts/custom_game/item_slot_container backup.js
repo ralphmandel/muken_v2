@@ -1,7 +1,7 @@
 "use strict";
 
 var head = null;
-var armo = null;
+var armor = null;
 var weapon = null;
 var misc = null;
 
@@ -51,8 +51,8 @@ function headItemChange(){
 }
 
 function armoItemChange(){
-  if (armo.BHasClass("item-equipped")){
-    if (armo.GetChild(0).BHasClass("item-rare")){
+  if (armor.BHasClass("item-equipped")){
+    if (armor.GetChild(0).BHasClass("item-rare")){
       if (squareArmo.GetChild(0).BHasClass("square-hidden")){
         squareArmo.GetChild(0).RemoveClass("square-hidden");
       }
@@ -61,7 +61,7 @@ function armoItemChange(){
       if (squareArmo.GetChild(2).BHasClass("square-hidden")){
       } else {squareArmo.GetChild(2).AddClass("square-hidden")}
 
-    } else if (armo.GetChild(0).BHasClass("item-epic")){
+    } else if (armor.GetChild(0).BHasClass("item-epic")){
       if (squareArmo.GetChild(1).BHasClass("square-hidden")){
         squareArmo.GetChild(1).RemoveClass("square-hidden");
       }
@@ -70,7 +70,7 @@ function armoItemChange(){
       if (squareArmo.GetChild(2).BHasClass("square-hidden")){
       } else {squareArmo.GetChild(2).AddClass("square-hidden")}
 
-    } else if (armo.GetChild(0).BHasClass("item-legendary")){
+    } else if (armor.GetChild(0).BHasClass("item-legendary")){
       if (squareArmo.GetChild(2).BHasClass("square-hidden")){
         squareArmo.GetChild(2).RemoveClass("square-hidden");
       }
@@ -174,7 +174,7 @@ function miscItemChange(){
 
 (function(){
     head = $.GetContextPanel().GetChild(1);
-    armo = $.GetContextPanel().GetChild(3);
+    armor = $.GetContextPanel().GetChild(3);
     weapon = $.GetContextPanel().GetChild(5);
     misc = $.GetContextPanel().GetChild(7);
 
@@ -184,10 +184,10 @@ function miscItemChange(){
         $.DispatchEvent("DOTAShowTitleTextTooltip", head, "Head Slot", "Any helm type equipament can be equipped on this slot.");
       }
       )
-    armo.SetPanelEvent(
+    armor.SetPanelEvent(
       "onmouseover", 
       function(){
-        $.DispatchEvent("DOTAShowTitleTextTooltip", armo, "Armo Slot", "Any armo type equipament can be equipped on this slot.");
+        $.DispatchEvent("DOTAShowTitleTextTooltip", armor, "Armor Slot", "Any armor type equipament can be equipped on this slot.");
       }
     )
     weapon.SetPanelEvent(
@@ -209,10 +209,10 @@ function miscItemChange(){
         $.DispatchEvent("DOTAHideTitleTextTooltip", head);
       }
       )
-    armo.SetPanelEvent(
+    armor.SetPanelEvent(
       "onmouseout", 
       function(){
-        $.DispatchEvent("DOTAHideTitleTextTooltip", armo);
+        $.DispatchEvent("DOTAHideTitleTextTooltip", armor);
       }
     )
     weapon.SetPanelEvent(

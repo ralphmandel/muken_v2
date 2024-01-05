@@ -42,7 +42,7 @@
 #square-head{
   position: 67px 4px 0px;
 }
-#square-armo{
+#square-armor{
   position: 0px 37.5px 0px;
 }
 #square-weapon{
@@ -75,7 +75,7 @@
   background-position: 0px 0px;
   position: 72px 8px 0px;
 }
-#armo{
+#armor{
   background-image: url("file://{images}/custom_game/slot_armo.png");
   background-size: cover;
   position: 5px 42.5px 0px;

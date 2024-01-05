@@ -15,12 +15,12 @@
             <Panel class="left-arrow" id="left-arrow-head"></Panel>
           </Panel>
 
-          <Panel class="slot-container" id="container-armo">
-            <Panel class="text-container" id="container-armo">
-              <Label class="TitleLabel" text="Armo Slot" />
-              <Label class="TextLabel" text="Any armo type equipament can be equipped on this slot." />
+          <Panel class="slot-container" id="container-armor">
+            <Panel class="text-container" id="container-armor">
+              <Label class="TitleLabel" text="Armor Slot" />
+              <Label class="TextLabel" text="Any armor type equipament can be equipped on this slot." />
             </Panel>
-            <Panel class="left-arrow" id="left-arrow-armo"></Panel>
+            <Panel class="left-arrow" id="left-arrow-armor"></Panel>
           </Panel>
 
           <Panel class="slot-container" id="container-weapon">
