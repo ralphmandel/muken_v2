@@ -29,6 +29,8 @@ function OnDragStart(panelId, dragCallbacks) {
   if (item != null) {
     $.DispatchEvent("DOTAHideAbilityTooltip", $.GetContextPanel());
     var displayPanel = $.CreatePanel("DOTAItemImage", $.GetContextPanel(), "dragImage");
+    displayPanel.SetHasClass("itemDragOn", true);
+    item.SetHasClass("itemDragOff", true);
 
     displayPanel.style.width = "75px";
     displayPanel.style.height = "57px";
@@ -54,12 +56,14 @@ function OnDragStart(panelId, dragCallbacks) {
   return false;
 }
 
-function OnDragEnd(panelId, draggedPanel) {
+function OnDragEnd(newPanel, draggedPanel) {
   var m_QueryUnit = draggedPanel.m_QueryUnit;
   var itemname = draggedPanel.itemname;
   var itemtype = draggedPanel.itemtype;
   var itemname_target = draggedPanel.m_OriginalPanel.itemname;
   var itemrarity_target = draggedPanel.m_OriginalPanel.itemrarity;
+
+  draggedPanel.m_OriginalPanel.SetHasClass("itemDragOff", false);
 
   if (draggedPanel.m_DragCompleted == true) {
     if (draggedPanel.swap_itens == false) {
@@ -131,10 +135,22 @@ function OnDragDrop(newPanel, draggedPanel) {
 	return true;
 }
 
+function OnDragEnter(newPanel, draggedPanel)
+{
+	return true;
+}
+
+function OnDragLeave(newPanel, draggedPanel)
+{
+	return true;
+}
+
 function SetupEvents(panel, header, message){
   $.RegisterEventHandler('DragStart', panel.GetChild(0), OnDragStart);
   $.RegisterEventHandler('DragEnd', panel.GetChild(0), OnDragEnd);
   $.RegisterEventHandler('DragDrop', panel.GetChild(0), OnDragDrop);
+  $.RegisterEventHandler('DragEnter', panel.GetChild(0), OnDragEnter);
+	$.RegisterEventHandler('DragLeave', panel.GetChild(0), OnDragLeave);
 
   panel.SetPanelEvent("onmouseover", function() {
     $.DispatchEvent("DOTAShowTitleTextTooltip", panel, header, message);

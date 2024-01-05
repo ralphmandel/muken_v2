@@ -14,6 +14,8 @@ function OnDragStart(panelId, dragCallbacks) {
   if (item != null) {
     $.DispatchEvent("DOTAHideAbilityTooltip", $.GetContextPanel());
     var displayPanel = $.CreatePanel("DOTAItemImage", $.GetContextPanel(), "dragImage");
+    displayPanel.SetHasClass("itemDragOn", true);
+    item.SetHasClass("itemDragOff", true);
 
     displayPanel.style.width = "59px";
     displayPanel.style.height = "45px";
@@ -40,7 +42,8 @@ function OnDragStart(panelId, dragCallbacks) {
   return false;
 }
 
-function OnDragEnd(panelId, draggedPanel) {
+function OnDragEnd(newPanel, draggedPanel) {
+  draggedPanel.m_OriginalPanel.SetHasClass("itemDragOff", false);
   draggedPanel.DeleteAsync(0);
   return false;
 }
@@ -100,21 +103,33 @@ function OnDragDrop(newPanel, draggedPanel) {
 	return true;
 }
 
-// function OnDragEnter(panelId, draggedPanel) {
-//   $.Msg('OnDragEnter -> ');
-//   $.Msg(panelId.id);
-//   $.Msg(draggedPanel.id);
+function OnDragEnter(newPanel, draggedPanel)
+{
+	//var draggedItem = draggedPanel.m_DragItem;
+  if (newPanel.id == "item") {
+    $.Msg("FF", newPanel.GetParent().id);
+    newPanel.GetParent().SetHasClass("dragHover", true);
+  } else {
+    $.Msg("FF", newPanel.id);
+    newPanel.SetHasClass("dragHover", true);
+  }
 
-// 	return true;
-// }
+	return true;
+}
 
-// function OnDragLeave(panelId, draggedPanel) {
-//   $.Msg('OnDragLeave -> ');
-//   $.Msg(panelId.id);
-//   $.Msg(draggedPanel.id);
+function OnDragLeave(newPanel, draggedPanel)
+{
+	//var draggedItem = draggedPanel.m_DragItem;
+  if (newPanel.id == "item") {
+    $.Msg("GG", newPanel.GetParent().id);
+    newPanel.GetParent().SetHasClass("dragHover", false);
+  } else {
+    $.Msg("GG", newPanel.id);
+    newPanel.SetHasClass("dragHover", false);
+  }
 
-// 	return true;
-// }
+	return true;
+}
 
 function OnItemIventoryAdded(event){
   for (let row = 0; row < MAX_ROWS; row++) {
@@ -144,6 +159,8 @@ function OnItemIventoryAdded(event){
       $.RegisterEventHandler('DragStart', ROWS[row_id].GetChild(i), OnDragStart);
       $.RegisterEventHandler('DragEnd', ROWS[row_id].GetChild(i), OnDragEnd);
       $.RegisterEventHandler('DragDrop', ROWS[row_id].GetChild(i), OnDragDrop);
+      $.RegisterEventHandler('DragEnter', ROWS[row_id].GetChild(i), OnDragEnter);
+      $.RegisterEventHandler('DragLeave', ROWS[row_id].GetChild(i), OnDragLeave);
     }
   }
 
