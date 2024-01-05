@@ -106,10 +106,15 @@ function GameMode:OnItemPickedUp(keys)
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local itemname = keys.itemname
 
-  print("KUBOOOO")
+  local item = unitEntity:FindItemInInventory(itemname)
+  local itemrarity = item:GetItemRarity()
+  local itemtype = item:GetItemType()
 
   unitEntity:RemoveItem(unitEntity:FindItemInInventory(itemname))
-  CustomGameEventManager:Send_ServerToPlayer(player, "add_item_inventory_from_lua", {itemname = itemname})
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "add_item_inventory_from_lua", {
+    itemname = itemname, itemrarity = itemrarity, itemtype = itemtype
+  })
 end
 
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change

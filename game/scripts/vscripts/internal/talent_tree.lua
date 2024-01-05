@@ -44,7 +44,7 @@ function TalentTree:OnItemEquipped(event)
   if (not player) then return end
 
   local unit = EntIndexToHScript(event.unit)
-  local item = CreateItem(event.itemname, player, nil)  
+  local item = CreateItem(event.itemname, player, nil)
   unit:AddItem(item)
 end
 
@@ -53,7 +53,7 @@ function TalentTree:OnItemUnequipped(event)
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
-
+  
   local unit = EntIndexToHScript(event.unit)
   local item = unit:FindItemInInventory(event.itemname)
   unit:RemoveItem(item)

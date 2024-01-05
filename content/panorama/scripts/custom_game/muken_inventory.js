@@ -13,12 +13,13 @@ function OnDragStart(panelId, dragCallbacks) {
 
   if (item != null) {
     $.DispatchEvent("DOTAHideAbilityTooltip", $.GetContextPanel());
-    var itemName = item.itemname;
-
     var displayPanel = $.CreatePanel("DOTAItemImage", $.GetContextPanel(), "dragImage");
+
     displayPanel.style.width = "59px";
     displayPanel.style.height = "45px";
-    displayPanel.itemname = itemName;
+    displayPanel.itemname = item.itemname;
+    displayPanel.itemrarity = item.itemrarity;
+    displayPanel.itemtype = item.itemtype;
 
     // displayPanel.contextEntityIndex = m_Item;
     // displayPanel.m_DragItem = m_Item;
@@ -26,6 +27,7 @@ function OnDragStart(panelId, dragCallbacks) {
     displayPanel.m_DragCompleted = false; // whether the drag was successful
     displayPanel.m_OriginalPanel = item;
     displayPanel.m_QueryUnit = m_QueryUnit;
+    displayPanel.swap_itens = false;
     displayPanel.row = row;
     displayPanel.slot = slot;
     
@@ -44,10 +46,17 @@ function OnDragEnd(panelId, draggedPanel) {
 }
 
 function OnDragDrop(newPanel, draggedPanel) {
-  $.Msg('Slot Drop ->');
+  $.Msg('Slot Drop ->', newPanel.itemname, draggedPanel.itemname);
+
+  if (Game.IsGamePaused() == true) {
+    Game.EmitSound("General.Item_CantMove_Slot");
+    return;
+  }
   
   var m_QueryUnit = draggedPanel.m_QueryUnit;
   var itemname = draggedPanel.itemname;
+  var itemrarity = draggedPanel.itemrarity;
+  var itemtype = draggedPanel.itemtype;
   var row = newPanel.GetParent().id;
   var slot = newPanel.id;
 
@@ -59,23 +68,32 @@ function OnDragDrop(newPanel, draggedPanel) {
   var slot_index = parseInt(slot.substr(slot.length - 1));
   var context = ROWS[row].GetChild(slot_index);
 
-  if (draggedPanel.equip_type != null) {
-    GameEvents.SendCustomGameEventToServer("unequip_item_from_panorama", {unit: m_QueryUnit, itemname: itemname});
-  }
-
   if (draggedPanel.row != row || draggedPanel.slot != slot) {
-    Game.EmitSound("General.ButtonClickRelease");
-    //General.Buttonrollover
-    //Item.PickUpGemWorld
-    //Item.PickUpRingWorld
-
     if (newPanel.id == "item") {
-      draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
-      newPanel.itemname = itemname;
+      if (draggedPanel.equip_type != null && itemtype != newPanel.itemtype) {
+        Game.EmitSound("General.Item_CantMove_Slot");
+      } else {
+        Game.EmitSound("General.ButtonClickRelease");
+
+        draggedPanel.m_DragCompleted = true;
+        draggedPanel.swap_itens = true;
+        draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
+        draggedPanel.m_OriginalPanel.itemrarity = newPanel.itemrarity;
+        draggedPanel.m_OriginalPanel.itemtype = newPanel.itemtype;
+  
+        newPanel.itemname = itemname;
+        newPanel.itemrarity = itemrarity;
+        newPanel.itemtype = itemtype;
+      }
     } else {
+      Game.EmitSound("General.ButtonClickRelease");
+
+      draggedPanel.m_DragCompleted = true;
       draggedPanel.m_OriginalPanel.DeleteAsync(0);
       var panel = $.CreatePanel("DOTAItemImage", context, "item");
       panel.itemname = itemname;
+      panel.itemrarity = itemrarity;
+      panel.itemtype = itemtype;
     }
   }
 
@@ -106,6 +124,8 @@ function OnItemIventoryAdded(event){
         Game.EmitSound("Item.PickUpWorld");
         var panel = $.CreatePanel("DOTAItemImage", ROWS[row_id].GetChild(i), "item");
         panel.itemname = event.itemname;
+        panel.itemrarity = event.itemrarity;
+        panel.itemtype = event.itemtype;
         return;
       }
     }

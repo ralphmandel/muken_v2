@@ -40,6 +40,7 @@ require('internal/gamemode')
 require('internal/events')
 require("internal/talent_tree")
 require("internal/spawner")
+require('libraries/muken_api')
 
 -- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
 require('settings')

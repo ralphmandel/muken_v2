@@ -1,4 +1,7 @@
 "use strict";
+//General.Buttonrollover
+//Item.PickUpGemWorld
+//Item.PickUpRingWorld
 
 var SLOTS = {
   "head": {}, "armor": {}, "weapon": {}, "misc": {}
@@ -25,12 +28,13 @@ function OnDragStart(panelId, dragCallbacks) {
 
   if (item != null) {
     $.DispatchEvent("DOTAHideAbilityTooltip", $.GetContextPanel());
-    var itemName = item.itemname;
-
     var displayPanel = $.CreatePanel("DOTAItemImage", $.GetContextPanel(), "dragImage");
-    displayPanel.style.width = "59px";
-    displayPanel.style.height = "45px";
-    displayPanel.itemname = itemName;
+
+    displayPanel.style.width = "75px";
+    displayPanel.style.height = "57px";
+    displayPanel.itemname = item.itemname;
+    displayPanel.itemrarity = item.itemrarity;
+    displayPanel.itemtype = item.itemtype;
 
     // displayPanel.contextEntityIndex = m_Item;
     // displayPanel.m_DragItem = m_Item;
@@ -38,6 +42,7 @@ function OnDragStart(panelId, dragCallbacks) {
     displayPanel.m_DragCompleted = false; // whether the drag was successful
     displayPanel.m_OriginalPanel = item;
     displayPanel.m_QueryUnit = m_QueryUnit;
+    displayPanel.swap_itens = false;
     displayPanel.equip_type = equip_type;
     
     // hook up the display panel, and specify the panel offset from the cursor
@@ -50,6 +55,20 @@ function OnDragStart(panelId, dragCallbacks) {
 }
 
 function OnDragEnd(panelId, draggedPanel) {
+  var m_QueryUnit = draggedPanel.m_QueryUnit;
+  var itemname = draggedPanel.itemname;
+  var itemtype = draggedPanel.itemtype;
+  var itemname_target = draggedPanel.m_OriginalPanel.itemname;
+  var itemrarity_target = draggedPanel.m_OriginalPanel.itemrarity;
+
+  if (draggedPanel.m_DragCompleted == true) {
+    if (draggedPanel.swap_itens == false) {
+      ChangeItem(m_QueryUnit, "0", itemtype, itemname, null);
+    } else {
+      ChangeItem(m_QueryUnit, itemrarity_target, itemtype, itemname, itemname_target);
+    }
+  }
+
   draggedPanel.DeleteAsync(0);
   return false;
 }
@@ -57,8 +76,15 @@ function OnDragEnd(panelId, draggedPanel) {
 function OnDragDrop(newPanel, draggedPanel) {
   $.Msg('Equip Drop -> ', newPanel.id);
 
+  if (Game.IsGamePaused() == true) {
+    Game.EmitSound("General.Item_CantMove_Slot");
+    return;
+  }
+
   var m_QueryUnit = draggedPanel.m_QueryUnit;
   var itemname = draggedPanel.itemname;
+  var itemrarity = draggedPanel.itemrarity;
+  var itemtype = draggedPanel.itemtype;
   var equip_type = newPanel.GetParent().id;
   
   if (newPanel.id == "item") {
@@ -68,20 +94,35 @@ function OnDragDrop(newPanel, draggedPanel) {
   var context = SLOTS[equip_type]["center"].GetChild(0);
 
   if (draggedPanel.equip_type == null) {
-    Game.EmitSound("General.ButtonClickRelease");
-    //General.Buttonrollover
-    //Item.PickUpGemWorld
-    //Item.PickUpRingWorld
-
-    if (newPanel.id == "item") {
-      draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
-      newPanel.itemname = itemname;
+    if (itemtype != newPanel.itemtype) {
+      Game.EmitSound("General.Item_CantMove_Slot");
     } else {
-      draggedPanel.m_OriginalPanel.DeleteAsync(0);
-      var panel = $.CreatePanel("DOTAItemImage", context, "item");
-      panel.itemname = itemname;
+      Game.EmitSound("General.ButtonClickRelease");
 
-      GameEvents.SendCustomGameEventToServer("equip_item_from_panorama", {unit: m_QueryUnit, itemname: itemname});
+      if (newPanel.id == "item") {
+        draggedPanel.m_DragCompleted = true;
+        draggedPanel.swap_itens = true;
+        draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
+        draggedPanel.m_OriginalPanel.itemrarity = newPanel.itemrarity;
+        draggedPanel.m_OriginalPanel.itemtype = newPanel.itemtype;
+
+        newPanel.itemname = itemname;
+        newPanel.itemrarity = itemrarity;
+        newPanel.itemtype = itemtype;
+        
+        ChangeItem(m_QueryUnit, itemrarity, itemtype, draggedPanel.m_OriginalPanel.itemname, itemname);
+
+      } else {
+        draggedPanel.m_DragCompleted = true;
+        draggedPanel.m_OriginalPanel.DeleteAsync(0);
+
+        var panel = $.CreatePanel("DOTAItemImage", context, "item");
+        panel.itemname = itemname;
+        panel.itemrarity = itemrarity;
+        panel.itemtype = itemtype;
+
+        ChangeItem(m_QueryUnit, itemrarity, itemtype, null, itemname);
+      }
     }
   } else if (draggedPanel.equip_type != equip_type) {
     Game.EmitSound("General.Item_CantMove_Slot");
@@ -108,6 +149,7 @@ function SetupEvents(panel, header, message){
   for (const [type, table] of Object.entries(SLOTS)) {
     SLOTS[type]["center"] = $("#" + type);
     SLOTS[type]["square"] = $("#square-" + type);
+    SLOTS[type]["center"].GetChild(0).itemtype = type;
     SetupEvents(SLOTS[type]["center"], TOOLTIPS["header"][type], TOOLTIPS["message"][type]);
   }
 
@@ -118,163 +160,26 @@ function SetupEvents(panel, header, message){
   SLOTS["misc"]["square"].GetChild(0).DeleteAsync(0);
 })()
 
-function headItemChange(){
-  if (head.BHasClass("item-equipped")){
-    if (head.GetChild(0).BHasClass("item-rare")){
-      if (squareHead.GetChild(0).BHasClass("square-hidden")){
-        squareHead.GetChild(0).RemoveClass("square-hidden");
-      }
-      if (squareHead.GetChild(1).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(1).AddClass("square-hidden")}
-      if (squareHead.GetChild(2).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(2).AddClass("square-hidden")}
+function ChangeItem(m_QueryUnit, rarity, type, toRemove, toEquip){
+  var bEquipped = !(toEquip == null);
 
-    } else if (head.GetChild(0).BHasClass("item-epic")){
-      if (squareHead.GetChild(1).BHasClass("square-hidden")){
-        squareHead.GetChild(1).RemoveClass("square-hidden");
-      }
-      if (squareHead.GetChild(0).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(0).AddClass("square-hidden")}
-      if (squareHead.GetChild(2).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(2).AddClass("square-hidden")}
+  SLOTS[type]["center"].SetHasClass("item-equipped", bEquipped);
+  SLOTS[type]["center"].SetHasClass("item-rare", rarity == 1);
+  SLOTS[type]["center"].SetHasClass("item-epic", rarity == 2);
+  SLOTS[type]["center"].SetHasClass("item-legendary", rarity == 3);
 
-    } else if (head.GetChild(0).BHasClass("item-legendary")){
-      if (squareHead.GetChild(2).BHasClass("square-hidden")){
-        squareHead.GetChild(2).RemoveClass("square-hidden");
-      }
-      if (squareHead.GetChild(0).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(0).AddClass("square-hidden")}
-      if (squareHead.GetChild(1).BHasClass("square-hidden")){
-      } else {squareHead.GetChild(1).AddClass("square-hidden")}
-
+  for (let i = 0; i < 3; i++) {
+    if (SLOTS[type]["square"].GetChild(i) != null) {
+      SLOTS[type]["square"].GetChild(i).SetHasClass("square-hidden", bEquipped == false || !(i == rarity - 1));
     }
-  } else {
-    if (squareHead.GetChild(0).BHasClass("square-hidden")){
-    } else {squareHead.GetChild(0).AddClass("square-hidden");}
-    if (squareHead.GetChild(1).BHasClass("square-hidden")){
-    } else {squareHead.GetChild(1).AddClass("square-hidden");}
-    if (squareHead.GetChild(2).BHasClass("square-hidden")){
-    } else { squareHead.GetChild(2).AddClass("square-hidden");}
   }
-}
 
-function armoItemChange(){
-  if (armor.BHasClass("item-equipped")){
-    if (armor.GetChild(0).BHasClass("item-rare")){
-      if (squareArmo.GetChild(0).BHasClass("square-hidden")){
-        squareArmo.GetChild(0).RemoveClass("square-hidden");
-      }
-      if (squareArmo.GetChild(1).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(1).AddClass("square-hidden")}
-      if (squareArmo.GetChild(2).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(2).AddClass("square-hidden")}
-
-    } else if (armor.GetChild(0).BHasClass("item-epic")){
-      if (squareArmo.GetChild(1).BHasClass("square-hidden")){
-        squareArmo.GetChild(1).RemoveClass("square-hidden");
-      }
-      if (squareArmo.GetChild(0).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(0).AddClass("square-hidden")}
-      if (squareArmo.GetChild(2).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(2).AddClass("square-hidden")}
-
-    } else if (armor.GetChild(0).BHasClass("item-legendary")){
-      if (squareArmo.GetChild(2).BHasClass("square-hidden")){
-        squareArmo.GetChild(2).RemoveClass("square-hidden");
-      }
-      if (squareArmo.GetChild(0).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(0).AddClass("square-hidden")}
-      if (squareArmo.GetChild(1).BHasClass("square-hidden")){
-      } else {squareArmo.GetChild(1).AddClass("square-hidden")}
-
-    }
-  } else {
-    if (squareArmo.GetChild(0).BHasClass("square-hidden")){
-    } else {squareArmo.GetChild(0).AddClass("square-hidden");}
-    if (squareArmo.GetChild(1).BHasClass("square-hidden")){
-    } else {squareArmo.GetChild(1).AddClass("square-hidden");}
-    if (squareArmo.GetChild(2).BHasClass("square-hidden")){
-    } else { squareArmo.GetChild(2).AddClass("square-hidden");}
+  if (toRemove != null) {
+    GameEvents.SendCustomGameEventToServer("unequip_item_from_panorama", {unit: m_QueryUnit, itemname: toRemove});
   }
-}
 
-function weaponItemChange(){
-  if (weapon.BHasClass("item-equipped")){
-    if (weapon.GetChild(0).BHasClass("item-rare")){
-      if (squareWeapon.GetChild(0).BHasClass("square-hidden")){
-        squareWeapon.GetChild(0).RemoveClass("square-hidden");
-      }
-      if (squareWeapon.GetChild(1).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(1).AddClass("square-hidden")}
-      if (squareWeapon.GetChild(2).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(2).AddClass("square-hidden")}
-
-    } else if (weapon.GetChild(0).BHasClass("item-epic")){
-      if (squareWeapon.GetChild(1).BHasClass("square-hidden")){
-        squareWeapon.GetChild(1).RemoveClass("square-hidden");
-      }
-      if (squareWeapon.GetChild(0).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(0).AddClass("square-hidden")}
-      if (squareWeapon.GetChild(2).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(2).AddClass("square-hidden")}
-
-    } else if (weapon.GetChild(0).BHasClass("item-legendary")){
-      if (squareWeapon.GetChild(2).BHasClass("square-hidden")){
-        squareWeapon.GetChild(2).RemoveClass("square-hidden");
-      }
-      if (squareWeapon.GetChild(0).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(0).AddClass("square-hidden")}
-      if (squareWeapon.GetChild(1).BHasClass("square-hidden")){
-      } else {squareWeapon.GetChild(1).AddClass("square-hidden")}
-
-    }
-  } else {
-    if (squareWeapon.GetChild(0).BHasClass("square-hidden")){
-    } else {squareWeapon.GetChild(0).AddClass("square-hidden");}
-    if (squareWeapon.GetChild(1).BHasClass("square-hidden")){
-    } else {squareWeapon.GetChild(1).AddClass("square-hidden");}
-    if (squareWeapon.GetChild(2).BHasClass("square-hidden")){
-    } else { squareWeapon.GetChild(2).AddClass("square-hidden");}
-  }
-}
-
-function miscItemChange(){
-  if (misc.BHasClass("item-equipped")){
-    if (misc.GetChild(0).BHasClass("item-rare")){
-      if (squareMisc.GetChild(0).BHasClass("square-hidden")){
-        squareMisc.GetChild(0).RemoveClass("square-hidden");
-      }
-      if (squareMisc.GetChild(1).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(1).AddClass("square-hidden")}
-      if (squareMisc.GetChild(2).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(2).AddClass("square-hidden")}
-
-    } else if (misc.GetChild(0).BHasClass("item-epic")){
-      if (squareMisc.GetChild(1).BHasClass("square-hidden")){
-        squareMisc.GetChild(1).RemoveClass("square-hidden");
-      }
-      if (squareMisc.GetChild(0).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(0).AddClass("square-hidden")}
-      if (squareMisc.GetChild(2).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(2).AddClass("square-hidden")}
-
-    } else if (misc.GetChild(0).BHasClass("item-legendary")){
-      if (squareMisc.GetChild(2).BHasClass("square-hidden")){
-        squareMisc.GetChild(2).RemoveClass("square-hidden");
-      }
-      if (squareMisc.GetChild(0).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(0).AddClass("square-hidden")}
-      if (squareMisc.GetChild(1).BHasClass("square-hidden")){
-      } else {squareMisc.GetChild(1).AddClass("square-hidden")}
-
-    }
-  } else {
-    if (squareMisc.GetChild(0).BHasClass("square-hidden")){
-    } else {squareMisc.GetChild(0).AddClass("square-hidden");}
-    if (squareMisc.GetChild(1).BHasClass("square-hidden")){
-    } else {squareMisc.GetChild(1).AddClass("square-hidden");}
-    if (squareMisc.GetChild(2).BHasClass("square-hidden")){
-    } else { squareMisc.GetChild(2).AddClass("square-hidden");}
+  if (toEquip != null) {
+    GameEvents.SendCustomGameEventToServer("equip_item_from_panorama", {unit: m_QueryUnit, itemname: toEquip});
   }
 }
 

@@ -1168,7 +1168,8 @@
 			//"MaxUpgradeLevel" 	"1"
 			//"ItemBaseLevel" 	"1"
 
-			"ItemQuality"		"artifact"
+      "ItemType"    "weapon"
+			"ItemQuality" "3"
 			"AllowedInBackpack"	"1"
 			"ItemIsNeutralDrop"	"1"
 			"ItemAlertable" 	"1"
@@ -1229,9 +1230,10 @@
 			//"MaxUpgradeLevel" 	"1"
 			//"ItemBaseLevel" 	"1"
 
-			"ItemQuality"		"artifact"
-			"AllowedInBackpack"	"1"
-			"ItemIsNeutralDrop"	"1"
+      "ItemType"    "head"
+			"ItemQuality" "1"
+			"AllowedInBackpack"	"0"
+			"ItemIsNeutralDrop"	"0"
 			"ItemAlertable" 	"1"
 			"ItemInitial"		"0"
 			"SideShop"			"0"
@@ -1322,14 +1324,15 @@
 			//"MaxUpgradeLevel" 	"1"
 			//"ItemBaseLevel" 	"1"
 
-			"ItemQuality"		"artifact"
-			"AllowedInBackpack"	"1"
-			"ItemIsNeutralDrop"	"1"
+      "ItemType"    "weapon"
+			"ItemQuality" "2"
+			"AllowedInBackpack"	"0"
+			"ItemIsNeutralDrop"	"0"
 			"ItemAlertable" 	"1"
 			"ItemInitial"		"0"
 			"SideShop"			"0"
 			"SecretShop"		"0"
-			
+
 			"AbilityCooldown"		"60"
 			"AbilityManaCost"		"200"
 			"AbilityCastRange"		"600"
