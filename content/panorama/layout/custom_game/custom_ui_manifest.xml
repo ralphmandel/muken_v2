@@ -30,9 +30,10 @@
     var Killcam = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("KillCam");
     var NoStrategyScreen = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("ScreenContainer").FindChildTraverse("StrategyScreen");
     var RightColumnHeight = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("MainContents").FindChildTraverse("ScreenContainer").FindChildTraverse("HeroPickScreen").FindChildTraverse("MainHeroPickScreenContents");
-    
+    var mukenLogo = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("PreGame").FindChildTraverse("ToGameTransition").FindChildTraverse("MiddleLogo");
     //FindChildrenWithClassTraverse
 
+    mukenLogo.style.backgroundImage = "url('file://{images}/custom_game/muken_logo.png')";
     NoTalents.FindChildTraverse("StatBranch").style.visibility = "collapse";
     NoTalentGlow.FindChildTraverse("level_stats_frame").style.visibility = "collapse";
     NoAghanimsPanel.FindChildTraverse("AghsStatusContainer").style.visibility = "collapse";

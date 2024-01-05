@@ -11,8 +11,8 @@
 
 .slot_item{
   wash-color: #828282db;
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   border: 2px solid #ffffff;
   border-radius: 3px;
   border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) ) ;
@@ -22,14 +22,13 @@
 }
 .item_equipped{
   border-radius: 50%;
-  border: 2px solid #ffffff;
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #fff ), to( #586e6c) );
- 
-  width: 52px;
-  height: 52px;
+  border: 1px solid #ffffff;
+  border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) ) ;
+  width: 50px;
+  height: 50px;
   vertical-align: middle;
   horizontal-align: center;
-  box-shadow: inset #000000cc 0px 0px 6px 2px;
+  box-shadow: inset #000000cc 0px 0px 1px 6px;
 
 }
 
@@ -39,17 +38,29 @@
   z-index: -1;
 }
 
+.item-rare{
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #00a2ff ), to( #0101c0) );
+}
+
+.item-epic{
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #b700ff ), to( #8100a8) );
+}
+
+.item-legendary{
+  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
+}
+
 #square-head{
-  position: 67px 4px 0px;
+  position: 66px 4px 0px;
 }
 #square-armor{
-  position: 0px 37.5px 0px;
+  position: 0px 36.5px 0px;
 }
 #square-weapon{
-  position: 134px 37.50px 0px;
+  position: 133px 36.5px 0px;
 }
 #square-misc{
-  position: 67px 72px 0px;
+  position: 66px 72px 0px;
 }
 
 .square-scene{
@@ -70,23 +81,23 @@
 
 
 #head{
-  background-image: url("file://{images}/custom_game/slot_head.png");
+  background-image: url("file://{images}/custom_game/slot_head_new.png");
   background-size: cover;
   background-position: 0px 0px;
-  position: 72px 8px 0px;
+  position: 72px 9px 0px;
 }
 #armor{
-  background-image: url("file://{images}/custom_game/slot_armo.png");
+  background-image: url("file://{images}/custom_game/slot_armo_new.png");
   background-size: cover;
   position: 5px 42.5px 0px;
 }
 #weapon{
-  background-image: url("file://{images}/custom_game/slot_weapon.png");
+  background-image: url("file://{images}/custom_game/slot_weapon_new.png");
   background-size: cover;
   position: 139px 42.50px 0px;
 }
 #misc{
-  background-image: url("file://{images}/custom_game/slot_misc.png");
+  background-image: url("file://{images}/custom_game/slot_misc_new.png");
   background-size: cover;
   position: 72px 77px 0px;
 }
@@ -95,17 +106,8 @@
   wash-color: none;
 }
 
-.item-rare{
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #00a2ff ), to( #0101c0) );
-  background-color: #0101c015;
-}
-
-.item-epic{
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #b700ff ), to( #8100a8) );
-  background-color: #8000c015;
-}
-
-.item-legendary{
-  border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
-  background-color: #c0930115;
+DOTAItemImage{ 
+  width: fill-parent-flow( 1.0 ); 
+  height: fill-parent-flow( 1.0 );
+  pre-transform-scale2d: 1;
 }

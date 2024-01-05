@@ -116,6 +116,7 @@
       <Image src="file://{resources}/images/custom_game/double_arrow_left.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/decagon_graph_ps.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/dot_graph.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/muken_logo.png" class="img_collapse"/>
       
     </Panel>
   </Panel>
