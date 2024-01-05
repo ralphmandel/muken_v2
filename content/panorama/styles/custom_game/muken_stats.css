@@ -301,12 +301,12 @@
   img-shadow: 0px 0px 20px -2px #000000;
 
   background-image: url("file://{images}/custom_game/hero_bar_status1.png");
-  
+  background-repeat: no-repeat;
 }
 
 #StatsWindowButton:active
 {
-  width: 145px;
+  width: 155px;
 }
 
 #StatsWindowButton Label
@@ -370,7 +370,7 @@
 {
   0% 		
   { 
-    opacity: 1.2; 
+    opacity: 0.9; 
   }
   100%	
   { 

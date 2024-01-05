@@ -40,14 +40,26 @@
 
 .item-rare{
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( #00a2ff ), to( #0101c0) );
+  animation-name: rare;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .item-epic{
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( #b700ff ), to( #8100a8) );
+  animation-name: epic;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .item-legendary{
   border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
+  animation-name: legendary;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #square-head{
@@ -130,3 +142,41 @@ DOTAItemImage{
   border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) );
 }
 
+
+
+
+@keyframes 'rare'
+{
+  0% 		
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #00a2ff ), to( #0101c0) );
+  }
+  100%	
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #015c90 ), to( #000056) );
+  }
+}
+
+@keyframes 'epic'
+{
+  0% 		
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #b700ff ), to( #8100a8) );
+  }
+  100%	
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #6b0096 ), to( #3b004d) );
+  }
+}
+
+@keyframes 'legendary'
+{
+  0% 		
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #ffdd00 ), to( #c09301) );
+  }
+  100%	
+  { 
+    border-brush: gradient( linear, -50% 0%, 0% 100%, from( #897600 ), to( #5a4500) );
+  }
+}

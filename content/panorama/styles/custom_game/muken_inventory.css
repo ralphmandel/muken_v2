@@ -35,7 +35,7 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
   background-color: #10171c;
 	flow-children: down;
 	vertical-align: top;
-
+  
 }
 
 .inventory_visibility {
