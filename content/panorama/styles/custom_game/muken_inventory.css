@@ -120,6 +120,10 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
   wash-color: #474747;
 }
 
+.itemDragBlock{
+  wash-color: #770000;
+}
+
 .itemDragOn{
   border: 2px solid #ffffff;
   border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) );

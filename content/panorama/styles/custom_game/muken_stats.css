@@ -313,7 +313,7 @@
 {
   font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
   font-size: 24px;
-	color: gradient(linear, 0% 0%, 0% 100%, from(#cdc8bc), color-stop(0.2, #6b6860), to(#fff4e6));
+  color: white;
   margin-top: 2px;
   text-align: center;
   vertical-align: middle;
