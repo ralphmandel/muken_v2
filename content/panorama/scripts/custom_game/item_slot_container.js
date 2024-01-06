@@ -137,11 +137,15 @@ function OnDragDrop(newPanel, draggedPanel) {
 
 function OnDragEnter(newPanel, draggedPanel)
 {
+	//var draggedItem = draggedPanel.m_DragItem;
+
 	return true;
 }
 
 function OnDragLeave(newPanel, draggedPanel)
 {
+	//var draggedItem = draggedPanel.m_DragItem;
+
 	return true;
 }
 
@@ -169,11 +173,11 @@ function SetupEvents(panel, header, message){
     SetupEvents(SLOTS[type]["center"], TOOLTIPS["header"][type], TOOLTIPS["message"][type]);
   }
 
-  SLOTS["head"]["square"].BLoadLayoutSnippet("SquareRare");
-  SLOTS["armor"]["square"].BLoadLayoutSnippet("SquareEpic");
-  SLOTS["weapon"]["square"].BLoadLayoutSnippet("SquareLegendary");
-  SLOTS["misc"]["square"].BLoadLayoutSnippet("SquareRare");
-  SLOTS["misc"]["square"].GetChild(0).DeleteAsync(0);
+  // SLOTS["head"]["square"].BLoadLayoutSnippet("SquareRare");
+  // SLOTS["armor"]["square"].BLoadLayoutSnippet("SquareEpic");
+  // SLOTS["weapon"]["square"].BLoadLayoutSnippet("SquareLegendary");
+  // SLOTS["misc"]["square"].BLoadLayoutSnippet("SquareRare");
+  // SLOTS["misc"]["square"].GetChild(0).DeleteAsync(0);
 })()
 
 function ChangeItem(m_QueryUnit, rarity, type, toRemove, toEquip){
@@ -186,7 +190,7 @@ function ChangeItem(m_QueryUnit, rarity, type, toRemove, toEquip){
 
   for (let i = 0; i < 3; i++) {
     if (SLOTS[type]["square"].GetChild(i) != null) {
-      SLOTS[type]["square"].GetChild(i).SetHasClass("square-hidden", bEquipped == false || !(i == rarity - 1));
+      //SLOTS[type]["square"].GetChild(i).SetHasClass("square-hidden", bEquipped == false || !(i == rarity - 1));
     }
   }
 
@@ -195,7 +199,7 @@ function ChangeItem(m_QueryUnit, rarity, type, toRemove, toEquip){
   }
 
   if (toEquip != null) {
-    GameEvents.SendCustomGameEventToServer("equip_item_from_panorama", {unit: m_QueryUnit, itemname: toEquip});
+    GameEvents.SendCustomGameEventToServer("equip_item_from_panorama", {unit: m_QueryUnit, itemname: toEquip, type: type});
   }
 }
 

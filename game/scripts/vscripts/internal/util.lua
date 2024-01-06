@@ -697,15 +697,23 @@
     end
   end
 
+  function GetSlotByType(type)
+    if type == "armor" then return 0 end
+    if type == "head" then return 1 end
+    if type == "weapon" then return 2 end
+    if type == "misc" then return 3 end
+    return -1
+  end
+
 -- BOTS
 
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {[1] = "item_rare_emperor_crown", [2] = "item_rare_arcane_hammer", [3] = "item_rare_killer_dagger"}
 
-      for i = 1, 15, 1 do
+      for i = 1, 30, 1 do
         local item = CreateItem(names[RandomInt(1, 3)], nil, nil)
-        local pos = Vector(-2000, -2000, 0)
+        local pos = Vector(-1800, -1800, 0)
         local drop = CreateItemOnPositionSync(pos, item)
         local pos_launch = pos + RandomVector(RandomInt(100, 500))
         item:LaunchLoot(false, 200, 0.75, pos_launch, nil)        

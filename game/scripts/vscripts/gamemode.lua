@@ -38,7 +38,7 @@ require('libraries/vector_target/vector_target')
 -- These internal libraries set up barebones's events and processes.  Feel free to inspect them/change them if you need to.
 require('internal/gamemode')
 require('internal/events')
-require("internal/talent_tree")
+require("internal/muken_events")
 require("internal/spawner")
 require('libraries/muken_api')
 

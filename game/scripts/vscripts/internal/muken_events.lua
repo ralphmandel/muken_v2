@@ -1,43 +1,38 @@
 require('libraries/notifications')
 
-if (not _G.TalentTree) then
-  _G.TalentTree = class({})
+if (not _G.MukenEvents) then
+  _G.MukenEvents = class({})
 end
 
-function TalentTree:Init()
+function MukenEvents:Init()
   if (not IsServer()) then return end
 
-  if TalentTree.initializated == nil then
-    TalentTree.initializated = true
-    TalentTree:InitPanaromaEvents()
+  if MukenEvents.initializated == nil then
+    MukenEvents.initializated = true
+    MukenEvents:InitPanaromaEvents()
   end
 end
 
-function TalentTree:InitPanaromaEvents()
-  CustomGameEventManager:RegisterListener("talent_tree_get_talents", Dynamic_Wrap(TalentTree, 'OnTalentTreeTalentsRequest'))
-  CustomGameEventManager:RegisterListener("talent_tree_level_up_talent", Dynamic_Wrap(TalentTree, 'OnTalentTreeLevelUpRequest'))
-  CustomGameEventManager:RegisterListener("talent_tree_get_state", Dynamic_Wrap(TalentTree, 'OnTalentTreeStateRequest'))
-  CustomGameEventManager:RegisterListener("talent_tree_reset_talents", Dynamic_Wrap(TalentTree, 'OnTalentTreeResetRequest'))
-  ListenToGameEvent("player_reconnected", Dynamic_Wrap(TalentTree, "OnPlayerReconnect"), TalentTree)
-  
-  CustomGameEventManager:RegisterListener("role_bar_update", Dynamic_Wrap(TalentTree, 'OnRoleBarRequest'))
-  CustomGameEventManager:RegisterListener("scoreboard_update", Dynamic_Wrap(TalentTree, 'OnScoreRequest'))
-  CustomGameEventManager:RegisterListener("request_unit_info_from_panorama", Dynamic_Wrap(TalentTree, 'OnPortraitUpdate'))
-  CustomGameEventManager:RegisterListener("game_points_from_server", Dynamic_Wrap(TalentTree, 'GamePointsUpdate'))
-  CustomGameEventManager:RegisterListener("dota_time_from_panorama", Dynamic_Wrap(TalentTree, 'Notifications'))
-  CustomGameEventManager:RegisterListener("equip_item_from_panorama", Dynamic_Wrap(TalentTree, 'OnItemEquipped'))
-  CustomGameEventManager:RegisterListener("unequip_item_from_panorama", Dynamic_Wrap(TalentTree, 'OnItemUnequipped'))
+function MukenEvents:InitPanaromaEvents()  
+  CustomGameEventManager:RegisterListener("role_bar_update", Dynamic_Wrap(MukenEvents, 'OnRoleBarRequest'))
+  CustomGameEventManager:RegisterListener("scoreboard_update", Dynamic_Wrap(MukenEvents, 'OnScoreRequest'))
+  CustomGameEventManager:RegisterListener("request_unit_info_from_panorama", Dynamic_Wrap(MukenEvents, 'OnPortraitUpdate'))
+  CustomGameEventManager:RegisterListener("game_points_from_server", Dynamic_Wrap(MukenEvents, 'GamePointsUpdate'))
+  CustomGameEventManager:RegisterListener("dota_time_from_panorama", Dynamic_Wrap(MukenEvents, 'Notifications'))
+  CustomGameEventManager:RegisterListener("equip_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnItemEquipped'))
+  CustomGameEventManager:RegisterListener("unequip_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnItemUnequipped'))
+  CustomGameEventManager:RegisterListener("drop_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnDropItem'))
 end
 
-function TalentTree:Notifications(params)
+function MukenEvents:Notifications(params)
   Notifications:TopToAll({text="THE FIRST TEAM TO REACH #score POINTS WINS", duration=10.0})
 end
 
-function TalentTree:GamePointsUpdate(params)
+function MukenEvents:GamePointsUpdate(params)
   SCORE_LIMIT = params.match_points
 end
 
-function TalentTree:OnItemEquipped(event)
+function MukenEvents:OnItemEquipped(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -46,9 +41,16 @@ function TalentTree:OnItemEquipped(event)
   local unit = EntIndexToHScript(event.unit)
   local item = CreateItem(event.itemname, player, nil)
   unit:AddItem(item)
+
+  local item_slot = item:GetItemSlot()
+  local new_slot = GetSlotByType(event.type)
+
+  if item_slot ~= new_slot then
+    unit:SwapItems(item_slot, new_slot)
+  end
 end
 
-function TalentTree:OnItemUnequipped(event)
+function MukenEvents:OnItemUnequipped(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -59,7 +61,19 @@ function TalentTree:OnItemUnequipped(event)
   unit:RemoveItem(item)
 end
 
-function TalentTree:OnRoleBarRequest(event)
+function MukenEvents:OnDropItem(event)
+  if (not event or not event.PlayerID) then return end
+  
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+  
+  local unit = EntIndexToHScript(event.unit)
+  local item = CreateItem(event.itemname, player, nil)
+  local drop = CreateItemOnPositionSync(unit:GetOrigin(), item)
+  item:LaunchLootInitialHeight(false, 200, 200, 0.5, unit:GetOrigin())
+end
+
+function MukenEvents:OnRoleBarRequest(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -73,7 +87,7 @@ function TalentTree:OnRoleBarRequest(event)
   end
 end
 
-function TalentTree:OnScoreRequest(event)
+function MukenEvents:OnScoreRequest(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -89,7 +103,7 @@ function TalentTree:OnScoreRequest(event)
   CustomGameEventManager:Send_ServerToPlayer(player, "score_state_from_server", score_table)
 end
 
-function TalentTree:OnPortraitUpdate(event)
+function MukenEvents:OnPortraitUpdate(event)
   if (not IsServer()) then return end
   if (not event or not event.PlayerID) then return end
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -164,7 +178,7 @@ function TalentTree:OnPortraitUpdate(event)
   CustomGameEventManager:Send_ServerToPlayer(player, "unit_info_from_lua", info)
 end
 
-function TalentTree:OnTalentTreeTalentsRequest(event)
+function MukenEvents:OnTalentTreeTalentsRequest(event)
   if (not event or not event.PlayerID) then return end
   
   local player = PlayerResource:GetPlayer(event.PlayerID)
@@ -178,7 +192,7 @@ function TalentTree:OnTalentTreeTalentsRequest(event)
   BaseHero(hero):UpdatePanoramaRanks()
 end
 
-function TalentTree:OnTalentTreeLevelUpRequest(event)
+function MukenEvents:OnTalentTreeLevelUpRequest(event)
   if (not IsServer()) then return end
   if (event == nil or not event.PlayerID) then return end
 
@@ -193,7 +207,7 @@ function TalentTree:OnTalentTreeLevelUpRequest(event)
   if BaseHero(hero) then BaseHero(hero):UpgradeRank(talentId) end
 end
 
-function TalentTree:OnTalentTreeStateRequest(event)
+function MukenEvents:OnTalentTreeStateRequest(event)
   if (not IsServer()) then return end
   if (not event or not event.PlayerID) then return end
 
@@ -208,7 +222,7 @@ function TalentTree:OnTalentTreeStateRequest(event)
   BaseHero(hero):UpdatePanoramaState()
 end
 
-function TalentTree:OnTalentTreeResetRequest(event)
+function MukenEvents:OnTalentTreeResetRequest(event)
   if (not IsServer()) then return end
   if (event == nil or not event.PlayerID) then return end
 
@@ -229,19 +243,4 @@ function TalentTree:OnTalentTreeResetRequest(event)
   BaseHero(hero):UpdateRankPoints(pointsToReturn)
 end
 
-function TalentTree:OnPlayerReconnect(keys)
-  if (not IsServer()) then return end
-
-  local player = EntIndexToHScript(keys.PlayerID)
-  if (not player) then return end
-
-  local hero = player:GetAssignedHero()
-  if (not hero) then return end
-
-  if BaseHero(hero) == nil then return end
-
-  --BaseHero(hero):UpdatePanoramaRanks()
-  BaseHero(hero):UpdatePanoramaState()
-end
-
-TalentTree:Init()
+MukenEvents:Init()

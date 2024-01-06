@@ -42,7 +42,7 @@ LinkLuaModifier("_modifier_turn_disabled", "_modifiers/_modifier_turn_disabled",
 LinkLuaModifier("_modifier_unslowable", "_modifiers/_modifier_unslowable", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_untargetable", "_modifiers/_modifier_untargetable", LUA_MODIFIER_MOTION_NONE)
 
-require("internal/talent_tree")
+require("internal/muken_events")
 require("internal/rank_system")
 
 -- INIT

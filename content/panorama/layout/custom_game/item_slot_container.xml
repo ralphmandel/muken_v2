@@ -24,21 +24,48 @@
   </snippets>
 
   <Panel class="slotContainer" hittest="false">
-    <Panel class="square-container" id="square-head"/>
+    <Panel class="square-container" id="square-head">
+    </Panel>
     <Panel class="slot_item" id="head" hittest="false">
       <Panel class="item_equipped" hittest="true" draggable="true"></Panel>
     </Panel>
-    <Panel class="square-container" id="square-armor"/>
+    <Panel id="HotkeyContainer-head" hittest="false">
+      <Panel class="Hotkey">
+        <Label id="HotkeyText" text="2" html="true" />
+      </Panel>
+    </Panel>
+
+    <Panel class="square-container" id="square-armor">
+    </Panel>
     <Panel class="slot_item" id="armor" hittest="false">
       <Panel class="item_equipped" hittest="true" draggable="true"></Panel>
     </Panel>
-    <Panel class="square-container" id="square-weapon"/>
+    <Panel id="HotkeyContainer-armor" hittest="false">
+      <Panel class="Hotkey">
+        <Label id="HotkeyText" text="1" html="true" />
+      </Panel>
+    </Panel>
+
+    <Panel class="square-container" id="square-weapon">
+    </Panel>
     <Panel class="slot_item" id="weapon" hittest="false">
       <Panel class="item_equipped" hittest="true" draggable="true"></Panel>
     </Panel>
-    <Panel class="square-container" id="square-misc"/>
+    <Panel id="HotkeyContainer-weapon" hittest="false">
+      <Panel class="Hotkey">
+        <Label id="HotkeyText" text="3" html="true" />
+      </Panel>
+    </Panel>
+
+    <Panel class="square-container" id="square-misc">
+    </Panel>
     <Panel class="slot_item" id="misc" hittest="false">
       <Panel class="item_equipped" hittest="true" draggable="true"></Panel>
+    </Panel>
+    <Panel id="HotkeyContainer-misc" hittest="false">
+      <Panel class="Hotkey">
+        <Label id="HotkeyText" text="4" html="true" />
+      </Panel>
     </Panel>
   </Panel>
 </root>

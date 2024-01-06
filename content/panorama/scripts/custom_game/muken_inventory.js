@@ -106,11 +106,11 @@ function OnDragDrop(newPanel, draggedPanel) {
 function OnDragEnter(newPanel, draggedPanel)
 {
 	//var draggedItem = draggedPanel.m_DragItem;
+  Game.EmitSound("Config.Move");
+
   if (newPanel.id == "item") {
-    $.Msg("FF", newPanel.GetParent().id);
     newPanel.GetParent().SetHasClass("dragHover", true);
   } else {
-    $.Msg("FF", newPanel.id);
     newPanel.SetHasClass("dragHover", true);
   }
 
@@ -121,10 +121,8 @@ function OnDragLeave(newPanel, draggedPanel)
 {
 	//var draggedItem = draggedPanel.m_DragItem;
   if (newPanel.id == "item") {
-    $.Msg("GG", newPanel.GetParent().id);
     newPanel.GetParent().SetHasClass("dragHover", false);
   } else {
-    $.Msg("GG", newPanel.id);
     newPanel.SetHasClass("dragHover", false);
   }
 
@@ -132,11 +130,12 @@ function OnDragLeave(newPanel, draggedPanel)
 }
 
 function OnItemIventoryAdded(event){
+  Game.EmitSound("Item.PickUpWorld");
+
   for (let row = 0; row < MAX_ROWS; row++) {
     var row_id = "row" + row;
     for(var i = 0; i < ROWS[row_id].GetChildCount(); i++) {
       if (ROWS[row_id].GetChild(i).GetChild(0) == null) {
-        Game.EmitSound("Item.PickUpWorld");
         var panel = $.CreatePanel("DOTAItemImage", ROWS[row_id].GetChild(i), "item");
         panel.itemname = event.itemname;
         panel.itemrarity = event.itemrarity;
@@ -145,6 +144,9 @@ function OnItemIventoryAdded(event){
       }
     }
   }
+
+  var player_hero_index = Players.GetPlayerHeroEntityIndex(Players.GetLocalPlayer());
+  GameEvents.SendCustomGameEventToServer("drop_item_from_panorama", {unit: player_hero_index, itemname: event.itemname});
 }
 
 (function(){
