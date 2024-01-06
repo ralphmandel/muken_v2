@@ -1,0 +1,48 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/muken_forge.css"/>
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/muken_forge.js"/>
+  </scripts>
+    <Panel class="forge_root" hittest="false">
+
+      <Panel id="muken_forge_items" class="forge_visibility" hittest="true" acceptsfocus="true" onactivate="$.GetContextPanel().SetFocus()">
+        <Panel id="text-header">
+          <Label class="TitleLabel" text="FORGE ITEMS" />
+          <Image id="close_icon" src="file://{images}/custom_game/close_icon.png" />
+        </Panel>
+
+        <Panel id="ForgeContainer">
+          <Panel id="forge_list_container" hittest="false">
+            <Label text="Select a type item to Forge:"/>
+            <Panel class="btn-radio">
+              <RadioButton group="radio" class="checkbox" id="checkbox-head" onactivate="RadioSelect()">  <Label text="HEAD"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-armo" onactivate="RadioSelect()">  <Label text="ARMO"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-weapon" onactivate="RadioSelect()">  <Label text="WEAPON"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-misc" onactivate="RadioSelect()">  <Label text="MISC"/></RadioButton>
+            </Panel>
+
+            <Panel class="item_row">
+              <Panel class="shard_item" id="shard1"></Panel>
+              <Image class="plus_icon" src="file://{images}/custom_game/plus_icon_small.png" />
+              <Panel class="shard_item" id="shard2"></Panel>
+              <Image class="plus_icon" src="file://{images}/custom_game/plus_icon_small.png" />
+              <Panel class="shard_item" id="shard3"></Panel>
+            </Panel>
+              <Button id="forge_head" class="forgeButton" onactivate="forgeItem()">
+              <Label class="forgeLabel" text="FORGE" />
+              </Button>
+              <Image class="equal_icon" src="file://{images}/custom_game/gold_arrow1.png" />
+              <Panel class="itemForged">
+              </Panel>
+          </Panel>
+        </Panel>
+
+        <Panel id="help_panel" hittest="false">
+          <Label id="text-header" text="Info:" />
+          <Image id="help_img" src="file://{images}/custom_game/helpicon.png" />
+        </Panel>
+      </Panel>
+    </Panel>
+</root>

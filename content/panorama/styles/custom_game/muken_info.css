@@ -138,6 +138,10 @@
   horizontal-align: middle;
 }
 
+#InfoButton:hover Label {
+  color: gradient(linear, 0% 0%, 0% 100%, from(#cdc8bc), color-stop(0.3, #b5b0a3), to(#fff4e6));
+}
+
 /* #InfoButton:hover
 {
   wash-color: #b0b0b0;

@@ -1,0 +1,304 @@
+@define defaultFont: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define monospaceNumbersFont: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define titleFont: Reaver,Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540;
+
+.forge_root {
+	tooltip-position: left;
+	tooltip-body-position: 100% 90%;
+	tooltip-arrow-position: 100% 90%;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  z-index: 2;
+}
+
+DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
+
+.Reborn.CustomHUDSkin #forge_list_container {
+	background-color: #ffffff05;
+}
+
+.Reborn #muken_forge_items {
+  margin-bottom: 150px;
+	flow-children: none;
+	horizontal-align: right;
+  background-image: url("file://{images}/custom_game/inventory_bg.png");
+  background-size: 100%;
+  border: 1px solid black;
+  padding: 6px;
+  box-shadow:  #000000cc 0px 0px 8px -1px;
+  background-color: #10171c;
+	flow-children: down;
+	vertical-align: center;
+}
+
+.forge_visibility {
+  opacity: 0.9;
+  width: 280px;
+  height: 355px;
+  perspective: 1600px;
+  transition-property: opacity, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transform: rotateX(0deg) rotateY(0deg) translateX( 0px );
+}
+
+.Hidden {
+  opacity: 0;
+  transform: rotateX(0deg) rotateY(-130deg) translateX( 140px );
+}
+
+.forge_row {
+	flow-children: right;
+	padding: 0px;
+	width: 100%;
+	height: 48px;
+}
+
+#ForgeContainer {
+	width: 100%;
+  margin-top: 2px;
+}
+
+#forge_list_container {
+	flow-children: down;
+	padding: 2px;
+	z-index: 1;
+  background-image: url("file://{images}/custom_game/forge_shard_grid.png");
+  background-size: 100% 100%;
+  background-position: center;
+	background-repeat: no-repeat;
+  background-img-opacity: 0.4;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-brush: gradient(linear, 100% 100%, 100% 0%, from(#553f00), color-stop(0.5, #ffbb00), to(#553f00));
+
+  width: 100%;
+}
+
+#muken_forge_items > #text-header{
+  width: 100%;
+  horizontal-align: center;
+  border-bottom: 2px solid #29353b;
+  margin-bottom: 2px;
+}
+
+.TitleLabel{
+  font-size: 17px;
+  color: #e1e1e1;
+  horizontal-align: center;
+  text-overflow: shrink;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 0px 1.0 #00000090;
+  font-weight: semi-bold;
+  text-transform: uppercase;
+  font-family: titleFont;
+  margin-bottom: 1px;
+  
+}
+
+#close_icon{
+  width: height-percentage(100%);
+  height: 80%;
+  horizontal-align: right;
+  vertical-align: center;
+  wash-color: #727277;
+}
+
+#close_icon:hover{
+ wash-color: none;
+}
+
+.item_row {
+	flow-children: right;
+	padding: 0px;
+	width: 100%;
+	height: 60px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.btn-radio{
+  flow-children: right;
+  horizontal-align: center;
+  wash-color: #99999970;
+  margin-left: 10px;
+  margin-top: 8px;
+ }
+
+ .checkbox{
+  margin-left: 0px;
+  margin-right: 8px;
+ }
+
+ .btn-radio RadioButton:selected{
+  background-color: gradient(linear, 100% 100%, 100% 0%, from(#caa132), color-stop(0.5, #ffbb00), to(#8a6500));
+  box-shadow: fill #281d00ef 0px 0px 1px;
+  border-top-left-radius: 10px;
+  border-radius: 2px;
+  sound: "General.SelectAction";
+  }
+
+ Label {
+  font-size: 18px;
+  font-family: defaultFont;
+  color: #e1e1e1;
+  text-shadow: 1px 1px 2px #000000c7;
+ }
+
+ .checkbox Label{
+  horizontal-align: center;
+  color: gradient(linear, 0% 0%, 0% 100%, from(#e4dfd2), color-stop(0.2, #c6c0b1), to(#fff4e6));
+ }
+
+ .checkbox:hover Label{
+  horizontal-align: center;
+  color: gradient(linear, 0% 0%, 0% 100%, from(#e4dfd2), color-stop(0.2, #f8f2e1), to(#fff4e6));
+ }
+
+.shard_item{
+  border-radius: 50%;
+  background-image: url("file://{images}/custom_game/circle_shard.png");
+  background-size: cover;
+  background-position: center;
+  width: 55px;
+  height: 55px;
+  margin: 2px;
+  border: 2px solid #ffffff;
+  border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #000000 ) , to ( #060013 ) );
+  box-shadow: inset #000000cc 0px 0px 8px 4px;
+}
+
+.forgeButton{
+  color: #e6e6e6;
+  margin-top: 5px;
+  font-size: 26px;
+  font-family: monospaceNumbersFont;
+  font-weight: semi-bold;
+  width: 120px;
+  height: 43px;
+  border: 2px solid #151717;
+  text-overflow: shrink;
+  vertical-align: middle;
+  horizontal-align: center;
+  background-color: gradient(linear, 100% 100%, 100% 0%, from(#caa132), color-stop(0.5, #ffbb00), to(#8a6500));
+  box-shadow: fill #b68600db 0px 0px 1px;
+  wash-color: #888888;
+  
+}
+
+.forgeReady{
+  wash-color: none;
+  animation-name: flash;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.forgeLabel{
+text-align: center;
+vertical-align: middle;
+horizontal-align: center;
+text-shadow: 0 0 5px #000000;
+}
+
+.forgeReady:hover{
+  brightness: 1.4;
+}
+
+.plus_icon{
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.equal_icon{
+  horizontal-align: center;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  width: 30px;
+  height: 18px;
+  animation-name: arrow;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.itemForged{
+  width: 80px;
+  height: 60px;
+  overflow: noclip;
+  background-color: #1a1c1d88;
+  background-image: url("file://{images}/custom_game/inventory_bg_container1.png");
+  background-size: 100%;
+  background-img-opacity: 0.4;
+  border: 4px solid #ffffff;
+  border-brush: gradient(linear, 100% 100%, 100% 0%, from(#553f00), to(#ffbb00));
+
+  margin-top: 10px;
+  box-shadow: inset #000000cc 0px 0px 2px;
+  horizontal-align: center;
+}
+
+#help_panel {
+  width: 100%;
+  flow-children: right;
+  margin-top: 4px;
+  border-top: 2px solid #29353b;
+  padding-top: 10px;
+}
+
+#help_panel Label{
+  color: white;
+  margin-left: 5px;
+  margin-right: 2px;
+  font-size: 14px;
+  font-family: defaultFont;
+}
+
+#help_img{
+  width: height-percentage(100%);
+  height: 20px;
+}
+
+.dragHover{
+  opacity-mask: url("file://{images}/custom_game/slot_draghover.png");
+  brightness: 1.5;
+}
+
+.itemDragOff{
+  wash-color: #474747;
+}
+
+.itemDragBlock{
+  wash-color: #770000;
+}
+
+.itemDragOn{
+  border: 2px solid #ffffff;
+  border-brush: gradient ( linear, 0% 0%, 50% 50%, from ( #6d6d6d ) , to ( #4d4c4f ) );
+}
+
+@keyframes 'flash'{
+  0%{
+    box-shadow: fill #b68600db 0px 0px 1px;
+  }
+  50%{
+    box-shadow: fill #b68600db 0px 0px 8px;
+  }
+  100%{
+    box-shadow: fill #b68600db 0px 0px 1px;
+  }
+ }
+
+ @keyframes 'arrow'{
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(5px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+ }
