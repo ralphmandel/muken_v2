@@ -35,10 +35,10 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
 .forge_visibility {
   opacity: 0.9;
   width: 280px;
-  height: 355px;
+  height: 388px;
   perspective: 1600px;
   transition-property: opacity, transform;
-  transition-duration: 0.2s;
+  transition-duration: 0.5s;
   transition-timing-function: ease-in-out;
   transform: rotateX(0deg) rotateY(0deg) translateX( 0px );
 }
@@ -121,7 +121,6 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
 .btn-radio{
   flow-children: right;
   horizontal-align: center;
-  wash-color: #99999970;
   margin-left: 10px;
   margin-top: 8px;
  }
@@ -131,12 +130,16 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
   margin-right: 8px;
  }
 
- .btn-radio RadioButton:selected{
+ RadioButton:selected{
   background-color: gradient(linear, 100% 100%, 100% 0%, from(#caa132), color-stop(0.5, #ffbb00), to(#8a6500));
   box-shadow: fill #281d00ef 0px 0px 1px;
   border-top-left-radius: 10px;
   border-radius: 2px;
   sound: "General.SelectAction";
+  }
+
+  #checkbox-random{
+    horizontal-align: center;
   }
 
  Label {
@@ -145,6 +148,7 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
   color: #e1e1e1;
   text-shadow: 1px 1px 2px #000000c7;
  }
+ 
 
  .checkbox Label{
   horizontal-align: center;
@@ -214,8 +218,8 @@ text-shadow: 0 0 5px #000000;
 
 .equal_icon{
   horizontal-align: center;
-  margin-top: 14px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 6px;
   width: 30px;
   height: 18px;
   animation-name: arrow;
@@ -236,8 +240,15 @@ text-shadow: 0 0 5px #000000;
   border-brush: gradient(linear, 100% 100%, 100% 0%, from(#553f00), to(#ffbb00));
 
   margin-top: 10px;
+  margin-bottom: 20px;
   box-shadow: inset #000000cc 0px 0px 2px;
   horizontal-align: center;
+  wash-color: #888888;
+  wash-color: none;
+  animation-name: flash;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 #help_panel {

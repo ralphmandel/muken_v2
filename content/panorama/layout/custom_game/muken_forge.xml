@@ -17,13 +17,14 @@
           <Panel id="forge_list_container" hittest="false">
             <Label text="Select a type item to Forge:"/>
             <Panel class="btn-radio">
-              <RadioButton group="radio" class="checkbox" id="checkbox-head" onactivate="RadioSelect()">  <Label text="HEAD"/></RadioButton>
-              <RadioButton group="radio" class="checkbox" id="checkbox-armo" onactivate="RadioSelect()">  <Label text="ARMO"/></RadioButton>
-              <RadioButton group="radio" class="checkbox" id="checkbox-weapon" onactivate="RadioSelect()">  <Label text="WEAPON"/></RadioButton>
-              <RadioButton group="radio" class="checkbox" id="checkbox-misc" onactivate="RadioSelect()">  <Label text="MISC"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-head" onactivate="RadioSelect(0)">  <Label text="HEAD"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-armo" onactivate="RadioSelect(1)">  <Label text="ARMO"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-weapon" onactivate="RadioSelect(2)">  <Label text="WEAPON"/></RadioButton>
+              <RadioButton group="radio" class="checkbox" id="checkbox-misc" onactivate="RadioSelect(3)">  <Label text="MISC"/></RadioButton>
             </Panel>
+            <RadioButton group="radio" class="checkbox" id="checkbox-random" onactivate="RadioSelect(4)">  <Label text="RANDOM"/></RadioButton>
 
-            <Panel class="item_row">
+            <Panel id="item_row_id" class="item_row">
               <Panel class="shard_item" id="shard1"></Panel>
               <Image class="plus_icon" src="file://{images}/custom_game/plus_icon_small.png" />
               <Panel class="shard_item" id="shard2"></Panel>

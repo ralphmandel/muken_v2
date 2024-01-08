@@ -170,4 +170,21 @@ var message = "You can forge items by dragging shards of the same type to each s
   panel.SetPanelEvent("onmouseout", function(){
     $.DispatchEvent("DOTAHideTextTooltip", panel);
   })
+
 })()
+
+
+var radioButton = $.GetContextPanel().FindChildTraverse("forge_list_container").FindChildTraverse("item_row_id"); 
+$.Msg('10', radioButton);
+
+function RadioSelect(button){
+  if(button == 4){
+    radioButton.GetChild(3).style.visibility = "collapse";
+    radioButton.GetChild(4).style.visibility = "collapse";
+    radioButton.style.marginLeft = "51px";
+  } else{
+    radioButton.GetChild(3).style.visibility = "visible"
+    radioButton.GetChild(4).style.visibility = "visible"
+    radioButton.style.marginLeft = "0px";
+  }
+}
