@@ -709,7 +709,7 @@
 
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
-      local names = {[1] = "item_rare_emperor_crown", [2] = "item_rare_arcane_hammer", [3] = "item_rare_killer_dagger"}
+      local names = {[1] = "item_rare_iron_shield", [2] = "item_rare_cloak_evasion", [3] = "item_rare_cloak_evasion"}
 
       for i = 1, 30, 1 do
         local item = CreateItem(names[RandomInt(1, 3)], nil, nil)

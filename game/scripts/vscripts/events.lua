@@ -110,6 +110,9 @@ function GameMode:OnItemPickedUp(keys)
   local itemrarity = item:GetItemRarity()
   local itemtype = item:GetItemType()
 
+  if itemtype == "shield" then itemtype = "armor" end
+  if itemtype == "boots" then itemtype = "misc" end
+  
   unitEntity:RemoveItem(unitEntity:FindItemInInventory(itemname))
 
   CustomGameEventManager:Send_ServerToPlayer(player, "add_item_inventory_from_lua", {

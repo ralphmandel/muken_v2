@@ -119,6 +119,9 @@ function GameMode:OnHeroInGame(hero)
   local item = CreateItem("item_tp", hero, hero)
   hero:AddItem(item)
 
+  -- local item_2 = CreateItem("", hero, hero)
+  -- hero:AddItem(item_2)
+
   if IsInToolsMode() then
     if BOTS_LOADED == false then
       if self.temp == nil then

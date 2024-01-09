@@ -1,0 +1,90 @@
+"DOTAAbilities"
+{
+  "item_rare_iron_shield"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_rare_iron_shield"
+    "AbilityTextureName"		"shield/iron_shield"
+    "ItemType"              "shield"
+    "ItemQuality"           "1"
+    "ID"							      "3101"
+
+    "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+    "AbilityValues"
+    {
+      "armor"         "3"
+      "block_chance"  "20"
+      "block_percent" "50"
+    }
+
+    "precache"
+    {
+      "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_rare_cloak_evasion"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_rare_cloak_evasion"
+    "AbilityTextureName"		"armor/cloak_evasion"
+    "ItemType"              "armor"
+    "ItemQuality"           "1"
+    "ID"							      "3102"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityCooldown"       "3"
+
+    "AbilityValues"
+    {
+      "evasion"       "3"
+      "invi_duration" "1"
+      "invi_delay"    "0.3"
+    }
+
+    "precache"
+    {
+      "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+}
