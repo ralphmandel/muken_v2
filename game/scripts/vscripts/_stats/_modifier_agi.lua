@@ -9,29 +9,44 @@ function _modifier_agi:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.main_bonus = 0
-
   self.const_base_movespeed = self.ability:GetSpecialValueFor("const_base_movespeed")
   self.const_base_attack_time = self.ability:GetSpecialValueFor("const_base_attack_time")
   self.const_base_mana_regen = self.ability:GetSpecialValueFor("const_base_mana_regen")
 
-  self.data = {
-    sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
-    sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
-    sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
-    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
-    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
-    sub_stat_movespeed_increase = {mult = 0, bonus = 0},
-    sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
-    sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
-    sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
-    sub_stat_attack_time = {mult = 0, bonus = 0}
-  }
-  
-  self:LoadData()
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+    self.main_bonus = 0
+
+    self.data = {
+      sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
+      sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
+      sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
+      sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
+      sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
+      sub_stat_movespeed_increase = {mult = 0, bonus = 0},
+      sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
+      sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
+      sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
+      sub_stat_attack_time = {mult = 0, bonus = 0}
+    }
+    
+    self:LoadData()
+  end
 end
 
 function _modifier_agi:OnRefresh(kv)
+end
+
+function _modifier_agi:AddCustomTransmitterData()
+  return {
+    main_bonus = self.main_bonus,
+    stat_data = self.data
+  }
+end
+
+function _modifier_agi:HandleCustomTransmitterData(data)
+	self.main_bonus = data.main_bonus
+  self.data = data.stat_data
 end
 
 -- PROPERTIES --------------------------------------------------------------------------------
@@ -238,6 +253,7 @@ function _modifier_agi:UpdateSubBonus(property)
   end
 
   self.data["sub_stat_"..property].bonus = value
+  self:SendBuffRefreshToClients()
 end
 
 function _modifier_agi:LoadData()

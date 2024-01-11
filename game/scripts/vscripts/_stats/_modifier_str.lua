@@ -15,25 +15,40 @@ function _modifier_str:OnCreated(kv)
   self.original_damage = 0
   self.damage_calc = false
 
-  self.main_bonus = 0
-
   self.const_critical_damage = self.ability:GetSpecialValueFor("const_critical_damage")
   self.const_critical_chance = self.ability:GetSpecialValueFor("const_critical_chance")
 
-  self.data = {
-    sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
-    sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
-    sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
-    sub_stat_critical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_damage"), bonus = 0},
-    sub_stat_critical_chance = {mult = 0, bonus = 0},
-    sub_stat_miss_chance = {mult = 0, bonus = 0},
-    sub_stat_physical_block = {mult = 0, bonus = 0},
-  }
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+    self.main_bonus = 0
 
-  self:LoadData()
+    self.data = {
+      sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
+      sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
+      sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
+      sub_stat_critical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_damage"), bonus = 0},
+      sub_stat_critical_chance = {mult = 0, bonus = 0},
+      sub_stat_miss_chance = {mult = 0, bonus = 0},
+      sub_stat_physical_block = {mult = 0, bonus = 0},
+    }
+
+    self:LoadData()
+  end
 end
 
 function _modifier_str:OnRefresh(kv)
+end
+
+function _modifier_str:AddCustomTransmitterData()
+  return {
+    main_bonus = self.main_bonus,
+    stat_data = self.data
+  }
+end
+
+function _modifier_str:HandleCustomTransmitterData(data)
+	self.main_bonus = data.main_bonus
+  self.data = data.stat_data
 end
 
 -- PROPERTIES --------------------------------------------------------------------------------
@@ -182,6 +197,7 @@ function _modifier_str:UpdateSubBonus(property)
   end
 
   self.data["sub_stat_"..property].bonus = value
+  self:SendBuffRefreshToClients()
 end
 
 function _modifier_str:LoadData()

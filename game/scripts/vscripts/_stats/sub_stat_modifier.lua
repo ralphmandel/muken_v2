@@ -6,23 +6,37 @@ function sub_stat_modifier:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE en
 function sub_stat_modifier:RemoveOnDeath() return false end
 
 function sub_stat_modifier:OnCreated(kv)
-  self.kv = kv
-  self.status_resist_stack = kv.status_resist_stack or 0
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
 
-  UpdateStatKV(self:GetParent(), self.kv)
+    self.kv = kv
+    self.status_resist_stack = kv.status_resist_stack or 0
+    self:UpdateStatKV()
+  end
 end
 
 function sub_stat_modifier:OnRemoved()
 end
 
 function sub_stat_modifier:OnDestroy()
-  UpdateStatKV(self:GetParent(), self.kv)
+  if IsServer() then self:UpdateStatKV() end
+
   if self.endCallback then self.endCallback(self.interrupted) end
 end
 
 function sub_stat_modifier:SetEndCallback(func)
 	self.endCallback = func
 end
+
+function sub_stat_modifier:AddCustomTransmitterData()
+  return {kv = self.kv}
+end
+
+function sub_stat_modifier:HandleCustomTransmitterData(data)
+	self.kv = data.kv
+end
+
+--------------------------------------------------------------------------------
 
 function sub_stat_modifier:DeclareFunctions()
   local funcs = {
@@ -33,5 +47,22 @@ function sub_stat_modifier:DeclareFunctions()
 end
 
 function sub_stat_modifier:GetModifierStatusResistanceStacking()
-  return self.status_resist_stack
+  if IsServer() then
+    return self.status_resist_stack
+  end
+end
+
+--------------------------------------------------------------------------------
+
+function sub_stat_modifier:UpdateStatKV()
+  for _, main in pairs({"str", "agi", "int", "vit"}) do
+    local modifier = self:GetParent():FindModifierByName("_modifier_"..main)
+    if modifier then
+      for property, value in pairs(self.kv) do
+        if modifier.data["sub_stat_"..property] then
+          modifier:UpdateSubBonus(property)
+        end
+      end
+    end
+  end
 end

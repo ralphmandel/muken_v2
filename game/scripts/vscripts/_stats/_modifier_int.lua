@@ -9,25 +9,40 @@ function _modifier_int:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.main_bonus = 0
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+    self.main_bonus = 0
 
-  self.data = {
-    sub_stat_max_mana = {mult = self.ability:GetSpecialValueFor("sub_stat_max_mana"), bonus = 0},
-    sub_stat_magical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_magical_damage"), bonus = 0},
-    sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
-    sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
-    sub_stat_summon_power = {mult = self.ability:GetSpecialValueFor("sub_stat_summon_power"), bonus = 0},
-    sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
-    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
-    sub_stat_luck = {mult = self.ability:GetSpecialValueFor("sub_stat_luck"), bonus = 0},
-    sub_stat_manacost = {mult = 0, bonus = 0},
-    sub_stat_magical_block = {mult = 0, bonus = 0},
-  }
+    self.data = {
+      sub_stat_max_mana = {mult = self.ability:GetSpecialValueFor("sub_stat_max_mana"), bonus = 0},
+      sub_stat_magical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_magical_damage"), bonus = 0},
+      sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
+      sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
+      sub_stat_summon_power = {mult = self.ability:GetSpecialValueFor("sub_stat_summon_power"), bonus = 0},
+      sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
+      sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
+      sub_stat_luck = {mult = self.ability:GetSpecialValueFor("sub_stat_luck"), bonus = 0},
+      sub_stat_manacost = {mult = 0, bonus = 0},
+      sub_stat_magical_block = {mult = 0, bonus = 0},
+    }
 
-  self:LoadData()
+    self:LoadData()
+  end
 end
 
 function _modifier_int:OnRefresh(kv)
+end
+
+function _modifier_int:AddCustomTransmitterData()
+  return {
+    main_bonus = self.main_bonus,
+    stat_data = self.data
+  }
+end
+
+function _modifier_int:HandleCustomTransmitterData(data)
+	self.main_bonus = data.main_bonus
+  self.data = data.stat_data
 end
 
 -- PROPERTIES --------------------------------------------------------------------------------
@@ -178,6 +193,7 @@ function _modifier_int:UpdateSubBonus(property)
   end
 
   self.data["sub_stat_"..property].bonus = value
+  self:SendBuffRefreshToClients()
 end
 
 function _modifier_int:LoadData()

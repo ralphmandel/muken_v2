@@ -249,19 +249,6 @@
     })
   end
 
-  function UpdateStatKV(baseNPC, kv)
-    for _, main in pairs({"str", "agi", "int", "vit"}) do
-      local modifier = baseNPC:FindModifierByName("_modifier_"..main)
-      if modifier then
-        for property, value in pairs(kv) do
-          if modifier.data["sub_stat_"..property] then
-            modifier:UpdateSubBonus(property)
-          end
-        end
-      end
-    end
-  end
-
   function UpdateMovespeed(baseNPC, name)
     local modifier = baseNPC:FindModifierByName("_modifier_agi")
     if modifier then

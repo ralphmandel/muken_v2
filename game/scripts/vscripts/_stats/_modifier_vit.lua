@@ -9,22 +9,37 @@ function _modifier_vit:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.main_bonus = 0
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+    self.main_bonus = 0
 
-  self.data = {
-    sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
-    sub_stat_health_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_health_regen"), bonus = 0},
-    sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0},
-    sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
-    sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
-    sub_stat_status_resist_stack = {mult = 0, bonus = 0},
-    sub_stat_max_health_percent = {mult = 0, bonus = 0}
-  }
-
-  self:LoadData()
+    self.data = {
+      sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
+      sub_stat_health_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_health_regen"), bonus = 0},
+      sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0},
+      sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
+      sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
+      sub_stat_status_resist_stack = {mult = 0, bonus = 0},
+      sub_stat_max_health_percent = {mult = 0, bonus = 0}
+    }
+  
+    self:LoadData()    
+  end
 end
 
 function _modifier_vit:OnRefresh(kv)
+end
+
+function _modifier_vit:AddCustomTransmitterData()
+  return {
+    main_bonus = self.main_bonus,
+    stat_data = self.data
+  }
+end
+
+function _modifier_vit:HandleCustomTransmitterData(data)
+	self.main_bonus = data.main_bonus
+  self.data = data.stat_data
 end
 
 -- PROPERTIES --------------------------------------------------------------------------------
@@ -143,7 +158,7 @@ end
 function _modifier_vit:UpdateSubBonus(property)
   if self.parent == nil then return end
   if IsValidEntity(self.ability) == false then return end
-  
+
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
   if mods then
@@ -155,6 +170,7 @@ function _modifier_vit:UpdateSubBonus(property)
   end
 
   self.data["sub_stat_"..property].bonus = value
+  self:SendBuffRefreshToClients()
 end
 
 function _modifier_vit:LoadData()
