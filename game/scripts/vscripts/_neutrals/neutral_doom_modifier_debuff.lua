@@ -42,6 +42,7 @@ end
 function neutral_doom_modifier_debuff:CheckState()
 	local state = {
 		[MODIFIER_STATE_PASSIVES_DISABLED] = true,
+    [MODIFIER_STATE_MUTED] = true
 	}
 
 	return state
@@ -57,6 +58,7 @@ end
 
 function neutral_doom_modifier_debuff:OnDeath(keys)
 	if keys.unit ~= self.caster then return end
+  if self.caster:IsHero() then return end
 	self:Destroy()
 end
 

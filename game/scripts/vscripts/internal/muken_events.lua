@@ -114,41 +114,41 @@ function MukenEvents:OnPortraitUpdate(event)
   if entity == nil then return end
   if IsValidEntity(entity) == false then return end
   if hero:CanEntityBeSeenByMyTeam(entity) == false then return end
-  if MainStats(entity, "STR") == nil then return end
-  if MainStats(entity, "AGI") == nil then return end
-  if MainStats(entity, "INT") == nil then return end
-  if MainStats(entity, "VIT") == nil then return end
+  if entity:GetMainStat("STR") == nil then return end
+  if entity:GetMainStat("AGI") == nil then return end
+  if entity:GetMainStat("INT") == nil then return end
+  if entity:GetMainStat("VIT") == nil then return end
 
   local info = {
     unit_name = entity:GetUnitName(),
 
-    physical_damage = MainStats(entity, "STR"):GetPhysicalDamageAmp(),
+    physical_damage = entity:GetMainStat("STR"):GetPhysicalDamageAmp(),
     attack_speed = entity:GetDisplayAttackSpeed(),
     armor = entity:GetPhysicalArmorValue(false),
-    evasion = MainStats(entity, "AGI"):GetEvasion(false),
-    evasion_percent = MainStats(entity, "AGI"):GetEvasion(true),
-    crit_chance = MainStats(entity, "STR"):GetCriticalChance(false),
-    crit_chance_percent = MainStats(entity, "STR"):GetCriticalChance(true),
+    evasion = entity:GetMainStat("AGI"):GetEvasion(false),
+    evasion_percent = entity:GetMainStat("AGI"):GetEvasion(true),
+    crit_chance = entity:GetMainStat("STR"):GetCriticalChance(false),
+    crit_chance_percent = entity:GetMainStat("STR"):GetCriticalChance(true),
 
     attack_damage = entity:GetAverageTrueAttackDamage(nil),
     movespeed = entity:GetIdealSpeed(),
     hp_regen = entity:GetHealthRegen(),
-    miss_chance = MainStats(entity, "STR"):GetMissChance(),
-    crit_damage = MainStats(entity, "STR"):GetCriticalDamage(),
+    miss_chance = entity:GetMainStat("STR"):GetMissChance(),
+    crit_damage = entity:GetMainStat("STR"):GetCriticalDamage(),
 
-    magical_damage = MainStats(entity, "INT"):GetMagicalDamageAmp(),
+    magical_damage = entity:GetMainStat("INT"):GetMagicalDamageAmp(),
     current_vision = entity:GetCurrentVisionRange(),
-    magical_resist = MainStats(entity, "INT"):GetMagicalResist(),
-    magical_resist_percent = entity:Script_GetMagicalArmorValue(false, MainStats(entity, "INT")) * 100,
+    magical_resist = entity:GetMainStat("INT"):GetMagicalResist(),
+    magical_resist_percent = entity:Script_GetMagicalArmorValue(false, entity:GetMainStat("INT")) * 100,
     mp_regen = entity:GetManaRegen(),
-    debuff_amp = MainStats(entity, "INT"):GetDebuffAmp() * 100,
+    debuff_amp = entity:GetMainStat("INT"):GetDebuffAmp() * 100,
 
-    heal_power = 100 + (MainStats(entity, "INT"):GetHealPower() * 100),
-    heal_amp = MainStats(entity, "VIT"):GetIncomingHeal(),
-    status_resist = MainStats(entity, "VIT"):GetStatusResist(true) * 100,
-    cd_reduction = MainStats(entity, "AGI"):GetCooldownReduction(),
+    heal_power = 100 + (entity:GetMainStat("INT"):GetHealPower() * 100),
+    heal_amp = entity:GetMainStat("VIT"):GetIncomingHeal(),
+    status_resist = entity:GetMainStat("VIT"):GetStatusResist(true) * 100,
+    cd_reduction = entity:GetMainStat("AGI"):GetCooldownReduction(),
     cd_reduction_percent = entity:GetCooldownReduction() * 100,
-    buff_amp = MainStats(entity, "VIT"):GetIncomingBuff() * 100
+    buff_amp = entity:GetMainStat("VIT"):GetIncomingBuff() * 100
 
     -- physical_damage = BaseStats(entity):GetTotalPhysicalDamagePercent(),
     -- attack_speed = entity:GetDisplayAttackSpeed(),

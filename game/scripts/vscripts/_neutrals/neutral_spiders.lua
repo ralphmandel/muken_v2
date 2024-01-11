@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_spiders_modifier_passive", "_neutrals/neutral_spiders_m
 LinkLuaModifier("neutral_spiders_modifier_summon", "_neutrals/neutral_spiders_modifier_summon", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_spiders:Spawn()
+  self.spiders = {}
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())
@@ -18,6 +20,16 @@ function neutral_spiders:OnSpellStart()
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 
+  if GetHeroName(caster) == "trickster" then
+    for _,spider in pairs(self.spiders) do
+      if IsValidEntity(spider) then
+        spider:RemoveModifierByName("neutral_spiders_modifier_summon")
+      end
+    end
+
+    self.spiders = {}
+  end
+
   if IsServer() then target:EmitSound("Hero_Broodmother.SpawnSpiderlingsCast") end
 
   Timers:CreateTimer((0.1), function()
@@ -29,6 +41,10 @@ function neutral_spiders:OnSpellStart()
         duration = self:GetSpecialValueFor("duration"),
         target = target:entindex()
       }, false)
+
+      if GetHeroName(caster) == "trickster" then
+        table.insert(self.spiders, spider)
+      end
     end
   end)
 end

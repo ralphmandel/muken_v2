@@ -32,6 +32,8 @@ function neutral_doom:OnSpellStart()
 	local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 
+  if target:TriggerSpellAbsorb(self) then return end
+
   target:RemoveModifierByName("neutral_doom_modifier_pre")
   AddModifier(target, self, "neutral_doom_modifier_debuff", {duration = self:GetSpecialValueFor("duration")}, true)
 

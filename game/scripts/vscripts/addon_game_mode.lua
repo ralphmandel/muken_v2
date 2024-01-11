@@ -84,6 +84,8 @@ function Precache( context )
     PrecacheResource( "particle", "particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_aftershock.vpcf", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_skeletonking/wraith_king_ambient.vpcf", context )
     PrecacheResource( "particle", "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refract_hit.vpcf", context )
+    PrecacheResource( "particle", "particles/generic/block_hit/physical_block_hit.vpcf", context )
+    PrecacheResource( "particle", "particles/generic/block_hit/magical_block_hit.vpcf", context )
 
   -- Models can also be precached by folder or individually
     -- PrecacheModel should generally used over PrecacheResource for individual models
@@ -107,7 +109,7 @@ function Precache( context )
     PrecacheResource( "model", "models/creeps/lane_creeps/ti9_crocodilian_dire/ti9_crocodilian_dire_melee.vmdl", context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl", context )
     PrecacheResource( "model", "models/creeps/neutral_creeps/n_creep_black_drake/n_creep_black_drake.vmdl", context )
-    PrecacheResource( "model", "models/items/warlock/golem/warlock_the_infernal_master_golem/warlock_the_infernal_master_golem.vmdl", context )
+    PrecacheResource( "model", "models/items/warlock/golem/tevent_2_gatekeeper_golem/tevent_2_gatekeeper_golem.vmdl", context )
     PrecacheResource( "model", "models/heroes/dragon_knight/dragon_knight_dragon.vmdl", context )
     PrecacheResource( "model", "models/creeps/darkreef/gaoler/darkreef_gaoler.vmdl", context )
     PrecacheResource( "model", "models/items/wraith_king/frostivus_wraith_king/frostivus_wraith_king_skeleton.vmdl", context )

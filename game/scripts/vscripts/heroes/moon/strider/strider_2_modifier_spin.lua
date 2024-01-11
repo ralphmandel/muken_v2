@@ -55,7 +55,7 @@ function strider_2_modifier_spin:CheckState()
 end
 
 function strider_2_modifier_spin:OnIntervalThink()
-  local critical_damage = MainStats(self.parent, "STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_crit_damage")
+  local critical_damage = self.parent:GetMainStat("STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_crit_damage")
 
   local enemies = FindUnitsInRadius(
     self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, self.radius,
@@ -89,7 +89,7 @@ function strider_2_modifier_spin:OnIntervalThink()
     end
 
     if self.ability:GetSpecialValueFor("special_crit_damage") > 0 then
-      MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
+      self.parent:GetMainStat("STR"):SetForceCrit(100, critical_damage)
     end
 
     self:PlayEfxHit(enemy)

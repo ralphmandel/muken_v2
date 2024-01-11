@@ -252,7 +252,7 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "cooldown" then return 18 - (value_level * 0.5) end
 
     if value_name == "duration" then return 12 end
-    if value_name == "ms" then return 150 end
+    if value_name == "ms" then return 100 end
     if value_name == "hits" then return 25 end
     if value_name == "special_lifesteal" then return 50 end
 	end

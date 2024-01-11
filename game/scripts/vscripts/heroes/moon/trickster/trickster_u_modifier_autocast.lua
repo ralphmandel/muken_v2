@@ -24,6 +24,14 @@ function trickster_u_modifier_autocast:GetTexture()
   if self.texture == 407 then return "paladin_shield" end
   if self.texture == 408 then return "paladin_hammer" end
   if self.texture == 409 then return "paladin_magnus" end
+  if self.texture == 501 then return "neutrals/acid_puddle" end
+  if self.texture == 502 then return "neutrals/doom" end
+  if self.texture == 503 then return "neutrals/fireball" end
+  if self.texture == 504 then return "neutrals/immunity" end
+  if self.texture == 505 then return "neutrals/iron_blow" end
+  if self.texture == 506 then return "neutrals/smash" end
+  if self.texture == 507 then return "neutrals/spiders" end
+  if self.texture == 508 then return "neutrals/spike_armor" end
 end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -187,6 +195,11 @@ function trickster_u_modifier_autocast:OnIntervalThink()
       if self.stolen_ability:GetAbilityName() == "ancient_u__fissure" then
         self:SetDuration(-1, true)
         self:StartIntervalThink(3.5)
+        return
+      end
+      if self.stolen_ability:GetAbilityName() == "neutral_spiders" then
+        self:SetDuration(-1, true)
+        self:StartIntervalThink(1)
         return
       end
     end

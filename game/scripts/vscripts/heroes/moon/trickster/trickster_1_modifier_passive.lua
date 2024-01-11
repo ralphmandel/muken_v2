@@ -139,13 +139,11 @@ function trickster_1_modifier_passive:GetGestureSpeed(delay_speed)
 end
 
 function trickster_1_modifier_passive:HasHit(target)
-  local attacker_missing = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetMissChance()
+  local attacker_missing = RandomFloat(0, 100) < self.parent:GetMainStat("STR"):GetMissChance()
   local target_evasion = false
 
-  if MainStats(target, "AGI") then
-    local crit = RandomFloat(0, 100) < MainStats(self.parent, "STR"):GetCriticalChance(true)
-    target_evasion = (crit == false and RandomFloat(0, 100) < MainStats(target, "AGI"):GetEvasion(true))
-  end
+  local crit = RandomFloat(0, 100) < self.parent:GetMainStat("STR"):GetCriticalChance(true)
+  target_evasion = (crit == false and RandomFloat(0, 100) < target:GetMainStat("AGI"):GetEvasion(true))
 
   return (attacker_missing == false and target_evasion == false)
 end
@@ -178,7 +176,7 @@ function trickster_1_modifier_passive:PerformHit(target)
     end
   end
 
-  MainStats(self.parent, "STR"):SetForceCrit(0, nil)
+  self.parent:GetMainStat("STR"):SetForceCrit(0, nil)
   self.parent:PerformAttack(target, false, true, true, false, false, false, true)
   self.parent:RemoveModifierByName("trickster_1_modifier_bonus_damage")
 end

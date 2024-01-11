@@ -11,8 +11,8 @@ function neutral_spiders_modifier_summon:OnCreated(kv)
   self.ability = self:GetAbility()
 
   AddSubStats(self.parent, self.ability, {
-    attack_speed = MainStats(self.caster, "INT"):GetSummonPower() * 1,
-    max_health = MainStats(self.caster, "INT"):GetSummonPower() * 4,
+    attack_speed = self.caster:GetMainStat("INT"):GetSummonPower() * 1,
+    max_health = self.caster:GetMainStat("INT"):GetSummonPower() * 4,
   }, false)
 
   if IsServer() then
@@ -54,6 +54,7 @@ end
 
 function neutral_spiders_modifier_summon:OnDeath(keys)
 	if keys.unit ~= self.caster then return end
+  if self.caster:IsHero() then return end
 	self:Destroy()
 end
 

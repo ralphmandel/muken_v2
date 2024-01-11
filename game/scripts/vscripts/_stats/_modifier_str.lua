@@ -12,6 +12,8 @@ function _modifier_str:OnCreated(kv)
   self.force_crit_chance = nil
   self.has_crit = false
   self.missing = false
+  self.original_damage = 0
+  self.damage_calc = false
 
   self.main_bonus = 0
 
@@ -23,7 +25,8 @@ function _modifier_str:OnCreated(kv)
     sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
     sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
     sub_stat_critical_damage = {mult = 0, bonus = 0},
-    sub_stat_miss_chance = {mult = 0, bonus = 0}
+    sub_stat_miss_chance = {mult = 0, bonus = 0},
+    sub_stat_physical_block = {mult = 0, bonus = 0},
   }
 
   self:LoadData()
@@ -40,6 +43,7 @@ function _modifier_str:DeclareFunctions()
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
     MODIFIER_PROPERTY_MISS_PERCENTAGE,
+    MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK,
     MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
     MODIFIER_EVENT_ON_TAKEDAMAGE
   }
@@ -52,6 +56,9 @@ function _modifier_str:GetModifierBaseAttack_BonusDamage()
 end
 
 function _modifier_str:GetModifierSpellAmplify_Percentage(keys)
+  self.original_damage = keys.original_damage
+  self.damage_calc = true
+
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
   if keys.damage_flags == 31 then return 0 end
   if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
@@ -71,6 +78,15 @@ function _modifier_str:GetModifierMiss_Percentage(keys)
   return 0
 end
 
+function _modifier_str:GetModifierPhysical_ConstantBlock(keys)
+  local block = self:GetCalculedData("sub_stat_physical_block", false)
+  if block > keys.damage then block = keys.damage end
+
+  if block > 0 and self.parent:IsBlockDisabled() == false then self:StartGenericEfxBlock(keys) end
+
+  return block
+end
+
 function _modifier_str:GetModifierTotalDamageOutgoing_Percentage(keys)
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     if keys.damage_flags ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
@@ -88,9 +104,13 @@ function _modifier_str:OnTakeDamage(keys)
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end
   if keys.attacker ~= self.parent then return end
-  if self.has_crit == false then return end
 
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
+  if keys.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
+    if self.damage_calc == false then self.original_damage = keys.original_damage end
+    self.damage_calc = false
+  end
+
+  if self.has_crit == true and keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     self:PopupSpellCrit(keys.damage, keys.unit, DAMAGE_TYPE_PHYSICAL)
   end
 end

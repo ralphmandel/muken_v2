@@ -63,6 +63,14 @@ function trickster_u_modifier_passive:IsListed(ability)
     "paladin_2__shield",
     "paladin_3__hammer",
     "paladin_4__magnus",
+    "neutral_acid_puddle",
+    "neutral_doom",
+    "neutral_fireball",
+    "neutral_immunity",
+    "neutral_iron_blow",
+    "neutral_smash",
+    "neutral_spiders",
+    "neutral_spike_armor",
   }
 
   for _, name in pairs(list) do

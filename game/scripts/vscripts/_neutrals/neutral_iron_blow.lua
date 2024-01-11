@@ -43,7 +43,8 @@ function neutral_iron_blow:OnSpellStart()
 	)
 
 	for _,enemy in pairs(enemies) do
-    if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then      
+    if caster:IsHero() == true
+    or (enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE]) then      
       self:PlayEfxScreenShake(enemy)
 
       ApplyDamage({

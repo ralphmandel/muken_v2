@@ -39,7 +39,8 @@ function neutral_smash:OnSpellStart()
 	)
 
 	for _,enemy in pairs(enemies) do
-    if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
+    if caster:IsHero() == true
+    or (enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE]) then
       if enemy:IsMagicImmune() == false then
         AddModifier(enemy, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
 

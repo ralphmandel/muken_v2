@@ -56,18 +56,185 @@
     "ID"							      "3102"
 
     "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityCooldown"       "3"
 
     "AbilityValues"
     {
       "evasion"       "3"
-      "invi_duration" "1"
+      "invi_chance"   "25"
+      "invi_duration" "1.2"
       "invi_delay"    "0.3"
     }
 
     "precache"
     {
       "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_rare_wizard_garb"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_rare_wizard_garb"
+    "AbilityTextureName"		"armor/wizard_garb"
+    "ItemType"              "armor"
+    "ItemQuality"           "1"
+    "ID"							      "3103"
+
+    "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL" 
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+    {
+      "magic_resist"    "3"
+      "damage_percent"  "10"
+    }
+
+    "precache"
+    {
+      "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_rare_healing_mail"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_rare_healing_mail"
+    "AbilityTextureName"		"armor/healing_mail"
+    "ItemType"              "armor"
+    "ItemQuality"           "1"
+    "ID"							      "3104"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityCooldown"       "3"
+
+    "AbilityValues"
+    {
+      "health_regen"    "10"
+      "heal"            "20"
+    }
+
+    "precache"
+    {
+      "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_epic_shaman_shield"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_epic_shaman_shield"
+    "AbilityTextureName"		"shield/shaman_shield"
+    "ItemType"              "shield"
+    "ItemQuality"           "2"
+    "ID"							      "3105"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+    {
+      "physical_block"  "10"
+      "status_resist"   "25"
+      "heal"            "10"
+    }
+
+    "precache"
+    {
+      "particle"	""
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "1"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_epic_dark_shield"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "ScriptFile"					  "equips/body/item_epic_dark_shield"
+    "AbilityTextureName"		"shield/dark_shield"
+    "ItemType"              "shield"
+    "ItemQuality"           "2"
+    "ID"							      "3106"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+    {
+      "magical_block"  "15"
+      "chance"         "15"
+    }
+
+    "precache"
+    {
+      "particle"	"particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf"
     }
 
     "ItemShareability"  "ITEM_FULLY_SHAREABLE"

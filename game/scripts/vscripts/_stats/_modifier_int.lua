@@ -20,6 +20,7 @@ function _modifier_int:OnCreated(kv)
     sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
     sub_stat_summon_power = {mult = self.ability:GetSpecialValueFor("sub_stat_summon_power"), bonus = 0},
     sub_stat_manacost = {mult = 0, bonus = 0},
+    sub_stat_magical_block = {mult = 0, bonus = 0},
   }
 
   self:LoadData()
@@ -36,6 +37,7 @@ function _modifier_int:DeclareFunctions()
     MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
     MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+    MODIFIER_PROPERTY_MAGICAL_CONSTANT_BLOCK,
     MODIFIER_EVENT_ON_TAKEDAMAGE
   }
 
@@ -74,6 +76,15 @@ end
 
 function _modifier_int:GetModifierMagicalResistanceBonus()
   return self:GetCalculedData("sub_stat_magic_resist", true)
+end
+
+function _modifier_int:GetModifierMagical_ConstantBlock(keys)
+  local block = self:GetCalculedData("sub_stat_magical_block", false)
+  if block > keys.damage then block = keys.damage end
+
+  if block > 0 and self.parent:IsBlockDisabled() == false then self:StartGenericEfxBlock(keys) end
+
+  return block
 end
 
 function _modifier_int:OnTakeDamage(keys)

@@ -76,7 +76,7 @@ function ancient_3_modifier_passive:OnAttacked(keys)
   end
 
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_double_chance")
-  and MainStats(self.parent, "STR").has_crit == false then
+  and self.parent:GetMainStat("STR").has_crit == false then
     if IsServer() then self:IncrementStackCount() end
   end
 end
@@ -90,7 +90,7 @@ function ancient_3_modifier_passive:OnTakeDamage(keys)
   local crit = true
 
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
-    crit = MainStats(self.parent, "STR").has_crit
+    crit = self.parent:GetMainStat("STR").has_crit
     PlayEfxAncientStun(self.parent, keys.damage, crit)
   end
 

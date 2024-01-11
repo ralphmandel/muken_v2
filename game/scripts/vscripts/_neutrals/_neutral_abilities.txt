@@ -196,11 +196,11 @@
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
 
     "AbilityManaCost"         	"300"
-		"AbilityCooldown"				    "20"
+		"AbilityCooldown"				    "15"
 
 		"AbilityValues"
     {
-      "magic_resist"  "15"
+      "magic_resist"  "10"
       "duration"      "10"
       "radius"	      "500"
     }
@@ -450,9 +450,9 @@
 
 		"AbilityValues"
     {
-      "radius"    "450"
+      "radius"    "500"
       "duration"  "10"
-      "damage"    "150"
+      "damage"    "100"
     }
 	}
 

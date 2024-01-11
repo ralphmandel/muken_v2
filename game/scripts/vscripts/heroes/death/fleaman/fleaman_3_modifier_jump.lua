@@ -113,7 +113,7 @@ end
 function fleaman_3_modifier_jump:PerformImpact(point)
 	self.parent:FadeGesture(ACT_DOTA_SLARK_POUNCE)
 
-  local critical_damage = MainStats(self.parent, "STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_critical_damage")
+  local critical_damage = self.parent:GetMainStat("STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_critical_damage")
 
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), point, nil, self.radius,
@@ -122,7 +122,7 @@ function fleaman_3_modifier_jump:PerformImpact(point)
 	)
 
 	for _,enemy in pairs(enemies) do
-    MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
+    self.parent:GetMainStat("STR"):SetForceCrit(100, critical_damage)
     self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
 	end
 

@@ -44,6 +44,7 @@ end
 
 function neutral_fireball_modifier_burn:OnDeath(keys)
 	if keys.unit ~= self.caster then return end
+  if self.caster:IsHero() then return end
 	self:Destroy()
 end
 

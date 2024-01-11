@@ -130,7 +130,7 @@ end
 -- UTILS -----------------------------------------------------------
 
 function lawbreaker_2_modifier_combo:GetAS()  
-  return MainStats(self.parent, "AGI"):GetTotalAttackSpeed() / 100 * self.parent:GetBaseAttackTime()
+  return self.parent:GetMainStat("AGI"):GetTotalAttackSpeed() / 100 * self.parent:GetBaseAttackTime()
 end
 
 function lawbreaker_2_modifier_combo:CalcPosition(target)

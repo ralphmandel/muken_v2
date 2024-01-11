@@ -124,10 +124,6 @@
 
 -- STATS/MODIFIERS
 
-  function MainStats(baseNPC, stat)
-    return baseNPC:FindModifierByName("_modifier_"..string.lower(stat))
-  end
-
   function CalcStatus(duration, caster, target)
     if caster == nil or target == nil then return duration end
     if IsValidEntity(caster) == false or IsValidEntity(target) == false then return duration end
@@ -143,18 +139,15 @@
   end
 
   function CalcDebuffAmp(duration, caster)
-    if MainStats(caster, "INT") then duration = duration * (1 + MainStats(caster, "INT"):GetDebuffAmp()) end
-    return duration
+    return duration * (1 + caster:GetMainStat("INT"):GetDebuffAmp())
   end
 
   function CalcStatusResistance(duration, target)
-    if MainStats(target, "VIT") then duration = duration * (1 - MainStats(target, "VIT"):GetStatusResist(true)) end
-    return duration
+    return duration * (1 - target:GetMainStat("VIT"):GetStatusResist(true))
   end
 
   function CalcBuffAmp(duration, target)
-    if MainStats(target, "VIT") then duration = duration * (1 + MainStats(target, "VIT"):GetIncomingBuff()) end
-    return duration
+    return duration * (1 + target:GetMainStat("VIT"):GetIncomingBuff())
   end
 
   function AddModifier(target, ability, modifier_name, table, bCalcStatus)
@@ -399,11 +392,7 @@
 -- HEAL / MANA
 
   function CalcHeal(caster, amount)
-    if MainStats(caster, "INT") then
-      return amount * (1 + MainStats(caster, "INT"):GetHealPower())
-    else
-      return amount
-    end
+    return amount * (1 + caster:GetMainStat("INT"):GetHealPower())
   end
 
   function IncreaseMana(target, amount)
@@ -709,9 +698,9 @@
 
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
-      local names = {[1] = "item_rare_iron_shield", [2] = "item_rare_cloak_evasion", [3] = "item_rare_cloak_evasion"}
+      local names = {[1] = "item_rare_healing_mail", [2] = "item_epic_shaman_shield", [3] = "item_epic_dark_shield"}
 
-      for i = 1, 30, 1 do
+      for i = 1, 10, 1 do
         local item = CreateItem(names[RandomInt(1, 3)], nil, nil)
         local pos = Vector(-1800, -1800, 0)
         local drop = CreateItemOnPositionSync(pos, item)

@@ -84,9 +84,7 @@ function lawbreaker_1_modifier_passive:OnAttacked(keys)
 end
 
 function lawbreaker_1_modifier_passive:OnProjectileDodge(keys)
-  if MainStats(keys.target, "AGI") == nil then return end
-
-  local attacker = MainStats(keys.target, "AGI").proj_miss_attacker
+  local attacker = keys.target:GetMainStat("AGI").proj_miss_attacker
   if attacker ~= self.parent then return end
   if IsServer() then self:IncrementStackCount() end
 end
@@ -100,8 +98,8 @@ function lawbreaker_1_modifier_passive:OnStackCountChanged(old)
   end
 
   -- if self:GetStackCount() == self.ability:GetSpecialValueFor("max_hit") then
-  --   local critical_damage = MainStats(self.parent, "STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("crit_dmg")
-  --   MainStats(self.parent, "STR"):SetForceCrit(100, critical_damage)
+  --   local critical_damage = self.parent:GetMainStat("STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("crit_dmg")
+  --   self.parent:GetMainStat("STR"):SetForceCrit(100, critical_damage)
   -- end
 end
 

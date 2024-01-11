@@ -44,8 +44,8 @@ function neutral_spike_armor_modifier_buff:OnTakeDamage(keys)
   if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
 	if keys.attacker:IsBaseNPC() == false then return end
-  if keys.attacker:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON]
-  or keys.attacker:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE] then return end
+  if self.parent:IsHero() == false
+  and (keys.attacker:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON] or keys.attacker:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE]) then return end
 
 	local return_percent = self.ability:GetSpecialValueFor("return_percent") * 0.01
 

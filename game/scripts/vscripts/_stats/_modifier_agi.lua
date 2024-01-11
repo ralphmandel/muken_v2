@@ -83,8 +83,7 @@ function _modifier_agi:GetModifierBaseAttackTimeConstant()
 end
 
 function _modifier_agi:GetModifierDodgeProjectile(keys)
-  local attacker_str = MainStats(keys.attacker, "STR")
-  if attacker_str == nil then return end
+  local attacker_str = keys.attacker:GetMainStat("STR")
 
   local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance(true)
   attacker_str.force_crit_chance = nil
@@ -97,7 +96,11 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
   local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion(true))
-  if attacker_missing or target_evasion then self.proj_miss_attacker = keys.attacker return 1 end
+  if attacker_missing or target_evasion then
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_MISS, self.parent, 0, self.parent)
+    self.proj_miss_attacker = keys.attacker
+    return 1
+  end
 
   self.proj_miss_attacker = nil
 
@@ -105,7 +108,7 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
 end
 
 function _modifier_agi:OnAttack(keys)
-  local attacker_str = MainStats(keys.attacker, "STR")
+  local attacker_str = keys.attacker:GetMainStat("STR")
   if attacker_str == nil then return end
 
   if keys.target ~= self.parent then return end

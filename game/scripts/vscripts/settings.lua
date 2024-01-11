@@ -183,6 +183,9 @@ TIER_TEAMS = {
 }
 
 SPAWNER_MOBS = {
+  -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+  --   ""
+  -- }},
   -- TIER 1 | 96
     {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
       "neutral_common_chameleon_a", "neutral_common_chameleon_b"

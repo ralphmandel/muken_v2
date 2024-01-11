@@ -74,9 +74,11 @@ function neutral_fireball:FindTarget(list)
       if enemy == target then pass = false end
     end
 
-    if enemy:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON]
-    or enemy:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE] then
-      pass = false
+    if caster:IsHero() == false then
+      if enemy:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON]
+      or enemy:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE] then
+        pass = false
+      end      
     end
 
     if pass == true then

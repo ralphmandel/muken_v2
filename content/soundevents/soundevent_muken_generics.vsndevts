@@ -119,7 +119,7 @@
 						"value"			"0"
 					}
 					"mixgroup"			{ "value"	"Physics"	}
-					"volume"        { "value"   "1.2"	}
+					"volume"        { "value"   "0.6"	}
 				}
 			}
 		}

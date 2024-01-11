@@ -236,7 +236,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "strider_2__spin" then
 		if value_name == "AbilityManaCost" then return 40 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
-		if value_name == "cooldown" then return 7.5 - (value_level * 0.25) end
+		if value_name == "cooldown" then return 9 - (value_level * 0.25) end
 
     if value_name == "radius" then return 350 end
     if value_name == "special_bash_duration" then return 0.5 end
@@ -247,7 +247,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
 		if value_name == "AbilityManaCost" then return 130 * mana_mult end
-		if value_name == "AbilityCooldown" then return 22 end
+		if value_name == "AbilityCooldown" then return 20 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
     if value_name == "radius" then return 300 + (value_level * 10) end
 
@@ -259,7 +259,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then
 		if value_name == "AbilityManaCost" then return 150 * mana_mult end
-		if value_name == "AbilityCooldown" then return 18 end
+		if value_name == "AbilityCooldown" then return 25 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("blink_range") end
 
     if value_name == "shuriken_amount" then return 24 + (value_level * 1) end

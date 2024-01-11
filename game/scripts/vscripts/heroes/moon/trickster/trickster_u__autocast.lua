@@ -190,6 +190,14 @@ LinkLuaModifier("paladin_special_values", "heroes/sun/paladin/paladin-special_va
       ["paladin_2__shield"] = 407,
       ["paladin_3__hammer"] = 408,
       ["paladin_4__magnus"] = 409,
+      ["neutral_acid_puddle"] = 501,
+      ["neutral_doom"] = 502,
+      ["neutral_fireball"] = 503,
+      ["neutral_immunity"] = 504,
+      ["neutral_iron_blow"] = 505,
+      ["neutral_smash"] = 506,
+      ["neutral_spiders"] = 507,
+      ["neutral_spike_armor"] = 508,
     }
   
     return list[ability_name]

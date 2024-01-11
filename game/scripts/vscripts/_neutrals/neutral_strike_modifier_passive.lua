@@ -59,7 +59,7 @@ function neutral_strike_modifier_passive:OnIntervalThink()
   end
 
   AddModifier(self.parent, self.ability, "neutral_strike_modifier_wind", {}, false)
-  MainStats(self.parent, "STR"):SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
+  self.parent:GetMainStat("STR"):SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
   self.strike = true
 
   if IsServer() then self:StartIntervalThink(-1) end

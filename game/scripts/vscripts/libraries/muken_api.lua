@@ -18,12 +18,17 @@ function CDOTA_Item:GetItemType()
   return items_table[self:GetAbilityName()].ItemType
 end
 
-function CDOTA_Buff:StartGenericEfxBlock(target)
+function CDOTA_Buff:StartGenericEfxBlock(keys)
   local parent = self:GetParent()
-  local string = "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refract_hit.vpcf"
+  local target = keys.attacker
   local direction = (parent:GetOrigin() - target:GetOrigin()):Normalized()
   local origin = parent:GetAbsOrigin()
   --origin.z = origin.z -200
+
+  local string = "particles/generic/block_hit/physical_block_hit.vpcf"
+  if keys.damage_type == DAMAGE_TYPE_MAGICAL then
+    string = "particles/generic/block_hit/magical_block_hit.vpcf"
+  end
 
   local hit_particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, parent)
   ParticleManager:SetParticleControlEnt(hit_particle, 0, parent, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", origin, true)
@@ -32,4 +37,12 @@ function CDOTA_Buff:StartGenericEfxBlock(target)
   ParticleManager:ReleaseParticleIndex(hit_particle)
 
   if IsServer() then parent:EmitSound("Generic.Damage.Block") end
+end
+
+function CDOTA_BaseNPC:GetMainStat(stat)
+  return self:FindModifierByName("_modifier_"..string.lower(stat))
+end
+
+function CDOTA_BaseNPC:GetLastOriginalDamage(percent)
+  return self:GetMainStat("STR").original_damage * percent * 0.01
 end
