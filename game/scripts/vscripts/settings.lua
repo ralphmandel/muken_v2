@@ -183,22 +183,22 @@ TIER_TEAMS = {
 }
 
 SPAWNER_MOBS = {
-  -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-  --   ""
-  -- }},
+  {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    "neutral_legendary_iron_golem"
+  }},
   -- TIER 1 | 96
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_chameleon_a", "neutral_common_chameleon_b"
-    }}, -- 96 | 43 + 53
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_crocodilian_a"
-    }}, -- 96 | 96
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_crocodilian_b"
-    }}, -- 114 | 114
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_great_gargoyle"
-    }}, -- 79 | 79
+    -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    --   "neutral_common_chameleon_a", "neutral_common_chameleon_b"
+    -- }}, -- 96 | 43 + 53
+    -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    --   "neutral_common_crocodilian_a"
+    -- }}, -- 96 | 96
+    -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    --   "neutral_common_crocodilian_b"
+    -- }}, -- 114 | 114
+    -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
+    --   "neutral_common_great_gargoyle"
+    -- }}, -- 79 | 79
 
   -- TIER 2 | 210
     {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {

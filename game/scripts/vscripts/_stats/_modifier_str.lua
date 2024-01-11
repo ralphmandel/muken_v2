@@ -18,13 +18,14 @@ function _modifier_str:OnCreated(kv)
   self.main_bonus = 0
 
   self.const_critical_damage = self.ability:GetSpecialValueFor("const_critical_damage")
+  self.const_critical_chance = self.ability:GetSpecialValueFor("const_critical_chance")
 
   self.data = {
     sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
     sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
-    sub_stat_critical_chance = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_chance"), bonus = 0},
     sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
-    sub_stat_critical_damage = {mult = 0, bonus = 0},
+    sub_stat_critical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_damage"), bonus = 0},
+    sub_stat_critical_chance = {mult = 0, bonus = 0},
     sub_stat_miss_chance = {mult = 0, bonus = 0},
     sub_stat_physical_block = {mult = 0, bonus = 0},
   }
@@ -134,21 +135,18 @@ function _modifier_str:GetPhysicalDamageAmp()
   return self:GetCalculedData("sub_stat_physical_damage", false) + 100
 end
 
-function _modifier_str:GetCriticalChance(bPercent)
-  local chance = self:GetCalculedDataStack("sub_stat_critical_chance", bPercent)
-
-  if bPercent then
-    if self.force_crit_chance then chance = self.force_crit_chance end
-    if chance < 0 then chance = 0 end
-    if chance > 100 then chance = 100 end    
-  end
+function _modifier_str:GetCriticalChance()
+  local chance = CalcLuck(self.parent, self.const_critical_chance) + self:GetCalculedData("sub_stat_critical_chance", false)
+  if self.force_crit_chance then chance = self.force_crit_chance end
+  if chance < 0 then chance = 0 end
+  if chance > 100 then chance = 100 end
 
   return chance
 end
 
 function _modifier_str:GetCriticalDamage()
   if self.force_crit_damage then return self.force_crit_damage end
-  return self.const_critical_damage + self:GetCalculedData("sub_stat_critical_damage", false)
+  return self.const_critical_damage + self:GetCalculedDataStack("sub_stat_critical_damage", false)
 end
 
 function _modifier_str:GetCalculedDataStack(property, bScalar)

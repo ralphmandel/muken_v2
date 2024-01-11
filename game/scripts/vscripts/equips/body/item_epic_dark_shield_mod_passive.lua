@@ -34,7 +34,7 @@ function item_epic_dark_shield_mod_passive:DeclareFunctions()
 end
 
 function item_epic_dark_shield_mod_passive:GetAbsorbSpell(keys)
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("chance")) then
     if IsServer() then self:PlayEfxSpellBlock() end
     return 1
   end

@@ -131,7 +131,7 @@ function trickster_u_modifier_autocast:OnAttack(keys)
   if self.parent:HasModifier("flea_3_modifier_jump") then return end
   if not self.enabled then return end
 
-  if RandomFloat(0, 100) < self:GetChance() then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, self:GetChance()) then
     local target = keys.target
 
     if self.stolen_ability:GetAbilityTargetTeam() == DOTA_UNIT_TARGET_TEAM_FRIENDLY then

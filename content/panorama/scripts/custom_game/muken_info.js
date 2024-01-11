@@ -18,32 +18,32 @@ var current_info = {};
     INFO_LAYOUT[tab][column] = InfoColumnPanel;
 
     if (tab == 1) {
-      CreateRow(tab, column, "physical_damage", '%');
-      CreateRow(tab, column, "attack_speed", '');
-      CreateRow(tab, column, "armor", '');
-      CreateRow(tab, column, "evasion", '');
-      CreateRow(tab, column, "crit_chance", '');
-    }
-    if (tab == 2) {
       CreateRow(tab, column, "attack_damage", '');
-      CreateRow(tab, column, "movespeed", '');
-      CreateRow(tab, column, "hp_regen", '');
-      CreateRow(tab, column, "miss_chance", '%');
+      CreateRow(tab, column, "attack_speed", '');
+      CreateRow(tab, column, "evasion", '');
+      CreateRow(tab, column, "crit_chance", '%');
       CreateRow(tab, column, "crit_damage", '%');
     }
-    if (tab == 3) {
+    if (tab == 2) {
+      CreateRow(tab, column, "physical_damage", '%');
+      CreateRow(tab, column, "armor", '');
       CreateRow(tab, column, "magical_damage", '%');
-      CreateRow(tab, column, "current_vision", '');
       CreateRow(tab, column, "magical_resist", '');
-      CreateRow(tab, column, "mp_regen", '');
+      CreateRow(tab, column, "status_resist", '%');
+    }
+    if (tab == 3) {
+      CreateRow(tab, column, "heal_power", '%');
+      CreateRow(tab, column, "summon_power", '');
       CreateRow(tab, column, "debuff_amp", '%');
+      CreateRow(tab, column, "buff_amp", '%');
+      CreateRow(tab, column, "luck", '%');
     }
     if (tab == 4) {
-      CreateRow(tab, column, "heal_power", '%');
-      CreateRow(tab, column, "heal_amp", '%');
-      CreateRow(tab, column, "status_resist", '%');
+      CreateRow(tab, column, "movespeed", '');
       CreateRow(tab, column, "cd_reduction", '');
-      CreateRow(tab, column, "buff_amp", '%');
+      CreateRow(tab, column, "miss_chance", '%');
+      CreateRow(tab, column, "current_vision", '');
+      CreateRow(tab, column, "heal_amp", '%');
     }
   }
 
@@ -93,8 +93,7 @@ var current_info = {};
 
       for (let tab = 1; tab <= 4; tab++) {
         for (const [layout_name, layout_value] of Object.entries(INFO_LAYOUT[tab]["INFO_VALUE"])) {
-          if (alt_pressed == true && (layout_name == "evasion" || layout_name == "crit_chance" ||
-          layout_name == "magical_resist" || layout_name == "cd_reduction")) {
+          if (alt_pressed == true && (layout_name == "evasion" || layout_name == "magical_resist" || layout_name == "cd_reduction")) {
             if (name == layout_name + "_percent") {
               var text = Number((value).toFixed(2)) + "%";
               INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text; 

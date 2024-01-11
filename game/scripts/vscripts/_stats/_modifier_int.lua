@@ -15,10 +15,11 @@ function _modifier_int:OnCreated(kv)
     sub_stat_max_mana = {mult = self.ability:GetSpecialValueFor("sub_stat_max_mana"), bonus = 0},
     sub_stat_magical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_magical_damage"), bonus = 0},
     sub_stat_holy_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_holy_damage"), bonus = 0},
-    sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
     sub_stat_debuff_amp = {mult = self.ability:GetSpecialValueFor("sub_stat_debuff_amp"), bonus = 0},
-    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
     sub_stat_summon_power = {mult = self.ability:GetSpecialValueFor("sub_stat_summon_power"), bonus = 0},
+    sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
+    sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
+    sub_stat_luck = {mult = self.ability:GetSpecialValueFor("sub_stat_luck"), bonus = 0},
     sub_stat_manacost = {mult = 0, bonus = 0},
     sub_stat_magical_block = {mult = 0, bonus = 0},
   }
@@ -49,11 +50,11 @@ function _modifier_int:GetModifierManaBonus()
     if self.parent:HasModifier("ancient_u_modifier_passive") == false then
       return 0
     else
-      return 1000 + self:GetCalculedDataStack("sub_stat_max_mana", false)
+      return 1000 + self:GetCalculedData("sub_stat_max_mana", false)
     end
   end
   
-  return self:GetCalculedDataStack("sub_stat_max_mana", false)
+  return self:GetCalculedData("sub_stat_max_mana", false)
 end
 
 function _modifier_int:GetModifierPercentageManacost(keys)
@@ -138,6 +139,10 @@ end
 
 function _modifier_int:GetSummonPower()
   return self:GetCalculedData("sub_stat_summon_power", false)
+end
+
+function _modifier_int:GetLuck()
+  return self:GetCalculedDataStack("sub_stat_luck", false) * 0.01
 end
 
 function _modifier_int:GetCalculedDataStack(property, bScalar)

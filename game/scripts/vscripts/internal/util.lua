@@ -389,7 +389,11 @@
     end
   end
 
--- HEAL / MANA
+-- LUCK / HEAL / MANA
+
+  function CalcLuck(caster, value)
+    return value * (1 + caster:GetMainStat("INT"):GetLuck())
+  end
 
   function CalcHeal(caster, amount)
     return amount * (1 + caster:GetMainStat("INT"):GetHealPower())

@@ -38,7 +38,7 @@ function item_rare_iron_shield_mod_passive:GetModifierPhysical_ConstantBlock(key
   if not keys.ranged_attack then return end
   if self.parent:IsMuted() then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("block_chance") then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("block_chance")) then
     local block = keys.damage * self.ability:GetSpecialValueFor("block_percent") * 0.01
     if block > 0 and self.parent:IsBlockDisabled() == false then self:StartGenericEfxBlock(keys) end
 

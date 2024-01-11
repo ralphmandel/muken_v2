@@ -16,11 +16,11 @@ function _modifier_agi:OnCreated(kv)
   self.const_base_mana_regen = self.ability:GetSpecialValueFor("const_base_mana_regen")
 
   self.data = {
-    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
     sub_stat_attack_speed = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_speed"), bonus = 0},
-    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
     sub_stat_cooldown_reduction = {mult = self.ability:GetSpecialValueFor("sub_stat_cooldown_reduction"), bonus = 0},
     sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
+    sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
+    sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
     sub_stat_movespeed_increase = {mult = 0, bonus = 0},
     sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
     sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
@@ -85,7 +85,7 @@ end
 function _modifier_agi:GetModifierDodgeProjectile(keys)
   local attacker_str = keys.attacker:GetMainStat("STR")
 
-  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance(true)
+  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance()
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 
@@ -115,7 +115,7 @@ function _modifier_agi:OnAttack(keys)
   if keys.attacker:GetAttackCapability() ~= DOTA_UNIT_CAP_MELEE_ATTACK
   and keys.no_attack_cooldown == false then return end
 
-  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance(true)
+  local crit = RandomFloat(0, 100) < attacker_str:GetCriticalChance()
   attacker_str.force_crit_chance = nil
   attacker_str.has_crit = crit
 

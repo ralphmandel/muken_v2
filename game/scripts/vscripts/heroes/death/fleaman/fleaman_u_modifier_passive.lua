@@ -76,7 +76,7 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
     self:PlayEfxLifesteal(keys.attacker)
   end
 
-  if RandomFloat(0, 100) < chain_chance and self.ability:IsCooldownReady() then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, chain_chance) and self.ability:IsCooldownReady() then
     AddModifier(self.parent, self.ability, "fleaman_u_modifier_chain", {target_index = keys.target:GetEntityIndex()}, false)
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
   end

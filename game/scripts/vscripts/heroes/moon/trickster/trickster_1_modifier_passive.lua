@@ -95,7 +95,7 @@ function trickster_1_modifier_passive:CheckDoubleAtk(target)
   if self:HasHit(target) == false then return end
   if not IsServer() then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("chance")) then
     local delay_speed = self:GetDelaySpeed()
     self.gesture_speed = self:GetGestureSpeed(delay_speed)
 
@@ -142,7 +142,7 @@ function trickster_1_modifier_passive:HasHit(target)
   local attacker_missing = RandomFloat(0, 100) < self.parent:GetMainStat("STR"):GetMissChance()
   local target_evasion = false
 
-  local crit = RandomFloat(0, 100) < self.parent:GetMainStat("STR"):GetCriticalChance(true)
+  local crit = RandomFloat(0, 100) < self.parent:GetMainStat("STR"):GetCriticalChance()
   target_evasion = (crit == false and RandomFloat(0, 100) < target:GetMainStat("AGI"):GetEvasion(true))
 
   return (attacker_missing == false and target_evasion == false)
@@ -162,7 +162,7 @@ function trickster_1_modifier_passive:PerformHit(target)
 
   if IsServer() then target:EmitSound("Hero_Riki.Backstab") end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_bleeding_chance") then
+  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_bleeding_chance")) then
     RemoveAllModifiersByNameAndAbility(target, "_modifier_bleeding", self)
     AddModifier(target, self.ability, "_modifier_bleeding", {
       duration = self.ability:GetSpecialValueFor("special_bleeding_duration")

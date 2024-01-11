@@ -13,11 +13,12 @@
 
 		"AbilityValues"
 		{
-      "sub_stat_critical_chance" "0.5" //% /^
-      "sub_stat_physical_damage" "2" //%
       "sub_stat_attack_damage"   "1"
+      "sub_stat_physical_damage" "2" //%
       "sub_stat_armor"           "0.1"
+      "sub_stat_critical_damage" "5" //%
       "const_critical_damage"    "150" //%
+      "const_critical_chance"    "17" //%
 		}
 	}
 
@@ -32,11 +33,11 @@
 
 		"AbilityValues"
 		{
-      "sub_stat_movespeed"          "3"
       "sub_stat_attack_speed"       "1"
-      "sub_stat_evasion"            "0.1" //% /^
       "sub_stat_cooldown_reduction" "0.07" //% /^
       "sub_stat_mana_regen"         "0.1"
+      "sub_stat_evasion"            "0.1" //% /^
+      "sub_stat_movespeed"          "3"
       "const_base_movespeed"        "300"
       "const_base_attack_time"      "1.3"
       "const_base_mana_regen"       "5"
@@ -54,13 +55,14 @@
 
 		"AbilityValues"
 		{
-      "sub_stat_max_mana"       "50"
+      "sub_stat_max_mana"       "10"
       "sub_stat_magical_damage" "2" //%
       "sub_stat_holy_damage"    "0.5" //%
-      "sub_stat_heal_power"     "2" //%
       "sub_stat_debuff_amp"     "0.5" //%
-      "sub_stat_magic_resist"   "0.1" //% /^
       "sub_stat_summon_power"   "1"
+      "sub_stat_heal_power"     "2" //%
+      "sub_stat_magic_resist"   "0.1" //% /^
+      "sub_stat_luck"           "2.5" //%
 		}
 	}
 
@@ -75,11 +77,11 @@
 
 		"AbilityValues"
 		{
-      "sub_stat_incoming_heal"  "1" //%
-      "sub_stat_health_regen"   "0.4"
       "sub_stat_max_health"     "50"
+      "sub_stat_health_regen"   "0.4"
       "sub_stat_incoming_buff"  "0.4" //%
       "sub_stat_status_resist"  "0.1" //% /^
+      "sub_stat_incoming_heal"  "1" //%
 		}
 	}
 }

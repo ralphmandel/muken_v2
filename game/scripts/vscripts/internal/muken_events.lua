@@ -127,12 +127,11 @@ function MukenEvents:OnPortraitUpdate(event)
     armor = entity:GetPhysicalArmorValue(false),
     evasion = entity:GetMainStat("AGI"):GetEvasion(false),
     evasion_percent = entity:GetMainStat("AGI"):GetEvasion(true),
-    crit_chance = entity:GetMainStat("STR"):GetCriticalChance(false),
-    crit_chance_percent = entity:GetMainStat("STR"):GetCriticalChance(true),
+    crit_chance = entity:GetMainStat("STR"):GetCriticalChance(),
 
     attack_damage = entity:GetAverageTrueAttackDamage(nil),
     movespeed = entity:GetIdealSpeed(),
-    hp_regen = entity:GetHealthRegen(),
+    luck = entity:GetMainStat("INT"):GetLuck() * 100,
     miss_chance = entity:GetMainStat("STR"):GetMissChance(),
     crit_damage = entity:GetMainStat("STR"):GetCriticalDamage(),
 
@@ -140,7 +139,7 @@ function MukenEvents:OnPortraitUpdate(event)
     current_vision = entity:GetCurrentVisionRange(),
     magical_resist = entity:GetMainStat("INT"):GetMagicalResist(),
     magical_resist_percent = entity:Script_GetMagicalArmorValue(false, entity:GetMainStat("INT")) * 100,
-    mp_regen = entity:GetManaRegen(),
+    summon_power = entity:GetMainStat("INT"):GetSummonPower(),
     debuff_amp = entity:GetMainStat("INT"):GetDebuffAmp() * 100,
 
     heal_power = 100 + (entity:GetMainStat("INT"):GetHealPower() * 100),
@@ -149,30 +148,6 @@ function MukenEvents:OnPortraitUpdate(event)
     cd_reduction = entity:GetMainStat("AGI"):GetCooldownReduction(),
     cd_reduction_percent = entity:GetCooldownReduction() * 100,
     buff_amp = entity:GetMainStat("VIT"):GetIncomingBuff() * 100
-
-    -- physical_damage = BaseStats(entity):GetTotalPhysicalDamagePercent(),
-    -- attack_speed = entity:GetDisplayAttackSpeed(),
-    -- armor = entity:GetPhysicalArmorValue(false),
-    -- evasion = BaseStats(entity):GetDodgePercent(),
-    -- crit_chance = BaseStats(entity):GetCriticalChance(true),
-
-    -- attack_damage = entity:GetAverageTrueAttackDamage(nil),
-    -- movespeed = entity:GetIdealSpeed(),
-    -- block = BaseStats(entity):GetBlockAtkDamage(),
-    -- hp_regen = entity:GetHealthRegen(),
-    -- crit_damage = 100 + BaseStats(entity):GetTotalCriticalDamage(),
-
-    -- magical_damage = BaseStats(entity):GetTotalMagicalDamagePercent(),
-    -- current_vision = entity:GetCurrentVisionRange(),
-    -- magical_resist = entity:Script_GetMagicalArmorValue(false, BaseStats(entity)) * 100,
-    -- mp_regen = entity:GetManaRegen(),
-    -- debuff_amp = BaseStats(entity):GetTotalDebuffAmpPercent(),
-
-    -- heal_power = BaseStats(entity):GetTotalHealPowerPercent(),
-    -- heal_amp = 100 + BaseStats(entity):GetHealAmp(),
-    -- status_resist = BaseStats(entity):GetStatusResistPercent(),
-    -- cd_reduction = entity:GetCooldownReduction() * 100,
-    -- buff_amp = BaseStats(entity):GetTotalBuffAmpPercent()
   }
 
   CustomGameEventManager:Send_ServerToPlayer(player, "unit_info_from_lua", info)
