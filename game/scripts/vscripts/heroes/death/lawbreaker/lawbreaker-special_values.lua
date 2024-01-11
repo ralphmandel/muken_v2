@@ -235,7 +235,7 @@ function lawbreaker_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "lifesteal" then return 15 + (value_level * 2.5) end
 
     if value_name == "special_attack_range" then return 150 end
-    if value_name == "special_critical_chance" then return 2 end
+    if value_name == "special_critical_chance" then return 3 end
     if value_name == "max_hit" then return 3 end
 	end
 

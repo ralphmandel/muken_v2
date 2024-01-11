@@ -48,7 +48,7 @@ function bloodstained_2_modifier_passive:OnAttackLanded(keys)
 
     AddModifier(self.parent, self.ability, "bloodstained_2_modifier_frenzy", {
       duration = self.ability:GetSpecialValueFor("duration")
-    }, true)
+    }, false)
 	end
 end
 

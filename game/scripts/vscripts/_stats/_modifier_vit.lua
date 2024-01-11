@@ -11,7 +11,7 @@ function _modifier_vit:OnCreated(kv)
 
   if IsServer() then
     self:SetHasCustomTransmitterData(true)
-    self.main_bonus = 0
+    self.stat_bonus = 0
 
     self.data = {
       sub_stat_max_health = {mult = self.ability:GetSpecialValueFor("sub_stat_max_health"), bonus = 0},
@@ -32,13 +32,13 @@ end
 
 function _modifier_vit:AddCustomTransmitterData()
   return {
-    main_bonus = self.main_bonus,
+    stat_bonus = self.stat_bonus,
     stat_data = self.data
   }
 end
 
 function _modifier_vit:HandleCustomTransmitterData(data)
-	self.main_bonus = data.main_bonus
+	self.stat_bonus = data.stat_bonus
   self.data = data.stat_data
 end
 
@@ -138,21 +138,21 @@ function _modifier_vit:GetStatusResist(bPercent)
 end
 
 function _modifier_vit:GetCalculedDataStack(property, bScalar)
-  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.main_bonus) / 5))
+  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
   value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end
 
 function _modifier_vit:GetCalculedData(property, bScalar)
-  local value = self.data[property].mult * (self.ability:GetLevel() + self.main_bonus)
+  local value = self.data[property].mult * (self.ability:GetLevel() + self.stat_bonus)
   value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end
 
 function _modifier_vit:UpdateMainBonus(value)
-  self.main_bonus = value
+  self.stat_bonus = value
 end
 
 function _modifier_vit:UpdateSubBonus(property)

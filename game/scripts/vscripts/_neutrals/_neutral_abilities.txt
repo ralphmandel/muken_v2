@@ -276,7 +276,7 @@
 		"AbilityValues"
     {
       "duration"      "2"
-      "chance"        "8"
+      "chance"        "7"
       "attack_speed"	"200"
       "lifesteal"     "50"
     }
@@ -484,78 +484,5 @@
       "units"     "5"
       "duration"  "60"
     }
-	}
-
-  //////////////////////////////////////////////////////////////////////////////////////
-
-	"summon_spiders"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/summon_spiders"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-		"AbilityTextureName"     		"_neutrals/summon_spiders"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilityCastPoint"       		"0.5"
-		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
-
-		"AbilityManaCost"           "175"
-		"AbilityCooldown"				    "40"
-		"AbilityCastRange"    		  "400"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"spiders_number"		"5"
-			}
-		}
-	}
-
-	"venom_aoe"
-	{
-		"BaseClass"              		"ability_lua"
-		"ScriptFile"            		"_neutrals/venom_aoe"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityTextureName"     		"_neutrals/venom_aoe"
-
-		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
-		"MaxLevel"               		"4"
-
-		"AbilityCastPoint"       		"0.5"
-		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK"
-
-		"AbilityManaCost"           "250"
-		"AbilityCooldown"				    "15"
-		"AbilityCastRange"    		  "600"
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"radius"				"500"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"duration"				"10"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"damage"				"50"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"def_reduction"			"10"
-			}
-		}
 	}
 }

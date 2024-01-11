@@ -20,13 +20,14 @@ function _modifier_str:OnCreated(kv)
 
   if IsServer() then
     self:SetHasCustomTransmitterData(true)
-    self.main_bonus = 0
+    self.stat_bonus = 0
 
     self.data = {
       sub_stat_attack_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_attack_damage"), bonus = 0},
       sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
       sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
       sub_stat_critical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_damage"), bonus = 0},
+      sub_stat_critical_damage_stack = {mult = 0, bonus = 0},
       sub_stat_critical_chance = {mult = 0, bonus = 0},
       sub_stat_miss_chance = {mult = 0, bonus = 0},
       sub_stat_physical_block = {mult = 0, bonus = 0},
@@ -41,13 +42,13 @@ end
 
 function _modifier_str:AddCustomTransmitterData()
   return {
-    main_bonus = self.main_bonus,
+    stat_bonus = self.stat_bonus,
     stat_data = self.data
   }
 end
 
 function _modifier_str:HandleCustomTransmitterData(data)
-	self.main_bonus = data.main_bonus
+	self.stat_bonus = data.stat_bonus
   self.data = data.stat_data
 end
 
@@ -161,25 +162,29 @@ end
 
 function _modifier_str:GetCriticalDamage()
   if self.force_crit_damage then return self.force_crit_damage end
-  return self.const_critical_damage + self:GetCalculedDataStack("sub_stat_critical_damage", false)
+
+  local base = self.const_critical_damage + (self:GetCalculedDataStack("sub_stat_critical_damage", true) * 3)
+  local stack = self:GetCalculedData("sub_stat_critical_damage_stack", false)
+
+  return base + stack
 end
 
 function _modifier_str:GetCalculedDataStack(property, bScalar)
-  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.main_bonus) / 5))
+  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
   value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end
 
 function _modifier_str:GetCalculedData(property, bScalar)
-  local value = self.data[property].mult * (self.ability:GetLevel() + self.main_bonus)
+  local value = self.data[property].mult * (self.ability:GetLevel() + self.stat_bonus)
   value = value + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end
 
 function _modifier_str:UpdateMainBonus(value)
-  self.main_bonus = value
+  self.stat_bonus = value
 end
 
 function _modifier_str:UpdateSubBonus(property)

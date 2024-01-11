@@ -47,7 +47,11 @@ require("internal/rank_system")
 
 -- INIT
 	function base_hero:Spawn()
-    if self:IsTrained() == false then self:UpgradeAbility(true) end
+    if IsServer() then
+      if self:IsTrained() == false then
+        self:UpgradeAbility(true)
+      end
+    end
 	end
 
   function base_hero:GetIntrinsicModifierName()
@@ -79,7 +83,7 @@ require("internal/rank_system")
     local caster = self:GetCaster()
 
     self.stat_points = 0
-    self.stat_bonus = {str = 0, agi = 0, int = 0, vit = 0}
+    self.bonus_level = {str = 0, agi = 0, int = 0, vit = 0}
     self:LoadBaseStats()
 
     self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
@@ -106,7 +110,7 @@ require("internal/rank_system")
               local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
               if ability_stat then ability_stat:SetLevel(value) end
             else
-              self.stat_bonus[string.lower(stat)] = value
+              self.bonus_level[string.lower(stat)] = value
             end
           end
         end
@@ -142,7 +146,7 @@ require("internal/rank_system")
     local caster = self:GetCaster()
 		local level = caster:GetLevel()
 
-    for stat, value in pairs(self.stat_bonus) do
+    for stat, value in pairs(self.bonus_level) do
       local up = math.floor(value)
       local old = math.fmod(value, 1) * (level - 1)
       local new = math.fmod(value, 1) * level

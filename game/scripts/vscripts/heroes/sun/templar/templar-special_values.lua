@@ -285,7 +285,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
 
-		if value_name == "revenge_chance" then return 7 + (value_level * 0.5) end
+		if value_name == "revenge_chance" then return 6 + (value_level * 0.25) end
     if value_name == "duration" then return 50 end
     if value_name == "stack" then return 9 end
     if value_name == "delay" then return 2.2 end
@@ -305,7 +305,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "cast_point" then return 2 end
     if value_name == "cast_range" then return 900 end
     if value_name == "percent" then return 75 end
-    if value_name == "special_reborn" then return 20 end
+    if value_name == "special_reborn" then return 17 end
 	end
 
 	if ability:GetAbilityName() == "templar_u__praise" then

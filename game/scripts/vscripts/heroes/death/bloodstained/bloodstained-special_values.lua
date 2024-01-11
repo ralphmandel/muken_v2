@@ -6,12 +6,29 @@ function bloodstained_special_values:IsPurgable() return false end
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function bloodstained_special_values:OnCreated(kv)
+  if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+
+    self.skills = {
+      ["bloodstained_2__frenzy"] = {
+        duration = 0
+      }
+    }
+  end
 end
 
 function bloodstained_special_values:OnRefresh(kv)
 end
 
 function bloodstained_special_values:OnRemoved()
+end
+
+function bloodstained_special_values:AddCustomTransmitterData()
+  return {skills = self.skills}
+end
+
+function bloodstained_special_values:HandleCustomTransmitterData(data)
+	self.skills = data.skills
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -230,6 +247,13 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
+  -- print("KD", IsServer(), ability, value_name, value_level, ability_level)
+
+  -- if IsServer() then
+  --   self.skills["bloodstained_2__frenzy"].duration = CalcStatus(3, caster, caster)
+  --   self:SendBuffRefreshToClients()
+  -- end
+
   local mana_mult = (1 + ((ability_level - 1) * 0.1))
 
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
@@ -250,7 +274,9 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "duration" then return 3 + (value_level * 0.25) end
+		if value_name == "duration" then
+      return self.skills["bloodstained_2__frenzy"].duration + (value_level * 0.25)
+    end
 
     if value_name == "ms" then return 300 end
     if value_name == "special_purge" then return 1 end

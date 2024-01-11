@@ -59,8 +59,8 @@
 
     "AbilityValues"
     {
-      "evasion"       "3"
-      "invi_chance"   "25"
+      "evasion"       "2.5"
+      "invi_chance"   "20"
       "invi_duration" "1.2"
       "invi_delay"    "0.3"
     }
@@ -229,7 +229,7 @@
     "AbilityValues"
     {
       "magical_block"  "15"
-      "chance"         "15"
+      "chance"         "12"
     }
 
     "precache"

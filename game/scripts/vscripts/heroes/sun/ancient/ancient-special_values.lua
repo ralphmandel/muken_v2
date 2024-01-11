@@ -301,7 +301,7 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "special_break_duration" then return 3 end
     if value_name == "damage_percent" then return 70 end
     if value_name == "special_double_chance" then return 25 end
-    if value_name == "special_return_chance" then return 10 end
+    if value_name == "special_return_chance" then return 8 end
     if value_name == "special_return_damage" then return 200 end
   end
 
@@ -330,8 +330,8 @@ function ancient_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "cast_point" then return 1.5 end
     if value_name == "block_physical" then return 40 end
     if value_name == "block_magical" then return 40 end
-    if value_name == "special_petrify_chance" then return 15 end
-    if value_name == "special_bkb_chance" then return 15 end
+    if value_name == "special_petrify_chance" then return 12 end
+    if value_name == "special_bkb_chance" then return 12 end
 	end
 
 	if ability:GetAbilityName() == "ancient_u__fissure" then

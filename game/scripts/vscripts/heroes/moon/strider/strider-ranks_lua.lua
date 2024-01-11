@@ -48,7 +48,11 @@ function strider__precache:GetIntrinsicModifierName()
 end
 
 function strider__precache:Spawn()
-	if self:IsTrained() == false then self:UpgradeAbility(true) end
+  if IsServer() then
+    if self:IsTrained() == false then
+      self:UpgradeAbility(true)
+    end
+  end
 end
 
 function strider__precache:Precache(context)

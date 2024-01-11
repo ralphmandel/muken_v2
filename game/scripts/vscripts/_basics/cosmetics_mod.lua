@@ -29,19 +29,24 @@ function cosmetics_mod:OnCreated( kv )
 	self.invi = false
 	self.model = kv.model
 	self.activity = kv.activity
-	self.parent:SetOriginalModel(self.model)
 
-	Timers:CreateTimer((FrameTime()), function()
-		self.parent:FollowEntity(self.caster, true)
-	end)
+  if IsServer() then
+    self.parent:SetOriginalModel(self.model)
+
+    Timers:CreateTimer((FrameTime()), function()
+      self.parent:FollowEntity(self.caster, true)
+    end)    
+  end
 end
 
 function cosmetics_mod:OnRefresh( kv )
 end
 
 function cosmetics_mod:OnRemoved()
-	self.parent:AddNoDraw()
-	self.parent:ForceKill(false)
+  if IsServer() then
+    self.parent:AddNoDraw()
+    self.parent:ForceKill(false)
+  end
 end
 
 --------------------------------------------------------------------------------

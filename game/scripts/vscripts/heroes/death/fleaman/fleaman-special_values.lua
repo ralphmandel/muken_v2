@@ -250,7 +250,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "duration" then return 15 + (value_level * 0.5) end
 
     if value_name == "attack_speed" then return 50 end
-    if value_name == "evasion" then return 5 end
+    if value_name == "evasion" then return 4 end
     if value_name == "special_damage" then return 175 end
     if value_name == "special_pulses" then return 7 end
     if value_name == "special_aoe" then return 325 end
@@ -298,13 +298,13 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "debuff_duration" then return 3.5 end
     if value_name == "special_root" then return 1 end
     if value_name == "distance" then return 900 end
-    if value_name == "special_critical_damage" then return 150 end
+    if value_name == "special_critical_damage" then return 300 end
 	end
 
 	if ability:GetAbilityName() == "fleaman_4__strip" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "chance" then return 9 + (value_level * 0.5) end
+    if value_name == "chance" then return 7.5 + (value_level * 0.25) end
 
     if value_name == "special_break" then return 1 end
     if value_name == "special_bleeding" then return 1 end
@@ -352,7 +352,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "special_lifesteal" then return 20 end
     if value_name == "special_manasteal" then return 15 end
     if value_name == "attack_steal" then return 4 end
-    if value_name == "special_chain_chance" then return 25 end
+    if value_name == "special_chain_chance" then return 20 end
     if value_name == "special_chain_hits" then return 4 end
     if value_name == "special_chain_damage" then return 100 end
     if value_name == "special_chain_radius" then return 700 end

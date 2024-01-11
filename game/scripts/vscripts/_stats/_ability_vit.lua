@@ -8,5 +8,5 @@ function _ability_vit:GetIntrinsicModifierName()
 end
 
 function _ability_vit:OnUpgrade()
-  UpdatePanoramaStat(self:GetCaster(), "vit")
+  if IsServer() then UpdatePanoramaStat(self:GetCaster(), "vit") end
 end

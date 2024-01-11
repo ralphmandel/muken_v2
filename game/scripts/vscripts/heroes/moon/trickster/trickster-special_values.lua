@@ -225,25 +225,25 @@ function trickster_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	if ability:GetAbilityName() == "trickster_1__double" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "chance" then return 40 + math.ceil((10 / 6) * value_level) end
+		if value_name == "chance" then return 30 + (value_level * 1) end
 
     if value_name == "attack_speed" then return 100 end
     if value_name == "special_bonus_damage" then return 30 end
     if value_name == "special_bleeding_chance" then return 10 end
-    if value_name == "special_bleeding_duration" then return 5 end
+    if value_name == "special_bleeding_duration" then return 4 end
 	end
 
 	if ability:GetAbilityName() == "trickster_2__dodge" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "evasion" then return 1.5 + (value_level * 0.25) end
+		if value_name == "evasion" then return 2 + (value_level * 0.25) end
 
-    if value_name == "critical_chance" then return -6 end
+    if value_name == "critical_chance" then return -10 end
     if value_name == "special_attack_time" then return 0.2 end
     if value_name == "special_linkens_chance" then return 5 end
     if value_name == "special_health_regen" then return 30 end
     if value_name == "special_disarm_chance" then return 5 end
-    if value_name == "special_disarm_duration" then return 3 end
+    if value_name == "special_disarm_duration" then return 2.5 end
 	end
 
 	if ability:GetAbilityName() == "trickster_3__hide" then

@@ -15,6 +15,10 @@ function strider_2_modifier_spin:OnCreated(kv)
     if kv.aggro then self.aggro = EntIndexToHScript(kv.aggro) end
     self.parent:Hold()
 
+    AddSubStats(self.parent, self.ability, {
+      critical_damage_stack = self.ability:GetSpecialValueFor("special_critical_damage_stack")
+    }, false)
+
     if GetHeroName(self.parent) == "trickster" then
       self.caster:StartGestureWithPlaybackRate(ACT_DOTA_CAST_ABILITY_4_END, 1.7)
     else
@@ -31,16 +35,20 @@ function strider_2_modifier_spin:OnRefresh(kv)
 end
 
 function strider_2_modifier_spin:OnRemoved()
-  if self.aggro then
-    if IsValidEntity(self.aggro) then
-      self.parent:MoveToTargetToAttack(self.aggro)
-    end
-  end
+  if IsServer() then
+    RemoveSubStats(self.parent, self.ability, {"critical_damage_stack"})
 
-  if GetHeroName(self.parent) == "trickster" then
-    self.caster:FadeGesture(ACT_DOTA_CAST_ABILITY_4_END)
-  else
-    self.caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+    if self.aggro then
+      if IsValidEntity(self.aggro) then
+        self.parent:MoveToTargetToAttack(self.aggro)
+      end
+    end
+  
+    if GetHeroName(self.parent) == "trickster" then
+      self.caster:FadeGesture(ACT_DOTA_CAST_ABILITY_4_END)
+    else
+      self.caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_1)
+    end    
   end
 end
 
@@ -55,8 +63,6 @@ function strider_2_modifier_spin:CheckState()
 end
 
 function strider_2_modifier_spin:OnIntervalThink()
-  local critical_damage = self.parent:GetMainStat("STR"):GetCriticalDamage() + self.ability:GetSpecialValueFor("special_crit_damage")
-
   local enemies = FindUnitsInRadius(
     self.caster:GetTeamNumber(), self.parent:GetOrigin(), nil, self.radius,
     self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(),
@@ -89,7 +95,7 @@ function strider_2_modifier_spin:OnIntervalThink()
     end
 
     if self.ability:GetSpecialValueFor("special_crit_damage") > 0 then
-      self.parent:GetMainStat("STR"):SetForceCrit(100, critical_damage)
+      self.parent:GetMainStat("STR"):SetForceCrit(100, nil)
     end
 
     self:PlayEfxHit(enemy)

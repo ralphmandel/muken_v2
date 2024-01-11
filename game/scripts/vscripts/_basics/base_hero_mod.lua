@@ -10,14 +10,16 @@ function base_hero_mod:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.hero_name = GetHeroName(self:GetCaster())
-  self.hero_team = GetHeroTeam(self:GetCaster())
+  if IsServer() then
+    self.hero_name = GetHeroName(self:GetCaster())
+    self.hero_team = GetHeroTeam(self:GetCaster())
+  
+    self:LoadActivity()
+    self:LoadModel()
+    self:LoadSounds()
 
-	self:LoadActivity()
-	self:LoadModel()
-	self:LoadSounds()
-
-	if IsServer() then self:StartIntervalThink(0.5) end
+    self:StartIntervalThink(0.5)
+  end
 end
 
 function base_hero_mod:OnRefresh(kv)

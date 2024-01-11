@@ -16,8 +16,8 @@
       "sub_stat_attack_damage"   "1"
       "sub_stat_physical_damage" "2" //%
       "sub_stat_armor"           "0.1"
-      "sub_stat_critical_damage" "5" //%
-      "const_critical_damage"    "150" //%
+      "sub_stat_critical_damage" "0.5" //% /^
+      "const_critical_damage"    "100" //%
       "const_critical_chance"    "17" //%
 		}
 	}
@@ -36,7 +36,7 @@
       "sub_stat_attack_speed"       "1"
       "sub_stat_cooldown_reduction" "0.07" //% /^
       "sub_stat_mana_regen"         "0.1"
-      "sub_stat_evasion"            "0.1" //% /^
+      "sub_stat_evasion"            "0.07" //% /^
       "sub_stat_movespeed"          "3"
       "const_base_movespeed"        "300"
       "const_base_attack_time"      "1.3"

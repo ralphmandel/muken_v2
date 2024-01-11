@@ -48,7 +48,11 @@ function template__precache:GetIntrinsicModifierName()
 end
 
 function template__precache:Spawn()
-	if self:IsTrained() == false then self:UpgradeAbility(true) end
+  if IsServer() then
+    if self:IsTrained() == false then
+      self:UpgradeAbility(true)
+    end
+  end
 end
 
 function template__precache:Precache(context)

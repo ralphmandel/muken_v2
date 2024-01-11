@@ -8,5 +8,5 @@ function _ability_int:GetIntrinsicModifierName()
 end
 
 function _ability_int:OnUpgrade()
-  UpdatePanoramaStat(self:GetCaster(), "int")
+  if IsServer() then UpdatePanoramaStat(self:GetCaster(), "int") end
 end

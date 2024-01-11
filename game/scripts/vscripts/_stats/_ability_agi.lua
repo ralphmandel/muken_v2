@@ -12,5 +12,5 @@ function _ability_agi:GetIntrinsicModifierName()
 end
 
 function _ability_agi:OnUpgrade()
-  UpdatePanoramaStat(self:GetCaster(), "agi")
+  if IsServer() then UpdatePanoramaStat(self:GetCaster(), "agi") end
 end

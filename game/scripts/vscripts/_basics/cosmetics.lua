@@ -2,7 +2,9 @@ cosmetics = class ({})
 LinkLuaModifier("cosmetics_mod", "_basics/cosmetics_mod", LUA_MODIFIER_MOTION_NONE)
 
 function cosmetics:Spawn()
-	self:UpgradeAbility(true)
+  if IsServer() then
+    self:UpgradeAbility(true)
+  end
 end
 
 function cosmetics:OnUpgrade()

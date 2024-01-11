@@ -79,7 +79,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_21") then
-      if value_name == "special_crit_damage" then return 1 end
+      if value_name == "special_critical_damage_stack" then return 1 end
 		end
 
     if caster:FindAbilityByName("strider_2__spin_rank_22") then
@@ -240,7 +240,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     if value_name == "radius" then return 350 end
     if value_name == "special_bash_duration" then return 0.5 end
-    if value_name == "special_crit_damage" then return 100 end
+    if value_name == "special_critical_damage_stack" then return 100 end
     if value_name == "bleeding_duration" then return 5 end
     if value_name == "special_bleed_chance" then return 10 end
 	end
@@ -253,7 +253,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     if value_name == "duration" then return 10 end
     if value_name == "fade_inv" then return 0.75 end
-    if value_name == "evasion" then return 7.5 end
+    if value_name == "evasion" then return 4.5 end
     if value_name == "special_armor" then return -5 end
 	end
 

@@ -244,8 +244,8 @@
     CustomGameEventManager:Send_ServerToPlayer(player, "update_stat_from_lua", {
       stat = string.upper(stat),
       base = modifier:GetAbility():GetLevel(),
-      bonus = modifier.main_bonus,
-      total = modifier:GetAbility():GetLevel() + modifier.main_bonus
+      bonus = modifier.stat_bonus,
+      total = modifier:GetAbility():GetLevel() + modifier.stat_bonus
     })
   end
 
@@ -379,7 +379,10 @@
 -- LUCK / HEAL / MANA
 
   function CalcLuck(caster, value)
-    return value * (1 + caster:GetMainStat("INT"):GetLuck())
+    local result = value * (1 + caster:GetMainStat("INT"):GetLuck())
+    if result < 0 then result = 0 elseif result > 100 then result = 100 end
+
+    return result
   end
 
   function CalcHeal(caster, amount)
