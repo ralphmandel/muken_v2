@@ -6,13 +6,13 @@ function sub_stat_modifier:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE en
 function sub_stat_modifier:RemoveOnDeath() return false end
 
 function sub_stat_modifier:OnCreated(kv)
-  if IsServer() then
-    self:SetHasCustomTransmitterData(true)
+  if not IsServer() then return end
 
-    self.kv = kv
-    self.status_resist_stack = kv.status_resist_stack or 0
-    self:UpdateStatKV()
-  end
+  self:SetHasCustomTransmitterData(true)
+
+  self.kv = kv
+  self.status_resist_stack = kv.status_resist_stack or 0
+  self:UpdateStatKV()
 end
 
 function sub_stat_modifier:OnRemoved()

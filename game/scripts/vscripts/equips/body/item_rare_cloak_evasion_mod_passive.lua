@@ -49,7 +49,7 @@ function item_rare_cloak_evasion_mod_passive:ApplyInvisibility(keys)
   if self.parent:HasModifier("_modifier_invisible") then return end
   if self.parent:IsMuted() then return end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("invi_chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("invi_chance") then
     if IsServer() then self.parent:EmitSound("Hunter.Invi") end
 
     local invi_duration = self.ability:GetSpecialValueFor("invi_duration")

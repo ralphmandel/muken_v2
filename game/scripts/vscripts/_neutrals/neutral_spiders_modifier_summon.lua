@@ -10,23 +10,25 @@ function neutral_spiders_modifier_summon:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+  
   AddSubStats(self.parent, self.ability, {
     attack_speed = self.caster:GetMainStat("INT"):GetSummonPower() * 1,
     max_health = self.caster:GetMainStat("INT"):GetSummonPower() * 4,
   }, false)
 
-  if IsServer() then
-    self.target = EntIndexToHScript(kv.target)
-    self.parent:SetForceAttackTarget(self.target)
-    self.parent:MoveToTargetToAttack(self.target)
-    self:StartIntervalThink(1)
-  end
+  self.target = EntIndexToHScript(kv.target)
+  self.parent:SetForceAttackTarget(self.target)
+  self.parent:MoveToTargetToAttack(self.target)
+  self:StartIntervalThink(1)
 end
 
 function neutral_spiders_modifier_summon:OnRefresh(kv)
 end
 
 function neutral_spiders_modifier_summon:OnRemoved()
+  if not IsServer() then return end
+  
   if self.parent:IsAlive() then self.parent:ForceKill(false) end
 end
 
@@ -48,8 +50,10 @@ function neutral_spiders_modifier_summon:GetAttackSound(keys)
 end
 
 function neutral_spiders_modifier_summon:OnAttackLanded(keys)
+  if not IsServer() then return end
+  
 	if keys.attacker ~= self.parent then return end
-	if IsServer() then self.parent:EmitSound("Hero_Broodmother.Attack") end
+	self.parent:EmitSound("Hero_Broodmother.Attack")
 end
 
 function neutral_spiders_modifier_summon:OnDeath(keys)
@@ -65,26 +69,26 @@ function neutral_spiders_modifier_summon:OnAbilityFullyCast(keys)
 end
 
 function neutral_spiders_modifier_summon:OnIntervalThink()
-  if IsServer() then
-    if self.target then
-      if IsValidEntity(self.target) then
-        if self.target:IsAlive() and self.parent:GetAggroTarget() == self.target then
-          return
-        end
+  if not IsServer() then return end
+  
+  if self.target then
+    if IsValidEntity(self.target) then
+      if self.target:IsAlive() and self.parent:GetAggroTarget() == self.target then
+        return
       end
     end
-
-    if self.caster:GetAggroTarget() then
-      self.target = self.caster:GetAggroTarget()
-      self.parent:SetForceAttackTarget(self.target)
-      self.parent:MoveToTargetToAttack(self.target)
-      return
-    end
-
-    self.target = nil
-    self.parent:SetForceAttackTarget(nil)
-    self.parent:MoveToNPC(self.caster)
   end
+
+  if self.caster:GetAggroTarget() then
+    self.target = self.caster:GetAggroTarget()
+    self.parent:SetForceAttackTarget(self.target)
+    self.parent:MoveToTargetToAttack(self.target)
+    return
+  end
+
+  self.target = nil
+  self.parent:SetForceAttackTarget(nil)
+  self.parent:MoveToNPC(self.caster)
 end
 
 -- UTILS -----------------------------------------------------------

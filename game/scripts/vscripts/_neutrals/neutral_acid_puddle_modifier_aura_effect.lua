@@ -10,6 +10,8 @@ function neutral_acid_puddle_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   local interval = 0.5
 
   self.damageTable = {
@@ -18,7 +20,7 @@ function neutral_acid_puddle_modifier_aura_effect:OnCreated(kv)
     damage_type = self.ability:GetAbilityDamageType()
 	}
 
-  if IsServer() then self:StartIntervalThink(interval) end
+  self:StartIntervalThink(interval)
 end
 
 function neutral_acid_puddle_modifier_aura_effect:OnRefresh(kv)
@@ -30,8 +32,9 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_acid_puddle_modifier_aura_effect:OnIntervalThink()
-  if IsServer() then self.parent:EmitSound("Hero_Alchemist.AcidSpray.Damage") end
+  if not IsServer() then return end
 
+  self.parent:EmitSound("Hero_Alchemist.AcidSpray.Damage")
   ApplyDamage(self.damageTable)
 end
 

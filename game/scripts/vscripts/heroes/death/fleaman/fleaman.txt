@@ -31,8 +31,8 @@
 
     "AbilityValues"
 		{
-			"attack_speed"  "30"
-			"evasion"       "2.5"
+			"attack_speed"  "0"
+			"evasion"       "0"
       "duration"		  "1 2 3 4 5 6 7"
       "special_damage"  "0"
       "special_pulses"  "0"
@@ -55,9 +55,9 @@
 
     "AbilityValues"
 		{
-			"duration"  "3"
-			"ms_gain"   "5"
-			"max_ms"    "120"
+			"duration"  "0"
+			"ms_gain"   "0"
+			"max_ms"    "0"
 			"min_ms"    "1 2 3 4 5 6 7"
       "special_phase"         "0"
       "special_stun_duration" "0"
@@ -82,10 +82,10 @@
 
     "AbilityValues"
 		{
-      "distance"	        "600"
-      "speed_mult"	      "2"
-      "debuff_duration"	  "2.5"
-      "slow_percent"	    "70"
+      "distance"	        "0"
+      "speed_mult"	      "0"
+      "debuff_duration"	  "0"
+      "slow_percent"	    "0"
       "radius"	          "1 2 3 4 5 6 7"
       "special_root"            "0"
       "special_critical_damage" "0"
@@ -107,8 +107,8 @@
 
     "AbilityValues"
 		{
-			"duration"		"5"
-			"armor"		    "-5"
+			"duration"		"0"
+			"armor"		    "0"
 			"chance"		  "1 2 3 4 5 6 7"
       "special_break"     "0"
       "special_bleeding"  "0"
@@ -138,10 +138,10 @@
 
     "AbilityValues"
 		{
-			"cast_range"  "600"
-			"duration"		"15"
-			"blind"		    "75"
-			"miss_chance" "25"
+			"cast_range"  "0"
+			"duration"		"0"
+			"blind"		    "0"
+			"miss_chance" "0"
 			"radius"		  "1 2 3 4 5 6 7"
       "special_hp_regen"  "0"
       "special_hide"      "0"

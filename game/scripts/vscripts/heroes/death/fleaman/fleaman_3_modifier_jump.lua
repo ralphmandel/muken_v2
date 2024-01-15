@@ -10,6 +10,8 @@ function fleaman_3_modifier_jump:OnCreated( kv )
 	self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
 	local movespeed = self.parent:GetIdealSpeed()
 	local jump_speed = (self.ability:GetSpecialValueFor("speed_mult") * self.parent:GetIdealSpeed()) + 75
 	local jump_distance = self.ability:GetSpecialValueFor("distance")
@@ -28,12 +30,10 @@ function fleaman_3_modifier_jump:OnCreated( kv )
 		self:Destroy()
 	end)
 
-	if IsServer() then
-		self.ability:SetActivated(false)
-		self:StartIntervalThink(0.1)
-		self:OnIntervalThink()
-		self:PlayEfxStart(duration)
-	end
+  self.ability:SetActivated(false)
+  self:StartIntervalThink(0.1)
+  self:OnIntervalThink()
+  self:PlayEfxStart(duration)
 end
 
 function fleaman_3_modifier_jump:OnRefresh(kv)
@@ -44,6 +44,8 @@ function fleaman_3_modifier_jump:OnRemoved()
 end
 
 function fleaman_3_modifier_jump:OnDestroy()
+  if not IsServer() then return end
+
 	self.ability:SetActivated(true)
 
 	GridNav:DestroyTreesAroundPoint(self.parent:GetOrigin(), self.radius, false)
@@ -72,6 +74,8 @@ function fleaman_3_modifier_jump:DeclareFunctions()
 end
 
 function fleaman_3_modifier_jump:OnAttackLanded(keys)
+  if not IsServer() then return end
+
 	if keys.attacker ~= self.parent then return end
   if keys.target:IsMagicImmune() then return end
 
@@ -96,6 +100,8 @@ function fleaman_3_modifier_jump:OnAttackLanded(keys)
 end
 
 function fleaman_3_modifier_jump:OnIntervalThink()
+  if not IsServer() then return end
+
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.parent:GetModelRadius(),
 		self.ability:GetAbilityTargetTeam(), self.ability:GetAbilityTargetType(), self.ability:GetAbilityTargetFlags(),
@@ -148,7 +154,7 @@ function fleaman_3_modifier_jump:PlayEfxStart(duration)
 	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then self.parent:EmitSound("Hero_Slark.Pounce.Cast.Immortal") end
+	self.parent:EmitSound("Hero_Slark.Pounce.Cast.Immortal")
 	self.parent:StartGestureWithPlaybackRate(ACT_DOTA_SLARK_POUNCE, (0.85 / duration))
 end
 
@@ -158,5 +164,5 @@ function fleaman_3_modifier_jump:PlayEfxHit(target)
 	ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 	ParticleManager:ReleaseParticleIndex(particle)
 
-	if IsServer() then target:EmitSound("Hero_Riki.Backstab") end
+	target:EmitSound("Hero_Riki.Backstab")
 end

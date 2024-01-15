@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_burn_aura_modifier_passive", "_neutrals/neutral_burn_au
 LinkLuaModifier("neutral_burn_aura_modifier_aura_effect", "_neutrals/neutral_burn_aura_modifier_aura_effect", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_burn_aura:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())

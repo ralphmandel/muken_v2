@@ -184,7 +184,7 @@ TIER_TEAMS = {
 
 SPAWNER_MOBS = {
   -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-  --   "neutral_legendary_iron_golem"
+  --   "neutral_legendary_great_lamp"
   -- }},
   -- TIER 1 | 96
     {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
@@ -422,4 +422,8 @@ OUTPOST_ORIGIN = {
   [2] = Vector(545.975, 2452.85, 48.1793),
   [3] = Vector(-2526.03, 596.85, 57.7422),
   [4] = Vector(-542.025, -2283.15, 16),
+}
+
+ORB_LIST = {
+  "orb_bleed__status"
 }

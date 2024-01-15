@@ -51,7 +51,7 @@ function _modifier_int:DeclareFunctions()
   local funcs = {
     MODIFIER_PROPERTY_MANA_BONUS,
     MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
-    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+    --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
     MODIFIER_PROPERTY_MAGICAL_CONSTANT_BLOCK,
     MODIFIER_EVENT_ON_TAKEDAMAGE
@@ -76,19 +76,19 @@ function _modifier_int:GetModifierPercentageManacost(keys)
   return self:GetCalculedData("sub_stat_manacost", false)
 end
 
-function _modifier_int:GetModifierSpellAmplify_Percentage(keys)
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
-  if keys.damage_flags == 31 then return 0 end
-  if keys.damage_type == DAMAGE_TYPE_PURE then return 0 end
+-- function _modifier_int:GetModifierSpellAmplify_Percentage(keys)
+--   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
+--   if keys.damage_flags == 31 then return 0 end
+--   if keys.damage_type == DAMAGE_TYPE_PURE then return 0 end
 
-  if keys.damage_type == DAMAGE_TYPE_MAGICAL then
-    return self:GetCalculedData("sub_stat_magical_damage", false)
-  end
+--   if keys.damage_type == DAMAGE_TYPE_MAGICAL then
+--     return self:GetCalculedData("sub_stat_magical_damage", false)
+--   end
 
-  if keys.damage_type == DAMAGE_TYPE_PURE then
-    return self:GetCalculedData("sub_stat_holy_damage", false)
-  end
-end
+--   if keys.damage_type == DAMAGE_TYPE_PURE then
+--     return self:GetCalculedData("sub_stat_holy_damage", false)
+--   end
+-- end
 
 function _modifier_int:GetModifierMagicalResistanceBonus()
   return self:GetCalculedData("sub_stat_magic_resist", true)
@@ -123,7 +123,7 @@ function _modifier_int:OnTakeDamage(keys)
 
   if keys.damage_type == DAMAGE_TYPE_PURE then
     if keys.damage_flags == DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION then
-      self:PopupBleedDamage(math.floor(keys.damage), self.parent)
+      --self:PopupBleedDamage(math.floor(keys.damage), self.parent)
     else
       self:PopupHolyDamage(math.floor(keys.damage), Vector(255, 225, 175), self.parent)
     end
@@ -138,6 +138,10 @@ end
 
 function _modifier_int:GetMagicalDamageAmp()
   return self:GetCalculedData("sub_stat_magical_damage", false) + 100
+end
+
+function _modifier_int:GetHolyDamageAmp()
+  return self:GetCalculedData("sub_stat_holy_damage", false) + 100
 end
 
 function _modifier_int:GetHealPower()
@@ -176,11 +180,17 @@ end
 
 function _modifier_int:UpdateMainBonus(value)
   self.stat_bonus = value
+  
+  self:SendBuffRefreshToClients()
+  
+  for property, table in pairs(self.data) do
+    self:OnStatUpated(property)
+  end
 end
 
 function _modifier_int:UpdateSubBonus(property)
   if self.parent == nil then return end
-  if IsValidEntity(self.ability) == false then return end
+  if IsValidEntity(self.parent) == false then return end
   
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
@@ -194,6 +204,29 @@ function _modifier_int:UpdateSubBonus(property)
 
   self.data["sub_stat_"..property].bonus = value
   self:SendBuffRefreshToClients()
+  self:OnStatUpated(property)
+end
+
+function _modifier_int:OnStatUpated(property)
+  if self.parent:IsHero() == false then return end
+  local special_kv_modifier = self.parent:FindModifierByName(GetHeroName(self.parent).."_special_values")
+  if special_kv_modifier == nil then return end
+
+  if property == "sub_stat_debuff_amp" then
+    special_kv_modifier:UpdateData("debuff_amp", self:GetDebuffAmp())
+  end
+
+  if property == "sub_stat_luck" then
+    special_kv_modifier:UpdateData("luck", self:GetLuck())
+  end
+
+  if property == "sub_stat_magical_damage" then
+    special_kv_modifier:UpdateData("magical_damage", self:GetMagicalDamageAmp())
+  end
+
+  if property == "sub_stat_holy_damage" then
+    special_kv_modifier:UpdateData("holy_damage", self:GetHolyDamageAmp())
+  end
 end
 
 function _modifier_int:LoadData()

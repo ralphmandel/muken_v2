@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_fireball_modifier_passive", "_neutrals/neutral_fireball
 LinkLuaModifier("neutral_fireball_modifier_burn", "_neutrals/neutral_fireball_modifier_burn", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_fireball:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())
@@ -15,6 +17,8 @@ function neutral_fireball:GetIntrinsicModifierName()
 end
 
 function neutral_fireball:OnSpellStart()
+  if not IsServer() then return end
+
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
   local list = {}
@@ -33,10 +37,12 @@ function neutral_fireball:OnSpellStart()
     end
   end
 
-  if IsServer() then caster:EmitSound("Hero_Huskar.Burning_Spear.Cast") end
+  caster:EmitSound("Hero_Huskar.Burning_Spear.Cast")
 end
 
 function neutral_fireball:OnProjectileHit(hTarget, vLocation)
+  if not IsServer() then return end
+
   if hTarget == nil then return end
   if hTarget:IsInvulnerable() then return end
   if hTarget:TriggerSpellAbsorb(self) then return end

@@ -7,9 +7,7 @@ LinkLuaModifier("_modifier_bkb", "_modifiers/_modifier_bkb", LUA_MODIFIER_MOTION
 -- INIT
 
   function bocuse_4__mirepoix:GetCastPoint()
-    local channel = self:GetCaster():FindAbilityByName("_channel")
-    local channel_time = self:GetSpecialValueFor("cast_point")
-    return channel_time-- * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
+    return self:GetSpecialValueFor("cast_point")
   end
 
 -- SPELL START

@@ -2,6 +2,8 @@ neutral_mana_burn = class({})
 LinkLuaModifier("neutral_mana_burn_modifier_orb", "_neutrals/neutral_mana_burn_modifier_orb", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_mana_burn:Spawn()
+  if not IsServer() then return end
+  
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())

@@ -10,6 +10,10 @@ function fleaman_4_modifier_strip:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
+  self:PlayEfxStart()
+
   AddSubStats(self.parent, self.ability, {
     armor = self.ability:GetSpecialValueFor("armor"),
     evasion = self.ability:GetSpecialValueFor("special_evasion")
@@ -32,14 +36,14 @@ function fleaman_4_modifier_strip:OnCreated(kv)
     damage_type = self.ability:GetAbilityDamageType(),
     ability = self.ability
   }
-
-	if IsServer() then self:PlayEfxStart() end
 end
 
 function fleaman_4_modifier_strip:OnRefresh(kv)
 end
 
 function fleaman_4_modifier_strip:OnRemoved()
+  if not IsServer() then return end
+  
   RemoveSubStats(self.parent, self.ability, {"armor", "evasion"})
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_break", self.ability)
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bleeding", self.ability)
@@ -62,6 +66,8 @@ function fleaman_4_modifier_strip:DeclareFunctions()
 end
 
 function fleaman_4_modifier_strip:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
   
   local damage_percent = self.ability:GetSpecialValueFor("special_damage")
@@ -86,7 +92,7 @@ function fleaman_4_modifier_strip:PlayEfxStart()
 	ParticleManager:SetParticleControl(particle_1, 0, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(particle_1)
 
-	if IsServer() then self.parent:EmitSound("DOTA_Item.AbyssalBlade.Activate") end
+	self.parent:EmitSound("DOTA_Item.AbyssalBlade.Activate")
 end
 
 function fleaman_4_modifier_strip:PlayEfxEnd()
@@ -95,5 +101,5 @@ function fleaman_4_modifier_strip:PlayEfxEnd()
 	ParticleManager:SetParticleControl(particle_1, 0, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(particle_1)
 
-	if IsServer() then self.parent:EmitSound("DOTA_Item.Bloodthorn.Activate") end
+	self.parent:EmitSound("DOTA_Item.Bloodthorn.Activate")
 end

@@ -39,7 +39,7 @@ function strider_2_modifier_passive:OnAttackLanded(keys)
     end
   end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_bleed_chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_bleed_chance") then
     RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_bleeding", self.ability)
     
     AddModifier(keys.target, self.ability, "_modifier_bleeding", {

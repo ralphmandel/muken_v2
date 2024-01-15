@@ -28,6 +28,8 @@ function neutral_doom_modifier_passive:DeclareFunctions()
 end
 
 function neutral_doom_modifier_passive:OnTakeDamage(keys)
+  if not IsServer() then return end
+
 	if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end

@@ -38,6 +38,8 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function fleaman_1_modifier_precision_stack:OnIntervalThink()
+  if not IsServer() then return end
+
 	local enemies = FindUnitsInRadius(
 		self.parent:GetTeamNumber(), self.parent:GetOrigin(), nil, self.ability:GetAOERadius(),
 		DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
@@ -83,5 +85,5 @@ function fleaman_1_modifier_precision_stack:PlayEfxStart()
 	ParticleManager:SetParticleControl(effect_cast, 2, Vector(self.ability:GetAOERadius(), 0, 0))
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then self.parent:EmitSound("Hero_Slark.DarkPact.Cast.Immortal") end
+	self.parent:EmitSound("Hero_Slark.DarkPact.Cast.Immortal")
 end

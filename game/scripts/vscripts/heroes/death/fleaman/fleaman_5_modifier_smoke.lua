@@ -50,5 +50,5 @@ function fleaman_5_modifier_smoke:PlayEfxStart()
 
   AddFOWViewer(self.caster:GetTeamNumber(), self.parent:GetOrigin(), self.radius, self:GetDuration() + 1, false)
 
-	if IsServer() then self.parent:EmitSound("Hero_Riki.Smoke_Screen.ti8") end
+	self.parent:EmitSound("Hero_Riki.Smoke_Screen.ti8")
 end

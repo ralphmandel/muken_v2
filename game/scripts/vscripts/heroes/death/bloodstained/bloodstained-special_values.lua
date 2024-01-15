@@ -9,10 +9,9 @@ function bloodstained_special_values:OnCreated(kv)
   if IsServer() then
     self:SetHasCustomTransmitterData(true)
 
-    self.skills = {
-      ["bloodstained_2__frenzy"] = {
-        duration = 0
-      }
+    self.data_props = {
+      buff_amp = 0,
+      debuff_amp = 0
     }
   end
 end
@@ -24,11 +23,11 @@ function bloodstained_special_values:OnRemoved()
 end
 
 function bloodstained_special_values:AddCustomTransmitterData()
-  return {skills = self.skills}
+  return {data_props = self.data_props}
 end
 
 function bloodstained_special_values:HandleCustomTransmitterData(data)
-	self.skills = data.skills
+	self.data_props = data.data_props
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -52,32 +51,15 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
+
+    if value_name == "radius" then return 1 end
+    if value_name == "call_duration" then return 1 end
+    if value_name == "damage_gain" then return 1 end
+    if value_name == "duration" then return 1 end
 		if value_name == "cooldown" then return 1 end
-
-		if caster:FindAbilityByName("bloodstained_1__rage_rank_11") then
-      if value_name == "duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("bloodstained_1__rage_rank_12") then
-      if value_name == "special_reset" then return 1 end
-		end
-
-		if caster:FindAbilityByName("bloodstained_1__rage_rank_21") then
-      if value_name == "call_duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("bloodstained_1__rage_rank_22") then
-      if value_name == "radius" then return 1 end
-      if value_name == "special_blink" then return 1 end
-		end
-
-		if caster:FindAbilityByName("bloodstained_1__rage_rank_31") then
-      if value_name == "damage_gain" then return 1 end
-		end
-
-    if caster:FindAbilityByName("bloodstained_1__rage_rank_32") then
-      if value_name == "special_damage_init" then return 1 end
-		end
+    if value_name == "special_reset" then return 1 end
+    if value_name == "special_blink" then return 1 end
+    if value_name == "special_damage_init" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then
@@ -247,13 +229,6 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	local ability_level = ability:GetLevel()
 	if ability_level < 1 then ability_level = 1 end
 
-  -- print("KD", IsServer(), ability, value_name, value_level, ability_level)
-
-  -- if IsServer() then
-  --   self.skills["bloodstained_2__frenzy"].duration = CalcStatus(3, caster, caster)
-  --   self:SendBuffRefreshToClients()
-  -- end
-
   local mana_mult = (1 + ((ability_level - 1) * 0.1))
 
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
@@ -262,21 +237,43 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("special_blink") end
 		if value_name == "cooldown" then return 16 - (value_level * 1) end
 
-    if value_name == "duration" then return 12 end
-    if value_name == "special_reset" then return 1 end
-    if value_name == "call_duration" then return 6 end
-    if value_name == "radius" then return 375 end
-    if value_name == "special_blink" then return 300 end
-    if value_name == "damage_gain" then return 10 end
-    if value_name == "special_damage_init" then return 100 end
+		if caster:FindAbilityByName("bloodstained_1__rage_rank_11") then
+      if value_name == "duration" then return 12 * self:GetBuffAmp() end
+		end
+
+    if caster:FindAbilityByName("bloodstained_1__rage_rank_12") then
+      if value_name == "special_reset" then return 1 end
+		end
+
+		if caster:FindAbilityByName("bloodstained_1__rage_rank_21") then
+      if value_name == "call_duration" then return 6 * self:GetDebuffAmp() end
+		end
+
+    if caster:FindAbilityByName("bloodstained_1__rage_rank_22") then
+      if value_name == "radius" then return 375 end
+      if value_name == "special_blink" then return 300 end
+		end
+
+		if caster:FindAbilityByName("bloodstained_1__rage_rank_31") then
+      if value_name == "damage_gain" then return 10 end
+		end
+
+    if caster:FindAbilityByName("bloodstained_1__rage_rank_32") then
+      if value_name == "special_damage_init" then return 100 end
+		end
+
+    if value_name == "radius" then return 275 end
+    if value_name == "call_duration" then return 3 * self:GetDebuffAmp() end
+    if value_name == "damage_gain" then return 6 end
+    if value_name == "duration" then return 10 * self:GetBuffAmp() end
+
+    return 0
 	end
 
   if ability:GetAbilityName() == "bloodstained_2__frenzy" then
 		if value_name == "AbilityManaCost" then return 0 end
 		if value_name == "AbilityCooldown" then return 0 end
-		if value_name == "duration" then
-      return self.skills["bloodstained_2__frenzy"].duration + (value_level * 0.25)
-    end
+		if value_name == "duration" then return (3 + (value_level * 0.25)) * self:GetBuffAmp() end
 
     if value_name == "ms" then return 300 end
     if value_name == "special_purge" then return 1 end
@@ -378,5 +375,18 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 end
 
 -- UTILS -----------------------------------------------------------
+
+function bloodstained_special_values:UpdateData(data, value)
+	self.data_props[data] = value
+  self:SendBuffRefreshToClients()
+end
+
+function bloodstained_special_values:GetBuffAmp()
+  return 1 + self.data_props["buff_amp"]
+end
+
+function bloodstained_special_values:GetDebuffAmp()
+  return 1 + self.data_props["debuff_amp"]
+end
 
 -- EFFECTS -----------------------------------------------------------

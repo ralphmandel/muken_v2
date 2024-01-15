@@ -86,7 +86,7 @@ end
 function trickster_2_modifier_passive:OnAttackLanded(keys)
   if keys.target ~= self.parent then return end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_disarm_chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_disarm_chance") then
     AddModifier(keys.attacker, self.ability, "_modifier_disarm", {
       duration = self.ability:GetSpecialValueFor("special_disarm_duration")
     }, true)
@@ -98,7 +98,7 @@ function trickster_2_modifier_passive:OnAttackLanded(keys)
 end
 
 function trickster_2_modifier_passive:GetAbsorbSpell(keys)
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_linkens_chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_linkens_chance") then
     if IsServer() then self:PlayEfxSpellBlock() end
     return 1
   end

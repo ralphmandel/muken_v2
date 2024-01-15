@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_strike_modifier_passive", "_neutrals/neutral_strike_mod
 LinkLuaModifier("neutral_strike_modifier_wind", "_neutrals/neutral_strike_modifier_wind", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_strike:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())

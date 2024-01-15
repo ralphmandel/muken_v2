@@ -11,15 +11,15 @@ function fleaman_u_modifier_chain:OnCreated(kv)
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   self.chain_hits = self.ability:GetSpecialValueFor("special_chain_hits")
   self.current_target = EntIndexToHScript(kv.target_index)
   self.source = self.parent
   self.targets = {}
 
-  if IsServer() then
-    self.current_target:EmitSound("Hero_Zuus.ArcLightning.Cast")
-    self:OnIntervalThink()
-  end
+  self.current_target:EmitSound("Hero_Zuus.ArcLightning.Cast")
+  self:OnIntervalThink()
 end
 
 function fleaman_u_modifier_chain:OnRefresh(kv)
@@ -31,6 +31,8 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function fleaman_u_modifier_chain:OnIntervalThink()
+  if not IsServer() then return end
+
   if self.current_target == nil or self.chain_hits <= 0 then
     self:Destroy()
     return
@@ -72,7 +74,7 @@ function fleaman_u_modifier_chain:OnIntervalThink()
   self.current_target = new_target
   self.chain_hits = self.chain_hits - 1
 
-  if IsServer() then self:StartIntervalThink(0.2) end
+  self:StartIntervalThink(0.2)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -90,5 +92,5 @@ function fleaman_u_modifier_chain:PlayEfxChain(source, target)
   ParticleManager:SetParticleControl(effect_cast, 62, Vector(2, 0, 2))
   ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then target:EmitSound("Hero_Zuus.ArcLightning.Target") end
+	target:EmitSound("Hero_Zuus.ArcLightning.Target")
 end

@@ -22,6 +22,8 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_acid_puddle_modifier_passive:OnIntervalThink()
+  if not IsServer() then return end
+
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
 

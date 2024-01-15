@@ -10,16 +10,16 @@ function fleaman_5_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   if self.caster:GetTeamNumber() == self.parent:GetTeamNumber() then
     RemoveAllModifiersByNameAndAbility(self.parent, "fleaman_5_modifier_shadow", self.ability)
     AddSubStats(self.parent, self.ability, {
       health_regen = self.ability:GetSpecialValueFor("special_hp_regen")
     }, false)
 
-    if IsServer() then
-      self:PlayEfxStart()
-      self:OnIntervalThink()
-    end
+    self:PlayEfxStart()
+    self:OnIntervalThink()
   else
     AddModifier(self.parent, self.ability, "_modifier_no_vision_attacker", {}, false)
 
@@ -37,6 +37,8 @@ function fleaman_5_modifier_aura_effect:OnRefresh(kv)
 end
 
 function fleaman_5_modifier_aura_effect:OnRemoved()
+  if not IsServer() then return end
+
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_no_vision_attacker", self.ability)
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_blind", self.ability)
   RemoveSubStats(self.parent, self.ability, {"miss_chance"})
@@ -76,8 +78,10 @@ function fleaman_5_modifier_aura_effect:GetActivityTranslationModifiers()
 end
 
 function fleaman_5_modifier_aura_effect:OnIntervalThink()
+  if not IsServer() then return end
+
 	if self.effect_cast then ParticleManager:SetParticleControl(self.effect_cast, 1, self.parent:GetOrigin()) end
-	if IsServer() then self:StartIntervalThink(FrameTime()) end
+	self:StartIntervalThink(FrameTime())
 end
 
 -- UTILS -----------------------------------------------------------

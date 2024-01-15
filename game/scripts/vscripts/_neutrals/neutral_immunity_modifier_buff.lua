@@ -10,6 +10,8 @@ function neutral_immunity_modifier_buff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   if self.caster == self.parent then
     self.ability:SetActivated(false)
     self.ability:EndCooldown()
@@ -23,6 +25,8 @@ function neutral_immunity_modifier_buff:OnRefresh(kv)
 end
 
 function neutral_immunity_modifier_buff:OnRemoved()
+  if not IsServer() then return end
+
   if self.caster == self.parent then
     self.ability:SetActivated(true)
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))

@@ -7,17 +7,20 @@ function sub_stat_movespeed_percent_increase:RemoveOnDeath() return false end
 function sub_stat_movespeed_percent_increase:GetTexture() return "_modifier_percent_movespeed_buff" end
 
 function sub_stat_movespeed_percent_increase:OnCreated(kv)
-  self.value = kv.value
+  if not IsServer() then return end
 
+  self.value = kv.value
   UpdateMovespeed(self:GetParent(), self:GetName())
 
-  if IsServer() then self:SetStackCount(self.value) end
+  self:SetStackCount(self.value)
 end
 
 function sub_stat_movespeed_percent_increase:OnRemoved()
 end
 
 function sub_stat_movespeed_percent_increase:OnDestroy()
+  if not IsServer() then return end
+
   UpdateMovespeed(self:GetParent(), self:GetName())
 
   if self.endCallback then self.endCallback(self.interrupted) end

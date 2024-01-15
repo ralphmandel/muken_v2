@@ -14,6 +14,8 @@ function _modifier__ai:OnCreated(kv)
 
   -- Only do AI on server
   if IsServer() then
+    self:SetHasCustomTransmitterData(true)
+
     self.state = AI_STATE_IDLE
     self.aggroRange = 400
     self.leashRange = 1000
@@ -40,14 +42,26 @@ function _modifier__ai:OnCreated(kv)
   end
 end
 
+function _modifier__ai:AddCustomTransmitterData()
+  return {
+    state = self.state
+  }
+end
+
+function _modifier__ai:HandleCustomTransmitterData(data)
+	self.state = data.state
+end
+
 function _modifier__ai:OnIntervalThink()
+  if not IsServer() then return end
+
   if self.unit:IsDominated() then
     RemoveAllModifiersByNameAndAbility(self.unit, "sub_stat_movespeed_increase", self.ability)
     return
   end
 
   self.stateActions[self.state](self)
-  if IsServer() then self:StartIntervalThink(AI_THINK_INTERVAL) end
+  self:StartIntervalThink(AI_THINK_INTERVAL)
 end
 
 function _modifier__ai:IdleThink()
@@ -58,7 +72,7 @@ function _modifier__ai:IdleThink()
   if target then
     self.aggroTarget = target
     self.unit:MoveToTargetToAttack(self.aggroTarget)
-    self.state = AI_STATE_AGGRESSIVE
+    self:SetState(AI_STATE_AGGRESSIVE)
     return
   end
 
@@ -128,13 +142,13 @@ function _modifier__ai:ReturningThink()
     if target then
       self.aggroTarget = target
       self.unit:MoveToTargetToAttack(self.aggroTarget)
-      self.state = AI_STATE_AGGRESSIVE
+      self:SetState(AI_STATE_AGGRESSIVE)
       return
     end
   end
 
   if (self.spawnPos - self.unit:GetAbsOrigin()):Length() < 10 then
-    self.state = AI_STATE_IDLE
+    self:SetState(AI_STATE_IDLE)
     return
   end
 
@@ -163,7 +177,12 @@ end
 function _modifier__ai:SetReturning(aggressive)
   self.unit:MoveToPosition(self.spawnPos)
   self.returning_agressive = aggressive
-  self.state = AI_STATE_RETURNING
+  self:SetState(AI_STATE_RETURNING)
+end
+
+function _modifier__ai:SetState(new_state)
+  self.state = new_state
+  self:SendBuffRefreshToClients()
 end
 
 -----------------------------------------------------------
@@ -209,31 +228,39 @@ function _modifier__ai:GetAbsoluteNoDamagePure(keys)
 end
 
 function _modifier__ai:GetModifierPreAttack(keys)
-	if keys.attacker ~= self.unit then return end
+  if not IsServer() then return end
+
+	if keys.attacker ~= self.unit then return 0 end
   local sound = ""
   
   if self.unit:GetUnitName() == "neutral_epic_igneo" then sound = "Hero_WarlockGolem.PreAttack" end
   if self.unit:GetUnitName() == "neutral_epic_great_igneo" then sound = "Hero_WarlockGolem.PreAttack" end
 
-	if IsServer() then self.unit:EmitSound(sound) end
+	self.unit:EmitSound(sound)
 end
 
 
 function _modifier__ai:OnAttack(keys)
-	if keys.attacker ~= self.unit then return end
-    local sound = ""
-    if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.Attack" end
-    if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
-    if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ElderDragonShoot3.Attack" end
-    if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.Attack" end
-    if self.unit:GetUnitName() == "neutral_legendary_spider" then sound = "hero_viper.attack" end
+  if not IsServer() then return end
 
-	if IsServer() then self.unit:EmitSound(sound) end
+	if keys.attacker ~= self.unit then return end
+  local sound = ""
+
+  if self.unit:GetUnitName() == "neutral_common_great_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_gargoyle" then sound = "Hero_LoneDruid.Attack" end
+  if self.unit:GetUnitName() == "neutral_common_drake" then sound = "Hero_DragonKnight.ElderDragonShoot3.Attack" end
+  if self.unit:GetUnitName() == "neutral_rare_mage" then sound = "Hero_Ancient_Apparition.Attack" end
+  if self.unit:GetUnitName() == "neutral_legendary_spider" then sound = "hero_viper.attack" end
+
+	self.unit:EmitSound(sound)
 end
 
 function _modifier__ai:OnAttackLanded(keys)
+  if not IsServer() then return end
+
 	if keys.attacker ~= self.unit then return end
   local sound = ""
+
   if self.unit:GetUnitName() == "neutral_common_chameleon_a" then sound = "Hero_Meepo.Attack" end
   if self.unit:GetUnitName() == "neutral_common_chameleon_b" then sound = "Hero_Meepo.Attack" end
   if self.unit:GetUnitName() == "neutral_common_crocodilian_a" then sound = "Hero_Slardar.Attack" end
@@ -255,7 +282,7 @@ function _modifier__ai:OnAttackLanded(keys)
   if self.unit:GetUnitName() == "neutral_legendary_gorillaz" then sound = "Hero_LoneDruid.TrueForm.Attack" end
   if self.unit:GetUnitName() == "neutral_legendary_spider" then sound = "hero_viper.projectileImpact" end
 
-	if IsServer() then keys.target:EmitSound(sound) end
+	keys.target:EmitSound(sound)
 end
 
 function _modifier__ai:GetAttackSound(keys)

@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_iron_guard_modifier_passive", "_neutrals/neutral_iron_g
 LinkLuaModifier("neutral_iron_guard_modifier_resistance", "_neutrals/neutral_iron_guard_modifier_resistance", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_iron_guard:Spawn()
+  if not IsServer() then return end
+  
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())

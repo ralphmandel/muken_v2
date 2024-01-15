@@ -109,7 +109,7 @@ function ancient_5_modifier_walk:ApplyDebuff()
 	)
 
 	for _,enemy in pairs(enemies) do
-    if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_petrify_chance")) then
+    if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_petrify_chance") then
       RemoveAllModifiersByNameAndAbility(enemy, "_modifier_petrified", self.ability)
       AddModifier(enemy, self.ability, "_modifier_petrified", {
         duration = self.ability:GetSpecialValueFor("special_duration")

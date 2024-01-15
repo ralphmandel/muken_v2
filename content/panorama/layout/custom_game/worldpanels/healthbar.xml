@@ -8,9 +8,9 @@
   </scripts>
   <Panel hittest="false" class="HealthBar">
     <Panel class="Bubble">
-      <Panel id="HP1" class="HP"/>
+      <Panel id="HP_inner" class="HP"/>
     </Panel>
-    <Panel class="Bubble">
+    <!-- <Panel class="Bubble">
       <Panel id="HP2" class="HP"/>
     </Panel>
     <Panel class="Bubble">
@@ -21,6 +21,6 @@
     </Panel>
     <Panel class="Bubble">
       <Panel id="HP5" class="HP"/>
-    </Panel>
+    </Panel> -->
   </Panel>
 </root>

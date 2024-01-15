@@ -10,12 +10,12 @@ function fleaman_5_modifier_shadow:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   AddModifier(self.parent, self.ability, "_modifier_invisible", {attack_break = 0}, false)
 
-	if IsServer() then
-		self:PlayEfxStart()
-		self:OnIntervalThink()
-	end
+  self:PlayEfxStart()
+  self:OnIntervalThink()
 end
 
 function fleaman_5_modifier_shadow:OnRefresh(kv)
@@ -50,8 +50,10 @@ function fleaman_5_modifier_shadow:GetActivityTranslationModifiers()
 end
 
 function fleaman_5_modifier_shadow:OnIntervalThink()
+  if not IsServer() then return end
+
 	if self.effect_cast then ParticleManager:SetParticleControl(self.effect_cast, 1, self.parent:GetOrigin()) end
-	if IsServer() then self:StartIntervalThink(FrameTime()) end
+	self:StartIntervalThink(FrameTime())
 end
 
 -- UTILS -----------------------------------------------------------
@@ -73,5 +75,5 @@ function fleaman_5_modifier_shadow:PlayEfxStart()
 	self:AddParticle(effect_cast_1, false, false, -1, false, false)
 
 	self.effect_cast = effect_cast_1
-	if IsServer() then self.parent:EmitSound("Fleaman.Shadow.Start") end
+	self.parent:EmitSound("Fleaman.Shadow.Start")
 end

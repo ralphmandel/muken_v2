@@ -112,9 +112,7 @@ function item_tp:SetCooldown(cd)
 end
 
 function item_tp:GetChannelTime()
-	local channel = self:GetCaster():FindAbilityByName("_channel")
-	local channel_time = self:GetSpecialValueFor("channel_time")
-	return channel_time-- * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
+	return self:GetSpecialValueFor("channel_time")
 end
 
 function item_tp:GetBehavior()

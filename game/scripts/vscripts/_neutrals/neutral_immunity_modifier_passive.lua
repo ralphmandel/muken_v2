@@ -22,6 +22,8 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_immunity_modifier_passive:OnIntervalThink()
+  if not IsServer() then return end
+
 	if self.ability:IsCooldownReady() == false then return end
 	if self.ability:IsOwnersManaEnough() == false then return end
 

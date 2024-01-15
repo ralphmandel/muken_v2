@@ -5,12 +5,16 @@ LinkLuaModifier("fleaman_3_modifier_effect", "heroes/death/fleaman/fleaman_3_mod
 -- INIT
 
   function fleaman_3__jump:OnOwnerSpawned()
+    if not IsServer() then return end
+    
     self:SetActivated(true)
   end
 
 -- SPELL START
 
   function fleaman_3__jump:OnSpellStart()
+    if not IsServer() then return end
+
     local caster = self:GetCaster()
 
     ProjectileManager:ProjectileDodge(caster)

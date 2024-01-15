@@ -11,18 +11,22 @@ function neutral_iron_guard_modifier_resistance:OnCreated(kv)
   self.ability = self:GetAbility()
   self.hp_percent = 0
 
+  if not IsServer() then return end
+
   self:UpdateResistance()
-  
-  if IsServer() then self:StartIntervalThink(0.5) end
+  self:StartIntervalThink(0.5)
 end
 
 function neutral_iron_guard_modifier_resistance:OnRefresh(kv)
-  self:UpdateResistance()
+  if not IsServer() then return end
 
-  if IsServer() then self:StartIntervalThink(0.5) end
+  self:UpdateResistance()
+  self:StartIntervalThink(0.5)
 end
 
 function neutral_iron_guard_modifier_resistance:OnRemoved()
+  if not IsServer() then return end
+  
   RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
 end
 
@@ -37,6 +41,8 @@ function neutral_iron_guard_modifier_resistance:DeclareFunctions()
 end
 
 function neutral_iron_guard_modifier_resistance:OnIntervalThink()
+  if not IsServer() then return end
+  
   local hp_percent = math.floor(self.parent:GetHealthPercent() / 5)
   if self.hp_percent ~= hp_percent then self:UpdateResistance() end
 end

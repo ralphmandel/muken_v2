@@ -35,6 +35,8 @@ function fleaman_2_modifier_charge:DeclareFunctions()
 end
 
 function fleaman_2_modifier_charge:OnAttackLanded(keys)
+  if not IsServer() then return end
+  
 	if keys.attacker ~= self.parent then return end
   
   if self:GetStackCount() == 100 then

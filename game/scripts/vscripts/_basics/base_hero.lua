@@ -1,46 +1,50 @@
 base_hero = class ({})
+require("examples/worldpanelsExample")
 LinkLuaModifier("base_hero_mod", "_basics/base_hero_mod", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_general_script", "_bot_scripts/_general_script", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_fountain_refresh_hp", "_modifiers/_fountain_refresh_hp", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_fountain_refresh_mp", "_modifiers/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_ban", "_modifiers/_modifier_ban", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_bkb", "_modifiers/_modifier_bkb", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_bleeding", "_modifiers/_modifier_bleeding", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_blind", "_modifiers/_modifier_blind", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_blind_stack", "_modifiers/_modifier_blind_stack", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_break", "_modifiers/_modifier_break", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_disarm", "_modifiers/_modifier_disarm", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_ethereal", "_modifiers/_modifier_ethereal", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_ethereal_status_efx", "_modifiers/_modifier_ethereal_status_efx", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_fear", "_modifiers/_modifier_fear", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_fear_status_efx", "_modifiers/_modifier_fear_status_efx", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_generic_arc", "_modifiers/_modifier_generic_arc", LUA_MODIFIER_MOTION_BOTH)
-LinkLuaModifier("_modifier_generic_custom_indicator", "_modifiers/_modifier_generic_custom_indicator", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_generic_knockback_lua", "_modifiers/_modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_hex", "_modifiers/_modifier_hex", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_hide", "_modifiers/_modifier_hide", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_immunity", "_modifiers/_modifier_immunity", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_invi_level", "_modifiers/_modifier_invi_level", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_invisible", "_modifiers/_modifier_invisible", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_invulnerable", "_modifiers/_modifier_invulnerable", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_lighting", "_modifiers/_modifier_lighting", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_no_bar", "_modifiers/_modifier_no_bar", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_no_block", "_modifiers/_modifier_no_block", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_no_vision_attacker", "_modifiers/_modifier_no_vision_attacker", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_path", "_modifiers/_modifier_path", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_petrified", "_modifiers/_modifier_petrified", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_petrified_status_efx", "_modifiers/_modifier_petrified_status_efx", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_phase", "_modifiers/_modifier_phase", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_pull", "_modifiers/_modifier_pull", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_restrict", "_modifiers/_modifier_restrict", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_root", "_modifiers/_modifier_root", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_silence", "_modifiers/_modifier_silence", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_stun", "_modifiers/_modifier_stun", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_tracking", "_modifiers/_modifier_tracking", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_truesight", "_modifiers/_modifier_truesight", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_turn_disabled", "_modifiers/_modifier_turn_disabled", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_unslowable", "_modifiers/_modifier_unslowable", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_untargetable", "_modifiers/_modifier_untargetable", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_fountain_refresh_hp", "_modifiers/generics/_fountain_refresh_hp", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_fountain_refresh_mp", "_modifiers/generics/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_ban", "_modifiers/generics/_modifier_ban", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_bkb", "_modifiers/generics/_modifier_bkb", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_bleeding", "_modifiers/generics/_modifier_bleeding", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_blind", "_modifiers/generics/_modifier_blind", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_blind_stack", "_modifiers/generics/_modifier_blind_stack", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_break", "_modifiers/generics/_modifier_break", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_disarm", "_modifiers/generics/_modifier_disarm", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_ethereal", "_modifiers/generics/_modifier_ethereal", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_ethereal_status_efx", "_modifiers/generics/_modifier_ethereal_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_fear", "_modifiers/generics/_modifier_fear", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_fear_status_efx", "_modifiers/generics/_modifier_fear_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_generic_arc", "_modifiers/generics/_modifier_generic_arc", LUA_MODIFIER_MOTION_BOTH)
+LinkLuaModifier("_modifier_generic_custom_indicator", "_modifiers/generics/_modifier_generic_custom_indicator", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_generic_knockback_lua", "_modifiers/generics/_modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_hex", "_modifiers/generics/_modifier_hex", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_hide", "_modifiers/generics/_modifier_hide", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_immunity", "_modifiers/generics/_modifier_immunity", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_invi_level", "_modifiers/generics/_modifier_invi_level", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_invisible", "_modifiers/generics/_modifier_invisible", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_invulnerable", "_modifiers/generics/_modifier_invulnerable", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_lighting", "_modifiers/generics/_modifier_lighting", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_no_bar", "_modifiers/generics/_modifier_no_bar", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_no_block", "_modifiers/generics/_modifier_no_block", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_no_vision_attacker", "_modifiers/generics/_modifier_no_vision_attacker", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_path", "_modifiers/generics/_modifier_path", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_petrified", "_modifiers/generics/_modifier_petrified", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_petrified_status_efx", "_modifiers/generics/_modifier_petrified_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_phase", "_modifiers/generics/_modifier_phase", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_pull", "_modifiers/generics/_modifier_pull", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_restrict", "_modifiers/generics/_modifier_restrict", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_root", "_modifiers/generics/_modifier_root", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_silence", "_modifiers/generics/_modifier_silence", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_stun", "_modifiers/generics/_modifier_stun", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_tracking", "_modifiers/generics/_modifier_tracking", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_truesight", "_modifiers/generics/_modifier_truesight", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_turn_disabled", "_modifiers/generics/_modifier_turn_disabled", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_unslowable", "_modifiers/generics/_modifier_unslowable", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_untargetable", "_modifiers/generics/_modifier_untargetable", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_bleed__modifier", "_modifiers/orbs/orb_bleed__modifier", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_bleed__status", "_modifiers/orbs/orb_bleed__status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_bleed_debuff", "_modifiers/orbs/orb_bleed_debuff", LUA_MODIFIER_MOTION_NONE)
 
 require("internal/muken_events")
 require("internal/rank_system")
@@ -193,14 +197,16 @@ require("internal/rank_system")
 
   function base_hero:UpgradeRank(skill_name, tier, path)
     local caster = self:GetCaster()
+    local special_kv_modifier = caster:FindModifierByName(GetHeroName(caster).."_special_values")
+    if special_kv_modifier == nil then return end
+
     local skill_id = self:GetSkillID(skill_name)
     tier = tonumber(tier)
     path = tonumber(path)
 
-    local rank = caster:AddAbility(self.ranks_name[skill_id][tier][path])
-    local ability = caster:FindAbilityByName(self.abilities_name[skill_id])
+    special_kv_modifier:LearnRank(skill_id, tier, path)
 
-    rank:UpgradeAbility(true)
+    local ability = caster:FindAbilityByName(self.abilities_name[skill_id])
     ability:SetLevel(ability:GetLevel() + tier)
     self:UpdateRankPoints(-tier)
 
@@ -247,7 +253,7 @@ require("internal/rank_system")
   function base_hero:GetRankState(skill_id, tier, path)
     local caster = self:GetCaster()
     local rank_name = self.ranks_name[skill_id][tier][path]
-    if caster:HasAbility(rank_name) then return "StateUpgraded" end
+    if caster:HasRank(skill_id, tier, path) then return "StateUpgraded" end
     if self.ranks_exception[rank_name] == true then return "StateDisabled" end
     if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
     return "StateDisabled"
@@ -259,7 +265,7 @@ require("internal/rank_system")
     if caster:FindAbilityByName(self.abilities_name[skill_id]):IsTrained() == false then return false end
     
     for i_path, rank_name in pairs(self.ranks_name[skill_id][tier]) do
-      if path ~= i_path and caster:HasAbility(rank_name) then
+      if path ~= i_path and caster:HasRank(skill_id, tier, i_path) then
         return false
       end
     end
@@ -272,10 +278,10 @@ require("internal/rank_system")
     local level = 0
     local style = "mana"
 
-    for skill = 1, 6, 1 do
+    for skill_id = 1, 6, 1 do
       for tier = 1, 3, 1 do
         for path = 1, 2, 1 do
-          if caster:HasAbility(self.ranks_name[skill][tier][path]) then
+          if caster:HasRank(skill_id, tier, path) then
             level = level + tier
           end
         end

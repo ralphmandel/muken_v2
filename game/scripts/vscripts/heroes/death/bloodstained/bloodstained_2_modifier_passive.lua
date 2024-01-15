@@ -35,7 +35,7 @@ function bloodstained_2_modifier_passive:OnAttackLanded(keys)
   local purge = self.ability:GetSpecialValueFor("special_purge")
   local bleeding_duration = self.ability:GetSpecialValueFor("special_bleeding_duration")
 
-	if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("chance")) then
+	if RandomFloat(0, 100) <  self.ability:GetSpecialValueFor("chance") then
 		self.ability.target = keys.target
 
     if purge == 1 then

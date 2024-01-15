@@ -11,19 +11,23 @@ function fleaman_1_modifier_precision:OnCreated(kv)
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 
-  AddStatusEfx(self.ability, "fleaman_1_modifier_precision_status_efx", self.caster, self.parent)
+  if not IsServer() then return end
 
-	if IsServer() then
-		self:SetStackCount(0)
-		self:AddMultStack()
-	end
+  AddStatusEfx(self.ability, "fleaman_1_modifier_precision_status_efx", self.caster, self.parent)
+  
+  self:SetStackCount(0)
+  self:AddMultStack()
 end
 
 function fleaman_1_modifier_precision:OnRefresh(kv)
-	if IsServer() then self:AddMultStack() end
+  if not IsServer() then return end
+
+	self:AddMultStack()
 end
 
 function fleaman_1_modifier_precision:OnRemoved()
+  if not IsServer() then return end
+
   RemoveStatusEfx(self.ability, "fleaman_1_modifier_precision_status_efx", self.caster, self.parent)
   RemoveSubStats(self.parent, self.ability, {"attack_speed"})
 end
@@ -34,23 +38,22 @@ function fleaman_1_modifier_precision:OnStackCountChanged(old)
 	if old == self:GetStackCount() then return end
 	if self:GetStackCount() == 0 then self:Destroy() return end
 
-  RemoveSubStats(self.parent, self.ability, {"attack_speed", "evasion"})
-  AddSubStats(self.parent, self.ability, {
-    attack_speed = self:GetStackCount() * self.ability:GetSpecialValueFor("attack_speed"),
-    evasion = self:GetStackCount() * self.ability:GetSpecialValueFor("evasion")
-  }, false)
+  if IsServer() then
+    RemoveSubStats(self.parent, self.ability, {"attack_speed", "evasion"})
+    AddSubStats(self.parent, self.ability, {
+      attack_speed = self:GetStackCount() * self.ability:GetSpecialValueFor("attack_speed"),
+      evasion = self:GetStackCount() * self.ability:GetSpecialValueFor("evasion")
+    }, false)
+  end
 end
 
 -- UTILS -----------------------------------------------------------
 
 function fleaman_1_modifier_precision:AddMultStack()
-	local duration = CalcStatus(self.ability:GetSpecialValueFor("duration"), self.caster, self.parent)
-
-  if IsServer() then
-    self:SetDuration(duration, true)
-    self:IncrementStackCount()
-    self.parent:EmitSound("Fleaman.Precision")
-  end
+  local duration = self.ability:GetSpecialValueFor("duration")
+  self:SetDuration(duration, true)
+  self:IncrementStackCount()
+  self.parent:EmitSound("Fleaman.Precision")
   
   AddModifier(self.parent, self.ability, "fleaman_1_modifier_precision_stack", {
     duration = duration, modifier = tempTable:AddATValue(self)

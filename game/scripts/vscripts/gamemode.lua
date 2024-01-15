@@ -134,9 +134,9 @@ function GameMode:OnHeroInGame(hero)
       end      
     end
   else
-    local channel = hero:FindAbilityByName("_channel")
-    hero:AddNewModifier(hero, channel, "_modifier_restrict", {duration = 10})
-    hero:AddNewModifier(hero, channel, "_modifier_no_bar", {duration = 10})
+    local base_hero = hero:FindAbilityByName("base_hero")
+    hero:AddNewModifier(hero, base_hero, "_modifier_restrict", {duration = 10})
+    hero:AddNewModifier(hero, base_hero, "_modifier_no_bar", {duration = 10})
   end
 
   local team_index = GetTeamIndex(hero:GetTeamNumber())

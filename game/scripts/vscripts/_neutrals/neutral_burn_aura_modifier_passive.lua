@@ -13,6 +13,7 @@ function neutral_burn_aura_modifier_passive:GetAuraSearchTeam() return self:GetA
 function neutral_burn_aura_modifier_passive:GetAuraSearchType() return self:GetAbility():GetAbilityTargetType() end
 function neutral_burn_aura_modifier_passive:GetAuraSearchFlags() return self:GetAbility():GetAbilityTargetFlags() end
 function neutral_burn_aura_modifier_passive:GetAuraEntityReject(hEntity)
+  if not IsServer() then return false end
   return hEntity:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON] or hEntity:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE]
 end
 

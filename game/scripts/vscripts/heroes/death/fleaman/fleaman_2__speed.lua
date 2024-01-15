@@ -11,8 +11,4 @@ LinkLuaModifier("fleaman_2_modifier_charge", "heroes/death/fleaman/fleaman_2_mod
 
 -- SPELL START
 
-	function fleaman_2__speed:OnSpellStart()
-		local caster = self:GetCaster()
-	end
-
 -- EFFECTS

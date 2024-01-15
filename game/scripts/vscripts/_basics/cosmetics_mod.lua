@@ -44,8 +44,12 @@ end
 
 function cosmetics_mod:OnRemoved()
   if IsServer() then
-    self.parent:AddNoDraw()
-    self.parent:ForceKill(false)
+    if self.parent then
+      if IsValidEntity(self.parent) then
+        self.parent:AddNoDraw()
+        self.parent:ForceKill(false)
+      end
+    end
   end
 end
 

@@ -38,5 +38,5 @@ function fleaman_3_modifier_effect:PlayEfxStart()
 
   AddFOWViewer(self.caster:GetTeamNumber(), self.parent:GetOrigin(), self.radius, self:GetDuration(), false)
 
-	if IsServer() then self.parent:EmitSound("Hero_Slark.Pounce.Leash.Immortal") end
+	self.parent:EmitSound("Hero_Slark.Pounce.Leash.Immortal")
 end

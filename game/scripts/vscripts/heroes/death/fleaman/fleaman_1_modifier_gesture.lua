@@ -6,9 +6,9 @@ function fleaman_1_modifier_gesture:IsPurgable() return false end
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function fleaman_1_modifier_gesture:OnCreated(kv)
-    self.caster = self:GetCaster()
-    self.parent = self:GetParent()
-    self.ability = self:GetAbility()
+  self.caster = self:GetCaster()
+  self.parent = self:GetParent()
+  self.ability = self:GetAbility()
 
 	if IsServer() then self:OnIntervalThink() end
 end
@@ -22,11 +22,13 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function fleaman_1_modifier_gesture:OnIntervalThink()
+  if not IsServer() then return end
+
 	if self.parent:IsMoving() or self.parent:IsAttacking() then
 		self.parent:FadeGesture(ACT_DOTA_CAST_ABILITY_1)
 	end
 
-	if IsServer() then self:StartIntervalThink(FrameTime()) end
+	self:StartIntervalThink(FrameTime())
 end
 
 -- UTILS -----------------------------------------------------------

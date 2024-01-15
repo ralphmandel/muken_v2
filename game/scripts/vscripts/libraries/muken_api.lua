@@ -46,3 +46,10 @@ end
 function CDOTA_BaseNPC:GetLastOriginalDamage(percent)
   return self:GetMainStat("STR").original_damage * percent * 0.01
 end
+
+function CDOTA_BaseNPC:HasRank(skill_id, tier, path)
+  local special_kv_modifier = self:FindModifierByName(GetHeroName(self).."_special_values")
+  if special_kv_modifier == nil then return false end
+
+  return special_kv_modifier:HasRank(skill_id, tier, path)
+end

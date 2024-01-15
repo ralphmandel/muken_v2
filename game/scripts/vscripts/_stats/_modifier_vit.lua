@@ -137,6 +137,12 @@ function _modifier_vit:GetStatusResist(bPercent)
   return base * 0.01
 end
 
+function _modifier_vit:GetStatusBar()
+  local base = self:GetCalculedData("sub_stat_status_resist", false) * 5
+  local bonus = self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.5
+  return 100 + base + bonus
+end
+
 function _modifier_vit:GetCalculedDataStack(property, bScalar)
   local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
   value = value + self.data[property].bonus
@@ -153,11 +159,17 @@ end
 
 function _modifier_vit:UpdateMainBonus(value)
   self.stat_bonus = value
+
+  self:SendBuffRefreshToClients()
+  
+  for property, table in pairs(self.data) do
+    self:OnStatUpated(property)
+  end
 end
 
 function _modifier_vit:UpdateSubBonus(property)
   if self.parent == nil then return end
-  if IsValidEntity(self.ability) == false then return end
+  if IsValidEntity(self.parent) == false then return end
 
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
@@ -171,6 +183,24 @@ function _modifier_vit:UpdateSubBonus(property)
 
   self.data["sub_stat_"..property].bonus = value
   self:SendBuffRefreshToClients()
+  self:OnStatUpated(property)
+end
+
+function _modifier_vit:OnStatUpated(property)
+  if property == "sub_stat_status_resist" or property == "sub_stat_status_resist_stack" then
+    for _, status_name in pairs(ORB_LIST) do
+      local status_modifier = self.parent:FindModifierByName(status_name)
+      if status_modifier then status_modifier:UpdateStatusBar() end      
+    end
+  end
+
+  if self.parent:IsHero() == false then return end
+  local special_kv_modifier = self.parent:FindModifierByName(GetHeroName(self.parent).."_special_values")
+  if special_kv_modifier == nil then return end
+
+  if property == "sub_stat_incoming_buff" then
+    special_kv_modifier:UpdateData("buff_amp", self:GetIncomingBuff())
+  end
 end
 
 function _modifier_vit:LoadData()

@@ -22,11 +22,13 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_fireball_modifier_passive:OnIntervalThink()
+  if not IsServer() then return end
+
   local ai = self.parent:FindModifierByName("_modifier__ai")
   if ai == nil then return end
 
 	if ai.state ~= 1 or self.ability:IsCooldownReady() == false or self.ability:IsOwnersManaEnough() == false then
-    if IsServer() then self:StartIntervalThink(1) end
+    self:StartIntervalThink(1)
     return
   end
 
@@ -41,10 +43,8 @@ function neutral_fireball_modifier_passive:OnIntervalThink()
     if enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE] then
       self.parent:CastAbilityOnTarget(enemy, self.ability, self.parent:GetPlayerOwnerID())
 
-      if IsServer() then
-        self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
-        ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
-      end
+      self:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
+      ai:StartIntervalThink(self.ability:GetCastPoint() + 0.5)
       break
     end
 	end

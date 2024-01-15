@@ -1,18 +1,18 @@
 .HealthBar
 {
   background-color: #000000;
-  padding:2px;
-  border-radius: 5px;
+  padding: 1px;
+  /* border-radius: 5px; */
   flow-children:right;
   border: 1px solid #555555;
 }
 
 .Bubble
 {
-  border-radius: 3px;
+  /* border-radius: 3px; */
   border: 1px solid #aaaaaa;
-  width: 20px;
-  height: 10px;
+  width: 100px;
+  height: 7px;
   margin-right: 1px;
   margin-left: 1px;
   vertical-align: center;

@@ -31,6 +31,8 @@ function neutral_iron_guard_modifier_passive:DeclareFunctions()
 end
 
 function neutral_iron_guard_modifier_passive:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
 
   if self.parent:GetHealthPercent() <= 95 then
@@ -39,12 +41,13 @@ function neutral_iron_guard_modifier_passive:OnTakeDamage(keys)
 end
 
 function neutral_iron_guard_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+
   if keys.target ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
 
   self:PlayEfxHit(keys.attacker)
-
-  if IsServer() then self:IncrementStackCount() end
+  self:IncrementStackCount()
 end
 
 function neutral_iron_guard_modifier_passive:OnIntervalThink()
@@ -52,15 +55,15 @@ function neutral_iron_guard_modifier_passive:OnIntervalThink()
 end
 
 function neutral_iron_guard_modifier_passive:OnStackCountChanged(old)
+  if not IsServer() then return end
+
   RemoveSubStats(self.parent, self.ability, {"armor"})
 
-  if IsServer() then
-    if self:GetStackCount() > 0 then
-      local mod = AddSubStats(self.parent, self.ability, {armor = self.ability:GetSpecialValueFor("armor") * self:GetStackCount()}, false)
-      self:StartIntervalThink(self.ability:GetSpecialValueFor("decrease_time"))
-    else
-      self:StartIntervalThink(-1)
-    end
+  if self:GetStackCount() > 0 then
+    local mod = AddSubStats(self.parent, self.ability, {armor = self.ability:GetSpecialValueFor("armor") * self:GetStackCount()}, false)
+    self:StartIntervalThink(self.ability:GetSpecialValueFor("decrease_time"))
+  else
+    self:StartIntervalThink(-1)
   end
 end
 
@@ -88,5 +91,5 @@ function neutral_iron_guard_modifier_passive:PlayEfxHit(target)
   ParticleManager:SetParticleControlEnt(hit_particle, 2, self.parent, PATTACH_POINT_FOLLOW, "attach_hitloc", origin, true)
   ParticleManager:ReleaseParticleIndex(hit_particle)
 
-  if IsServer() then self.parent:EmitSound("Hero_TemplarAssassin.Refraction.Absorb") end
+  self.parent:EmitSound("Hero_TemplarAssassin.Refraction.Absorb")
 end

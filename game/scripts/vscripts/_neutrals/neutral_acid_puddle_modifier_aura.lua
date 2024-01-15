@@ -13,6 +13,7 @@ function neutral_acid_puddle_modifier_aura:GetAuraSearchTeam() return self:GetAb
 function neutral_acid_puddle_modifier_aura:GetAuraSearchType() return self:GetAbility():GetAbilityTargetType() end
 function neutral_acid_puddle_modifier_aura:GetAuraSearchFlags() return self:GetAbility():GetAbilityTargetFlags() end
 function neutral_acid_puddle_modifier_aura:GetAuraEntityReject(hEntity)
+  if not IsServer() then return false end
   if self:GetCaster():IsHero() then return false end
   return hEntity:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON] or hEntity:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE]
 end

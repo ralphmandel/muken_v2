@@ -11,6 +11,8 @@ function neutral_immunity:GetIntrinsicModifierName()
 end
 
 function neutral_immunity:OnSpellStart()
+  if not IsServer() then return end
+
   local caster = self:GetCaster()
 
   local allies = FindUnitsInRadius(
@@ -23,5 +25,5 @@ function neutral_immunity:OnSpellStart()
     AddModifier(ally, self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration")}, true)
 	end
 
-  if IsServer() then caster:EmitSound("Hero_Omniknight.GuardianAngel.Cast") end
+  caster:EmitSound("Hero_Omniknight.GuardianAngel.Cast")
 end

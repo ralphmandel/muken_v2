@@ -10,6 +10,8 @@ function neutral_burn_aura_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   local interval = 0.4
 
   self.damageTable = {
@@ -18,7 +20,7 @@ function neutral_burn_aura_modifier_aura_effect:OnCreated(kv)
     damage_type = self.ability:GetAbilityDamageType()
 	}
 
-  if IsServer() then self:StartIntervalThink(interval) end
+  self:StartIntervalThink(interval)
 end
 
 function neutral_burn_aura_modifier_aura_effect:OnRefresh(kv)
@@ -30,6 +32,8 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function neutral_burn_aura_modifier_aura_effect:OnIntervalThink()
+  if not IsServer() then return end
+
   ApplyDamage(self.damageTable)  
 end
 

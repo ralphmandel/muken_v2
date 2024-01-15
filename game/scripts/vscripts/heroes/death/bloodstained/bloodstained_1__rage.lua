@@ -7,6 +7,8 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
 -- INIT
 
   function bloodstained_1__rage:Spawn()
+    if not IsServer() then return end
+
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
@@ -15,6 +17,8 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
   end
 
   function bloodstained_1__rage:OnOwnerSpawned()
+    if not IsServer() then return end
+
     self:SetActivated(true)
   end
 
@@ -31,9 +35,13 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
 -- SPELL START
 
   function bloodstained_1__rage:OnSpellStart()
-    local caster = self:GetCaster()
-    AddModifier(caster, self, "bloodstained_1_modifier_rage", {duration = self:GetSpecialValueFor("duration")}, true)
+    if not IsServer() then return end
 
+    local caster = self:GetCaster()
+    self:PlayEfxStart()
+    
+    AddModifier(caster, self, "bloodstained_1_modifier_rage", {duration = self:GetSpecialValueFor("duration")}, false)
+    
     if self:GetSpecialValueFor("special_blink") > 0 then
       local origin = caster:GetOrigin()
       FindClearSpaceForUnit(caster, caster:GetCursorPosition(), true)
@@ -53,8 +61,6 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
         }, true)
       end
     end
-
-    if IsServer() then self:PlayEfxStart() end
   end
 
 -- EFFECTS

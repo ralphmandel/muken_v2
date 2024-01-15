@@ -38,6 +38,8 @@ end
 
 
 function neutral_mana_burn_modifier_orb:GetModifierProjectileName()
+  if not IsServer() then return end
+
   if self:ShouldLaunch(self.parent:GetAggroTarget()) then return self.ability:GetProjectileName() end
 	-- if not self.ability.GetProjectileName then return end
 	-- if self.proj_name == true then
@@ -47,6 +49,8 @@ function neutral_mana_burn_modifier_orb:GetModifierProjectileName()
 end
 
 function neutral_mana_burn_modifier_orb:OnAttack(keys)
+  if not IsServer() then return end
+  
 	if keys.attacker ~= self.parent then return end
 
 	if self:ShouldLaunch(keys.target) then
@@ -60,22 +64,30 @@ function neutral_mana_burn_modifier_orb:OnAttack(keys)
 end
 
 function neutral_mana_burn_modifier_orb:GetModifierProcAttack_Feedback(keys)
+  if not IsServer() then return end
+  
 	if self.launch[keys.record] then
 		if self.ability.OnOrbImpact then self.ability:OnOrbImpact(keys) end
 	end
 end
 
 function neutral_mana_burn_modifier_orb:OnAttackFail(keys)
+  if not IsServer() then return end
+  
 	if self.launch[keys.record] then
 		if self.ability.OnOrbFail then self.ability:OnOrbFail(keys) end
 	end
 end
 
 function neutral_mana_burn_modifier_orb:OnAttackRecordDestroy(keys)
+  if not IsServer() then return end
+  
 	self.launch[keys.record] = nil
 end
 
 function neutral_mana_burn_modifier_orb:OnOrder(keys)
+  if not IsServer() then return end
+  
 	if keys.unit ~= self.parent then return end
 
 	if keys.ability then

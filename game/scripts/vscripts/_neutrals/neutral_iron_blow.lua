@@ -2,6 +2,8 @@ neutral_iron_blow = class({})
 LinkLuaModifier("neutral_iron_blow_modifier_passive", "_neutrals/neutral_iron_blow_modifier_passive", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_iron_blow:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())
@@ -18,18 +20,24 @@ function neutral_iron_blow:GetAOERadius()
 end
 
 function neutral_iron_blow:OnAbilityPhaseStart()
+  if not IsServer() then return true end
+
   local caster = self:GetCaster()
-	if IsServer() then caster:EmitSound("Hero_MonkeyKing.Strike.Cast") end
+	caster:EmitSound("Hero_MonkeyKing.Strike.Cast")
 
   return true
 end
 
 function neutral_iron_blow:OnAbilityPhaseInterrupted()
+  if not IsServer() then return end
+
   local caster = self:GetCaster()
-	if IsServer() then caster:StopSound("Hero_MonkeyKing.Strike.Cast") end
+	caster:StopSound("Hero_MonkeyKing.Strike.Cast")
 end
 
 function neutral_iron_blow:OnSpellStart()
+  if not IsServer() then return end
+
   local caster = self:GetCaster()
   local damage = caster:GetHealthDeficit() * self:GetSpecialValueFor("damage") * 0.01
 

@@ -24,6 +24,8 @@ end
 --------------------------------------------------------------------------------
 
 function _modifier_stun:OnCreated(kv)
+  if not IsServer() then return end
+
 	local special = kv.special or 0
 	local effect
 	local attach
@@ -41,11 +43,9 @@ function _modifier_stun:OnCreated(kv)
 	self.particle = ParticleManager:CreateParticle(effect, attach, self:GetParent())
 	ParticleManager:SetParticleControl(self.particle, 0, self:GetParent():GetOrigin())
 
-	if IsServer() then
-		self:GetParent():EmitSound("DOTA_Item.SkullBasher")
-		self:SetStackCount(0)
-		self:StartIntervalThink(FrameTime())
-	end
+	self:GetParent():EmitSound("DOTA_Item.SkullBasher")
+	self:SetStackCount(0)
+	self:StartIntervalThink(FrameTime())
 end
 
 function _modifier_stun:OnRefresh(kv)
@@ -53,6 +53,7 @@ function _modifier_stun:OnRefresh(kv)
 end
 
 function _modifier_stun:OnRemoved()
+  if not IsServer() then return end
 	ParticleManager:DestroyParticle(self.particle, false)
 end
 

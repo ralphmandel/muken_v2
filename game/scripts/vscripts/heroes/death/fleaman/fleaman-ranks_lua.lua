@@ -48,7 +48,11 @@ function fleaman__precache:GetIntrinsicModifierName()
 end
 
 function fleaman__precache:Spawn()
-	if self:IsTrained() == false then self:UpgradeAbility(true) end
+  if IsServer() then
+    if self:IsTrained() == false then
+      self:UpgradeAbility(true)
+    end
+  end
 end
 
 function fleaman__precache:Precache(context)

@@ -5,6 +5,8 @@ LinkLuaModifier("neutral_doom_modifier_debuff", "_neutrals/neutral_doom_modifier
 LinkLuaModifier("neutral_doom_modifier_debuff_status_efx", "_neutrals/neutral_doom_modifier_debuff_status_efx", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_doom:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())
@@ -17,6 +19,8 @@ function neutral_doom:GetIntrinsicModifierName()
 end
 
 function neutral_doom:OnAbilityPhaseStart()
+  if not IsServer() then return true end
+
   local target = self:GetCursorTarget()
   AddModifier(target, self, "neutral_doom_modifier_pre", {}, false)
 
@@ -24,11 +28,15 @@ function neutral_doom:OnAbilityPhaseStart()
 end
 
 function neutral_doom:OnAbilityPhaseInterrupted()
+  if not IsServer() then return end
+
   local target = self:GetCursorTarget()
   target:RemoveModifierByName("neutral_doom_modifier_pre")
 end
 
 function neutral_doom:OnSpellStart()
+  if not IsServer() then return end
+
 	local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 

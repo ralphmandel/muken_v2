@@ -10,6 +10,8 @@ function neutral_doom_modifier_debuff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   AddStatusEfx(self.ability, "neutral_doom_modifier_debuff_status_efx", self.caster, self.parent)
   AddSubStats(self.parent, self.ability, {manacost = self.ability:GetSpecialValueFor("manacost")}, false)
 
@@ -21,16 +23,16 @@ function neutral_doom_modifier_debuff:OnCreated(kv)
     damage_type = self.ability:GetAbilityDamageType()
 	}
 
-  if IsServer() then
-    self:PlayEfxStart()
-    self:StartIntervalThink(interval)
-  end
+  self:PlayEfxStart()
+  self:StartIntervalThink(interval)
 end
 
 function neutral_doom_modifier_debuff:OnRefresh(kv)
 end
 
 function neutral_doom_modifier_debuff:OnRemoved()
+  if not IsServer() then return end
+
   RemoveStatusEfx(self.ability, "neutral_doom_modifier_debuff_status_efx", self.caster, self.parent)
   RemoveSubStats(self.parent, self.ability, {"manacost"})
 
@@ -63,6 +65,8 @@ function neutral_doom_modifier_debuff:OnDeath(keys)
 end
 
 function neutral_doom_modifier_debuff:OnIntervalThink()
+  if not IsServer() then return end
+
   ApplyDamage(self.damageTable)  
 end
 

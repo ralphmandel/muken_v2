@@ -10,15 +10,21 @@ function neutral_rage_modifier_buff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {attack_speed = self.ability:GetSpecialValueFor("attack_speed")}, false)
+  if IsServer() then
+    self.parent:EmitSound("Hero_Ursa.Enrage")
 
-  if IsServer() then self.parent:EmitSound("Hero_Ursa.Enrage") end
+    AddSubStats(self.parent, self.ability, {
+      attack_speed = self.ability:GetSpecialValueFor("attack_speed")
+    }, false)
+  end
 end
 
 function neutral_rage_modifier_buff:OnRefresh(kv)
 end
 
 function neutral_rage_modifier_buff:OnRemoved()
+  if not IsServer() then return end
+
   RemoveSubStats(self.parent, self.ability, {"attack_speed"})
 end
 
@@ -33,10 +39,11 @@ function neutral_rage_modifier_buff:DeclareFunctions()
 end
 
 function neutral_rage_modifier_buff:OnAttacked(keys)
+  if not IsServer() then return end
+  
   if keys.attacker ~= self.parent then return end
 
   self.parent:Heal(keys.original_damage * self.ability:GetSpecialValueFor("lifesteal") * 0.01, self.ability)
-
   self:PlayEfxLifesteal()
 end
 

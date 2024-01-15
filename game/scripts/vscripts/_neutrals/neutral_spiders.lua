@@ -3,6 +3,8 @@ LinkLuaModifier("neutral_spiders_modifier_passive", "_neutrals/neutral_spiders_m
 LinkLuaModifier("neutral_spiders_modifier_summon", "_neutrals/neutral_spiders_modifier_summon", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_spiders:Spawn()
+  if not IsServer() then return end
+  
   self.spiders = {}
 
   Timers:CreateTimer((0.2), function()
@@ -17,6 +19,8 @@ function neutral_spiders:GetIntrinsicModifierName()
 end
 
 function neutral_spiders:OnSpellStart()
+  if not IsServer() then return end
+  
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 

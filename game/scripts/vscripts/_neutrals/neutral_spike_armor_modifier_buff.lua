@@ -10,6 +10,8 @@ function neutral_spike_armor_modifier_buff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {
     value = self.ability:GetSpecialValueFor("ms_percent")
   }, false)
@@ -17,13 +19,15 @@ function neutral_spike_armor_modifier_buff:OnCreated(kv)
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
 
-  if IsServer() then self.parent:EmitSound("DOTA_Item.BladeMail.Activate") end
+  self.parent:EmitSound("DOTA_Item.BladeMail.Activate")
 end
 
 function neutral_spike_armor_modifier_buff:OnRefresh(kv)
 end
 
 function neutral_spike_armor_modifier_buff:OnRemoved()
+  if not IsServer() then return end
+
   RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_increase", self.ability)
 
   self.ability:SetActivated(true)
@@ -41,6 +45,8 @@ function neutral_spike_armor_modifier_buff:DeclareFunctions()
 end
 
 function neutral_spike_armor_modifier_buff:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
 	if keys.attacker:IsBaseNPC() == false then return end
@@ -50,7 +56,7 @@ function neutral_spike_armor_modifier_buff:OnTakeDamage(keys)
 	local return_percent = self.ability:GetSpecialValueFor("return_percent") * 0.01
 
 	if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
-		if IsServer() then keys.attacker:EmitSound("DOTA_Item.BladeMail.Damage") end
+		keys.attacker:EmitSound("DOTA_Item.BladeMail.Damage")
 
     ApplyDamage({
 			attacker = self.caster, victim = keys.attacker, ability = self.ability,

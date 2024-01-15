@@ -31,10 +31,12 @@ function neutral_strike_modifier_passive:DeclareFunctions()
 end
 
 function neutral_strike_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+  
   if keys.attacker ~= self.parent then return end
 
   if self.parent:HasModifier("neutral_strike_modifier_wind") then
-    if IsServer() then keys.target:EmitSound("Crocodile.Strike") end
+    keys.target:EmitSound("Crocodile.Strike")
   end
 
   self.parent:RemoveModifierByName("neutral_strike_modifier_wind")
@@ -50,19 +52,19 @@ function neutral_strike_modifier_passive:OnAttackLanded(keys)
     self.ability:StartCooldown(interval)
   end
 
-  if IsServer() then self:StartIntervalThink(interval) end
+  self:StartIntervalThink(interval)
 end
 
 function neutral_strike_modifier_passive:OnIntervalThink()
-  if self.parent:PassivesDisabled() then
-    if IsServer() then self:StartIntervalThink(0.5) end
-  end
+  if not IsServer() then return end
+  
+  if self.parent:PassivesDisabled() then self:StartIntervalThink(0.5) end
 
   AddModifier(self.parent, self.ability, "neutral_strike_modifier_wind", {}, false)
   self.parent:GetMainStat("STR"):SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
   self.strike = true
 
-  if IsServer() then self:StartIntervalThink(-1) end
+  self:StartIntervalThink(-1)
 end
 
 -- UTILS -----------------------------------------------------------

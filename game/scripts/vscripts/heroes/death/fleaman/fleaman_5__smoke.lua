@@ -12,6 +12,8 @@ LinkLuaModifier("fleaman_5_modifier_shadow", "heroes/death/fleaman/fleaman_5_mod
 -- SPELL START
 
   function fleaman_5__smoke:OnSpellStart()
+    if not IsServer() then return end
+
 		local caster = self:GetCaster()
 
 		CreateModifierThinker(caster, self, "fleaman_5_modifier_smoke", {

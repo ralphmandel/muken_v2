@@ -575,11 +575,6 @@ LinkLuaModifier("_2_MND_modifier_stack", "_modifiers/_2_MND_modifier_stack", LUA
 				if self.stat_total[stat] < 0 then self.stat_total[stat] = 0 end
 				if self.stat_total[stat] > 99 then self.stat_total[stat] = 99 end
 
-				if stat == "REC" then
-					local channel = self:GetCaster():FindAbilityByName("_channel")
-					if channel then channel:SetLevel(self.stat_total["REC"] + 1) end
-				end
-
 				local void = self:GetCaster():FindAbilityByName("_void")
 				if void then void:SetLevel(1) end
 

@@ -135,9 +135,7 @@ LinkLuaModifier("_modifier_percent_movespeed_debuff", "_modifiers/_modifier_perc
   end
 
   function genuine_4__awakening:GetChannelTime()
-    local channel = self:GetCaster():FindAbilityByName("_channel")
-    local channel_time = self:GetSpecialValueFor("channel_time")
-    return channel_time * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
+    return self:GetSpecialValueFor("channel_time")
   end
 
 -- EFFECTS

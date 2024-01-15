@@ -10,22 +10,23 @@ function fleaman_2_modifier_speed_stack:OnCreated(kv)
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   self:ChangeMS()
 end
 
 function fleaman_2_modifier_speed_stack:OnRefresh(kv)
+  if not IsServer() then return end
+
   self:ChangeMS()
 end
 
 function fleaman_2_modifier_speed_stack:OnRemoved()
+  if not IsServer() then return end
+
   local modifier = self.parent:FindModifierByName(self.ability:GetIntrinsicModifierName())
   local min_ms = self.ability:GetSpecialValueFor("min_ms")
-
-  if IsServer() then
-    if modifier then
-      modifier:SetStackCount(min_ms)
-    end
-  end
+  if modifier then modifier:SetStackCount(min_ms) end
 end
 
 function fleaman_2_modifier_speed_stack:OnDestroy()

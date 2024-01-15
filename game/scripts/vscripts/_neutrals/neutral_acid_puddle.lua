@@ -4,6 +4,8 @@ LinkLuaModifier("neutral_acid_puddle_modifier_aura", "_neutrals/neutral_acid_pud
 LinkLuaModifier("neutral_acid_puddle_modifier_aura_effect", "_neutrals/neutral_acid_puddle_modifier_aura_effect", LUA_MODIFIER_MOTION_NONE)
 
 function neutral_acid_puddle:Spawn()
+  if not IsServer() then return end
+
   Timers:CreateTimer((0.2), function()
     if IsServer() then
       self:SetLevel(self:GetMaxLevel())
@@ -20,6 +22,8 @@ function neutral_acid_puddle:GetAOERadius()
 end
 
 function neutral_acid_puddle:OnSpellStart()
+  if not IsServer() then return end
+
   local caster = self:GetCaster()
 
   CreateModifierThinker(caster, self, "neutral_acid_puddle_modifier_aura", {

@@ -46,7 +46,7 @@ function templar_4_modifier_buff:OnTakeDamage(keys)
   if keys.attacker:IsOutOfGame() then return end
   if keys.attacker:IsMagicImmune() then return end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("revenge_chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("revenge_chance") then
     AddModifier(keys.attacker, self.ability, "templar_4_modifier_revenge", {duration = 5}, false)
     if IsServer() then self:DecrementStackCount() end
   end

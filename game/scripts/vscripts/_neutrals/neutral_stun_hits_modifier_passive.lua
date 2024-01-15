@@ -30,6 +30,8 @@ function neutral_stun_hits_modifier_passive:DeclareFunctions()
 end
 
 function neutral_stun_hits_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+
   if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
 
@@ -40,15 +42,15 @@ function neutral_stun_hits_modifier_passive:OnAttackLanded(keys)
     }, true)
   end
 
-  if IsServer() then self:DecrementStackCount() end
+  self:DecrementStackCount()
 end
 
 function neutral_stun_hits_modifier_passive:OnStackCountChanged(old)
-  if IsServer() then
-    if self:GetStackCount() == 0 and self:GetStackCount() ~= old then
-      self:SetStackCount(self.ability:GetSpecialValueFor("hits"))
-    end    
-  end
+  if not IsServer() then return end
+
+  if self:GetStackCount() == 0 and self:GetStackCount() ~= old then
+    self:SetStackCount(self.ability:GetSpecialValueFor("hits"))
+  end    
 end
 
 

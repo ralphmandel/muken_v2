@@ -12,8 +12,6 @@ function _modifier_str:OnCreated(kv)
   self.force_crit_chance = nil
   self.has_crit = false
   self.missing = false
-  self.original_damage = 0
-  self.damage_calc = false
 
   self.const_critical_damage = self.ability:GetSpecialValueFor("const_critical_damage")
   self.const_critical_chance = self.ability:GetSpecialValueFor("const_critical_chance")
@@ -57,7 +55,7 @@ end
 function _modifier_str:DeclareFunctions()
   local funcs = {
     MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
-    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+    --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
     MODIFIER_PROPERTY_MISS_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK,
@@ -72,16 +70,13 @@ function _modifier_str:GetModifierBaseAttack_BonusDamage()
   return self:GetCalculedData("sub_stat_attack_damage", false)
 end
 
-function _modifier_str:GetModifierSpellAmplify_Percentage(keys)
-  self.original_damage = keys.original_damage
-  self.damage_calc = true
+-- function _modifier_str:GetModifierSpellAmplify_Percentage(keys)
+--   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
+--   if keys.damage_flags == 31 then return 0 end
+--   if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
 
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
-  if keys.damage_flags == 31 then return 0 end
-  if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
-
-  return self:GetCalculedData("sub_stat_physical_damage", false)
-end
+--   return self:GetCalculedData("sub_stat_physical_damage", false)
+-- end
 
 function _modifier_str:GetModifierPhysicalArmorBonus()
   return self:GetCalculedData("sub_stat_armor", false)
@@ -121,11 +116,6 @@ function _modifier_str:OnTakeDamage(keys)
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end
   if keys.attacker ~= self.parent then return end
-
-  if keys.damage_category == DOTA_DAMAGE_CATEGORY_SPELL then
-    if self.damage_calc == false then self.original_damage = keys.original_damage end
-    self.damage_calc = false
-  end
 
   if self.has_crit == true and keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     self:PopupSpellCrit(keys.damage, keys.unit, DAMAGE_TYPE_PHYSICAL)
@@ -185,11 +175,17 @@ end
 
 function _modifier_str:UpdateMainBonus(value)
   self.stat_bonus = value
+  
+  self:SendBuffRefreshToClients()
+  
+  for property, table in pairs(self.data) do
+    self:OnStatUpated(property)
+  end
 end
 
 function _modifier_str:UpdateSubBonus(property)
   if self.parent == nil then return end
-  if IsValidEntity(self.ability) == false then return end
+  if IsValidEntity(self.parent) == false then return end
   
   local value = 0
   local mods = self.parent:FindAllModifiersByName("sub_stat_modifier")
@@ -203,6 +199,17 @@ function _modifier_str:UpdateSubBonus(property)
 
   self.data["sub_stat_"..property].bonus = value
   self:SendBuffRefreshToClients()
+  self:OnStatUpated(property)
+end
+
+function _modifier_str:OnStatUpated(property)
+  if self.parent:IsHero() == false then return end
+  local special_kv_modifier = self.parent:FindModifierByName(GetHeroName(self.parent).."_special_values")
+  if special_kv_modifier == nil then return end
+
+  if property == "sub_stat_physical_damage" then
+    special_kv_modifier:UpdateData("physical_damage", self:GetPhysicalDamageAmp())
+  end
 end
 
 function _modifier_str:LoadData()

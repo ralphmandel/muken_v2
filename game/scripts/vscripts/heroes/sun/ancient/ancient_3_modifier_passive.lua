@@ -49,7 +49,7 @@ end
 
 function ancient_3_modifier_passive:OnAttacked(keys)
   if keys.target == self.parent then
-    if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_return_chance")) then
+    if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_return_chance") then
       if keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 then
         ApplyDamage({
           damage = keys.original_damage * self.ability:GetSpecialValueFor("special_return_damage") * 0.01,
@@ -75,7 +75,7 @@ function ancient_3_modifier_passive:OnAttacked(keys)
     }, true)
   end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_double_chance"))
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_double_chance")
   and self.parent:GetMainStat("STR").has_crit == false then
     if IsServer() then self:IncrementStackCount() end
   end

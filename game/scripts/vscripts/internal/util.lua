@@ -128,25 +128,37 @@
     if caster == nil or target == nil then return duration end
     if IsValidEntity(caster) == false or IsValidEntity(target) == false then return duration end
 
-    if caster:GetTeamNumber() == target:GetTeamNumber() then
-      duration = CalcBuffAmp(duration, target)
-    else
-      duration = CalcDebuffAmp(duration, caster)
+    -- if caster:GetTeamNumber() == target:GetTeamNumber() then
+    --   duration = CalcBuffAmp(duration, target)
+    -- else
+    --   duration = CalcDebuffAmp(duration, caster)
+    --   duration = CalcStatusResistance(duration, target)
+    -- end
+
+    if caster:GetTeamNumber() ~= target:GetTeamNumber() then
       duration = CalcStatusResistance(duration, target)
     end
-    
+
     return duration
   end
 
+  function CalcStatusDebuffAmp(duration, caster)
+    if caster:GetMainStat("INT") == nil then return duration end
+    return duration * (1 + (caster:GetMainStat("INT"):GetDebuffAmp() * 2))
+  end
+
   function CalcDebuffAmp(duration, caster)
+    if caster:GetMainStat("INT") == nil then return duration end
     return duration * (1 + caster:GetMainStat("INT"):GetDebuffAmp())
   end
 
   function CalcStatusResistance(duration, target)
+    if target:GetMainStat("VIT") == nil then return duration end
     return duration * (1 - target:GetMainStat("VIT"):GetStatusResist(true))
   end
 
   function CalcBuffAmp(duration, target)
+    if target:GetMainStat("VIT") == nil then return duration end
     return duration * (1 + target:GetMainStat("VIT"):GetIncomingBuff())
   end
 

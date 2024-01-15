@@ -1,5 +1,7 @@
 $.Msg("healthbar");
 
+var units = {}
+
 var teamColors = GameUI.CustomUIConfig().team_colors;
 
 if (!teamColors) {
@@ -31,44 +33,58 @@ function HealthCheck()
   if (!offScreen && wp){
     var ent = wp.entity;
     if (ent){
-      if (!Entities.IsAlive(ent)){
+      if (!Entities.IsAlive(ent) || units[ent] == null){
         $.GetContextPanel().style.opacity = "0";
         $.Schedule(1/30, HealthCheck);
         return;
       }
-
-      //var pTeam = Players.GetTeam(Game.GetLocalPlayerID());
-      var team = Entities.GetTeamNumber(ent);
-
-      // Color by friendly/enemy
-      /*if (team == pTeam)
-        $.GetContextPanel().SetHasClass("Friendly", true);
-      else
-        $.GetContextPanel().SetHasClass("Friendly", false);*/
 
       $.GetContextPanel().style.opacity = "1";
       var hp = Entities.GetHealth(ent);
       var hpMax = Entities.GetMaxHealth(ent);
       var hpPer = (hp * 100 / hpMax).toFixed(0);
 
+      var perc = (units[ent].current_status / units[ent].max_status) * 100
+
+      var pan = $("#HP_inner");
+      pan.GetParent().style.width = units[ent].max_status + "px;";
+      pan.style.width = perc + "%;";
+      pan.style.backgroundColor = "red;";
+
+      //$.Msg("oi", pan);
+
+      // var pan = $("#HP_inner");
+      // pan.style.width = hpPer + "%;";
+      // pan.style.backgroundColor = "#4285f4;";
       
-      for (var i=1; i<=5; i++){
-        var pan = $("#HP" + i);
-        var perc = Math.min(Math.max(0, hpPer), 20) * 5;
+      // for (var i=1; i<=5; i++){
+      //   var pan = $("#HP" + i);
+      //   var perc = Math.min(Math.max(0, hpPer), 20) * 5;
 
-        pan.style.width = perc + "%;";
-        pan.style.backgroundColor = teamColors[team];
+      //   pan.style.width = perc + "%;";
+      //   pan.style.backgroundColor = "#4285f4;";
 
-        hpPer -= 20;
-      }
+      //   hpPer -= 20;
+      // }
     }
   }
 
   $.Schedule(1/30, HealthCheck);
 }
 
+function OnStatusUpdate(event) {
+  if (event.current_status == 0) {
+    units[event.entity] = null;
+  } else {
+    units[event.entity] = {};
+    units[event.entity].max_status = event.max_status;
+    units[event.entity].current_status = event.current_status;
+  }
+}
+
 (function()
 { 
   HealthCheck();
 
+  GameEvents.Subscribe("update_status_bar_state_from_server", OnStatusUpdate);
 })();

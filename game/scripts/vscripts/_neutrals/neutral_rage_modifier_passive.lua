@@ -28,11 +28,13 @@ function neutral_rage_modifier_passive:DeclareFunctions()
 end
 
 function neutral_rage_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+
   if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
   if self.parent:HasModifier("neutral_rage_modifier_buff") == true then return end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("chance")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
     AddModifier(self.parent, self.ability, "neutral_rage_modifier_buff", {
       duration = self.ability:GetSpecialValueFor("duration")
     }, true)

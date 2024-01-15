@@ -28,6 +28,8 @@ function neutral_spike_armor_modifier_passive:DeclareFunctions()
 end
 
 function neutral_spike_armor_modifier_passive:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
   if self.ability:IsActivated() == false then return end
   if self.ability:IsCooldownReady() == false then return end

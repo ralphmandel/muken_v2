@@ -30,6 +30,8 @@ function fleaman_u_modifier_passive:DeclareFunctions()
 end
 
 function fleaman_u_modifier_passive:OnAttacked(keys)
+  if not IsServer() then return end
+
 	if keys.attacker ~= self.parent then return end
   if keys.target:GetTeamNumber() == self.parent:GetTeamNumber() then return end
 	if self.parent:PassivesDisabled() then return end
@@ -39,7 +41,6 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
   local attack_steal = self.ability:GetSpecialValueFor("attack_steal")
   local duration = self.ability:GetSpecialValueFor("duration")
   local chain_hits = self.ability:GetSpecialValueFor("special_chain_hits")
-  local chain_damage = self.ability:GetSpecialValueFor("special_chain_damage")
   local chain_chance = self.ability:GetSpecialValueFor("special_chain_chance")
   local manasteal = keys.original_damage * self.ability:GetSpecialValueFor("special_manasteal") * 0.01
   local lifesteal = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal") * 0.01
@@ -76,13 +77,10 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
     self:PlayEfxLifesteal(keys.attacker)
   end
 
-  if RandomFloat(0, 100) < CalcLuck(self.parent, chain_chance) and self.ability:IsCooldownReady() then
+  if RandomFloat(0, 100) < chain_chance and self.ability:IsCooldownReady() then
     AddModifier(self.parent, self.ability, "fleaman_u_modifier_chain", {target_index = keys.target:GetEntityIndex()}, false)
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
   end
-end
-
-function fleaman_u_modifier_passive:OnStackCountChanged(old)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -96,7 +94,7 @@ function fleaman_u_modifier_passive:PlayEfxHit(target)
   ParticleManager:SetParticleControlTransformForward(effect_cast, 3, self.parent:GetOrigin(), self.caster:GetLeftVector())
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then target:EmitSound("Hero_BountyHunter.Jinada") end
+	target:EmitSound("Hero_BountyHunter.Jinada")
 end
 
 function fleaman_u_modifier_passive:PlayEfxManasteal(target)

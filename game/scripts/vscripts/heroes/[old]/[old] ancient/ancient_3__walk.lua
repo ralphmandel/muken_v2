@@ -9,9 +9,7 @@ LinkLuaModifier("_modifier_petrified_status_efx", "_modifiers/_modifier_petrifie
 -- INIT
 
   function ancient_3__walk:GetCastPoint()
-    local channel = self:GetCaster():FindAbilityByName("_channel")
-    local channel_time = self:GetSpecialValueFor("cast_point")
-    return channel_time * (1 - (channel:GetLevel() * channel:GetSpecialValueFor("channel") * 0.01))
+    return self:GetSpecialValueFor("cast_point")
   end
 
   function ancient_3__walk:GetAOERadius()

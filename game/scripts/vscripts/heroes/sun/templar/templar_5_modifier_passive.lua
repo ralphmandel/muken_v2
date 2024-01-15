@@ -31,7 +31,7 @@ function templar_5_modifier_passive:DeclareFunctions()
 end
 
 function templar_5_modifier_passive:ReincarnateTime(keys)
-  if RandomFloat(0, 100) < CalcLuck(self.parent, self.ability:GetSpecialValueFor("special_reborn")) then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_reborn") then
     return 5
   end
 

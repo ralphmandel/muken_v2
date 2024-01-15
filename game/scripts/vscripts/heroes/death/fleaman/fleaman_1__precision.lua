@@ -7,6 +7,8 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 -- INIT
 
   function fleaman_1__precision:Spawn()
+    if not IsServer() then return end
+
     Timers:CreateTimer(0.2, function()
       if self:IsTrained() == false then
         self:UpgradeAbility(true)
@@ -26,11 +28,16 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
     return self:GetSpecialValueFor("special_aoe")
   end
 
+  function fleaman_1__precision:GetIntrinsicModifierName()
+    return "orb_bleed__modifier"
+  end
+
 -- SPELL START
 
   function fleaman_1__precision:OnSpellStart()
-    local caster = self:GetCaster()
+    if not IsServer() then return end
 
+    local caster = self:GetCaster()
     caster:RemoveModifierByName("fleaman_1_modifier_gesture")
 
     if GetHeroName(caster) == "trickster" then
