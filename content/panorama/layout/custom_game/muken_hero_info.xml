@@ -117,7 +117,14 @@
       <Image src="file://{resources}/images/custom_game/decagon_graph_ps.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/dot_graph.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/muken_logo.png" class="img_collapse"/>
-      
+      <Image src="file://{resources}/images/custom_game/status_bar/status_bleed.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_curse.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_freeze.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_poison.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_raw.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_sleep.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/status_bar/status_thunder.png" class="img_collapse"/>
+
     </Panel>
   </Panel>
 </root>

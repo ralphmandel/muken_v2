@@ -40,7 +40,6 @@ function StatusBarCheck()
       var pan = $("#HP_inner");
       pan.GetParent().style.width = wp.data.max_status + "px;";
       pan.style.width = perc + "%;";
-      pan.style.backgroundColor = "red;";
     }
   }
 

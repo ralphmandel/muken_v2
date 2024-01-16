@@ -6,21 +6,10 @@
   <scripts>
     <include src="file://{resources}/scripts/worldpanels/muken_status_bar.js" /> 
   </scripts>
-  <Panel hittest="false" class="HealthBar">
-    <Panel class="Bubble">
+  <Panel class="statusbar_root">
+    <Image class="status_img" src="file://{resources}/images/custom_game/status_bar/status_bleed.png" />
+    <Panel hittest="false" class="StatusBarContainer">
       <Panel id="HP_inner" class="HP"/>
     </Panel>
-    <!-- <Panel class="Bubble">
-      <Panel id="HP2" class="HP"/>
     </Panel>
-    <Panel class="Bubble">
-      <Panel id="HP3" class="HP"/>
-    </Panel>
-    <Panel class="Bubble">
-      <Panel id="HP4" class="HP"/>
-    </Panel>
-    <Panel class="Bubble">
-      <Panel id="HP5" class="HP"/>
-    </Panel> -->
-  </Panel>
 </root>
