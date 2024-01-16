@@ -39,6 +39,15 @@ function CDOTA_Buff:StartGenericEfxBlock(keys)
   if IsServer() then parent:EmitSound("Generic.Damage.Block") end
 end
 
+function CDOTA_Buff:PopupBleedDamage(damage, target)
+  if damage <= 0 then return end
+  local digits = 1 + #tostring(damage)
+
+  local pidx = ParticleManager:CreateParticle("particles/bocuse/bocuse_msg.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
+  ParticleManager:SetParticleControl(pidx, 3, Vector(0, damage, 3))
+  ParticleManager:SetParticleControl(pidx, 4, Vector(1, digits, 0))
+end
+
 function CDOTA_BaseNPC:GetMainStat(stat)
   return self:FindModifierByName("_modifier_"..string.lower(stat))
 end

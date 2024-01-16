@@ -1,5 +1,4 @@
 base_hero = class ({})
-require("examples/worldpanelsExample")
 LinkLuaModifier("base_hero_mod", "_basics/base_hero_mod", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_general_script", "_bot_scripts/_general_script", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_fountain_refresh_hp", "_modifiers/generics/_fountain_refresh_hp", LUA_MODIFIER_MOTION_NONE)

@@ -40,6 +40,9 @@ end
 function orb_bleed_debuff:OnIntervalThink()
   if not IsServer() then return end
 
+  if self.caster == nil then self:Destroy() return end
+  if IsValidEntity(self.caster) == false then self:Destroy() return end
+
   self.damageTable.damage = self.bleed_damage * self.interval * self:GetBleedDamageAmp()
   if self.parent:IsMoving() then self.damageTable.damage = self.damageTable.damage * 2 end
 
@@ -60,7 +63,7 @@ function orb_bleed_debuff:GetBleedDamageAmp()
   local str = self.caster:GetMainStat("STR")
   if str == nil then return 1 end
 
-  return str:GetPhysicalDamageAmp() * 0.005
+  return str:GetPhysicalDamageAmp() * 0.01
 end
 
 -- EFFECTS -----------------------------------------------------------
@@ -81,13 +84,4 @@ function orb_bleed_debuff:PlayEfxStart()
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
 	if IsServer() then self.parent:EmitSound("Generic.Bleed") end
-end
-
-function orb_bleed_debuff:PopupBleedDamage(damage, target)
-  if damage <= 0 then return end
-  local digits = 1 + #tostring(damage)
-
-  local pidx = ParticleManager:CreateParticle("particles/bocuse/bocuse_msg.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
-  ParticleManager:SetParticleControl(pidx, 3, Vector(0, damage, 3))
-  ParticleManager:SetParticleControl(pidx, 4, Vector(1, digits, 0))
 end

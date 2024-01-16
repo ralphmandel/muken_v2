@@ -122,44 +122,78 @@ function base_hero_mod:LoadModel()
 	Timers:CreateTimer((0.1), function()
 		if self.parent then
 			if IsValidEntity(self.parent) then
-				if self.hero_name == "bocuse" then
-					self.model_scale = 1.15
-					self.parent:SetHealthBarOffsetOverride(250 * self.parent:GetModelScale())
-					self.parent:SetMaterialGroup("1")
-				end
-				if self.hero_name == "krieger" then
-					self.model_scale = 1.10
-					self.parent:SetHealthBarOffsetOverride(200 * self.parent:GetModelScale())
+        if self.hero_name == "templar" then
+					self.model_scale = 1.2
+          self.parent.hp_offset = 240
+          self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
 				if self.hero_name == "ancient" then
 					self.model_scale = 1.07
-					self.parent:SetHealthBarOffsetOverride(200 * self.parent:GetModelScale())
+          self.parent.hp_offset = 250
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
-				if self.hero_name == "osiris" then
-					self.model_scale = 1.30
-					self.parent:SetHealthBarOffsetOverride(200 * self.parent:GetModelScale())
+        if self.hero_name == "paladin" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
-				if self.hero_name == "shadowmancer" then
-					self.model_scale = 1.1
-					self.parent:SetHealthBarOffsetOverride(200 * self.parent:GetModelScale())
+        if self.hero_name == "fleaman" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
+        if self.hero_name == "lawbreaker" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+				end
+        if self.hero_name == "bloodstained" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+				end
+        if self.hero_name == "trickster" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+				end
+        if self.hero_name == "strider" then
+					self.model_scale = 1
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+				end
+
+
+				if self.hero_name == "bocuse" then
+					self.model_scale = 1.15
+          self.parent.hp_offset = 230
+          self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+					self.parent:SetMaterialGroup("1")
+				end
+
 				if self.hero_name == "baldur" then
 					self.model_scale = 1
-					self.parent:SetHealthBarOffsetOverride(200 * self.parent:GetModelScale())
+          self.parent.hp_offset = 200
+					self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
         if self.hero_name == "hunter" then
 					self.parent:SetMaterialGroup("1")
 				end
-        if self.hero_name == "templar" then
-					self.model_scale = 1.2
-					self.parent:SetHealthBarOffsetOverride(350 * self.parent:GetModelScale())
-				end
 				if self.hero_name == "vulture" then
 					self.model_scale = 1.0
-					self.parent:SetHealthBarOffsetOverride(350 * self.parent:GetModelScale())
-				end
-				if self.model_scale ~= nil then
-					self.parent:SetModelScale(self.model_scale)
+          self.parent.hp_offset = 200
+          self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
 			end
 		end

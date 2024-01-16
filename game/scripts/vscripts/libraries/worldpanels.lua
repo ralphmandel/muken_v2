@@ -248,8 +248,12 @@ function WorldPanels:CreateWorldPanel(pids, conf)
     UpdateTable(self)
   end
 
-  function wp:SetData(data)
+  function wp:SetData(data, entityHeight)
     self.pt.data = data
+    self.pt.entityHeight = entityHeight
+
+    CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+
     UpdateTable(self)
   end
 

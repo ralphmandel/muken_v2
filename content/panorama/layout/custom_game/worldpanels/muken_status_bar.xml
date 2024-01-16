@@ -1,10 +1,10 @@
 <root> 
   <styles>
     <include src="s2r://panorama/styles/dotastyles.vcss_c" />
-    <include src="file://{resources}/styles/worldpanels/healthbar.css" />
+    <include src="file://{resources}/styles/worldpanels/muken_status_bar.css" />
   </styles>
   <scripts>
-    <include src="file://{resources}/scripts/worldpanels/healthbar.js" /> 
+    <include src="file://{resources}/scripts/worldpanels/muken_status_bar.js" /> 
   </scripts>
   <Panel hittest="false" class="HealthBar">
     <Panel class="Bubble">

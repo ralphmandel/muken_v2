@@ -5,19 +5,20 @@ if not WorldPanelExample then
 end
 
 function WorldPanelExample:OnNPCSpawned(keys)
-  --Apply a worldpanel health bar to every spawned hero unit
-  local npc = EntIndexToHScript(keys.entindex)
+  -- --Apply a worldpanel health bar to every spawned hero unit
+  -- local npc = EntIndexToHScript(keys.entindex)
 
-  --if npc.IsRealHero and npc:IsRealHero() and not npc.worldPanel then
-  if not npc.worldPanel and npc:IsConsideredHero() then
-    -- npc:AddNewModifier(npc, nil, "modifier_no_health", {})
-    -- entityHeight could be loaded from the npc_heroes.txt "HealthBarOffset"
-    npc.worldPanel = WorldPanels:CreateWorldPanelForAll(
-      {layout = "file://{resources}/layout/custom_game/worldpanels/healthbar.xml",
-        entity = npc:GetEntityIndex(),
-        entityHeight = npc:GetBaseHealthBarOffset() + 125,
-      })
-  end
+  -- --if npc.IsRealHero and npc:IsRealHero() and not npc.worldPanel then
+  -- if not npc.worldPanel and npc:IsConsideredHero() then
+  --   npc:AddNewModifier(npc, nil, "modifier_no_health", {})
+  --   -- entityHeight could be loaded from the npc_heroes.txt "HealthBarOffset"
+  --   npc.worldPanel = WorldPanels:CreateWorldPanelForAll({
+  --     layout = "file://{resources}/layout/custom_game/worldpanels/muken_status_bar.xml",
+  --     entity = npc:GetEntityIndex(),
+  --     entityHeight = npc:GetBaseHealthBarOffset() + 125,
+  --     duration = 30
+  --   })
+  -- end
 end
 
 if not WorldPanelExample.initialized then
