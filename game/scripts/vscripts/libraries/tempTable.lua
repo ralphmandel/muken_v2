@@ -29,9 +29,9 @@ function tempTable:GetATValue( key )
 	return self.table[key]
 end
 
-function tempTable:Print()
+function tempTable:print()
 	for k,v in pairs(self.table) do
-		print(k,v)
+		--print(k,v)
 	end
 end
 

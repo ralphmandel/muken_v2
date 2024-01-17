@@ -44,6 +44,10 @@ LinkLuaModifier("_modifier_untargetable", "_modifiers/generics/_modifier_untarge
 LinkLuaModifier("orb_bleed__modifier", "_modifiers/orbs/orb_bleed__modifier", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed__status", "_modifiers/orbs/orb_bleed__status", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed_debuff", "_modifiers/orbs/orb_bleed_debuff", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__modifier", "_modifiers/orbs/orb_ice__modifier", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__status", "_modifiers/orbs/orb_ice__status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__status_efx", "_modifiers/orbs/orb_ice__status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice_debuff", "_modifiers/orbs/orb_ice_debuff", LUA_MODIFIER_MOTION_NONE)
 
 require("internal/muken_events")
 require("internal/rank_system")
@@ -253,7 +257,7 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     local rank_name = self.ranks_name[skill_id][tier][path]
     if caster:HasRank(skill_id, tier, path) then return "StateUpgraded" end
-    if self.ranks_exception[rank_name] == true then return "StateDisabled" end
+    --if self.ranks_exception[rank_name] == true then return "StateDisabled" end
     if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
     return "StateDisabled"
   end

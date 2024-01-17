@@ -241,10 +241,10 @@ function base_hero_mod:PlayEfxAmbient(ambient, attach)
 end
 
 -- function base_hero_mod:OnIntervalThink()
---     print("x", self.parent:GetAbsOrigin().x, "| y", self.parent:GetAbsOrigin().y, "| z", self.parent:GetAbsOrigin().z)
+--     --print("x", self.parent:GetAbsOrigin().x, "| y", self.parent:GetAbsOrigin().y, "| z", self.parent:GetAbsOrigin().z)
 -- end
 
 -- function base_hero_mod:OnIntervalThink()
 -- 	local message = "x:" .. self.parent:GetOrigin().x .. "; y:" .. self.parent:GetOrigin().y .. "; loc"
--- 	print(message)
+-- 	--print(message)
 -- end

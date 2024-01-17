@@ -129,16 +129,4 @@
 		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
 		"MaxLevel"               		"1"
 	}
-
-	"_void"
-	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"_basics/_void"
-        "AbilityTextureName"    		"plus"
-		"FightRecapLevel"				"1"
-		"MaxLevel"						"1"	
-		
-		"AbilityType"					"ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-	}
 }

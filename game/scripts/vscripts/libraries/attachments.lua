@@ -109,7 +109,7 @@ local Notify = function(player, msg, duration)
     local table = {text=msg, duration=duration, style={color="red"}}
     Notifications:Bottom(player, table)
   else
-    print('[Attachments.lua] ' .. msg)
+    --print('[Attachments.lua] ' .. msg)
   end
 end
 
@@ -142,7 +142,7 @@ end
 function Attachments:start()
 
   local src = debug.getinfo(1).source
-  --print(src)
+  ----print(src)
 
   self.gameDir = ""
   self.addonName = ""
@@ -152,8 +152,8 @@ function Attachments:start()
     if src:sub(2):find("(.*dota 2 beta[\\/]game[\\/]dota_addons[\\/])([^\\/]+)[\\/]") then
 
       self.gameDir, self.addonName = string.match(src:sub(2), "(.*dota 2 beta[\\/]game[\\/]dota_addons[\\/])([^\\/]+)[\\/]")
-      --print('[attachments] ', self.gameDir)
-      --print('[attachments] ', self.addonName)
+      ----print('[attachments] ', self.gameDir)
+      ----print('[attachments] ', self.addonName)
 
       self.initialized = true
 
@@ -167,12 +167,12 @@ function Attachments:start()
 
 
       if IsInToolsMode() then
-        print('[attachments] Tools Mode')
+        --print('[attachments] Tools Mode')
         SendToServerConsole("dota_combine_models 0")
         Convars:RegisterCommand( "attachment_configure", Dynamic_Wrap(Attachments, 'ActivateAttachmentSetup'), "Activate Attachment Setup", FCVAR_CHEAT )
       end
     else
-      print("[attachments] RELOADING")
+      --print("[attachments] RELOADING")
       SendToServerConsole("script_reload_code " .. src:sub(2))
     end
   else
@@ -191,18 +191,18 @@ end
 function Attachments:ActivateAttachmentSetup()
   addon = Attachments.addonName
   --[[if addon == nil or addon == "" then
-    print("[Attachments.lua] Addon name must be specified.")
+    --print("[Attachments.lua] Addon name must be specified.")
     return
   end]]
 
   if not io then
-    print("[Attachments.lua] Attachments Setup is only available in tools mode.")
+    --print("[Attachments.lua] Attachments Setup is only available in tools mode.")
     return
   end
   if not Attachments.activated then
     local file = io.open("../../dota_addons/" .. addon ..  "/scripts/attachments.txt", 'r')
     if not file and Attachments.dbFilePath == nil then
-      print("[Attachments.lua] Cannot find file 'dota_addons/" .. addon .. "/scripts/attachments.txt'.  Re-execute the console command to force create the file.")
+      --print("[Attachments.lua] Cannot find file 'dota_addons/" .. addon .. "/scripts/attachments.txt'.  Re-execute the console command to force create the file.")
       Attachments.dbFilePath = ""
       return
     end
@@ -212,7 +212,7 @@ function Attachments:ActivateAttachmentSetup()
     if not file then
       file = io.open(Attachments.dbFilePath, 'w')
       WriteKV(file, "Attachments", {})
-      print("[Attachments.lua] Created file: 'dota_addons/" .. addon .. "/scripts/attachments.txt'.")
+      --print("[Attachments.lua] Created file: 'dota_addons/" .. addon .. "/scripts/attachments.txt'.")
     end
     file:close()
 
@@ -235,8 +235,8 @@ function Attachments:ActivateAttachmentSetup()
 end
 
 function Attachments:Attachment_DoSphere(args)
-  --DebugPrint('Attachment_DoSphere')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_DoSphere')
+  ----DebugPrintTable(args)
 
   Attachments.doSphere = args.doSphere == 1
 
@@ -244,8 +244,8 @@ function Attachments:Attachment_DoSphere(args)
 end
 
 function Attachments:Attachment_DoAttach(args)
-  --DebugPrint('Attachment_DoAttach')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_DoAttach')
+  ----DebugPrintTable(args)
 
   Attachments.doAttach = args.doAttach == 1
 
@@ -253,8 +253,8 @@ function Attachments:Attachment_DoAttach(args)
 end
 
 function Attachments:Attachment_Freeze(args)
-  --DebugPrint('Attachment_Freeze')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_Freeze')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -273,8 +273,8 @@ function Attachments:Attachment_Freeze(args)
 end
 
 function Attachments:Attachment_UpdateAttach(args)
-  DebugPrint('Attachment_UpdateAttach')
-  DebugPrintTable(args)
+  --DebugPrint('Attachment_UpdateAttach')
+  --DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -325,8 +325,8 @@ function Attachments:Attachment_UpdateAttach(args)
 end
 
 function Attachments:Attachment_SaveAttach(args)
-  --DebugPrint('Attachment_SaveAttach')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_SaveAttach')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -342,12 +342,12 @@ function Attachments:Attachment_SaveAttach(args)
   Attachments:Attachment_UpdateAttach(args)
 
   if not io then
-    print("[Attachments.lua] Attachments Setup is only available in tools mode.")
+    --print("[Attachments.lua] Attachments Setup is only available in tools mode.")
     return
   end
 
   if Attachments.dbFilePath == nil or Attachments.dbFilePath == "" then
-    print("[Attachments.lua] Attachments database file must be set.")
+    --print("[Attachments.lua] Attachments database file must be set.")
     return
   end
 
@@ -357,8 +357,8 @@ function Attachments:Attachment_SaveAttach(args)
 end
 
 function Attachments:Attachment_LoadAttach(args)
-  --DebugPrint('Attachment_LoadAttach')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_LoadAttach')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -372,7 +372,7 @@ function Attachments:Attachment_LoadAttach(args)
   local model = properties.model
 
   if not io then
-    print("[Attachments.lua] Attachments Setup is only available in tools mode.")
+    --print("[Attachments.lua] Attachments Setup is only available in tools mode.")
     return
   end
 
@@ -395,8 +395,8 @@ function Attachments:Attachment_LoadAttach(args)
 end
 
 function Attachments:Attachment_HideAttach(args)
-  --DebugPrint('Attachment_HideAttach')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_HideAttach')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -421,8 +421,8 @@ function Attachments:Attachment_HideAttach(args)
 end
 
 function Attachments:Attachment_UpdateUnit(args)
-  --DebugPrint('Attachment_UpdateUnit')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_UpdateUnit')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -437,13 +437,13 @@ function Attachments:Attachment_UpdateUnit(args)
     end
   end
 
-  --DebugPrintTable(cosmetics)
+  ----DebugPrintTable(cosmetics)
   CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(args.PlayerID), "attachment_cosmetic_list", cosmetics )
 end
 
 function Attachments:Attachment_HideCosmetic(args)
-  --DebugPrint('Attachment_HideCosmetic')
-  --DebugPrintTable(args)
+  ----DebugPrint('Attachment_HideCosmetic')
+  ----DebugPrintTable(args)
 
   local unit = EntIndexToHScript(args.index)
   if not unit then
@@ -466,7 +466,7 @@ function Attachments:Attachment_HideCosmetic(args)
         child:RemoveEffects(EF_NODRAW)
         hiddenCosmetics[model] = nil
       else
-        --print("HIDING")
+        ----print("HIDING")
         child:AddEffects(EF_NODRAW)
         hiddenCosmetics[model] = true
       end
@@ -495,7 +495,7 @@ function Attachments:AttachProp(unit, attachPoint, model, scale, properties)
     if propModel.GetModelName then propModel = propModel:GetModelName() end
     if not properties then
       if not db[unitModel] or not db[unitModel][attachPoint] or not db[unitModel][attachPoint][propModel] then
-        print("[Attachments.lua] No attach found in attachment database for '" .. unitModel .. "', '" .. attachPoint .. "', '" .. propModel .. "'")
+        --print("[Attachments.lua] No attach found in attachment database for '" .. unitModel .. "', '" .. attachPoint .. "', '" .. propModel .. "'")
         return
       end
     end
@@ -527,15 +527,15 @@ function Attachments:AttachProp(unit, attachPoint, model, scale, properties)
     
     angles = QAngle(angles.x, angles.y, angles.z)
     --angles = RotationDelta(angles,QAngle(pitch, yaw, roll))
-    --print(prop:GetAngles())
-    --print(angles)
-    --print(RotationDelta(RotationDelta(angles,QAngle(pitch, yaw, roll)),QAngle(0,0,0)))
+    ----print(prop:GetAngles())
+    ----print(angles)
+    ----print(RotationDelta(RotationDelta(angles,QAngle(pitch, yaw, roll)),QAngle(0,0,0)))
     --angles = QAngle(pitch, yaw, roll)
 
     if not Attachments.doAttach then angles = QAngle(pitch, yaw, roll) end
     angles = RotateOrientation(angles,RotationDelta(QAngle(pitch, yaw, roll), QAngle(0,0,0)))
 
-    --print('angleSpace = QAngle(' .. angles.x .. ', ' .. angles.y .. ', ' .. angles.z .. ')')
+    ----print('angleSpace = QAngle(' .. angles.x .. ', ' .. angles.y .. ', ' .. angles.z .. ')')
 
     local attach_pos = unit:GetAttachmentOrigin(attach)
     --attach_pos = attach_pos + RotatePosition(Vector(0,0,0), QAngle(angles.x,angles.y,angles.z), offset)

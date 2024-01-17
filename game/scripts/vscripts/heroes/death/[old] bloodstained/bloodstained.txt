@@ -1,0 +1,520 @@
+// Dota Ability bloodstained
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+  "bloodstained__precache"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+    "AbilityTextureName"    		"bloodstained__precache"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"99"
+		"RequiredLevel"         	 	"-200"
+
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"bloodstained_1__rage"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_1__rage"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"bloodstained_rage"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_VICTORY"
+		"AbilityCastPoint"       		"0.35"
+
+    "AbilityValues"
+		{
+      "radius"        "0"
+      "call_duration" "0"
+      "damage_gain"   "0"
+      "duration"      "0"
+      "cooldown"		  "1 2 3 4 5 6 7"
+      "special_reset"       "0"
+      "special_blink"       "0"
+      "special_damage_init" "0"
+		}
+	}
+
+	"bloodstained_2__frenzy"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_2__frenzy"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"bloodstained_frenzy"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+		{
+      "chance"        "10"
+      "ms"            "150"
+      "status_res"    "30"
+      "attack_speed"  "50"
+      "duration"      "1 2 3 4 5 6 7"
+      "special_purge"             "0"
+      "special_bleeding_duration" "0"
+	    "special_cleave"            "0"
+	  }
+	}
+
+	"bloodstained_3__curse"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_3__curse"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"bloodstained_curse"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_ALL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.4"
+
+    "AbilityValues"
+		{
+			"shared_damage" "60"
+			"max_range"		  "1"
+			"duration"		  "1 2 3 4 5 6 7"
+      "special_slow_percent" "0"
+      "special_max_hp_steal" "0"
+      "special_kill_reset"   "0"
+		}
+	}
+
+	"bloodstained_4__tear"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_4__tear"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"bloodstained_tear"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PURE"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+    "AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint"       		"0.45"
+
+		"AbilityValues"
+		{
+      "blood_duration"  "20"
+      "hp_lost"		      "1"
+      "tick"		        "1"
+      "radius"		      "350"
+      "blood_percent"	  "1 2 3 4 5 6 7"
+      "special_init_loss"		"0"
+      "special_copy_leech"	"0"
+		}
+	}
+
+	"bloodstained_5__lifesteal"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_5__lifesteal"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"bloodstained_lifesteal"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityValues"
+		{
+			"max_heal"  "40"
+			"base_heal" "1 2 3 4 5 6 7"
+      "special_target_hp"     "0"
+      "special_self_hp_hero"  "0"
+      "special_self_hp_creep" "0"
+      "special_heal_radius"   "0"
+      "special_max_hp_regen"  "0"
+      "special_min_heal"      "0"
+      "special_max_heal"      "0"
+		}
+	}
+
+	"bloodstained_u__seal"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/bloodstained/bloodstained_u__seal"
+		"AbilityTextureName"     		"bloodstained_seal"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"8"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastPoint"       		"0.4"
+
+    "AbilityValues"
+		{
+      "duration"			  "13"
+      "radius"		      "500"
+      "slow_duration"   "1.5"
+      "copy_number"     "1"
+      "copy_duration"   "15"
+      "hp_stolen"       "10"
+      "steal_duration"  "1 2 3 4 5 6 7"
+      "special_break"     "0"
+      "special_kill"      "0"
+      "special_bleed_in"  "0"
+      "special_bleed_out" "0"
+		}
+	}
+
+  //RANKS
+    "bloodstained_1__rage_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_1__rage_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_1__rage_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_1__rage_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_1__rage_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_1__rage_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_rage"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_2__frenzy_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_frenzy"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_3__curse_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_curse"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_4__tear_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_tear"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }    
+
+    "bloodstained_5__lifesteal_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_5__lifesteal_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_5__lifesteal_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_5__lifesteal_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_5__lifesteal_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_5__lifesteal_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_lifesteal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_11"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_12"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_21"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_22"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_31"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+
+    "bloodstained_u__seal_rank_32"
+    {
+      "BaseClass"						"ability_lua"
+      "ScriptFile"					"heroes/death/bloodstained/bloodstained-ranks_lua"
+      "AbilityTextureName"  "bloodstained_seal"            
+      "AbilityType"					"ABILITY_TYPE_BASIC"
+      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+    }
+}

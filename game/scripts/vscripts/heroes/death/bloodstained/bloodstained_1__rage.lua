@@ -78,7 +78,6 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     if IsServer() then
       caster:EmitSound("Hero_PhantomAssassin.CoupDeGrace")
       caster:EmitSound("Bloodstained.fury")
-      caster:EmitSound("Bloodstained.rage")
     end
   end
 

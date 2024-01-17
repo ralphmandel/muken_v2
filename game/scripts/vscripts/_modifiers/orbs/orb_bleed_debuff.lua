@@ -14,9 +14,9 @@ function orb_bleed_debuff:OnCreated(kv)
 
   if not IsServer() then return end
   
+  self.interval = 0.25
   self.status_mult = 0.1
   self.bleed_damage = 50
-  self.interval = 0.25
 
   self.damageTable = {
     attacker = self.caster,
@@ -30,6 +30,10 @@ function orb_bleed_debuff:OnCreated(kv)
 end
 
 function orb_bleed_debuff:OnRefresh(kv)
+  if not IsServer then return end
+
+  self:SetDuration(kv.duration, true)
+  self:PlayEfxStart()
 end
 
 function orb_bleed_debuff:OnRemoved()
@@ -43,7 +47,7 @@ function orb_bleed_debuff:OnIntervalThink()
   if self.caster == nil then self:Destroy() return end
   if IsValidEntity(self.caster) == false then self:Destroy() return end
 
-  self.damageTable.damage = self.bleed_damage * self.interval * self:GetBleedDamageAmp()
+  self.damageTable.damage = self.parent:GetSpellDamage(self.bleed_damage, DAMAGE_TYPE_PHYSICAL) * self.interval
   if self.parent:IsMoving() then self.damageTable.damage = self.damageTable.damage * 2 end
 
   local damage_result = ApplyDamage(self.damageTable)
@@ -58,13 +62,6 @@ function orb_bleed_debuff:OnIntervalThink()
 end
 
 -- UTILS -----------------------------------------------------------
-
-function orb_bleed_debuff:GetBleedDamageAmp()
-  local str = self.caster:GetMainStat("STR")
-  if str == nil then return 1 end
-
-  return str:GetPhysicalDamageAmp() * 0.01
-end
 
 -- EFFECTS -----------------------------------------------------------
 

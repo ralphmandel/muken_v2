@@ -1,45 +1,3 @@
-bloodstained_1__rage_rank_11 = class ({})
-bloodstained_1__rage_rank_12 = class ({})
-bloodstained_1__rage_rank_21 = class ({})
-bloodstained_1__rage_rank_22 = class ({})
-bloodstained_1__rage_rank_31 = class ({})
-bloodstained_1__rage_rank_32 = class ({})
-
-bloodstained_2__frenzy_rank_11 = class ({})
-bloodstained_2__frenzy_rank_12 = class ({})
-bloodstained_2__frenzy_rank_21 = class ({})
-bloodstained_2__frenzy_rank_22 = class ({})
-bloodstained_2__frenzy_rank_31 = class ({})
-bloodstained_2__frenzy_rank_32 = class ({})
-
-bloodstained_3__curse_rank_11 = class ({})
-bloodstained_3__curse_rank_12 = class ({})
-bloodstained_3__curse_rank_21 = class ({})
-bloodstained_3__curse_rank_22 = class ({})
-bloodstained_3__curse_rank_31 = class ({})
-bloodstained_3__curse_rank_32 = class ({})
-
-bloodstained_4__tear_rank_11 = class ({})
-bloodstained_4__tear_rank_12 = class ({})
-bloodstained_4__tear_rank_21 = class ({})
-bloodstained_4__tear_rank_22 = class ({})
-bloodstained_4__tear_rank_31 = class ({})
-bloodstained_4__tear_rank_32 = class ({})
-
-bloodstained_5__lifesteal_rank_11 = class ({})
-bloodstained_5__lifesteal_rank_12 = class ({})
-bloodstained_5__lifesteal_rank_21 = class ({})
-bloodstained_5__lifesteal_rank_22 = class ({})
-bloodstained_5__lifesteal_rank_31 = class ({})
-bloodstained_5__lifesteal_rank_32 = class ({})
-
-bloodstained_u__seal_rank_11 = class ({})
-bloodstained_u__seal_rank_12 = class ({})
-bloodstained_u__seal_rank_21 = class ({})
-bloodstained_u__seal_rank_22 = class ({})
-bloodstained_u__seal_rank_31 = class ({})
-bloodstained_u__seal_rank_32 = class ({})
-
 bloodstained__precache = class ({})
 LinkLuaModifier("bloodstained_special_values", "heroes/death/bloodstained/bloodstained-special_values", LUA_MODIFIER_MOTION_NONE)
 
@@ -48,7 +6,11 @@ function bloodstained__precache:GetIntrinsicModifierName()
 end
 
 function bloodstained__precache:Spawn()
-	if self:IsTrained() == false then self:UpgradeAbility(true) end
+  if IsServer() then
+    if self:IsTrained() == false then
+      self:UpgradeAbility(true)
+    end
+  end
 end
 
 function bloodstained__precache:Precache(context)

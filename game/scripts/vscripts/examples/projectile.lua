@@ -54,7 +54,7 @@ local projectile = {
 
   UnitTest = function(self, unit) return unit:GetUnitName() ~= "npc_dummy_unit" and unit:GetTeamNumber() ~= hero:GetTeamNumber() end,
   OnUnitHit = function(self, unit) 
-    print ('HIT UNIT: ' .. unit:GetUnitName())
+    --print ('HIT UNIT: ' .. unit:GetUnitName())
   end,
   --OnTreeHit = function(self, tree) ... end,
   --OnWallHit = function(self, gnvPos) ... end,

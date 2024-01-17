@@ -47,7 +47,7 @@ end
 
 function vulture__modifier_rot_stack:OnStackCountChanged(iStackCount)
   if self:GetStackCount() >= 100 then
-    print(self.ability:GetSpecialValueFor("rot_duration"))
+    --print(self.ability:GetSpecialValueFor("rot_duration"))
     AddModifier(self.parent, self.ability, "vulture__modifier_rot", {duration = self.ability:GetSpecialValueFor("rot_duration")}, true)
     self:Destroy()
   end

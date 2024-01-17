@@ -90,7 +90,7 @@ end
 
 function hunter_2_modifier_aim:OnIntervalThink()
   -- local loc = "Vector(" .. math.floor(self.parent:GetOrigin().x) .. ", " .. math.floor(self.parent:GetOrigin().y) .. ", 0)"
-  -- print(loc)
+  -- --print(loc)
 end
 
 -- UTILS -----------------------------------------------------------

@@ -56,7 +56,7 @@ if GetMapName() == "playground" then
       buttons =     {"Take All"},
       position =    "entity", --"mouse",--"900px 200px 0px",
       OnClose = function(playerID, container)
-        print("Closed")
+        --print("Closed")
 
         if next(container:GetAllOpen()) == nil and #container:GetAllItems() == 0 then
           container:GetEntity():RemoveSelf()
@@ -69,7 +69,7 @@ if GetMapName() == "playground" then
         end
       end,
       OnOpen = function(playerID, container)
-        print("Loot box opened")
+        --print("Loot box opened")
       end,
       closeOnOrder= true,
       items = items,
@@ -88,7 +88,7 @@ if GetMapName() == "playground" then
         end
       end,
       OnEntityOrder = function(playerID, container, unit, target)
-        print("ORDER ACTION loot box: ", playerID)
+        --print("ORDER ACTION loot box: ", playerID)
         container:Open(playerID)
         unit:Stop()
       end
@@ -162,12 +162,12 @@ if GetMapName() == "playground" then
       closeOnOrder= true,
       range =       230,
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION shared bank: ", playerID)
+        --print("ORDER ACTION shared bank: ", playerID)
         container:Open(playerID)
         unit:Stop()
       end,
       OnEntityDrag= function(playerID, container, unit, target, fromContainer, item)
-        print("Drag ACTION shared bank: ", playerID, unit, target, fromContainer, item)
+        --print("Drag ACTION shared bank: ", playerID, unit, target, fromContainer, item)
         if IsValidEntity(target) and fromContainer:ContainsItem(item) then
           fromContainer:RemoveItem(item)
           if not container:AddItem(item) then
@@ -210,7 +210,7 @@ if GetMapName() == "playground" then
       closeOnOrder= true,
       range =       230,
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION item shop", playerID)
+        --print("ORDER ACTION item shop", playerID)
         container:Open(playerID)
         unit:Stop()
       end,
@@ -247,19 +247,19 @@ if GetMapName() == "playground" then
       range =       300,
       --OnCloseClickedJS = "ExampleCloseClicked",
       OnSelect  =   function(playerID, container, selected)
-        print("Selected", selected:GetUnitName())
+        --print("Selected", selected:GetUnitName())
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_GOODGUYS then
           container:Open(playerID)
         end
       end,
       OnDeselect =  function(playerID, container, deselected)
-        print("Deselected", deselected:GetUnitName())
+        --print("Deselected", deselected:GetUnitName())
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_GOODGUYS then
           container:Close(playerID)
         end
       end,
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION radiant shop", playerID)
+        --print("ORDER ACTION radiant shop", playerID)
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_GOODGUYS then
           container:Open(playerID)
           unit:Stop()
@@ -299,19 +299,19 @@ if GetMapName() == "playground" then
       closeOnOrder= true,
       range =       300,
       OnSelect  =   function(playerID, container, selected)
-        print("Selected", selected:GetUnitName())
+        --print("Selected", selected:GetUnitName())
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
           container:Open(playerID)
         end
       end,
       OnDeselect  =   function(playerID, container, deselected)
-        print("Deselected", deselected:GetUnitName())
+        --print("Deselected", deselected:GetUnitName())
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
           container:Close(playerID)
         end
       end,
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION dire shop", playerID)
+        --print("ORDER ACTION dire shop", playerID)
         if PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
           container:Open(playerID)
           unit:Stop()
@@ -333,7 +333,7 @@ if GetMapName() == "playground" then
       range =       200,
       buttons =     {"Craft"},
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION crafting station", playerID)
+        --print("ORDER ACTION crafting station", playerID)
         container:Open(playerID)
         unit:Stop()
       end,
@@ -343,15 +343,15 @@ if GetMapName() == "playground" then
           local branches = container:GetItemsByName("item_branches")
           local broadswords = container:GetItemsByName("item_broadsword")
           local claymores = container:GetItemsByName("item_claymore")
-          print(#all, #branches, #broadswords, #claymores)
+          --print(#all, #branches, #broadswords, #claymores)
 
           if #all == 3 and #branches == 1 and #broadswords == 1 and #claymores == 1 then
             local row,col = container:GetRowColumnForItem(branches[1])
             local row2,col2 = container:GetRowColumnForItem(broadswords[1])
             local row3,col3 = container:GetRowColumnForItem(claymores[1])
-            print(row,col)
-            print(row2,col2)
-            print(row3,col3)
+            --print(row,col)
+            --print(row2,col2)
+            --print(row3,col3)
             if row == 3 and row2+row3 == 3 and col == col2 and col == col3 then
               for _,item in ipairs(all) do
                 container:RemoveItem(item)
@@ -374,7 +374,7 @@ if GetMapName() == "playground" then
       range =       200,
       buttons =     {},
       OnEntityOrder=function(playerID, container, unit, target)
-        print("ORDER ACTION crafting mats", playerID)
+        --print("ORDER ACTION crafting mats", playerID)
         container:Open(playerID)
         unit:Stop()
       end,
@@ -427,7 +427,7 @@ if GetMapName() == "playground" then
 
   function PlayGround:OnHeroInGame(hero)
     -- create inventory
-    print(pid, hero:GetName())
+    --print(pid, hero:GetName())
     local pid = hero:GetPlayerID()
 
     local validItemsBySlot = {
@@ -453,7 +453,7 @@ if GetMapName() == "playground" then
       OnDragWorld = true,
       OnRightClickJS = "SpecialContextMenu",
       OnRightClick = function(playerID, container, unit, item, slot)
-        print("RIGHT CLICK")
+        --print("RIGHT CLICK")
         local armor = pidEquipment[playerID]
         for i,valid in pairs(validItemsBySlot) do
           for itemname,_ in pairs(valid) do
@@ -499,7 +499,7 @@ if GetMapName() == "playground" then
       forcePurchaser=hero,
       range =       250,
       OnEntityOrder =function(playerID, container, unit, target)
-        print("ORDER ACTION private bank: ", playerID)
+        --print("ORDER ACTION private bank: ", playerID)
         if privateBank[playerID] then
           privateBank[playerID]:Open(playerID)
         end
@@ -528,7 +528,7 @@ if GetMapName() == "playground" then
       OnRightClickJS = "ExampleRightClick",
       OnMouseOverJS = "ExampleMouseOver",
       AddItemFilter = function(container, item, slot)
-        print("Armor, AddItemFilter: ", container, item, slot)
+        --print("Armor, AddItemFilter: ", container, item, slot)
         if slot ~= -1 and validItemsBySlot[slot][item:GetAbilityName()] then
           return true
         end

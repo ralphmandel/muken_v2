@@ -117,7 +117,7 @@ function WorldPanels:start()
 end
 
 function WorldPanels:OnEntityKilled( keys )
-  --print( '[WorldPanels] OnEntityKilled Called' )
+  ----print( '[WorldPanels] OnEntityKilled Called' )
   --PrintTable( keys )
   
 
@@ -235,6 +235,9 @@ function WorldPanels:CreateWorldPanel(pids, conf)
 
   function wp:SetOffsetY(offY)
     self.pt.offsetY = offY
+
+    CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+
     UpdateTable(self)
   end
 
@@ -280,6 +283,9 @@ function WorldPanels:CreateWorldPanel(pids, conf)
 
   self.worldPanels[self.nextID] = wp
   self.nextID = self.nextID + 1
+
+  CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+
   return wp
 end
 

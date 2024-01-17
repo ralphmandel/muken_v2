@@ -6,7 +6,7 @@ BAREBONES_VERSION = "1.00"
 BAREBONES_DEBUG_SPEW = true 
 
 if GameMode == nil then
-    DebugPrint( '[BAREBONES] creating barebones game mode' )
+    --DebugPrint( '[BAREBONES] creating barebones game mode' )
     _G.GameMode = class({})
 end
 
@@ -72,7 +72,7 @@ end
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function GameMode:PostLoadPrecache()
-  DebugPrint("[BAREBONES] Performing Post-Load precache")    
+  --DebugPrint("[BAREBONES] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
 
@@ -85,7 +85,7 @@ end
   It can be used to initialize state that isn't initializeable in InitGameMode() but needs to be done before everyone loads in.
 ]]
 function GameMode:OnFirstPlayerLoaded()
-  DebugPrint("[BAREBONES] First Player has loaded")
+  --DebugPrint("[BAREBONES] First Player has loaded")
 end
 
 --[[
@@ -93,7 +93,7 @@ end
   It can be used to initialize non-hero player state or adjust the hero selection (i.e. force random etc)
 ]]
 function GameMode:OnAllPlayersLoaded()
-  DebugPrint("[BAREBONES] All Players have loaded into the game")
+  --DebugPrint("[BAREBONES] All Players have loaded into the game")
 end
 
 --[[
@@ -104,7 +104,7 @@ end
   The hero parameter is the hero entity that just spawned in
 ]]
 function GameMode:OnHeroInGame(hero)
-  DebugPrint("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  --DebugPrint("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   --hero:SetGold(500, false)
 
@@ -152,7 +152,7 @@ end
   is useful for starting any game logic timers/thinkers, beginning the first round, etc.
 ]]
 function GameMode:OnGameInProgress()
-  DebugPrint("[BAREBONES] The game has officially begun")
+  --DebugPrint("[BAREBONES] The game has officially begun")
 
   Timers:CreateTimer(1, -- Start this timer 30 game-time seconds later
     function()
@@ -170,17 +170,17 @@ end
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
   GameMode = self
-  DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
+  --DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
 
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
-  DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
+  --DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
 end
 
 -- This is an example console command
 function GameMode:ExampleConsoleCommand()
-  print( '******* Example Console Command ***************' )
+  --print( '******* Example Console Command ***************' )
   local cmdPlayer = Convars:GetCommandClient()
   if cmdPlayer then
     local playerID = cmdPlayer:GetPlayerID()
@@ -190,5 +190,5 @@ function GameMode:ExampleConsoleCommand()
     end
   end
 
-  print( '*********************************************' )
+  --print( '*********************************************' )
 end

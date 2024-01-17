@@ -35,7 +35,13 @@ function orb_bleed__modifier:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
 
-  keys.target:RemoveModifierByNameAndCaster("orb_bleed_debuff", self.caster)
+  local modifiers = keys.target:FindAllModifiersByName("orb_bleed_debuff")
+  for _, modifier in pairs(modifiers) do
+    if modifier:GetAbility() == self.ability then
+      modifier:OnRefresh({duration = self.bleed_duration})
+      return
+    end
+  end
   
   AddModifier(keys.target, self.ability, "orb_bleed_debuff", {
     duration = self.bleed_duration
@@ -45,3 +51,11 @@ end
 -- UTILS -----------------------------------------------------------
 
 -- EFFECTS -----------------------------------------------------------
+
+function orb_bleed__modifier:GetEffectName()
+	return "particles/bloodstained/frenzy/bloodstained_hands_v2.vpcf"
+end
+
+function orb_bleed__modifier:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end

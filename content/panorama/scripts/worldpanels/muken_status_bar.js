@@ -1,6 +1,4 @@
-$.Msg("StatusBar");
-
-var current_portrait_entity = "";
+var current_portrait_entity = Players.GetLocalPlayerPortraitUnit();
 var player_hero_entity = Game.GetLocalPlayerInfo().player_selected_hero_entity_index;
 var alt_pressed = false;
 
@@ -23,10 +21,10 @@ function StatusBarCheck()
   var wp = $.GetContextPanel().WorldPanel;
   var offScreen = $.GetContextPanel().OffScreen;
   if (!offScreen && wp){
-    //$.Msg("kubo", wp.data.scale);
     var ent = wp.entity;
     if (ent){
-      if ((alt_pressed == false && ent != current_portrait_entity && ent != player_hero_entity) || !Entities.IsAlive(ent)){
+      if ((HasPlayerAmount() == false && alt_pressed == false &&
+      ent != current_portrait_entity && ent != player_hero_entity) || !Entities.IsAlive(ent)){
         $.GetContextPanel().style.opacity = "0";
         $.Schedule(1/30, StatusBarCheck);
         return;
@@ -37,9 +35,13 @@ function StatusBarCheck()
       var max = wp.data.max_status;
       var perc = (current * 100 / max).toFixed(0);
 
-      var pan = $("#HP_inner");
+      var pan = $("#current_status_panel");
       pan.GetParent().style.width = wp.data.max_status + "px;";
       pan.style.width = perc + "%;";
+
+      var icon = $("#icon");
+      SetIcon(icon, wp.data.status_name);
+      SetBarStyle(pan, wp.data.status_name);
     }
   }
 
@@ -49,9 +51,39 @@ function StatusBarCheck()
 function OnStatusUpdate(event) {
   var wp = $.GetContextPanel().WorldPanel;
 
-  if (event.entity == wp.entity) {
+  if (event.entity == wp.entity && event.data.status_name == wp.data.status_name) {
     wp.data = event.data;
+    wp.offsetY = event.offsetY;
   }
+}
+
+function HasPlayerAmount() {
+  var wp = $.GetContextPanel().WorldPanel;
+
+  for (const [entindex, bool] of Object.entries(wp.data.players_amount)) {
+    if (player_hero_entity == entindex) {
+      return bool;
+    }
+  }
+}
+
+function SetIcon(icon, status_name) {
+  var source = "";
+
+  if (status_name == "orb_bleed__status") {
+    source = "file://{resources}/images/custom_game/status_bar/status_bleed.png";
+  }
+
+  if (status_name == "orb_ice__status") {
+    source = "file://{resources}/images/custom_game/status_bar/status_freeze.png";
+  }
+
+  icon.SetImage(source);
+}
+
+function SetBarStyle(icon, status_name) {
+  icon.SetHasClass("orb_bleed__status", "orb_bleed__status" == status_name);
+  icon.SetHasClass("orb_ice__status", "orb_ice__status" == status_name);
 }
 
 (function()

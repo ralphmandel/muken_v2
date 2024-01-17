@@ -21,7 +21,7 @@ function trickster_1_modifier_passive:OnCreated(kv)
   self.max_interval_gesture = self.delay_max - self.gesture_min
 
   --self.time = GameRules:GetGameTime()
-  --print("kubito", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
+  ----print("kubito", GameRules:GetGameTime() - self.time, self.parent:GetAttackAnimationPoint())
   --self.time = GameRules:GetGameTime()
 
   --if IsServer() then self:StartIntervalThink(0.2) end
@@ -64,7 +64,7 @@ function trickster_1_modifier_passive:OnAttackStart(keys)
 end
 
 function trickster_1_modifier_passive:OnIntervalThink()
-  print("kubito loc ->", self.parent:GetOrigin())
+  --print("kubito loc ->", self.parent:GetOrigin())
 end
 
 -- UTILS -----------------------------------------------------------

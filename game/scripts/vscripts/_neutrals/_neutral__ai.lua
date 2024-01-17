@@ -43,6 +43,10 @@ LinkLuaModifier("_modifier_untargetable", "_modifiers/generics/_modifier_untarge
 LinkLuaModifier("orb_bleed__modifier", "_modifiers/orbs/orb_bleed__modifier", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed__status", "_modifiers/orbs/orb_bleed__status", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed_debuff", "_modifiers/orbs/orb_bleed_debuff", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__modifier", "_modifiers/orbs/orb_ice__modifier", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__status", "_modifiers/orbs/orb_ice__status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__status_efx", "_modifiers/orbs/orb_ice__status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice_debuff", "_modifiers/orbs/orb_ice_debuff", LUA_MODIFIER_MOTION_NONE)
 
 function _neutral__ai:GetIntrinsicModifierName()
 	return "_modifier__ai"

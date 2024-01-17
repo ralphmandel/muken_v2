@@ -7,7 +7,7 @@
     end
 
     --if spew == 1 then
-      print(...)
+      --print(...)
     --end
   end
 
@@ -23,7 +23,7 @@
   end
 
   function PrintTable(t, indent, done)
-    --print ( string.format ('PrintTable type %s', type(keys)) )
+    ----print ( string.format ('PrintTable type %s', type(keys)) )
     if type(t) ~= "table" then return end
 
     done = done or {}
@@ -43,17 +43,17 @@
 
         if type(value) == "table" and not done[value] then
           done [value] = true
-          print(string.rep ("\t", indent)..tostring(v)..":")
+          --print(string.rep ("\t", indent)..tostring(v)..":")
           PrintTable (value, indent + 2, done)
         elseif type(value) == "userdata" and not done[value] then
           done [value] = true
-          print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
+          --print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
           PrintTable ((getmetatable(value) and getmetatable(value).__index) or getmetatable(value), indent + 2, done)
         else
           if t.FDesc and t.FDesc[v] then
-            print(string.rep ("\t", indent)..tostring(t.FDesc[v]))
+            --print(string.rep ("\t", indent)..tostring(t.FDesc[v]))
           else
-            print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
+            --print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
           end
         end
       end
@@ -81,7 +81,7 @@
 
   function DebugAllCalls()
       if not GameRules.DebugCalls then
-          print("Starting DebugCalls")
+          --print("Starting DebugCalls")
           GameRules.DebugCalls = true
 
           debug.sethook(function(...)
@@ -89,11 +89,11 @@
               local src = tostring(info.short_src)
               local name = tostring(info.name)
               if name ~= "__index" then
-                  print("Call: ".. src .. " -- " .. name .. " -- " .. info.currentline)
+                  --print("Call: ".. src .. " -- " .. name .. " -- " .. info.currentline)
               end
           end, "c")
       else
-          print("Stopped DebugCalls")
+          --print("Stopped DebugCalls")
           GameRules.DebugCalls = false
           debug.sethook(nil, "c")
       end

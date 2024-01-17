@@ -60,6 +60,6 @@ end
 -- 	local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, owner)
 -- 	ParticleManager:SetParticleControl(particle, 0, owner:GetOrigin())
 -- 	ParticleManager:ReleaseParticleIndex( particle )
---   print('EFEITO FUNFOU')
+--   --print('EFEITO FUNFOU')
 
 -- end

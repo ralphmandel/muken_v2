@@ -17,9 +17,8 @@ function orb_bleed__status:OnCreated(kv)
   self.bloodloss = 500
   self.current_status = kv.status_amount
 
-  self:CreatePanel()
-  self:UpdateStatusBar()
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
+  self:UpdateStatusBar()
   self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(0.3)
 end
@@ -29,8 +28,8 @@ function orb_bleed__status:OnRefresh(kv)
 
   self.caster = EntIndexToHScript(kv.inflictor)
 
-  self:AddCurrentStatus(kv.status_amount)
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
+  self:AddCurrentStatus(kv.status_amount)
   self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(0.3)
 end
@@ -38,7 +37,7 @@ end
 function orb_bleed__status:OnRemoved()
   if not IsServer() then return end
 
-  self.parent.worldPanel:Delete()
+  self.parent:RemovePanelFromList(self:GetName())
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -49,11 +48,11 @@ function orb_bleed__status:OnIntervalThink()
   local interval = 0.1
   local degen = self.status_degen * interval
 
-  self:AddCurrentStatus(-degen)
-
   for ent_index, table in pairs(self.status_amount) do
     self:AddEntityAmount(ent_index, degen / #self.status_amount)
   end
+
+  self:AddCurrentStatus(-degen)
 
   self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(interval)
@@ -77,6 +76,8 @@ function orb_bleed__status:ApplyBloodLoss()
   end
 
   if attacker.unit == nil then return end
+
+  self.parent:RemoveAllModifiersOfName("orb_bleed_debuff")
 
   local damage_result = ApplyDamage({
     attacker = attacker.unit, victim = self.parent, ability = nil,
@@ -126,7 +127,12 @@ function orb_bleed__status:AddCurrentStatus(amount)
     return
   end
 
-  self:UpdatePanel()
+  self.parent:UpdatePanel({
+    current_status = self.current_status,
+    max_status = self.max_status,
+    status_name = self:GetName(),
+    entities = self.status_amount
+  })
 end
 
 function orb_bleed__status:UpdateStatusBar()
@@ -147,23 +153,11 @@ function orb_bleed__status:UpdateStatusBar()
   end
 
   self.max_status = max_status
-  self:UpdatePanel()
-end
-
-function orb_bleed__status:UpdatePanel(current_status)
-  self.parent.worldPanel:SetData(
-    {current_status = self.current_status, max_status = self.max_status},
-    self.parent.hp_offset
-  )
-end
-
-function orb_bleed__status:CreatePanel()
-  self.parent.worldPanel = WorldPanels:CreateWorldPanelForAll({
-    layout = "file://{resources}/layout/custom_game/worldpanels/muken_status_bar.xml",
-    entity = self.parent:GetEntityIndex(),
-    entityHeight = self.parent.hp_offset,
-    offsetY = -50,
-    data = {current_status = 0, max_status = 0}
+  self.parent:UpdatePanel({
+    current_status = self.current_status,
+    max_status = self.max_status,
+    status_name = self:GetName(),
+    entities = self.status_amount
   })
 end
 

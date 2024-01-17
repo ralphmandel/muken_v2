@@ -1,5 +1,5 @@
 if Spawner == nil then
-  DebugPrint( '[BAREBONES] creating spawner' )
+  --DebugPrint( '[BAREBONES] creating spawner' )
   _G.Spawner = class({})
 end
 

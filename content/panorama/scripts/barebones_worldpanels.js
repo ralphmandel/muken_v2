@@ -19,7 +19,7 @@ var entities = [];
 
 function WorldPanelChange(id, changes, dels)
 {
-  $.Msg("change ", id, ' -- ', changes, ' -- ', dels);
+  //$.Msg("change ", id, ' -- ', changes, ' -- ', dels);
   for (var k in changes){
     var wp = panels[k];
     if (!wp){
@@ -63,7 +63,7 @@ function WorldPanelChange(id, changes, dels)
     wp.offsetX = wp.offsetX || 0;
     wp.offsetY = wp.offsetY || 0;
     wp.entityHeight = wp.entityHeight || 0;
-    wp.hAlign = wp.hAlign || HA_CENTER;
+    wp.hAlign = wp.hAlign || HA_LEFT;
     wp.vAlign = wp.vAlign || VA_BOTTOM;
     wp.edge = wp.edge || -1;
     wp.seen = wp.entity ? Entities.IsValidEntity(wp.entity) : null;

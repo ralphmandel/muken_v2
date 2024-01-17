@@ -425,5 +425,10 @@ OUTPOST_ORIGIN = {
 }
 
 ORB_LIST = {
-  "orb_bleed__status"
+  "orb_bleed__status",
+  "orb_ice__status"
 }
+
+STATUS_OFFSET_HERO = -25
+STATUS_OFFSET_CREEP = -10
+STATUS_OFFSET_SPACING = -25

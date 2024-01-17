@@ -123,7 +123,7 @@ end
 		for i = 1, #self.cosmetic, 1 do
 			if self:CheckFlags(self.cosmetic[i]) then
 				if enable == true then
-					self.cosmetic[i]:AddNewModifier(caster, inflictor, string, {})
+					local result = self.cosmetic[i]:AddNewModifier(caster, inflictor, string, {})
 				else
 					if ability then
 						local mod = self.cosmetic[i]:FindAllModifiersByName(string)

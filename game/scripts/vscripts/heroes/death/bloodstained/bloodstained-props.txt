@@ -8,10 +8,10 @@
 
 		//ABILITIES
 			"Ability1"						"bloodstained_1__rage"
-			"Ability2"						"bloodstained_2__frenzy"
+			"Ability2"						"bloodstained_2__bloodsteal"
 			"Ability3"						"bloodstained_3__curse"
-			"Ability4"						"bloodstained_4__tear"
-			"Ability5"						"bloodstained_5__lifesteal"
+			"Ability4"						"bloodstained_4__bloodloss"
+			"Ability5"						"bloodstained_5__tears"
 			"Ability6"						"bloodstained_u__seal"
 			"Ability7"						"bloodstained__precache"
 			"Ability8"						"_ability_str"
@@ -20,7 +20,7 @@
 			"Ability11"						"_ability_vit"
 			"Ability12"						"cosmetics"
 			"Ability13"						"base_hero"
-			"Ability14"						"_channel"
+			"Ability14"						"null"
 			"Ability15"						"null"
 			"Ability16"						"null"
 			"Ability17"						"null"

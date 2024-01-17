@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf45:version{73c3d623-a141-4df2-b548-41dd786e6300} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf58:version{9bada39c-a931-42d0-abdd-e5c1b13d37a6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -95,9 +95,10 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 60.0
-				m_flRandomMax = 72.0
+				m_flRandomMin = 45.0
+				m_flRandomMax = 54.0
 				m_bHasRandomSignFlip = false
+				m_nRandomSeed = -1
 				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
 				m_flLOD0 = 0.0
 				m_flLOD1 = 0.0
@@ -117,6 +118,8 @@
 				m_flNoiseTurbulenceMix = 0.5
 				m_flNoiseImgPreviewScale = 1.0
 				m_bNoiseImgPreviewLive = true
+				m_flNoCameraFallback = 0.0
+				m_bUseBoundsCenter = false
 				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
 				m_flMultFactor = 1.0
 				m_flInput0 = 0.0
@@ -158,6 +161,11 @@
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMin = [ -22.0, -22.0, 28.0 ]
 			m_vecOutputMax = [ 22.0, 22.0, 52.0 ]
+			m_TransformInput = 
+			{
+				m_nType = "PT_TYPE_INVALID"
+			}
+			m_bDisableOperator = true
 		},
 	]
 	m_Operators = 

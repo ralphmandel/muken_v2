@@ -7,10 +7,10 @@
     <include src="file://{resources}/scripts/worldpanels/muken_status_bar.js" /> 
   </scripts>
   <Panel class="statusbar_root">
-    <Image class="status_img" src="file://{resources}/images/custom_game/status_bar/status_bleed.png" />
+    <Image id="icon" class="status_img" src="" />
     <Panel hittest="false" class="StatusBarContainer">
-      <Panel hittest="false" id="statusmax">
-         <Panel id="HP_inner" class="HP"/>
+      <Panel hittest="false" id="status_max_panel">
+         <Panel id="current_status_panel" class="HP"/>
       </Panel>
     </Panel>
     </Panel>

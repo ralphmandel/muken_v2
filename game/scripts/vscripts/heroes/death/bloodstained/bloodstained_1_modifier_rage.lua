@@ -11,12 +11,14 @@ function bloodstained_1_modifier_rage:OnCreated(kv)
   self.ability = self:GetAbility()
   self.damage = self.ability:GetSpecialValueFor("special_damage_init")
 
+  if not IsServer() then return end
+
 	self.ability:EndCooldown()
 	self.ability:SetActivated(false)
+  self.parent:EmitSound("Bloodstained.rage")
+  self:SetStackCount(self.damage)
 
   AddStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
-
-  if IsServer() then self:SetStackCount(self.damage) end
 end
 
 function bloodstained_1_modifier_rage:OnRefresh(kv)
@@ -24,13 +26,14 @@ function bloodstained_1_modifier_rage:OnRefresh(kv)
 end
 
 function bloodstained_1_modifier_rage:OnRemoved()
-	if IsServer() then self.parent:StopSound("Bloodstained.rage") end
+  if not IsServer() then return end
+
+  self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+	self.ability:SetActivated(true)
+	self.parent:StopSound("Bloodstained.rage")
 
   RemoveStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
-	RemoveSubStats(self.parent, self.ability, {"attack_damage"})
-
-	self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
-	self.ability:SetActivated(true)
+	RemoveSubStats(self.parent, self.ability, {"attack_damage", "physical_damage"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -38,7 +41,6 @@ end
 function bloodstained_1_modifier_rage:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
-		MODIFIER_EVENT_ON_ATTACK_LANDED,
     MODIFIER_EVENT_ON_DEATH
 	}
 
@@ -46,15 +48,15 @@ function bloodstained_1_modifier_rage:DeclareFunctions()
 end
 
 function bloodstained_1_modifier_rage:OnTakeDamage(keys)
+  if not IsServer() then return end
+
 	if keys.unit ~= self.parent then return end
   self:FilterDamage(keys.damage)
 end
 
-function bloodstained_1_modifier_rage:OnAttackLanded(keys)
-  if keys.attacker ~= self.parent then return end
-end
-
 function bloodstained_1_modifier_rage:OnDeath(keys)
+  if not IsServer() then return end
+
   if keys.attacker == nil then return end
 	if keys.attacker:IsBaseNPC() == false then return end
   if keys.attacker ~= self.parent then return end
@@ -68,8 +70,12 @@ function bloodstained_1_modifier_rage:OnDeath(keys)
 end
 
 function bloodstained_1_modifier_rage:OnStackCountChanged(old)
-	RemoveSubStats(self.parent, self.ability, {"attack_damage"})
-  AddSubStats(self.parent, self.ability, {attack_damage = self:GetStackCount()}, false)
+  if not IsServer() then return end
+
+  local stack = self:GetStackCount()
+
+	RemoveSubStats(self.parent, self.ability, {"attack_damage", "physical_damage"})
+  AddSubStats(self.parent, self.ability, {attack_damage = stack, physical_damage = stack * 2}, false)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -79,10 +85,8 @@ function bloodstained_1_modifier_rage:FilterDamage(amount)
 end
 
 function bloodstained_1_modifier_rage:CalcGain(gain)
-	if IsServer() then
-    self.damage = self.damage + gain
-    self:SetStackCount(math.floor(self.damage))
-  end
+  self.damage = self.damage + gain
+  self:SetStackCount(math.floor(self.damage))
 end
 
 -- EFFECTS -----------------------------------------------------------

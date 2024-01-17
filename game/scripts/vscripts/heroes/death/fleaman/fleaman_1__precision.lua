@@ -29,7 +29,7 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
   end
 
   function fleaman_1__precision:GetIntrinsicModifierName()
-    return "orb_bleed__modifier"
+    return "orb_ice__modifier"
   end
 
 -- SPELL START
