@@ -16,6 +16,7 @@ function orb_bleed__status:OnCreated(kv)
   self.status_degen = 4
   self.bloodloss = 500
   self.current_status = kv.status_amount
+  self.status_name = string.sub(self:GetName(), 5, string.len(self:GetName()))
 
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
@@ -37,7 +38,7 @@ end
 function orb_bleed__status:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemovePanelFromList(string.sub(self:GetName(), 5, string.len(self:GetName())))
+  self.parent:RemovePanelFromList(self.status_name)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -124,7 +125,7 @@ function orb_bleed__status:AddCurrentStatus(amount)
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    status_name = self.status_name,
     entities = self.status_amount,
     max_state = 0
   })
@@ -132,10 +133,7 @@ end
 
 function orb_bleed__status:UpdateStatusBar()
   local old_max_status = self.max_status
-  local max_status = 100
-
-  local vit = self.parent:GetMainStat("VIT")
-  if vit then max_status = vit:GetStatusBar() end
+  local max_status = self.parent:GetResistance(self.status_name)
 
   if old_max_status == nil then
     if self.current_status > max_status then
@@ -151,7 +149,7 @@ function orb_bleed__status:UpdateStatusBar()
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    status_name = self.status_name,
     entities = self.status_amount,
     max_state = 0
   })

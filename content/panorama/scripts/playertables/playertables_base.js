@@ -290,12 +290,12 @@ function CreateItemSlotPanel(){
 function CreateInventoryPanel(){
   var centerPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
   var inventorySlot = $.CreatePanel( "Panel", centerPanel, "" );
-  inventorySlot.BLoadLayout( "file://{resources}/layout/custom_game/muken_inventory.xml", false, false );
+  inventorySlot.BLoadLayout( "file://{resources}/layout/custom_game/equip_system/muken_inventory.xml", false, false );
 
   var inventoryStash = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block").FindChildTraverse("inventory_composition_layer_container");
   inventoryStash.FindChildTraverse("inventory_neutral_slot_container").style.visibility = "collapse";
   var inventoryButton = $.CreatePanel( "Panel", inventoryStash, "" );
-  inventoryButton.BLoadLayout( "file://{resources}/layout/custom_game/muken_inventory_button.xml", false, false );
+  inventoryButton.BLoadLayout( "file://{resources}/layout/custom_game/equip_system/muken_inventory_button.xml", false, false );
   
   //CenterPanel.MoveChildBefore(TooltipContainer, CenterPanel.GetChild(26));
 }

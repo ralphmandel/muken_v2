@@ -160,8 +160,8 @@
   function AddModifier(target, ability, modifier_name, table, bCalcStatus)
     local caster = ability:GetCaster()
 
-    if target:HasModifier("orb_ice__max_status") then
-      if modifier_name == "orb_ice_debuff" or modifier_name == "orb_ice__status" then return end
+    if target:HasModifier("orb_cold__max_status") then
+      if modifier_name == "orb_cold_debuff" or modifier_name == "orb_cold__status" then return end
     end
 
     if modifier_name == "modifier_knockback" then ability = nil end

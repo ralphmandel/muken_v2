@@ -22,6 +22,9 @@ function _modifier_int:OnCreated(kv)
       sub_stat_heal_power = {mult = self.ability:GetSpecialValueFor("sub_stat_heal_power"), bonus = 0},
       sub_stat_magic_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_magic_resist"), bonus = 0},
       sub_stat_luck = {mult = self.ability:GetSpecialValueFor("sub_stat_luck"), bonus = 0},
+      sub_stat_cold_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_cold_resist"), bonus = 0},
+      sub_stat_sleep_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_sleep_resist"), bonus = 0},
+      sub_stat_thunder_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_thunder_resist"), bonus = 0},
       sub_stat_manacost = {mult = 0, bonus = 0},
       sub_stat_magical_block = {mult = 0, bonus = 0},
     }
@@ -162,6 +165,18 @@ end
 
 function _modifier_int:GetLuck()
   return self:GetCalculedDataStack("sub_stat_luck", false) * 0.01
+end
+
+function _modifier_int:GetColdResist()
+  return self:GetCalculedData("sub_stat_cold_resist", false)
+end
+
+function _modifier_int:GetSleepResist()
+  return self:GetCalculedData("sub_stat_sleep_resist", false)
+end
+
+function _modifier_int:GetThunderResist()
+  return self:GetCalculedData("sub_stat_thunder_resist", false)
 end
 
 function _modifier_int:GetCalculedDataStack(property, bScalar)

@@ -43,12 +43,12 @@ LinkLuaModifier("_modifier_untargetable", "_modifiers/generics/_modifier_untarge
 LinkLuaModifier("orb_bleed__modifier", "_modifiers/orbs/orb_bleed__modifier", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed__status", "_modifiers/orbs/orb_bleed__status", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_bleed_debuff", "_modifiers/orbs/orb_bleed_debuff", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice__modifier", "_modifiers/orbs/orb_ice__modifier", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice__status", "_modifiers/orbs/orb_ice__status", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice__status_efx", "_modifiers/orbs/orb_ice__status_efx", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice_debuff", "_modifiers/orbs/orb_ice_debuff", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice__max_status", "_modifiers/orbs/orb_ice__max_status", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("orb_ice__max_status_efx", "_modifiers/orbs/orb_ice__max_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold__modifier", "_modifiers/orbs/orb_cold__modifier", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold__status", "_modifiers/orbs/orb_cold__status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold_debuff_efx", "_modifiers/orbs/orb_cold_debuff_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold_debuff", "_modifiers/orbs/orb_cold_debuff", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold__max_status", "_modifiers/orbs/orb_cold__max_status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_cold__max_status_efx", "_modifiers/orbs/orb_cold__max_status_efx", LUA_MODIFIER_MOTION_NONE)
 
 function _neutral__ai:GetIntrinsicModifierName()
 	return "_modifier__ai"

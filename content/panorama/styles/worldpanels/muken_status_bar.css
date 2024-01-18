@@ -8,10 +8,10 @@
 .status_img{
   width: 22px;
   height: 22px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid whitesmoke;
 }
 
-.StatusBarContainer
+#status_container
 {
   /* border-radius: 3px; */
   border: 2px solid #242424;
@@ -22,11 +22,16 @@
   padding: 0px;
 }
 
+#status_container.max_state
+{
+  border: 1px solid #242424;
+}
+
 #status_max_panel
 {
-  border: 1px solid #aaaaaa;
+  border: 1px solid whitesmoke;
   width: 100px;
-  height: 10px;
+  height: 8px;
   margin-right: 1px;
   margin-left: 1px;
   flow-children:right;
@@ -36,6 +41,8 @@
 #status_max_panel.max_state
 {
   background-color: whitesmoke;
+  border: 2px solid whitesmoke;
+  height: 10px;
 }
 
 .HP
@@ -51,13 +58,13 @@
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#e60300), color-stop(0.25, #bf0300), to(#730200));
 }
 
-.ice__status
+.cold__status
 {
   box-shadow: #0069bf -4px 0px 8px 2px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#007be6), color-stop(0.25, #0069bf), to(#003b73));
 }
 
-#current_status_panel.ice__status.max_state
+#current_status_panel.cold__status.max_state
 {
   box-shadow: #003b73 -5px 0px 10px 1px;
   background-color: #003b73;

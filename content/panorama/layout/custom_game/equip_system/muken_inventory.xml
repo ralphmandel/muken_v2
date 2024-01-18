@@ -1,9 +1,9 @@
 <root>
   <styles>
-    <include src="file://{resources}/styles/custom_game/muken_inventory.css"/>
+    <include src="file://{resources}/styles/equip_system/muken_inventory.css"/>
   </styles>
   <scripts>
-    <include src="file://{resources}/scripts/custom_game/muken_inventory.js"/>
+    <include src="file://{resources}/scripts/equip_system/muken_inventory.js"/>
   </scripts>
     <Panel class="inventory_root" hittest="false">
 

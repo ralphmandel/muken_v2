@@ -150,6 +150,8 @@ function OnItemIventoryAdded(event){
 var message = "You can forge items by dragging shards of the same type to each slot container, then select the item type and forge it to receive a random item based on shard tier.";
 
 (function(){
+  ForgePanelCheck();
+
   var panel = $.GetContextPanel().FindChildTraverse("help_panel");
   var container = $.GetContextPanel().FindChildTraverse("muken_forge_items");
   //     $.RegisterEventHandler('DragStart', ROWS[row_id].GetChild(i), OnDragStart);
@@ -173,9 +175,7 @@ var message = "You can forge items by dragging shards of the same type to each s
 
 })()
 
-
 var radioButton = $.GetContextPanel().FindChildTraverse("forge_list_container").FindChildTraverse("item_row_id"); 
-$.Msg('10', radioButton);
 
 function RadioSelect(button){
   if(button == 4){
@@ -187,4 +187,25 @@ function RadioSelect(button){
     radioButton.GetChild(4).style.visibility = "visible"
     radioButton.style.marginLeft = "0px";
   }
+}
+
+function ForgePanelCheck()
+{
+  var wp = $.GetContextPanel().WorldPanel;
+  var offScreen = $.GetContextPanel().OffScreen;
+
+  if (!offScreen && wp){
+    var ent = wp.entity;
+    if (ent){
+      if (!Entities.IsAlive(ent)){
+        $.GetContextPanel().style.opacity = "0";
+        $.Schedule(1/30, ForgePanelCheck);
+        return;
+      }
+
+      $.GetContextPanel().style.opacity = "1";
+    }
+  }
+
+  $.Schedule(1/30, ForgePanelCheck);
 }

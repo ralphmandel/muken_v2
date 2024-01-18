@@ -22,6 +22,7 @@ function MukenEvents:InitPanaromaEvents()
   CustomGameEventManager:RegisterListener("equip_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnItemEquipped'))
   CustomGameEventManager:RegisterListener("unequip_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnItemUnequipped'))
   CustomGameEventManager:RegisterListener("drop_item_from_panorama", Dynamic_Wrap(MukenEvents, 'OnDropItem'))
+  CustomGameEventManager:RegisterListener("forge_tower_from_panorama", Dynamic_Wrap(MukenEvents, 'OnForgeTower'))
 end
 
 function MukenEvents:Notifications(params)
@@ -30,6 +31,15 @@ end
 
 function MukenEvents:GamePointsUpdate(params)
   SCORE_LIMIT = params.match_points
+end
+
+function MukenEvents:OnForgeTower(event)
+  if (not event or not event.PlayerID) then return end
+  
+  local player = PlayerResource:GetPlayer(event.PlayerID)
+  if (not player) then return end
+
+  player:ToggleForgeTower(event.ent_index)
 end
 
 function MukenEvents:OnItemEquipped(event)

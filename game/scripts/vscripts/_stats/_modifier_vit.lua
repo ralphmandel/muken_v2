@@ -19,6 +19,7 @@ function _modifier_vit:OnCreated(kv)
       sub_stat_incoming_buff = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_buff"), bonus = 0},
       sub_stat_status_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_status_resist"), bonus = 0},
       sub_stat_incoming_heal = {mult = self.ability:GetSpecialValueFor("sub_stat_incoming_heal"), bonus = 0},
+      sub_stat_curse_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_curse_resist"), bonus = 0},
       sub_stat_status_resist_stack = {mult = 0, bonus = 0},
       sub_stat_max_health_percent = {mult = 0, bonus = 0}
     }
@@ -103,6 +104,18 @@ function _modifier_vit:GetData(property)
   return self.data[property].bonus
 end
 
+function _modifier_vit:GetIncomingHeal()
+  return self:GetCalculedDataStack("sub_stat_incoming_heal", false)
+end
+
+function _modifier_vit:GetIncomingBuff()
+  return self:GetCalculedData("sub_stat_incoming_buff", false) * 0.01
+end
+
+function _modifier_vit:GetCurseResist()
+  return self:GetCalculedData("sub_stat_curse_resist", false)
+end
+
 function _modifier_vit:GetBonusHP()
   local base_hp = 5000
   local bonus_hp = self:GetCalculedData("sub_stat_max_health", false)
@@ -117,14 +130,6 @@ function _modifier_vit:GetBonusHP()
   return total
 end
 
-function _modifier_vit:GetIncomingHeal()
-  return self:GetCalculedDataStack("sub_stat_incoming_heal", false)
-end
-
-function _modifier_vit:GetIncomingBuff()
-  return self:GetCalculedData("sub_stat_incoming_buff", false) * 0.01
-end
-
 function _modifier_vit:GetStatusResist(bPercent)
   local base = self:GetCalculedData("sub_stat_status_resist", bPercent)
   if bPercent == false then return base end
@@ -135,12 +140,6 @@ function _modifier_vit:GetStatusResist(bPercent)
   if base > 100 then base = 100 end
 
   return base * 0.01
-end
-
-function _modifier_vit:GetStatusBar()
-  local base = self:GetCalculedData("sub_stat_status_resist", false) * 5
-  local bonus = self:GetCalculedData("sub_stat_status_resist_stack", false) * 0.5
-  return 100 + base + bonus
 end
 
 function _modifier_vit:GetCalculedDataStack(property, bScalar)

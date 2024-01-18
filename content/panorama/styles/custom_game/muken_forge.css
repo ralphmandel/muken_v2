@@ -3,11 +3,11 @@
 @define titleFont: Reaver,Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540;
 
 .forge_root {
-	tooltip-position: left;
+	/* tooltip-position: left;
 	tooltip-body-position: 100% 90%;
-	tooltip-arrow-position: 100% 90%;
-  width: 100%;
-  height: 100%;
+	tooltip-arrow-position: 100% 90%; */
+  /* width: 100%;
+  height: 100%; */
   visibility: visible;
   z-index: 2;
 }
@@ -19,9 +19,10 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
 }
 
 .Reborn #muken_forge_items {
-  margin-bottom: 150px;
+  /* margin-bottom: 150px; */
+	/* horizontal-align: left; */
+  /* vertical-align: center; */
 	flow-children: none;
-	horizontal-align: right;
   background-image: url("file://{images}/custom_game/inventory_bg.png");
   background-size: 100%;
   border: 1px solid black;
@@ -29,7 +30,6 @@ DOTAItemImage{ width: fill-parent-flow( 1.0 ); height: fill-parent-flow( 1.0 );}
   box-shadow:  #000000cc 0px 0px 8px -1px;
   background-color: #10171c;
 	flow-children: down;
-	vertical-align: center;
 }
 
 .forge_visibility {

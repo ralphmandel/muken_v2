@@ -155,7 +155,7 @@ function OnItemIventoryAdded(event){
   for (let row = 0; row < MAX_ROWS; row++) {
     var row_id = "row" + row;
     ROWS[row_id] = $.CreatePanel("Panel", inventory_container, row_id);
-    ROWS[row_id].BLoadLayout("file://{resources}/layout/custom_game/muken_inventory_row.xml", false, false);
+    ROWS[row_id].BLoadLayout("file://{resources}/layout/custom_game/equip_system/muken_inventory_row.xml", false, false);
 
     for(var i = 0; i < ROWS[row_id].GetChildCount(); i++) {
       $.RegisterEventHandler('DragStart', ROWS[row_id].GetChild(i), OnDragStart);

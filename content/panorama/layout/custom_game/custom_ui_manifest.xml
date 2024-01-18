@@ -158,8 +158,6 @@
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_stats.xml"/>
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_info.xml"/>
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/error_messages.xml"/>
-    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_forge.xml"/>
-    <!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/muken_inventory.xml"/> -->
 
     <CustomUIElement type="HudTopBar" layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml"/>
     <CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/ui_econ_set_preview.xml"/>

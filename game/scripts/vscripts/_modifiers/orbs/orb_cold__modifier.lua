@@ -1,11 +1,11 @@
-orb_ice__modifier = class({})
+orb_cold__modifier = class({})
 
-function orb_ice__modifier:IsHidden() return false end
-function orb_ice__modifier:IsPurgable() return false end
+function orb_cold__modifier:IsHidden() return false end
+function orb_cold__modifier:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function orb_ice__modifier:OnCreated(kv)
+function orb_cold__modifier:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
@@ -28,15 +28,15 @@ function orb_ice__modifier:OnCreated(kv)
   self.parent:EmitSound("hero_Crystal.attack")
 end
 
-function orb_ice__modifier:OnRefresh(kv)
+function orb_cold__modifier:OnRefresh(kv)
 end
 
-function orb_ice__modifier:OnRemoved()
+function orb_cold__modifier:OnRemoved()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function orb_ice__modifier:DeclareFunctions()
+function orb_cold__modifier:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE,
 		MODIFIER_EVENT_ON_ATTACK_LANDED
@@ -45,11 +45,11 @@ function orb_ice__modifier:DeclareFunctions()
 	return funcs
 end
 
-function orb_ice__modifier:GetModifierBaseDamageOutgoing_Percentage(keys)
+function orb_cold__modifier:GetModifierBaseDamageOutgoing_Percentage(keys)
   return -self.damage_percent
 end
 
-function orb_ice__modifier:OnAttackLanded(keys)
+function orb_cold__modifier:OnAttackLanded(keys)
   if not IsServer() then return end
 
 	if keys.attacker ~= self.parent then return end
@@ -63,12 +63,12 @@ function orb_ice__modifier:OnAttackLanded(keys)
   if IsValidEntity(keys.target) == false then return end
   if keys.target:IsAlive() == false then return end
 
-  AddModifier(keys.target, self.ability, "orb_ice__status", {
+  AddModifier(keys.target, self.ability, "orb_cold__status", {
     inflictor = self.caster:entindex(),
     status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, nil)
   })
 
-  local modifiers = keys.target:FindAllModifiersByName("orb_ice_debuff")
+  local modifiers = keys.target:FindAllModifiersByName("orb_cold_debuff")
   for _, modifier in pairs(modifiers) do
     if modifier:GetAbility() == self.ability then
       modifier:OnRefresh({duration = self.cold_duration})
@@ -76,7 +76,7 @@ function orb_ice__modifier:OnAttackLanded(keys)
     end
   end
   
-  AddModifier(keys.target, self.ability, "orb_ice_debuff", {
+  AddModifier(keys.target, self.ability, "orb_cold_debuff", {
     duration = self.cold_duration
   }, false)
 end
@@ -85,15 +85,15 @@ end
 
 -- EFFECTS -----------------------------------------------------------
 
-function orb_ice__modifier:GetEffectName()
+function orb_cold__modifier:GetEffectName()
 	return "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_buff.vpcf"
 end
 
-function orb_ice__modifier:GetEffectAttachType()
+function orb_cold__modifier:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
--- function orb_ice__modifier:PlayEfxAmbient()
+-- function orb_cold__modifier:PlayEfxAmbient()
 --   local particle_cast = ""
 --   local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
 --   self:AddParticle(effect_cast, false, false, -1, false, false)

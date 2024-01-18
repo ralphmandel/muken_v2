@@ -201,6 +201,8 @@ function WorldPanels:CreateWorldPanel(pids, conf)
     pt =                pt,
   }
 
+  print("A2", pt.entity)
+
   function wp:SetPosition(pos)
     self.pt.entity = nil
     self.pt.position = pos
@@ -236,7 +238,9 @@ function WorldPanels:CreateWorldPanel(pids, conf)
   function wp:SetOffsetY(offY)
     self.pt.offsetY = offY
 
-    CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+    if EntIndexToHScript(self.pt.entity):GetUnitName() ~= "npc_dota_watch_tower" then
+      CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+    end
 
     UpdateTable(self)
   end
@@ -255,7 +259,9 @@ function WorldPanels:CreateWorldPanel(pids, conf)
     self.pt.data = data
     self.pt.entityHeight = entityHeight
 
-    CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+    if EntIndexToHScript(self.pt.entity):GetUnitName() ~= "npc_dota_watch_tower" then
+      CustomGameEventManager:Send_ServerToAllClients("update_status_bar_state_from_server", self.pt)
+    end
 
     UpdateTable(self)
   end

@@ -20,6 +20,34 @@
     return data
   end
 
+-- CDOTAPlayerController || FORGE/ITENS
+
+function CDOTAPlayerController:ToggleForgeTower(ent_index)
+  if self.ForgeWorldPanel == nil then
+    self:CreateForgePanel(ent_index)
+  else
+    if self.ForgeWorldPanel.pt.entity == ent_index then
+      self.ForgeWorldPanel:Delete()
+      self.ForgeWorldPanel = nil
+    else
+      self.ForgeWorldPanel:Delete()
+      self:CreateForgePanel(ent_index)
+    end
+  end
+end
+
+function CDOTAPlayerController:CreateForgePanel(ent_index)
+  self.ForgeWorldPanel = WorldPanels:CreateWorldPanelForAll({
+    layout = "file://{resources}/layout/custom_game/muken_forge.xml",
+    entity = ent_index,
+    entityHeight = 200,
+    offsetY = 100,
+    offsetX = 0,
+    horizontalAlign = "center",
+    data = {}
+  })
+end
+
 -- CDOTA_Item
 
   function CDOTA_Item:GetItemRarity()
@@ -107,6 +135,45 @@
     return amount
   end
 
+  function CDOTA_BaseNPC:GetResistance(type)
+    if self:GetMainStat("STR") == nil or self:GetMainStat("AGI") == nil
+    or self:GetMainStat("INT") == nil or self:GetMainStat("VIT") == nil then
+      return 100
+    end
+
+    local name = string.sub(type, 1, string.len(type) - 8)
+    
+    if name == "stone" then
+      return 100 + self:GetMainStat("STR"):GetStoneResist()
+    end
+
+    if name == "poison" then
+      return 100 + self:GetMainStat("AGI"):GetPoisonResist()
+    end
+
+    if name == "cold" then
+      return 100 + self:GetMainStat("INT"):GetColdResist()
+    end
+
+    if name == "bleed" then
+      return 100 + self:GetMainStat("STR"):GetBleedResist() + self:GetMainStat("AGI"):GetBleedResist()
+    end
+
+    if name == "thunder" then
+      return 100 + self:GetMainStat("AGI"):GetThunderResist() + self:GetMainStat("INT"):GetThunderResist()
+    end
+
+    if name == "sleep" then
+      return 100 + self:GetMainStat("INT"):GetSleepResist() + self:GetMainStat("STR"):GetSleepResist()
+    end
+
+    if name == "curse" then
+      return 100 + self:GetMainStat("VIT"):GetCurseResist()
+    end
+
+    return 100
+  end
+
 -- CDOTA_BaseNPC || STATUS PANEL
 
   function CDOTA_BaseNPC:GetPlayersAmount()
@@ -163,7 +230,7 @@
       entity = self:GetEntityIndex(),
       entityHeight = self.hp_offset,
       offsetY = offset_base + STATUS_OFFSET_SPACING,
-      offsetX = -75;
+      offsetX = -75,
       data = data
     })
 

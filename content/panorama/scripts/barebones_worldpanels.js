@@ -79,9 +79,11 @@ function WorldPanelChange(id, changes, dels)
 function PositionPanels()
 {
   //$.Msg(Object.keys(panels).length);
+
   for (var k in panels){
     var wp = panels[k];
     var pos = wp.position;
+
     if (!pos){
       if (!Entities.IsValidEntity(wp.entity)){
         if (wp.seen){

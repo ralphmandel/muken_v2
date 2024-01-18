@@ -25,6 +25,9 @@ function _modifier_str:OnCreated(kv)
       sub_stat_physical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_physical_damage"), bonus = 0},
       sub_stat_armor = {mult = self.ability:GetSpecialValueFor("sub_stat_armor"), bonus = 0},
       sub_stat_critical_damage = {mult = self.ability:GetSpecialValueFor("sub_stat_critical_damage"), bonus = 0},
+      sub_stat_stone_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_stone_resist"), bonus = 0},
+      sub_stat_bleed_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_bleed_resist"), bonus = 0},
+      sub_stat_sleep_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_sleep_resist"), bonus = 0},
       sub_stat_critical_damage_stack = {mult = 0, bonus = 0},
       sub_stat_critical_chance = {mult = 0, bonus = 0},
       sub_stat_miss_chance = {mult = 0, bonus = 0},
@@ -139,6 +142,18 @@ end
 
 function _modifier_str:GetPhysicalDamageAmp()
   return self:GetCalculedData("sub_stat_physical_damage", false) + 100
+end
+
+function _modifier_str:GetStoneResist()
+  return self:GetCalculedData("sub_stat_stone_resist", false)
+end
+
+function _modifier_str:GetBleedResist()
+  return self:GetCalculedData("sub_stat_bleed_resist", false)
+end
+
+function _modifier_str:GetSleepResist()
+  return self:GetCalculedData("sub_stat_sleep_resist", false)
 end
 
 function _modifier_str:GetCriticalChance()

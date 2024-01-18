@@ -23,6 +23,9 @@ function _modifier_agi:OnCreated(kv)
       sub_stat_mana_regen = {mult = self.ability:GetSpecialValueFor("sub_stat_mana_regen"), bonus = 0},
       sub_stat_evasion = {mult = self.ability:GetSpecialValueFor("sub_stat_evasion"), bonus = 0},
       sub_stat_movespeed = {mult = self.ability:GetSpecialValueFor("sub_stat_movespeed"), bonus = 0},
+      sub_stat_poison_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_poison_resist"), bonus = 0},
+      sub_stat_thunder_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_thunder_resist"), bonus = 0},
+      sub_stat_bleed_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_bleed_resist"), bonus = 0},
       sub_stat_movespeed_increase = {mult = 0, bonus = 0},
       sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
       sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
@@ -60,12 +63,9 @@ function _modifier_agi:DeclareFunctions()
     MODIFIER_PROPERTY_DODGE_PROJECTILE,
     MODIFIER_EVENT_ON_ATTACK,
     MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
-    MODIFIER_PROPERTY_MANA_REGEN_CONSTANT
+    MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
+    MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT
   }
-
-  if self:GetParent():IsHero() or self:GetParent():IsConsideredHero() then
-    table.insert(funcs, MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT)
-  end
 
   return funcs
 end
@@ -161,6 +161,22 @@ function _modifier_agi:GetData(property)
   return self.data[property].bonus
 end
 
+function _modifier_agi:GetCooldownReduction()
+  return self:GetCalculedData("sub_stat_cooldown_reduction", false)
+end
+
+function _modifier_agi:GetPoisonResist()
+  return self:GetCalculedData("sub_stat_poison_resist", false)
+end
+
+function _modifier_agi:GetThunderResist()
+  return self:GetCalculedData("sub_stat_thunder_resist", false)
+end
+
+function _modifier_agi:GetBleedResist()
+  return self:GetCalculedData("sub_stat_bleed_resist", false)
+end
+
 function _modifier_agi:GetBonusMS()
   local result = self:GetCalculedData("sub_stat_movespeed_increase", false)
 
@@ -214,10 +230,6 @@ function _modifier_agi:UpdateMS(property)
   end
 
   self.data[property].bonus = value
-end
-
-function _modifier_agi:GetCooldownReduction()
-  return self:GetCalculedData("sub_stat_cooldown_reduction", false)
 end
 
 function _modifier_agi:GetCalculedDataStack(property, bScalar)

@@ -60,6 +60,10 @@ function GameMode:OnNPCSpawned(keys)
   local npc = EntIndexToHScript(keys.entindex)
   if npc then
     if npc:IsHero() == false then
+      if npc:IsConsideredHero() == false then
+        npc.xp_mult = 0
+      end
+      
       local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutral_units.txt")
       for name, table in pairs(neutral_list) do
         if name == npc:GetUnitName() then
