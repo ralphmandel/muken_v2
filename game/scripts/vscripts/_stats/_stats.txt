@@ -58,7 +58,7 @@
       "sub_stat_max_mana"       "10"
       "sub_stat_magical_damage" "2" //%
       "sub_stat_holy_damage"    "0.5" //%
-      "sub_stat_debuff_amp"     "0.5" //%
+      "sub_stat_debuff_amp"     "1" //%
       "sub_stat_summon_power"   "1"
       "sub_stat_heal_power"     "2" //%
       "sub_stat_magic_resist"   "0.1" //% /^

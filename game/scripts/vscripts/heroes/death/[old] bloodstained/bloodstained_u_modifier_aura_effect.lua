@@ -42,17 +42,17 @@ end
 
 function bloodstained_u_modifier_aura_effect:DeclareFunctions()
 	local funcs = {
-		MODIFIER_PROPERTY_AVOID_DAMAGE,
+		--MODIFIER_PROPERTY_AVOID_DAMAGE,
     MODIFIER_EVENT_ON_DEATH
 	}
 
 	return funcs
 end
 
-function bloodstained_u_modifier_aura_effect:GetModifierAvoidDamage(keys)
-  if keys.attacker:HasModifier(self:GetName()) == false then return 1 end
-	return 0
-end
+-- function bloodstained_u_modifier_aura_effect:GetModifierAvoidDamage(keys)
+--   if keys.attacker:HasModifier(self:GetName()) == false then return 1 end
+-- 	return 0
+-- end
 
 function bloodstained_u_modifier_aura_effect:OnDeath(keys)
   if keys.unit:IsHero() == false then return end

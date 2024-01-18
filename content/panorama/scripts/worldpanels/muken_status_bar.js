@@ -54,6 +54,11 @@ function OnStatusUpdate(event) {
   if (event.entity == wp.entity && event.data.status_name == wp.data.status_name) {
     wp.data = event.data;
     wp.offsetY = event.offsetY;
+
+    var status_max_panel = $("#status_max_panel");
+    var current_status_panel = $("#current_status_panel").GetParent();
+    status_max_panel.SetHasClass("max_state", wp.data.max_state == "1");
+    current_status_panel.SetHasClass("max_state", wp.data.max_state == "1");
   }
 }
 
@@ -70,20 +75,20 @@ function HasPlayerAmount() {
 function SetIcon(icon, status_name) {
   var source = "";
 
-  if (status_name == "orb_bleed__status") {
+  if (status_name == "bleed__status") {
     source = "file://{resources}/images/custom_game/status_bar/status_bleed.png";
   }
 
-  if (status_name == "orb_ice__status") {
+  if (status_name == "ice__status") {
     source = "file://{resources}/images/custom_game/status_bar/status_freeze.png";
   }
 
   icon.SetImage(source);
 }
 
-function SetBarStyle(icon, status_name) {
-  icon.SetHasClass("orb_bleed__status", "orb_bleed__status" == status_name);
-  icon.SetHasClass("orb_ice__status", "orb_ice__status" == status_name);
+function SetBarStyle(pan, status_name) {
+  pan.SetHasClass("bleed__status", "bleed__status" == status_name);
+  pan.SetHasClass("ice__status", "ice__status" == status_name);
 }
 
 (function()

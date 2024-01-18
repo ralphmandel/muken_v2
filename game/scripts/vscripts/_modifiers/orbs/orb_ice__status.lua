@@ -1,6 +1,6 @@
 orb_ice__status = class({})
 
-function orb_ice__status:IsHidden() return false end
+function orb_ice__status:IsHidden() return true end
 function orb_ice__status:IsPurgable() return true end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -14,7 +14,8 @@ function orb_ice__status:OnCreated(kv)
   self.caster = EntIndexToHScript(kv.inflictor)
   self.status_amount = {}
   self.status_degen = 4
-  self.bloodloss = 500
+  self.freeze_amount = 500
+  self.freeze_duration = 5
   self.current_status = kv.status_amount
 
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
@@ -22,7 +23,7 @@ function orb_ice__status:OnCreated(kv)
   self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(1)
 
-  AddStatusEfx(nil, "orb_ice__status_efx", self.caster, self.parent)
+  --AddStatusEfx(nil, "orb_ice__status_efx", nil, self.parent)
 end
 
 function orb_ice__status:OnRefresh(kv)
@@ -39,9 +40,11 @@ end
 function orb_ice__status:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemovePanelFromList(self:GetName())
+  if self.bCompleted == nil then
+    self.parent:RemovePanelFromList(string.sub(self:GetName(), 5, string.len(self:GetName())))
+  end
 
-  RemoveStatusEfx(nil, "orb_ice__status_efx", self.caster, self.parent)
+  --RemoveStatusEfx(nil, "orb_ice__status_efx", nil, self.parent)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -83,6 +86,12 @@ function orb_ice__status:ApplyFrozenState()
 
   self.parent:RemoveAllModifiersOfName("orb_ice_debuff")
 
+  self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "orb_ice__max_status", {
+    duration = attacker.unit:GetDebuffPower(self.freeze_duration, self.parent),
+    amount = attacker.unit:GetDebuffPower(self.freeze_amount, self.parent),
+    multiplier = 100 / self.freeze_amount
+  })
+
   self:Destroy()
 end
 
@@ -120,8 +129,9 @@ function orb_ice__status:AddCurrentStatus(amount)
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = self:GetName(),
-    entities = self.status_amount
+    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    entities = self.status_amount,
+    max_state = 0
   })
 end
 
@@ -146,17 +156,18 @@ function orb_ice__status:UpdateStatusBar()
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = self:GetName(),
-    entities = self.status_amount
+    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    entities = self.status_amount,
+    max_state = 0
   })
 end
 
 -- EFFECTS -----------------------------------------------------------
 
-function orb_ice__status:GetStatusEffectName()
-	return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
-end
+-- function orb_ice__status:GetStatusEffectName()
+-- 	return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
+-- end
 
-function orb_ice__status:StatusEffectPriority()
-	return MODIFIER_PRIORITY_HIGH
-end
+-- function orb_ice__status:StatusEffectPriority()
+-- 	return MODIFIER_PRIORITY_HIGH
+-- end

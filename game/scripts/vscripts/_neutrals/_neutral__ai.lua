@@ -47,6 +47,8 @@ LinkLuaModifier("orb_ice__modifier", "_modifiers/orbs/orb_ice__modifier", LUA_MO
 LinkLuaModifier("orb_ice__status", "_modifiers/orbs/orb_ice__status", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_ice__status_efx", "_modifiers/orbs/orb_ice__status_efx", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_ice_debuff", "_modifiers/orbs/orb_ice_debuff", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__max_status", "_modifiers/orbs/orb_ice__max_status", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_ice__max_status_efx", "_modifiers/orbs/orb_ice__max_status_efx", LUA_MODIFIER_MOTION_NONE)
 
 function _neutral__ai:GetIntrinsicModifierName()
 	return "_modifier__ai"

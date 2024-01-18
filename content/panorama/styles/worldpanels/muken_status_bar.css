@@ -5,13 +5,11 @@
   horizontal-align: left;
 }
 
-
 .status_img{
   width: 22px;
   height: 22px;
   border: 1px solid #aaaaaa;
 }
-
 
 .StatusBarContainer
 {
@@ -24,7 +22,8 @@
   padding: 0px;
 }
 
-#status_max_panel{
+#status_max_panel
+{
   border: 1px solid #aaaaaa;
   width: 100px;
   height: 7px;
@@ -34,6 +33,11 @@
   overflow: clip;
 }
 
+.max_state
+{
+  background-color: whitesmoke;
+}
+
 .HP
 {
   width: 100%;
@@ -41,16 +45,22 @@
   align: left center;
 }
 
-.orb_bleed__status
+.bleed__status
 {
   box-shadow: #e60300 -5px 0px 10px 1px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#e60300), color-stop(0.25, #bf0300), to(#730200));
 }
 
-.orb_ice__status
+.ice__status
 {
   box-shadow: #007be6 -5px 0px 10px 1px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#007be6), color-stop(0.25, #0069bf), to(#003b73));
+}
+
+.ice__status .max_state
+{
+  box-shadow: #003b73 -5px 0px 10px 1px;
+  background-color: #003b73;
 }
 
 .Friendly .HP

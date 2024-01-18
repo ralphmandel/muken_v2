@@ -8,7 +8,7 @@
   </scripts>
   <Panel class="statusbar_root">
     <Image id="icon" class="status_img" src="" />
-    <Panel hittest="false" class="StatusBarContainer">
+    <Panel hittest="false" id="status_container" class="StatusBarContainer">
       <Panel hittest="false" id="status_max_panel">
          <Panel id="current_status_panel" class="HP"/>
       </Panel>

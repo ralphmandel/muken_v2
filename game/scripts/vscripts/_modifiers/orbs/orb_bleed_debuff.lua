@@ -30,7 +30,7 @@ function orb_bleed_debuff:OnCreated(kv)
 end
 
 function orb_bleed_debuff:OnRefresh(kv)
-  if not IsServer then return end
+  if not IsServer() then return end
 
   self:SetDuration(kv.duration, true)
   self:PlayEfxStart()
@@ -55,7 +55,7 @@ function orb_bleed_debuff:OnIntervalThink()
 
   AddModifier(self.parent, self.ability, "orb_bleed__status", {
     inflictor = self.caster:entindex(),
-    status_amount = CalcStatusDebuffAmp(damage_result * self.status_mult, self.caster)
+    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, nil)
   })
 
   self:StartIntervalThink(self.interval)
@@ -80,5 +80,5 @@ function orb_bleed_debuff:PlayEfxStart()
 	ParticleManager:SetParticleControl(effect_cast, 1, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then self.parent:EmitSound("Generic.Bleed") end
+	self.parent:EmitSound("Generic.Bleed")
 end

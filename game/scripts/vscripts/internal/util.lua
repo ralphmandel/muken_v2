@@ -142,11 +142,6 @@
     return duration
   end
 
-  function CalcStatusDebuffAmp(duration, caster)
-    if caster:GetMainStat("INT") == nil then return duration end
-    return duration * (1 + (caster:GetMainStat("INT"):GetDebuffAmp() * 2))
-  end
-
   function CalcDebuffAmp(duration, caster)
     if caster:GetMainStat("INT") == nil then return duration end
     return duration * (1 + caster:GetMainStat("INT"):GetDebuffAmp())
@@ -164,11 +159,16 @@
 
   function AddModifier(target, ability, modifier_name, table, bCalcStatus)
     local caster = ability:GetCaster()
+
+    if target:HasModifier("orb_ice__max_status") then
+      if modifier_name == "orb_ice_debuff" or modifier_name == "orb_ice__status" then return end
+    end
+
     if modifier_name == "modifier_knockback" then ability = nil end
 
     if table.duration then
       if bCalcStatus then table.duration = CalcStatus(table.duration, caster, target) end
-      if table.duration <= 0 then return nil end
+      if table.duration <= 0 then return end
     end
 
     return target:AddNewModifier(caster, ability, modifier_name, table)

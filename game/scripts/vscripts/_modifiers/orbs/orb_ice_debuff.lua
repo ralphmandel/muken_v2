@@ -12,7 +12,7 @@ function orb_ice_debuff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if not IsServer then return end
+  if not IsServer() then return end
 
   self.interval = 0.25
   self.status_mult = 0.05
@@ -21,13 +21,14 @@ function orb_ice_debuff:OnCreated(kv)
 
   AddSubStats(self.parent, self.ability, {attack_time = attack_time}, false)
   AddModifier(self.parent, self.ability, "sub_stat_movespeed_decrease", {value = self.slow}, false)
+  AddStatusEfx(nil, "orb_ice__status_efx", nil, self.parent)
 
   self:PlayEfxStart()
   self:StartIntervalThink(self.interval)
 end
 
 function orb_ice_debuff:OnRefresh(kv)
-  if not IsServer then return end
+  if not IsServer() then return end
 
   self:SetDuration(kv.duration, true)
 
@@ -44,10 +45,11 @@ function orb_ice_debuff:OnRefresh(kv)
 end
 
 function orb_ice_debuff:OnRemoved()
-  if not IsServer then return end
+  if not IsServer() then return end
 
   RemoveSubStats(self.parent, self.ability, {"attack_time"})
   RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_decrease", self.ability)
+  RemoveStatusEfx(nil, "orb_ice__status_efx", nil, self.parent)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -60,7 +62,7 @@ function orb_ice_debuff:OnIntervalThink()
 
   AddModifier(self.parent, self.ability, "orb_ice__status", {
     inflictor = self.caster:entindex(),
-    status_amount = CalcStatusDebuffAmp(self.slow * self.interval * self.status_mult, self.caster)
+    status_amount = self.caster:GetDebuffPower(self.slow * self.interval * self.status_mult, nil)
   })
 
   self:StartIntervalThink(self.interval)
@@ -76,6 +78,14 @@ end
 
 function orb_ice_debuff:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
+end
+
+function orb_ice_debuff:GetStatusEffectName()
+	return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
+end
+
+function orb_ice_debuff:StatusEffectPriority()
+	return MODIFIER_PRIORITY_HIGH
 end
 
 function orb_ice_debuff:PlayEfxStart()

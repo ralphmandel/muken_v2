@@ -79,18 +79,6 @@
     return self:FindModifierByName("_modifier_"..string.lower(stat))
   end
 
-  function CDOTA_BaseNPC:GetDebuffPower(amount, target)
-    amount = amount * (1 + self:GetMainStat("INT"):GetDebuffAmp())
-  
-    if target then
-      if target:GetMainStat("VIT") then
-        amount = amount * (1 - target:GetMainStat("VIT"):GetStatusResist(true))
-      end
-    end
-  
-    return amount
-  end
-  
   function CDOTA_BaseNPC:GetSpellDamage(amount, damage_type)
     if damage_type == DAMAGE_TYPE_PHYSICAL then
       return amount * self:GetMainStat("STR"):GetPhysicalDamageAmp() * 0.01
@@ -107,6 +95,18 @@
     return amount
   end
 
+  function CDOTA_BaseNPC:GetDebuffPower(amount, target)
+    amount = amount * (1 + self:GetMainStat("INT"):GetDebuffAmp())
+  
+    if target then
+      if target:GetMainStat("VIT") then
+        amount = amount * (1 - target:GetMainStat("VIT"):GetStatusResist(true))
+      end
+    end
+  
+    return amount
+  end
+
 -- CDOTA_BaseNPC || STATUS PANEL
 
   function CDOTA_BaseNPC:GetPlayersAmount()
@@ -118,10 +118,14 @@
     for _, player in pairs(players) do
       local hero_index = player:GetAssignedHero():GetEntityIndex()
       for _, wp in pairs(self.worldPanel) do
-        for ent_index, amount in pairs(wp.pt.data.entities) do
-          if hero_index == ent_index then
-            data[hero_index] = true
-          end  
+        if wp.pt.data.max_state == 1 then
+          data[hero_index] = true
+        elseif wp.pt.data.entities ~= nil then
+          for ent_index, amount in pairs(wp.pt.data.entities) do
+            if hero_index == ent_index then
+              data[hero_index] = true
+            end  
+          end     
         end
       end
       if not data[hero_index] then
@@ -152,6 +156,7 @@
 
     local offset_base = STATUS_OFFSET_HERO
     if self:IsHero() == false then offset_base = STATUS_OFFSET_CREEP end
+
 
     local panel = WorldPanels:CreateWorldPanelForAll({
       layout = "file://{resources}/layout/custom_game/worldpanels/muken_status_bar.xml",

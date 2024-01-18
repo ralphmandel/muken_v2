@@ -23,7 +23,7 @@ function orb_ice__modifier:OnCreated(kv)
 		damage_type = DAMAGE_TYPE_MAGICAL
   }
 
-  if not IsServer then return end
+  if not IsServer() then return end
 
   self.parent:EmitSound("hero_Crystal.attack")
 end
@@ -53,19 +53,19 @@ function orb_ice__modifier:OnAttackLanded(keys)
   if not IsServer() then return end
 
 	if keys.attacker ~= self.parent then return end
-  if self.parent:PassivesDisabled() then return end
 
   self.damageTable.victim = keys.target
   self.damageTable.damage = self.parent:GetSpellDamage(self.magical_damage, DAMAGE_TYPE_MAGICAL)
   local damage_result = ApplyDamage(self.damageTable)
 
+  if self.parent:PassivesDisabled() then return end
   if keys.target == nil then return end
   if IsValidEntity(keys.target) == false then return end
   if keys.target:IsAlive() == false then return end
 
   AddModifier(keys.target, self.ability, "orb_ice__status", {
     inflictor = self.caster:entindex(),
-    status_amount = CalcStatusDebuffAmp(damage_result * self.status_mult, self.caster)
+    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, nil)
   })
 
   local modifiers = keys.target:FindAllModifiersByName("orb_ice_debuff")

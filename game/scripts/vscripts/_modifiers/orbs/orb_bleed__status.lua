@@ -1,6 +1,6 @@
 orb_bleed__status = class({})
 
-function orb_bleed__status:IsHidden() return false end
+function orb_bleed__status:IsHidden() return true end
 function orb_bleed__status:IsPurgable() return true end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -37,7 +37,7 @@ end
 function orb_bleed__status:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemovePanelFromList(self:GetName())
+  self.parent:RemovePanelFromList(string.sub(self:GetName(), 5, string.len(self:GetName())))
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -81,19 +81,13 @@ function orb_bleed__status:ApplyBloodLoss()
 
   local damage_result = ApplyDamage({
     attacker = attacker.unit, victim = self.parent, ability = nil,
-    damage = self:GetBloodLoss(attacker.unit), damage_type = DAMAGE_TYPE_PURE,
+    damage = attacker.unit:GetDebuffPower(self.bloodloss, self.parent), damage_type = DAMAGE_TYPE_PURE,
     damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 
   self:PopupBleedDamage(math.floor(damage_result), self.parent)
   self:PlayEfxBloodLoss()
   self:Destroy()
-end
-
-function orb_bleed__status:GetBloodLoss(attacker)
-  local result = CalcStatusDebuffAmp(self.bloodloss, attacker)
-  result = CalcStatusResistance(result, self.parent)
-  return result
 end
 
 function orb_bleed__status:AddEntityAmount(ent_index, amount)
@@ -130,8 +124,9 @@ function orb_bleed__status:AddCurrentStatus(amount)
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = self:GetName(),
-    entities = self.status_amount
+    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    entities = self.status_amount,
+    max_state = 0
   })
 end
 
@@ -156,8 +151,9 @@ function orb_bleed__status:UpdateStatusBar()
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
-    status_name = self:GetName(),
-    entities = self.status_amount
+    status_name = string.sub(self:GetName(), 5, string.len(self:GetName())),
+    entities = self.status_amount,
+    max_state = 0
   })
 end
 
@@ -176,5 +172,5 @@ function orb_bleed__status:PlayEfxBloodLoss()
 	ParticleManager:SetParticleControl(effect_cast2, 1, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(effect_cast2)
 
-	if IsServer() then self.parent:EmitSound("Generic.Bloodloss") end
+	self.parent:EmitSound("Generic.Bloodloss")
 end
