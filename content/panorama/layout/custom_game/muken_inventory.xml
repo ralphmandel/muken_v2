@@ -21,7 +21,7 @@
           <Label id="text-header" text="Order by:" />
           <Panel class="btn-radio">
             <Button class="checkbox" id="checkbox-name" onactivate="RadioSelect()"></Button>
-            <Label text="Name"/>
+            <Label text="Slot"/>
              <Button class="checkbox selected" id="checkbox-tier" onactivate="RadioSelect()"></Button>
             <Label text="Tier"/>
           </Panel>

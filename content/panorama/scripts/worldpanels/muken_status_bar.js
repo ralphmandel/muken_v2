@@ -56,7 +56,7 @@ function OnStatusUpdate(event) {
     wp.offsetY = event.offsetY;
 
     var status_max_panel = $("#status_max_panel");
-    var current_status_panel = $("#current_status_panel").GetParent();
+    var current_status_panel = $("#current_status_panel");
     status_max_panel.SetHasClass("max_state", wp.data.max_state == "1");
     current_status_panel.SetHasClass("max_state", wp.data.max_state == "1");
   }

@@ -26,14 +26,14 @@
 {
   border: 1px solid #aaaaaa;
   width: 100px;
-  height: 7px;
+  height: 10px;
   margin-right: 1px;
   margin-left: 1px;
   flow-children:right;
   overflow: clip;
 }
 
-.max_state
+#status_max_panel.max_state
 {
   background-color: whitesmoke;
 }
@@ -47,17 +47,17 @@
 
 .bleed__status
 {
-  box-shadow: #e60300 -5px 0px 10px 1px;
+  box-shadow: #bf0300 -4px 0px 8px 2px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#e60300), color-stop(0.25, #bf0300), to(#730200));
 }
 
 .ice__status
 {
-  box-shadow: #007be6 -5px 0px 10px 1px;
+  box-shadow: #0069bf -4px 0px 8px 2px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#007be6), color-stop(0.25, #0069bf), to(#003b73));
 }
 
-.ice__status .max_state
+#current_status_panel.ice__status.max_state
 {
   box-shadow: #003b73 -5px 0px 10px 1px;
   background-color: #003b73;
