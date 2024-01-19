@@ -40,7 +40,7 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     local caster = self:GetCaster()
     self:PlayEfxStart()
     
-    AddModifier(caster, self, "bloodstained_1_modifier_rage", {duration = self:GetSpecialValueFor("duration")}, false)
+    caster:AddModifier(self, "bloodstained_1_modifier_rage", {duration = self:GetSpecialValueFor("duration")})
     
     if self:GetSpecialValueFor("special_blink") > 0 then
       local origin = caster:GetOrigin()
@@ -56,9 +56,9 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
 
     for _,enemy in pairs(enemies) do
       if enemy:IsHero() or enemy:IsConsideredHero() then
-        AddModifier(enemy, self, "bloodstained_1_modifier_call", {
-          duration = self:GetSpecialValueFor("call_duration")
-        }, true)
+        enemy:AddModifier(self, "bloodstained_1_modifier_call", {
+          duration = self:GetSpecialValueFor("call_duration"), bResist = 1
+        })
       end
     end
   end

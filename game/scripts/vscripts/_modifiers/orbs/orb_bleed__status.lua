@@ -82,7 +82,7 @@ function orb_bleed__status:ApplyBloodLoss()
 
   local damage_result = ApplyDamage({
     attacker = attacker.unit, victim = self.parent, ability = nil,
-    damage = attacker.unit:GetDebuffPower(self.bloodloss, self.parent), damage_type = DAMAGE_TYPE_PURE,
+    damage = attacker.unit:GetDebuffPower(self.bloodloss, nil), damage_type = DAMAGE_TYPE_PURE,
     damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 

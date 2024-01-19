@@ -63,9 +63,9 @@ function orb_cold__modifier:OnAttackLanded(keys)
   if IsValidEntity(keys.target) == false then return end
   if keys.target:IsAlive() == false then return end
 
-  AddModifier(keys.target, self.ability, "orb_cold__status", {
+  keys.target:AddModifier(self.ability, "orb_cold__status", {
     inflictor = self.caster:entindex(),
-    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, nil)
+    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, keys.target)
   })
 
   local modifiers = keys.target:FindAllModifiersByName("orb_cold_debuff")
@@ -76,9 +76,7 @@ function orb_cold__modifier:OnAttackLanded(keys)
     end
   end
   
-  AddModifier(keys.target, self.ability, "orb_cold_debuff", {
-    duration = self.cold_duration
-  }, false)
+  keys.target:AddModifier(self.ability, "orb_cold_debuff", {duration = self.cold_duration})
 end
 
 -- UTILS -----------------------------------------------------------
@@ -92,9 +90,3 @@ end
 function orb_cold__modifier:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
-
--- function orb_cold__modifier:PlayEfxAmbient()
---   local particle_cast = ""
---   local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
---   self:AddParticle(effect_cast, false, false, -1, false, false)
--- end

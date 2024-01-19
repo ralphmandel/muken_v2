@@ -42,9 +42,10 @@
       "damage_gain"   "0"
       "duration"      "0"
       "cooldown"		  "1 2 3 4 5 6 7"
-      "special_reset"       "0"
-      "special_blink"       "0"
-      "special_damage_init" "0"
+      "special_reset"         "0"
+      "special_blink"         "0"
+      "special_status_resist" "0"
+      "special_attack_speed"  "0"
 		}
 	}
 
@@ -62,15 +63,16 @@
 
     "AbilityValues"
 		{
-			"max_heal"  "40"
+			"max_heal"  "0"
 			"base_heal" "1 2 3 4 5 6 7"
-      "special_target_hp"     "0"
-      "special_self_hp_hero"  "0"
-      "special_self_hp_creep" "0"
-      "special_heal_radius"   "0"
-      "special_max_hp_regen"  "0"
-      "special_min_heal"      "0"
-      "special_max_heal"      "0"
+      "special_min_hp"        "0"
+      "special_death_delay"   "0"
+      "special_respawn_time"  "0"
+      "special_rage_restaure" "0"
+      "special_kill_radius"   "0"
+      "special_kill_heal"     "0"
+      "special_cleave_radius" "0"
+      "special_cleave_damage" "0"
 		}
 	}
 

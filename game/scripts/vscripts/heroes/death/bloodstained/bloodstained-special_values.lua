@@ -80,15 +80,16 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "cooldown" then return 1 end
     if value_name == "special_reset" then return 1 end
     if value_name == "special_blink" then return 1 end
-    if value_name == "special_damage_init" then return 1 end
+    if value_name == "special_status_resist" then return 1 end
+    if value_name == "special_attack_speed" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_2__bloodsteal" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "max_heal" then return 1 end
+		if value_name == "base_heal" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_3__curse" then
@@ -138,24 +139,31 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 
 	if ability:GetAbilityName() == "bloodstained_1__rage" then
     if self:HasRank(1, 1, 1) then
+      if value_name == "duration" then return 14 * self:GetBuffAmp() end
     end
 
     if self:HasRank(1, 1, 2) then
+      if value_name == "special_reset" then return 1 end
     end
 
     if self:HasRank(1, 2, 1) then
+      if value_name == "special_status_resist" then return 30 end
 		end
 
     if self:HasRank(1, 2, 2) then
+      if value_name == "special_attack_speed" then return 75 end
 		end
 
 		if self:HasRank(1, 3, 1) then
+      if value_name == "call_duration" then return 7.5 * self:GetDebuffAmp() end
 		end
 
     if self:HasRank(1, 3, 2) then
+      if value_name == "radius" then return 400 end
+      if value_name == "special_blink" then return 500 end
 		end
 
-		if value_name == "AbilityManaCost" then return 0 end
+		if value_name == "AbilityManaCost" then return 0 * mana_mult end
     if value_name == "AbilityHealthCost" then return 250 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("special_blink") end
@@ -164,30 +172,42 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "radius" then return 275 end
     if value_name == "call_duration" then return 3 * self:GetDebuffAmp() end
     if value_name == "damage_gain" then return 5 end
-    if value_name == "duration" then return 10 * self:GetBuffAmp() end
+    if value_name == "duration" then return 12 * self:GetBuffAmp() end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_2__bloodsteal" then
     if self:HasRank(2, 1, 1) then
+      if value_name == "special_min_hp" then return 1 end
+      if value_name == "special_death_delay" then return 5 end
     end
 
     if self:HasRank(2, 1, 2) then
+      if value_name == "special_respawn_time" then return -25 end
     end
 
     if self:HasRank(2, 2, 1) then
+      if value_name == "special_rage_restaure" then return 50 end
 		end
 
     if self:HasRank(2, 2, 2) then
+      if value_name == "special_kill_radius" then return 1000 end
+      if value_name == "special_kill_heal" then return 5 end
 		end
 
 		if self:HasRank(2, 3, 1) then
+      if value_name == "max_heal" then return 50 end
 		end
 
     if self:HasRank(2, 3, 2) then
+      if value_name == "special_cleave_radius" then return 1 end
+      if value_name == "special_cleave_damage" then return 50 end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "base_heal" then return 4 + (value_level * 1) end
+
+    if value_name == "max_heal" then return 40 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_3__curse" then

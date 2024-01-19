@@ -18,7 +18,11 @@ function bloodstained_1_modifier_rage:OnCreated(kv)
   self.parent:EmitSound("Bloodstained.rage")
   self:SetStackCount(self.damage)
 
-  AddStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
+  self.parent:AddStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_rage_status_efx")
+  self.parent:AddSubStats(self.ability, {
+    status_resist_stack = self.ability:GetSpecialValueFor("special_status_resist"),
+    attack_speed = self.ability:GetSpecialValueFor("special_attack_speed")
+  })
 end
 
 function bloodstained_1_modifier_rage:OnRefresh(kv)
@@ -32,8 +36,9 @@ function bloodstained_1_modifier_rage:OnRemoved()
 	self.ability:SetActivated(true)
 	self.parent:StopSound("Bloodstained.rage")
 
-  RemoveStatusEfx(self.ability, "bloodstained_1_modifier_rage_status_efx", self.caster, self.parent)
-	RemoveSubStats(self.parent, self.ability, {"attack_damage", "physical_damage"})
+  self.parent:RemoveStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_rage_status_efx")
+  self.parent:RemoveSubStats(self.ability, {"attack_damage", "physical_damage"})
+  self.parent:RemoveSubStats(self.ability, {"status_resist_stack", "attack_speed"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -74,8 +79,8 @@ function bloodstained_1_modifier_rage:OnStackCountChanged(old)
 
   local stack = self:GetStackCount()
 
-	RemoveSubStats(self.parent, self.ability, {"attack_damage", "physical_damage"})
-  AddSubStats(self.parent, self.ability, {attack_damage = stack, physical_damage = stack * 2}, false)
+  self.parent:RemoveSubStats(self.ability, {"attack_damage", "physical_damage"})
+  self.parent:AddSubStats(self.ability, {attack_damage = stack, physical_damage = stack * 2})
 end
 
 -- UTILS -----------------------------------------------------------

@@ -53,9 +53,9 @@ function orb_bleed_debuff:OnIntervalThink()
   local damage_result = ApplyDamage(self.damageTable)
   self:PopupBleedDamage(math.floor(damage_result), self.parent)
 
-  AddModifier(self.parent, self.ability, "orb_bleed__status", {
+  self.parent:AddModifier(self.ability, "orb_bleed__status", {
     inflictor = self.caster:entindex(),
-    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, nil)
+    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, self.parent)
   })
 
   self:StartIntervalThink(self.interval)

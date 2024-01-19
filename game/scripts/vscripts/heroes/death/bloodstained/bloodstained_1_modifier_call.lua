@@ -14,8 +14,7 @@ function bloodstained_1_modifier_call:OnCreated(kv)
 
 	self.parent:SetForceAttackTarget(self.caster)
 	self.parent:MoveToTargetToAttack(self.caster)
-
-  AddStatusEfx(self.ability, "bloodstained_1_modifier_call_status_efx", self.caster, self.parent)
+  self.parent:AddStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_call_status_efx")
 end
 
 function bloodstained_1_modifier_call:OnRefresh(kv)
@@ -25,8 +24,7 @@ function bloodstained_1_modifier_call:OnRemoved()
   if not IsServer() then return end
 
 	self.parent:SetForceAttackTarget(nil)
-  
-  RemoveStatusEfx(self.ability, "bloodstained_1_modifier_call_status_efx", self.caster, self.parent)
+  self.parent:RemoveStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_call_status_efx")
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

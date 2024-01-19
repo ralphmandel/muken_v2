@@ -13,7 +13,7 @@ function orb_cold__max_status:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.current_status = kv.amount
+  self.current_status = 1
   self.max_status = kv.amount
   self.multiplier = kv.multiplier
   self.status_name = "cold__status"
@@ -34,9 +34,14 @@ end
 function orb_cold__max_status:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemovePanelFromList(self.status_name)
+  local damage_result = ApplyDamage({
+    attacker = self.caster, victim = self.parent, ability = nil,
+    damage = self.current_status, damage_type = DAMAGE_TYPE_PURE,
+    damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+  })
 
-  self:PlayEfxEnd()
+  self.parent:RemovePanelFromList(self.status_name)
+  self:PlayEfxEnd(damage_result)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -53,33 +58,34 @@ end
 
 function orb_cold__max_status:DeclareFunctions()
 	local funcs = {
-    MODIFIER_PROPERTY_MIN_HEALTH,
-    MODIFIER_EVENT_ON_TAKEDAMAGE
+    MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT
 	}
 
 	return funcs
 end
 
-function orb_cold__max_status:GetMinHealth(keys)
-  return 1
+function orb_cold__max_status:GetModifierIncomingDamageConstant(keys)
+  if not IsServer() then return 0 end
+
+  local damage = keys.damage
+
+  self.current_status = self.current_status + keys.damage
+
+  if self.current_status >= self.max_status then
+    damage = damage + self.max_status - self.current_status
+    self.current_status = self.max_status
+    self:Destroy()
+  else
+    self.parent:UpdatePanel({
+      current_status = self.current_status * self.multiplier,
+      max_status = self.max_status * self.multiplier,
+      status_name = self.status_name,
+      max_state = 1
+    })
+  end
+
+  return -damage
 end
-
-function orb_cold__max_status:OnTakeDamage(keys)
-  if not IsServer() then return end
-
-  if keys.unit ~= self.parent then return end
-
-  self.current_status = self.current_status - keys.damage
-  if self.current_status <= 0 then self:Destroy() return end
-
-  self.parent:UpdatePanel({
-    current_status = self.current_status * self.multiplier,
-    max_status = self.max_status * self.multiplier,
-    status_name = self.status_name,
-    max_state = 1
-  })
-end
-
 
 -- UTILS -----------------------------------------------------------
 
@@ -102,13 +108,16 @@ function orb_cold__max_status:StatusEffectPriority()
 end
 
 function orb_cold__max_status:PlayEfxStart()
-  AddStatusEfx(nil, "orb_cold__max_status_efx", nil, self.parent)
-
+  self.parent:AddStatusEfx(nil, nil, "orb_cold__max_status_efx")
 	self.parent:EmitSound("Hero_Ancient_Apparition.IceBlast.Tracker")
 end
 
-function orb_cold__max_status:PlayEfxEnd()
-  RemoveStatusEfx(nil, "orb_cold__max_status_efx", nil, self.parent)
+function orb_cold__max_status:PlayEfxEnd(damage_result)
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
+  self:PopupColdDamage(damage_result, self.parent)
+  self.parent:RemoveStatusEfx(nil, nil, "orb_cold__max_status_efx")
 
 	local particle = "particles/units/heroes/hero_winter_wyvern/wyvern_arctic_burn_start.vpcf"
 	local effect_cast = ParticleManager:CreateParticle(particle, PATTACH_WORLDORIGIN, nil)

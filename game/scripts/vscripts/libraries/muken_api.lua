@@ -22,31 +22,31 @@
 
 -- CDOTAPlayerController || FORGE/ITENS
 
-function CDOTAPlayerController:ToggleForgeTower(ent_index)
-  if self.ForgeWorldPanel == nil then
-    self:CreateForgePanel(ent_index)
-  else
-    if self.ForgeWorldPanel.pt.entity == ent_index then
-      self.ForgeWorldPanel:Delete()
-      self.ForgeWorldPanel = nil
-    else
-      self.ForgeWorldPanel:Delete()
+  function CDOTAPlayerController:ToggleForgeTower(ent_index)
+    if self.ForgeWorldPanel == nil then
       self:CreateForgePanel(ent_index)
+    else
+      if self.ForgeWorldPanel.pt.entity == ent_index then
+        self.ForgeWorldPanel:Delete()
+        self.ForgeWorldPanel = nil
+      else
+        self.ForgeWorldPanel:Delete()
+        self:CreateForgePanel(ent_index)
+      end
     end
   end
-end
 
-function CDOTAPlayerController:CreateForgePanel(ent_index)
-  self.ForgeWorldPanel = WorldPanels:CreateWorldPanelForAll({
-    layout = "file://{resources}/layout/custom_game/muken_forge.xml",
-    entity = ent_index,
-    entityHeight = 200,
-    offsetY = 100,
-    offsetX = 0,
-    horizontalAlign = "center",
-    data = {}
-  })
-end
+  function CDOTAPlayerController:CreateForgePanel(ent_index)
+    self.ForgeWorldPanel = WorldPanels:CreateWorldPanelForAll({
+      layout = "file://{resources}/layout/custom_game/muken_forge.xml",
+      entity = ent_index,
+      entityHeight = 200,
+      offsetY = 100,
+      offsetX = 0,
+      horizontalAlign = "center",
+      data = {}
+    })
+  end
 
 -- CDOTA_Item
 
@@ -84,12 +84,22 @@ end
   end
 
   function CDOTA_Buff:PopupBleedDamage(damage, target)
+    if target == nil then return end
+    if IsValidEntity(target) == false then return end
+
     if damage <= 0 then return end
     local digits = 1 + #tostring(damage)
 
     local pidx = ParticleManager:CreateParticle("particles/bocuse/bocuse_msg.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
     ParticleManager:SetParticleControl(pidx, 3, Vector(0, damage, 3))
     ParticleManager:SetParticleControl(pidx, 4, Vector(1, digits, 0))
+  end
+
+  function CDOTA_Buff:PopupColdDamage(damage, target)
+    if target == nil then return end
+    if IsValidEntity(target) == false then return end
+
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage, target)
   end
 
 -- CDOTA_BaseNPC || RANK SYSTEM
@@ -125,14 +135,15 @@ end
 
   function CDOTA_BaseNPC:GetDebuffPower(amount, target)
     amount = amount * (1 + self:GetMainStat("INT"):GetDebuffAmp())
-  
-    if target then
-      if target:GetMainStat("VIT") then
-        amount = amount * (1 - target:GetMainStat("VIT"):GetStatusResist(true))
-      end
-    end
+    if target then amount = target:GetStatusResist(amount) end
   
     return amount
+  end
+
+  function CDOTA_BaseNPC:GetStatusResist(amount)
+    if self:GetMainStat("VIT") == nil then return amount end
+
+    return amount * (1 - self:GetMainStat("VIT"):GetStatusResist(true))
   end
 
   function CDOTA_BaseNPC:GetResistance(type)
@@ -172,6 +183,88 @@ end
     end
 
     return 100
+  end
+
+-- CDOTA_BaseNPC || ADD MODIFIERS/STATS
+
+  function CDOTA_BaseNPC:AddSubStats(ability, table)
+    return self:AddModifier(ability, "sub_stat_modifier", table)
+  end
+
+  function CDOTA_BaseNPC:RemoveSubStats(ability, list)
+    if IsValidEntity(self) == false then return end
+
+    local mod = self:FindAllModifiersByName("sub_stat_modifier")
+    for _,modifier in pairs(mod) do
+      local bPass = true
+
+      for _, sub_stat in pairs(list) do
+        if modifier.kv[sub_stat] == nil then
+          bPass = false
+        end
+      end
+
+      if bPass == true and (modifier:GetAbility() == ability or ability == nil) then
+        modifier:Destroy()
+      end
+    end
+  end
+
+  function CDOTA_BaseNPC:AddModifier(ability, modifier_name, table)
+    local caster = ability:GetCaster()
+
+    if self:HasModifier("orb_cold__max_status") then
+      if modifier_name == "orb_cold_debuff" or modifier_name == "orb_cold__status" then return end
+    end
+
+    if modifier_name == "modifier_knockback" then ability = nil end
+
+    if table.duration then
+      if table.bResist and self:GetTeamNumber() ~= caster:GetTeamNumber() then
+        table.duration = self:GetStatusResist(table.duration)
+      end
+      if table.duration <= 0 then return end
+    end
+
+    return self:AddNewModifier(caster, ability, modifier_name, table)
+  end
+
+  function CDOTA_BaseNPC:RemoveAllModifiersByNameAndAbility(name, ability)
+    local mod = self:FindAllModifiersByName(name)
+    for _,modifier in pairs(mod) do
+      if modifier:GetAbility() == ability or ability == nil then
+        modifier:Destroy()
+      end
+    end
+  end
+
+-- CDOTA_BaseNPC || PERFORMS
+
+  function CDOTA_BaseNPC:ApplyHeal(amount, ability, bAmplify)
+    if bAmplify and ability then
+      local caster = ability:GetCaster()
+      if caster then
+        if IsValidEntity(caster) then
+          amount = amount * (1 + caster:GetMainStat("INT"):GetHealPower())
+        end
+      end
+    end
+
+    self:Heal(amount, ability)
+  end
+
+-- CDOTA_BaseNPC || COSMETICS
+
+  function CDOTA_BaseNPC:GetBaseCosmetic()
+    return self:FindAbilityByName("cosmetics")
+  end
+
+  function CDOTA_BaseNPC:AddStatusEfx(caster, ability, string)
+    if self:GetBaseCosmetic() then self:GetBaseCosmetic():SetStatusEffect(caster, ability, string, true) end
+  end
+
+  function CDOTA_BaseNPC:RemoveStatusEfx(caster, ability, string)
+    if self:GetBaseCosmetic() then self:GetBaseCosmetic():SetStatusEffect(caster, ability, string, false) end
   end
 
 -- CDOTA_BaseNPC || STATUS PANEL

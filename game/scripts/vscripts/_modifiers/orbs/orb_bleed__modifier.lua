@@ -42,10 +42,8 @@ function orb_bleed__modifier:OnAttackLanded(keys)
       return
     end
   end
-  
-  AddModifier(keys.target, self.ability, "orb_bleed_debuff", {
-    duration = self.bleed_duration
-  }, false)
+
+  keys.target:AddModifier(self.ability, "orb_bleed_debuff", {duration = self.bleed_duration})
 end
 
 -- UTILS -----------------------------------------------------------

@@ -201,8 +201,6 @@ function WorldPanels:CreateWorldPanel(pids, conf)
     pt =                pt,
   }
 
-  print("A2", pt.entity)
-
   function wp:SetPosition(pos)
     self.pt.entity = nil
     self.pt.position = pos

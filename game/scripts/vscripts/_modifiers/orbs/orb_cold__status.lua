@@ -84,8 +84,8 @@ function orb_cold__status:ApplyFrozenState()
   self.parent:RemoveAllModifiersOfName("orb_cold_debuff")
 
   self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "orb_cold__max_status", {
-    duration = attacker.unit:GetDebuffPower(self.freeze_duration, self.parent),
-    amount = attacker.unit:GetDebuffPower(self.freeze_amount, self.parent),
+    duration = attacker.unit:GetDebuffPower(self.freeze_duration, nil),
+    amount = attacker.unit:GetDebuffPower(self.freeze_amount, nil),
     multiplier = 100 / self.freeze_amount
   })
 
