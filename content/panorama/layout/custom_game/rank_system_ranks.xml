@@ -22,6 +22,6 @@
   </script>
 
   <Button class="StateDisabled RankPanel" onactivate="OnRankClick()" onmouseover="ShowRankTooltip()" onmouseout="HideRankTooltip()">
-    <DOTAAbilityImage id="RankImage" abilityname="" />
+    <Image id="RankImage" src="" />
   </Button>
 </root>

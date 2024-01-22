@@ -2,6 +2,7 @@ orb_cold__modifier = class({})
 
 function orb_cold__modifier:IsHidden() return false end
 function orb_cold__modifier:IsPurgable() return false end
+function orb_cold__modifier:RemoveOnDeath() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 

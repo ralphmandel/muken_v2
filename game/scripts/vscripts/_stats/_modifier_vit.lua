@@ -93,7 +93,10 @@ function _modifier_vit:OnHealReceived(keys)
 
   SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, keys.unit, keys.gain, keys.unit)
 
-  if keys.inflictor:GetAbilityName() == "bloodstained_5__lifesteal" then return end
+  if keys.inflictor:GetAbilityName() == "bloodstained_2__bloodsteal"
+  or keys.inflictor:GetAbilityName() == "bloodstained_4__bloodloss" then
+    return
+  end
 
   if IsServer() then self.parent:EmitSound("Effect.Heal") end
 end

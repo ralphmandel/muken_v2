@@ -568,22 +568,6 @@
     return list
 	end
 
-  function GetRanksList(abilities_list)
-    local list = {}
-
-    for skill = 1, #abilities_list, 1 do
-      list[skill] = {}
-      for tier = 1, 3, 1 do
-        list[skill][tier] = {}
-        for path = 1, 2, 1 do
-          list[skill][tier][path] = abilities_list[skill].."_rank_"..tostring(tier)..tostring(path)
-        end
-      end
-    end
-
-    return list
-	end
-
   function GetShrineTarget(hero)
     local bot_script = hero:FindModifierByName("_general_script")
     if bot_script then return bot_script:GetShrineTarget() end
@@ -818,4 +802,22 @@
     end
 
     return attackers
+  end
+
+  function CallBloodLoss(damage, attacker, unit)
+    local keys = {damage = damage, attacker = attacker, unit = unit}
+
+    local entties = Entities:FindAllInSphere(Vector(0, 0, 0), 10000)
+
+    for _,ent in pairs(entties) do
+      if ent:IsBaseNPC() then
+        local modifiers = ent:FindAllModifiers()
+
+        for _,mod in pairs(modifiers) do
+          if mod.OnBloodLoss then
+            mod:OnBloodLoss(keys)
+          end
+        end
+      end
+    end
   end

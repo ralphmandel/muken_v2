@@ -45,7 +45,7 @@ function neutral_doom:OnSpellStart()
   target:RemoveModifierByName("neutral_doom_modifier_pre")
   AddModifier(target, self, "neutral_doom_modifier_debuff", {duration = self:GetSpecialValueFor("duration")}, true)
 
-  self:PlayEfxStart()
+  self:PlayEfxStart(target)
 end
 
 function neutral_doom:PlayEfxStart(target)

@@ -63,16 +63,16 @@
 
     "AbilityValues"
 		{
-			"max_heal"  "0"
-			"base_heal" "1 2 3 4 5 6 7"
+			"max_heal"      "0"
+			"base_heal"     "0"
+      "incoming_heal" "1 2 3 4 5 6 7"
       "special_min_hp"        "0"
       "special_death_delay"   "0"
       "special_respawn_time"  "0"
-      "special_rage_restaure" "0"
+      "special_rage_restore"  "0"
       "special_kill_radius"   "0"
       "special_kill_heal"     "0"
-      "special_cleave_radius" "0"
-      "special_cleave_damage" "0"
+      "special_overhealth"    "0"
 		}
 	}
 
@@ -90,18 +90,20 @@
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"       		"0.4"
 
     "AbilityValues"
 		{
-			"shared_damage" "60"
-			"max_range"		  "1"
-			"duration"		  "1 2 3 4 5 6 7"
-      "special_slow_percent" "0"
-      "special_max_hp_steal" "0"
-      "special_kill_reset"   "0"
+			"shared_damage" "0"
+      "duration"      "0"
+			"max_range"		  "1 2 3 4 5 6 7"
+      "special_ms"            "0"
+      "special_slow_percent"  "0"
+      "special_slow_duration" "0"
+      "special_mute"          "0"
 		}
 	}
 
@@ -119,6 +121,7 @@
 
     "AbilityValues"
 		{
+      "heal_percent"  "1 2 3 4 5 6 7"
 	  }
 	}
 

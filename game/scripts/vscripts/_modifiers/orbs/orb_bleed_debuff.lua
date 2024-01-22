@@ -1,7 +1,7 @@
 orb_bleed_debuff = class({})
 
 function orb_bleed_debuff:IsHidden() return false end
-function orb_bleed_debuff:IsPurgable() return false end
+function orb_bleed_debuff:IsPurgable() return true end
 function orb_bleed_debuff:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 function orb_bleed_debuff:GetTexture() return "bleeding" end
 
@@ -47,7 +47,7 @@ function orb_bleed_debuff:OnIntervalThink()
   if self.caster == nil then self:Destroy() return end
   if IsValidEntity(self.caster) == false then self:Destroy() return end
 
-  self.damageTable.damage = self.parent:GetSpellDamage(self.bleed_damage, DAMAGE_TYPE_PHYSICAL) * self.interval
+  self.damageTable.damage = self.caster:GetSpellDamage(self.bleed_damage, DAMAGE_TYPE_PHYSICAL) * self.interval
   if self.parent:IsMoving() then self.damageTable.damage = self.damageTable.damage * 2 end
 
   local damage_result = ApplyDamage(self.damageTable)

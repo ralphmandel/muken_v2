@@ -1,11 +1,11 @@
-example_modifier_barrier = class({})
+bloodstained_2_modifier_barrier = class({})
 
-function example_modifier_barrier:IsHidden() return false end
-function example_modifier_barrier:IsPurgable() return false end
+function bloodstained_2_modifier_barrier:IsHidden() return false end
+function bloodstained_2_modifier_barrier:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function example_modifier_barrier:OnCreated(kv)
+function bloodstained_2_modifier_barrier:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
@@ -14,16 +14,16 @@ function example_modifier_barrier:OnCreated(kv)
 
   self:SetHasCustomTransmitterData(true)
 
-  self.max_barrier = 1000
+  self.max_barrier = self.ability:GetSpecialValueFor("special_overhealth")
   self.barrier = kv.gain
 
   self:StartIntervalThink(10)
 end
 
-function example_modifier_barrier:OnRefresh(kv)
+function bloodstained_2_modifier_barrier:OnRefresh(kv)
   if not IsServer() then return end
 
-  self.max_barrier = 1000
+  self.max_barrier = self.ability:GetSpecialValueFor("special_overhealth")
   self.barrier = self.barrier + kv.gain
   if self.barrier > self.max_barrier then self.barrier = self.max_barrier end
 
@@ -31,32 +31,32 @@ function example_modifier_barrier:OnRefresh(kv)
   self:StartIntervalThink(10)
 end
 
-function example_modifier_barrier:OnRemoved()
+function bloodstained_2_modifier_barrier:OnRemoved()
 end
 
-function example_modifier_barrier:AddCustomTransmitterData()
+function bloodstained_2_modifier_barrier:AddCustomTransmitterData()
   return {
     max_barrier = self.max_barrier,
     barrier = self.barrier,
   }
 end
 
-function example_modifier_barrier:HandleCustomTransmitterData(data)
+function bloodstained_2_modifier_barrier:HandleCustomTransmitterData(data)
   self.max_barrier = data.max_barrier
   self.barrier = data.barrier  
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function example_modifier_barrier:DeclareFunctions()
+function bloodstained_2_modifier_barrier:DeclareFunctions()
 	local funcs = {
-    MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT
+    MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_CONSTANT
 	}
 
 	return funcs
 end
 
-function example_modifier_barrier:GetModifierIncomingDamageConstant(keys)  
+function bloodstained_2_modifier_barrier:GetModifierIncomingPhysicalDamageConstant(keys)  
   if not IsServer() then
     if keys.report_max then
       return self.max_barrier
@@ -81,7 +81,7 @@ function example_modifier_barrier:GetModifierIncomingDamageConstant(keys)
   return -damage
 end
 
-function example_modifier_barrier:OnIntervalThink()
+function bloodstained_2_modifier_barrier:OnIntervalThink()
   if not IsServer() then return end
 
   self.barrier = self.barrier - (self.max_barrier * 0.001)

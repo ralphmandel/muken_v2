@@ -133,6 +133,10 @@
     return amount
   end
 
+  function CDOTA_BaseNPC:GetHealPower(amount)
+    return amount * (1 + self:GetMainStat("INT"):GetHealPower())
+  end
+
   function CDOTA_BaseNPC:GetDebuffPower(amount, target)
     amount = amount * (1 + self:GetMainStat("INT"):GetDebuffAmp())
     if target then amount = target:GetStatusResist(amount) end
@@ -245,12 +249,47 @@
       local caster = ability:GetCaster()
       if caster then
         if IsValidEntity(caster) then
-          amount = amount * (1 + caster:GetMainStat("INT"):GetHealPower())
+          amount = caster:GetHealPower(amount)
         end
       end
     end
 
     self:Heal(amount, ability)
+    return amount
+  end
+
+  function CDOTA_BaseNPC:ApplyMana(amount, ability, bAmplify, target, bMessage)
+    if target then
+      if bAmplify then
+        amount = self:GetDebuffPower(amount, target)
+      end
+
+      if amount > target:GetMana() then
+        amount = target:GetMana()
+      end
+      if amount > 0 then
+        target:Script_ReduceMana(amount, ability)
+        if bMessage then SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_LOSS, target, amount, nil) end
+      else
+        return 0
+      end
+    else
+      if bAmplify then
+        amount = self:GetHealPower(amount)
+      end
+    end
+
+    if self:GetMaxMana() == 0 then return 0 end
+
+    if amount > 0 then
+      self:GiveMana(amount)
+      if bMessage then SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_ADD, self, amount, nil) end
+    elseif amount < 0 then
+      self:Script_ReduceMana(amount, ability)
+      if bMessage then SendOverheadEventMessage(nil, OVERHEAD_ALERT_MANA_LOSS, self, amount, nil) end
+    end
+
+    return amount
   end
 
 -- CDOTA_BaseNPC || COSMETICS

@@ -28,10 +28,6 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
     return self:GetSpecialValueFor("special_aoe")
   end
 
-  function fleaman_1__precision:GetIntrinsicModifierName()
-    return "orb_cold__modifier"
-  end
-
 -- SPELL START
 
   function fleaman_1__precision:OnSpellStart()

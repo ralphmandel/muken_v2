@@ -1,7 +1,7 @@
 orb_bleed__status = class({})
 
 function orb_bleed__status:IsHidden() return true end
-function orb_bleed__status:IsPurgable() return true end
+function orb_bleed__status:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
@@ -17,6 +17,8 @@ function orb_bleed__status:OnCreated(kv)
   self.bloodloss = 500
   self.current_status = kv.status_amount
   self.status_name = string.sub(self:GetName(), 5, string.len(self:GetName()))
+
+  if self.parent:IsMagicImmune() then self.current_status = 1 end
 
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
@@ -86,6 +88,8 @@ function orb_bleed__status:ApplyBloodLoss()
     damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 
+  CallBloodLoss(damage_result, attacker.unit, self.parent)
+
   self:PopupBleedDamage(math.floor(damage_result), self.parent)
   self:PlayEfxBloodLoss()
   self:Destroy()
@@ -110,6 +114,7 @@ function orb_bleed__status:AddEntityAmount(ent_index, amount)
 end
 
 function orb_bleed__status:AddCurrentStatus(amount)
+  if self.parent:IsMagicImmune() then amount = 0 end
   self.current_status = self.current_status + amount
 
   if self.current_status > self.max_status then

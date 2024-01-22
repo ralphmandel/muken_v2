@@ -25,6 +25,7 @@ LinkLuaModifier("_modifier_invisible", "_modifiers/generics/_modifier_invisible"
 LinkLuaModifier("_modifier_invulnerable", "_modifiers/generics/_modifier_invulnerable", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_lighting", "_modifiers/generics/_modifier_lighting", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_bar", "_modifiers/generics/_modifier_no_bar", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_mute", "_modifiers/generics/_modifier_mute", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_block", "_modifiers/generics/_modifier_no_block", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_vision_attacker", "_modifiers/generics/_modifier_no_vision_attacker", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_path", "_modifiers/generics/_modifier_path", LUA_MODIFIER_MOTION_NONE)
@@ -96,7 +97,6 @@ require("internal/rank_system")
     self:LoadBaseStats()
 
     self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
-    self.ranks_name = GetRanksList(self.abilities_name)
     self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
     self.max_level = 15
@@ -230,9 +230,7 @@ require("internal/rank_system")
     for tier = 1, 3, 1 do
       list[tier] = {}
       for path = 1, 2, 1 do
-        list[tier][path] = {}
-        list[tier][path]["rank_name"] = self.ranks_name[skill_id][tier][path]
-        list[tier][path]["rank_state"] = self:GetRankState(skill_id, tier, path)
+        list[tier][path] = self:GetRankState(skill_id, tier, path)
       end
     end
 
@@ -257,9 +255,7 @@ require("internal/rank_system")
 
   function base_hero:GetRankState(skill_id, tier, path)
     local caster = self:GetCaster()
-    local rank_name = self.ranks_name[skill_id][tier][path]
     if caster:HasRank(skill_id, tier, path) then return "StateUpgraded" end
-    --if self.ranks_exception[rank_name] == true then return "StateDisabled" end
     if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
     return "StateDisabled"
   end
@@ -268,9 +264,9 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     if self.rank_points < tier then return false end
     if caster:FindAbilityByName(self.abilities_name[skill_id]):IsTrained() == false then return false end
-    
-    for i_path, rank_name in pairs(self.ranks_name[skill_id][tier]) do
-      if path ~= i_path and caster:HasRank(skill_id, tier, i_path) then
+
+    for i = 1, 2, 1 do
+      if path ~= i and caster:HasRank(skill_id, tier, i) then
         return false
       end
     end

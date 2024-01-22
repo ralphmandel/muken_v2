@@ -1,7 +1,7 @@
 orb_cold_debuff = class({})
 
 function orb_cold_debuff:IsHidden() return false end
-function orb_cold_debuff:IsPurgable() return false end
+function orb_cold_debuff:IsPurgable() return true end
 function orb_cold_debuff:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 function orb_cold_debuff:GetTexture() return "cold" end
 
@@ -16,11 +16,12 @@ function orb_cold_debuff:OnCreated(kv)
 
   self.interval = 0.25
   self.status_mult = 0.05
-  self.slow = self.caster:GetDebuffPower(100, self.parent)
-  local attack_time = self.caster:GetDebuffPower(0.4, self.parent)
 
-  self.parent:AddSubStats(self.ability, {attack_time = attack_time})
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_decrease", {value = self.slow})
+  self.spell_immune = self.parent:IsMagicImmune()
+  self.slow = self.caster:GetDebuffPower(100, self.parent)
+  self.attack_time = self.caster:GetDebuffPower(0.4, self.parent)
+  self:CheckSpellImmunity()
+
   self.parent:AddStatusEfx(nil, nil, "orb_cold_debuff_efx")
 
   self:PlayEfxStart()
@@ -32,13 +33,10 @@ function orb_cold_debuff:OnRefresh(kv)
 
   self:SetDuration(kv.duration, true)
 
+  self.spell_immune = self.parent:IsMagicImmune()
   self.slow = self.caster:GetDebuffPower(75, self.parent)
-  local attack_time = self.caster:GetDebuffPower(0.4, self.parent)
-
-  self.parent:RemoveSubStats(self.ability, {"attack_time"})
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_decrease", self.ability)
-  self.parent:AddSubStats(self.ability, {attack_time = attack_time})
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_decrease", {value = self.slow})
+  self.attack_time = self.caster:GetDebuffPower(0.4, self.parent)
+  self:CheckSpellImmunity()
 
   self:PlayEfxStart()
 end
@@ -52,6 +50,28 @@ function orb_cold_debuff:OnRemoved()
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
+
+function orb_cold_debuff:DeclareFunctions()
+	local funcs = {
+    MODIFIER_EVENT_ON_STATE_CHANGED
+	}
+
+	return funcs
+end
+
+function orb_cold_debuff:OnStateChanged(keys)
+  if keys.unit ~= self.parent then return end
+  
+  if self.spell_immune == false and self.parent:PassivesDisabled() then
+    self:CheckSpellImmunity()
+    self.passives_disabled = true
+  end
+
+  if self.spell_immune == true and self.parent:PassivesDisabled() == false then
+    self:CheckSpellImmunity()
+    self.passives_disabled = false
+  end
+end
 
 function orb_cold_debuff:OnIntervalThink()
   if not IsServer() then return end
@@ -68,6 +88,16 @@ function orb_cold_debuff:OnIntervalThink()
 end
 
 -- UTILS -----------------------------------------------------------
+
+function orb_cold_debuff:CheckSpellImmunity()
+  self.parent:RemoveSubStats(self.ability, {"attack_time"})
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_decrease", self.ability)
+
+  if self.parent:IsMagicImmune() == false then
+    self.parent:AddSubStats(self.ability, {attack_time = self.attack_time})
+    self.parent:AddModifier(self.ability, "sub_stat_movespeed_decrease", {value = self.slow})
+  end
+end
 
 -- EFFECTS -----------------------------------------------------------
 

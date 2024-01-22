@@ -23,6 +23,7 @@ LinkLuaModifier("_modifier_invi_level", "_modifiers/generics/_modifier_invi_leve
 LinkLuaModifier("_modifier_invisible", "_modifiers/generics/_modifier_invisible", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_invulnerable", "_modifiers/generics/_modifier_invulnerable", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_lighting", "_modifiers/generics/_modifier_lighting", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_mute", "_modifiers/generics/_modifier_mute", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_bar", "_modifiers/generics/_modifier_no_bar", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_block", "_modifiers/generics/_modifier_no_block", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_no_vision_attacker", "_modifiers/generics/_modifier_no_vision_attacker", LUA_MODIFIER_MOTION_NONE)

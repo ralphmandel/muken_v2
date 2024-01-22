@@ -90,22 +90,38 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 
     if value_name == "max_heal" then return 1 end
 		if value_name == "base_heal" then return 1 end
+    if value_name == "incoming_heal" then return 1 end
+    if value_name == "special_min_hp" then return 1 end
+    if value_name == "special_death_delay" then return 1 end
+    if value_name == "special_respawn_time" then return 1 end
+    if value_name == "special_rage_restore" then return 1 end
+    if value_name == "special_kill_radius" then return 1 end
+    if value_name == "special_kill_heal" then return 1 end
+    if value_name == "special_overhealth" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_3__curse" then
 		if value_name == "AbilityManaCost" then return 1 end
+    if value_name == "AbilityHealthCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
+    if value_name == "AbilityCastRange" then return 1 end
+
+    if value_name == "duration" then return 1 end
+    if value_name == "shared_damage" then return 1 end
+    if value_name == "max_range" then return 1 end
+    if value_name == "special_ms" then return 1 end
+    if value_name == "special_slow_percent" then return 1 end
+    if value_name == "special_slow_duration" then return 1 end
+    if value_name == "special_mute" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_4__bloodloss" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+    if value_name == "heal_percent" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_5__tears" then
@@ -167,7 +183,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "AbilityHealthCost" then return 250 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("special_blink") end
-		if value_name == "cooldown" then return 16 - (value_level * 1) end
+		if value_name == "cooldown" then return 18 - (value_level * 1) end
 
     if value_name == "radius" then return 275 end
     if value_name == "call_duration" then return 3 * self:GetDebuffAmp() end
@@ -178,15 +194,15 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 	if ability:GetAbilityName() == "bloodstained_2__bloodsteal" then
     if self:HasRank(2, 1, 1) then
       if value_name == "special_min_hp" then return 1 end
-      if value_name == "special_death_delay" then return 5 end
+      if value_name == "special_death_delay" then return 5 * self:GetBuffAmp() end
     end
 
     if self:HasRank(2, 1, 2) then
-      if value_name == "special_respawn_time" then return -25 end
+      if value_name == "special_respawn_time" then return -30 end
     end
 
     if self:HasRank(2, 2, 1) then
-      if value_name == "special_rage_restaure" then return 50 end
+      if value_name == "special_rage_restore" then return 50 end
 		end
 
     if self:HasRank(2, 2, 2) then
@@ -199,38 +215,54 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 		end
 
     if self:HasRank(2, 3, 2) then
-      if value_name == "special_cleave_radius" then return 1 end
-      if value_name == "special_cleave_damage" then return 50 end
+      if value_name == "base_heal" then return 10 end
+      if value_name == "special_overhealth" then return 500 + (caster:GetLevel() * 50) end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "base_heal" then return 4 + (value_level * 1) end
+    if value_name == "incoming_heal" then return 0 + (value_level * 1) end
 
-    if value_name == "max_heal" then return 40 end
+    if value_name == "max_heal" then return 35 end
+    if value_name == "base_heal" then return 5 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_3__curse" then
     if self:HasRank(3, 1, 1) then
+      if value_name == "special_ms" then return 30 end
     end
 
     if self:HasRank(3, 1, 2) then
+      if value_name == "special_slow_percent" then return 100 end
+      if value_name == "special_slow_duration" then return 1.5 end
     end
 
     if self:HasRank(3, 2, 1) then
+      if value_name == "AbilityCharges" then return 2 end
 		end
 
     if self:HasRank(3, 2, 2) then
+      if value_name == "AbilityChargeRestoreTime" then return 20 end
 		end
 
 		if self:HasRank(3, 3, 1) then
+      if value_name == "shared_damage" then return 80 end
 		end
 
     if self:HasRank(3, 3, 2) then
+      if value_name == "special_mute" then return 1 end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
+    if value_name == "AbilityHealthCost" then return 200 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return 30 end
+    if value_name == "AbilityCastRange" then return 350 + ((ability_level - 1) * 25) end
+    if value_name == "max_range" then return 350 + (value_level * 25) end
+
+    if value_name == "duration" then return 20 end
+    if value_name == "shared_damage" then return 50 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_4__bloodloss" then
@@ -254,9 +286,10 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "heal_percent" then return 70 + (value_level * 5) end
 	end
 
-	if ability:GetAbilityName() == "bloodstained_5__smoke" then
+	if ability:GetAbilityName() == "bloodstained_5__tears" then
     if self:HasRank(5, 1, 1) then
     end
 

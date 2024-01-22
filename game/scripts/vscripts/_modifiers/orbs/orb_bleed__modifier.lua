@@ -2,6 +2,7 @@ orb_bleed__modifier = class({})
 
 function orb_bleed__modifier:IsHidden() return false end
 function orb_bleed__modifier:IsPurgable() return false end
+function orb_bleed__modifier:RemoveOnDeath() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 

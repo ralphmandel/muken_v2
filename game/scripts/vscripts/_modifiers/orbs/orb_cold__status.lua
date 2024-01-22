@@ -1,7 +1,7 @@
 orb_cold__status = class({})
 
 function orb_cold__status:IsHidden() return true end
-function orb_cold__status:IsPurgable() return true end
+function orb_cold__status:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
@@ -18,6 +18,8 @@ function orb_cold__status:OnCreated(kv)
   self.freeze_duration = 5
   self.current_status = kv.status_amount
   self.status_name = string.sub(self:GetName(), 5, string.len(self:GetName()))
+
+  if self.parent:IsMagicImmune() then self.current_status = 1 end
 
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
@@ -111,6 +113,7 @@ function orb_cold__status:AddEntityAmount(ent_index, amount)
 end
 
 function orb_cold__status:AddCurrentStatus(amount)
+  if self.parent:IsMagicImmune() then amount = 0 end
   self.current_status = self.current_status + amount
 
   if self.current_status > self.max_status then
