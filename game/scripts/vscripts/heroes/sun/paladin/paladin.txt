@@ -37,9 +37,9 @@
 
     "AbilityValues"
 		{
-      "absorption"    "100"
-      "pure_damage"   "20"
-      "duration"      "30"
+      "absorption"    "0"
+      "pure_damage"   "0"
+      "duration"      "0"
 			"cast_range"    "1 2 3 4 5 6 7"
 			"max_range"     "1 2 3 4 5 6 7"
 		}
@@ -67,8 +67,8 @@
 
     "AbilityValues"
 		{
-      "hits"          "8"
-      "status_resist" "40"
+      "hits"          "0"
+      "status_resist" "0"
       "duration"      "1 2 3 4 5 6 7"
       "special_cast_range"  "0"
       "special_burn_damage" "0"
@@ -100,11 +100,11 @@
 
     "AbilityValues"
 		{
-      "cast_range"    "750"
-			"radius"			  "275"
-      "min_mult"      "2"
-      "max_mult"      "3"
-      "target_mult"   "1"
+      "cast_range"    "0"
+			"radius"			  "0"
+      "min_mult"      "0"
+      "max_mult"      "0"
+      "target_mult"   "0"
       "damage"        "1 2 3 4 5 6 7"
       "heal"          "1 2 3 4 5 6 7"
       "special_stun_duration" "0"
@@ -133,8 +133,8 @@
       "damage_percent"  "2"
       "interval"        "0.2"
       "radius"          "325"
+      "disarmed"        "1"
 			"duration"	      "1 2 3 4 5 6 7"
-      "disarmed"            "1"
       "special_heal_unit"   "0"
       "special_heal_hero"   "0"
       "special_manaloss"    "0"
@@ -160,11 +160,10 @@
 
     "AbilityValues"
 		{
-      "heal"    "50"
-			"damage"  "1 2 3 4 5 6 7"
-      "special_hp_based"      "0"
-      "special_stun_duration" "0"
-      "special_hits"          "0"
+			"damage"        "0"
+      "heal"          "0"
+      "restore_time"  "1 2 3 4 5 6 7"
+      "special_hits"  "0"
 		}
 	}
 
@@ -193,329 +192,4 @@
       "special_hp_cap"        "0"
     }
 	}
-
-  //RANKS
-    "paladin_1__link_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_1__link_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_1__link_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_1__link_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_1__link_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_1__link_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_link"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_2__shield_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_shield"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_3__hammer_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_hammer"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_4__magnus_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_magnus"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }    
-
-    "paladin_5__smite_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_5__smite_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_5__smite_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_5__smite_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_5__smite_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_5__smite_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_smite"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_11"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_12"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_21"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_22"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_31"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      "AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
-
-    "paladin_u__faith_rank_32"
-    {
-      "BaseClass"						"ability_lua"
-      "ScriptFile"					"heroes/sun/paladin/paladin-ranks_lua"
-      //"AbilityTextureName"  "paladin_faith"
-      "AbilityType"					"ABILITY_TYPE_BASIC"
-      "AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    }
 }

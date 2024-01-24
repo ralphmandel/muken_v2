@@ -32,6 +32,7 @@ function fleaman_special_values:OnCreated(kv)
     physical_damage = 0,
     magical_damage = 0,
     holy_damage = 0,
+    heal_power = 0,
     luck = 0
   }
 end
@@ -432,6 +433,10 @@ end
 
 function fleaman_special_values:GetHolyDamageAmp()
   return self.data_props["holy_damage"] * 0.01
+end
+
+function fleaman_special_values:GetHealPower()
+  return 1 + self.data_props["heal_power"]
 end
 
 function fleaman_special_values:CalcLuck(value)

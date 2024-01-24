@@ -48,7 +48,8 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
           unit:Kill(self, caster)
         else
           ApplyDamage({
-            victim = unit, attacker = caster, damage = self:GetSpecialValueFor("damage") * mult,
+            victim = unit, attacker = caster,
+            damage = self:GetSpecialValueFor("damage") * mult,
             damage_type = self:GetAbilityDamageType(),
             ability = self
           })

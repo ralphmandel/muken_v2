@@ -33,6 +33,7 @@ function bloodstained_special_values:OnCreated(kv)
     magical_damage = 0,
     holy_damage = 0,
     luck = 0,
+    heal_power = 0,
     tears_step = 1
   }
 end
@@ -432,6 +433,10 @@ end
 
 function bloodstained_special_values:GetHolyDamageAmp()
   return self.data_props["holy_damage"] * 0.01
+end
+
+function bloodstained_special_values:GetHealPower()
+  return 1 + self.data_props["heal_power"]
 end
 
 function bloodstained_special_values:CalcLuck(value)

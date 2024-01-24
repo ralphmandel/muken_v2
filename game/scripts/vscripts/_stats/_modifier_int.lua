@@ -242,6 +242,10 @@ function _modifier_int:OnStatUpated(property)
   if property == "sub_stat_holy_damage" then
     special_kv_modifier:UpdateData("holy_damage", self:GetHolyDamageAmp())
   end
+
+  if property == "sub_stat_heal_power" then
+    special_kv_modifier:UpdateData("heal_power", self:GetHealPower())
+  end
 end
 
 function _modifier_int:LoadData()

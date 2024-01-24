@@ -155,6 +155,10 @@
     return amount
   end
 
+  function CDOTA_BaseNPC:GetBuffPower(amount)
+    return amount * (1 + self:GetMainStat("VIT"):GetIncomingBuff())
+  end
+
   function CDOTA_BaseNPC:GetHealPower(amount)
     return amount * (1 + self:GetMainStat("INT"):GetHealPower())
   end
@@ -246,9 +250,14 @@
     if modifier_name == "modifier_knockback" then ability = nil end
 
     if table.duration then
-      if table.bResist and self:GetTeamNumber() ~= caster:GetTeamNumber() then
-        table.duration = self:GetStatusResist(table.duration)
+      if table.bResist then
+        if self:GetTeamNumber() == caster:GetTeamNumber() then
+          table.duration = self:GetBuffPower(table.duration)
+        else
+          table.duration = self:GetStatusResist(table.duration)
+        end
       end
+
       if table.duration <= 0 then return end
     end
 
