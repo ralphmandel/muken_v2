@@ -375,7 +375,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if self:HasRank(6, 3, 2) then
       if value_name == "special_chain_chance" then return self:CalcLuck(20) end
       if value_name == "special_chain_hits" then return 4 end
-      if value_name == "special_chain_damage" then return 100 * self:GetMagicalDamageAmp() end
+      if value_name == "special_chain_damage" then return 50 * self:GetMagicalDamageAmp() end
       if value_name == "special_chain_radius" then return 700 end
     end
 
