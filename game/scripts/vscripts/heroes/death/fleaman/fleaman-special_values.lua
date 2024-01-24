@@ -76,10 +76,10 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
-    if value_name == "duration" then return 1 end
 
     if value_name == "attack_speed" then return 1 end
     if value_name == "evasion" then return 1 end
+    if value_name == "duration" then return 1 end
     if value_name == "special_damage" then return 1 end
     if value_name == "special_pulses" then return 1 end
     if value_name == "special_aoe" then return 1 end
@@ -89,11 +89,11 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "fleaman_2__speed" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-		if value_name == "min_ms" then return 1 end
 
     if value_name == "duration" then return 1 end
     if value_name == "ms_gain" then return 1 end
     if value_name == "max_ms" then return 1 end
+		if value_name == "min_ms" then return 1 end
     if value_name == "special_phase" then return 1 end
     if value_name == "special_stun_duration" then return 1 end
     if value_name == "special_unslow" then return 1 end
@@ -104,12 +104,12 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
-		if value_name == "radius" then return 1 end
 
     if value_name == "distance" then return 1 end
     if value_name == "speed_mult" then return 1 end
     if value_name == "debuff_duration" then return 1 end
     if value_name == "slow_percent" then return 1 end
+		if value_name == "radius" then return 1 end
     if value_name == "special_root" then return 1 end
     if value_name == "special_critical_damage" then return 1 end
 	end
@@ -117,10 +117,10 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "fleaman_4__strip" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "chance" then return 1 end
 
     if value_name == "duration" then return 1 end
     if value_name == "armor" then return 1 end
+    if value_name == "chance" then return 1 end
     if value_name == "special_break" then return 1 end
     if value_name == "special_bleeding" then return 1 end
     if value_name == "special_evasion" then return 1 end
@@ -132,12 +132,12 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "radius" then return 1 end
 
     if value_name == "cast_range" then return 1 end
     if value_name == "duration" then return 1 end
     if value_name == "blind" then return 1 end
     if value_name == "miss_chance" then return 1 end
+		if value_name == "radius" then return 1 end
     if value_name == "special_hp_regen" then return 1 end
     if value_name == "special_hide" then return 1 end
 	end
@@ -145,9 +145,9 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "fleaman_u__steal" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "duration" then return 1 end
 
     if value_name == "attack_steal" then return 1 end
+    if value_name == "duration" then return 1 end
     if value_name == "special_respawn_self" then return 1 end
     if value_name == "special_respawn_enemy" then return 1 end
     if value_name == "special_lifesteal" then return 1 end
@@ -189,7 +189,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if self:HasRank(1, 3, 1) then
-      if value_name == "special_damage" then return 175 * self:GetMagicalDamageAmp() end
+      if value_name == "special_damage" then return 150 * self:GetMagicalDamageAmp() end
       if value_name == "special_pulses" then return 7 end
       if value_name == "special_aoe" then return 325 end
 		end

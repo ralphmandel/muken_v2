@@ -20,9 +20,9 @@ function fleaman_3_modifier_jump:OnCreated( kv )
 
 	self.radius = self.ability:GetSpecialValueFor("radius")
 
-  self.arc = AddModifier(self.parent, self.ability, "_modifier_generic_arc", {
+  self.arc = self.parent:AddModifier(self.ability, "_modifier_generic_arc", {
     speed = jump_speed, duration = duration, distance = jump_distance, height = height
-  }, false)
+  })
 
 	self.arc:SetEndCallback(function(interrupted)
 		if self:IsNull() then return end
@@ -79,22 +79,18 @@ function fleaman_3_modifier_jump:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   if keys.target:IsMagicImmune() then return end
 
-  AddModifier(keys.target, self.ability, "sub_stat_movespeed_percent_decrease", {
+  keys.target:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
     value = self.ability:GetSpecialValueFor("slow_percent"),
-    duration = self.ability:GetSpecialValueFor("debuff_duration")
-  }, true)
+    duration = self.ability:GetSpecialValueFor("debuff_duration"),
+    bResist = 1
+  })
   
   if self.ability:GetSpecialValueFor("special_root") == 1 then
-    AddModifier(keys.target, self.ability, "_modifier_root", {
-      duration = self.ability:GetSpecialValueFor("debuff_duration"), effect = 2
-    }, true)  
+    keys.target:AddModifier(self.ability, "_modifier_root", {
+      duration = self.ability:GetSpecialValueFor("debuff_duration"),
+      effect = 2, bResist = 1
+    })  
   end
-
-  -- if self.ability:GetSpecialValueFor("special_silence") == 1 then
-  --   AddModifier(keys.target, self.ability, "_modifier_silence", {
-  --     duration = self.ability:GetSpecialValueFor("debuff_duration"), special = 3
-  --   }, true)    
-  -- end
 
   self:PlayEfxHit(keys.target)
 end

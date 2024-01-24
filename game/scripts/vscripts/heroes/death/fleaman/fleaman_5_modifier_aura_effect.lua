@@ -13,23 +13,21 @@ function fleaman_5_modifier_aura_effect:OnCreated(kv)
   if not IsServer() then return end
 
   if self.caster:GetTeamNumber() == self.parent:GetTeamNumber() then
-    RemoveAllModifiersByNameAndAbility(self.parent, "fleaman_5_modifier_shadow", self.ability)
-    AddSubStats(self.parent, self.ability, {
-      health_regen = self.ability:GetSpecialValueFor("special_hp_regen")
-    }, false)
+    self.parent:RemoveAllModifiersByNameAndAbility("fleaman_5_modifier_shadow", self.ability)
+    self.parent:AddSubStats(self.ability, {health_regen = self.ability:GetSpecialValueFor("special_hp_regen")})
 
     self:PlayEfxStart()
     self:OnIntervalThink()
   else
-    AddModifier(self.parent, self.ability, "_modifier_no_vision_attacker", {}, false)
+    self.parent:AddModifier(self.ability, "_modifier_no_vision_attacker", {})
 
-    AddModifier(self.parent, self.ability, "_modifier_blind", {
+    self.parent:AddModifier(self.ability, "_modifier_blind", {
       percent = self.ability:GetSpecialValueFor("blind")
-    }, false)
+    })
 
-    AddSubStats(self.parent, self.ability, {
+    self.parent:AddModifier(self.ability, {
       miss_chance = self.ability:GetSpecialValueFor("miss_chance")
-    }, false)
+    })
   end
 end
 
@@ -39,15 +37,15 @@ end
 function fleaman_5_modifier_aura_effect:OnRemoved()
   if not IsServer() then return end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_no_vision_attacker", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_blind", self.ability)
-  RemoveSubStats(self.parent, self.ability, {"miss_chance"})
-  RemoveSubStats(self.parent, self.ability, {"health_regen"})
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_no_vision_attacker", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_blind", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"miss_chance"})
+  self.parent:RemoveSubStats(self.ability, {"health_regen"})
 
   if self.caster:GetTeamNumber() == self.parent:GetTeamNumber() then
-    AddModifier(self.parent, self.ability, "fleaman_5_modifier_shadow", {
+    self.parent:AddModifier(self.ability, "fleaman_5_modifier_shadow", {
       duration = self.ability:GetSpecialValueFor("special_hide")
-    }, true)
+    })
   end
 end
 

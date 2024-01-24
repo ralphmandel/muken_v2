@@ -40,9 +40,9 @@ function fleaman_2_modifier_charge:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   
   if self:GetStackCount() == 100 then
-    AddModifier(keys.target, self.ability, "_modifier_stun", {
-      duration = self.ability:GetSpecialValueFor("special_stun_duration")
-    }, true)
+    keys.target:AddModifier(self.ability, "_modifier_stun", {
+      duration = self.ability:GetSpecialValueFor("special_stun_duration"), bResist = 1
+    })
 
     self:Destroy()
   end

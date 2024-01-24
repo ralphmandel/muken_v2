@@ -25,8 +25,8 @@ function fleaman_2_modifier_passive:OnRefresh(kv)
   self.min_ms = self.ability:GetSpecialValueFor("min_ms")
 
   if self.ability:GetSpecialValueFor("special_unslow") == 1 then
-    RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_unslowable", self.ability)
-    AddModifier(self.parent, self.ability, "_modifier_unslowable", {}, false)
+    self.parent:RemoveAllModifiersByNameAndAbility("_modifier_unslowable", self.ability)
+    self.parent:AddModifier(self.ability, "_modifier_unslowable", {})
   end
 
   if self:GetStackCount() < self.min_ms then
@@ -63,16 +63,16 @@ function fleaman_2_modifier_passive:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
   
-  AddModifier(self.parent, self.ability, "fleaman_2_modifier_speed_stack", {
+  self.parent:AddModifier(self.ability, "fleaman_2_modifier_speed_stack", {
     duration = self.ability:GetSpecialValueFor("duration")
-  }, true)
+  })
 end
 
 function fleaman_2_modifier_passive:OnStackCountChanged(old)
   if not IsServer() then return end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_increase", self.ability)
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {value = self:GetStackCount()}, false)
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_increase", {value = self:GetStackCount()})
 end
 
 function fleaman_2_modifier_passive:OnIntervalThink()
@@ -83,7 +83,7 @@ function fleaman_2_modifier_passive:OnIntervalThink()
 
 	if self.ability:GetSpecialValueFor("special_stun_duration") > 0
   and self.parent:PassivesDisabled() == false and distance > 0 then
-    AddModifier(self.parent, self.ability, "fleaman_2_modifier_charge", {distance = distance}, false)
+    self.parent:AddModifier(self.ability, "fleaman_2_modifier_charge", {distance = distance})
 	end
 
 	self:StartIntervalThink(0.1)

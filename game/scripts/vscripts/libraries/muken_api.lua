@@ -113,6 +113,26 @@
     return special_kv_modifier:HasRank(skill_id, tier, path)
   end
 
+  function CDOTA_BaseNPC:GetHeroName()
+		local data = LoadKeyValues("scripts/kv/heroes_name.kv")
+
+		for name, id_name in pairs(data) do
+			if self:GetUnitName() == id_name then return name end
+		end
+	end
+
+  function CDOTA_BaseNPC:GetHeroTeam()
+		local data = LoadKeyValues("scripts/kv/heroes_team.kv")
+
+    for team, hero_list in pairs(data) do
+      for _,hero_name in pairs(hero_list) do
+        if self:GetHeroName() == hero_name then
+          return team
+        end
+      end
+		end
+	end
+
 -- CDOTA_BaseNPC || GET STATS
 
   function CDOTA_BaseNPC:GetMainStat(stat)

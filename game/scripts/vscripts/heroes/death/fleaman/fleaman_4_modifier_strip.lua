@@ -14,21 +14,21 @@ function fleaman_4_modifier_strip:OnCreated(kv)
 
   self:PlayEfxStart()
 
-  AddSubStats(self.parent, self.ability, {
+  self.parent:AddSubStats(self.ability, {
     armor = self.ability:GetSpecialValueFor("armor"),
     evasion = self.ability:GetSpecialValueFor("special_evasion")
-  }, false)
+  })
 
   if self.ability:GetSpecialValueFor("special_break") == 1 then
-    AddModifier(self.parent, self.ability, "_modifier_break", {}, false)
+    self.parent:AddModifier(self.ability, "_modifier_break", {})
   end
 
   if self.ability:GetSpecialValueFor("special_bleeding") == 1 then
-    AddModifier(self.parent, self.ability, "_modifier_bleeding", {}, false)
+    self.parent:AddModifier(self.ability, "_modifier_bleeding", {})
   end
 
   if self.ability:GetSpecialValueFor("special_silence") == 1 then
-    AddModifier(self.parent, self.ability, "_modifier_silence", {}, false)
+    self.parent:AddModifier(self.ability, "_modifier_silence", {})
   end
 
   self.damageTable = {
@@ -44,10 +44,10 @@ end
 function fleaman_4_modifier_strip:OnRemoved()
   if not IsServer() then return end
   
-  RemoveSubStats(self.parent, self.ability, {"armor", "evasion"})
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_break", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_bleeding", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"armor", "evasion"})
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_break", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_bleeding", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
 
   if self.damageTable.damage > 0 then
     self:PlayEfxEnd()

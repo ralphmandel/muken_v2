@@ -44,8 +44,8 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
   local chain_chance = self.ability:GetSpecialValueFor("special_chain_chance")
   local manasteal = keys.original_damage * self.ability:GetSpecialValueFor("special_manasteal") * 0.01
   local lifesteal = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal") * 0.01
-  local modifier = AddSubStats(self.parent, self.ability, {duration = duration, attack_damage = attack_steal}, false)
-  AddSubStats(keys.target, self.ability, {duration = duration, attack_damage = -attack_steal}, false)
+  local modifier = self.parent:AddSubStats(self.ability, {duration = duration, attack_damage = attack_steal})
+  keys.target:AddSubStats(self.ability, {duration = duration, attack_damage = -attack_steal})
 
   if IsServer() then
     self:SetStackCount(self:GetStackCount() + attack_steal)
@@ -68,17 +68,17 @@ function fleaman_u_modifier_passive:OnAttacked(keys)
   end)
 
   if manasteal > 0 then
-    StealMana(keys.target, keys.attacker, self.ability, manasteal)
+    keys.attacker:ApplyMana(manasteal, self.ability, false, keys.target, true)
     self:PlayEfxManasteal(keys.attacker)
   end
 
   if lifesteal > 0 then
-    keys.attacker:Heal(lifesteal, self.ability)
+    keys.attacker:ApplyHeal(lifesteal, self.ability, false)
     self:PlayEfxLifesteal(keys.attacker)
   end
 
   if RandomFloat(0, 100) < chain_chance and self.ability:IsCooldownReady() then
-    AddModifier(self.parent, self.ability, "fleaman_u_modifier_chain", {target_index = keys.target:GetEntityIndex()}, false)
+    self.parent:AddModifier(self.ability, "fleaman_u_modifier_chain", {target_index = keys.target:GetEntityIndex()})
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
   end
 end

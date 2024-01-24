@@ -12,7 +12,7 @@ function fleaman_5_modifier_shadow:OnCreated(kv)
 
   if not IsServer() then return end
 
-  AddModifier(self.parent, self.ability, "_modifier_invisible", {attack_break = 0}, false)
+  self.parent:AddModifier(self.ability, "_modifier_invisible", {attack_break = 0})
 
   self:PlayEfxStart()
   self:OnIntervalThink()
@@ -24,7 +24,7 @@ end
 function fleaman_5_modifier_shadow:OnRemoved()
   if IsServer() then self.parent:StopSound("Fleaman.Shadow.Start") end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_invisible", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_invisible", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

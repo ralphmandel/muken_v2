@@ -15,7 +15,7 @@ LinkLuaModifier("fleaman_3_modifier_effect", "heroes/death/fleaman/fleaman_3_mod
 
     ProjectileManager:ProjectileDodge(caster)
     caster:RemoveModifierByName("flea_3_modifier_jump")
-    AddModifier(caster, self, "fleaman_3_modifier_jump", {}, false)
+    caster:AddModifier(self, "fleaman_3_modifier_jump", {})
   end
 
 -- EFFECTS

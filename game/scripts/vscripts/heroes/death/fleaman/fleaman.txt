@@ -39,6 +39,14 @@
       "special_aoe"     "0"
       "special_purge"   "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/slark/slark_head_immortal/slark_immortal_dark_pact_pulses.vpcf"
+      "particle"  "particles/fleaman/fleaman_precision.vpcf"
+      "particle"  "particles/status_fx/status_effect_slark_shadow_dance.vpcf"
+      "particle"  "particles/econ/items/slark/slark_ti6_blade/slark_ti6_pounce_ground.vpcf"
+    }
 	}
 
 	"fleaman_2__speed"
@@ -90,6 +98,13 @@
       "special_root"            "0"
       "special_critical_damage" "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/slark/slark_ti6_blade/slark_ti6_pounce_trail.vpcf"
+      "particle"  "particles/econ/items/slark/slark_ti6_blade/slark_ti6_pounce_start.vpcf"
+      "particle"  "particles/units/heroes/hero_riki/riki_backstab.vpcf"
+    }
 	}
 
 	"fleaman_4__strip"
@@ -116,6 +131,13 @@
       "special_silence"   "0"
       "special_damage"    "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/items3_fx/star_emblem.vpcf"
+      "particle"  "particles/items_fx/abyssal_blink_end.vpcf"
+      "particle"  "particles/items_fx/abyssal_blink_start.vpcf"
+    }
 	}
 
 	"fleaman_5__smoke"
@@ -146,6 +168,13 @@
       "special_hp_regen"  "0"
       "special_hide"      "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_slark/slark_shadow_dance.vpcf"
+      "particle"  "particles/units/heroes/hero_slark/slark_shadow_dance_dummy.vpcf"
+      "particle"  "particles/fleaman/smoke/fleaman_smoke.vpcf"
+    }
 	}
 
 	"fleaman_u__steal"
@@ -174,5 +203,13 @@
       "special_chain_damage" "0"
       "special_chain_radius" "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_zuus/zuus_arc_lightning_.vpcf"
+      "particle"  "particles/econ/items/slark/slark_ti6_blade/slark_ti6_blade_essence_shift.vpcf"
+      "particle"  "particles/generic/give_mana.vpcf"
+      "particle"  "particles/units/heroes/hero_skeletonking/wraith_king_vampiric_aura_lifesteal.vpcf"
+    }
 	}
 }
