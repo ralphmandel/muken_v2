@@ -28,7 +28,12 @@ function bloodstained_special_values:OnCreated(kv)
 
   self.data_props = {
     buff_amp = 0,
-    debuff_amp = 0
+    debuff_amp = 0,
+    physical_damage = 0,
+    magical_damage = 0,
+    holy_damage = 0,
+    luck = 0,
+    tears_step = 1
   }
 end
 
@@ -126,18 +131,34 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
 
   if ability:GetAbilityName() == "bloodstained_5__tears" then
 		if value_name == "AbilityManaCost" then return 1 end
+    if value_name == "AbilityHealthCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "step" then return 1 end
+    if value_name == "radius" then return 1 end
+    if value_name == "blood_duration" then return 1 end
+    if value_name == "hp_lost" then return 1 end
+    if value_name == "interval" then return 1 end
+    if value_name == "blood_percent" then return 1 end
+    if value_name == "special_purge" then return 1 end
+    if value_name == "special_status_reduction" then return 1 end
+    if value_name == "special_critical_chance" then return 1 end
 	end
 
   if ability:GetAbilityName() == "bloodstained_u__seal" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "radius" then return 1 end
+    if value_name == "hp_stolen" then return 1 end
+    if value_name == "copy_duration" then return 1 end
+    if value_name == "slow_duration" then return 1 end
+    if value_name == "steal_duration" then return 1 end
+    if value_name == "duration" then return 1 end
+    if value_name == "special_lifesteal" then return 1 end
+    if value_name == "special_break" then return 1 end
+    if value_name == "special_bleed_damage" then return 1 end
 	end
 
 	return 0
@@ -291,49 +312,79 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
 
 	if ability:GetAbilityName() == "bloodstained_5__tears" then
     if self:HasRank(5, 1, 1) then
+      if value_name == "blood_percent" then return 9 end
     end
 
     if self:HasRank(5, 1, 2) then
+      if value_name == "blood_duration" then return 25 end
     end
 
     if self:HasRank(5, 2, 1) then
+      if value_name == "special_purge" then return 1 end
+      if value_name == "special_status_reduction" then return 5 end
 		end
 
     if self:HasRank(5, 2, 2) then
+      if value_name == "special_critical_chance" then return 10 end
 		end
 
 		if self:HasRank(5, 3, 1) then
+      if value_name == "hp_lost" then return 2 end
 		end
 
     if self:HasRank(5, 3, 2) then
+      if value_name == "radius" then return 550 end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
-    if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityHealthCost" then return 300 * mana_mult end
+    if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
+    if value_name == "cooldown" then return 40 - (value_level * 2.5) end
+
+    if value_name == "step" then return self.data_props["tears_step"] end
+    if value_name == "radius" then return 350 end
+    if value_name == "blood_duration" then return 20 end
+    if value_name == "hp_lost" then return 1 end
+    if value_name == "interval" then return 1 end
+    if value_name == "blood_percent" then return 8 end
 	end
 
 	if ability:GetAbilityName() == "bloodstained_u__seal" then
     if self:HasRank(6, 1, 1) then
+      if value_name == "slow_duration" then return 2 * self:GetDebuffAmp() end
     end
 
     if self:HasRank(6, 1, 2) then
+      if value_name == "special_lifesteal" then return 10 end
     end
 
     if self:HasRank(6, 2, 1) then
+      if value_name == "steal_duration" then return 180 end
 		end
 
     if self:HasRank(6, 2, 2) then
+      if value_name == "special_break" then return 1 end
 		end
 
-		if self:HasRank(6, 3, 1) then
+    if self:HasRank(6, 3, 1) then
+      if value_name == "hp_stolen" then return 15 end
 		end
 
     if self:HasRank(6, 3, 2) then
+      if value_name == "special_bleed_damage" then return 100 * self:GetPhysicalDamageAmp() end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
-    if value_name == "AbilityCooldown" then return 0 end
-	end
+    if value_name == "AbilityCooldown" then return 100 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") - 50 end
+    if value_name == "duration" then return 12 + (value_level * 0.5) end
+
+    if value_name == "radius" then return 500 end
+    if value_name == "hp_stolen" then return 10 end
+    if value_name == "copy_duration" then return 15 end
+    if value_name == "slow_duration" then return 1 * self:GetDebuffAmp() end
+    if value_name == "steal_duration" then return 90 end
+  end
 
 	return 0
 end

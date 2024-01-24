@@ -11,11 +11,12 @@ function orb_bleed__status:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.caster = EntIndexToHScript(kv.inflictor)
   self.status_amount = {}
   self.status_degen = 4
   self.bloodloss = 500
-  self.current_status = kv.status_amount
+
+  self.caster = EntIndexToHScript(kv.inflictor)
+  self.current_status = self.caster:GetDebuffPower(kv.status_amount, self.parent)
   self.status_name = string.sub(self:GetName(), 5, string.len(self:GetName()))
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end
@@ -23,18 +24,19 @@ function orb_bleed__status:OnCreated(kv)
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
   self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(0.3)
+  self:StartIntervalThink(1)
 end
 
 function orb_bleed__status:OnRefresh(kv)
   if not IsServer() then return end
 
   self.caster = EntIndexToHScript(kv.inflictor)
+  local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
-  self:AddEntityAmount(kv.inflictor, kv.status_amount)
-  self:AddCurrentStatus(kv.status_amount)
+  self:AddEntityAmount(kv.inflictor, added_amount)
+  self:AddCurrentStatus(added_amount)
   self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(0.3)
+  self:StartIntervalThink(1)
 end
 
 function orb_bleed__status:OnRemoved()
@@ -49,19 +51,21 @@ function orb_bleed__status:OnIntervalThink()
   if not IsServer() then return end
 
   local interval = 0.1
-  local degen = self.status_degen * interval
-
-  for ent_index, table in pairs(self.status_amount) do
-    self:AddEntityAmount(ent_index, degen / #self.status_amount)
-  end
-
-  self:AddCurrentStatus(-degen)
-
+  
+  self:ReduceAmount(self.status_degen * interval)
   self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(interval)
 end
 
 -- UTILS -----------------------------------------------------------
+
+function orb_bleed__status:ReduceAmount(amount)
+  for ent_index, table in pairs(self.status_amount) do
+    self:AddEntityAmount(ent_index, amount / #self.status_amount)
+  end
+
+  self:AddCurrentStatus(-amount)
+end
 
 function orb_bleed__status:ApplyBloodLoss()
   local attacker = {unit = nil, amount = 0}
@@ -90,7 +94,7 @@ function orb_bleed__status:ApplyBloodLoss()
 
   CallBloodLoss(damage_result, attacker.unit, self.parent)
 
-  self:PopupBleedDamage(math.floor(damage_result), self.parent)
+  self:PopupBleedDamage(damage_result, self.parent)
   self:PlayEfxBloodLoss()
   self:Destroy()
 end
@@ -114,7 +118,7 @@ function orb_bleed__status:AddEntityAmount(ent_index, amount)
 end
 
 function orb_bleed__status:AddCurrentStatus(amount)
-  if self.parent:IsMagicImmune() then amount = 0 end
+  if self.parent:IsMagicImmune() and amount > 0 then amount = 0 end
   self.current_status = self.current_status + amount
 
   if self.current_status > self.max_status then

@@ -17,7 +17,7 @@ end
 -----------------------------------------------------------
 
 function bloodstained_1_modifier_call_status_efx:GetStatusEffectName()
-    return "particles/status_fx/status_effect_beserkers_call.vpcf"
+  return "particles/status_fx/status_effect_beserkers_call.vpcf"
 end
 
 function bloodstained_1_modifier_call_status_efx:StatusEffectPriority()

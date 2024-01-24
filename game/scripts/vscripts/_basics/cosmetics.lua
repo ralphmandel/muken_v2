@@ -58,11 +58,11 @@ end
 		self:ChangeTeam(caster:GetTeamNumber())
 
     if GetHeroName(caster) == "templar" then
-      if IsServer() then self:PlayEfxHammer() end
+      self:PlayEfxHammer()
 		end
 
     if GetHeroName(caster) == "lawbreaker" then
-      if IsServer() then self:PlayEfxGuns() end
+      self:PlayEfxGuns()
 		end
 	end
 

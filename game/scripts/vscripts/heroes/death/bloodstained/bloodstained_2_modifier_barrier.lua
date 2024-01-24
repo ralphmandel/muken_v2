@@ -1,6 +1,6 @@
 bloodstained_2_modifier_barrier = class({})
 
-function bloodstained_2_modifier_barrier:IsHidden() return false end
+function bloodstained_2_modifier_barrier:IsHidden() return true end
 function bloodstained_2_modifier_barrier:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------

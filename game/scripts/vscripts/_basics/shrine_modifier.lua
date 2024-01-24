@@ -10,7 +10,9 @@ function shrine_modifier:OnCreated( kv )
 
   self.name = string.sub(self.caster:GetName(), 1, -3)
 
-  if IsServer() then self:StartIntervalThink(1) end
+  if not IsServer() then return end
+
+  self:StartIntervalThink(1)
 end
 
 function shrine_modifier:OnRefresh( kv )
@@ -115,14 +117,15 @@ function shrine_modifier:OnModifierAdded(keys)
 end
 
 function shrine_modifier:OnIntervalThink()
+  if not IsServer() then return end
+  
   local filler = self.parent:FindAbilityByName("filler_ability")
-
   filler:EndCooldown()
 
   if self.name == "hp_filler" then filler:StartCooldown(PRE_GAME_TIME) end
   if self.name == "mp_filler" then filler:StartCooldown(PRE_GAME_TIME + 30) end
 
-  if IsServer() then self:StartIntervalThink(-1) end
+  self:StartIntervalThink(-1)
 end
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +134,7 @@ function shrine_modifier:ActivateHP(mod)
   if mod:GetParent():GetHealthPercent() > 50
   or mod:GetParent():HasModifier("shrine_refresh_hp_modifier") then
     Timers:CreateTimer(FrameTime(), function()
-      if IsServer() then self.parent:StopSound("Shrine.Cast") end
+      self.parent:StopSound("Shrine.Cast")
     end)
 
     local filler = self.parent:FindAbilityByName("filler_ability")
@@ -143,7 +146,7 @@ function shrine_modifier:ActivateHP(mod)
 
   AddModifier(mod:GetParent(), self.ability, "shrine_refresh_hp_modifier", {duration = 60}, false)
 
-  if IsServer() then self:PlayEfxHP(mod) end
+  self:PlayEfxHP(mod)
 end
 
 function shrine_modifier:ActiveteMP(mod)
@@ -151,7 +154,7 @@ function shrine_modifier:ActiveteMP(mod)
   or mod:GetParent():HasModifier("ancient_3_modifier_passive")
   or mod:GetParent():HasModifier("shrine_refresh_mp_modifier") then
     Timers:CreateTimer(FrameTime(), function()
-      if IsServer() then self.parent:StopSound("Shrine.Cast") end
+      self.parent:StopSound("Shrine.Cast")
     end)
 
     local filler = self.parent:FindAbilityByName("filler_ability")
@@ -163,7 +166,7 @@ function shrine_modifier:ActiveteMP(mod)
 
   AddModifier(mod:GetParent(), self.ability, "shrine_refresh_mp_modifier", {duration = 90}, false)
 
-  if IsServer() then self:PlayEfxMP(mod) end
+  self:PlayEfxMP(mod)
 end
 
 function shrine_modifier:PlayEfxHP(mod)

@@ -17,8 +17,6 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
   end
 
   function bloodstained_1__rage:OnOwnerSpawned()
-    if not IsServer() then return end
-
     self:SetActivated(true)
   end
 
@@ -35,8 +33,6 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
 -- SPELL START
 
   function bloodstained_1__rage:OnSpellStart()
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
     self:PlayEfxStart()
     
@@ -75,10 +71,8 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     ParticleManager:SetParticleControlEnt(effect_cast, 1, caster, PATTACH_POINT_FOLLOW, "attach_mouth", Vector(0,0,0), true)
     ParticleManager:ReleaseParticleIndex(effect_cast)
 
-    if IsServer() then
-      caster:EmitSound("Hero_PhantomAssassin.CoupDeGrace")
-      caster:EmitSound("Bloodstained.fury")
-    end
+    caster:EmitSound("Hero_PhantomAssassin.CoupDeGrace")
+    caster:EmitSound("Bloodstained.fury")
   end
 
   function bloodstained_1__rage:PlayEfxBlink(origin)
@@ -94,5 +88,5 @@ LinkLuaModifier("bloodstained_1_modifier_call_status_efx", "heroes/death/bloodst
     ParticleManager:SetParticleControl(effect_cast_b, 0, caster:GetOrigin())
     ParticleManager:ReleaseParticleIndex(effect_cast_b)
 
-    if IsServer() then caster:EmitSound("DOTA_Item.Overwhelming_Blink.Activate") end
+    caster:EmitSound("DOTA_Item.Overwhelming_Blink.Activate")
   end

@@ -87,6 +87,8 @@
     if target == nil then return end
     if IsValidEntity(target) == false then return end
 
+    damage = math.floor(damage)
+
     if damage <= 0 then return end
     local digits = 1 + #tostring(damage)
 
@@ -290,6 +292,48 @@
     end
 
     return amount
+  end
+
+  function CDOTA_BaseNPC:ReduceStatus(amount, list)
+    for _,status_name in pairs(list) do
+      local modifier = self:FindModifierByName(status_name)
+      if modifier then modifier:ReduceAmount(amount) end
+    end
+  end
+
+  function CDOTA_BaseNPC:SetBloodIllusion(ent, bRemove)
+    if not self.blood_illusion then self.blood_illusion = {} end
+    if not self.blood_efx then self.blood_efx = {} end
+
+    local ent_index = ent:GetEntityIndex()
+
+    if bRemove then
+      self.blood_illusion[ent_index] = nil
+    else
+      self.blood_illusion[ent_index] = ent
+    end
+
+    if self.blood_illusion[ent_index] then
+      local string = "particles/bloodstained/bloodstained_u_track1.vpcf"
+      self.blood_efx[ent_index] = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN_FOLLOW, self)
+      ParticleManager:SetParticleControlEnt(self.blood_efx[ent_index], 3, self, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", self:GetAbsOrigin(), true)
+      self.parent:EmitSound("Hero_LifeStealer.OpenWounds")
+    else
+      if self.blood_efx[ent_index] then
+        ParticleManager:DestroyParticle(self.blood_efx[ent_index], true)
+        self.blood_efx[ent_index] = nil
+      end
+    end
+  end
+
+  function CDOTA_BaseNPC:GetBloodIllusions()
+    if not self.blood_illusion then self.blood_illusion = {} end
+
+    for _,illusion in pairs(self.blood_illusion) do
+      return self.blood_illusion
+    end
+
+    return nil
   end
 
 -- CDOTA_BaseNPC || COSMETICS

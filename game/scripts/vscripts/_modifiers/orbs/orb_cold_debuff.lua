@@ -17,9 +17,12 @@ function orb_cold_debuff:OnCreated(kv)
   self.interval = 0.25
   self.status_mult = 0.05
 
+  self.base_slow = 100
+  self.base_attack_time = 0.4
+
   self.spell_immune = self.parent:IsMagicImmune()
-  self.slow = self.caster:GetDebuffPower(100, self.parent)
-  self.attack_time = self.caster:GetDebuffPower(0.4, self.parent)
+  self.slow = self.caster:GetDebuffPower(self.base_slow, self.parent)
+  self.attack_time = self.caster:GetDebuffPower(self.base_attack_time, self.parent)
   self:CheckSpellImmunity()
 
   self.parent:AddStatusEfx(nil, nil, "orb_cold_debuff_efx")
@@ -34,8 +37,8 @@ function orb_cold_debuff:OnRefresh(kv)
   self:SetDuration(kv.duration, true)
 
   self.spell_immune = self.parent:IsMagicImmune()
-  self.slow = self.caster:GetDebuffPower(75, self.parent)
-  self.attack_time = self.caster:GetDebuffPower(0.4, self.parent)
+  self.slow = self.caster:GetDebuffPower(self.base_slow, self.parent)
+  self.attack_time = self.caster:GetDebuffPower(self.base_attack_time, self.parent)
   self:CheckSpellImmunity()
 
   self:PlayEfxStart()
@@ -81,7 +84,7 @@ function orb_cold_debuff:OnIntervalThink()
 
   self.parent:AddModifier(self.ability, "orb_cold__status", {
     inflictor = self.caster:entindex(),
-    status_amount = self.slow * self.interval * self.status_mult
+    status_amount = self.base_slow * self.interval * self.status_mult
   })
 
   self:StartIntervalThink(self.interval)

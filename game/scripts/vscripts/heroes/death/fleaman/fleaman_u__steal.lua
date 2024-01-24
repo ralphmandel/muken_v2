@@ -15,8 +15,6 @@ LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modi
 -- SPELL START
 
   function fleaman_u__steal:OnOwnerDied()
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
     local passive = caster:FindModifierByName(self:GetIntrinsicModifierName())
     local mult = self:GetSpecialValueFor("special_respawn_self")
@@ -36,8 +34,6 @@ LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modi
   end
 
   function fleaman_u__steal:OnOwnerSpawned()
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
 
     if self.origin then
@@ -49,8 +45,6 @@ LinkLuaModifier("fleaman_u_modifier_chain", "heroes/death/fleaman/fleaman_u_modi
   end
 
   function fleaman_u__steal:OnHeroDiedNearby(unit, attacker, table)
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
     local mult = self:GetSpecialValueFor("special_respawn_enemy")
     local modifiers = unit:FindAllModifiersByName("sub_stat_modifier")

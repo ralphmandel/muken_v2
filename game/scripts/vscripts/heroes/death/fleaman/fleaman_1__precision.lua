@@ -31,8 +31,6 @@ LinkLuaModifier("fleaman_1_modifier_precision_status_efx", "heroes/death/fleaman
 -- SPELL START
 
   function fleaman_1__precision:OnSpellStart()
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
     caster:RemoveModifierByName("fleaman_1_modifier_gesture")
 

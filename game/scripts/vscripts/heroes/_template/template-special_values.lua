@@ -28,7 +28,11 @@ function template_special_values:OnCreated(kv)
 
   self.data_props = {
     buff_amp = 0,
-    debuff_amp = 0
+    debuff_amp = 0,
+    physical_damage = 0,
+    magical_damage = 0,
+    holy_damage = 0,
+    luck = 0
   }
 end
 

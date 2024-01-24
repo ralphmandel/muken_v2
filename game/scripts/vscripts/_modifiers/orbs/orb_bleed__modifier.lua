@@ -39,12 +39,18 @@ function orb_bleed__modifier:OnAttackLanded(keys)
   local modifiers = keys.target:FindAllModifiersByName("orb_bleed_debuff")
   for _, modifier in pairs(modifiers) do
     if modifier:GetAbility() == self.ability then
-      modifier:OnRefresh({duration = self.bleed_duration})
+      modifier:OnRefresh({
+        duration = self.bleed_duration,
+        bleed_damage = self.parent:GetSpellDamage(50, DAMAGE_TYPE_PHYSICAL)
+      })
       return
     end
   end
 
-  keys.target:AddModifier(self.ability, "orb_bleed_debuff", {duration = self.bleed_duration})
+  keys.target:AddModifier(self.ability, "orb_bleed_debuff", {
+    duration = self.bleed_duration,
+    bleed_damage = self.parent:GetSpellDamage(50, DAMAGE_TYPE_PHYSICAL)
+  })
 end
 
 -- UTILS -----------------------------------------------------------

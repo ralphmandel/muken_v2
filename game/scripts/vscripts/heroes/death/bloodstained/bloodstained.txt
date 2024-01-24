@@ -47,6 +47,16 @@
       "special_status_resist" "0"
       "special_attack_speed"  "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf"
+      "particle"  "particles/econ/events/ti6/blink_dagger_start_ti6_lvl2.vpcf"
+      "particle"  "particles/econ/events/ti6/blink_dagger_end_ti6_lvl2.vpcf"
+      "particle"  "particles/status_fx/status_effect_beserkers_call.vpcf"
+      "particle"  "particles/econ/items/lifestealer/lifestealer_immortal_backbone/status_effect_life_stealer_immortal_rage.vpcf"
+      "particle"  "particles/econ/items/ogre_magi/ogre_magi_arcana/ogre_magi_arcana_ignite_debuff.vpcf"
+    }
 	}
 
 	"bloodstained_2__bloodsteal"
@@ -74,6 +84,16 @@
       "special_kill_heal"     "0"
       "special_overhealth"    "0"
 		}
+    "precache"
+    {
+      "particle"  "particles/status_fx/status_effect_wraithking_ghosts.vpcf"
+      "particle"  "particles/units/heroes/hero_skeletonking/wraith_king_ghosts_ambient.vpcf"
+      "particle"  "particles/bloodstained/status_efx/status_effect_bloodstained.vpcf"
+      "particle"  "particles/bioshadow/bioshadow_drain.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture_nuke.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodbath.vpcf"
+      "particle"  "particles/units/heroes/hero_undying/undying_soul_rip_damage.vpcf"
+    }
 	}
 
 	"bloodstained_3__curse"
@@ -105,6 +125,12 @@
       "special_slow_duration" "0"
       "special_mute"          "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_queenofpain/queen_shadow_strike_body.vpcf"
+      "particle"  "particles/econ/items/grimstroke/gs_fall20_immortal/gs_fall20_immortal_soulbind.vpcf"
+    }
 	}
 
 	"bloodstained_4__bloodloss"
@@ -123,6 +149,11 @@
 		{
       "heal_percent"  "1 2 3 4 5 6 7"
 	  }
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodbath_eztzhok.vpcf"
+    }
 	}
 
 	"bloodstained_5__tears"
@@ -139,21 +170,29 @@
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 
     "AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_4"
 		"AbilityCastPoint"       		"0.45"
 
 		"AbilityValues"
 		{
-      "blood_duration"  "20"
-      "hp_lost"		      "1"
-      "tick"		        "1"
-      "radius"		      "350"
+      "step"            "0"
+      "blood_duration"  "0"
+      "hp_lost"		      "0"
+      "tick"		        "0"
+      "radius"		      "0"
       "blood_percent"	  "1 2 3 4 5 6 7"
-      "special_init_loss"		"0"
-      "special_copy_leech"	"0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/bloodstained/mist/blood_mist_aoe.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_x2_blood.vpcf"
+      "particle"  "particles/units/heroes/hero_undying/undying_soul_rip_damage.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodbath.vpcf"
+      "particle"  "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+    }
 	}
 
 	"bloodstained_u__seal"
@@ -176,17 +215,30 @@
 
     "AbilityValues"
 		{
-      "duration"			  "13"
-      "radius"		      "500"
-      "slow_duration"   "1.5"
-      "copy_number"     "1"
-      "copy_duration"   "15"
-      "hp_stolen"       "10"
-      "steal_duration"  "1 2 3 4 5 6 7"
-      "special_break"     "0"
-      "special_kill"      "0"
-      "special_bleed_in"  "0"
-      "special_bleed_out" "0"
+      "radius"		      "0"
+      "hp_stolen"       "0"
+      "copy_duration"   "0"
+      "slow_duration"   "0"
+      "steal_duration"  "0"
+      "duration"        "1 2 3 4 5 6 7"
+      "special_lifesteal"     "0"
+      "special_break"         "0"
+      "special_bleed_damage"  "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/bloodstained/seal_finder_aoe.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_thirst_owner_smoke_dark.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture_nuke.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodbath.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_u_illusion_status.vpcf"
+      "particle"  "particles/units/heroes/hero_bloodseeker/bloodseeker_rupture.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_u_bubbles.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_field_replica.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_seal_impact.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_seal_war.vpcf"
+      "particle"  "particles/bloodstained/bloodstained_u_track1.vpcf"
+    }
 	}
 }

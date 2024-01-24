@@ -56,12 +56,11 @@ require("internal/muken_events")
 require("internal/rank_system")
 
 -- INIT
+
 	function base_hero:Spawn()
-    if IsServer() then
-      if self:IsTrained() == false then
-        self:UpgradeAbility(true)
-      end
-    end
+    if not IsServer() then return end
+
+    if self:IsTrained() == false then self:UpgradeAbility(true) end
 	end
 
   function base_hero:GetIntrinsicModifierName()
@@ -430,6 +429,7 @@ require("internal/rank_system")
 	end
 
 -- PATH SYSTEM
+
   function base_hero:UpgradePath(path)
     local caster = self:GetCaster()
     self.chosen_path[path] = true

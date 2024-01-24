@@ -424,7 +424,7 @@ OUTPOST_ORIGIN = {
   [4] = Vector(-542.025, -2283.15, 16),
 }
 
-ORB_LIST = {
+STATUS_LIST = {
   "orb_bleed__status",
   "orb_cold__status"
 }

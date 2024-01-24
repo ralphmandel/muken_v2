@@ -41,8 +41,6 @@ LinkLuaModifier("bloodstained_2_modifier_barrier", "heroes/death/bloodstained/bl
   end
 
   function bloodstained_2__bloodsteal:OnHeroDiedNearby(unit, attacker, table)
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
 
     if attacker then

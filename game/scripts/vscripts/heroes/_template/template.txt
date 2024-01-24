@@ -38,6 +38,11 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 
 	"template_2__sk2"
@@ -62,6 +67,11 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 
 	"template_3__sk3"
@@ -86,6 +96,11 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 
 	"template_4__sk4"
@@ -110,6 +125,11 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 
 	"template_5__sk5"
@@ -134,6 +154,11 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 
 	"template_u__sk6"
@@ -158,5 +183,10 @@
     "AbilityValues"
 		{
 		}
+
+    "precache"
+    {
+      "particle"  ""
+    }
 	}
 }

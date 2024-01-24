@@ -190,7 +190,7 @@ end
 
 function _modifier_vit:OnStatUpated(property)
   if property == "sub_stat_status_resist" or property == "sub_stat_status_resist_stack" then
-    for _, status_name in pairs(ORB_LIST) do
+    for _, status_name in pairs(STATUS_LIST) do
       local status_modifier = self.parent:FindModifierByName(status_name)
       if status_modifier then status_modifier:UpdateStatusBar() end      
     end

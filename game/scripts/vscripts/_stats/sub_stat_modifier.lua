@@ -15,6 +15,17 @@ function sub_stat_modifier:OnCreated(kv)
   self:UpdateStatKV()
 end
 
+function sub_stat_modifier:OnRefresh(kv)
+  if not IsServer() then return end
+
+  self.kv = kv
+  self.status_resist_stack = kv.status_resist_stack or 0
+  self.stat_mod:SendBuffRefreshToClients()
+  self:UpdateStatKV()
+
+  if kv.duration then self.stat_mod:SetDuration(kv.duration, true) end
+end
+
 function sub_stat_modifier:OnRemoved()
 end
 

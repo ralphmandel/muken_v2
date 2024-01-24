@@ -16,7 +16,7 @@ function orb_bleed_debuff:OnCreated(kv)
   
   self.interval = 0.25
   self.status_mult = 0.1
-  self.bleed_damage = 50
+  self.bleed_damage = kv.bleed_damage
 
   self.damageTable = {
     attacker = self.caster,
@@ -31,6 +31,8 @@ end
 
 function orb_bleed_debuff:OnRefresh(kv)
   if not IsServer() then return end
+
+  self.bleed_damage = kv.bleed_damage
 
   self:SetDuration(kv.duration, true)
   self:PlayEfxStart()
@@ -47,15 +49,15 @@ function orb_bleed_debuff:OnIntervalThink()
   if self.caster == nil then self:Destroy() return end
   if IsValidEntity(self.caster) == false then self:Destroy() return end
 
-  self.damageTable.damage = self.caster:GetSpellDamage(self.bleed_damage, DAMAGE_TYPE_PHYSICAL) * self.interval
+  self.damageTable.damage = self.bleed_damage * self.interval
   if self.parent:IsMoving() then self.damageTable.damage = self.damageTable.damage * 2 end
 
   local damage_result = ApplyDamage(self.damageTable)
-  self:PopupBleedDamage(math.floor(damage_result), self.parent)
+  self:PopupBleedDamage(damage_result, self.parent)
 
   self.parent:AddModifier(self.ability, "orb_bleed__status", {
     inflictor = self.caster:entindex(),
-    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, self.parent)
+    status_amount = damage_result * self.status_mult
   })
 
   self:StartIntervalThink(self.interval)

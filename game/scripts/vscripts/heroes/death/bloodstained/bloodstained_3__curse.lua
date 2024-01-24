@@ -6,8 +6,6 @@ LinkLuaModifier("bloodstained_3_modifier_curse", "heroes/death/bloodstained/bloo
 -- SPELL START
 
   function bloodstained_3__curse:OnSpellStart()
-    if not IsServer() then return end
-
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
     

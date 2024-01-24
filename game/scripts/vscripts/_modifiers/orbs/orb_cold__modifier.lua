@@ -66,7 +66,7 @@ function orb_cold__modifier:OnAttackLanded(keys)
 
   keys.target:AddModifier(self.ability, "orb_cold__status", {
     inflictor = self.caster:entindex(),
-    status_amount = self.caster:GetDebuffPower(damage_result * self.status_mult, keys.target)
+    status_amount = damage_result * self.status_mult
   })
 
   local modifiers = keys.target:FindAllModifiersByName("orb_cold_debuff")
