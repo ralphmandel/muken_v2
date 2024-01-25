@@ -23,12 +23,14 @@ function fleaman_4_modifier_strip:OnCreated(kv)
     self.parent:AddModifier(self.ability, "_modifier_break", {})
   end
 
-  if self.ability:GetSpecialValueFor("special_bleeding") == 1 then
-    self.parent:AddModifier(self.ability, "_modifier_bleeding", {})
-  end
-
   if self.ability:GetSpecialValueFor("special_silence") == 1 then
     self.parent:AddModifier(self.ability, "_modifier_silence", {})
+  end
+
+  local bleed_damage = self.ability:GetSpecialValueFor("special_bleed_dmg")
+
+  if bleed_damage > 0 then
+    self.parent:AddModifier(self.ability, "orb_bleed_debuff", {bleed_damage = bleed_damage})
   end
 
   self.damageTable = {
@@ -46,8 +48,8 @@ function fleaman_4_modifier_strip:OnRemoved()
   
   self.parent:RemoveSubStats(self.ability, {"armor", "evasion"})
   self.parent:RemoveAllModifiersByNameAndAbility("_modifier_break", self.ability)
-  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_bleeding", self.ability)
   self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("orb_bleed_debuff", self.ability)
 
   if self.damageTable.damage > 0 then
     self:PlayEfxEnd()

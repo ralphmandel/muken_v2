@@ -5,7 +5,6 @@ LinkLuaModifier("_fountain_refresh_hp", "_modifiers/generics/_fountain_refresh_h
 LinkLuaModifier("_fountain_refresh_mp", "_modifiers/generics/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_ban", "_modifiers/generics/_modifier_ban", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_bkb", "_modifiers/generics/_modifier_bkb", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_bleeding", "_modifiers/generics/_modifier_bleeding", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_blind", "_modifiers/generics/_modifier_blind", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_blind_stack", "_modifiers/generics/_modifier_blind_stack", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_break", "_modifiers/generics/_modifier_break", LUA_MODIFIER_MOTION_NONE)
@@ -51,6 +50,7 @@ LinkLuaModifier("orb_cold_debuff_efx", "_modifiers/orbs/orb_cold_debuff_efx", LU
 LinkLuaModifier("orb_cold_debuff", "_modifiers/orbs/orb_cold_debuff", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_cold__max_status", "_modifiers/orbs/orb_cold__max_status", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_cold__max_status_efx", "_modifiers/orbs/orb_cold__max_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("orb_holy__modifier", "_modifiers/orbs/orb_holy__modifier", LUA_MODIFIER_MOTION_NONE)
 
 require("internal/muken_events")
 require("internal/rank_system")

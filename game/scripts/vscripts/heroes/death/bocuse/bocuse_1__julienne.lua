@@ -1,7 +1,6 @@
 bocuse_1__julienne = class({})
 LinkLuaModifier("bocuse_1_modifier_passive", "heroes/death/bocuse/bocuse_1_modifier_passive", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bocuse_1_modifier_julienne", "heroes/death/bocuse/bocuse_1_modifier_julienne", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("_modifier_bleeding", "_modifiers/_modifier_bleeding", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_stun", "_modifiers/_modifier_stun", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_crit_damage", "_modifiers/_modifier_crit_damage", LUA_MODIFIER_MOTION_NONE)
 

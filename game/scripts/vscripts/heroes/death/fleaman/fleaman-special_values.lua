@@ -123,7 +123,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "armor" then return 1 end
     if value_name == "chance" then return 1 end
     if value_name == "special_break" then return 1 end
-    if value_name == "special_bleeding" then return 1 end
+    if value_name == "special_bleed_dmg" then return 1 end
     if value_name == "special_evasion" then return 1 end
     if value_name == "special_silence" then return 1 end
     if value_name == "special_damage" then return 1 end
@@ -283,20 +283,20 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "fleaman_4__strip" then
-    if self:HasRank(4, 1, 1) then
-      if value_name == "special_break" then return 1 end
+		if self:HasRank(4, 1, 1) then
+      if value_name == "armor" then return -6 end
 		end
 
     if self:HasRank(4, 1, 2) then
-      if value_name == "special_bleeding" then return 1 end
+      if value_name == "special_evasion" then return -1 end
 		end
 
-		if self:HasRank(4, 2, 1) then
-      if value_name == "armor" then return -6.5 end
+    if self:HasRank(4, 2, 1) then
+      if value_name == "special_break" then return 1 end
 		end
 
     if self:HasRank(4, 2, 2) then
-      if value_name == "special_evasion" then return -2 end
+      if value_name == "special_bleed_dmg" then return 100 end
 		end
 
 		if self:HasRank(4, 3, 1) then

@@ -83,10 +83,11 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "AbilityChargeRestoreTime" then return 1 end
 
     if value_name == "absorption" then return 1 end
-    if value_name == "pure_damage" then return 1 end
     if value_name == "duration" then return 1 end
 		if value_name == "cast_range" then return 1 end
 		if value_name == "max_range" then return 1 end
+		if value_name == "special_heal" then return 1 end
+		if value_name == "special_mana" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "paladin_2__shield" then
@@ -148,37 +149,16 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 
     if value_name == "damage" then return 1 end
     if value_name == "heal" then return 1 end
-    if value_name == "restore_time" then return 1 end
     if value_name == "special_hits" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "paladin_u__faith" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "holy_reduction" then return 1 end
 
-		if caster:FindAbilityByName("paladin_u__faith_rank_11") then
-      if value_name == "special_magic_resist" then return 1 end
-		end
-
-    if caster:FindAbilityByName("paladin_u__faith_rank_12") then
-		end
-
-		if caster:FindAbilityByName("paladin_u__faith_rank_21") then
-      if value_name == "max_health" then return 1 end
-		end
-
-    if caster:FindAbilityByName("paladin_u__faith_rank_22") then
-      if value_name == "special_aura_radius" then return 1 end
-		end
-
-		if caster:FindAbilityByName("paladin_u__faith_rank_31") then
-      if value_name == "special_mana" then return 1 end
-      if value_name == "special_hp_cap" then return 1 end
-		end
-
-    if caster:FindAbilityByName("paladin_u__faith_rank_32") then
-		end
+    if value_name == "max_health" then return 1 end
+    if value_name == "special_magic_resist" then return 1 end
+    if value_name == "special_aura_radius" then return 1 end
 	end
 
 	return 0
@@ -196,38 +176,39 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "paladin_1__link" then
     if self:HasRank(1, 1, 1) then
-      if value_name == "duration" then return 35 end
     end
 
     if self:HasRank(1, 1, 2) then
     end
 
     if self:HasRank(1, 2, 1) then
-      if value_name == "pure_damage" then return 30 * self:GetHolyDamageAmp() end
+      if value_name == "AbilityChargeRestoreTime" then return 30 end
+      if value_name == "absorption" then return 100 end
 		end
 
     if self:HasRank(1, 2, 2) then
+      if value_name == "AbilityCharges" then return 2 end
+      if value_name == "absorption" then return 50 end
 		end
 
 		if self:HasRank(1, 3, 1) then
-      if value_name == "AbilityCharges" then return 2 end
-      if value_name == "absorption" then return 75 end
+      if value_name == "special_heal" then return 20 * self:GetHealPower() end
 		end
 
     if self:HasRank(1, 3, 2) then
+      if value_name == "special_mana" then return 10 * self:GetHealPower() end
 		end
 
 		if value_name == "AbilityManaCost" then return 200 * mana_mult end
 		if value_name == "AbilityCooldown" then return 0 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
     if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 60 end
+    if value_name == "AbilityChargeRestoreTime" then return 40 end
     if value_name == "cast_range" then return 600 + (value_level * 50) end
 		if value_name == "max_range" then return 900 + (value_level * 50) end
 
-    if value_name == "absorption" then return 100 end
-    if value_name == "pure_damage" then return 20 * self:GetHolyDamageAmp() end
-    if value_name == "duration" then return 30 end
+    if value_name == "absorption" then return 75 end
+    if value_name == "duration" then return 20 end
 	end
 
 	if ability:GetAbilityName() == "paladin_2__shield" then
@@ -380,7 +361,6 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCastRange" then return caster:Script_GetAttackRange() end
     if value_name == "AbilityCharges" then return 3 end
     if value_name == "AbilityChargeRestoreTime" then return ability:GetSpecialValueFor("restore_time") end
-    if value_name == "restore_time" then return 5 - (math.floor(value_level / 0.6) * 0.1) end
 
     if value_name == "damage" then return 120 end
     if value_name == "heal" then return 50 end
@@ -391,12 +371,15 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(6, 1, 2) then
+      if value_name == "special_magic_resist" then return 2 end
     end
 
     if self:HasRank(6, 2, 1) then
+      if value_name == "max_health" then return 2500 end
 		end
 
     if self:HasRank(6, 2, 2) then
+      if value_name == "special_aura_radius" then return 900 end
 		end
 
 		if self:HasRank(6, 3, 1) then
@@ -406,21 +389,9 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if value_name == "AbilityManaCost" then return 0 end
+		if value_name == "AbilityCooldown" then return 0 end
 
-		if value_name == "AbilityCooldown" then
-      if caster:FindAbilityByName("paladin_u__faith_rank_31") then
-        return 120
-      end
-      return 0
-    end
-
-		if value_name == "holy_reduction" then return 15 + (value_level * 2.5) end
-
-    if value_name == "special_magic_resist" then return 2 end
-    if value_name == "max_health" then return 2500 end
-    if value_name == "special_aura_radius" then return 900 end
-    if value_name == "special_mana" then return 10 end
-    if value_name == "special_hp_cap" then return 20 end
+    if value_name == "max_health" then return 3000 end
 	end
 
 	return 0

@@ -13,9 +13,8 @@ function orb_cold__modifier:OnCreated(kv)
 
   self.cold_duration = 1.5
 
-  local base_damage = 50
   self.damage_percent = 50
-  self.magical_damage = base_damage * self.damage_percent * 0.01
+  self.magical_damage = 25
   self.status_mult = 0.05
 
   self.damageTable = {

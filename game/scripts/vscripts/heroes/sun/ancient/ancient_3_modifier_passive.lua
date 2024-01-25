@@ -55,7 +55,7 @@ function ancient_3_modifier_passive:OnAttacked(keys)
           damage = keys.original_damage * self.ability:GetSpecialValueFor("special_return_damage") * 0.01,
           damage_type = DAMAGE_TYPE_PHYSICAL,
           attacker = self.caster, victim = keys.attacker, ability = self.ability,
-          damage_flags = 31 --DOTA_DAMAGE_FLAG_REFLECTION
+          damage_flags = 31
         })
       end
     end

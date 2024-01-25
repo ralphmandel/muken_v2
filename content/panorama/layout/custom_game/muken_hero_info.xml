@@ -136,6 +136,12 @@
       <Image src="file://{resources}/images/custom_game/abilities/fleaman_4__strip.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/abilities/fleaman_5__smoke.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/abilities/fleaman_u__steal.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_1__link.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_2__shield.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_3__hammer.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_4__magnus.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_5__smite.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_u__faith.png" class="img_collapse"/>
     </Panel>
   </Panel>
 </root>

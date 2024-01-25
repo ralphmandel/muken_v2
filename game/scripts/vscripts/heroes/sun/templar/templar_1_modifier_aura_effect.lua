@@ -63,7 +63,7 @@ function templar_1_modifier_aura_effect:OnTakeDamage(keys)
 		ApplyDamage({
 			damage = return_damage, damage_type = keys.damage_type,
 			attacker = self.caster, victim = keys.attacker, ability = self.ability,
-			damage_flags = 31 --DOTA_DAMAGE_FLAG_REFLECTION
+			damage_flags = 31
 		})
 	end
 end
