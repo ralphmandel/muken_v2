@@ -10,21 +10,19 @@ function paladin_2_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  self.tick = self.ability:GetSpecialValueFor("special_burn_tick")
+  if not IsServer() then return end
 
-  AddModifier(self.parent, self.ability, "paladin_2_modifier_burn_efx", {}, false)
+  self.interval = self.ability:GetSpecialValueFor("special_burn_tick")
+  self.parent:AddModifier(self.ability, "paladin_2_modifier_burn_efx", {})
 
-  if IsServer() then
-    self:PlayEfxStart()
-    self:StartIntervalThink(self.tick)
-  end
+  self:StartIntervalThink(self.interval)
 end
 
 function paladin_2_modifier_aura_effect:OnRefresh(kv)
 end
 
 function paladin_2_modifier_aura_effect:OnRemoved()
-  if IsServer() then self.parent:StopSound("Hero_Batrider.Firefly.loop") end
+  if not IsServer() then return end
 
   self.parent:RemoveModifierByName("paladin_2_modifier_burn_efx")
 end
@@ -34,20 +32,15 @@ end
 -- UTILS -----------------------------------------------------------
 
 function paladin_2_modifier_aura_effect:OnIntervalThink()
+  if not IsServer() then return end
+
   ApplyDamage({
     victim = self.parent, attacker = self.caster, ability = self.ability,
-    damage = self.ability:GetSpecialValueFor("special_burn_damage") * self.tick,
+    damage = self.ability:GetSpecialValueFor("special_burn_damage") * self.interval,
     damage_type = self.ability:GetAbilityDamageType(),
   })
 
-	if IsServer() then self:StartIntervalThink(self.tick) end
+	self:StartIntervalThink(self.interval)
 end
 
 -- EFFECTS -----------------------------------------------------------
-
-function paladin_2_modifier_aura_effect:PlayEfxStart(radius)
-  if IsServer() then
-    self.parent:EmitSound("Hero_Inquisitor.Shield.Fire")
-    self.parent:EmitSound("Hero_Batrider.Firefly.loop")
-  end
-end

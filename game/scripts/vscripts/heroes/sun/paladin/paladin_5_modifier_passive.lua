@@ -9,6 +9,9 @@ function paladin_5_modifier_passive:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+
+  if not IsServer() then return end
+
   self.cast = false
 end
 
@@ -23,13 +26,20 @@ end
 function paladin_5_modifier_passive:DeclareFunctions()
 	local funcs = {
 		MODIFIER_EVENT_ON_ORDER,
+    MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
 		MODIFIER_PROPERTY_PROCATTACK_FEEDBACK
 	}
 
 	return funcs
 end
 
+function paladin_5_modifier_passive:GetModifierAttackRangeBonus()
+  return self.ability:GetSpecialValueFor("special_attack_range")
+end
+
 function paladin_5_modifier_passive:OnOrder(keys)
+  if not IsServer() then return end
+
 	if keys.unit ~= self.parent then return end
 
 	if keys.ability then
@@ -43,6 +53,8 @@ function paladin_5_modifier_passive:OnOrder(keys)
 end
 
 function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
+  if not IsServer() then return end
+
   if self:ShouldLaunch(keys.target) == false then return end
 
   self.ability:UseResources(true, false, false, true)
@@ -50,43 +62,28 @@ function paladin_5_modifier_passive:GetModifierProcAttack_Feedback(keys)
 
   if keys.target:TriggerSpellAbsorb(self) then return end
 
-  if IsServer() then
-    self:PlayEfxHit(keys.target)
-    self:PlayEfxScreenShake(keys.target)
+  self:PlayEfxHit(keys.target)
+  self:PlayEfxScreenShake(keys.target)
+
+  if self.ability:GetSpecialValueFor("special_hits") > 0 then
+    self.parent:AddModifier(self.ability, "paladin_5_modifier_sonicblow", {target = keys.target:entindex()})
   end
 
   if keys.target:IsMagicImmune() == false then
-    local stun_mods = keys.target:FindAllModifiersByName("_modifier_stun")
-    local stun_duration = CalcStatus(self.ability:GetSpecialValueFor("special_stun_duration"), self.caster, keys.target)
-  
-    for _, mod in pairs(stun_mods) do
-      if mod:GetCaster() == self.caster and mod:GetAbility() == self.ability then
-        stun_duration = stun_duration + mod:GetRemainingTime()
-      end
-    end
-    
-    RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_stun", self.ability)
-    AddModifier(keys.target, self.ability, "_modifier_stun", {duration = stun_duration}, false)
+    keys.target:AddModifier(self.ability, "_modifier_stun", {
+      duration = self.ability:GetSpecialValueFor("special_stun_duration"),
+      bResist = 1
+    })
   end
 
-  if self.ability:GetSpecialValueFor("special_hits") > 0 then
-    AddModifier(self.parent, self.ability, "paladin_5_modifier_sonicblow", {target = keys.target:entindex()}, false)
-  end
-
-  local target_max_hp = keys.target:GetMaxHealth()
-
-  local damage_result = ApplyDamage({
+  ApplyDamage({
     victim = keys.target, attacker = self.caster,
     damage = self.ability:GetSpecialValueFor("damage"),
     damage_type = self.ability:GetAbilityDamageType(),
     ability = self.ability
   })
 
-  local base = damage_result
-
-  if self.ability:GetSpecialValueFor("special_hp_based") == 1 then base = target_max_hp end
-
-  self.parent:Heal(base * self.ability:GetSpecialValueFor("heal") * 0.01, self.ability)
+  self.parent:ApplyHeal(self.ability:GetSpecialValueFor("heal"), self.ability, false)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -131,10 +128,8 @@ function paladin_5_modifier_passive:PlayEfxHit(target)
 	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
 	ParticleManager:SetParticleControl(effect_cast, 0, self.parent:GetOrigin())
 
-  if IsServer() then
-    target:EmitSound("Hero_Omniknight.HammerOfPurity.Crit")
-    self.parent:EmitSound("Hero_Centaur.DoubleEdge")
-  end
+  target:EmitSound("Hero_Omniknight.HammerOfPurity.Crit")
+  self.parent:EmitSound("Hero_Centaur.DoubleEdge")
 end
 
 function paladin_5_modifier_passive:PlayEfxScreenShake(target)

@@ -38,7 +38,7 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
           unit:Purge(false, true, false, true, false)
         end
 
-        unit:Heal(CalcHeal(caster, self:GetSpecialValueFor("heal") * mult), self)
+        unit:ApplyHeal(self:GetSpecialValueFor("heal") * mult, self, false)
       else
         if random_mult ==  self:GetSpecialValueFor("max_mult") then
           AddModifier(unit, self, "_modifier_stun", {duration = self:GetSpecialValueFor("special_stun_duration")}, true)
@@ -78,7 +78,7 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
     ParticleManager:SetParticleControl(effect3, 0, target:GetOrigin() )
     ParticleManager:SetParticleControl(effect3, 2, Vector(radius, radius, radius))
 
-    if IsServer() then target:EmitSound("Hero_Omniknight.Purification.Wingfall") end
+    target:EmitSound("Hero_Omniknight.Purification.Wingfall")
   end
 
   function paladin_3__hammer:PlayEfxMult(target, level)

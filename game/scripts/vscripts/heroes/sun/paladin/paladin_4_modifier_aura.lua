@@ -24,17 +24,19 @@ function paladin_4_modifier_aura:OnCreated(kv)
   self.interval = self.ability:GetSpecialValueFor("interval")
   self.disarmed = self.ability:GetSpecialValueFor("disarmed")
 
-  if IsServer() then
-    self:PlayEfxStart()
-    self:StartIntervalThink(self.interval)
-  end
+  if not IsServer() then return end
+
+  self:PlayEfxStart()
+  self:StartIntervalThink(self.interval)
 end
 
 function paladin_4_modifier_aura:OnRefresh(kv)
 end
 
 function paladin_4_modifier_aura:OnRemoved()
-  if IsServer() then self.parent:StopSound("Hero_ArcWarden.MagneticField") end
+  if not IsServer() then return end
+
+  self.parent:StopSound("Hero_ArcWarden.MagneticField")
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -49,17 +51,17 @@ function paladin_4_modifier_aura:CheckState()
 end
 
 function paladin_4_modifier_aura:OnIntervalThink()
+  if not IsServer() then return end
+
   ApplyDamage({
     victim = self.parent, attacker = self.caster,
     damage = self.caster:GetMaxHealth() * self.ability:GetSpecialValueFor("damage_percent") * self.interval * 0.01,
     damage_type = self.ability:GetAbilityDamageType(),
-    ability = self.ability, damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+    ability = self.ability, damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL
   })
 
-  if IsServer() then
-    self.parent:EmitSound("Paladin.Magnus.Hit")
-    self:StartIntervalThink(self.interval)
-  end
+  self.parent:EmitSound("Paladin.Magnus.Hit")
+  self:StartIntervalThink(self.interval)
 end
 
 -- UTILS -----------------------------------------------------------
@@ -73,5 +75,5 @@ function paladin_4_modifier_aura:PlayEfxStart()
 	ParticleManager:SetParticleControl(self.effect_cast, 1, Vector(self.radius, self.radius, self.radius))
 	self:AddParticle(self.effect_cast, false, false, -1, true, false)
 
-  if IsServer() then self.parent:EmitSound("Hero_ArcWarden.MagneticField") end
+  self.parent:EmitSound("Hero_ArcWarden.MagneticField")
 end

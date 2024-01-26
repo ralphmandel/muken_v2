@@ -13,6 +13,10 @@ function paladin_1_modifier_link:OnCreated(kv)
   if not IsServer() then return end
 
   self.parent:AddModifier(self.ability, "orb_holy__modifier", {})
+  self.parent:AddSubStats(self.ability, {
+    magical_damage = self.ability:GetSpecialValueFor("special_magical_damage"),
+    physical_damage = self.ability:GetSpecialValueFor("special_physical_damage")
+  })
 
   self:PlayEfxStart()
   self:StartIntervalThink(1)
@@ -25,6 +29,7 @@ function paladin_1_modifier_link:OnRemoved()
   if not IsServer() then return end
 
   self.parent:RemoveAllModifiersByNameAndAbility("orb_holy__modifier", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"magical_damage", "physical_damage"})
 
   self.caster:StopSound("Hero_Wisp.Tether")
   self.caster:EmitSound("Hero_Wisp.Tether.Stop")
@@ -76,7 +81,7 @@ function paladin_1_modifier_link:OnIntervalThink()
   if self.efx then ParticleManager:SetParticleControl(self.pfx, 3, Vector(cast_range, max_range, 0)) end
 
   self.parent:ApplyHeal(self.ability:GetSpecialValueFor("special_heal"), self.ability, false)
-  self.parent:ApplyMana(self.ability:GetSpecialValueFor("special_mana"), self.ability, false, false, true)
+  self.parent:ApplyMana(self.ability:GetSpecialValueFor("special_mana"), self.ability, false, nil, true)
 
   self:StartIntervalThink(1)
 end

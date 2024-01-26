@@ -25,23 +25,21 @@ LinkLuaModifier("paladin_2_modifier_burn_efx", "heroes/sun/paladin/paladin_2_mod
 
   function paladin_2__shield:OnAbilityPhaseStart()
     local caster = self:GetCaster()
-
-    if IsServer() then caster:EmitSound("Hero_Dawnbreaker.PreAttack") end
+    caster:EmitSound("Hero_Dawnbreaker.PreAttack")
 
     return true
   end
 
   function paladin_2__shield:OnAbilityPhaseInterrupted()
     local caster = self:GetCaster()
-
-    if IsServer() then caster:StopSound("Hero_Dawnbreaker.PreAttack") end
+    caster:StopSound("Hero_Dawnbreaker.PreAttack")
   end
 
 	function paladin_2__shield:OnSpellStart()
 		local caster = self:GetCaster()
     local target = self:GetCursorTarget() or caster
 
-    AddModifier(target, self, "paladin_2_modifier_shield", {duration = self:GetSpecialValueFor("duration")}, true)
+    target:AddModifier(self, "paladin_2_modifier_shield", {duration = self:GetSpecialValueFor("duration")})
 	end
 
 -- EFFECTS

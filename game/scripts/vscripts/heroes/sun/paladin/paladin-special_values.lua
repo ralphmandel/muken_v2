@@ -86,6 +86,8 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "duration" then return 1 end
 		if value_name == "cast_range" then return 1 end
 		if value_name == "max_range" then return 1 end
+		if value_name == "special_magical_damage" then return 1 end
+		if value_name == "special_physical_damage" then return 1 end
 		if value_name == "special_heal" then return 1 end
 		if value_name == "special_mana" then return 1 end
 	end
@@ -149,6 +151,8 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 
     if value_name == "damage" then return 1 end
     if value_name == "heal" then return 1 end
+    if value_name == "special_attack_range" then return 1 end
+    if value_name == "special_stun_duration" then return 1 end
     if value_name == "special_hits" then return 1 end
 	end
 
@@ -159,6 +163,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "max_health" then return 1 end
     if value_name == "special_magic_resist" then return 1 end
     if value_name == "special_aura_radius" then return 1 end
+    if value_name == "special_max_mana" then return 1 end
 	end
 
 	return 0
@@ -176,9 +181,11 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "paladin_1__link" then
     if self:HasRank(1, 1, 1) then
+      if value_name == "special_magical_damage" then return 30 end
     end
 
     if self:HasRank(1, 1, 2) then
+      if value_name == "special_physical_damage" then return 30 end
     end
 
     if self:HasRank(1, 2, 1) then
@@ -221,7 +228,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(2, 2, 1) then
-      if value_name == "special_burn_damage" then return 50 * self:GetMagicalDamageAmp() end
+      if value_name == "special_burn_damage" then return 40 * self:GetMagicalDamageAmp() end
       if value_name == "special_burn_radius" then return 250 end
       if value_name == "special_burn_tick" then return 0.4 end
 		end
@@ -332,18 +339,19 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "paladin_5__smite" then
     if self:HasRank(5, 1, 1) then
+      if value_name == "special_attack_range" then return 50 end
     end
 
     if self:HasRank(5, 1, 2) then
+      if value_name == "special_stun_duration" then return 0.1 end
     end
 
     if self:HasRank(5, 2, 1) then
-      if value_name == "heal" then return 100 end
+      if value_name == "heal" then return 80 * self:GetHealPower() end
 		end
 
     if self:HasRank(5, 2, 2) then
-      if value_name == "damage" then return 180 end
-      if value_name == "heal" then return 30 end
+      if value_name == "damage" then return 180 * self:GetHolyDamageAmp() end
 		end
 
 		if self:HasRank(5, 3, 1) then
@@ -362,8 +370,8 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCharges" then return 3 end
     if value_name == "AbilityChargeRestoreTime" then return ability:GetSpecialValueFor("restore_time") end
 
-    if value_name == "damage" then return 120 end
-    if value_name == "heal" then return 50 end
+    if value_name == "damage" then return 120 * self:GetHolyDamageAmp() end
+    if value_name == "heal" then return 40 * self:GetHealPower() end
 	end
 
 	if ability:GetAbilityName() == "paladin_u__faith" then
@@ -371,11 +379,10 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(6, 1, 2) then
-      if value_name == "special_magic_resist" then return 2 end
     end
 
     if self:HasRank(6, 2, 1) then
-      if value_name == "max_health" then return 2500 end
+      if value_name == "special_magic_resist" then return 4 end
 		end
 
     if self:HasRank(6, 2, 2) then
@@ -383,9 +390,11 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if self:HasRank(6, 3, 1) then
+      if value_name == "max_health" then return 4000 end
 		end
 
     if self:HasRank(6, 3, 2) then
+      if value_name == "special_max_mana" then return 300 end
 		end
 
 		if value_name == "AbilityManaCost" then return 0 end

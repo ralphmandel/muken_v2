@@ -9,29 +9,32 @@ function paladin_5_modifier_sonicblow:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+
+  if not IsServer() then return end
+
   self.ban = true
 
   -- MAX ASPD: 800
-  AddSubStats(self.parent, self.ability, {attack_speed = 9999, attack_time = 0.6}, false)
-  AddModifier(self.parent, self.ability, "_modifier_ban", {}, false)
+  self.parent:AddSubStats(self.ability, {attack_speed = 9999, attack_time = 0.6})
+  self.parent:AddModifier(self.ability, "_modifier_ban", {})
+  self.parent:Stop()
+
   ProjectileManager:ProjectileDodge(self.parent)
 
-	self.parent:Stop()
-
-  if IsServer() then
-    self.target = EntIndexToHScript(kv.target)
-    self:SetStackCount(self.ability:GetSpecialValueFor("special_hits"))
-    self:PlayEfxBlinkStart()
-    self:StartIntervalThink(0.3)
-  end
+  self.target = EntIndexToHScript(kv.target)
+  self:SetStackCount(self.ability:GetSpecialValueFor("special_hits"))
+  self:PlayEfxBlinkStart()
+  self:StartIntervalThink(0.3)
 end
 
 function paladin_5_modifier_sonicblow:OnRefresh(kv)
 end
 
 function paladin_5_modifier_sonicblow:OnRemoved()
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_ban", self.ability)
-  RemoveSubStats(self.parent, self.ability, {"attack_speed", "attack_time"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"attack_speed", "attack_time"})
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_ban", self.ability)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -48,6 +51,8 @@ function paladin_5_modifier_sonicblow:DeclareFunctions()
 end
 
 function paladin_5_modifier_sonicblow:OnStateChanged(keys)
+  if not IsServer() then return end
+
 	if keys.unit ~= self.parent then return end
   if self.ban == true then return end
 
@@ -60,10 +65,14 @@ function paladin_5_modifier_sonicblow:OnStateChanged(keys)
 end
 
 function paladin_5_modifier_sonicblow:OnUnitMoved(keys)
+  if not IsServer() then return end
+
 	if keys.unit == self.parent then self:Destroy() end
 end
 
 function paladin_5_modifier_sonicblow:OnOrder(keys)
+  if not IsServer() then return end
+
 	if keys.unit ~= self.parent then return end
 	if keys.order_type > 10 then return end
 	if keys.order_type == 4 then
@@ -78,19 +87,21 @@ function paladin_5_modifier_sonicblow:OnOrder(keys)
 end
 
 function paladin_5_modifier_sonicblow:OnAttack(keys)
+  if not IsServer() then return end
+
 	if keys.attacker ~= self.parent then return end
 
-  if IsServer() then
-    if keys.target == self.target then
-      self:DecrementStackCount()
-    else
-      self:SetStackCount(0)
-    end
+  if keys.target == self.target then
+    self:DecrementStackCount()
+  else
+    self:SetStackCount(0)
   end
 end
 
 function paladin_5_modifier_sonicblow:OnIntervalThink()
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_ban", self.ability)
+  if not IsServer() then return end
+
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_ban", self.ability)
 
   if self.target then
     if IsValidEntity(self.target) then
@@ -109,7 +120,7 @@ function paladin_5_modifier_sonicblow:OnIntervalThink()
       self:PlayEfxBlinkEnd(point)
 
       if self.target:IsMagicImmune() == false then
-        AddModifier(self.target, self.ability, "modifier_knockback", {
+        self.target:AddModifier(self.ability, "modifier_knockback", {
           center_x = self.parent:GetAbsOrigin().x + 1,
           center_y = self.parent:GetAbsOrigin().y + 1,
           center_z = self.parent:GetAbsOrigin().z,
@@ -117,14 +128,11 @@ function paladin_5_modifier_sonicblow:OnIntervalThink()
           duration = 0.3,
           knockback_duration = 0.3,
           knockback_distance = 75
-        }, true)        
+        })   
       end
     
-      if IsServer() then
-        self.target:EmitSound("Hero_Spirit_Breaker.Charge.Impact")
-        self:StartIntervalThink(-1)
-      end
-
+      self.target:EmitSound("Hero_Spirit_Breaker.Charge.Impact")
+      self:StartIntervalThink(-1)
       return
     end
   end
@@ -150,7 +158,7 @@ function paladin_5_modifier_sonicblow:PlayEfxBlinkStart()
 	ParticleManager:SetParticleControl(blink_start_fx, 1, self.target:GetOrigin() + direction)
   ParticleManager:ReleaseParticleIndex(blink_start_fx)
 
-	if IsServer() then self.parent:EmitSound("Hero_Antimage.Blink_out") end
+	self.parent:EmitSound("Hero_Antimage.Blink_out")
 end
 
 function paladin_5_modifier_sonicblow:PlayEfxBlinkEnd(point)
@@ -169,5 +177,5 @@ function paladin_5_modifier_sonicblow:PlayEfxBlinkEnd(point)
   ParticleManager:SetParticleControlForward( blink_end_fx, 0, direction:Normalized())
   ParticleManager:ReleaseParticleIndex(blink_end_fx)
 
-	if IsServer() then self.parent:EmitSound("Hero_Antimage.Blink_in.Persona") end
+	self.parent:EmitSound("Hero_Antimage.Blink_in.Persona")
 end

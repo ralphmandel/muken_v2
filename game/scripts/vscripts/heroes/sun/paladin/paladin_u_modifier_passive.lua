@@ -22,46 +22,34 @@ function paladin_u_modifier_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
+  if not IsServer() then return end
+
+  self.parent:AddSubStats(self.ability, {
     max_health = self.ability:GetSpecialValueFor("max_health"),
+    max_mana = self.ability:GetSpecialValueFor("special_max_mana"),
     magic_resist = self.ability:GetSpecialValueFor("special_magic_resist")
-  }, false)
+  })
 end
 
 function paladin_u_modifier_passive:OnRefresh(kv)
-  RemoveSubStats(self.parent, self.ability, {"max_health", "magic_resist"})
-  AddSubStats(self.parent, self.ability, {
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"max_health", "max_mana", "magic_resist"})
+
+  self.parent:AddSubStats(self.ability, {
     max_health = self.ability:GetSpecialValueFor("max_health"),
+    max_mana = self.ability:GetSpecialValueFor("special_max_mana"),
     magic_resist = self.ability:GetSpecialValueFor("special_magic_resist")
-  }, false)
+  })
 end
 
 function paladin_u_modifier_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"max_health", "magic_resist"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"max_health", "max_mana", "magic_resist"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
-
-function paladin_u_modifier_passive:DeclareFunctions()
-	local funcs = {
-		MODIFIER_EVENT_ON_TAKEDAMAGE
-	}
-
-	return funcs
-end
-
-function paladin_u_modifier_passive:OnTakeDamage(keys)
-  if keys.unit ~= self.parent then return end
-  if self.parent:PassivesDisabled() then return end
-  if self.parent:IsAlive() == false then return end
-  if self.ability:IsCooldownReady() == false then return end
-
-  if self.parent:GetHealthPercent() < self.ability:GetSpecialValueFor("special_hp_cap") then
-    IncreaseMana(self.parent, self.parent:GetMaxHealth() * self.ability:GetSpecialValueFor("special_mana") * 0.01)
-    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
-    self:PlayEfxRestore()
-  end
-end
 
 -- UTILS -----------------------------------------------------------
 
@@ -73,5 +61,5 @@ function paladin_u_modifier_passive:PlayEfxRestore()
   ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
   ParticleManager:ReleaseParticleIndex(effect)
 
-  if IsServer() then self.parent:EmitSound("DOTA_Item.Mekansm.Activate") end
+  self.parent:EmitSound("DOTA_Item.Mekansm.Activate")
 end

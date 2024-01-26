@@ -10,7 +10,9 @@ function paladin_4_modifier_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if IsServer() then self:OnIntervalThink() end
+  if not IsServer() then return end
+
+  self:OnIntervalThink()
 end
 
 function paladin_4_modifier_passive:OnRefresh(kv)
@@ -22,9 +24,11 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function paladin_4_modifier_passive:OnIntervalThink()
+  if not IsServer() then return end
+
   local percent_required = self.ability:GetSpecialValueFor("damage_percent") * self.ability:GetSpecialValueFor("duration")
   self.ability:SetActivated(self.parent:GetHealthPercent() >= percent_required)
-  if IsServer() then self:StartIntervalThink(FrameTime()) end
+  if IsServer() then self:StartIntervalThink(0.1) end
 end
 
 -- UTILS -----------------------------------------------------------

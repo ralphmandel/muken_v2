@@ -40,9 +40,8 @@ LinkLuaModifier("paladin_4_modifier_aura_effect", "heroes/sun/paladin/paladin_4_
       self:PlayEfxBlink(origin, caster:GetOrigin())
     end
 
-    AddModifier(caster, self, "paladin_4_modifier_aura", {duration = self:GetSpecialValueFor("duration")}, false)
-
-    if IsServer() then caster:EmitSound("Hero_ArcWarden.MagneticField.Cast") end
+    caster:AddModifier(self, "paladin_4_modifier_aura", {duration = self:GetSpecialValueFor("duration")})
+    caster:EmitSound("Hero_ArcWarden.MagneticField.Cast")
 	end
 
 -- EFFECTS
@@ -60,5 +59,5 @@ LinkLuaModifier("paladin_4_modifier_aura_effect", "heroes/sun/paladin/paladin_4_
     ParticleManager:SetParticleControl(blink_end_fx, 0, end_point)
     ParticleManager:ReleaseParticleIndex(blink_end_fx)
 
-    if IsServer() then caster:EmitSound("DOTA_Item.Overwhelming_Blink.Activate") end
+    caster:EmitSound("DOTA_Item.Overwhelming_Blink.Activate")
   end
