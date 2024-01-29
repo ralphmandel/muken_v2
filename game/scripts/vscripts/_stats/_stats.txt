@@ -18,8 +18,8 @@
       "sub_stat_armor"           "0.1"
       "sub_stat_critical_damage" "0.5" //% /^
       "sub_stat_stone_resist"    "1" //%
-      "sub_stat_bleed_resist"    "0.5" //%
-      "sub_stat_sleep_resist"    "0.5" //%
+      "sub_stat_bleed_resist"    "1" //%
+      "sub_stat_sleep_resist"    "1" //%
       "const_critical_damage"    "100" //%
       "const_critical_chance"    "17" //%
 		}
@@ -42,8 +42,8 @@
       "sub_stat_evasion"            "0.07" //% /^
       "sub_stat_movespeed"          "3"
       "sub_stat_poison_resist"      "1" //%
-      "sub_stat_thunder_resist"     "0.5" //%
-      "sub_stat_bleed_resist"       "0.5" //%
+      "sub_stat_thunder_resist"     "1" //%
+      "sub_stat_bleed_resist"       "1" //%
       "const_base_movespeed"        "300"
       "const_base_attack_time"      "1.3"
       "const_base_mana_regen"       "5"
@@ -70,8 +70,8 @@
       "sub_stat_magic_resist"   "0.1" //% /^
       "sub_stat_luck"           "2.5" //%
       "sub_stat_cold_resist"    "1" //%
-      "sub_stat_sleep_resist"   "0.5" //%
-      "sub_stat_thunder_resist" "0.5" //%
+      "sub_stat_sleep_resist"   "1" //%
+      "sub_stat_thunder_resist" "1" //%
 		}
 	}
 

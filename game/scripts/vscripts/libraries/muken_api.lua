@@ -196,20 +196,20 @@
       return 100 + self:GetMainStat("INT"):GetColdResist()
     end
 
+    if name == "curse" then
+      return 100 + self:GetMainStat("VIT"):GetCurseResist()
+    end
+
     if name == "bleed" then
-      return 100 + self:GetMainStat("STR"):GetBleedResist() + self:GetMainStat("AGI"):GetBleedResist()
+      return 100 + ((self:GetMainStat("STR"):GetBleedResist() + self:GetMainStat("AGI"):GetBleedResist()) / 2)
     end
 
     if name == "thunder" then
-      return 100 + self:GetMainStat("AGI"):GetThunderResist() + self:GetMainStat("INT"):GetThunderResist()
+      return 100 + ((self:GetMainStat("AGI"):GetThunderResist() + self:GetMainStat("INT"):GetThunderResist()) / 2)
     end
 
     if name == "sleep" then
-      return 100 + self:GetMainStat("INT"):GetSleepResist() + self:GetMainStat("STR"):GetSleepResist()
-    end
-
-    if name == "curse" then
-      return 100 + self:GetMainStat("VIT"):GetCurseResist()
+      return 100 + ((self:GetMainStat("INT"):GetSleepResist() + self:GetMainStat("STR"):GetSleepResist()) / 2)
     end
 
     return 100

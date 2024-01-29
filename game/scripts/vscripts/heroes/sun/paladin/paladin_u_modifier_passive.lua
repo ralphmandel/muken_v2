@@ -27,26 +27,46 @@ function paladin_u_modifier_passive:OnCreated(kv)
   self.parent:AddSubStats(self.ability, {
     max_health = self.ability:GetSpecialValueFor("max_health"),
     max_mana = self.ability:GetSpecialValueFor("special_max_mana"),
-    magic_resist = self.ability:GetSpecialValueFor("special_magic_resist")
+    magic_resist = self.ability:GetSpecialValueFor("special_magic_resist"),
+    stone_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    cold_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    poison_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    thunder_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    bleed_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    sleep_resist = self.ability:GetSpecialValueFor("special_stone_resist")
   })
 end
 
 function paladin_u_modifier_passive:OnRefresh(kv)
   if not IsServer() then return end
 
-  self.parent:RemoveSubStats(self.ability, {"max_health", "max_mana", "magic_resist"})
+  self.parent:RemoveSubStats(self.ability, {
+    "max_health", "max_mana", "magic_resist",
+    "stone_resist", "cold_resist", "poison_resist",
+    "thunder_resist", "bleed_resist", "sleep_resist"
+  })
 
   self.parent:AddSubStats(self.ability, {
     max_health = self.ability:GetSpecialValueFor("max_health"),
     max_mana = self.ability:GetSpecialValueFor("special_max_mana"),
-    magic_resist = self.ability:GetSpecialValueFor("special_magic_resist")
+    magic_resist = self.ability:GetSpecialValueFor("special_magic_resist"),
+    stone_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    cold_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    poison_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    thunder_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    bleed_resist = self.ability:GetSpecialValueFor("special_stone_resist"),
+    sleep_resist = self.ability:GetSpecialValueFor("special_stone_resist")
   })
 end
 
 function paladin_u_modifier_passive:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemoveSubStats(self.ability, {"max_health", "max_mana", "magic_resist"})
+  self.parent:RemoveSubStats(self.ability, {
+    "max_health", "max_mana", "magic_resist",
+    "stone_resist", "cold_resist", "poison_resist",
+    "thunder_resist", "bleed_resist", "sleep_resist"
+  })
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

@@ -46,6 +46,11 @@
       "special_heal"            "0"
       "special_mana"            "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/paladin/link/paladin_link.vpcf"
+    }
 	}
 
 	"paladin_2__shield"
@@ -80,6 +85,14 @@
       "special_hp_regen"    "0"
       "special_bkb"         "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_phoenix/phoenix_supernova_radiance.vpcf"
+      "particle"  "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refraction.vpcf"
+      "particle"  "particles/econ/items/ember_spirit/ember_ti9/ember_ti9_flameguard.vpcf"
+      "particle"  "particles/units/heroes/hero_oracle/oracle_false_promise_attacked.vpcf"
+    }
 	}
 
 	"paladin_3__hammer"
@@ -113,6 +126,14 @@
       "special_stun_duration" "0"
       "special_purge"         "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_ti6_immortal.vpcf"
+      "particle"  "particles/econ/items/omniknight/hammer_ti6_immortal/omniknight_purification_immortal_cast.vpcf"
+      "particle"  "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_gold_call.vpcf"
+      "particle"  "particles/paladin/multi_combo/paladin_multi_combo.vpcf"
+    }
 	}
 
 	"paladin_4__magnus"
@@ -143,6 +164,15 @@
       "special_manaloss"    "0"
       "special_cast_range"  "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/econ/events/ti10/blink_dagger_start_ti10_lvl2.vpcf"
+      "particle"  "particles/econ/events/ti10/blink_dagger_end_ti10_lvl2.vpcf"
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
+      "particle"  "particles/paladin/cross_magnus/paladin_cross_magnus.vpcf"
+    }
 	}
 
 	"paladin_5__smite"
@@ -168,6 +198,16 @@
       "restore_time"  "5 4.8 4.6 4.4 4.25 4.1 4"
       "special_hits"  "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_shard_hammer_of_purity_target.vpcf"
+      "particle"  "particles/econ/items/earthshaker/earthshaker_arcana/earthshaker_arcana_spawn_v2.vpcf"
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_shard_hammer_of_purity_heal.vpcf"
+      "particle"  "particles/econ/events/ti10/blink_dagger_start_ti10_splash.vpcf"
+      "particle"  "particles/econ/items/phantom_assassin/pa_fall20_immortal_shoulders/pa_fall20_blur_start.vpcf"
+      "particle"  "particles/econ/events/ti10/blink_dagger_end_ti10_lvl2.vpcf"
+    }
 	}
 
 	"paladin_u__faith"
@@ -189,8 +229,21 @@
 		{
 			"max_health"      "0"
 			"holy_reduction"  "15 17 19 21 22.5 24 25"
-      "special_magic_resist"  "0"
-      "special_aura_radius"   "0"
+      "special_stone_resist"    "0"
+      "special_cold_resist"     "0"
+      "special_poison_resist"   "0"
+      "special_thunder_resist"  "0"
+      "special_sleep_resist"    "0"
+      "special_bleed_resit"     "0"
+      "special_magic_resist"    "0"
+      "special_aura_radius"     "0"
+      "special_max_mana"        "0"
+    }
+
+    "precache"
+    {
+      "particle"  "particles/paladin/aura_faith/aura_faith.vpcf"
+      "particle"  "particles/econ/events/fall_2022/mekanism/mekanism_fall2022.vpcf"
     }
 	}
 }

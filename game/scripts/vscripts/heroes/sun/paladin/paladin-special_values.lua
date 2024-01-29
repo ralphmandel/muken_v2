@@ -161,6 +161,12 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityCooldown" then return 1 end
 
     if value_name == "max_health" then return 1 end
+    if value_name == "special_stone_resist" then return 1 end
+    if value_name == "special_cold_resist" then return 1 end
+    if value_name == "special_poison_resist" then return 1 end
+    if value_name == "special_thunder_resist" then return 1 end
+    if value_name == "special_sleep_resist" then return 1 end
+    if value_name == "special_bleed_resit" then return 1 end
     if value_name == "special_magic_resist" then return 1 end
     if value_name == "special_aura_radius" then return 1 end
     if value_name == "special_max_mana" then return 1 end
@@ -376,9 +382,15 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "paladin_u__faith" then
     if self:HasRank(6, 1, 1) then
+      if value_name == "special_stone_resist" then return 20 end
+      if value_name == "special_cold_resist" then return 20 end
+      if value_name == "special_poison_resist" then return 20 end
     end
 
     if self:HasRank(6, 1, 2) then
+      if value_name == "special_thunder_resist" then return 20 end
+      if value_name == "special_sleep_resist" then return 20 end
+      if value_name == "special_bleed_resit" then return 20 end
     end
 
     if self:HasRank(6, 2, 1) then
