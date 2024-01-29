@@ -5,19 +5,8 @@ LinkLuaModifier("_modifier_heal_amp", "_modifiers/_modifier_heal_amp", LUA_MODIF
 
 -- INIT
 
-  function templar_1__shield:OnUpgrade()
-    if self:GetLevel() == 1 then
-      self:SetCurrentAbilityCharges(CYCLE_NIGHT)
-    end
-  end
-
   function templar_1__shield:GetAOERadius()
     return self:GetSpecialValueFor("radius")
-    -- if self:GetCurrentAbilityCharges() == CYCLE_NIGHT then
-    --   return self:GetSpecialValueFor("radius")
-    -- end
-
-    -- return -1
   end
 
   function templar_1__shield:GetIntrinsicModifierName()

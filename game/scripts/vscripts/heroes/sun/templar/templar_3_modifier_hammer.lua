@@ -10,42 +10,49 @@ function templar_3_modifier_hammer:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if IsServer() then
-    self:SetStackCount(10)
-    self:StartIntervalThink(kv.interval)
-    self:PlayEfxStart()
-  end
+  if not IsServer() then return end
+
+  self:PlayEfxStart()
+  self:SetStackCount(10)
+  self:StartIntervalThink(kv.interval)
 end
 
 function templar_3_modifier_hammer:OnRefresh(kv)
-  if IsServer() then
-    self:SetStackCount(10)
-    self:StartIntervalThink(kv.interval)
-    self:PlayEfxStart()
-  end
+  if not IsServer() then return end
+
+  self:PlayEfxStart()
+  self:SetStackCount(10)
+  self:StartIntervalThink(kv.interval)
 end
 
 function templar_3_modifier_hammer:OnRemoved()
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
+  if not IsServer() then return end
+
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"attack_speed"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
 function templar_3_modifier_hammer:OnIntervalThink()
-  if IsServer() then self:DecrementStackCount() end
+  if not IsServer() then return end
+
+  self:DecrementStackCount()
 end
 
 function templar_3_modifier_hammer:OnStackCountChanged(old)
+  if not IsServer() then return end
+
   if self:GetStackCount() ~= old and self:GetStackCount() == 0 then self:Destroy() return end
 
-  local slow = CalcStatus(self.ability:GetSpecialValueFor("slow_start"), self.caster, self.parent) * 0.1 * self:GetStackCount()
-  local as = self.ability:GetSpecialValueFor("special_as_start") * 0.1 * self:GetStackCount()
+  local slow = self.parent:GetStatusResist(self.ability:GetSpecialValueFor("slow_start")) * 0.1 * self:GetStackCount()
+  local as = self.parent:GetStatusResist(self.ability:GetSpecialValueFor("special_as_start")) * 0.1 * self:GetStackCount()
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_decrease", self.ability)
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_decrease", {value = slow}, false)
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {value = slow})
 
-  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
-  AddSubStats(self.parent, self.ability, {attack_speed = as})
+  self.parent:RemoveSubStats(self.ability, {"attack_speed"})
+  self.parent:AddSubStats(self.ability, {attack_speed = as})
 end
 
 -- UTILS -----------------------------------------------------------
@@ -66,5 +73,5 @@ function templar_3_modifier_hammer:PlayEfxStart()
   ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
   ParticleManager:ReleaseParticleIndex(effect)
 
-  if IsServer() then self.parent:EmitSound("Hero_Omniknight.HammerOfPurity.Target") end
+  self.parent:EmitSound("Hero_Omniknight.HammerOfPurity.Target")
 end

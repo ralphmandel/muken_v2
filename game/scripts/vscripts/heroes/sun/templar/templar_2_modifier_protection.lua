@@ -10,28 +10,48 @@ function templar_2_modifier_protection:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {
+  if not IsServer() then return end
+
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_increase", {
     value = self.ability:GetSpecialValueFor("special_ms")
-  }, false)
+  })
+
+  if self.ability:GetSpecialValueFor("special_bkb") == 1 then
+    self.parent:AddModifier(self.ability, "_modifier_bkb", {})
+  end
+
+  self:PlayEfxStart()
 
   if self.parent:GetHealthPercent() < self.ability:GetSpecialValueFor("special_hp_cap") then
     self.parent:Purge(false, true, false, true, false)
-    self.parent:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("special_heal")), self.ability)
+    self.parent:ApplyHeal(self.ability:GetSpecialValueFor("special_heal"), self.ability, false)
     self:StartEfxBeam(self.parent)
 
     self.caster:Purge(false, true, false, true, false)
-    self.caster:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("special_heal")), self.ability)
+    self.caster:ApplyHeal(self.ability:GetSpecialValueFor("special_heal"), self.ability, false)
     self:StartEfxBeam(self.caster)
   end
 
-  if IsServer() then self:PlayEfxStart() end
+  if self.caster == self.parent and self.ability:GetSpecialValueFor("special_self_cast") == 1 then
+    self.ability:SetActivated(false)
+    self.ability:EndCooldown()
+  end
 end
 
 function templar_2_modifier_protection:OnRefresh(kv)
 end
 
 function templar_2_modifier_protection:OnRemoved()
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_increase", self.ability)
+  if not IsServer() then return end
+
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_bkb", self.ability)
+
+  if self.ability:GetSpecialValueFor("special_self_cast") == 1
+  and self.ability:IsActivated() == false and self.caster == self.parent then
+    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+    self.ability:SetActivated(true)
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -79,7 +99,7 @@ function templar_2_modifier_protection:PlayEfxStart()
   ParticleManager:SetParticleControl(efx, 0, self.parent:GetOrigin())
   self:AddParticle(efx, false, false, -1, true, false)
 
-  if IsServer() then self.parent:EmitSound("Hero_Omniknight.GuardianAngel.Cast") end
+  self.parent:EmitSound("Hero_Omniknight.GuardianAngel.Cast")
 end
 
 function templar_2_modifier_protection:StartEfxBeam(unit)
@@ -91,6 +111,6 @@ function templar_2_modifier_protection:StartEfxBeam(unit)
 	ParticleManager:SetParticleControlEnt(efx, 6, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:ReleaseParticleIndex(efx)
 
-  if IsServer() then unit:EmitSound("Hero_Luna.Eclipse.Target") end
-  if IsServer() then unit:EmitSound("Hero_Chen.HandOfGodHealHero") end
+  unit:EmitSound("Hero_Luna.Eclipse.Target")
+  unit:EmitSound("Hero_Chen.HandOfGodHealHero")
 end

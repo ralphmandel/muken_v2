@@ -46,7 +46,8 @@ templar_3__hammer.hits = {}
     self.hits[handle] = nil
 
     AddFOWViewer(caster:GetTeamNumber(), target:GetOrigin(), 150, 1, true)
-    AddModifier(target, self, "templar_3_modifier_hammer", {interval = self:GetSpecialValueFor("interval") * percent}, false)
+
+    target:AddModifier(self, "templar_3_modifier_hammer", {interval = self:GetSpecialValueFor("interval") * percent})
 
     local total_damage = ApplyDamage({
       victim = target, attacker = caster,
@@ -55,13 +56,13 @@ templar_3__hammer.hits = {}
       ability = self
     })
 
-    caster:Heal(total_damage * self:GetSpecialValueFor("special_heal") * 0.01, self)
+    caster:ApplyHeal(total_damage * self:GetSpecialValueFor("special_heal") * 0.01, self, false)
   end
 
   function templar_3__hammer:CreateProj(source, target, attach)
     local caster = self:GetCaster()
-    if IsServer() then source:EmitSound("Hero_Omniknight.HammerOfPurity.Cast") end
-
+    source:EmitSound("Hero_Omniknight.HammerOfPurity.Cast")
+    
     local projectile = ProjectileManager:CreateTrackingProjectile({
       Target = target, Source = source, Ability = self,
       EffectName = "particles/units/heroes/hero_omniknight/omniknight_hammer_of_purity_projectile.vpcf",

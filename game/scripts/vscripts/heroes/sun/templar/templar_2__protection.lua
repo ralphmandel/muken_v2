@@ -28,7 +28,11 @@ LinkLuaModifier("templar_2_modifier_protection", "heroes/sun/templar/templar_2_m
     local target = self:GetCursorTarget()
 
     target:RemoveModifierByNameAndCaster("templar_2_modifier_protection", caster)
-    AddModifier(target, self, "templar_2_modifier_protection", {duration = self:GetSpecialValueFor("duration")}, true)
+    target:AddModifier(self, "templar_2_modifier_protection", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
+
+    if self:GetSpecialValueFor("special_self_cast") == 1 then
+      caster:AddModifier(self, "templar_2_modifier_protection", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
+    end
   end
 
 -- EFFECTS
