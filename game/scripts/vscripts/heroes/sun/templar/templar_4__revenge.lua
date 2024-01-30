@@ -16,7 +16,7 @@ LinkLuaModifier("templar_4_modifier_curse", "heroes/sun/templar/templar_4_modifi
 		local caster = self:GetCaster()
     local target = self:GetCursorTarget()
 
-    AddModifier(target, self, "templar_4_modifier_buff", {duration = self:GetSpecialValueFor("duration")}, false)
+    target:AddModifier(self, "templar_4_modifier_buff", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
 	end
 
 -- EFFECTS

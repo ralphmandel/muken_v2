@@ -34,6 +34,8 @@
     "precache"
     {
       "soundfile" "soundevents/soundevent_templar.vsndevts"
+      "particle"  "particles/dasdingo/dasdingo_aura.vpcf"
+      "particle"  "particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf"
     }
 
     "AbilityValues"
@@ -77,6 +79,13 @@
       "special_hp_cap"    "0"
       "special_self_cast" "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_halo_buff.vpcf"
+      "particle"  "particles/econ/items/omniknight/omni_2021_immortal/omni_2021_immortal.vpcf"
+      "particle"  "particles/econ/items/luna/luna_lucent_ti5_gold/luna_eclipse_impact_notarget_moonfall_gold.vpcf" 
+    }
 	}
 
 	"templar_3__hammer"
@@ -100,17 +109,24 @@
 
     "AbilityValues"
 		{
-			"proj_speed"	  "1500"
-      "bounce_range"  "500"
-      "hits"          "2"
-      "damage"        "300"
-      "interval"      "0.6"
-      "slow_start"    "75"
-      "reduction"     "20"
+			"proj_speed"	  "0"
+      "bounce_range"  "0"
+      "hits"          "0"
+      "damage"        "0"
+      "interval"      "0"
+      "slow_start"    "0"
+      "reduction"     "0"
       "cast_range"    "1 2 3 4 5 6 7"
       "special_heal"      "0"
       "special_as_start"  "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_hammer_of_purity_projectile.vpcf"
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_shard_hammer_of_purity_overhead_debuff.vpcf"
+      "particle"  "particles/units/heroes/hero_omniknight/omniknight_shard_hammer_of_purity_target.vpcf"
+    }
 	}
 
 	"templar_4__revenge"
@@ -134,19 +150,26 @@
 
     "AbilityValues"
 		{
-      "cast_range"      "400"
-      "duration"        "30"
-      "stack"           "7"
+      "cast_range"      "0"
+      "duration"        "0"
+      "stack"           "0"
     //REVENGE
-      "delay"           "1.2"
-      "hits"            "7"
-      "damage_hit"      "25"
-      "dmg_interval"    "0.2"
-      "blind"           "70"
+      "delay"           "0"
+      "hits"            "0"
+      "damage_hit"      "0"
+      "dmg_interval"    "0"
+      "blind"           "0"
       "revenge_chance"  "1 2 3 4 5 6 7"
-      "special_microstun" "0"
-      "special_autocast"  "0"
+      "special_microstun"       "0"
+      "special_autocast_chance" "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_dawnbreaker/dawnbreaker_solar_guardian_beam_shaft.vpcf"
+      "particle"  "particles/econ/items/pugna/pugna_ward_golden_nether_lord/pugna_gold_ambient.vpcf"
+      "particle"  "particles/templar/pillar/templar_pillar.vpcf"
+    }
 	}
 
 	"templar_5__reborn"
@@ -168,14 +191,20 @@
 
     "AbilityValues"
 		{
-      "cast_range"  "300"
-      "cast_point"  "4"
-			"percent"     "50"
+      "cast_range"  "0"
+      "cast_point"  "0"
+			"percent"     "0"
 			"cooldown"    "1 2 3 4 5 6 7"
-      "special_refresh" "0"
-      "special_bkb"     "0"
-      "special_reborn"  "0"
+      "special_refresh"   "0"
+      "special_no_damage" "0"
+      "special_reborn"    "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/items_fx/aegis_respawn_timer.vpcf"
+      "particle"  "particles/econ/events/ti10/aegis_lvl_1000_ambient_ti10.vpcf"
+    }
 	}
 
 	"templar_u__praise"
@@ -204,5 +233,13 @@
       "special_ethereal"    "0"
       "special_mana"        "0"
 		}
+
+    "precache"
+    {
+      "particle"  "particles/status_fx/status_effect_shield_rune.vpcf"
+      "particle"  "particles/econ/items/luna/luna_lucent_ti5_gold/luna_eclipse_cast_moonfall_gold.vpcf"
+      "particle"  "particles/bioshadow/bioshadow_poison_hit_shake.vpcf"
+      "particle"  "particles/econ/items/luna/luna_lucent_ti5_gold/luna_eclipse_impact_notarget_moonfall_gold.vpcf"
+    }
 	}
 }

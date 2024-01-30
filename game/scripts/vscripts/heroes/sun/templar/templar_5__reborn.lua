@@ -14,6 +14,8 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
   function templar_5__reborn:CastFilterResultLocation(vLocation)
     local caster = self:GetCaster()
 
+    if not IsServer() then return UF_SUCCESS end
+
     local allies = FindUnitsInRadius(
       caster:GetTeamNumber(), vLocation, nil, 200,
       self:GetAbilityTargetTeam(), self:GetAbilityTargetType(),
@@ -50,11 +52,8 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
       and ally:GetTimeUntilRespawn() > self:GetCastPoint() then
         self.target = ally
         
-        if IsServer() then
-          caster:StopSound("Druid.Channel")
-          caster:EmitSound("Druid.Channel")
-        end
-        
+        caster:StopSound("Druid.Channel")
+        caster:EmitSound("Druid.Channel")
         return true
       end
     end
@@ -63,12 +62,12 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
   end
 
   function templar_5__reborn:OnAbilityPhaseInterrupted()
-    if IsServer() then self:GetCaster():StopSound("Druid.Channel") end
+    self:GetCaster():StopSound("Druid.Channel")
   end
 
   function templar_5__reborn:OnSpellStart()
     if self.target:IsAlive() then
-      if IsServer() then self:GetCaster():StopSound("Druid.Channel") end
+      self:GetCaster():StopSound("Druid.Channel")
       return
     end
     
@@ -86,13 +85,13 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
       end
     end
 
-    AddModifier(self.target, self, "_modifier_bkb", {
-      duration = self:GetSpecialValueFor("special_bkb")
-    }, true)
+    self.target:AddModifier(self, "_modifier_avoid_damage", {
+      duration = self:GetSpecialValueFor("special_no_damage"), bResist = 1
+    })
     
     FindClearSpaceForUnit(self.target, self:GetCursorPosition(), false)
 
-    if IsServer() then self:PlayEfxStart(self:GetCursorPosition()) end
+    self:PlayEfxStart(self:GetCursorPosition())
   end
 
 -- EFFECTS
@@ -104,8 +103,6 @@ LinkLuaModifier("templar_5_modifier_passive", "heroes/sun/templar/templar_5_modi
     ParticleManager:SetParticleControl(efx_reborn, 0, loc)
     ParticleManager:SetParticleControl(efx_reborn, 1, Vector(0, 0, 0))
 
-    if IsServer() then
-      caster:StopSound("Druid.Channel")
-      self.target:EmitSound("Aegis.Expire")
-    end
+    caster:StopSound("Druid.Channel")
+    self.target:EmitSound("Aegis.Expire")
   end

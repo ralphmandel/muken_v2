@@ -46,8 +46,10 @@ function templar_1_modifier_aura_effect:GetBonusNightVision()
 end
 
 function templar_1_modifier_aura_effect:GetAbsorbSpell(keys)
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_spellblock_chance") then
-    if IsServer() then self:PlayEfxSpellBlock() end
+  if not IsServer() then return end
+
+  if RandomFloat(0, 100) < self.parent:GetLuck(self.ability:GetSpecialValueFor("special_spellblock_chance")) then
+    self:PlayEfxSpellBlock()
     return 1
   end
 

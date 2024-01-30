@@ -8,8 +8,9 @@ LinkLuaModifier("templar_u_modifier_praise_status_efx", "heroes/sun/templar/temp
 
 	function templar_u__praise:OnSpellStart()
 		local caster = self:GetCaster()
+    
     caster:RemoveModifierByName("templar_u_modifier_praise")
-    AddModifier(caster, self, "templar_u_modifier_praise", {duration = self:GetSpecialValueFor("duration")}, true)
+    caster:AddModifier(self, "templar_u_modifier_praise", {duration = self:GetSpecialValueFor("duration")})
 	end
 
 -- EFFECTS

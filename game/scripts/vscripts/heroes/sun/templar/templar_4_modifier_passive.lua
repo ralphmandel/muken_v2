@@ -28,11 +28,13 @@ function templar_4_modifier_passive:DeclareFunctions()
 end
 
 function templar_4_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+
   if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_autocast") then
-    AddModifier(keys.target, self.ability, "templar_4_modifier_revenge", {duration = 5}, false)
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_autocast_chance") then
+    keys.target:AddModifier(self.ability, "templar_4_modifier_revenge", {duration = 5})
   end
 end
 

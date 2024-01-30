@@ -127,91 +127,47 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
+
+    if value_name == "cast_range" then return 1 end
+    if value_name == "duration" then return 1 end
+    if value_name == "stack" then return 1 end
+    if value_name == "delay" then return 1 end
+    if value_name == "hits" then return 1 end
+    if value_name == "damage_hit" then return 1 end
+    if value_name == "dmg_interval" then return 1 end
+    if value_name == "blind" then return 1 end
 		if value_name == "revenge_chance" then return 1 end
-
-		if caster:FindAbilityByName("templar_4__revenge_rank_11") then
-      if value_name == "duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_4__revenge_rank_12") then
-      if value_name == "stack" then return 1 end
-		end
-
-		if caster:FindAbilityByName("templar_4__revenge_rank_21") then
-      if value_name == "delay" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_4__revenge_rank_22") then
-      if value_name == "special_microstun" then return 1 end
-		end
-
-		if caster:FindAbilityByName("templar_4__revenge_rank_31") then
-      if value_name == "damage_hit" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_4__revenge_rank_32") then
-      if value_name == "special_autocast" then return 1 end
-		end
+    if value_name == "special_microstun" then return 1 end
+    if value_name == "special_autocast_chance" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "cooldown" then return 1 end
 
-		if caster:FindAbilityByName("templar_5__reborn_rank_11") then
-      if value_name == "special_refresh" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_5__reborn_rank_12") then
-      if value_name == "special_bkb" then return 1 end
-		end
-
-		if caster:FindAbilityByName("templar_5__reborn_rank_21") then
-      if value_name == "cast_point" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_5__reborn_rank_22") then
-      if value_name == "cast_range" then return 1 end
-		end
-
-		if caster:FindAbilityByName("templar_5__reborn_rank_31") then
-      if value_name == "percent" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_5__reborn_rank_32") then
-      if value_name == "special_reborn" then return 1 end
-		end
+    if value_name == "cast_range" then return 1 end
+    if value_name == "cast_point" then return 1 end
+    if value_name == "percent" then return 1 end
+    if value_name == "cooldown" then return 1 end
+    if value_name == "special_refresh" then return 1 end
+    if value_name == "special_no_damage" then return 1 end
+    if value_name == "special_reborn" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "templar_u__praise" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+
+    if value_name == "interval_base_day" then return 1 end
+		if value_name == "interval_base_night" then return 1 end
+		if value_name == "interval_reduction" then return 1 end
+		if value_name == "heal" then return 1 end
+		if value_name == "duration" then return 1 end
 		if value_name == "hp_cap" then return 1 end
-
-		if caster:FindAbilityByName("templar_u__praise_rank_11") then
-      if value_name == "duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_u__praise_rank_12") then
-		end
-
-		if caster:FindAbilityByName("templar_u__praise_rank_21") then
-      if value_name == "special_bkb" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_u__praise_rank_22") then
-      if value_name == "special_ethereal" then return 1 end
-		end
-
-		if caster:FindAbilityByName("templar_u__praise_rank_31") then
-      if value_name == "heal" then return 1 end
-		end
-
-    if caster:FindAbilityByName("templar_u__praise_rank_32") then
-      if value_name == "special_mana" then return 1 end
-		end
+    if value_name == "special_bkb" then return 1 end
+    if value_name == "special_ethereal" then return 1 end
+    if value_name == "special_mana" then return 1 end
   end
 
 	return 0
@@ -341,102 +297,113 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "templar_4__revenge" then
     if self:HasRank(4, 1, 1) then
+      if value_name == "duration" then return 50 end
     end
 
     if self:HasRank(4, 1, 2) then
+      if value_name == "stack" then return 9 end
     end
 
     if self:HasRank(4, 2, 1) then
+      if value_name == "delay" then return 2.2 end
 		end
 
     if self:HasRank(4, 2, 2) then
+      if value_name == "special_microstun" then return 0.1 * self:GetDebuffAmp() end
 		end
 
 		if self:HasRank(4, 3, 1) then
+      if value_name == "damage_hit" then return 50 * self:GetHolyDamageAmp() end
 		end
 
     if self:HasRank(4, 3, 2) then
+      if value_name == "special_autocast_chance" then return self:CalcLuck(7) end
 		end
 
 		if value_name == "AbilityManaCost" then return 175 * mana_mult end
 		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+		if value_name == "revenge_chance" then return self:CalcLuck(7 + (value_level * 0.25)) end
 
-		if value_name == "revenge_chance" then return 6 + (value_level * 0.25) end
-    if value_name == "duration" then return 50 end
-    if value_name == "stack" then return 9 end
-    if value_name == "delay" then return 2.2 end
-    if value_name == "special_microstun" then return 0.1 end
-    if value_name == "damage_hit" then return 50 end
-    if value_name == "special_autocast" then return 7 end
+    if value_name == "cast_range" then return 400 end
+    if value_name == "duration" then return 30 end
+    if value_name == "stack" then return 7 end
+    if value_name == "delay" then return 1.2 end
+    if value_name == "hits" then return 7 end
+    if value_name == "damage_hit" then return 25 * self:GetHolyDamageAmp() end
+    if value_name == "dmg_interval" then return 0.2 end
+    if value_name == "blind" then return 70 end
 	end
 
 	if ability:GetAbilityName() == "templar_5__reborn" then
     if self:HasRank(5, 1, 1) then
+      if value_name == "special_refresh" then return 1 end
     end
 
     if self:HasRank(5, 1, 2) then
+      if value_name == "special_no_damage" then return 10 end
     end
 
     if self:HasRank(5, 2, 1) then
+      if value_name == "cast_point" then return 2 end
 		end
 
     if self:HasRank(5, 2, 2) then
+      if value_name == "cast_range" then return 900 end
 		end
 
 		if self:HasRank(5, 3, 1) then
+      if value_name == "percent" then return 75 end
 		end
 
     if self:HasRank(5, 3, 2) then
+      if value_name == "special_reborn" then return self:CalcLuck(12.5) end
 		end
 
 		if value_name == "AbilityManaCost" then return 250 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
-    
 		if value_name == "cooldown" then return 75 - (value_level * 2.5) end
-    if value_name == "special_refresh" then return 1 end
-    if value_name == "special_bkb" then return 10 end
-    if value_name == "cast_point" then return 2 end
-    if value_name == "cast_range" then return 900 end
-    if value_name == "percent" then return 75 end
-    if value_name == "special_reborn" then return 17 end
+
+    if value_name == "cast_range" then return 300 end
+    if value_name == "cast_point" then return 4 end
+    if value_name == "percent" then return 50 end
 	end
 
 	if ability:GetAbilityName() == "templar_u__praise" then
     if self:HasRank(6, 1, 1) then
+      if value_name == "duration" then return 10 * self:GetBuffAmp() end
     end
 
     if self:HasRank(6, 1, 2) then
+      if value_name == "AbilityCooldown" then return 100 end
     end
 
     if self:HasRank(6, 2, 1) then
+      if value_name == "special_bkb" then return 1 end
 		end
 
     if self:HasRank(6, 2, 2) then
+      if value_name == "special_ethereal" then return 1 end
 		end
 
 		if self:HasRank(6, 3, 1) then
+      if value_name == "heal" then return 80 * self:GetHealPower() end
 		end
 
     if self:HasRank(6, 3, 2) then
+      if value_name == "special_mana" then return 30 * self:GetHealPower() end
 		end
 
 		if value_name == "AbilityManaCost" then return 400 * mana_mult end
-    
-		if value_name == "AbilityCooldown" then
-      if caster:FindAbilityByName("templar_u__praise_rank_12") then
-        return 100
-      end
-      return 120
-    end
-
+		if value_name == "AbilityCooldown" then return 120 end
     if value_name == "hp_cap" then return 60 + (value_level * 2.5) end
-    if value_name == "duration" then return 10 end
-    if value_name == "heal" then return 80 end
-    if value_name == "special_bkb" then return 1 end
-    if value_name == "special_ethereal" then return 1 end
-    if value_name == "special_mana" then return 30 end
+
+    if value_name == "interval_base_day" then return 0.8 end
+		if value_name == "interval_base_night" then return 1 end
+		if value_name == "interval_reduction" then return 0.7 end
+		if value_name == "heal" then return 60 * self:GetHealPower() end
+		if value_name == "duration" then return 9 * self:GetBuffAmp() end
 	end
 
 	return 0

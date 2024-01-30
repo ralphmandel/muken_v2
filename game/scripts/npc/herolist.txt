@@ -7,7 +7,7 @@
 
   "npc_dota_hero_elder_titan"         "0"
   "npc_dota_hero_dawnbreaker"         "1"
-  "npc_dota_hero_omniknight"          "0"
+  "npc_dota_hero_omniknight"          "1"
   "npc_dota_hero_phantom_assassin"    "0"
 
   "npc_dota_hero_juggernaut"          "1"

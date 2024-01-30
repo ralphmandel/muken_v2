@@ -31,25 +31,27 @@ function templar_5_modifier_passive:DeclareFunctions()
 end
 
 function templar_5_modifier_passive:ReincarnateTime(keys)
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_reborn") then
-    return 5
-  end
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_reborn") then return 5 end
 
   return 0
 end
 
 function templar_5_modifier_passive:OnDeath(keys)
+  if not IsServer() then return end
+
   if keys.unit:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
   if keys.unit:IsHero() == false or keys.unit:IsIllusion() then return end
 
-  if IsServer() then self:PlayEfxPre(keys.unit, keys.unit:GetOrigin()) end
+  self:PlayEfxPre(keys.unit, keys.unit:GetOrigin())
 end
 
 function templar_5_modifier_passive:OnRespawn(keys)
+  if not IsServer() then return end
+
   if keys.unit:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
   if keys.unit:IsHero() == false then return end
 
-  if IsServer() then self:StopEfx(keys.unit) end
+  self:StopEfx(keys.unit)
 end
 
 -- UTILS -----------------------------------------------------------

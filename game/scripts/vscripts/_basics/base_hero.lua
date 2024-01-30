@@ -3,6 +3,7 @@ LinkLuaModifier("base_hero_mod", "_basics/base_hero_mod", LUA_MODIFIER_MOTION_NO
 LinkLuaModifier("_general_script", "_bot_scripts/_general_script", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_fountain_refresh_hp", "_modifiers/generics/_fountain_refresh_hp", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_fountain_refresh_mp", "_modifiers/generics/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_avoid_damage", "_modifiers/generics/_modifier_avoid_damage", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_ban", "_modifiers/generics/_modifier_ban", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_bkb", "_modifiers/generics/_modifier_bkb", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_blind", "_modifiers/generics/_modifier_blind", LUA_MODIFIER_MOTION_NONE)

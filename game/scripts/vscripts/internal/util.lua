@@ -390,13 +390,6 @@
 
 -- LUCK / HEAL / MANA
 
-  function CalcLuck(caster, value)
-    local result = value * (1 + caster:GetMainStat("INT"):GetLuck())
-    if result < 0 then result = 0 elseif result > 100 then result = 100 end
-
-    return result
-  end
-
   function CalcHeal(caster, amount)
     return amount * (1 + caster:GetMainStat("INT"):GetHealPower())
   end

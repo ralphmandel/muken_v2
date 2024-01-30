@@ -10,20 +10,20 @@ function templar_4_modifier_buff:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if IsServer() then
-    self:SetStackCount(self.ability:GetSpecialValueFor("stack"))
-    self:PlayEfxStart()
-    self:PlayEfxBuff()
-    self:PlayEfxBuff()
-    self:PlayEfxBuff()
-  end
+  if not IsServer() then return end
+
+  self:SetStackCount(self.ability:GetSpecialValueFor("stack"))
+  self:PlayEfxStart()
+  self:PlayEfxBuff()
+  self:PlayEfxBuff()
+  self:PlayEfxBuff()
 end
 
 function templar_4_modifier_buff:OnRefresh(kv)
-  if IsServer() then
-    self:SetStackCount(self.ability:GetSpecialValueFor("stack"))
-    self:PlayEfxStart()
-  end
+  if not IsServer() then return end
+
+  self:SetStackCount(self.ability:GetSpecialValueFor("stack"))
+  self:PlayEfxStart()
 end
 
 function templar_4_modifier_buff:OnRemoved()
@@ -40,6 +40,8 @@ function templar_4_modifier_buff:DeclareFunctions()
 end
 
 function templar_4_modifier_buff:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
   if keys.attacker:IsBaseNPC() == false then return end
@@ -47,12 +49,14 @@ function templar_4_modifier_buff:OnTakeDamage(keys)
   if keys.attacker:IsMagicImmune() then return end
 
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("revenge_chance") then
-    AddModifier(keys.attacker, self.ability, "templar_4_modifier_revenge", {duration = 5}, false)
-    if IsServer() then self:DecrementStackCount() end
+    keys.attacker:AddModifier(self.ability, "templar_4_modifier_revenge", {duration = 5})
+    self:DecrementStackCount()
   end
 end
 
 function templar_4_modifier_buff:OnStackCountChanged(old)
+  if not IsServer() then return end
+
   if self:GetStackCount() == 0 and self:GetStackCount() ~= old then self:Destroy() end
 end
 
@@ -70,10 +74,8 @@ function templar_4_modifier_buff:PlayEfxStart()
   ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
   ParticleManager:SetParticleControl(effect, 1, Vector(100, 0, 0))
 
-  if IsServer() then
-    self.parent:EmitSound("Ancient.Aura.Cast")
-    self.parent:EmitSound("Hero_Chen.HandOfGodHealHero")
-  end
+  self.parent:EmitSound("Ancient.Aura.Cast")
+  self.parent:EmitSound("Hero_Chen.HandOfGodHealHero")
 end
 
 function templar_4_modifier_buff:PlayEfxBuff()

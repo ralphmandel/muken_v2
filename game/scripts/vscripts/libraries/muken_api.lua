@@ -215,6 +215,13 @@
     return 100
   end
 
+  function CDOTA_BaseNPC:GetLuck(amount)
+    local result = amount * (1 + self:GetMainStat("INT"):GetLuck())
+    if result < 0 then result = 0 elseif result > 100 then result = 100 end
+
+    return result
+  end
+
 -- CDOTA_BaseNPC || ADD MODIFIERS/STATS
 
   function CDOTA_BaseNPC:AddSubStats(ability, table)

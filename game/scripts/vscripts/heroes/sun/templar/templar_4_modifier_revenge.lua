@@ -11,26 +11,29 @@ function templar_4_modifier_revenge:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_blind", self.ability)
+  if not IsServer() then return end
 
-  self.silence = AddModifier(self.parent, self.ability, "_modifier_silence", {}, false)
-  self.blind = AddModifier(self.parent, self.ability, "_modifier_blind", {
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_blind", self.ability)
+
+  self.silence = self.parent:AddModifier(self.ability, "_modifier_silence", {})
+  self.blind = self.parent:AddModifier(self.ability, "_modifier_blind", {
     percent = self.ability:GetSpecialValueFor("blind")
-  }, false)
+  })
 
-  if IsServer() then
-    self:PlayEfxStart(self.ability:GetSpecialValueFor("delay") + 1.8)
-    self:SetStackCount(self.ability:GetSpecialValueFor("hits"))
-    self:StartIntervalThink(self.ability:GetSpecialValueFor("delay"))
-  end
+  self:PlayEfxStart(self.ability:GetSpecialValueFor("delay") + 1.8)
+  self:SetStackCount(self.ability:GetSpecialValueFor("hits"))
+  self:StartIntervalThink(self.ability:GetSpecialValueFor("delay"))
 end
 
 function templar_4_modifier_revenge:OnRefresh(kv)
 end
 
 function templar_4_modifier_revenge:OnRemoved()
-  if IsServer() then self.parent:StopSound("Templar.Light") end
+  if not IsServer() then return end
+
+  self.parent:StopSound("Templar.Light")
+
   self:RemoveDebuff("_modifier_silence", self.silence)
   self:RemoveDebuff("_modifier_blind", self.blind)
 end
@@ -38,31 +41,33 @@ end
 -- API FUNCTIONS -----------------------------------------------------------
 
 function templar_4_modifier_revenge:OnIntervalThink()
-  if IsServer() then
-    if self.parent:IsOutOfGame() == false then
-      self:PlayEfxHit()
+  if not IsServer() then return end
 
-      if self.parent:IsMagicImmune() == false then
-        AddModifier(self.parent, self.ability, "_modifier_stun", {
-          duration = self.ability:GetSpecialValueFor("special_microstun")
-        }, true)
-      end
-  
-      ApplyDamage({
-        victim = self.parent, attacker = self.caster,
-        damage = self.ability:GetSpecialValueFor("damage_hit"),
-        damage_type = self.ability:GetAbilityDamageType(),
-        ability = self.ability
+  if self.parent:IsOutOfGame() == false then
+    self:PlayEfxHit()
+
+    if self.parent:IsMagicImmune() == false then
+      self.parent:AddModifier(self.ability, "_modifier_stun", {
+        duration = self.ability:GetSpecialValueFor("special_microstun"), bResist = 1
       })
-  
-      self:DecrementStackCount()
     end
 
-    self:StartIntervalThink(self.ability:GetSpecialValueFor("dmg_interval"))
+    ApplyDamage({
+      victim = self.parent, attacker = self.caster,
+      damage = self.ability:GetSpecialValueFor("damage_hit"),
+      damage_type = self.ability:GetAbilityDamageType(),
+      ability = self.ability
+    })
+
+    self:DecrementStackCount()
   end
+
+  self:StartIntervalThink(self.ability:GetSpecialValueFor("dmg_interval"))
 end
 
 function templar_4_modifier_revenge:OnStackCountChanged(old)
+  if not IsServer() then return end
+
   if self:GetStackCount() == 0 and self:GetStackCount() ~= old then self:Destroy() end
 end
 
@@ -85,7 +90,7 @@ function templar_4_modifier_revenge:PlayEfxStart(duration)
   ParticleManager:SetParticleControl(pfx, 0, self.parent:GetOrigin())
   ParticleManager:SetParticleControl(pfx, 1, Vector(duration, 0, 0))
 
-  if IsServer() then self.parent:EmitSound("Templar.Light") end
+  self.parent:EmitSound("Templar.Light")
 end
 
 function templar_4_modifier_revenge:PlayEfxHit()
@@ -94,5 +99,5 @@ function templar_4_modifier_revenge:PlayEfxHit()
 	ParticleManager:SetParticleControl(effect, 0, self.parent:GetOrigin())
 	ParticleManager:SetParticleControl(effect, 1, Vector(35, 0, 0))
 
-  if IsServer() then self.parent:EmitSound("Templar.Combo.Hit") end
+  self.parent:EmitSound("Templar.Combo.Hit")
 end

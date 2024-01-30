@@ -157,7 +157,7 @@ function _modifier_str:GetSleepResist()
 end
 
 function _modifier_str:GetCriticalChance()
-  local chance = CalcLuck(self.parent, self.const_critical_chance) + self:GetCalculedData("sub_stat_critical_chance", false)
+  local chance = self.parent:GetLuck(self.const_critical_chance) + self:GetCalculedData("sub_stat_critical_chance", false)
   if self.force_crit_chance then chance = self.force_crit_chance end
   if chance < 0 then chance = 0 end
   if chance > 100 then chance = 100 end
