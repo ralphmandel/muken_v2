@@ -1,0 +1,57 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "projected_dota.vfx"
+
+	//---- Fade decal based on slope calculated against UP vector ----
+	F_SLOPED 1
+
+	//---- Fade out based on height within the projected decal box ----
+	F_HEIGHT_FADE 1
+
+	//---- Normal Maps ----
+	F_NORMAL_MAP 1
+
+	g_flAlphaRange "0.400"
+	g_flSolidRange "0.455"
+
+	//---- Color ----
+	TextureColor "materials/particle/blood/blood_decal_color.png"
+
+	//---- HeightFade ----
+	g_flHeightFadeSharpness "16.000"
+
+	//---- Normal Map ----
+	g_flBumpStrength "0.800"
+	TextureNormal "materials/particle/blood/blood_decal_normal.png"
+
+	//---- Overbright ----
+	g_flOverbrightFactor "1.000"
+
+	//---- Translucency ----
+	TextureTranslucency "materials/particle/blood/blood_decal_trans.png"
+
+
+	VariableState
+	{
+		""
+		{
+		}
+		"Color"
+		{
+		}
+		"HeightFade"
+		{
+		}
+		"Normal Map"
+		{
+		}
+		"Overbright"
+		{
+		}
+		"Translucency"
+		{
+		}
+	}
+}

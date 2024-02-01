@@ -1,0 +1,14 @@
+"Layer0"
+{
+	"shader"	"projected_dota.vfx"
+	"F_SLOPED"	"1"
+	"F_HEIGHT_FADE"	"1"
+	"F_NORMAL_MAP"	"1"
+	"g_flAlphaRange"	"0.4"
+	"g_flSolidRange"	"0.455"
+	"g_flHeightFadeSharpness"	"16"
+	"g_flBumpStrength"	"0.8"
+	"TextureColor"	"materials/particle/blackhole/blackhole_decal_color.png"
+	"TextureTranslucency"	"materials/particle/blackhole/blackhole_decal_trans.png"
+	"TextureNormal"	"materials/particle/blackhole/blackhole_decal_normal.png"
+}
