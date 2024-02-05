@@ -124,24 +124,30 @@
       <Image src="file://{resources}/images/custom_game/status_bar/status_raw.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/status_bar/status_sleep.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/status_bar/status_thunder.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_1__rage.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_2__bloodsteal.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_3__curse.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_4__bloodloss.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_5__tears.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_u__seal.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_1__precision.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_2__speed.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_3__jump.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_4__strip.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_5__smoke.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/fleaman_u__steal.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_1__link.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_2__shield.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_3__hammer.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_4__magnus.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_5__smite.png" class="img_collapse"/>
-      <Image src="file://{resources}/images/custom_game/abilities/paladin_u__faith.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_1.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_2.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_3.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_4.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_5.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/bloodstained_6.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_1.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_2.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_3.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_4.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_5.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/fleaman_6.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_1.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_2.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_3.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_4.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_5.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/paladin_6.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_1.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_2.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_3.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_4.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_5.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/templar_6.png" class="img_collapse"/>
     </Panel>
   </Panel>
 </root>

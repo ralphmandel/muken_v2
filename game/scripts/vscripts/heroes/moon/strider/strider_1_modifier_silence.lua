@@ -1,6 +1,6 @@
 strider_1_modifier_silence = class({})
 
-function strider_1_modifier_silence:IsHidden() return false end
+function strider_1_modifier_silence:IsHidden() return true end
 function strider_1_modifier_silence:IsPurgable() return true end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -10,47 +10,43 @@ function strider_1_modifier_silence:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
 	self.purge = true
   self.damage_received = 0
   self.health_cost = kv.health_cost
 
-  AddModifier(self.parent, self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2}, false)
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
+    amount = self.ability:GetSpecialValueFor("special_slow_percent")}
+  )
+  self.parent:AddModifier(self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2})
+  self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
 
-  if self.ability:GetSpecialValueFor("special_disarm") == 1 then
-    AddModifier(self.parent, self.ability, "_modifier_disarm", {}, false)
-  end
-
-  if IsServer() then
-    self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
-		self:StartIntervalThink(self:GetDuration())
-  end
+  self:StartIntervalThink(self:GetDuration())
 end
 
 function strider_1_modifier_silence:OnRefresh(kv)
+  if not IsServer() then return end
+
   self:CalcDebuff(true)
 
   self.purge = true
   self.damage_received = 0
   self.health_cost = kv.health_cost
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_disarm", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
+  self.parent:AddModifier(self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2})
+  self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
 
-  AddModifier(self.parent, self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2}, false)
-
-  if self.ability:GetSpecialValueFor("special_disarm") == 1 then
-    AddModifier(self.parent, self.ability, "_modifier_disarm", {}, false)
-  end
-
-  if IsServer() then
-    self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
-		self:StartIntervalThink(self:GetDuration())
-  end
+  self:StartIntervalThink(self:GetDuration())
 end
 
 function strider_1_modifier_silence:OnRemoved(bDeath)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_silence", self.ability)
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_disarm", self.ability)
+  if not IsServer() then return end
+
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
+
   self:CalcDebuff(bDeath)
 end
 
@@ -63,6 +59,8 @@ function strider_1_modifier_silence:DeclareFunctions()
 end
 
 function strider_1_modifier_silence:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
   if keys.attacker == nil then return end
   if IsValidEntity(keys.attacker) == false then return end
@@ -81,11 +79,12 @@ function strider_1_modifier_silence:CalcDebuff(bDeath)
   if self.damage_received > 0 and (self.purge == false or bDeath == true) then
     local stun_mult = self.ability:GetSpecialValueFor("special_stun_mult")
     local damage_mult = self.ability:GetSpecialValueFor("special_damage_mult")
+    local heal = self.damage_received * self.ability:GetSpecialValueFor("heal_bonus") * 0.01
 
     if stun_mult > 0 then
-      AddModifier(self.parent, self.ability, "_modifier_stun", {
+      self.parent:AddModifier(self.ability, "_modifier_stun", {
         duration = self.damage_received / (self.health_cost* stun_mult)
-      }, false)
+      })
     end
 
     if damage_mult > 0 then
@@ -93,11 +92,10 @@ function strider_1_modifier_silence:CalcDebuff(bDeath)
         victim = self.parent, attacker = self.caster, ability = self.ability,
         damage = self.damage_received / (self.health_cost * damage_mult),
         damage_type = self.ability:GetAbilityDamageType(),
-        damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
       })
     end
 
-    self.caster:Heal(self.damage_received * self.ability:GetSpecialValueFor("heal_bonus") * 0.01, self.ability)    
+    self.caster:ApplyHeal(heal, self.ability, false)
     self:PlayEfxEnd()
   end
 end

@@ -11,8 +11,10 @@ LinkLuaModifier("bloodstained_5_modifier_blood", "heroes/death/bloodstained/bloo
   end
 
   function bloodstained_5__tears:GetAbilityTextureName()
-    if self:GetSpecialValueFor("step") == 1 then return "bloodstained_tear" end
+    if self:GetSpecialValueFor("step") == 1 then return "bloodstained_tears" end
     if self:GetSpecialValueFor("step") == 2 then return "bloodstained_consume" end
+
+    return "bloodstained_tears"
   end
 
   function bloodstained_5__tears:GetBehavior()

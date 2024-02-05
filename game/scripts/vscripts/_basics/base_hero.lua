@@ -222,6 +222,7 @@ require("internal/rank_system")
     local caster = self:GetCaster()
 		if (not player) then return end
 
+    local hero_name = caster:GetHeroName()
     local skill_id = self:GetSkillID(skill_name)
     if skill_id == nil then return end
 
@@ -241,7 +242,7 @@ require("internal/rank_system")
     end
 
 		CustomGameEventManager:Send_ServerToPlayer(player, "ranks_from_lua", {
-      skill_name = skill_name, skill_level = skill_level, table = list
+      hero_name = hero_name, skill_name = skill_name, skill_id = skill_id, skill_level = skill_level, table = list
     })
 	end
 

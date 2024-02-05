@@ -24,6 +24,8 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 		Timers:CreateTimer(0.7, function()
 			caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
 		end)
+
+    self:PlayEfxStart()
 		
 		ProjectileManager:CreateTrackingProjectile({
 			Target = target,
@@ -40,17 +42,16 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
         health_cost = self:GetHealthCost(self:GetLevel())
       }
 		})
-
-		if IsServer() then self:PlayEfxStart() end
 	end
 
 	function strider_1__silence:OnProjectileHit_ExtraData(hTarget, vLocation, table)
     if (not hTarget) or hTarget:IsInvulnerable() or hTarget:TriggerSpellAbsorb(self) then return end
 
-		AddModifier(hTarget, self, "strider_1_modifier_silence", {
+    hTarget:AddModifier(self, "strider_1_modifier_silence", {
       duration = self:GetSpecialValueFor("duration"),
-      health_cost = table.health_cost
-    }, true)
+      health_cost = table.health_cost,
+      bResist = 1
+    })
 	end
 
 -- EFFECTS
@@ -62,5 +63,5 @@ function strider_1__silence:PlayEfxStart()
 	ParticleManager:SetParticleControl(effect_cast, 0, caster:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then caster:EmitSound("Hero_BountyHunter.Shuriken") end
+	caster:EmitSound("Hero_BountyHunter.Shuriken")
 end

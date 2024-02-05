@@ -1,45 +1,3 @@
-strider_1__silence_rank_11 = class ({})
-strider_1__silence_rank_12 = class ({})
-strider_1__silence_rank_21 = class ({})
-strider_1__silence_rank_22 = class ({})
-strider_1__silence_rank_31 = class ({})
-strider_1__silence_rank_32 = class ({})
-
-strider_2__spin_rank_11 = class ({})
-strider_2__spin_rank_12 = class ({})
-strider_2__spin_rank_21 = class ({})
-strider_2__spin_rank_22 = class ({})
-strider_2__spin_rank_31 = class ({})
-strider_2__spin_rank_32 = class ({})
-
-strider_3__smoke_rank_11 = class ({})
-strider_3__smoke_rank_12 = class ({})
-strider_3__smoke_rank_21 = class ({})
-strider_3__smoke_rank_22 = class ({})
-strider_3__smoke_rank_31 = class ({})
-strider_3__smoke_rank_32 = class ({})
-
-strider_4__shuriken_rank_11 = class ({})
-strider_4__shuriken_rank_12 = class ({})
-strider_4__shuriken_rank_21 = class ({})
-strider_4__shuriken_rank_22 = class ({})
-strider_4__shuriken_rank_31 = class ({})
-strider_4__shuriken_rank_32 = class ({})
-
-strider_5__aspd_rank_11 = class ({})
-strider_5__aspd_rank_12 = class ({})
-strider_5__aspd_rank_21 = class ({})
-strider_5__aspd_rank_22 = class ({})
-strider_5__aspd_rank_31 = class ({})
-strider_5__aspd_rank_32 = class ({})
-
-strider_u__shadow_rank_11 = class ({})
-strider_u__shadow_rank_12 = class ({})
-strider_u__shadow_rank_21 = class ({})
-strider_u__shadow_rank_22 = class ({})
-strider_u__shadow_rank_31 = class ({})
-strider_u__shadow_rank_32 = class ({})
-
 strider__precache = class ({})
 LinkLuaModifier("strider_special_values", "heroes/moon/strider/strider-special_values", LUA_MODIFIER_MOTION_NONE)
 
@@ -56,4 +14,15 @@ function strider__precache:Spawn()
 end
 
 function strider__precache:Precache(context)
+  PrecacheResource("model", "models/items/juggernaut/jugg_year_beast_slayer_head/jugg_year_beast_slayer_head.vmdl", context)
+  PrecacheResource("model", "models/items/juggernaut/jugg_year_beast_slayer_back/jugg_year_beast_slayer_back.vmdl", context)
+  PrecacheResource("model", "models/items/juggernaut/jugg_year_beast_slayer_arms/jugg_year_beast_slayer_arms.vmdl", context)
+  PrecacheResource("model", "models/items/juggernaut/jugg_year_beast_slayer_legs/jugg_year_beast_slayer_legs.vmdl", context)
+  PrecacheResource("model", "models/items/juggernaut/generic_wep_jadesword.vmdl", context)
+
+  PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_head_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_back_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_arms_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_slayer/jugg_slayer_legs_ambient.vpcf", context)
+  PrecacheResource("particle", "particles/econ/items/juggernaut/jugg_sword_jade/jugg_weapon_glow_variation_jade.vpcf", context)
 end

@@ -125,7 +125,7 @@
 					}
 					"volume_fade_out"
 					{
-						"value"		"10"
+						"value"		"2"
 					}
 					"memory_type"
 					{

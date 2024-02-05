@@ -105,7 +105,7 @@ function SendRanksRequest(event) {
 function OnRankPanelUpdate(event) {
   for(var tier = 1; tier <= 3; tier++) {
     for(var path = 1; path <= 2; path++) {
-      var source = "file://{resources}/images/custom_game/abilities/" + event.skill_name + ".png";
+      var source = "file://{resources}/images/custom_game/abilities/" + event.hero_name + "_" + event.skill_id + ".png";
       RANK_PANELS[tier][path].GetChild(0).SetImage(source);
       for (const [i, state] of Object.entries(rank_states)) {
         RANK_PANELS[tier][path].SetHasClass(state, state == event.table[tier][path]);
