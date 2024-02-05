@@ -79,10 +79,6 @@
 				m_nMapType = "PF_MAP_TYPE_MULT"
 				m_flMultFactor = 0.0
 			}
-			m_TransformInput = 
-			{
-				m_nControlPoint = 2
-			}
 		},
 		{
 			_class = "C_INIT_PositionOffset"
