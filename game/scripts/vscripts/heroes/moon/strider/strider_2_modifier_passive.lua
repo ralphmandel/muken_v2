@@ -21,13 +21,29 @@ end
 
 function strider_2_modifier_passive:DeclareFunctions()
 	local funcs = {
-		MODIFIER_EVENT_ON_ATTACK_LANDED
+    MODIFIER_PROPERTY_PRE_ATTACK,
+    MODIFIER_EVENT_ON_ORDER,
+    MODIFIER_EVENT_ON_ATTACK_LANDED
 	}
 
 	return funcs
 end
 
+function strider_2_modifier_passive:GetModifierPreAttack(keys)
+  if self.parent:HasModifier("strider_2_modifier_spin") then return end
+  self.ability.aggro = keys.target
+end
+
+function strider_2_modifier_passive:OnOrder(keys)
+  if keys.unit ~= self.parent then return end
+  if keys.order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION then
+    self.ability.aggro = nil
+  end
+end
+
 function strider_2_modifier_passive:OnAttackLanded(keys)
+  if not IsServer() then return end
+  
   if keys.attacker ~= self.parent then return end
   if self.parent:PassivesDisabled() then return end
   if self.parent:HasModifier("strider_2_modifier_spin") then return end
@@ -39,12 +55,9 @@ function strider_2_modifier_passive:OnAttackLanded(keys)
     end
   end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_bleed_chance") then
-    RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_bleeding", self.ability)
-    
-    AddModifier(keys.target, self.ability, "_modifier_bleeding", {
-      duration = self.ability:GetSpecialValueFor("bleeding_duration")
-    }, true)
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_cast_chance") then
+    self.ability.aggro = self.parent:GetAttackTarget()
+    self.ability:OnSpellStart()
   end
 end
 

@@ -251,7 +251,7 @@
     local caster = ability:GetCaster()
 
     if self:HasModifier("orb_cold__max_status") then
-      if modifier_name == "orb_cold_debuff" or modifier_name == "orb_cold__status" then return end
+      if modifier_name == "orb_cold__status" then return end
     end
 
     if modifier_name == "modifier_knockback" then ability = nil end
@@ -370,6 +370,14 @@
     end
 
     return nil
+  end
+
+  function CDOTA_BaseNPC:GetCriticalDamage()
+    return self:GetMainStat("STR"):GetCriticalDamage()
+  end
+
+  function CDOTA_BaseNPC:SetForceCrit(chance, damage)
+    self:GetMainStat("STR"):SetForceCrit(chance, damage)
   end
 
 -- CDOTA_BaseNPC || COSMETICS

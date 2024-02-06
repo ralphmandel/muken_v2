@@ -73,6 +73,10 @@
   font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
+.TierLabel{
+  padding-left: 8px;
+}
+
 #RankNameContainer {
   horizontal-align: center;
   height: 51px;

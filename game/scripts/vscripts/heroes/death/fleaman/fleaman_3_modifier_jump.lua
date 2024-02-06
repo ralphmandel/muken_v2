@@ -124,7 +124,7 @@ function fleaman_3_modifier_jump:PerformImpact(point)
 	)
 
 	for _,enemy in pairs(enemies) do
-    self.parent:GetMainStat("STR"):SetForceCrit(100, critical_damage)
+    self.parent:SetForceCrit(100, critical_damage)
     self.parent:PerformAttack(enemy, false, true, true, true, false, false, true)
 	end
 

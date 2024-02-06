@@ -22,10 +22,9 @@ function orb_cold__status:OnCreated(kv)
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end
 
+  self:StartIntervalThink(1)
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
-  self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(1)
 end
 
 function orb_cold__status:OnRefresh(kv)
@@ -34,10 +33,9 @@ function orb_cold__status:OnRefresh(kv)
   self.caster = EntIndexToHScript(kv.inflictor)
   local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
+  self:StartIntervalThink(1)
   self:AddEntityAmount(kv.inflictor, added_amount)
   self:AddCurrentStatus(added_amount)
-  self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(1)
 end
 
 function orb_cold__status:OnRemoved()
@@ -56,7 +54,6 @@ function orb_cold__status:OnIntervalThink()
   local interval = 0.1
 
   self:ReduceAmount(self.status_degen * interval)
-  self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(interval)
 end
 
@@ -87,7 +84,9 @@ function orb_cold__status:ApplyFrozenState()
 
   if attacker.unit == nil then return end
 
-  self.parent:RemoveAllModifiersOfName("orb_cold_debuff")
+  self.current_status = self.current_status - self.max_status
+
+  self:StartIntervalThink(-1)
 
   self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "orb_cold__max_status", {
     duration = attacker.unit:GetDebuffPower(self.freeze_duration, nil),
@@ -95,7 +94,7 @@ function orb_cold__status:ApplyFrozenState()
     multiplier = 100 / self.freeze_amount
   })
 
-  self:Destroy()
+  if self.current_status <= 0 then self:Destroy() end
 end
 
 function orb_cold__status:AddEntityAmount(ent_index, amount)
@@ -141,19 +140,18 @@ end
 
 function orb_cold__status:UpdateStatusBar()
   local old_max_status = self.max_status
-  local max_status = self.parent:GetResistance(self.status_name)
+  self.max_status = self.parent:GetResistance(self.status_name)
 
   if old_max_status == nil then
-    if self.current_status > max_status then
+    if self.current_status > self.max_status then
       self:ApplyFrozenState()
       return
     end
   else
     local percent = self.current_status / old_max_status
-    self.current_status = max_status * percent
+    self.current_status = self.max_status * percent
   end
 
-  self.max_status = max_status
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,

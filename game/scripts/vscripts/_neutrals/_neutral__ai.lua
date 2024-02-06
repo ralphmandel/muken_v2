@@ -4,6 +4,8 @@ LinkLuaModifier("_fountain_refresh_hp", "_modifiers/generics/_fountain_refresh_h
 LinkLuaModifier("_fountain_refresh_mp", "_modifiers/generics/_fountain_refresh_mp", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_avoid_damage", "_modifiers/generics/_modifier_avoid_damage", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_ban", "_modifiers/generics/_modifier_ban", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_barrier", "_modifiers/generics/_modifier_barrier", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_barrier_universal_efx", "_modifiers/generics/_modifier_barrier_universal_efx", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_bkb", "_modifiers/generics/_modifier_bkb", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_blind", "_modifiers/generics/_modifier_blind", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_blind_stack", "_modifiers/generics/_modifier_blind_stack", LUA_MODIFIER_MOTION_NONE)

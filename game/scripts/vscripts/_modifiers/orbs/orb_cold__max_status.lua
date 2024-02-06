@@ -40,8 +40,16 @@ function orb_cold__max_status:OnRemoved()
     damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 
-  self.parent:RemovePanelFromList(self.status_name)
   self:PlayEfxEnd(damage_result)
+
+  local status_modifier = self.parent:FindModifierByName("orb_cold__status")
+
+  if status_modifier then
+    status_modifier.bCompleted = nil
+    status_modifier:OnIntervalThink()
+  else
+    self.parent:RemovePanelFromList(self.status_name)
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

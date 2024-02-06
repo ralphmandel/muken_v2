@@ -60,8 +60,8 @@ function neutral_strike_modifier_passive:OnIntervalThink()
   
   if self.parent:PassivesDisabled() then self:StartIntervalThink(0.5) end
 
-  AddModifier(self.parent, self.ability, "neutral_strike_modifier_wind", {}, false)
-  self.parent:GetMainStat("STR"):SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
+  self.parent:AddModifier(self.ability, "neutral_strike_modifier_wind", {})
+  self.parent:SetForceCrit(100, self.ability:GetSpecialValueFor("critical_damage"))
   self.strike = true
 
   self:StartIntervalThink(-1)

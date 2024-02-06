@@ -66,6 +66,7 @@
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"50"
 
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
 		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -76,13 +77,16 @@
 
     "AbilityValues"
 		{
-      "spin_duration"     "0.23"
-      "radius"            "250"
-      "bleeding_duration" "3"
-      "cooldown"          "1 2 3 4 5 6 7"
-      "special_bash_duration"         "0"
-      "special_critical_damage_stack" "0"
-      "special_bleed_chance"          "0"
+      "spin_duration"         "0"
+      "radius"                "0"
+      "critical_damage_stack" "0"
+      "bleed_damage"          "0"
+      "bleed_duration"        "0"
+      "cooldown"              "1 2 3 4 5 6 7"
+      "special_bash_duration"     "0"
+      "special_barrier_mult"      "0"
+      "special_barrier_duration"  "0"
+      "special_cast_chance"       "0"
 		}
 	}
 

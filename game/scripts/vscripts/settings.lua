@@ -426,7 +426,7 @@ OUTPOST_ORIGIN = {
 
 STATUS_LIST = {
   "orb_bleed__status",
-  "orb_cold__status"
+  ""
 }
 
 STATUS_OFFSET_HERO = -25

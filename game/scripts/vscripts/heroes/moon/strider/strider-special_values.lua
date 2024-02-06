@@ -93,30 +93,17 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "strider_2__spin" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+
+		if value_name == "spin_duration" then return 1 end
+		if value_name == "radius" then return 1 end
+		if value_name == "critical_damage_stack" then return 1 end
+		if value_name == "bleed_damage" then return 1 end
+		if value_name == "bleed_duration" then return 1 end
 		if value_name == "cooldown" then return 1 end
-
-		if caster:FindAbilityByName("strider_2__spin_rank_11") then
-      if value_name == "radius" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_2__spin_rank_12") then
-      if value_name == "special_bash_duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_2__spin_rank_21") then
-      if value_name == "special_critical_damage_stack" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_2__spin_rank_22") then
-		end
-
-		if caster:FindAbilityByName("strider_2__spin_rank_31") then
-      if value_name == "bleeding_duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_2__spin_rank_32") then
-      if value_name == "special_bleed_chance" then return 1 end
-		end
+    if value_name == "special_bash_duration" then return 1 end
+    if value_name == "special_barrier_mult" then return 1 end
+    if value_name == "special_barrier_duration" then return 1 end
+    if value_name == "special_cast_chance" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
@@ -282,38 +269,42 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "strider_2__spin" then
     if self:HasRank(2, 1, 1) then
-
+      if value_name == "radius" then return 350 end
     end
 
     if self:HasRank(2, 1, 2) then
-
+      if value_name == "special_bash_duration" then return 0.6 * self:GetDebuffAmp() end
     end
 
     if self:HasRank(2, 2, 1) then
-
+      if value_name == "critical_damage_stack" then return 200 end
 		end
 
-    if self:HasRank(2, 2, 2) then
-
+		if self:HasRank(2, 2, 2) then
+      if value_name == "bleed_damage" then return 70 * self:GetPhysicalDamageAmp() end
+      if value_name == "bleed_duration" then return 4 end
 		end
 
-		if self:HasRank(2, 3, 1) then
-
+    if self:HasRank(2, 3, 1) then
+      if value_name == "special_barrier_mult" then return 300 end
+      if value_name == "special_barrier_duration" then return 5 * self:GetBuffAmp() end
 		end
 
     if self:HasRank(2, 3, 2) then
-
+      if value_name == "special_cast_chance" then return self:CalcLuck(10) end
+      if value_name == "AbilityManaCost" then return 0 end
+      if value_name == "cooldown" then return 0 end
     end
 
 		if value_name == "AbilityManaCost" then return 40 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "cooldown" then return 9 - (value_level * 0.25) end
 
-    if value_name == "radius" then return 350 end
-    if value_name == "special_bash_duration" then return 0.5 end
-    if value_name == "special_critical_damage_stack" then return 100 end
-    if value_name == "bleeding_duration" then return 5 end
-    if value_name == "special_bleed_chance" then return 10 end
+    if value_name == "spin_duration" then return 0.23 end
+		if value_name == "radius" then return 250 end
+		if value_name == "critical_damage_stack" then return 75 end
+		if value_name == "bleed_damage" then return 60 * self:GetPhysicalDamageAmp() end
+		if value_name == "bleed_duration" then return 3 end
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then

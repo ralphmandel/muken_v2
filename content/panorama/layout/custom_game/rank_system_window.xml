@@ -9,15 +9,15 @@
     <Panel id="RankContainer" hittest="false">
       <Panel class="RankSpellContainer" hittest="false">
 
-        <Label text="TIER 3"/>
+        <Label class="TierLabel" text="TIER 3"/>
         <Panel class="RankTier" id="Tier3" hittest="false">
         </Panel>
 
-        <Label text="TIER 2"/>
+        <Label class="TierLabel" text="TIER 2"/>
         <Panel class="RankTier" id="Tier2" hittest="false">
         </Panel>
         
-        <Label text="TIER 1"/>
+        <Label class="TierLabel" text="TIER 1"/>
         <Panel class="RankTier" id="Tier1" hittest="false">
         </Panel>
         

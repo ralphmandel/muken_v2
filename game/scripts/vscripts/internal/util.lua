@@ -157,23 +157,6 @@
     return duration * (1 + target:GetMainStat("VIT"):GetIncomingBuff())
   end
 
-  function AddModifier(target, ability, modifier_name, table, bCalcStatus)
-    local caster = ability:GetCaster()
-
-    if target:HasModifier("orb_cold__max_status") then
-      if modifier_name == "orb_cold_debuff" or modifier_name == "orb_cold__status" then return end
-    end
-
-    if modifier_name == "modifier_knockback" then ability = nil end
-
-    if table.duration then
-      if bCalcStatus then table.duration = CalcStatus(table.duration, caster, target) end
-      if table.duration <= 0 then return end
-    end
-
-    return target:AddNewModifier(caster, ability, modifier_name, table)
-  end
-
   function AddSubStats(target, ability, table, bCalcStatus)
     return AddModifier(target, ability, "sub_stat_modifier", table, bCalcStatus)
   end

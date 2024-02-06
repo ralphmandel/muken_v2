@@ -21,10 +21,9 @@ function orb_bleed__status:OnCreated(kv)
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end
 
+  self:StartIntervalThink(1)
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
-  self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(1)
 end
 
 function orb_bleed__status:OnRefresh(kv)
@@ -33,10 +32,9 @@ function orb_bleed__status:OnRefresh(kv)
   self.caster = EntIndexToHScript(kv.inflictor)
   local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
+  self:StartIntervalThink(1)
   self:AddEntityAmount(kv.inflictor, added_amount)
   self:AddCurrentStatus(added_amount)
-  self:SetStackCount(math.floor(self.current_status))
-  self:StartIntervalThink(1)
 end
 
 function orb_bleed__status:OnRemoved()
@@ -53,7 +51,6 @@ function orb_bleed__status:OnIntervalThink()
   local interval = 0.1
   
   self:ReduceAmount(self.status_degen * interval)
-  self:SetStackCount(math.floor(self.current_status))
   self:StartIntervalThink(interval)
 end
 
@@ -83,8 +80,6 @@ function orb_bleed__status:ApplyBloodLoss()
   end
 
   if attacker.unit == nil then return end
-
-  self.parent:RemoveAllModifiersOfName("orb_bleed_debuff")
 
   local damage_result = ApplyDamage({
     attacker = attacker.unit, victim = self.parent, ability = nil,
@@ -142,19 +137,18 @@ end
 
 function orb_bleed__status:UpdateStatusBar()
   local old_max_status = self.max_status
-  local max_status = self.parent:GetResistance(self.status_name)
+  self.max_status = self.parent:GetResistance(self.status_name)
 
   if old_max_status == nil then
-    if self.current_status > max_status then
+    if self.current_status > self.max_status then
       self:ApplyBloodLoss()
       return
     end
   else
     local percent = self.current_status / old_max_status
-    self.current_status = max_status * percent
+    self.current_status = self.max_status * percent
   end
 
-  self.max_status = max_status
   self.parent:UpdatePanel({
     current_status = self.current_status,
     max_status = self.max_status,
