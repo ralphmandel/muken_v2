@@ -22,7 +22,7 @@ function neutral_doom:OnAbilityPhaseStart()
   if not IsServer() then return true end
 
   local target = self:GetCursorTarget()
-  AddModifier(target, self, "neutral_doom_modifier_pre", {}, false)
+  target:AddModifier(self, "neutral_doom_modifier_pre", {})
 
   return true
 end
@@ -43,7 +43,9 @@ function neutral_doom:OnSpellStart()
   if target:TriggerSpellAbsorb(self) then return end
 
   target:RemoveModifierByName("neutral_doom_modifier_pre")
-  AddModifier(target, self, "neutral_doom_modifier_debuff", {duration = self:GetSpecialValueFor("duration")}, true)
+  target:AddModifier(self, "neutral_doom_modifier_debuff", {
+    duration = caster:GetDebuffPower(self:GetSpecialValueFor("duration"), target)
+  })
 
   self:PlayEfxStart(target)
 end

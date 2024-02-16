@@ -20,5 +20,7 @@ function neutral_spike_armor:OnSpellStart()
   if not IsServer() then return end
 
   local caster = self:GetCaster()
-  AddModifier(caster, self, "neutral_spike_armor_modifier_buff", {duration = self:GetSpecialValueFor("duration")}, true)
+  caster:AddModifier(self, "neutral_spike_armor_modifier_buff", {
+    duration = self:GetSpecialValueFor("duration"), bResist = 1
+  })
 end

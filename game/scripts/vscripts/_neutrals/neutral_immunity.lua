@@ -22,7 +22,7 @@ function neutral_immunity:OnSpellStart()
   )
 
 	for _,ally in pairs(allies) do
-    AddModifier(ally, self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration")}, true)
+    ally:AddModifier(self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
 	end
 
   caster:EmitSound("Hero_Omniknight.GuardianAngel.Cast")

@@ -27,7 +27,7 @@ end
 function neutral_iron_guard_modifier_resistance:OnRemoved()
   if not IsServer() then return end
   
-  RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
+  self.parent:RemoveSubStats(self.ability, {"status_resist_stack"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -53,8 +53,8 @@ function neutral_iron_guard_modifier_resistance:UpdateResistance()
   if self.parent:GetHealthPercent() == 100 then self:Destroy() return end
 
   self.hp_percent = math.floor(self.parent:GetHealthPercent() / 5)
-  RemoveSubStats(self.parent, self.ability, {"status_resist_stack"})
-  AddSubStats(self.parent, self.ability, {status_resist_stack = 100 - (self.hp_percent * 5)}, false)
+  self.parent:RemoveSubStats(self.ability, {"status_resist_stack"})
+  self.parent:AddSubStats(self.ability, {status_resist_stack = 100 - (self.hp_percent * 5)})
 end
 
 -- EFFECTS -----------------------------------------------------------

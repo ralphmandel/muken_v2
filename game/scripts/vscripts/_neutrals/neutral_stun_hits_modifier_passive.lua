@@ -36,10 +36,10 @@ function neutral_stun_hits_modifier_passive:OnAttackLanded(keys)
   if self.parent:PassivesDisabled() then return end
 
   if self:GetStackCount() == 1 then
-    RemoveAllModifiersByNameAndAbility(keys.target, "_modifier_stun", self.ability)
-    AddModifier(keys.target, self.ability, "_modifier_stun", {
-      duration = self.ability:GetSpecialValueFor("stun_duration")
-    }, true)
+    keys.target:RemoveAllModifiersByNameAndAbility("_modifier_stun", self.ability)
+    keys.target:AddModifier(self.ability, "_modifier_stun", {
+      duration = self.parent:GetDebuffPower(self.ability:GetSpecialValueFor("stun_duration"), keys.target)
+    })
   end
 
   self:DecrementStackCount()

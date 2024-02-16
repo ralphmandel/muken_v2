@@ -144,7 +144,7 @@ function shrine_modifier:ActivateHP(mod)
     return
   end
 
-  AddModifier(mod:GetParent(), self.ability, "shrine_refresh_hp_modifier", {duration = 60}, false)
+  mod:GetParent():AddModifier(self.ability, "shrine_refresh_hp_modifier", {duration = 60})
 
   self:PlayEfxHP(mod)
 end
@@ -164,7 +164,7 @@ function shrine_modifier:ActiveteMP(mod)
     return
   end
 
-  AddModifier(mod:GetParent(), self.ability, "shrine_refresh_mp_modifier", {duration = 90}, false)
+  mod:GetParent():AddModifier(self.ability, "shrine_refresh_mp_modifier", {duration = 90})
 
   self:PlayEfxMP(mod)
 end

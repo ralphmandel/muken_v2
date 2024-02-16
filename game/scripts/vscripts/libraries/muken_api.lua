@@ -297,9 +297,12 @@
   end
 
   function CDOTA_BaseNPC:ApplyMana(amount, ability, bAmplify, target, bMessage)
+    if ability == nil then return 0 end
+    local caster = ability:GetCaster()
+
     if target then
       if bAmplify then
-        amount = self:GetDebuffPower(amount, target)
+        amount = caster:GetDebuffPower(amount, target)
       end
 
       if amount > target:GetMana() then
@@ -313,7 +316,11 @@
       end
     else
       if bAmplify then
-        amount = self:GetHealPower(amount)
+        if ability:GetCaster():GetTeamNumber() == self:GetTeamNumber() then
+          amount = caster:GetHealPower(amount)
+        else
+          amount = caster:GetDebuffPower(amount, self)
+        end
       end
     end
 
@@ -392,6 +399,24 @@
 
   function CDOTA_BaseNPC:RemoveStatusEfx(caster, ability, string)
     if self:GetBaseCosmetic() then self:GetBaseCosmetic():SetStatusEffect(caster, ability, string, false) end
+  end
+
+  function CDOTA_BaseNPC:SetModifierOnAllCosmetics(ability, modifier_name, table, bEnabled)      
+    if self:GetBaseCosmetic() == nil then return end
+
+    if bEnabled == true then
+      self:AddNewModifier(self, ability, modifier_name, table)
+
+      for i = 1, #self:GetBaseCosmetic().cosmetic, 1 do
+        self:GetBaseCosmetic().cosmetic[i]:AddNewModifier(self, ability, modifier_name, table)
+      end
+    else
+      self:RemoveAllModifiersByNameAndAbility(modifier_name, ability)
+
+      for i = 1, #self:GetBaseCosmetic().cosmetic, 1 do
+        self:GetBaseCosmetic().cosmetic[i]:RemoveAllModifiersByNameAndAbility(modifier_name, ability)
+      end
+    end
   end
 
 -- CDOTA_BaseNPC || STATUS PANEL

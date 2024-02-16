@@ -31,15 +31,20 @@ function strider_4_modifier_turn:DeclareFunctions()
 end
 
 function strider_4_modifier_turn:GetModifierDisableTurning()
+  if not IsServer() then return 0 end
+
 	return self.ability.disable
 end
 
 function strider_4_modifier_turn:GetModifierIgnoreCastAngle()
+  if not IsServer() then return 0 end
+
 	return self.ability.disable
 end
 
 function strider_4_modifier_turn:OnOrder(keys)
   if not IsServer() then return end
+  
 	if keys.unit ~= self.parent then return end
   if self.parent:HasModifier("strider_4_modifier_shuriken") then return end
 

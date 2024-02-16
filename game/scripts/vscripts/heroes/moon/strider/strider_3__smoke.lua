@@ -10,21 +10,28 @@ LinkLuaModifier("strider_3_modifier_aura_effect", "heroes/moon/strider/strider_3
 
   function strider_3__smoke:OnAbilityPhaseStart()
     local caster = self:GetCaster()
-    if IsServer() then caster:EmitSound("Hero_MonkeyKing.Strike.Cast") end
+    caster:EmitSound("Hero_MonkeyKing.Strike.Cast")
 
     return true
+  end
+
+  function strider_3__smoke:OnOwnerDied()
+    if self:GetSpecialValueFor("special_cast_on_death") == 1 then
+      local caster = self:GetCaster()
+      caster:SetCursorPosition(caster:GetOrigin())
+      self:OnSpellStart()
+    end
   end
 
 -- SPELL START
 
 	function strider_3__smoke:OnSpellStart()
 		local caster = self:GetCaster()
+    caster:EmitSound("Strider.smoke")
 
 		CreateModifierThinker(caster, self, "strider_3_modifier_smoke", {
       duration = self:GetSpecialValueFor("duration")
-    }, self:GetCursorPosition(), caster:GetTeamNumber(), false)
-
-    if IsServer() then caster:EmitSound("Strider.smoke") end
+    }, caster:GetCursorPosition(), caster:GetTeamNumber(), false)
 	end
 
 -- EFFECTS

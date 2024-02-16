@@ -50,14 +50,18 @@ function neutral_fireball:OnProjectileHit(hTarget, vLocation)
   local caster = self:GetCaster()
 
   if hTarget:IsMagicImmune() == false then
-    AddModifier(hTarget, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
+    hTarget:AddModifier(self, "_modifier_stun", {
+      duration = caster:GetDebuffPower(self:GetSpecialValueFor("stun_duration"), hTarget)
+    })
   end
   
-  AddModifier(hTarget, self, "neutral_fireball_modifier_burn", {duration = self:GetSpecialValueFor("flame_duration")}, true)
+  hTarget:AddModifier(self, "neutral_fireball_modifier_burn", {
+    duration = caster:GetDebuffPower(self:GetSpecialValueFor("flame_duration"), hTarget)
+  })
 
   ApplyDamage({
     victim = hTarget, attacker = caster, ability = self,
-    damage = self:GetSpecialValueFor("fireball_damage"),
+    damage = caster:GetSpellDamage(self:GetSpecialValueFor("fireball_damage"), self:GetAbilityDamageType()),
     damage_type = self:GetAbilityDamageType()
   })
 end

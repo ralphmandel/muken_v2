@@ -36,41 +36,30 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		FindClearSpaceForUnit(caster, init_pos, true)
 		caster:SetForwardVector(direction)
 
-		Timers:CreateTimer(0.2, function()
+		Timers:CreateTimer(0.1, function()
 			caster:MoveToPosition(caster:GetOrigin())
 		end)
 
     ProjectileManager:ProjectileDodge(caster)
 
-		AddModifier(caster, self, "strider_4_modifier_shuriken", {
-			init_x = init_pos.x, init_y = init_pos.y, init_z = init_pos.z,
+    caster:AddModifier(self, "strider_4_modifier_shuriken", {
+      init_x = init_pos.x, init_y = init_pos.y, init_z = init_pos.z,
 			end_x = end_pos.x, end_y = end_pos.y, end_z = end_pos.z
-		}, false)
+    })
 
-		if IsServer() then self:PlayEfxStart(origin, direction) end
+		self:PlayEfxStart(origin, direction)
 	end
 
 	function strider_4__shuriken:OnProjectileHit(hTarget, vLocation)
 		local caster = self:GetCaster()
+		if not hTarget then return end
 
-		if IsServer() then self:PlayEfxTarget(hTarget) end
+		self:PlayEfxTarget(hTarget)
 
     if hTarget:IsMagicImmune() == false then
-      AddModifier(hTarget, self, "sub_stat_movespeed_decrease", {
-        value = self:GetSpecialValueFor("slow"), duration = self:GetSpecialValueFor("slow_duration")
-      }, true)
-
-      local stun_mods = hTarget:FindAllModifiersByName("_modifier_stun")
-      local stun_duration = CalcStatus(self:GetSpecialValueFor("special_stun_duration"), caster, hTarget)
-    
-      for _, mod in pairs(stun_mods) do
-        if mod:GetCaster() == caster and mod:GetAbility() == self then
-          stun_duration = stun_duration + mod:GetRemainingTime()
-        end
-      end
-    
-      RemoveAllModifiersByNameAndAbility(hTarget, "_modifier_stun", self)
-      AddModifier(hTarget, self, "_modifier_stun", {duration = stun_duration}, false)
+      hTarget:AddModifier(self, "_modifier_stun", {
+        duration = self:GetSpecialValueFor("special_stun_duration"), bResist = 1
+      })
     end
 
 		ApplyDamage({
@@ -79,7 +68,7 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 			damage_type = self:GetAbilityDamageType()
 		})
 
-    return true
+    return self:GetSpecialValueFor("special_pierce") == 0
 	end
 
 -- EFFECTS
@@ -110,7 +99,7 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		-- ParticleManager:SetParticleControlForward( effect_cast_a, 0, direction:Normalized() )
 		ParticleManager:ReleaseParticleIndex(effect_cast_a)
 
-		if IsServer() then caster:EmitSound("Hero_Antimage.Blink_out") end
+		caster:EmitSound("Hero_Antimage.Blink_out")
 	end
 
 	function strider_4__shuriken:PlayEfxTarget(enemy)
@@ -118,5 +107,5 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, enemy)
 		ParticleManager:ReleaseParticleIndex(effect_cast)
 
-    if IsServer() then enemy:EmitSound("Hero_Mirana.ProjectileImpact") end
+    enemy:EmitSound("Hero_Mirana.ProjectileImpact")
 	end

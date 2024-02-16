@@ -317,7 +317,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "fleaman_5__smoke" then
     if self:HasRank(5, 1, 1) then
-      if value_name == "blind" then return 90 end
+      if value_name == "blind" then return 85 end
 		end
 
     if self:HasRank(5, 1, 2) then
@@ -325,7 +325,7 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if self:HasRank(5, 2, 1) then
-      if value_name == "AbilityCooldown" then return 20 end
+      if value_name == "AbilityCooldown" then return 30 end
 		end
 
     if self:HasRank(5, 2, 2) then
@@ -340,14 +340,14 @@ function fleaman_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "special_hide" then return 5 * self:GetBuffAmp() end
 		end
 
-		if value_name == "AbilityManaCost" then return 150 * mana_mult end
-		if value_name == "AbilityCooldown" then return 25 end
+		if value_name == "AbilityManaCost" then return 200 * mana_mult end
+		if value_name == "AbilityCooldown" then return 40 end
     if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
-		if value_name == "radius" then return 450 + (value_level * 25) end
+		if value_name == "radius" then return 600 + (value_level * 25) end
 
     if value_name == "cast_range" then return 600 end
     if value_name == "duration" then return 15 end
-    if value_name == "blind" then return 75 end
+    if value_name == "blind" then return 70 end
     if value_name == "miss_chance" then return 25 end
 	end
 

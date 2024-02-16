@@ -36,7 +36,7 @@ function neutral_iron_guard_modifier_passive:OnTakeDamage(keys)
   if keys.unit ~= self.parent then return end
 
   if self.parent:GetHealthPercent() <= 95 then
-    AddModifier(self.parent, self.ability, "neutral_iron_guard_modifier_resistance", {}, false)
+    self.parent:AddModifier(self.ability, "neutral_iron_guard_modifier_resistance", {})
   end
 end
 
@@ -57,10 +57,13 @@ end
 function neutral_iron_guard_modifier_passive:OnStackCountChanged(old)
   if not IsServer() then return end
 
-  RemoveSubStats(self.parent, self.ability, {"armor"})
+  self.parent:RemoveSubStats(self.ability, {"armor"})
 
   if self:GetStackCount() > 0 then
-    local mod = AddSubStats(self.parent, self.ability, {armor = self.ability:GetSpecialValueFor("armor") * self:GetStackCount()}, false)
+    local mod = self.parent:AddSubStats(self.ability, {
+      armor = self.ability:GetSpecialValueFor("armor") * self:GetStackCount()
+    })
+    
     self:StartIntervalThink(self.ability:GetSpecialValueFor("decrease_time"))
   else
     self:StartIntervalThink(-1)

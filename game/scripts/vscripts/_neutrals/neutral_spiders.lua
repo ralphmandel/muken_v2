@@ -41,10 +41,10 @@ function neutral_spiders:OnSpellStart()
       local spider = CreateUnitByName("summon_spider", target:GetOrigin(), true, nil, nil, caster:GetTeamNumber())
       self:SetStats(spider)
 
-      AddModifier(spider, self, "neutral_spiders_modifier_summon", {
+      spider:AddModifier(self, "neutral_spiders_modifier_summon", {
         duration = self:GetSpecialValueFor("duration"),
         target = target:entindex()
-      }, false)
+      })
 
       if GetHeroName(caster) == "trickster" then
         table.insert(self.spiders, spider)

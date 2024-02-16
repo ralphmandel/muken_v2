@@ -12,15 +12,14 @@ function neutral_burn_aura_modifier_aura_effect:OnCreated(kv)
 
   if not IsServer() then return end
 
-  local interval = 0.4
+  self.interval = 0.4
 
   self.damageTable = {
 		attacker = self.caster, victim = self.parent, ability = self.ability,
-		damage = self.ability:GetSpecialValueFor("damage") * interval,
     damage_type = self.ability:GetAbilityDamageType()
 	}
 
-  self:StartIntervalThink(interval)
+  self:StartIntervalThink(self.interval)
 end
 
 function neutral_burn_aura_modifier_aura_effect:OnRefresh(kv)
@@ -34,6 +33,8 @@ end
 function neutral_burn_aura_modifier_aura_effect:OnIntervalThink()
   if not IsServer() then return end
 
+  local damage = self.ability:GetSpecialValueFor("damage") * self.interval
+  self.damageTable.damage = self.damageTable.attacker:GetSpellDamage(damage, self.ability:GetAbilityDamageType())
   ApplyDamage(self.damageTable)  
 end
 

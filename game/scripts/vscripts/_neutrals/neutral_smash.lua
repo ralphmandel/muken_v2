@@ -48,11 +48,13 @@ function neutral_smash:OnSpellStart()
     if caster:IsHero() == true
     or (enemy:GetTeamNumber() ~= TIER_TEAMS[RARITY_COMMON] and enemy:GetTeamNumber() < TIER_TEAMS[RARITY_RARE]) then
       if enemy:IsMagicImmune() == false then
-        AddModifier(enemy, self, "_modifier_stun", {duration = self:GetSpecialValueFor("stun_duration")}, true)
+        enemy:AddModifier(self, "_modifier_stun", {
+          duration = caster:GetDebuffPower(self:GetSpecialValueFor("stun_duration"), enemy)
+        })
 
         local distance_percent = 1 - ((caster:GetOrigin() - enemy:GetOrigin()):Length2D() / self:GetAOERadius())
 
-        local bash = AddModifier(enemy, self, "modifier_knockback", {
+        local bash = enemy:AddModifier(self, "modifier_knockback", {
           center_x = caster:GetAbsOrigin().x + 1,
           center_y = caster:GetAbsOrigin().y + 1,
           center_z = caster:GetAbsOrigin().z,
@@ -60,12 +62,12 @@ function neutral_smash:OnSpellStart()
           duration = distance_percent * 0.35,
           knockback_duration = distance_percent * 0.35,
           knockback_distance = distance_percent * self:GetAOERadius() * 1.35
-        }, true)
+        })
       end
       
       ApplyDamage({
         attacker = caster, victim = enemy, ability = self,
-        damage = self:GetSpecialValueFor("stun_damage"),
+        damage =  caster:GetSpellDamage(self:GetSpecialValueFor("stun_damage"), self:GetAbilityDamageType()),
         damage_type = self:GetAbilityDamageType(),
       })
     end

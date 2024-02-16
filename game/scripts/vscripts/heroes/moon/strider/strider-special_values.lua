@@ -110,59 +110,34 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
-		if value_name == "radius" then return 1 end
 
-		if caster:FindAbilityByName("strider_3__smoke_rank_11") then
-      if value_name == "duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_3__smoke_rank_12") then
-      if value_name == "fade_inv" then return 1 end
-		end
-
-		if caster:FindAbilityByName("strider_3__smoke_rank_21") then
-      if value_name == "evasion" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_3__smoke_rank_22") then
-		end
-
-		if caster:FindAbilityByName("strider_3__smoke_rank_31") then
-      if value_name == "special_armor" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_3__smoke_rank_32") then
-		end
+    if value_name == "fade_inv" then return 1 end
+    if value_name == "evasion" then return 1 end
+    if value_name == "radius" then return 1 end
+    if value_name == "attack_break" then return 1 end
+    if value_name == "spell_break" then return 1 end
+    if value_name == "duration" then return 1 end
+    if value_name == "special_cast_on_death" then return 1 end
+    if value_name == "special_mute" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 		if value_name == "AbilityCastRange" then return 1 end
+
+    if value_name == "blink_range" then return 1 end
+    if value_name == "damage" then return 1 end
+    if value_name == "angle" then return 1 end
+    if value_name == "special_allow_move" then return 1 end
+    if value_name == "interval" then return 1 end
+    if value_name == "shuriken_range" then return 1 end
+    if value_name == "shuriken_speed" then return 1 end
     if value_name == "shuriken_amount" then return 1 end
-
-		if caster:FindAbilityByName("strider_4__shuriken_rank_11") then
-      if value_name == "damage" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_4__shuriken_rank_12") then
-      if value_name == "blink_range" then return 1 end
-		end
-
-		if caster:FindAbilityByName("strider_4__shuriken_rank_21") then
-      if value_name == "particle_distance" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_4__shuriken_rank_22") then
-		end
-
-		if caster:FindAbilityByName("strider_4__shuriken_rank_31") then
-      if value_name == "slow_duration" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_4__shuriken_rank_32") then
-      if value_name == "special_stun_duration" then return 1 end
-		end
+    if value_name == "special_pierce" then return 1 end
+    if value_name == "special_stun_duration" then return 1 end
+    if value_name == "special_lifetime" then return 1 end
+    if value_name == "vector_target" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_5__aspd" then
@@ -277,11 +252,11 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(2, 2, 1) then
-      if value_name == "critical_damage_stack" then return 200 end
+      if value_name == "critical_damage_stack" then return 175 end
 		end
 
 		if self:HasRank(2, 2, 2) then
-      if value_name == "bleed_damage" then return 70 * self:GetPhysicalDamageAmp() end
+      if value_name == "bleed_damage" then return 60 * self:GetPhysicalDamageAmp() end
       if value_name == "bleed_duration" then return 4 end
 		end
 
@@ -303,82 +278,88 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "spin_duration" then return 0.23 end
 		if value_name == "radius" then return 250 end
 		if value_name == "critical_damage_stack" then return 75 end
-		if value_name == "bleed_damage" then return 60 * self:GetPhysicalDamageAmp() end
-		if value_name == "bleed_duration" then return 3 end
+		if value_name == "bleed_damage" then return 50 * self:GetPhysicalDamageAmp() end
+		if value_name == "bleed_duration" then return 3.5 end
 	end
 
 	if ability:GetAbilityName() == "strider_3__smoke" then
     if self:HasRank(3, 1, 1) then
-
+      if value_name == "AbilityCooldown" then return 18 end
     end
 
     if self:HasRank(3, 1, 2) then
-
+      if value_name == "special_cast_on_death" then return 1 end
     end
 
     if self:HasRank(3, 2, 1) then
-
+      if value_name == "special_mute" then return 1 end
 		end
 
     if self:HasRank(3, 2, 2) then
-
+      if value_name == "radius" then return 400 end
 		end
 
 		if self:HasRank(3, 3, 1) then
-
+      if value_name == "evasion" then return 5 end
 		end
 
-    if self:HasRank(2, 3, 2) then
-
+    if self:HasRank(3, 3, 2) then
+      if value_name == "spell_break" then return 0 end
+      if value_name == "fade_inv" then return 1 end
+      if value_name == "attack_break" then return 30 end
     end
 
-		if value_name == "AbilityManaCost" then return 130 * mana_mult end
-		if value_name == "AbilityCooldown" then return 20 end
+		if value_name == "AbilityManaCost" then return 140 * mana_mult end
+		if value_name == "AbilityCooldown" then return 21 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
-    if value_name == "radius" then return 300 + (value_level * 10) end
+    if value_name == "duration" then return 9 + (value_level * 0.5) end
 
-    if value_name == "duration" then return 10 end
-    if value_name == "fade_inv" then return 0.75 end
-    if value_name == "evasion" then return 4.5 end
-    if value_name == "special_armor" then return -5 end
+    if value_name == "radius" then return 300 end
+    if value_name == "fade_inv" then return 2 end
+    if value_name == "evasion" then return 3 end
+    if value_name == "attack_break" then return 100 end
+    if value_name == "spell_break" then return 100 end
 	end
 
 	if ability:GetAbilityName() == "strider_4__shuriken" then
     if self:HasRank(4, 1, 1) then
-
-    end
+      if value_name == "blink_range" then return 600 end
+		end
 
     if self:HasRank(4, 1, 2) then
-
-    end
+      if value_name == "special_allow_move" then return 1 end
+      if value_name == "interval" then return 0.04 end
+		end
 
     if self:HasRank(4, 2, 1) then
-
-		end
+      if value_name == "shuriken_range" then return 900 end
+    end
 
     if self:HasRank(4, 2, 2) then
-
-		end
+      if value_name == "damage" then return 70 * self:GetPhysicalDamageAmp() end
+    end
 
 		if self:HasRank(4, 3, 1) then
-
+      if value_name == "special_pierce" then return 1 end
 		end
 
     if self:HasRank(4, 3, 2) then
-
+      if value_name == "special_stun_duration" then return 0.2 * self:GetDebuffAmp() end
+      if value_name == "special_lifetime" then return 30 end
     end
 
-		if value_name == "AbilityManaCost" then return 150 * mana_mult end
-		if value_name == "AbilityCooldown" then return 25 end
+		if value_name == "AbilityManaCost" then return 130 * mana_mult end
+		if value_name == "AbilityCooldown" then return 18 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("blink_range") end
-
     if value_name == "shuriken_amount" then return 24 + (value_level * 1) end
 
-    if value_name == "damage" then return 45 end
-    if value_name == "blink_range" then return 800 end
-    if value_name == "particle_distance" then return 900 end
-    if value_name == "slow_duration" then return 10 end
-    if value_name == "special_stun_duration" then return 0.2 end
+    if value_name == "blink_range" then return 400 end
+    if value_name == "damage" then return 50 * self:GetPhysicalDamageAmp() end
+    if value_name == "angle" then return 19 end
+    if value_name == "interval" then return 0.03 end
+    if value_name == "shuriken_range" then return 600 end
+    if value_name == "shuriken_speed" then return 1500 end
+    if value_name == "vector_target" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_5__aspd" then

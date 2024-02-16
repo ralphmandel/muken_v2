@@ -34,10 +34,10 @@ function neutral_rage_modifier_passive:OnAttackLanded(keys)
   if self.parent:PassivesDisabled() then return end
   if self.parent:HasModifier("neutral_rage_modifier_buff") == true then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
-    AddModifier(self.parent, self.ability, "neutral_rage_modifier_buff", {
-      duration = self.ability:GetSpecialValueFor("duration")
-    }, true)
+  if RandomFloat(0, 100) < self.parent:GetLuck(self.ability:GetSpecialValueFor("chance")) then
+    self.parent:AddModifier(self.ability, "neutral_rage_modifier_buff", {
+      duration = self.ability:GetSpecialValueFor("duration"), bResist = 1
+    })
   end
 end
 

@@ -12,10 +12,10 @@ function neutral_spiders_modifier_summon:OnCreated(kv)
 
   if not IsServer() then return end
   
-  AddSubStats(self.parent, self.ability, {
+  self.parent:AddSubStats(self.ability, {
     attack_speed = self.caster:GetMainStat("INT"):GetSummonPower() * 1,
     max_health = self.caster:GetMainStat("INT"):GetSummonPower() * 4,
-  }, false)
+  })
 
   self.target = EntIndexToHScript(kv.target)
   self.parent:SetForceAttackTarget(self.target)

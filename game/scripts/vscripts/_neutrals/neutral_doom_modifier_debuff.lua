@@ -12,19 +12,18 @@ function neutral_doom_modifier_debuff:OnCreated(kv)
 
   if not IsServer() then return end
 
-  AddStatusEfx(self.ability, "neutral_doom_modifier_debuff_status_efx", self.caster, self.parent)
-  AddSubStats(self.parent, self.ability, {manacost = self.ability:GetSpecialValueFor("manacost")}, false)
+  self.parent:AddStatusEfx(self.caster, self.ability, "neutral_doom_modifier_debuff_status_efx")
+  self.parent:AddSubStats(self.ability, {manacost = self.ability:GetSpecialValueFor("manacost")})
 
-  local interval = 0.8
+  self.interval = 0.8
 
   self.damageTable = {
 		attacker = self.caster, victim = self.parent, ability = self.ability,
-		damage = self.ability:GetSpecialValueFor("damage") * interval,
     damage_type = self.ability:GetAbilityDamageType()
 	}
 
   self:PlayEfxStart()
-  self:StartIntervalThink(interval)
+  self:StartIntervalThink(self.interval)
 end
 
 function neutral_doom_modifier_debuff:OnRefresh(kv)
@@ -33,8 +32,8 @@ end
 function neutral_doom_modifier_debuff:OnRemoved()
   if not IsServer() then return end
 
-  RemoveStatusEfx(self.ability, "neutral_doom_modifier_debuff_status_efx", self.caster, self.parent)
-  RemoveSubStats(self.parent, self.ability, {"manacost"})
+  self.parent:RemoveStatusEfx(self.caster, self.ability, "neutral_doom_modifier_debuff_status_efx")
+  self.parent:RemoveSubStats(self.ability, {"manacost"})
 
   if IsServer() then self.parent:StopSound("Hero_DoomBringer.Doom") end
 end
@@ -67,7 +66,9 @@ end
 function neutral_doom_modifier_debuff:OnIntervalThink()
   if not IsServer() then return end
 
-  ApplyDamage(self.damageTable)  
+  local damage = self.ability:GetSpecialValueFor("damage") * self.interval
+  self.damageTable.damage = self.damageTable.attacker:GetSpellDamage(damage, self.ability:GetAbilityDamageType())
+  ApplyDamage(self.damageTable)
 end
 
 -- UTILS -----------------------------------------------------------

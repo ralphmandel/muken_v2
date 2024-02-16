@@ -10,13 +10,16 @@ function strider_3_modifier_aura_effect:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
+  if not IsServer() then return end
+
   if self.parent:GetTeamNumber() == self.caster:GetTeamNumber() then
-    AddModifierOnAllCosmetics(self.parent, self.ability, "_modifier_invi_level", {level = 1})
-    AddSubStats(self.parent, self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")}, false)
-  
-    if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv")) end
+    self.parent:SetModifierOnAllCosmetics(self.ability, "_modifier_invi_level", {level = 1}, true)
+    self.parent:AddSubStats(self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")})
+    self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv"))
   else
-    AddSubStats(self.parent, self.ability, {armor = self.ability:GetSpecialValueFor("special_armor")}, false)
+    if self.ability:GetSpecialValueFor("special_mute") == 1 then
+      self.parent:AddModifier(self.ability, "_modifier_mute", {})
+    end
   end
 end
 
@@ -24,41 +27,50 @@ function strider_3_modifier_aura_effect:OnRefresh(kv)
 end
 
 function strider_3_modifier_aura_effect:OnRemoved()
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_invisible", self.ability)
-  RemoveModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level")
-  RemoveSubStats(self.parent, self.ability, {"evasion"})
-  RemoveSubStats(self.parent, self.ability, {"armor"})
+  if not IsServer() then return end
+
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_mute", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_invisible", self.ability)
+  self.parent:SetModifierOnAllCosmetics(self.ability, "_modifier_invi_level", nil, false)
+  self.parent:RemoveSubStats(self.ability, {"evasion"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
 function strider_3_modifier_aura_effect:OnIntervalThink()
-  local inv = AddModifier(self.parent, self.ability, "_modifier_invisible", {attack_break = 1, spell_break = 1}, false)
+  if not IsServer() then return end
+
+  local inv = self.parent:AddModifier(self.ability, "_modifier_invisible", {
+    attack_break = self.ability:GetSpecialValueFor("attack_break"),
+    spell_break = self.ability:GetSpecialValueFor("spell_break")
+  })
 
   inv:SetEndCallback(function(interrupted)
-    if IsServer() and interrupted == true then
-      AddModifierOnAllCosmetics(self.parent, self.ability, "_modifier_invi_level", {level = 1})
+    if interrupted == true then
+      self.parent:SetModifierOnAllCosmetics(self.ability, "_modifier_invi_level", {level = 1}, true)
       self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv"))
     end
   end)
 
-	if IsServer() then self:StartIntervalThink(-1) end
+	self:StartIntervalThink(-1)
 end
 
-function strider_3_modifier_aura_effect:DeclareFunctions()
-	local funcs = {
-		MODIFIER_EVENT_ON_ATTACK
-	}
+-- function strider_3_modifier_aura_effect:DeclareFunctions()
+-- 	local funcs = {
+-- 		MODIFIER_EVENT_ON_ATTACK
+-- 	}
 
-	return funcs
-end
+-- 	return funcs
+-- end
 
-function strider_3_modifier_aura_effect:OnAttack(keys)
-	if keys.attacker ~= self.parent then return end
-  if self.parent:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
+-- function strider_3_modifier_aura_effect:OnAttack(keys)
+--   if not IsServer() then return end
+
+-- 	if keys.attacker ~= self.parent then return end
+--   if self.parent:GetTeamNumber() ~= self.caster:GetTeamNumber() then return end
   
-  if IsServer() then self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv")) end
-end
+--   self:StartIntervalThink(self.ability:GetSpecialValueFor("fade_inv"))
+-- end
 
 -- UTILS -----------------------------------------------------------
 

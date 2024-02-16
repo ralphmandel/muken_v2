@@ -9,7 +9,7 @@ function StartVectorTarget( location, ability ) {
 	// Get Data
 	var particle_cast = "particles/strider/shuriken/strider_range_finder_cone.vpcf";
 	var caster = Abilities.GetCaster( ability );
-  particle_distance = Abilities.GetSpecialValueFor( ability, "particle_distance" );
+  particle_distance = Abilities.GetSpecialValueFor( ability, "shuriken_range" );
 
 	// Create Range Finder
 	var effect_cast = Particles.CreateParticle( particle_cast, ParticleAttachment_t.PATTACH_WORLDORIGIN, caster );

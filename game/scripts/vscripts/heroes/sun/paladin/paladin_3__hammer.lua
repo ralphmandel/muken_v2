@@ -41,7 +41,9 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
         unit:ApplyHeal(self:GetSpecialValueFor("heal") * mult, self, false)
       else
         if random_mult ==  self:GetSpecialValueFor("max_mult") then
-          AddModifier(unit, self, "_modifier_stun", {duration = self:GetSpecialValueFor("special_stun_duration")}, true)
+          unit:AddModifier(self, "_modifier_stun", {
+            duration = self:GetSpecialValueFor("special_stun_duration"), bResist = 1
+          })
         end
         
         if target == unit and unit:IsIllusion() then

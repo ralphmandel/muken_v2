@@ -12,9 +12,9 @@ function neutral_spike_armor_modifier_buff:OnCreated(kv)
 
   if not IsServer() then return end
 
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_increase", {
     value = self.ability:GetSpecialValueFor("ms_percent")
-  }, false)
+  })
 
   self.ability:SetActivated(false)
   self.ability:EndCooldown()
@@ -28,7 +28,7 @@ end
 function neutral_spike_armor_modifier_buff:OnRemoved()
   if not IsServer() then return end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_percent_increase", self.ability)
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_increase", self.ability)
 
   self.ability:SetActivated(true)
   self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))

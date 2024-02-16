@@ -13,9 +13,9 @@ function neutral_rage_modifier_buff:OnCreated(kv)
   if IsServer() then
     self.parent:EmitSound("Hero_Ursa.Enrage")
 
-    AddSubStats(self.parent, self.ability, {
+    self.parent:AddSubStats(self.ability, {
       attack_speed = self.ability:GetSpecialValueFor("attack_speed")
-    }, false)
+    })
   end
 end
 
@@ -25,7 +25,7 @@ end
 function neutral_rage_modifier_buff:OnRemoved()
   if not IsServer() then return end
 
-  RemoveSubStats(self.parent, self.ability, {"attack_speed"})
+  self.parent:RemoveSubStats(self.ability, {"attack_speed"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

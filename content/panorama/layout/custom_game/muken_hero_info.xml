@@ -148,6 +148,12 @@
       <Image src="file://{resources}/images/custom_game/abilities/templar_4.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/abilities/templar_5.png" class="img_collapse"/>
       <Image src="file://{resources}/images/custom_game/abilities/templar_6.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_1.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_2.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_3.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_4.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_5.png" class="img_collapse"/>
+      <Image src="file://{resources}/images/custom_game/abilities/strider_6.png" class="img_collapse"/>
     </Panel>
   </Panel>
 </root>

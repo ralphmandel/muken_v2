@@ -12,18 +12,17 @@ function neutral_fireball_modifier_burn:OnCreated(kv)
 
   if not IsServer() then return end
 
- local interval = 0.5
+  self.interval = 0.5
 
 	self.damageTable = {
     victim = self.parent,
     attacker = self.caster,
-    damage = self.ability:GetSpecialValueFor("flame_damage") * interval,
     damage_type = self.ability:GetAbilityDamageType(),
     ability = self.ability
   }
 
   self.parent:EmitSound("Hero_Huskar.Burning_Spear")
-  self:StartIntervalThink(interval)
+  self:StartIntervalThink(self.interval)
 end
 
 function neutral_fireball_modifier_burn:OnRefresh(kv)
@@ -51,7 +50,9 @@ end
 function neutral_fireball_modifier_burn:OnIntervalThink()
   if not IsServer() then return end
 
-  ApplyDamage(self.damageTable)
+  local flame_damage = self.ability:GetSpecialValueFor("flame_damage") * self.interval
+  self.damageTable.damage = self.damageTable.attacker:GetSpellDamage(flame_damage, self.ability:GetAbilityDamageType())
+  ApplyDamage(self.damageTable) 
 end 
 
 -- UTILS -----------------------------------------------------------

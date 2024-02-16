@@ -1,55 +1,41 @@
 _modifier_invisible = class({})
 
--- Classifications
-function _modifier_invisible:IsHidden()
-	return false
-end
-
-function _modifier_invisible:IsPurgable()
-	return true
-end
-
-function _modifier_invisible:GetTexture()
-	return "_modifier_invisible"
-end
-
-function _modifier_invisible:GetAttributes()
-	return MODIFIER_ATTRIBUTE_MULTIPLE
-end
+function _modifier_invisible:IsHidden() return false end
+function _modifier_invisible:IsPurgable() return true end
+function _modifier_invisible:GetTexture() return "_modifier_invisible" end
+function _modifier_invisible:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 --------------------------------------------------------------------------------
 
 function _modifier_invisible:OnCreated( kv )
 	local delay = kv.delay or 0
-	local spell_break = kv.spell_break or 0
-	local attack_break = kv.attack_break or 1
-
+	self.spell_break = kv.spell_break or 0
+	self.attack_break = kv.attack_break or 100
 	self.delay = false
   self.hidden = false
-	self.spell_break = (spell_break == 1)
-	self.attack_break = (attack_break == 1)
   self.interrupted = false
 
-	if IsServer() then
-		if delay == 0 then
-			self.hidden = true
-		else
-			self:StartIntervalThink(delay)
-		end
+	if not IsServer() then return end
 
-    AddModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level", {level = 1})
+  if delay == 0 then
+    self.hidden = true
+  else
+    self:StartIntervalThink(delay)
+  end
 
-    if self.attack_break == false and self:GetParent():GetAttackTarget() then
-      self:GetParent():MoveToTargetToAttack(self:GetParent():GetAttackTarget())
-    end
-	end
+  AddModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level", {level = 1})
+
+  if self.attack_break > 0 and self:GetParent():GetAttackTarget() then
+    self:GetParent():MoveToTargetToAttack(self:GetParent():GetAttackTarget())
+  end
 end
 
 function _modifier_invisible:OnRefresh( kv )
-
 end
 
 function _modifier_invisible:OnDestroy( kv )
+  if not IsServer() then return end
+
 	RemoveModifierOnAllCosmetics(self:GetParent(), self:GetAbility(), "_modifier_invi_level")
 
   if self.endCallback then
@@ -77,22 +63,28 @@ function _modifier_invisible:DeclareFunctions()
 end
 
 function _modifier_invisible:OnAttackStart(keys)
-  if IsServer() then
-    if keys.attacker == self:GetParent() and self.attack_break then
-      self.interrupted = true
-      self:Destroy()
-    end
+  if not IsServer() then return end
+
+  if keys.attacker == self:GetParent()
+  and RandomFloat(0, 100) < self.attack_break then
+    self.interrupted = true
+    self:Destroy()
   end
 end
 
 function _modifier_invisible:OnAbilityStart(keys)
-	if keys.unit == self:GetParent() and self.spell_break then
+  if not IsServer() then return end
+
+	if keys.unit == self:GetParent()
+  and RandomFloat(0, 100) < self.spell_break then
     self.interrupted = true
     self:Destroy()
   end
 end
 
 function _modifier_invisible:OnIntervalThink()
+  if not IsServer() then return end
+
 	if self.delay == false then
 		self.delay = true
 		self:PlayEffects()

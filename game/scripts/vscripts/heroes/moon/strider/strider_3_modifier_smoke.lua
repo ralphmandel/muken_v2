@@ -10,8 +10,8 @@ function strider_3_modifier_smoke:GetAuraDuration() return 0 end
 function strider_3_modifier_smoke:GetModifierAura() return "strider_3_modifier_aura_effect" end
 function strider_3_modifier_smoke:GetAuraRadius() return self.radius end
 function strider_3_modifier_smoke:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_BOTH end
-function strider_3_modifier_smoke:GetAuraSearchType() return self:GetAbility():GetAbilityTargetType() end
-function strider_3_modifier_smoke:GetAuraSearchFlags() return self:GetAbility():GetAbilityTargetFlags() end
+function strider_3_modifier_smoke:GetAuraSearchType() return self.ability:GetAbilityTargetType() end
+function strider_3_modifier_smoke:GetAuraSearchFlags() return self.ability:GetAbilityTargetFlags() end
 function strider_3_modifier_smoke:GetAuraEntityReject(hEntity) return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
@@ -23,14 +23,18 @@ function strider_3_modifier_smoke:OnCreated(kv)
 
   self.radius = self.ability:GetAOERadius()
 
-	if IsServer() then self:PlayEfxStart(self.radius) end
+	if not IsServer() then return end
+
+  self:PlayEfxStart(self.radius)
 end
 
 function strider_3_modifier_smoke:OnRefresh(kv)
 end
 
 function strider_3_modifier_smoke:OnRemoved()
-	if IsServer() then self.parent:StopSound( "Hero_Wisp.Spirits.Muerta.Layer") end
+  if not IsServer() then return end
+
+	self.parent:StopSound( "Hero_Wisp.Spirits.Muerta.Layer")
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -47,5 +51,5 @@ function strider_3_modifier_smoke:PlayEfxStart()
 	ParticleManager:SetParticleControl(particle_2, 2, Vector(self:GetDuration(), 0, 0))
 	self:AddParticle(particle_2, false, false, -1, false, false)
 
-	if IsServer() then self.parent:EmitSound("Hero_Wisp.Spirits.Muerta.Layer") end
+	self.parent:EmitSound("Hero_Wisp.Spirits.Muerta.Layer")
 end

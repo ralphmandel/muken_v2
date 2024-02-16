@@ -14,11 +14,10 @@ function neutral_strike_modifier_wind:OnCreated(kv)
   
   self.parent:AttackNoEarlierThan(1, 20)
 
-  AddSubStats(self.parent, self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")}, false)
-
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_increase", {
+  self.parent:AddSubStats(self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")})
+  self.parent:AddModifier(self.ability, "sub_stat_movespeed_increase", {
     value = self.ability:GetSpecialValueFor("ms")
-  }, false)
+  })
 
   self.parent:EmitSound("Ability.Windrun")
 end
@@ -29,10 +28,9 @@ end
 function neutral_strike_modifier_wind:OnRemoved()
   if not IsServer() then return end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_increase", self.ability)
-  RemoveSubStats(self.parent, self.ability, {"evasion"})
-
-  if IsServer() then self.parent:StopSound("Ability.Windrun") end
+  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"evasion"})
+  self.parent:StopSound("Ability.Windrun")
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

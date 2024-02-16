@@ -17,8 +17,8 @@ function neutral_immunity_modifier_buff:OnCreated(kv)
     self.ability:EndCooldown()
   end
 
-  AddSubStats(self.parent, self.ability, {magic_resist = self.ability:GetSpecialValueFor("magic_resist")}, false)
-  AddModifier(self.parent, self.ability, "_modifier_immunity", {duration = self:GetDuration()}, false)
+  self.parent:AddModifier(self.ability, "_modifier_immunity", {duration = self:GetDuration()})
+  self.parent:AddSubStats(self.ability, {magic_resist = self.ability:GetSpecialValueFor("magic_resist")})
 end
 
 function neutral_immunity_modifier_buff:OnRefresh(kv)
@@ -32,8 +32,8 @@ function neutral_immunity_modifier_buff:OnRemoved()
     self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
   end
 
-  RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_immunity", self.ability)
-  RemoveSubStats(self.parent, self.ability, {"magic_resist"})
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_immunity", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"magic_resist"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

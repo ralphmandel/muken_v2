@@ -18,6 +18,9 @@ end
 -- Initializations
 function _modifier_ban:OnCreated( kv )
   local parent = self:GetParent()
+
+  if not IsServer() then return end
+
   parent:AddNoDraw()
 
   local cosmetics = parent:FindAbilityByName("cosmetics")
@@ -26,6 +29,9 @@ end
 
 function _modifier_ban:OnRemoved()
   local parent = self:GetParent()
+
+  if not IsServer() then return end
+
   parent:RemoveNoDraw()
 
   local cosmetics = parent:FindAbilityByName("cosmetics")
@@ -55,9 +61,9 @@ function _modifier_ban:DeclareFunctions()
 end
 
 function _modifier_ban:GetBonusNightVision()
-	return -9999
+  if self:IsDebuff() then return -9999 else return 0 end
 end
 
 function _modifier_ban:GetBonusDayVision()
-	return -9999
+  if self:IsDebuff() then return -9999 else return 0 end
 end

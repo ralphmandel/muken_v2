@@ -75,6 +75,12 @@
 		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCastPoint"       		"0.2"
 
+    "precache"
+    {
+      "particle"  "particles/strider/spin/strider_bloodchaser.vpcf"
+      "particle"  "particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf"
+    }
+
     "AbilityValues"
 		{
       "spin_duration"         "0"
@@ -108,13 +114,21 @@
 		"AbilityCastAnimation"   		"ACT_DOTA_ATTACK_TAUNT"
 		"AbilityCastPoint"       		"0.8"
 
+    "precache"
+    {
+      "particle"  "particles/strider/smoke/strider_smoke.vpcf" 
+    }
+
     "AbilityValues"
 		{
-      "duration"  "8"
-      "evasion"   "3"
-      "fade_inv"  "1.5"
-      "radius"    "1 2 3 4 5 6 7"
-      "special_armor" "0"
+      "evasion"       "0"
+      "fade_inv"      "0"
+      "radius"        "0"
+      "attack_break"  "0"
+      "spell_break"   "0"
+      "duration"      "1 2 3 4 5 6 7"
+      "special_cast_on_death" "0"
+      "special_mute"          "0"
 		}
 	}
 
@@ -139,18 +153,18 @@
 
     "AbilityValues"
 		{
-      "blink_range"       "600"
-      "damage"            "30"
-      "slow"              "15"
-      "slow_duration"     "6"
-      "angle"             "19"
-      "interval"          "0.03"
-      "ms_limit"          "150"
-      "particle_distance" "600"
-      "shuriken_speed"    "1500"
+      "blink_range"       "0"
+      "damage"            "0"
+      "angle"             "0"
+      "interval"          "0"
+      "shuriken_range"    "0"
+      "shuriken_speed"    "0"
       "shuriken_amount"   "1 2 3 4 5 6 7"
+      "special_allow_move"    "0"
+      "special_pierce"        "0"
       "special_stun_duration" "0"
-      "vector_target"     "1"
+      "special_lifetime"      "0"
+      "vector_target"         "0"
 		}
 	}
 

@@ -11,7 +11,9 @@ function neutral_strike_modifier_passive:OnCreated(kv)
   self.ability = self:GetAbility()
   self.strike = false
 
-  if IsServer() then self:StartIntervalThink(2) end
+  if not IsServer() then return end
+
+  self:StartIntervalThink(2)
 end
 
 function neutral_strike_modifier_passive:OnRefresh(kv)
