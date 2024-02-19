@@ -1,12 +1,12 @@
-orb_cold__max_status = class({})
+status_bar_cold_max = class({})
 
-function orb_cold__max_status:IsHidden() return false end
-function orb_cold__max_status:IsPurgable() return false end
-function orb_cold__max_status:GetTexture() return "status_freeze" end
+function status_bar_cold_max:IsHidden() return false end
+function status_bar_cold_max:IsPurgable() return false end
+function status_bar_cold_max:GetTexture() return "status_freeze" end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function orb_cold__max_status:OnCreated(kv)
+function status_bar_cold_max:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
@@ -28,10 +28,10 @@ function orb_cold__max_status:OnCreated(kv)
   self:PlayEfxStart()
 end
 
-function orb_cold__max_status:OnRefresh(kv)
+function status_bar_cold_max:OnRefresh(kv)
 end
 
-function orb_cold__max_status:OnRemoved()
+function status_bar_cold_max:OnRemoved()
   if not IsServer() then return end
 
   local damage_result = ApplyDamage({
@@ -42,7 +42,7 @@ function orb_cold__max_status:OnRemoved()
 
   self:PlayEfxEnd(damage_result)
 
-  local status_modifier = self.parent:FindModifierByName("orb_cold__status")
+  local status_modifier = self.parent:FindModifierByName("status_bar_cold")
 
   if status_modifier then
     status_modifier.bCompleted = nil
@@ -54,7 +54,7 @@ end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function orb_cold__max_status:CheckState()
+function status_bar_cold_max:CheckState()
 	local state = {
 		[MODIFIER_STATE_STUNNED] = true,
 		[MODIFIER_STATE_FROZEN] = true,
@@ -64,7 +64,7 @@ function orb_cold__max_status:CheckState()
 	return state
 end
 
-function orb_cold__max_status:DeclareFunctions()
+function status_bar_cold_max:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT
 	}
@@ -72,7 +72,7 @@ function orb_cold__max_status:DeclareFunctions()
 	return funcs
 end
 
-function orb_cold__max_status:GetModifierIncomingDamageConstant(keys)
+function status_bar_cold_max:GetModifierIncomingDamageConstant(keys)
   if not IsServer() then return 0 end
 
   local damage = keys.damage
@@ -99,33 +99,33 @@ end
 
 -- EFFECTS -----------------------------------------------------------
 
-function orb_cold__max_status:GetEffectName()
+function status_bar_cold_max:GetEffectName()
 	return "particles/econ/items/winter_wyvern/winter_wyvern_ti7/wyvern_cold_embrace_ti7buff.vpcf"
 end
 
-function orb_cold__max_status:GetEffectAttachType()
+function status_bar_cold_max:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
 end
 
-function orb_cold__max_status:GetStatusEffectName()
+function status_bar_cold_max:GetStatusEffectName()
 	return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
 end
 
-function orb_cold__max_status:StatusEffectPriority()
+function status_bar_cold_max:StatusEffectPriority()
 	return MODIFIER_PRIORITY_ULTRA
 end
 
-function orb_cold__max_status:PlayEfxStart()
-  self.parent:AddStatusEfx(nil, nil, "orb_cold__max_status_efx")
+function status_bar_cold_max:PlayEfxStart()
+  self.parent:AddStatusEfx(nil, nil, "status_bar_cold_max_efx")
 	self.parent:EmitSound("Hero_Ancient_Apparition.IceBlast.Tracker")
 end
 
-function orb_cold__max_status:PlayEfxEnd(damage_result)
+function status_bar_cold_max:PlayEfxEnd(damage_result)
   if self.parent == nil then return end
   if IsValidEntity(self.parent) == false then return end
 
   self:PopupColdDamage(damage_result, self.parent)
-  self.parent:RemoveStatusEfx(nil, nil, "orb_cold__max_status_efx")
+  self.parent:RemoveStatusEfx(nil, nil, "status_bar_cold_max_efx")
 
 	local particle = "particles/units/heroes/hero_winter_wyvern/wyvern_arctic_burn_start.vpcf"
 	local effect_cast = ParticleManager:CreateParticle(particle, PATTACH_WORLDORIGIN, nil)

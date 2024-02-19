@@ -21,22 +21,6 @@ function strider_4_modifier_shuriken:OnCreated(kv)
 	
 	self.caster:StartGestureWithPlaybackRate(ACT_DOTA_GENERIC_CHANNEL_1, 2)
 
-	self.info = {
-		Source = self.parent,
-		Ability = self.ability,
-		iUnitTargetTeam = self.ability:GetAbilityTargetTeam(),
-		iUnitTargetType = self.ability:GetAbilityTargetType(),
-		iUnitTargetFlags = self.ability:GetAbilityTargetFlags(),
-		EffectName = "particles/strider/shuriken/strider_shuriken_base.vpcf",
-		bDeleteOnHit = true,
-		fDistance = self.ability:GetSpecialValueFor("shuriken_range"),
-		fStartRadius = 30,
-		fEndRadius = 30,
-		bProvidesVision = true,
-    iVisionRadius = 50,
-    iVisionTeamNumber = self.caster:GetTeamNumber()
-	}
-
   self:SetStackCount(self.ability:GetSpecialValueFor("shuriken_amount"))
   self:StartIntervalThink(0.26)
 end
@@ -100,12 +84,9 @@ function strider_4_modifier_shuriken:OnIntervalThink()
 
   local angle = self.ability:GetSpecialValueFor("angle")
   local projectile_direction = RotatePosition(Vector(0,0,0), QAngle(0, math.random(-angle, angle), 0), self.direction)
-  self.info.vVelocity = projectile_direction * self.ability:GetSpecialValueFor("shuriken_speed")
-  self.info.vSpawnOrigin = self.parent:GetOrigin()
+  
+  self.ability:CreateShuriken(projectile_direction)
 
-  ProjectileManager:CreateLinearProjectile(self.info)
-
-  self.parent:EmitSound("Hero_Terrorblade.PreAttack")
   self:DecrementStackCount()
   self:StartIntervalThink(self.ability:GetSpecialValueFor("interval"))
 end

@@ -1,19 +1,20 @@
-orb_bleed__status = class({})
+status_bar_cold = class({})
 
-function orb_bleed__status:IsHidden() return true end
-function orb_bleed__status:IsPurgable() return false end
+function status_bar_cold:IsHidden() return true end
+function status_bar_cold:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function orb_bleed__status:OnCreated(kv)
+function status_bar_cold:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
   if not IsServer() then return end
 
   self.status_amount = {}
-  self.status_degen = 4
-  self.bloodloss = 500
+  self.status_degen = 2
+  self.freeze_amount = 500
+  self.freeze_duration = 5
 
   self.caster = EntIndexToHScript(kv.inflictor)
   self.current_status = self.caster:GetDebuffPower(kv.status_amount, self.parent)
@@ -21,42 +22,43 @@ function orb_bleed__status:OnCreated(kv)
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end
 
-  self:StartIntervalThink(1)
+  self:StartIntervalThink(0.1)
   self:AddEntityAmount(kv.inflictor, kv.status_amount)
   self:UpdateStatusBar()
 end
 
-function orb_bleed__status:OnRefresh(kv)
+function status_bar_cold:OnRefresh(kv)
   if not IsServer() then return end
 
   self.caster = EntIndexToHScript(kv.inflictor)
   local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
-  self:StartIntervalThink(1)
   self:AddEntityAmount(kv.inflictor, added_amount)
   self:AddCurrentStatus(added_amount)
 end
 
-function orb_bleed__status:OnRemoved()
+function status_bar_cold:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemovePanelFromList(self.status_name)
+  if self.bCompleted == nil then
+    self.parent:RemovePanelFromList(self.status_name)
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function orb_bleed__status:OnIntervalThink()
+function status_bar_cold:OnIntervalThink()
   if not IsServer() then return end
 
   local interval = 0.1
-  
+
   self:ReduceAmount(self.status_degen * interval)
   self:StartIntervalThink(interval)
 end
 
 -- UTILS -----------------------------------------------------------
 
-function orb_bleed__status:ReduceAmount(amount)
+function status_bar_cold:ReduceAmount(amount)
   for ent_index, table in pairs(self.status_amount) do
     self:AddEntityAmount(ent_index, amount / #self.status_amount)
   end
@@ -64,7 +66,7 @@ function orb_bleed__status:ReduceAmount(amount)
   self:AddCurrentStatus(-amount)
 end
 
-function orb_bleed__status:ApplyBloodLoss()
+function status_bar_cold:ApplyFrozenState()
   local attacker = {unit = nil, amount = 0}
 
   for ent_index, table in pairs(self.status_amount) do
@@ -81,20 +83,20 @@ function orb_bleed__status:ApplyBloodLoss()
 
   if attacker.unit == nil then return end
 
-  local damage_result = ApplyDamage({
-    attacker = attacker.unit, victim = self.parent, ability = nil,
-    damage = attacker.unit:GetDebuffPower(self.bloodloss, nil), damage_type = DAMAGE_TYPE_PURE,
-    damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
+  self.current_status = self.current_status - self.max_status
+
+  self:StartIntervalThink(-1)
+
+  self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "status_bar_cold_max", {
+    duration = attacker.unit:GetDebuffPower(self.freeze_duration, nil),
+    amount = attacker.unit:GetDebuffPower(self.freeze_amount, nil),
+    multiplier = 100 / self.freeze_amount
   })
 
-  CallBloodLoss(damage_result, attacker.unit, self.parent)
-
-  self:PopupBleedDamage(damage_result, self.parent)
-  self:PlayEfxBloodLoss()
-  self:Destroy()
+  if self.current_status <= 0 then self:Destroy() end
 end
 
-function orb_bleed__status:AddEntityAmount(ent_index, amount)
+function status_bar_cold:AddEntityAmount(ent_index, amount)
   if IsValidEntity(EntIndexToHScript(ent_index)) == false then
     self.status_amount[ent_index] = nil
     return
@@ -112,12 +114,12 @@ function orb_bleed__status:AddEntityAmount(ent_index, amount)
   end
 end
 
-function orb_bleed__status:AddCurrentStatus(amount)
+function status_bar_cold:AddCurrentStatus(amount)
   if self.parent:IsMagicImmune() and amount > 0 then amount = 0 end
   self.current_status = self.current_status + amount
 
   if self.current_status > self.max_status then
-    self:ApplyBloodLoss()
+    self:ApplyFrozenState()
     return
   end
 
@@ -135,13 +137,13 @@ function orb_bleed__status:AddCurrentStatus(amount)
   })
 end
 
-function orb_bleed__status:UpdateStatusBar()
+function status_bar_cold:UpdateStatusBar()
   local old_max_status = self.max_status
   self.max_status = self.parent:GetResistance(self.status_name)
 
   if old_max_status == nil then
     if self.current_status > self.max_status then
-      self:ApplyBloodLoss()
+      self:ApplyFrozenState()
       return
     end
   else
@@ -159,19 +161,3 @@ function orb_bleed__status:UpdateStatusBar()
 end
 
 -- EFFECTS -----------------------------------------------------------
-
-function orb_bleed__status:PlayEfxBloodLoss()
-	local particle_cast = "particles/units/heroes/hero_bloodseeker/bloodseeker_bloodritual_impact.vpcf"
-	local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	ParticleManager:SetParticleControl(effect_cast, 0, self.parent:GetOrigin())
-	ParticleManager:SetParticleControl(effect_cast, 1, self.parent:GetOrigin())
-	ParticleManager:ReleaseParticleIndex(effect_cast)
-
-  local particle_cast2 = "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodbath_eztzhok.vpcf"
-	local effect_cast2 = ParticleManager:CreateParticle(particle_cast2, PATTACH_ABSORIGIN_FOLLOW, self.parent)
-	ParticleManager:SetParticleControl(effect_cast2, 0, self.parent:GetOrigin())
-	ParticleManager:SetParticleControl(effect_cast2, 1, self.parent:GetOrigin())
-	ParticleManager:ReleaseParticleIndex(effect_cast2)
-
-	self.parent:EmitSound("Generic.Bloodloss")
-end

@@ -131,9 +131,10 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "angle" then return 1 end
     if value_name == "special_allow_move" then return 1 end
     if value_name == "interval" then return 1 end
-    if value_name == "shuriken_range" then return 1 end
-    if value_name == "shuriken_speed" then return 1 end
     if value_name == "shuriken_amount" then return 1 end
+    if value_name == "shuriken_speed" then return 1 end
+    if value_name == "shuriken_range" then return 1 end
+    if value_name == "finder_range" then return 1 end
     if value_name == "special_pierce" then return 1 end
     if value_name == "special_stun_duration" then return 1 end
     if value_name == "special_lifetime" then return 1 end
@@ -300,11 +301,13 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if self:HasRank(3, 3, 1) then
-      if value_name == "evasion" then return 5 end
+      if value_name == "evasion" then return 12 end
+      if value_name == "fade_inv" then return -1 end
 		end
 
     if self:HasRank(3, 3, 2) then
       if value_name == "spell_break" then return 0 end
+      if value_name == "evasion" then return 0 end
       if value_name == "fade_inv" then return 1 end
       if value_name == "attack_break" then return 30 end
     end
@@ -316,7 +319,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     if value_name == "radius" then return 300 end
     if value_name == "fade_inv" then return 2 end
-    if value_name == "evasion" then return 3 end
+    if value_name == "evasion" then return 2 end
     if value_name == "attack_break" then return 100 end
     if value_name == "spell_break" then return 100 end
 	end
@@ -332,11 +335,11 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
     if self:HasRank(4, 2, 1) then
-      if value_name == "shuriken_range" then return 900 end
+      if value_name == "damage" then return 100 * self:GetPhysicalDamageAmp() end
     end
 
     if self:HasRank(4, 2, 2) then
-      if value_name == "damage" then return 70 * self:GetPhysicalDamageAmp() end
+      if value_name == "shuriken_amount" then return 20 end
     end
 
 		if self:HasRank(4, 3, 1) then
@@ -345,20 +348,22 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     if self:HasRank(4, 3, 2) then
       if value_name == "special_stun_duration" then return 0.2 * self:GetDebuffAmp() end
-      if value_name == "special_lifetime" then return 30 end
+      if value_name == "special_lifetime" then return 5 end
+      if value_name == "shuriken_range" then return 9999 end
     end
 
 		if value_name == "AbilityManaCost" then return 130 * mana_mult end
 		if value_name == "AbilityCooldown" then return 18 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("blink_range") end
-    if value_name == "shuriken_amount" then return 24 + (value_level * 1) end
+    if value_name == "finder_range" then return 900 + (value_level * 50) end
 
     if value_name == "blink_range" then return 400 end
-    if value_name == "damage" then return 50 * self:GetPhysicalDamageAmp() end
+    if value_name == "damage" then return 75 * self:GetPhysicalDamageAmp() end
     if value_name == "angle" then return 19 end
     if value_name == "interval" then return 0.03 end
-    if value_name == "shuriken_range" then return 600 end
+    if value_name == "shuriken_amount" then return 15 end
     if value_name == "shuriken_speed" then return 1500 end
+    if value_name == "shuriken_range" then return ability:GetSpecialValueFor("finder_range") end
     if value_name == "vector_target" then return 1 end
 	end
 

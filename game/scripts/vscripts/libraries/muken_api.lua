@@ -250,8 +250,8 @@
   function CDOTA_BaseNPC:AddModifier(ability, modifier_name, table)
     local caster = ability:GetCaster()
 
-    if self:HasModifier("orb_cold__max_status") then
-      if modifier_name == "orb_cold__status" then return end
+    if self:HasModifier("status_bar_cold_max") then
+      if modifier_name == "status_bar_cold" then return end
     end
 
     if modifier_name == "modifier_knockback" then ability = nil end
@@ -340,7 +340,11 @@
   function CDOTA_BaseNPC:ReduceStatus(amount, list)
     for _,status_name in pairs(list) do
       local modifier = self:FindModifierByName(status_name)
-      if modifier then modifier:ReduceAmount(amount) end
+      if modifier then
+        if modifier.bCompleted == nil then
+          modifier:ReduceAmount(amount)
+        end
+      end
     end
   end
 

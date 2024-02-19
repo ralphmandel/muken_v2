@@ -63,7 +63,7 @@ function orb_cold__modifier:OnAttackLanded(keys)
   if IsValidEntity(keys.target) == false then return end
   if keys.target:IsAlive() == false then return end
 
-  keys.target:AddModifier(self.ability, "orb_cold__status", {
+  keys.target:AddModifier(self.ability, "status_bar_cold", {
     inflictor = self.caster:entindex(),
     status_amount = damage_result * self.status_mult
   })

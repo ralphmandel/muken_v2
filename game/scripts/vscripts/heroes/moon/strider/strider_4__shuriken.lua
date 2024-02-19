@@ -6,6 +6,7 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 
   function strider_4__shuriken:Spawn()
     self.disable = 0
+    self.projectiles = {}
   end
 
 	function strider_4__shuriken:GetIntrinsicModifierName()
@@ -50,9 +51,84 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		self:PlayEfxStart(origin, direction)
 	end
 
-	function strider_4__shuriken:OnProjectileHit(hTarget, vLocation)
-		local caster = self:GetCaster()
-		if not hTarget then return end
+  function strider_4__shuriken:CreateShuriken(projectile_direction)
+    local caster = self:GetCaster()
+    local vVelocity = projectile_direction * self:GetSpecialValueFor("shuriken_speed")
+    local bonus_range = RandomInt(-100, 100)
+
+    caster:EmitSound("Hero_Terrorblade.PreAttack")
+
+    local proj = ProjectileManager:CreateLinearProjectile({
+      Source = caster,
+      Ability = self,
+      vSpawnOrigin = caster:GetOrigin(),
+      iUnitTargetTeam = self:GetAbilityTargetTeam(),
+      iUnitTargetType = self:GetAbilityTargetType(),
+      iUnitTargetFlags = self:GetAbilityTargetFlags(),
+      EffectName = "",
+      bDeleteOnHit = true,
+      fDistance = self:GetSpecialValueFor("shuriken_range") + bonus_range,
+      vVelocity = vVelocity,
+      fStartRadius = 40,
+      fEndRadius = 40,
+      bProvidesVision = true,
+      iVisionRadius = 50,
+      iVisionTeamNumber = caster:GetTeamNumber()
+    })
+
+    self.projectiles[proj] = {
+      source_loc = caster:GetOrigin(),
+      direction = projectile_direction,
+      distance = self:GetSpecialValueFor("finder_range") + bonus_range,
+      lifetime = self:GetSpecialValueFor("special_lifetime"),
+      pfx = self:PlayEfxShuriken(caster:GetOrigin(), vVelocity),
+      returning = 0
+    }
+  end
+
+  function strider_4__shuriken:OnProjectileThinkHandle(id)
+    if self.projectiles[id] == nil then return end
+
+    local caster = self:GetCaster()
+    local vLocation = ProjectileManager:GetLinearProjectileLocation(id)
+
+    if (vLocation - self.projectiles[id].source_loc):Length2D() < self.projectiles[id].distance then return end
+    if self.projectiles[id].lifetime == 0 then return end
+
+    if self.projectiles[id].start_time == nil then
+      local vVelocity = self.projectiles[id].direction * 1
+      self.projectiles[id].start_time = GameRules:GetGameTime()
+      ProjectileManager:UpdateLinearProjectileDirection(id, vVelocity, 9999)
+
+      if self.projectiles[id].pfx then
+        ParticleManager:DestroyParticle(self.projectiles[id].pfx, true)
+        self.projectiles[id].pfx = self:PlayEfxShuriken(vLocation, vVelocity)
+      end
+    else
+      if GameRules:GetGameTime() - self.projectiles[id].start_time >= self.projectiles[id].lifetime
+      and self.projectiles[id].returning == 0 then
+        local direction = caster:GetOrigin() - vLocation
+        local distance = direction:Length2D()
+        direction.z = direction.z + 90
+        local vVelocity = direction:Normalized() * 2500
+        
+        ProjectileManager:UpdateLinearProjectileDirection(id, vVelocity, distance)
+        self.projectiles[id].returning = 1
+
+        if self.projectiles[id].pfx then
+          ParticleManager:DestroyParticle(self.projectiles[id].pfx, true)
+          self.projectiles[id].pfx = self:PlayEfxShuriken(vLocation, vVelocity)
+          caster:EmitSound("Hero_Terrorblade.PreAttack")
+        end
+      end
+    end
+  end
+
+	function strider_4__shuriken:OnProjectileHitHandle(hTarget, vLocation, id)
+		if not hTarget then self:RemoveProj(id) return end
+    if self:GetSpecialValueFor("special_pierce") == 0 then self:RemoveProj(id) end
+
+    local caster = self:GetCaster()
 
 		self:PlayEfxTarget(hTarget)
 
@@ -70,6 +146,16 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 
     return self:GetSpecialValueFor("special_pierce") == 0
 	end
+
+  function strider_4__shuriken:RemoveProj(id)
+    if self.projectiles[id] then
+      if self.projectiles[id].pfx then
+        ParticleManager:DestroyParticle(self.projectiles[id].pfx, false)
+      end
+    end
+
+    self.projectiles[id] = nil
+  end
 
 -- EFFECTS
 
@@ -108,4 +194,13 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 		ParticleManager:ReleaseParticleIndex(effect_cast)
 
     enemy:EmitSound("Hero_Mirana.ProjectileImpact")
+	end
+
+  function strider_4__shuriken:PlayEfxShuriken(source_loc, vVelocity)
+    local particle_name = "particles/strider/shuriken/strider_shuriken_base.vpcf"
+    local pfx = ParticleManager:CreateParticle(particle_name, PATTACH_WORLDORIGIN, nil)
+    ParticleManager:SetParticleControl(pfx, 0, source_loc)
+    ParticleManager:SetParticleControl(pfx, 1, vVelocity)
+
+    return pfx
 	end

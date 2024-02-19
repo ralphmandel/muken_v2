@@ -151,15 +151,26 @@
 		"AbilityCastAnimation"   		"ACT_DOTA_SPAWN"
 		"AbilityCastPoint"       		"0.2"
 
+    "precache"
+    {
+      "particle"  "particles/strider/shuriken/strider_cast_ground.vpcf"
+      "particle"  "particles/strider/shuriken/strider_cast_body.vpcf"
+      "particle"  "particles/econ/events/ti9/blink_dagger_ti9_end.vpcf"
+      "particle"  "particles/strider/shuriken/strider_blink_start.vpcf"
+      "particle"  "particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf"
+      "particle"  "particles/strider/shuriken/strider_shuriken_base.vpcf"
+    }
+
     "AbilityValues"
 		{
       "blink_range"       "0"
       "damage"            "0"
       "angle"             "0"
       "interval"          "0"
-      "shuriken_range"    "0"
+      "shuriken_amount"   "0"
       "shuriken_speed"    "0"
-      "shuriken_amount"   "1 2 3 4 5 6 7"
+      "shuriken_range"    "0"
+      "finder_range"      "1 2 3 4 5 6 7"
       "special_allow_move"    "0"
       "special_pierce"        "0"
       "special_stun_duration" "0"
