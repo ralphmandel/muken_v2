@@ -20,7 +20,6 @@ LinkLuaModifier("strider_3_modifier_aura_effect", "heroes/moon/strider/strider_3
 
   function strider_3__smoke:OnAbilityPhaseStart()
     local caster = self:GetCaster()
-    print("kuboZ", caster:IsIllusion())
     caster:EmitSound("Hero_MonkeyKing.Strike.Cast")
 
     return true

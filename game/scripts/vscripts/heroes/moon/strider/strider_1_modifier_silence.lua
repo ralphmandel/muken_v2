@@ -36,17 +36,8 @@ end
 
 function strider_1_modifier_silence:DeclareFunctions()
 	return {
-		MODIFIER_EVENT_ON_TAKEDAMAGE,
-    MODIFIER_EVENT_ON_DEATH
+		MODIFIER_EVENT_ON_TAKEDAMAGE
 	}
-end
-
-function strider_1_modifier_silence:OnDeath(keys)
-  if not IsServer() then return end
-  
-	if keys.unit == self.caster and keys.unit:IsIllusion() then
-    self:Destroy()
-  end
 end
 
 function strider_1_modifier_silence:OnTakeDamage(keys)

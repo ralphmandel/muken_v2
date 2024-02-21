@@ -62,7 +62,8 @@ end
 
 function strider_4_modifier_shuriken:DeclareFunctions()
 	local funcs = {
-		MODIFIER_EVENT_ON_STATE_CHANGED
+		MODIFIER_EVENT_ON_STATE_CHANGED,
+    MODIFIER_EVENT_ON_MODIFIER_ADDED
 	}
 
 	return funcs
@@ -73,10 +74,14 @@ function strider_4_modifier_shuriken:OnStateChanged(keys)
 
   if keys.unit ~= self.parent then return end
 
-  if self.parent:IsStunned() or self.parent:IsFrozen()
+  if self.parent:IsFrozen()
   or self.parent:IsHexed() or self.parent:IsOutOfGame() then
     self:Destroy()
   end
+end
+
+function strider_4_modifier_shuriken:OnModifierAdded(keys)
+  if keys.unti == self.parent and keys.added_buff:GetName() == "_modifier_stun" then self:Destroy() end
 end
 
 function strider_4_modifier_shuriken:OnIntervalThink()

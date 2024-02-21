@@ -258,22 +258,6 @@
   function CDOTA_BaseNPC:AddModifier(ability, modifier_name, table)
     local caster = ability:GetCaster()
 
-    -- if caster:IsIllusion() then
-    --   local players = PlayerResource:GetAllPlayers()
-    --   for _, player in pairs(players) do
-    --     local hero = player:GetAssignedHero()
-    --     if caster:GetHeroName() == hero:GetHeroName() then
-    --       local hero_ability = hero:FindAbilityByName(ability:GetAbilityName())
-    --       if hero_ability then
-    --         if hero_ability:IsTrained() then
-    --           caster = hero
-    --           ability = hero_ability
-    --         end
-    --       end
-    --     end
-    --   end
-    -- end
-
     if self:HasModifier("status_bar_cold_max") then
       if modifier_name == "status_bar_cold" then return end
     end
@@ -302,6 +286,26 @@
         modifier:Destroy()
       end
     end
+  end
+
+  function CDOTA_BaseNPC:AddModToList(modifier)
+    if not self.modifiers_list then self.modifiers_list = {} end
+
+    table.insert(self.modifiers_list, modifier)
+  end
+
+  function CDOTA_BaseNPC:RemoveModFromList(modifier)
+    for i = 1, #self.modifiers_list, 1 do
+      if modifier == self.modifiers_list[i] then
+        table.remove(self.modifiers_list, i)
+        return
+      end
+    end
+  end
+
+  function CDOTA_BaseNPC:GetModList()
+    if not self.modifiers_list then self.modifiers_list = {} end
+    return self.modifiers_list
   end
 
 -- CDOTA_BaseNPC || PERFORMS

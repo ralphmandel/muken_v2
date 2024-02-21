@@ -23,6 +23,7 @@ function strider_u_modifier_shadow:OnCreated(kv)
   self.parent:SetHealth(self.parent:GetMaxHealth())
   self.parent:AddStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
   self.entindex = kv.entindex
+  self.modifiers = {}
 
   self.state = SHADOW_STATE_IDLE
   self.time = GameRules:GetGameTime()
@@ -36,6 +37,12 @@ end
 function strider_u_modifier_shadow:OnRemoved()
   if not IsServer() then return end
 
+  for _, modifier in pairs(self.modifiers) do
+    if modifier:IsNull() == false then
+      modifier:Destroy()
+    end
+  end
+  
   self.ability.shadows[self.entindex] = nil
 
   self.ability:SetActivated(#self.ability.shadows < self.ability:GetSpecialValueFor("max_shadows"))
@@ -56,6 +63,7 @@ function strider_u_modifier_shadow:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_FIXED_DAY_VISION,
     MODIFIER_PROPERTY_FIXED_NIGHT_VISION,
+    MODIFIER_EVENT_ON_MODIFIER_ADDED,
     MODIFIER_EVENT_ON_ABILITY_START
 	}
 
@@ -68,6 +76,12 @@ end
 
 function strider_u_modifier_shadow:GetFixedNightVision(keys)
   return self.ability:GetSpecialValueFor("vision_range")
+end
+
+function strider_u_modifier_shadow:OnModifierAdded(keys)
+  if keys.added_buff:GetCaster() == self.parent then
+    table.insert(self.modifiers, keys.added_buff)
+  end
 end
 
 function strider_u_modifier_shadow:OnAbilityStart(keys)
