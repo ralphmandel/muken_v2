@@ -19,7 +19,7 @@ function strider_4_modifier_shuriken:OnCreated(kv)
   self.direction.z = self.direction.z + 90
   self.direction = self.direction:Normalized()
 	
-	self.caster:StartGestureWithPlaybackRate(ACT_DOTA_GENERIC_CHANNEL_1, 2)
+	self.parent:StartGestureWithPlaybackRate(ACT_DOTA_GENERIC_CHANNEL_1, 2)
 
   self:SetStackCount(self.ability:GetSpecialValueFor("shuriken_amount"))
   self:StartIntervalThink(0.26)
@@ -42,7 +42,7 @@ end
 function strider_4_modifier_shuriken:OnRemoved(kv)
   if not IsServer() then return end
 
-  self.caster:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
+  self.parent:FadeGesture(ACT_DOTA_GENERIC_CHANNEL_1)
   self.ability.disable = 0
 end
 
@@ -50,7 +50,7 @@ end
 
 function strider_4_modifier_shuriken:CheckState()
 	local state = {
-		[MODIFIER_STATE_IGNORING_MOVE_ORDERS] = true,
+		[MODIFIER_STATE_STUNNED] = true,
 	}
 
   if self.ability:GetSpecialValueFor("special_allow_move") == 1 then

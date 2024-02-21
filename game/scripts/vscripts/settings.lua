@@ -440,6 +440,9 @@ HEROES_DATA = {
   ["fleaman"] = {
     shield_fx_height = 155
   },
+  ["strider"] = {
+    shield_fx_height = 185
+  },
   ["paladin"] = {
     shield_fx_height = 215
   },

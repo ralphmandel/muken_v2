@@ -22,7 +22,11 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 		local target = self:GetCursorTarget()
 
 		Timers:CreateTimer(0.7, function()
-			caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
+      if caster then
+        if IsValidEntity(caster) then
+          caster:FadeGesture(ACT_DOTA_OVERRIDE_ABILITY_4)
+        end
+      end
 		end)
 
     self:PlayEfxStart()
@@ -46,10 +50,12 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 
 	function strider_1__silence:OnProjectileHit_ExtraData(hTarget, vLocation, table)
     if (not hTarget) or hTarget:IsInvulnerable() or hTarget:TriggerSpellAbsorb(self) then return end
+    
+    hTarget:RemoveModifierByName("strider_1_modifier_silence")
 
     hTarget:AddModifier(self, "strider_1_modifier_silence", {
       duration = self:GetSpecialValueFor("duration"),
-      health_cost = table.health_cost,
+      health_cost = table.health_cost,  
       bResist = 1
     })
 	end

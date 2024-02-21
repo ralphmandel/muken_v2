@@ -92,8 +92,8 @@ function bloodstained_u_modifier_aura_effect:CreateBloodIllusion()
 		illu:SetForwardVector((self.parent:GetAbsOrigin() - loc):Normalized())
 	end
 
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
-    value = 100, duration = self.ability:GetSpecialValueFor("slow_duration"), bResist = 1
+  self.parent:AddSubStats(self.ability, {
+    slow_percent = 100, duration = self.ability:GetSpecialValueFor("slow_duration"), bResist = 1
   })
 end
 

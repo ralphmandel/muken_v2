@@ -21,25 +21,38 @@ end
 
 function _modifier_silence:OnCreated( kv )
 	self.parent = self:GetParent()
+  self.interrupted = false
 
-	if IsServer() then
-		local str = kv.special or 1
+	if not IsServer() then return end
 
-		local path = nil
-		if str == 1 then
-			path = "particles/basics/silence.vpcf"
-		elseif str == 2 then
-			path = "particles/basics/silence__red.vpcf"
-		elseif str == 3 then
-			path = "particles/econ/items/silencer/silencer_ti6/silencer_last_word_ti6_silence.vpcf"
-		end
-		
-		self:PlayEfxStart(path)
-	end
+  local str = kv.special or 1
+
+  local path = nil
+  if str == 1 then
+    path = "particles/basics/silence.vpcf"
+  elseif str == 2 then
+    path = "particles/basics/silence__red.vpcf"
+  elseif str == 3 then
+    path = "particles/econ/items/silencer/silencer_ti6/silencer_last_word_ti6_silence.vpcf"
+  end
+  
+  self:PlayEfxStart(path)
 end
 
 function _modifier_silence:OnRemoved( kv )
 	if self.effect then ParticleManager:DestroyParticle(self.effect, false) end
+end
+
+function _modifier_silence:OnDestroy( kv )
+  if not IsServer() then return end
+
+  if self.endCallback then
+		self.endCallback(self.interrupted)
+	end
+end
+
+function _modifier_silence:SetEndCallback(func)
+	self.endCallback = func
 end
 
 --------------------------------------------------------------------------------

@@ -77,11 +77,11 @@ function HasPlayerAmount() {
 function SetIcon(icon, status_name) {
   var source = "";
 
-  if (status_name == "bleed__status") {
+  if (status_name == "status_bar_bleed") {
     source = "file://{resources}/images/custom_game/status_bar/status_bleed.png";
   }
 
-  if (status_name == "cold__status") {
+  if (status_name == "status_bar_cold") {
     source = "file://{resources}/images/custom_game/status_bar/status_freeze.png";
   }
 
@@ -89,8 +89,8 @@ function SetIcon(icon, status_name) {
 }
 
 function SetBarStyle(pan, status_name) {
-  pan.SetHasClass("bleed__status", "bleed__status" == status_name);
-  pan.SetHasClass("cold__status", "cold__status" == status_name);
+  pan.SetHasClass("status_bar_bleed", "status_bar_bleed" == status_name);
+  pan.SetHasClass("status_bar_cold", "status_bar_cold" == status_name);
 }
 
 (function()

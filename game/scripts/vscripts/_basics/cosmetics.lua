@@ -207,7 +207,7 @@ end
 
 		for i = 1, #self.cosmetic, 1 do
 			if bClear then self.cosmetic[i]:ClearActivityModifiers() end
-			self.cosmetic[i]:AddActivityModifier(BaseHeroMod(self:GetCaster()).activity)
+			self.cosmetic[i]:AddActivityModifier(self:GetCaster():GetBaseHeroModifier().activity)
 		end
 	end
 

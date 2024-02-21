@@ -52,13 +52,13 @@
   align: left center;
 }
 
-.bleed__status
+.status_bar_bleed
 {
   box-shadow: #bf0300 -4px 0px 8px 2px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#e60300), color-stop(0.25, #bf0300), to(#730200));
 }
 
-.cold__status
+.status_bar_cold
 {
   box-shadow: #0069bf -4px 0px 8px 2px;
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#007be6), color-stop(0.25, #0069bf), to(#003b73));

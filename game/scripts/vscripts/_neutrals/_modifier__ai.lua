@@ -56,7 +56,7 @@ function _modifier__ai:OnIntervalThink()
   if not IsServer() then return end
 
   if self.unit:IsDominated() then
-    self.unit:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+    self.unit:RemoveSubStats(self.ability, {"speed"})
     return
   end
 
@@ -65,7 +65,7 @@ function _modifier__ai:OnIntervalThink()
 end
 
 function _modifier__ai:IdleThink()
-  self.unit:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.unit:RemoveSubStats(self.ability, {"speed"})
 
   local target = self:FindNewTarget()
 
@@ -132,7 +132,7 @@ function _modifier__ai:AggressiveThink()
     end
   end
   
-  self.unit:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.unit:RemoveSubStats(self.ability, {"speed"})
 end
 
 function _modifier__ai:ReturningThink()
@@ -155,8 +155,8 @@ function _modifier__ai:ReturningThink()
   self.unit:Purge(false, true, false, true, false)
   self.unit:MoveToPosition(self.spawnPos)
 
-  self.unit:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
-  self.unit:AddModifier(self.ability, "sub_stat_movespeed_increase", {value = 300})
+  self.unit:RemoveSubStats(self.ability, {"speed"})
+  self.unit:AddSubStats(self.ability, {speed = 300})
 end
 
 function _modifier__ai:FindNewTarget()

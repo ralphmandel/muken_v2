@@ -17,10 +17,8 @@ function bloodstained_u_modifier_copy:OnCreated(kv)
   self.target = EntIndexToHScript(kv.target)
 
   self.stat_mod = self.target:AddSubStats(self.ability, {max_health = 0})
+  self.parent:AddSubStats(self.ability, {speed_percent = 100})
   self.parent:AddStatusEfx(self.caster, self.ability, "bloodstained_u_modifier_copy_status_efx")
-
-  AddStatusEfx(self.ability, "bloodstained_u_modifier_copy_status_efx", self.caster, self.parent)
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_percent_increase", {value = 100}, false)
 
   self.max_barrier = kv.hp_stolen
   self.barrier = kv.hp_stolen

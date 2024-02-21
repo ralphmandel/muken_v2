@@ -28,8 +28,7 @@ end
 function templar_3_modifier_hammer:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
-  self.parent:RemoveSubStats(self.ability, {"attack_speed"})
+  self.parent:RemoveSubStats(self.ability, {"attack_speed", "slow_percent"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -48,11 +47,8 @@ function templar_3_modifier_hammer:OnStackCountChanged(old)
   local slow = self.parent:GetStatusResist(self.ability:GetSpecialValueFor("slow_start")) * 0.1 * self:GetStackCount()
   local as = self.parent:GetStatusResist(self.ability:GetSpecialValueFor("special_as_start")) * 0.1 * self:GetStackCount()
 
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {value = slow})
-
-  self.parent:RemoveSubStats(self.ability, {"attack_speed"})
-  self.parent:AddSubStats(self.ability, {attack_speed = as})
+  self.parent:RemoveSubStats(self.ability, {"attack_speed", "slow_percent"})
+  self.parent:AddSubStats(self.ability, {attack_speed = as, slow_percent = slow})
 end
 
 -- UTILS -----------------------------------------------------------

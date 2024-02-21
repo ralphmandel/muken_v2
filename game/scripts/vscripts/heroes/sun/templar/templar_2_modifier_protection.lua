@@ -12,9 +12,7 @@ function templar_2_modifier_protection:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_increase", {
-    value = self.ability:GetSpecialValueFor("special_ms")
-  })
+  self.parent:AddSubStats(self.ability, {speed = self.ability:GetSpecialValueFor("special_ms")})
 
   if self.ability:GetSpecialValueFor("special_bkb") == 1 then
     self.parent:AddModifier(self.ability, "_modifier_bkb", {})
@@ -44,7 +42,7 @@ end
 function templar_2_modifier_protection:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"speed"})
   self.parent:RemoveAllModifiersByNameAndAbility("_modifier_bkb", self.ability)
 
   if self.ability:GetSpecialValueFor("special_self_cast") == 1

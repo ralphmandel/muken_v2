@@ -129,12 +129,25 @@ function MukenEvents:OnPortraitUpdate(event)
   if entity:GetMainStat("INT") == nil then return end
   if entity:GetMainStat("VIT") == nil then return end
 
+  local armor = entity:GetPhysicalArmorValue(false)
+
+  if entity:IsIllusion() then
+    local players = PlayerResource:GetAllPlayers()
+    for _, player in pairs(players) do
+      local hero = player:GetAssignedHero()
+      if entity:GetHeroName() == hero:GetHeroName() then
+        armor = hero:GetPhysicalArmorValue(false)
+        break
+      end
+    end
+  end
+
   local info = {
     unit_name = entity:GetUnitName(),
 
     physical_damage = entity:GetMainStat("STR"):GetPhysicalDamageAmp(),
     attack_speed = entity:GetDisplayAttackSpeed(),
-    armor = entity:GetPhysicalArmorValue(false),
+    armor = armor,
     evasion = entity:GetMainStat("AGI"):GetEvasion(false),
     evasion_percent = entity:GetMainStat("AGI"):GetEvasion(true),
     crit_chance = entity:GetMainStat("STR"):GetCriticalChance(),

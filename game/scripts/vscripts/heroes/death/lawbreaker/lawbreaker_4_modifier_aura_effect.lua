@@ -14,9 +14,7 @@ function lawbreaker_4_modifier_aura_effect:OnCreated(kv)
   self.radius = self.ability:GetAOERadius()
   self.interval = self.ability:GetSpecialValueFor("interval")
 
-  AddModifier(self.parent, self.ability, "sub_stat_movespeed_decrease", {
-    value = CalcStatus(self.ability:GetSpecialValueFor("slow"), self.caster, self.parent)
-  }, false)
+  self.parent:AddSubStats(self.ability, {slow = self.ability:GetSpecialValueFor("slow")})
 
   if IsServer() then self:OnIntervalThink() end
 end
@@ -25,7 +23,7 @@ function lawbreaker_4_modifier_aura_effect:OnRefresh(kv)
 end
 
 function lawbreaker_4_modifier_aura_effect:OnRemoved()
-  RemoveAllModifiersByNameAndAbility(self.parent, "sub_stat_movespeed_decrease", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"slow"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

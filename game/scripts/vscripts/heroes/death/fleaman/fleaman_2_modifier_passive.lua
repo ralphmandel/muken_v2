@@ -71,8 +71,8 @@ end
 function fleaman_2_modifier_passive:OnStackCountChanged(old)
   if not IsServer() then return end
 
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_increase", self.ability)
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_increase", {value = self:GetStackCount()})
+  self.parent:RemoveSubStats(self.ability, {"speed"})
+  self.parent:AddSubStats(self.ability, {speed = self:GetStackCount()})
 end
 
 function fleaman_2_modifier_passive:OnIntervalThink()

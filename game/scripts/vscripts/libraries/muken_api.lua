@@ -104,16 +104,24 @@
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage, target)
   end
 
--- CDOTA_BaseNPC || RANK SYSTEM
+-- CDOTA_BaseNPC_Hero
 
-  function CDOTA_BaseNPC:HasRank(skill_id, tier, path)
+  function CDOTA_BaseNPC_Hero:GetBaseHeroAbility()
+    return self:FindAbilityByName("base_hero")
+  end
+
+  function CDOTA_BaseNPC_Hero:GetBaseHeroModifier()
+    return self:FindModifierByName("base_hero_mod")
+  end
+
+  function CDOTA_BaseNPC_Hero:HasRank(skill_id, tier, path)
     local special_kv_modifier = self:FindModifierByName(GetHeroName(self).."_special_values")
     if special_kv_modifier == nil then return false end
 
     return special_kv_modifier:HasRank(skill_id, tier, path)
   end
 
-  function CDOTA_BaseNPC:GetHeroName()
+  function CDOTA_BaseNPC_Hero:GetHeroName()
 		local data = LoadKeyValues("scripts/kv/heroes_name.kv")
 
 		for name, id_name in pairs(data) do
@@ -121,7 +129,7 @@
 		end
 	end
 
-  function CDOTA_BaseNPC:GetHeroTeam()
+  function CDOTA_BaseNPC_Hero:GetHeroTeam()
 		local data = LoadKeyValues("scripts/kv/heroes_team.kv")
 
     for team, hero_list in pairs(data) do
@@ -249,6 +257,22 @@
 
   function CDOTA_BaseNPC:AddModifier(ability, modifier_name, table)
     local caster = ability:GetCaster()
+
+    -- if caster:IsIllusion() then
+    --   local players = PlayerResource:GetAllPlayers()
+    --   for _, player in pairs(players) do
+    --     local hero = player:GetAssignedHero()
+    --     if caster:GetHeroName() == hero:GetHeroName() then
+    --       local hero_ability = hero:FindAbilityByName(ability:GetAbilityName())
+    --       if hero_ability then
+    --         if hero_ability:IsTrained() then
+    --           caster = hero
+    --           ability = hero_ability
+    --         end
+    --       end
+    --     end
+    --   end
+    -- end
 
     if self:HasModifier("status_bar_cold_max") then
       if modifier_name == "status_bar_cold" then return end

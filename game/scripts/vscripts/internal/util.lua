@@ -244,13 +244,6 @@
     })
   end
 
-  function UpdateMovespeed(baseNPC, name)
-    local modifier = baseNPC:FindModifierByName("_modifier_agi")
-    if modifier then
-      modifier:UpdateMS(name)
-    end
-  end
-
 -- HEROES UTIL
 
   function HasTreeNearby(point, radius)

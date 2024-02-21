@@ -47,8 +47,7 @@ end
 function orb_cold_debuff:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemoveSubStats(self.ability, {"attack_time"})
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_decrease", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"attack_time", "slow"})
   self.parent:RemoveStatusEfx(nil, nil, "orb_cold_debuff_efx")
 end
 
@@ -93,12 +92,10 @@ end
 -- UTILS -----------------------------------------------------------
 
 function orb_cold_debuff:CheckSpellImmunity()
-  self.parent:RemoveSubStats(self.ability, {"attack_time"})
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_decrease", self.ability)
+  self.parent:RemoveSubStats(self.ability, {"attack_time", "slow"})
 
   if self.parent:IsMagicImmune() == false then
-    self.parent:AddSubStats(self.ability, {attack_time = self.attack_time})
-    self.parent:AddModifier(self.ability, "sub_stat_movespeed_decrease", {value = self.slow})
+    self.parent:AddSubStats(self.ability, {attack_time = self.attack_time, slow = self.slow})
   end
 end
 

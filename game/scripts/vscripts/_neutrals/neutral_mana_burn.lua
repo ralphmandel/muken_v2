@@ -30,9 +30,9 @@ function neutral_mana_burn:OnOrbImpact(keys)
   if IsServer() then keys.target:EmitSound("Hero_Ancient_Apparition.ChillingTouch.Target") end
 
   if keys.target:IsMagicImmune() == false then
-    keys.target:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self)
-    keys.target:AddModifier(self, "sub_stat_movespeed_percent_decrease", {
-      value = caster:GetDebuffPower(self:GetSpecialValueFor("slow_percent"), keys.target),
+    keys.target:RemoveSubStats(self, {"slow_percent"})
+    keys.target:AddSubStats(self, {
+      slow_percent = caster:GetDebuffPower(self:GetSpecialValueFor("slow_percent"), keys.target),
       duration = self:GetSpecialValueFor("slow_duration")
     })
   end

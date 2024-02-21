@@ -24,6 +24,7 @@ function strider_2_modifier_spin:OnCreated(kv)
   if average_damage > 0 then
     self.parent:RemoveAllModifiersByNameAndAbility("_modifier_barrier", self.ability)
     self.parent:AddModifier(self.ability, "_modifier_bkb", {})
+
     local barrier_mod = self.parent:AddModifier(self.ability, "_modifier_barrier", {
       duration = self.ability:GetSpecialValueFor("special_barrier_duration"),
       max_universal_barrier = average_damage,
@@ -70,9 +71,13 @@ end
 
 function strider_2_modifier_spin:CheckState()
 	local state = {
-		[MODIFIER_STATE_IGNORING_MOVE_ORDERS] = true,
-		[MODIFIER_STATE_DISARMED] = true
+		[MODIFIER_STATE_STUNNED] = true
 	}
+
+  -- local state = {
+	-- 	[MODIFIER_STATE_IGNORING_MOVE_ORDERS] = true,
+	-- 	[MODIFIER_STATE_DISARMED] = true
+	-- }
 
   return state
 end

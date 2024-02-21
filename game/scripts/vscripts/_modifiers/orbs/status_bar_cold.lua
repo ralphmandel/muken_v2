@@ -18,7 +18,7 @@ function status_bar_cold:OnCreated(kv)
 
   self.caster = EntIndexToHScript(kv.inflictor)
   self.current_status = self.caster:GetDebuffPower(kv.status_amount, self.parent)
-  self.status_name = string.sub(self:GetName(), 5, string.len(self:GetName()))
+  self.status_name = self:GetName()
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end
 

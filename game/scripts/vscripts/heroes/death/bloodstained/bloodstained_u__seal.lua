@@ -1,6 +1,7 @@
 bloodstained_u__seal = class({})
 LinkLuaModifier("bloodstained_u_modifier_seal", "heroes/death/bloodstained/bloodstained_u_modifier_seal", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("bloodstained_u_modifier_aura_effect", "heroes/death/bloodstained/bloodstained_u_modifier_aura_effect", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("bloodstained_u_modifier_copy", "heroes/death/bloodstained/bloodstained_u_modifier_copy", LUA_MODIFIER_MOTION_NONE)
 
 -- INIT
 

@@ -8,13 +8,6 @@ LinkLuaModifier("strider_3_modifier_aura_effect", "heroes/moon/strider/strider_3
     return self:GetSpecialValueFor("radius")
   end
 
-  function strider_3__smoke:OnAbilityPhaseStart()
-    local caster = self:GetCaster()
-    caster:EmitSound("Hero_MonkeyKing.Strike.Cast")
-
-    return true
-  end
-
   function strider_3__smoke:OnOwnerDied()
     if self:GetSpecialValueFor("special_cast_on_death") == 1 then
       local caster = self:GetCaster()
@@ -24,6 +17,14 @@ LinkLuaModifier("strider_3_modifier_aura_effect", "heroes/moon/strider/strider_3
   end
 
 -- SPELL START
+
+  function strider_3__smoke:OnAbilityPhaseStart()
+    local caster = self:GetCaster()
+    print("kuboZ", caster:IsIllusion())
+    caster:EmitSound("Hero_MonkeyKing.Strike.Cast")
+
+    return true
+  end
 
 	function strider_3__smoke:OnSpellStart()
 		local caster = self:GetCaster()

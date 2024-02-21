@@ -31,9 +31,8 @@ function RankSystem:OnStatUpgrade(event)
 
   local hero = player:GetAssignedHero()
   if (not hero) then return end
-  if BaseHero(hero) == nil then return end
 
-  BaseHero(hero):UpgradeStat(event.stat)
+  hero:GetBaseHeroAbility():UpgradeStat(event.stat)
 end
 
 function RankSystem:OnProgressBarRequest(event)
@@ -42,7 +41,7 @@ function RankSystem:OnProgressBarRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local event = {
+  local data = {
     entity = event.entity,
     points = 0,
     rank_level = "0",
@@ -50,19 +49,34 @@ function RankSystem:OnProgressBarRequest(event)
     style = "mana"
   }
 
-  local unit = EntIndexToHScript(event.entity)
+  local unit = EntIndexToHScript(data.entity)
+
+  if unit == nil then return end
+  if IsValidEntity(unit) == false then return end
 
   if unit:HasModifier("ancient_u_modifier_passive") then
-    event.style = "energy"
+    data.style = "energy"
   end
 
   if unit then
-    if BaseHero(unit) then
-      event = BaseHero(unit):GetProgressBarInfo()
+    if unit:IsHero() then
+      if unit:IsIllusion() then
+        local players = PlayerResource:GetAllPlayers()
+        for _, player in pairs(players) do
+          local hero = player:GetAssignedHero()
+          if unit:GetHeroName() == hero:GetHeroName() then
+            data = hero:GetBaseHeroAbility():GetProgressBarInfo()
+            data.entity = event.entity
+            break
+          end
+        end
+      else
+        data = unit:GetBaseHeroAbility():GetProgressBarInfo()
+      end
     end
   end
 
-  CustomGameEventManager:Send_ServerToPlayer(player, "update_bar_from_lua", event)
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_bar_from_lua", data)
 end
 
 function RankSystem:OnSkillNameRequest(event)
@@ -80,11 +94,21 @@ function RankSystem:OnRanksTableRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local hero = EntIndexToHScript(event.entity)
-  if (not hero) then RankSystem:OnButtonsStateRequest(event) return end
-  if BaseHero(hero) == nil then RankSystem:OnButtonsStateRequest(event) return end
+  local entity = EntIndexToHScript(event.entity)
+  if (not entity) then RankSystem:OnButtonsStateRequest(event) return end
+  if entity:IsHero() == false then RankSystem:OnButtonsStateRequest(event) return end
 
-  BaseHero(hero):UpdatePanoramaRanksByName(player, event.skill_name)
+  if entity:IsIllusion() then
+    local players = PlayerResource:GetAllPlayers()
+    for _, player in pairs(players) do
+      local hero = player:GetAssignedHero()
+      if entity:GetHeroName() == hero:GetHeroName() then
+        hero:GetBaseHeroAbility():UpdatePanoramaRanksByName(player, event.skill_name)
+      end
+    end
+  else
+    entity:GetBaseHeroAbility():UpdatePanoramaRanksByName(player, event.skill_name)
+  end
 end
 
 function RankSystem:OnButtonsStateRequest(event)
@@ -94,9 +118,9 @@ function RankSystem:OnButtonsStateRequest(event)
   if (not player) then return end
 
   local bEnable = false
-  local hero = EntIndexToHScript(event.entity)
-  if hero then
-    if BaseHero(hero) then
+  local entity = EntIndexToHScript(event.entity)
+  if entity then
+    if entity:IsHero() then
       bEnable = true
     end
   end
@@ -107,11 +131,12 @@ end
 function RankSystem:OnRankUpgrade(event)
   if (not event or not event.PlayerID) then return end
 
-  local hero = EntIndexToHScript(event.entity)
-  if (not hero) then return end
-  if BaseHero(hero) == nil then return end
+  local entity = EntIndexToHScript(event.entity)
+  if (not entity) then return end
+  if entity:IsHero() == false then return end
+  if entity:IsIllusion() then return end
 
-  BaseHero(hero):UpgradeRank(event.skill_name, event.tier, event.path)
+  entity:GetBaseHeroAbility():UpgradeRank(event.skill_name, event.tier, event.path)
 end
 
 function RankSystem:OnPathUpgrade(event)
@@ -123,9 +148,7 @@ function RankSystem:OnPathUpgrade(event)
   local hero = player:GetAssignedHero()
   if (not hero) then return end
 
-  if BaseHero(hero) == nil then return end
-
-  BaseHero(hero):UpgradePath(event.path)
+  hero:GetBaseHeroAbility():UpgradePath(event.path)
 end
 
 RankSystem:Init()

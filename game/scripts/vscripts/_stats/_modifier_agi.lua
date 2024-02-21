@@ -26,10 +26,10 @@ function _modifier_agi:OnCreated(kv)
       sub_stat_poison_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_poison_resist"), bonus = 0},
       sub_stat_thunder_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_thunder_resist"), bonus = 0},
       sub_stat_bleed_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_bleed_resist"), bonus = 0},
-      sub_stat_movespeed_increase = {mult = 0, bonus = 0},
-      sub_stat_movespeed_decrease = {mult = 0, bonus = 0},
-      sub_stat_movespeed_percent_increase = {mult = 0, bonus = 0},
-      sub_stat_movespeed_percent_decrease = {mult = 0, bonus = 0},
+      sub_stat_speed = {mult = 0, bonus = 0},
+      sub_stat_speed_percent = {mult = 0, bonus = 0},
+      sub_stat_slow = {mult = 0, bonus = 0},
+      sub_stat_slow_percent = {mult = 0, bonus = 0},
       sub_stat_attack_time = {mult = 0, bonus = 0}
     }
     
@@ -178,20 +178,20 @@ function _modifier_agi:GetBleedResist()
 end
 
 function _modifier_agi:GetBonusMS()
-  local result = self:GetCalculedData("sub_stat_movespeed_increase", false)
+  local result = self:GetCalculedData("sub_stat_speed", false)
 
   if self.parent:HasModifier("_modifier_unslowable") == false then
-    result = result - self:GetCalculedData("sub_stat_movespeed_decrease", false)
+    result = result - self:GetCalculedData("sub_stat_slow", false)
   end
 
   return result
 end
 
 function _modifier_agi:GetPercentMS()
-  local result = self:GetCalculedData("sub_stat_movespeed_percent_increase", false)
+  local result = self:GetCalculedData("sub_stat_speed_percent", false)
 
   if self.parent:HasModifier("_modifier_unslowable") == false then
-    result = result - self:GetCalculedData("sub_stat_movespeed_percent_decrease", false)
+    result = result - self:GetCalculedData("sub_stat_slow_percent", false)
   end
 
   return result
@@ -219,17 +219,6 @@ function _modifier_agi:GetEvasion(bPercent)
   end
 
   return evasion
-end
-
-function _modifier_agi:UpdateMS(property)
-  local value = 0
-  local mods = self.parent:FindAllModifiersByName(property)
-
-  if mods then
-    for _,modifier in pairs(mods) do value = value + modifier.value end
-  end
-
-  self.data[property].bonus = value
 end
 
 function _modifier_agi:GetCalculedDataStack(property, bScalar)

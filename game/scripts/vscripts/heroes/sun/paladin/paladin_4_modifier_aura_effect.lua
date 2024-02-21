@@ -58,8 +58,12 @@ function paladin_4_modifier_aura_effect:OnIntervalThink()
     ability = self.ability, damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
   self.parent:ApplyMana(damage * self.ability:GetSpecialValueFor("special_manaloss") * 0.01, self.ability, false, nil, true)
-  self:StartIntervalThink(self.interval) 
+
+  self:StartIntervalThink(self.interval)
 end
 
 -- UTILS -----------------------------------------------------------

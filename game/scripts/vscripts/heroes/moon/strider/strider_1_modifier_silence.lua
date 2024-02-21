@@ -16,36 +16,18 @@ function strider_1_modifier_silence:OnCreated(kv)
   self.damage_received = 0
   self.health_cost = kv.health_cost
 
-  self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
-    amount = self.ability:GetSpecialValueFor("special_slow_percent")}
-  )
   self.parent:AddModifier(self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2})
-  self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
+  self.parent:AddSubStats(self.ability, {slow_percent = self.ability:GetSpecialValueFor("special_slow_percent")})
 
+  self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
   self:StartIntervalThink(self:GetDuration())
 end
 
 function strider_1_modifier_silence:OnRefresh(kv)
-  if not IsServer() then return end
-
-  self:CalcDebuff(true)
-
-  self.purge = true
-  self.damage_received = 0
-  self.health_cost = kv.health_cost
-
-  self.parent:RemoveAllModifiersByNameAndAbility("sub_stat_movespeed_percent_decrease", self.ability)
-  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
-  self.parent:AddModifier(self.ability, "_modifier_silence", {duration = self:GetDuration(), special = 2})
-  self.parent:EmitSound("Hero_PhantomAssassin.Dagger.Target")
-
-  self:StartIntervalThink(self:GetDuration())
 end
 
 function strider_1_modifier_silence:OnRemoved(bDeath)
   if not IsServer() then return end
-
-  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_silence", self.ability)
 
   self:CalcDebuff(bDeath)
 end
@@ -54,8 +36,17 @@ end
 
 function strider_1_modifier_silence:DeclareFunctions()
 	return {
-		MODIFIER_EVENT_ON_TAKEDAMAGE
+		MODIFIER_EVENT_ON_TAKEDAMAGE,
+    MODIFIER_EVENT_ON_DEATH
 	}
+end
+
+function strider_1_modifier_silence:OnDeath(keys)
+  if not IsServer() then return end
+  
+	if keys.unit == self.caster and keys.unit:IsIllusion() then
+    self:Destroy()
+  end
 end
 
 function strider_1_modifier_silence:OnTakeDamage(keys)
@@ -88,6 +79,8 @@ function strider_1_modifier_silence:CalcDebuff(bDeath)
     end
 
     if damage_mult > 0 then
+      self.parent:EmitSound("DOTA_Item.Bloodthorn.Activate")
+      
       ApplyDamage({
         victim = self.parent, attacker = self.caster, ability = self.ability,
         damage = self.damage_received / (self.health_cost * damage_mult),

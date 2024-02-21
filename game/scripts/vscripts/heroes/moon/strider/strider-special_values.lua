@@ -144,28 +144,15 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
 	if ability:GetAbilityName() == "strider_5__aspd" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
+
+    if value_name == "attack_speed" then return 1 end
+    if value_name == "movespeed" then return 1 end
     if value_name == "duration" then return 1 end
-
-		if caster:FindAbilityByName("strider_5__aspd_rank_11") then
-      if value_name == "special_movespeed" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_5__aspd_rank_12") then
-		end
-
-		if caster:FindAbilityByName("strider_5__aspd_rank_21") then
-      if value_name == "attack_speed" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_5__aspd_rank_22") then
-		end
-
-		if caster:FindAbilityByName("strider_5__aspd_rank_31") then
-      if value_name == "special_bkb" then return 1 end
-		end
-
-    if caster:FindAbilityByName("strider_5__aspd_rank_32") then
-		end
+    if value_name == "special_double_ms_duration" then return 1 end
+    if value_name == "special_no_slow" then return 1 end
+    if value_name == "special_attack_lifesteal" then return 1 end
+    if value_name == "special_aura_radius" then return 1 end
+    if value_name == "special_purge" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "strider_u__shadow" then
@@ -175,23 +162,10 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
 
-		if caster:FindAbilityByName("strider_u__shadow_rank_11") then
-		end
-
-    if caster:FindAbilityByName("strider_u__shadow_rank_12") then
-		end
-
-		if caster:FindAbilityByName("strider_u__shadow_rank_21") then
-		end
-
-    if caster:FindAbilityByName("strider_u__shadow_rank_22") then
-		end
-
-		if caster:FindAbilityByName("strider_u__shadow_rank_31") then
-		end
-
-    if caster:FindAbilityByName("strider_u__shadow_rank_32") then
-		end
+    if value_name == "vision_range" then return 1 end
+    if value_name == "max_shadows" then return 1 end
+    if value_name == "duration" then return 1 end
+    if value_name == "incoming_damage" then return 1 end
 	end
 
 	return 0
@@ -272,7 +246,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "cooldown" then return 0 end
     end
 
-		if value_name == "AbilityManaCost" then return 40 * mana_mult end
+		if value_name == "AbilityManaCost" then return 50 * mana_mult end
 		if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
 		if value_name == "cooldown" then return 9 - (value_level * 0.25) end
 
@@ -312,7 +286,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "attack_break" then return 30 end
     end
 
-		if value_name == "AbilityManaCost" then return 140 * mana_mult end
+		if value_name == "AbilityManaCost" then return 125 * mana_mult end
 		if value_name == "AbilityCooldown" then return 21 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("radius") end
     if value_name == "duration" then return 9 + (value_level * 0.5) end
@@ -352,7 +326,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "shuriken_range" then return 9999 end
     end
 
-		if value_name == "AbilityManaCost" then return 130 * mana_mult end
+		if value_name == "AbilityManaCost" then return 135 * mana_mult end
 		if value_name == "AbilityCooldown" then return 18 end
 		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("blink_range") end
     if value_name == "finder_range" then return 900 + (value_level * 50) end
@@ -369,36 +343,35 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "strider_5__aspd" then
     if self:HasRank(5, 1, 1) then
-
+      if value_name == "special_double_ms_duration" then return 2.5 * self:GetBuffAmp() end
     end
 
     if self:HasRank(5, 1, 2) then
-
+      if value_name == "special_no_slow" then return 1 end
     end
 
     if self:HasRank(5, 2, 1) then
-
+      if value_name == "attack_speed" then return 75 end
 		end
 
     if self:HasRank(5, 2, 2) then
-
+      if value_name == "special_attack_lifesteal" then return 20 end
 		end
 
 		if self:HasRank(5, 3, 1) then
-
+      if value_name == "special_aura_radius" then return 350 end
 		end
 
     if self:HasRank(5, 3, 2) then
-
+      if value_name == "special_purge" then return 1 end
     end
 
-		if value_name == "AbilityManaCost" then return 120 * mana_mult end
+		if value_name == "AbilityManaCost" then return 100 * mana_mult end
 		if value_name == "AbilityCooldown" then return 12 end
-    if value_name == "duration" then return 6 + (value_level * 0.25) end
+    if value_name == "duration" then return (7.5 + (value_level * 0.25)) * self:GetBuffAmp() end
 
-    if value_name == "special_movespeed" then return 100 end
-    if value_name == "attack_speed" then return 125 end
-    if value_name == "special_bkb" then return 1 end
+    if value_name == "attack_speed" then return 50 end
+    if value_name == "movespeed" then return 75 end
 	end
 
 	if ability:GetAbilityName() == "strider_u__shadow" then
@@ -426,13 +399,16 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
     end
 
-		if value_name == "AbilityManaCost" then return 100 end
+		if value_name == "AbilityManaCost" then return 80 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCastRange" then return 500 end
+    if value_name == "AbilityCastRange" then return 350 end
     if value_name == "AbilityCharges" then return 2 end
-    if value_name == "AbilityChargeRestoreTime" then return 30 end
+    if value_name == "AbilityChargeRestoreTime" then return 45 end
+    if value_name == "incoming_damage" then return 450 - (value_level * 25) end
 
-
+    if value_name == "vision_range" then return 400 end
+    if value_name == "max_shadows" then return 2 end
+    if value_name == "duration" then return 60 end
 	end
 
 	return 0

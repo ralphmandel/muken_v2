@@ -43,6 +43,10 @@ function _modifier_invisible:OnDestroy( kv )
 	end
 end
 
+function _modifier_invisible:SetEndCallback(func)
+	self.endCallback = func
+end
+
 -------------------------------------------------------------
 
 function _modifier_invisible:CheckState()
@@ -93,10 +97,6 @@ function _modifier_invisible:OnIntervalThink()
 		self.hidden = true
 		self:StartIntervalThink(-1)
 	end
-end
-
-function _modifier_invisible:SetEndCallback(func)
-	self.endCallback = func
 end
 
 --------------------------------------------------------------------------------

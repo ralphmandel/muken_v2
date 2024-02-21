@@ -79,8 +79,8 @@ function fleaman_3_modifier_jump:OnAttackLanded(keys)
 	if keys.attacker ~= self.parent then return end
   if keys.target:IsMagicImmune() then return end
 
-  keys.target:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
-    value = self.ability:GetSpecialValueFor("slow_percent"),
+  keys.target:AddSubStats(self.ability, {
+    slow_percent = self.ability:GetSpecialValueFor("slow_percent"),
     duration = self.ability:GetSpecialValueFor("debuff_duration"),
     bResist = 1
   })

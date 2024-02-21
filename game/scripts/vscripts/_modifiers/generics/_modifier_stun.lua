@@ -26,6 +26,8 @@ end
 function _modifier_stun:OnCreated(kv)
   if not IsServer() then return end
 
+  self.interrupted = false
+
 	local special = kv.special or 0
 	local effect
 	local attach
@@ -55,6 +57,18 @@ end
 function _modifier_stun:OnRemoved()
   if not IsServer() then return end
 	ParticleManager:DestroyParticle(self.particle, false)
+end
+
+function _modifier_stun:OnDestroy( kv )
+  if not IsServer() then return end
+
+  if self.endCallback then
+		self.endCallback(self.interrupted)
+	end
+end
+
+function _modifier_stun:SetEndCallback(func)
+	self.endCallback = func
 end
 
 --------------------------------------------------------------------------------

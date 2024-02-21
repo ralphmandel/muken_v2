@@ -7,6 +7,9 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
   function strider_4__shuriken:Spawn()
     self.disable = 0
     self.projectiles = {}
+    self.direction = Vector(0, 0, 0)
+		self.init_pos = Vector(0, 0, 0)
+		self.end_pos = Vector(0, 0, 0)
   end
 
 	function strider_4__shuriken:GetIntrinsicModifierName()
@@ -16,6 +19,13 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 -- SPELL START
 
 	function strider_4__shuriken:OnAbilityPhaseStart()
+    local caster = self:GetCaster()
+
+    if caster:IsIllusion() then
+      self:PlayEfxPhase()
+      return true
+    end
+
 		if not self:CheckVectorTargetPosition() then return false end
 		self:PlayEfxPhase()
 
@@ -29,26 +39,32 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 	function strider_4__shuriken:OnSpellStart()
 		local caster = self:GetCaster()
 		local vect_targets = self:GetVectorTargetPosition()
-		local direction = vect_targets.direction
-		local init_pos = vect_targets.init_pos
-		local end_pos = vect_targets.end_pos
-		local origin = caster:GetOrigin()
+    
+    if caster:IsIllusion() == false then
+      self.direction = vect_targets.direction
+      self.init_pos = vect_targets.init_pos
+      self.end_pos = vect_targets.end_pos
+    end
 
-		FindClearSpaceForUnit(caster, init_pos, true)
-		caster:SetForwardVector(direction)
+		FindClearSpaceForUnit(caster, self.init_pos, true)
+		caster:SetForwardVector(self.direction)
 
 		Timers:CreateTimer(0.1, function()
-			caster:MoveToPosition(caster:GetOrigin())
+      if caster then
+        if IsValidEntity(caster) then
+          caster:MoveToPosition(caster:GetOrigin())
+        end
+      end
 		end)
 
     ProjectileManager:ProjectileDodge(caster)
 
     caster:AddModifier(self, "strider_4_modifier_shuriken", {
-      init_x = init_pos.x, init_y = init_pos.y, init_z = init_pos.z,
-			end_x = end_pos.x, end_y = end_pos.y, end_z = end_pos.z
+      init_x = self.init_pos.x, init_y = self.init_pos.y, init_z = self.init_pos.z,
+			end_x = self.end_pos.x, end_y = self.end_pos.y, end_z = self.end_pos.z
     })
 
-		self:PlayEfxStart(origin, direction)
+		self:PlayEfxStart(caster:GetOrigin(), self.direction)
 	end
 
   function strider_4__shuriken:CreateShuriken(projectile_direction)

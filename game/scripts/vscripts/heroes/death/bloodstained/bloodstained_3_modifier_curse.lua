@@ -16,9 +16,7 @@ function bloodstained_3_modifier_curse:OnCreated(kv)
 
 	if self.parent ~= self.caster then
     local mod = self.caster:AddModifier(self.ability, self:GetName(), {})
-    local mod_ms = self.caster:AddModifier(self.ability, "sub_stat_movespeed_increase", {
-      amount = self.ability:GetSpecialValueFor("special_ms")
-    })
+    local mod_ms = self.caster:AddSubStats(self.ability, {speed = self.ability:GetSpecialValueFor("special_ms")})
 
     if self.ability:GetSpecialValueFor("special_mute") == 1 then
       self.parent:AddModifier(self.ability, "_modifier_mute", {})
@@ -44,11 +42,11 @@ function bloodstained_3_modifier_curse:OnRemoved()
     self.parent:RemoveAllModifiersByNameAndAbility("_modifier_mute", self.ability)
 
     if self.parent:IsMagicImmune() == false then
-      self.parent:AddModifier(self.ability, "sub_stat_movespeed_percent_decrease", {
+      self.parent:AddSubStats(self.ability, {
+        slow_percent = self.ability:GetSpecialValueFor("special_slow_percent"),
         duration = self.ability:GetSpecialValueFor("special_slow_duration"),
-        amount = self.ability:GetSpecialValueFor("special_slow_percent"),
         bResist = 1
-      })      
+      })
     end
 	end
 end
