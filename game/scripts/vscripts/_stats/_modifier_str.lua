@@ -62,7 +62,7 @@ function _modifier_str:DeclareFunctions()
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
     MODIFIER_PROPERTY_MISS_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK,
-    MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
+    MODIFIER_PROPERTY_PHYSICALDAMAGEOUTGOING_PERCENTAGE,
     MODIFIER_EVENT_ON_TAKEDAMAGE
   }
 
@@ -102,7 +102,7 @@ function _modifier_str:GetModifierPhysical_ConstantBlock(keys)
   return block
 end
 
-function _modifier_str:GetModifierTotalDamageOutgoing_Percentage(keys)
+function _modifier_str:GetModifierPhysicalDamageOutgoing_Percentage(keys)
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     if keys.damage_flags ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
     and keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 and self.has_crit == true then
@@ -188,11 +188,22 @@ function _modifier_str:GetCalculedData(property, bScalar)
   return value
 end
 
-function _modifier_str:UpdateMainBonus(value)
+function _modifier_str:UpdateMainBonus()
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
+  local value = 0
+  local mods = self.parent:FindAllModifiersByName("main_stat_modifier")
+  if mods then
+    for _,modifier in pairs(mods) do
+      if modifier.kv["str"] then
+        value = value + modifier.kv["str"]
+      end
+    end
+  end
+
   self.stat_bonus = value
-  
   self:SendBuffRefreshToClients()
-  
   for property, table in pairs(self.data) do
     self:OnStatUpated(property)
   end
@@ -219,7 +230,7 @@ end
 
 function _modifier_str:OnStatUpated(property)
   if self.parent:IsHero() == false then return end
-  local special_kv_modifier = self.parent:FindModifierByName(GetHeroName(self.parent).."_special_values")
+  local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
   if special_kv_modifier == nil then return end
 
   if property == "sub_stat_physical_damage" then

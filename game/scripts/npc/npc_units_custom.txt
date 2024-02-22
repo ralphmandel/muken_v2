@@ -3,7 +3,104 @@
 {
   "Version" "1"
 
-	// SUMMONS
+  // SUMMONS
+    "strider_shadow"
+		{
+			"BaseClass"			  "npc_dota_creature"
+			"SoundSet"				"Hero_Juggernaut"
+			"GameSoundsFile"	""
+
+			"Model"						      "models/heroes/juggernaut/juggernaut.vmdl"
+			"TeamName"					    "DOTA_TEAM_CUSTOM_5"
+			"MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
+			"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackRange"				    "140"
+			"HealthBarOffset"			  "225"
+			"RingRadius"				    "100"
+			"VisionDaytimeRange"		"700"
+			"VisionNighttimeRange"	"900"
+			//"ProjectileModel"			  ""
+			//"ProjectileSpeed"			  "1200"
+			"Level"						      "9"
+
+			"Ability1"					"strider_1__silence"
+			"Ability2"					"strider_2__spin"
+			"Ability3"					"strider_3__smoke"
+			"Ability4"					"strider_4__shuriken"
+			"Ability5"					"strider_5__aspd"
+			"Ability6"					"strider_u__shadow"
+			"Ability7"				  "strider__precache"
+			"Ability8"					"_ability_str"
+			"Ability9"					"_ability_agi"
+			"Ability10"					"_ability_int"
+			"Ability11"					"_ability_vit"
+			"Ability12"					"base_hero"
+
+			"Stats"
+			{
+				"str" "22"
+				"agi" "23"
+				"int" "23"
+				"vit" "22"
+			}
+
+			"BoundsHullName"        "DOTA_HULL_SIZE_HERO"
+			"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+			"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+			"UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+			"ConsideredHero" 	      "1"
+			"IsNeutralUnitType"     "0"
+			"WakesNeutrals" 	      "0"
+			"ArmorPhysical"				    "0"
+			"MagicalResistance"       "0"
+			"StatusHealth"				    "1000"
+			"StatusHealthRegen"	      "0"
+			"StatusMana"				      "500"
+			"StatusManaRegen"			    "0"
+			"MovementSpeed"           "9999"
+			"AttackDamageMax"			    "55"
+			"AttackDamageMin"			    "45"
+			"AttackRate"				      "1"
+			"AttackAnimationPoint"		"0.3"
+			"AttackAcquisitionRange"  "50"  
+			
+			"Creature"
+			{
+				"HPGain"					"0"
+				"DamageGain"			"0"
+				"ArmorGain"				"0"
+				"MagicResistGain" "0"
+				"MoveSpeedGain"		"0"
+				"BountyGain"			"0"
+				"XPGain"					"0"
+
+        "AttachWearables"
+        {
+          "head"
+          {
+            "ItemDef"		"13492"
+          }
+          "back"
+          {
+            "ItemDef"		"13495"
+          }
+          "arms"
+          {
+            "ItemDef"		"13491"
+          }
+          "legs"
+          {
+            "ItemDef"		"13496"
+          }
+          "weapon"
+          {
+            "ItemDef"		"4100"
+          }
+        }
+			}
+		}
+
+	// OLD SUMMONS
     "icebreaker_shard"
 		{
 			"Model"						  "models/items/tuskarr/sigil/boreal_sigil/boreal_sigil.vmdl"
@@ -424,7 +521,7 @@
 			}
 		}
 
-		"strider_shadow"
+		"strider_shadow_old"
 		{
 			"Model"											"models/heroes/juggernaut/juggernaut.vmdl"
 			"BaseClass"									"npc_dota_creature"
@@ -520,7 +617,6 @@
 					{
 						"ItemDef"		"13496"
 					}
-				
 					"weapon"
 					{
 						"ItemDef"		"4100"

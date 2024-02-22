@@ -64,27 +64,25 @@ function _neutral__ai:Spawn()
 	local caster = self:GetCaster()
 
   Timers:CreateTimer((0.2), function()
-    if IsServer() then
-      local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutral_units.txt")
-      local abilities_stats = {
-        ["str"] = caster:FindAbilityByName("_ability_str"),
-        ["agi"] = caster:FindAbilityByName("_ability_agi"),
-        ["int"] = caster:FindAbilityByName("_ability_int"),
-        ["vit"] = caster:FindAbilityByName("_ability_vit")
-      }
-    
-      for name, table in pairs(neutral_list) do
-        if name == caster:GetUnitName() then
-          for info, stats in pairs(table) do
-            if info == "Stats" then
-              for stat, value in pairs(stats) do
-                abilities_stats[stat]:SetLevel(value * caster:GetLevel())
-              end
-              return
+    local neutral_list = LoadKeyValues("scripts/vscripts/_neutrals/_neutral_units.txt")
+    local abilities_stats = {
+      ["str"] = caster:FindAbilityByName("_ability_str"),
+      ["agi"] = caster:FindAbilityByName("_ability_agi"),
+      ["int"] = caster:FindAbilityByName("_ability_int"),
+      ["vit"] = caster:FindAbilityByName("_ability_vit")
+    }
+  
+    for name, table in pairs(neutral_list) do
+      if name == caster:GetUnitName() then
+        for info, stats in pairs(table) do
+          if info == "Stats" then
+            for stat, value in pairs(stats) do
+              abilities_stats[stat]:SetLevel(value * caster:GetLevel())
             end
+            return
           end
         end
-      end      
+      end
     end
   end)
 end

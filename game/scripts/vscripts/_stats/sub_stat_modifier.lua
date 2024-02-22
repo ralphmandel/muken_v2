@@ -30,7 +30,9 @@ function sub_stat_modifier:OnRemoved()
 end
 
 function sub_stat_modifier:OnDestroy()
-  if IsServer() then self:UpdateStatKV() end
+  if not IsServer() then return end
+
+  self:UpdateStatKV()
 
   if self.endCallback then self.endCallback(self.interrupted) end
 end

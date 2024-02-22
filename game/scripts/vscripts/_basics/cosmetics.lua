@@ -8,7 +8,9 @@ function cosmetics:Spawn()
 end
 
 function cosmetics:OnUpgrade()
-	if self:GetCaster():IsIllusion() then
+  local caster = self:GetCaster()
+
+	if caster:IsHero() == false or caster:IsIllusion() then
 		self:LoadCosmetics()
 	else
     if IsInToolsMode() then
@@ -40,28 +42,28 @@ end
 			-- [6] = "models/items/rikimaru/riki_scarlet_fox_tail/riki_scarlet_fox_tail.vmdl"
 		}
 	
-		local cosmetics_data = LoadKeyValues("scripts/vscripts/heroes/"..GetHeroTeam(caster).."/"..GetHeroName(caster).."/"..GetHeroName(caster).."-cosmetics.txt")
+		local cosmetics_data = LoadKeyValues("scripts/vscripts/heroes/"..caster:GetHeroTeam().."/"..caster:GetHeroName().."/"..caster:GetHeroName().."-cosmetics.txt")
 		if cosmetics_data ~= nil then self:ApplyCosmetics(cosmetics_data) end
 	
-		if GetHeroName(caster) == "icebreaker" then
+		if caster:GetHeroName() == "icebreaker" then
 			--self:SetStatusEffect(caster, nil, "icebreaker_1_modifier_passive_status_efx", true)
 		end
 
-		if GetHeroName(caster) == "bloodstained" then
+		if caster:GetHeroName() == "bloodstained" then
 			self:SetStatusEffect(caster, nil, "bloodstained_1_modifier_passive_status_efx", true)
 		end
 		
-		if GetHeroName(caster) == "krieger" then
+		if caster:GetHeroName() == "krieger" then
 			self:SetStatusEffect(caster, nil, "krieger_1_modifier_passive_status_efx", true)
 		end
 
 		self:ChangeTeam(caster:GetTeamNumber())
 
-    if GetHeroName(caster) == "templar" then
+    if caster:GetHeroName() == "templar" then
       self:PlayEfxHammer()
 		end
 
-    if GetHeroName(caster) == "lawbreaker" then
+    if caster:GetHeroName() == "lawbreaker" then
       self:PlayEfxGuns()
 		end
 	end

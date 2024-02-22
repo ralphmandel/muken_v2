@@ -235,14 +235,22 @@ function _modifier_agi:GetCalculedData(property, bScalar)
   return value
 end
 
-function _modifier_agi:UpdateMainBonus(value)
-  self.stat_bonus = value
-  
-  self:SendBuffRefreshToClients()
-  
-  for property, table in pairs(self.data) do
-    --self:OnStatUpated(property)
+function _modifier_agi:UpdateMainBonus()
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
+  local value = 0
+  local mods = self.parent:FindAllModifiersByName("main_stat_modifier")
+  if mods then
+    for _,modifier in pairs(mods) do
+      if modifier.kv["agi"] then
+        value = value + modifier.kv["agi"]
+      end
+    end
   end
+
+  self.stat_bonus = value
+  self:SendBuffRefreshToClients()
 end
 
 function _modifier_agi:UpdateSubBonus(property)

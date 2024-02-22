@@ -98,8 +98,7 @@ function cosmetics_mod:OnStateChanged(keys)
 end
 
 function cosmetics_mod:OnDeath(keys)
-	if keys.unit == self.caster
-	and keys.unit:IsIllusion() then
+	if keys.unit == self.caster and (keys.unit:IsIllusion() or keys.unit:IsHero() == false) then
 		self:Destroy()
 	end
 end

@@ -115,22 +115,26 @@
   end
 
   function CDOTA_BaseNPC_Hero:HasRank(skill_id, tier, path)
-    local special_kv_modifier = self:FindModifierByName(GetHeroName(self).."_special_values")
+    local special_kv_modifier = self:FindModifierByName(self:GetHeroName().."_special_values")
     if special_kv_modifier == nil then return false end
 
     return special_kv_modifier:HasRank(skill_id, tier, path)
   end
 
-  function CDOTA_BaseNPC_Hero:GetHeroName()
-		local data = LoadKeyValues("scripts/kv/heroes_name.kv")
+-- CDOTA_BaseNPC || GET STATS
 
-		for name, id_name in pairs(data) do
-			if self:GetUnitName() == id_name then return name end
-		end
-	end
+  function CDOTA_BaseNPC:GetHeroName()
+    local data = LoadKeyValues("scripts/kv/heroes_name.kv")
 
-  function CDOTA_BaseNPC_Hero:GetHeroTeam()
-		local data = LoadKeyValues("scripts/kv/heroes_team.kv")
+    if self:GetUnitName() == "strider_shadow" then return "strider" end
+
+    for name, id_name in pairs(data) do
+      if self:GetUnitName() == id_name then return name end
+    end
+  end
+
+  function CDOTA_BaseNPC:GetHeroTeam()
+    local data = LoadKeyValues("scripts/kv/heroes_team.kv")
 
     for team, hero_list in pairs(data) do
       for _,hero_name in pairs(hero_list) do
@@ -138,10 +142,8 @@
           return team
         end
       end
-		end
-	end
-
--- CDOTA_BaseNPC || GET STATS
+    end
+  end
 
   function CDOTA_BaseNPC:GetMainStat(stat)
     return self:FindModifierByName("_modifier_"..string.lower(stat))
@@ -161,6 +163,13 @@
     end
   
     return amount
+  end
+
+  function CDOTA_BaseNPC:GetSummonPower(amount)
+    local result = amount * self:GetMainStat("INT"):GetSummonPower()
+    if result < 0 then result = 0 end
+
+    return result
   end
 
   function CDOTA_BaseNPC:GetBuffPower(amount)
@@ -232,8 +241,31 @@
 
 -- CDOTA_BaseNPC || ADD MODIFIERS/STATS
 
+  function CDOTA_BaseNPC:AddMainStats(ability, table)
+    return self:AddModifier(ability, "main_stat_modifier", table)
+  end
+
   function CDOTA_BaseNPC:AddSubStats(ability, table)
     return self:AddModifier(ability, "sub_stat_modifier", table)
+  end
+
+  function CDOTA_BaseNPC:RemoveMainStats(ability, list)
+    if IsValidEntity(self) == false then return end
+
+    local mod = self:FindAllModifiersByName("main_stat_modifier")
+    for _,modifier in pairs(mod) do
+      local bPass = true
+
+      for _, stat in pairs(list) do
+        if modifier.kv[stat] == nil then
+          bPass = false
+        end
+      end
+
+      if bPass == true and (modifier:GetAbility() == ability or ability == nil) then
+        modifier:Destroy()
+      end
+    end
   end
 
   function CDOTA_BaseNPC:RemoveSubStats(ability, list)

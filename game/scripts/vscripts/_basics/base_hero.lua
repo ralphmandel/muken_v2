@@ -64,6 +64,30 @@ require("internal/rank_system")
     if not IsServer() then return end
 
     if self:IsTrained() == false then self:UpgradeAbility(true) end
+
+    local caster = self:GetCaster()
+    if caster:IsHero() then return end
+  
+    local stats_list = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+    local abilities_stats = {
+      ["str"] = caster:FindAbilityByName("_ability_str"),
+      ["agi"] = caster:FindAbilityByName("_ability_agi"),
+      ["int"] = caster:FindAbilityByName("_ability_int"),
+      ["vit"] = caster:FindAbilityByName("_ability_vit")
+    }
+  
+    for name, table in pairs(stats_list) do
+      if name == caster:GetUnitName() then
+        for info, stats in pairs(table) do
+          if info == "Stats" then
+            for stat, value in pairs(stats) do
+              abilities_stats[stat]:SetLevel(value)
+            end
+            return
+          end
+        end
+      end
+    end
 	end
 
   function base_hero:GetIntrinsicModifierName()
@@ -72,6 +96,7 @@ require("internal/rank_system")
 
   function base_hero:OnUpgrade()
 		local caster = self:GetCaster()
+    if caster:IsHero() == false then return end
 		if caster:IsIllusion() then return end
 
 		if self:GetLevel() == 1 then
@@ -98,7 +123,7 @@ require("internal/rank_system")
     self.bonus_level = {str = 0, agi = 0, int = 0, vit = 0}
     self:LoadBaseStats()
 
-    self.abilities_name = GetAbilitiesList(self:GetCaster():GetUnitName())
+    self.abilities_name = GetAbilitiesList(caster)
     self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
     self.max_level = 15
@@ -114,7 +139,7 @@ require("internal/rank_system")
     local stats_data = LoadKeyValues("scripts/kv/heroes_stats.kv")
 
     for hero_name, stats in pairs(stats_data) do
-      if hero_name == GetHeroName(caster) then
+      if hero_name == caster:GetHeroName() then
         for stat, types_table in pairs(stats) do
           for type, value in pairs(types_table) do
             if type == "base" then
@@ -131,8 +156,8 @@ require("internal/rank_system")
 
   function base_hero:GetRanksException()
     local caster = self:GetCaster()
-    local name = GetHeroName(caster)
-    local team = GetHeroTeam(caster)
+    local name = caster:GetHeroName()
+    local team = caster:GetHeroTeam()
     local data = LoadKeyValues("scripts/vscripts/heroes/"..team.."/"..name.."/"..name..".txt")
     local result = {}
 
@@ -204,7 +229,7 @@ require("internal/rank_system")
 
   function base_hero:UpgradeRank(skill_name, tier, path)
     local caster = self:GetCaster()
-    local special_kv_modifier = caster:FindModifierByName(GetHeroName(caster).."_special_values")
+    local special_kv_modifier = caster:FindModifierByName(caster:GetHeroName().."_special_values")
     if special_kv_modifier == nil then return end
 
     local skill_id = self:GetSkillID(skill_name)
@@ -311,8 +336,8 @@ require("internal/rank_system")
     local caster = self:GetCaster()
     if caster:IsHero() == false then return end
 
-    local hero_name = GetHeroName(caster)
-    local hero_team = GetHeroTeam(caster)
+    local hero_name = caster:GetHeroName()
+    local hero_team = caster:GetHeroTeam()
     local abilities_data = LoadKeyValues("scripts/vscripts/heroes/"..hero_team.."/"..hero_name.."/"..hero_name..".txt")
     if abilities_data == nil then return end
 
@@ -332,6 +357,7 @@ require("internal/rank_system")
 	function base_hero:OnHeroLevelUp()
 		local caster = self:GetCaster()
 		local level = caster:GetLevel()
+    if caster:IsHero() == false then return end
 		if caster:IsIllusion() then return end
 
     caster:SetAbilityPoints(self.ability_points)

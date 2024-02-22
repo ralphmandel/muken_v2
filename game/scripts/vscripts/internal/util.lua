@@ -524,10 +524,10 @@
 		end
 	end
 
-  function GetAbilitiesList(unit_name)
+  function GetAbilitiesList(BaseNPC)
     local list = {}
 
-		local skills_data = LoadKeyValues("scripts/vscripts/heroes/".. GetHeroTeam(unit_name).."/"..GetHeroName(unit_name).."/"..GetHeroName(unit_name).."-skills.txt")
+		local skills_data = LoadKeyValues("scripts/vscripts/heroes/".. BaseNPC:GetHeroTeam().."/"..BaseNPC:GetHeroName().."/"..BaseNPC:GetHeroName().."-skills.txt")
 		if skills_data ~= nil then
 			for skill, skill_name in pairs(skills_data) do
 				list[tonumber(skill)] = skill_name

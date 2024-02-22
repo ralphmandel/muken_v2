@@ -60,7 +60,7 @@ end
 
 function _modifier_vit:GetModifierExtraHealthBonus()
   if self:GetParent():IsHero() == false then
-    return self:GetBonusHP()
+    return self:GetBonusHP(1000)
   end
 
   return 0
@@ -68,7 +68,7 @@ end
 
 function _modifier_vit:GetModifierHealthBonus()
   if self:GetParent():IsHero() then
-    return self:GetBonusHP()
+    return self:GetBonusHP(5000)
   end
 
   return 0
@@ -119,8 +119,7 @@ function _modifier_vit:GetCurseResist()
   return self:GetCalculedData("sub_stat_curse_resist", false)
 end
 
-function _modifier_vit:GetBonusHP()
-  local base_hp = 5000
+function _modifier_vit:GetBonusHP(base_hp)
   local bonus_hp = self:GetCalculedData("sub_stat_max_health", false)
   local hp_percent = self:GetCalculedData("sub_stat_max_health_percent", false)
   if hp_percent < -90 then hp_percent = -90 end
@@ -159,11 +158,22 @@ function _modifier_vit:GetCalculedData(property, bScalar)
   return value
 end
 
-function _modifier_vit:UpdateMainBonus(value)
-  self.stat_bonus = value
+function _modifier_vit:UpdateMainBonus()
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
 
+  local value = 0
+  local mods = self.parent:FindAllModifiersByName("main_stat_modifier")
+  if mods then
+    for _,modifier in pairs(mods) do
+      if modifier.kv["vit"] then
+        value = value + modifier.kv["vit"]
+      end
+    end
+  end
+
+  self.stat_bonus = value
   self:SendBuffRefreshToClients()
-  
   for property, table in pairs(self.data) do
     self:OnStatUpated(property)
   end

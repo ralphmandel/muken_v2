@@ -20,27 +20,39 @@ LinkLuaModifier("strider_u_modifier_shadow_status_efx", "heroes/moon/strider/str
 	function strider_u__shadow:OnSpellStart()
 		local caster = self:GetCaster()
 
-    local illusion = CreateIllusions(caster, caster, {
-      outgoing_damage = 0,
-      incoming_damage = self:GetSpecialValueFor("incoming_damage"),
-      bounty_base = 0,
-      bounty_growth = 0,
-      duration = self:GetSpecialValueFor("duration")
-    }, 1, 64, false, true)
+		local shadow = CreateUnitByName("strider_shadow", self:GetCursorPosition(), true, caster, caster, caster:GetTeamNumber())
+    shadow:CreatureLevelUp(self:GetLevel() - 1)
 
-    illusion = illusion[1]
+    self:CheckAbilities(shadow)
     self:CheckMaxShadow()
-    self.shadows[illusion:GetEntityIndex()] = GameRules:GetGameTime()
+    self.shadows[shadow:GetEntityIndex()] = GameRules:GetGameTime()
 
-    FindClearSpaceForUnit(illusion, self:GetCursorPosition(), true)
-    illusion:AddModifier(self, "strider_u_modifier_shadow", {entindex = illusion:GetEntityIndex()})
+    local shadow_modifier = shadow:AddModifier(self, "strider_u_modifier_shadow", {
+      entindex = shadow:GetEntityIndex(),
+      duration = self:GetSpecialValueFor("duration")
+    })
 
-    local caster_modifier = caster:FindModifierByName("strider_special_values")
-    local illusion_modifier = illusion:FindModifierByName("strider_special_values")
-    illusion_modifier.ranks = caster_modifier.ranks
-    illusion_modifier.data_props = caster_modifier.data_props
-    illusion_modifier:SendBuffRefreshToClients()
+    shadow_modifier:SetEndCallback(function(entindex_callback)
+      self.shadows[entindex_callback] = nil
+      self:SetActivated(#self.shadows < self:GetSpecialValueFor("max_shadows"))
+    end)
+
+    local caster_special_kv = caster:FindModifierByName("strider_special_values")
+    local shadow_special_kv = shadow:FindModifierByName("strider_special_values")
+    shadow_special_kv.ranks = caster_special_kv.ranks
+    shadow_special_kv:SendBuffRefreshToClients()
 	end
+
+  function strider_u__shadow:CheckAbilities(shadow)
+    local caster = self:GetCaster()
+    local abilities_name = GetAbilitiesList(caster)
+
+    for i = 1, 6, 1 do
+      if i == 6 or caster:FindAbilityByName(abilities_name[i]):IsTrained() == false then
+        shadow:FindAbilityByName(abilities_name[i]):SetLevel(0)
+      end
+    end
+  end
 
   function strider_u__shadow:CheckMaxShadow()
     local caster = self:GetCaster()

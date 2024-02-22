@@ -234,6 +234,7 @@
       "max_shadows"     "0"
       "duration"        "0"
       "incoming_damage" "1 2 3 4 5 6 7"
+      "outgoing_damage" "1 2 3 4 5 6 7"
 		}
 	}
 

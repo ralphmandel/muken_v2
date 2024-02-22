@@ -21,7 +21,7 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 	function strider_4__shuriken:OnAbilityPhaseStart()
     local caster = self:GetCaster()
 
-    if caster:IsIllusion() then
+    if caster:IsHero() == false then
       self:PlayEfxPhase()
       return true
     end
@@ -124,9 +124,12 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
       if GameRules:GetGameTime() - self.projectiles[id].start_time >= self.projectiles[id].lifetime
       and self.projectiles[id].returning == 0 then
         local direction = caster:GetOrigin() - vLocation
-        local distance = direction:Length2D()
+        local new_pos = caster:GetOrigin() + (direction:Normalized() * 150)
+
+        direction = new_pos - vLocation
+        local distance = direction:Length2D() + 150
         direction.z = direction.z + 90
-        local vVelocity = direction:Normalized() * 2500
+        local vVelocity = direction:Normalized() * (distance + 1000)
         
         ProjectileManager:UpdateLinearProjectileDirection(id, vVelocity, distance)
         self.projectiles[id].returning = 1
@@ -134,7 +137,7 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
         if self.projectiles[id].pfx then
           ParticleManager:DestroyParticle(self.projectiles[id].pfx, true)
           self.projectiles[id].pfx = self:PlayEfxShuriken(vLocation, vVelocity)
-          caster:EmitSound("Hero_Terrorblade.PreAttack")
+          EmitSoundOnLocationWithCaster(vLocation, "Hero_Terrorblade.PreAttack", caster)
         end
       end
     end

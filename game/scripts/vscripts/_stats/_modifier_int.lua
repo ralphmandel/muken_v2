@@ -52,6 +52,7 @@ end
 
 function _modifier_int:DeclareFunctions()
   local funcs = {
+    MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
     MODIFIER_PROPERTY_MANA_BONUS,
     MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
     --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
@@ -63,16 +64,20 @@ function _modifier_int:DeclareFunctions()
   return funcs
 end
 
-function _modifier_int:GetModifierManaBonus()
-  if self.parent:HasModifier("ancient_3_modifier_passive") then
-    if self.parent:HasModifier("ancient_u_modifier_passive") == false then
-      return 0
-    else
-      return 1000 + self:GetCalculedData("sub_stat_max_mana", false)
-    end
+function _modifier_int:GetModifierExtraManaBonus()
+  if self.parent:IsHero() == false then
+    return self:GetBonusMP(500)
   end
-  
-  return self:GetCalculedData("sub_stat_max_mana", false)
+
+  return 0
+end
+
+function _modifier_int:GetModifierManaBonus()
+  if self.parent:IsHero() then
+    return self:GetBonusMP(1000)
+  end
+
+  return 0
 end
 
 function _modifier_int:GetModifierPercentageManacost(keys)
@@ -179,6 +184,18 @@ function _modifier_int:GetThunderResist()
   return self:GetCalculedData("sub_stat_thunder_resist", false)
 end
 
+function _modifier_int:GetBonusMP(base_mp)
+  if self.parent:HasModifier("ancient_3_modifier_passive") then
+    if self.parent:HasModifier("ancient_u_modifier_passive") == false then
+      return 0
+    else
+      return base_mp + self:GetCalculedData("sub_stat_max_mana", false)
+    end
+  end
+  
+  return self:GetCalculedData("sub_stat_max_mana", false)
+end
+
 function _modifier_int:GetCalculedDataStack(property, bScalar)
   local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
   value = value + self.data[property].bonus
@@ -193,11 +210,22 @@ function _modifier_int:GetCalculedData(property, bScalar)
   return value
 end
 
-function _modifier_int:UpdateMainBonus(value)
+function _modifier_int:UpdateMainBonus()
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
+  local value = 0
+  local mods = self.parent:FindAllModifiersByName("main_stat_modifier")
+  if mods then
+    for _,modifier in pairs(mods) do
+      if modifier.kv["int"] then
+        value = value + modifier.kv["int"]
+      end
+    end
+  end
+
   self.stat_bonus = value
-  
   self:SendBuffRefreshToClients()
-  
   for property, table in pairs(self.data) do
     self:OnStatUpated(property)
   end

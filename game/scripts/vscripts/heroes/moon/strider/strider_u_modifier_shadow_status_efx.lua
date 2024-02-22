@@ -21,5 +21,5 @@ function strider_u_modifier_shadow_status_efx:GetStatusEffectName()
 end
 
 function strider_u_modifier_shadow_status_efx:StatusEffectPriority()
-	return 99999999
+	return MODIFIER_PRIORITY_SUPER_ULTRA
 end

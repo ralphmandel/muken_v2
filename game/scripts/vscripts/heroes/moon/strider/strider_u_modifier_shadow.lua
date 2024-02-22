@@ -20,7 +20,17 @@ function strider_u_modifier_shadow:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:SetHealth(self.parent:GetMaxHealth())
+  self.parent:AddMainStats(self.ability, {
+    str = math.floor(self.caster:GetSummonPower(0.8)),
+    agi = math.floor(self.caster:GetSummonPower(1.2)),
+    int = math.floor(self.caster:GetSummonPower(0.4)),
+    vit = math.floor(self.caster:GetSummonPower(0.6)),
+  })
+
+  Timers:CreateTimer(FrameTime(), function()
+    self.parent:SetMana(self.parent:GetMaxMana())
+  end)
+
   self.parent:AddStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
   self.entindex = kv.entindex
   self.modifiers = {}
@@ -37,16 +47,20 @@ end
 function strider_u_modifier_shadow:OnRemoved()
   if not IsServer() then return end
 
+  if self.endCallback then self.endCallback(self.entindex) end
+
+  self.parent:RemoveStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
+  self.parent:Kill(self.ability, self.caster)
+
   for _, modifier in pairs(self.modifiers) do
     if modifier:IsNull() == false then
       modifier:Destroy()
     end
   end
-  
-  self.ability.shadows[self.entindex] = nil
+end
 
-  self.ability:SetActivated(#self.ability.shadows < self.ability:GetSpecialValueFor("max_shadows"))
-  self.parent:RemoveStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
+function strider_u_modifier_shadow:SetEndCallback(func)
+	self.endCallback = func
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -63,8 +77,12 @@ function strider_u_modifier_shadow:DeclareFunctions()
 	local funcs = {
     MODIFIER_PROPERTY_FIXED_DAY_VISION,
     MODIFIER_PROPERTY_FIXED_NIGHT_VISION,
+    MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+    MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
+    MODIFIER_EVENT_ON_DEATH,
     MODIFIER_EVENT_ON_MODIFIER_ADDED,
-    MODIFIER_EVENT_ON_ABILITY_START
+    MODIFIER_EVENT_ON_ABILITY_START,
+    MODIFIER_EVENT_ON_ABILITY_FULLY_CAST
 	}
 
 	return funcs
@@ -78,15 +96,33 @@ function strider_u_modifier_shadow:GetFixedNightVision(keys)
   return self.ability:GetSpecialValueFor("vision_range")
 end
 
+function strider_u_modifier_shadow:GetModifierIncomingDamage_Percentage(keys)
+  return self.ability:GetSpecialValueFor("incoming_damage")
+end
+
+function strider_u_modifier_shadow:GetModifierTotalDamageOutgoing_Percentage(keys)
+  return self.ability:GetSpecialValueFor("outgoing_damage") -100
+end
+
+function strider_u_modifier_shadow:OnDeath(keys)
+  if not IsServer() then return end
+
+  if keys.unit == self.caster then self:Destroy() end
+end
+
 function strider_u_modifier_shadow:OnModifierAdded(keys)
+  if not IsServer() then return end
+
   if keys.added_buff:GetCaster() == self.parent then
     table.insert(self.modifiers, keys.added_buff)
   end
 end
 
 function strider_u_modifier_shadow:OnAbilityStart(keys)
+  if not IsServer() then return end
+
   if self.state == SHADOW_STATE_IDLE then return end
-  if keys.unit:IsIllusion() then return end
+  if keys.unit == self.parent then return end
   if keys.unit ~= self.caster then return end
 
   local ability_name = keys.ability:GetAbilityName()
@@ -123,6 +159,22 @@ function strider_u_modifier_shadow:OnAbilityStart(keys)
     end
 
     self.parent:CastAbilityOnPosition(self.parent:GetOrigin(), ability, self.parent:GetPlayerOwnerID())
+  end
+end
+
+function strider_u_modifier_shadow:OnAbilityFullyCast(keys)
+  if not IsServer() then return end
+
+  if self.state == SHADOW_STATE_IDLE then return end
+  if keys.unit == self.parent then return end
+  if keys.unit ~= self.caster then return end
+
+  local ability_name = keys.ability:GetAbilityName()
+  local ability = self.parent:FindAbilityByName(ability_name)
+  if ability:IsTrained() == false then return end
+
+  if ability_name == "strider_5__aspd" then
+    self.parent:CastAbilityNoTarget(ability, self.parent:GetPlayerOwnerID())
   end
 end
 
@@ -210,7 +262,7 @@ function strider_u_modifier_shadow:GetStatusEffectName()
 end
 
 function strider_u_modifier_shadow:StatusEffectPriority()
-	return 99999999
+	return MODIFIER_PRIORITY_SUPER_ULTRA
 end
 
 function strider_u_modifier_shadow:GetEffectName()
@@ -223,12 +275,12 @@ end
 
 function strider_u_modifier_shadow:PlayEfxStart()
 	local string = "particles/econ/items/phantom_assassin/pa_crimson_witness_2021/pa_crimson_witness_blur_start.vpcf"
-	local particle = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN, self.parent)
+	local particle = ParticleManager:CreateParticle(string, PATTACH_ABSORIGIN, self.parent)
 	ParticleManager:SetParticleControl(particle, 0, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(particle)
 
 	local string_2 = "particles/strider/ult/strider_shadow_ground.vpcf"
-	local particle_2 = ParticleManager:CreateParticle(string, PATTACH_WORLDORIGIN, nil)
+	local particle_2 = ParticleManager:CreateParticle(string_2, PATTACH_WORLDORIGIN, nil)
 	ParticleManager:SetParticleControl(particle_2, 0, self.parent:GetOrigin())
   self:AddParticle(particle_2, false, false, -1, false, false)
 

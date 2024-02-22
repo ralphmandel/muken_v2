@@ -11,8 +11,8 @@ function base_hero_mod:OnCreated(kv)
   self.ability = self:GetAbility()
 
   if IsServer() then
-    self.hero_name = GetHeroName(self:GetCaster())
-    self.hero_team = GetHeroTeam(self:GetCaster())
+    self.hero_name = self.caster:GetHeroName()
+    self.hero_team = self.caster:GetHeroTeam()
   
     self:LoadActivity()
     self:LoadModel()
@@ -59,6 +59,7 @@ end
 -- end
 
 function base_hero_mod:OnTakeDamage(keys)
+  if self.parent:IsHero() == false then return end
 	if self.parent:IsIllusion() then return end
 	if keys.unit ~= self.parent then return end
 	local tp = self.parent:FindItemInInventory("item_tp")
