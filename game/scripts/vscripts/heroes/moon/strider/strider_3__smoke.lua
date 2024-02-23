@@ -25,6 +25,18 @@ LinkLuaModifier("strider_3_modifier_aura_effect", "heroes/moon/strider/strider_3
     return true
   end
 
+  function strider_3__smoke:OnAbilityPhaseInterrupted()
+		local caster = self:GetCaster()
+
+    local ult = caster:FindAbilityByName("strider_u__shadow")
+    if ult:IsTrained() then
+      for index, time in pairs(ult.shadows) do
+        local shadow = EntIndexToHScript(index)
+        shadow:Interrupt()
+      end
+    end
+	end
+
 	function strider_3__smoke:OnSpellStart()
 		local caster = self:GetCaster()
     caster:EmitSound("Strider.smoke")

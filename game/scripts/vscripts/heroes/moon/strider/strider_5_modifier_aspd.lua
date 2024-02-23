@@ -57,7 +57,9 @@ function strider_5_modifier_aspd:OnRemoved()
   self.parent:RemoveAllModifiersByNameAndAbility("_modifier_unslowable", self.ability)
 
   self.ability:SetActivated(true)
-  self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+  if self.parent:IsHero() then
+    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+  end
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

@@ -162,6 +162,7 @@ function strider_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
 
+    if value_name == "cast_range" then return 1 end
     if value_name == "vision_range" then return 1 end
     if value_name == "max_shadows" then return 1 end
     if value_name == "duration" then return 1 end
@@ -402,12 +403,13 @@ function strider_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 		if value_name == "AbilityManaCost" then return 80 end
 		if value_name == "AbilityCooldown" then return 0 end
-    if value_name == "AbilityCastRange" then return 350 end
+		if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
     if value_name == "AbilityCharges" then return 2 end
     if value_name == "AbilityChargeRestoreTime" then return 45 end
     if value_name == "incoming_damage" then return 150 - (value_level * 5) end
     if value_name == "outgoing_damage" then return 60 + (value_level * 2.5) end
 
+    if value_name == "cast_range" then return 300 end
     if value_name == "vision_range" then return 400 end
     if value_name == "max_shadows" then return 2 end
     if value_name == "duration" then return 60 end

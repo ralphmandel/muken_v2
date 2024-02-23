@@ -15,6 +15,14 @@ LinkLuaModifier("strider_1_modifier_silence", "heroes/moon/strider/strider_1_mod
 	function strider_1__silence:OnAbilityPhaseInterrupted()
 		local caster = self:GetCaster()
 		caster:FadeGesture(ACT_DOTA_IDLE_RARE)
+
+    local ult = caster:FindAbilityByName("strider_u__shadow")
+    if ult:IsTrained() then
+      for index, time in pairs(ult.shadows) do
+        local shadow = EntIndexToHScript(index)
+        shadow:Interrupt()
+      end
+    end
 	end
 
 	function strider_1__silence:OnSpellStart()

@@ -21,6 +21,18 @@ LinkLuaModifier("strider_2_modifier_spin", "heroes/moon/strider/strider_2_modifi
 
 -- SPELL START
 
+  function strider_2__spin:OnAbilityPhaseInterrupted()
+    local caster = self:GetCaster()
+
+    local ult = caster:FindAbilityByName("strider_u__shadow")
+    if ult:IsTrained() then
+      for index, time in pairs(ult.shadows) do
+        local shadow = EntIndexToHScript(index)
+        shadow:Interrupt()
+      end
+    end
+  end
+
 	function strider_2__spin:OnSpellStart()
 		local caster = self:GetCaster()
 

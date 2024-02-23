@@ -229,7 +229,6 @@ function _modifier_str:UpdateSubBonus(property)
 end
 
 function _modifier_str:OnStatUpated(property)
-  if self.parent:IsHero() == false then return end
   local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
   if special_kv_modifier == nil then return end
 

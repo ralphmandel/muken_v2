@@ -22,13 +22,15 @@ function strider_u_modifier_shadow:OnCreated(kv)
 
   self.parent:AddMainStats(self.ability, {
     str = math.floor(self.caster:GetSummonPower(0.8)),
-    agi = math.floor(self.caster:GetSummonPower(1.2)),
+    agi = math.floor(self.caster:GetSummonPower(1.0)),
     int = math.floor(self.caster:GetSummonPower(0.4)),
     vit = math.floor(self.caster:GetSummonPower(0.6)),
   })
 
   Timers:CreateTimer(FrameTime(), function()
     self.parent:SetMana(self.parent:GetMaxMana())
+    self.parent:AddActivityModifier("chase")
+    --self.parent:StartGesture(ACT_DOTA_RUN)
   end)
 
   self.parent:AddStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
@@ -164,9 +166,9 @@ end
 
 function strider_u_modifier_shadow:OnAbilityFullyCast(keys)
   if not IsServer() then return end
-
+  
+  if keys.unit == self.parent then keys.ability:EndCooldown() return end
   if self.state == SHADOW_STATE_IDLE then return end
-  if keys.unit == self.parent then return end
   if keys.unit ~= self.caster then return end
 
   local ability_name = keys.ability:GetAbilityName()
@@ -279,20 +281,18 @@ function strider_u_modifier_shadow:PlayEfxStart()
 	ParticleManager:SetParticleControl(particle, 0, self.parent:GetOrigin())
 	ParticleManager:ReleaseParticleIndex(particle)
 
+	-- local string = "particles/shadowmancer/shadowmancer_arcana_ambient.vpcf"
+	-- local particle = ParticleManager:CreateParticle(string, PATTACH_POINT_FOLLOW, self.parent)
+	-- self:AddParticle(particle, false, false, -1, false, false)
+	-- ParticleManager:ReleaseParticleIndex(particle)
+
 	local string_2 = "particles/strider/ult/strider_shadow_ground.vpcf"
-	local particle_2 = ParticleManager:CreateParticle(string_2, PATTACH_WORLDORIGIN, nil)
+	local particle_2 = ParticleManager:CreateParticle(string_2, PATTACH_ABSORIGIN_FOLLOW, self.parent)
 	ParticleManager:SetParticleControl(particle_2, 0, self.parent:GetOrigin())
   self:AddParticle(particle_2, false, false, -1, false, false)
 
 	self.parent:EmitSound("Hero_Invoker.ForgeSpirit")
 end
-
--- function strider_u_modifier_shadow:PlayEfxStart()
--- 	local string = "particles/shadowmancer/shadowmancer_arcana_ambient.vpcf"
--- 	local particle = ParticleManager:CreateParticle(string, PATTACH_POINT_FOLLOW, self.parent)
--- 	self:AddParticle(particle, false, false, -1, false, false)
--- 	ParticleManager:ReleaseParticleIndex(particle)
--- end
 
 -- function strider_u_modifier_shadow:PlayEffects()
 -- 	local string = "particles/strider/ult/strider_shadow_blur.vpcf"

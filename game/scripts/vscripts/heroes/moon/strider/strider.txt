@@ -230,6 +230,7 @@
 
     "AbilityValues"
 		{
+      "cast_range"      "0"
       "vision_range"    "0"
       "max_shadows"     "0"
       "duration"        "0"

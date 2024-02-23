@@ -34,13 +34,23 @@ LinkLuaModifier("strider_4_modifier_turn", "heroes/moon/strider/strider_4_modifi
 
 	function strider_4__shuriken:OnAbilityPhaseInterrupted()
 		self.disable = 0
-	end
 
+    local caster = self:GetCaster()
+
+    local ult = caster:FindAbilityByName("strider_u__shadow")
+    if ult:IsTrained() then
+      for index, time in pairs(ult.shadows) do
+        local shadow = EntIndexToHScript(index)
+        shadow:Interrupt()
+      end
+    end
+	end
+  
 	function strider_4__shuriken:OnSpellStart()
 		local caster = self:GetCaster()
 		local vect_targets = self:GetVectorTargetPosition()
     
-    if caster:IsIllusion() == false then
+    if caster:IsHero() then
       self.direction = vect_targets.direction
       self.init_pos = vect_targets.init_pos
       self.end_pos = vect_targets.end_pos
