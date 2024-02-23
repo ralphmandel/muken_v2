@@ -30,14 +30,13 @@ function strider_u_modifier_shadow:OnCreated(kv)
   Timers:CreateTimer(FrameTime(), function()
     self.parent:SetMana(self.parent:GetMaxMana())
     self.parent:AddActivityModifier("chase")
-    --self.parent:StartGesture(ACT_DOTA_RUN)
   end)
 
   self.parent:AddStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
   self.entindex = kv.entindex
   self.modifiers = {}
 
-  self.state = SHADOW_STATE_IDLE
+  self:ChangeState(SHADOW_STATE_IDLE)
   self.time = GameRules:GetGameTime()
   self:PlayEfxStart()
   self:OnIntervalThink()
@@ -120,6 +119,20 @@ function strider_u_modifier_shadow:OnModifierAdded(keys)
   end
 end
 
+function strider_u_modifier_shadow:OnAttackLanded(keys)
+  if not IsServer() then return end
+
+  for index, time in pairs(self.shadows) do
+    local shadow = EntIndexToHScript(index)
+    
+    if keys.attacker == shadow and shadow.duplicated == nil
+    and RandomFloat(0, 100) < self.ability:GetSpecialValueFor("special_chance") then
+      shadow.duplicated = 1
+      self.ability:CreateShadow(shadow:GetOrigin() + RandomVector(200))
+    end
+  end
+end
+
 function strider_u_modifier_shadow:OnAbilityStart(keys)
   if not IsServer() then return end
 
@@ -191,11 +204,11 @@ function strider_u_modifier_shadow:OnIntervalThink()
     local target_state = self:CheckTarget()
 
     if target_state == TARGET_STATE_NULL then
-      self.state = SHADOW_STATE_IDLE
+      self:ChangeState(SHADOW_STATE_IDLE)
     end
 
     if target_state == TARGET_STATE_MISSING then
-      self.state = SHADOW_STATE_CHASING
+      self:ChangeState(SHADOW_STATE_CHASING)
       self.time = GameRules:GetGameTime()
     end
 
@@ -210,17 +223,17 @@ function strider_u_modifier_shadow:OnIntervalThink()
     local target_state = self:CheckTarget()
 
     if target_state == TARGET_STATE_NULL then
-      self.state = SHADOW_STATE_IDLE
+      self:ChangeState(SHADOW_STATE_IDLE)
     end
 
     if target_state == TARGET_STATE_MISSING then
       if GameRules:GetGameTime() - self.time > 5 then
-        self.state = SHADOW_STATE_IDLE
+        self:ChangeState(SHADOW_STATE_IDLE)
       end
     end
 
     if target_state == TARGET_STATE_VISIBLE then
-      self.state = SHADOW_STATE_ATTACKING
+      self:ChangeState(SHADOW_STATE_ATTACKING)
     end
   end
 
@@ -228,6 +241,19 @@ function strider_u_modifier_shadow:OnIntervalThink()
 end
 
 -- UTILS -----------------------------------------------------------
+
+function strider_u_modifier_shadow:ChangeState(new_state)
+  self.state = new_state
+
+  if self.state == SHADOW_STATE_IDLE then
+    if self.ability:GetSpecialValueFor("special_invisibility") == 1 then
+      self.parent:RemoveAllModifiersByNameAndAbility("_modifier_invisible", self.ability)
+      self.parent:AddModifier(self.ability, "_modifier_invisible", {
+        attack_break = 100, spell_break = 100
+      })
+    end
+  end
+end
 
 function strider_u_modifier_shadow:CheckTarget()
   if self.target == nil then return TARGET_STATE_NULL end
@@ -251,7 +277,7 @@ function strider_u_modifier_shadow:FindTarget(target_type)
       self.target = enemy
       self.parent:SetForceAttackTarget(self.target)
       self.parent:MoveToTargetToAttack(self.target)
-      self.state = SHADOW_STATE_ATTACKING
+      self:ChangeState(SHADOW_STATE_ATTACKING)
       return
     end
 	end

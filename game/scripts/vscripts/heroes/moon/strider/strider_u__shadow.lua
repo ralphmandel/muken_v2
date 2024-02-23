@@ -18,9 +18,13 @@ LinkLuaModifier("strider_u_modifier_shadow_status_efx", "heroes/moon/strider/str
 	end
 
 	function strider_u__shadow:OnSpellStart()
-		local caster = self:GetCaster()
+    self:CreateShadow(self:GetCursorPosition())
+	end
 
-		local shadow = CreateUnitByName("strider_shadow", self:GetCursorPosition(), true, caster, caster, caster:GetTeamNumber())
+  function strider_u__shadow:CreateShadow(position)
+    local caster = self:GetCaster()
+
+    local shadow = CreateUnitByName("strider_shadow", position, true, caster, caster, caster:GetTeamNumber())
     shadow:CreatureLevelUp(self:GetLevel() - 1)
 
     self:CheckAbilities(shadow)
@@ -41,7 +45,7 @@ LinkLuaModifier("strider_u_modifier_shadow_status_efx", "heroes/moon/strider/str
     local shadow_special_kv = shadow:FindModifierByName("strider_special_values")
     shadow_special_kv.ranks = caster_special_kv.ranks
     shadow_special_kv:SendBuffRefreshToClients()
-	end
+  end
 
   function strider_u__shadow:CheckAbilities(shadow)
     local caster = self:GetCaster()
