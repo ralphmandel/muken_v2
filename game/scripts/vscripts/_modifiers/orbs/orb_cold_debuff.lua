@@ -81,10 +81,7 @@ function orb_cold_debuff:OnIntervalThink()
   if self.caster == nil then self:Destroy() return end
   if IsValidEntity(self.caster) == false then self:Destroy() return end
 
-  self.parent:AddModifier(self.ability, "status_bar_cold", {
-    inflictor = self.caster:entindex(),
-    status_amount = self.base_slow * self.interval * self.status_mult
-  })
+  self.parent:IncrementStatus("status_bar_cold", self.ability, self.caster, self.slow * self.interval * self.status_mult)
 
   self:StartIntervalThink(self.interval)
 end

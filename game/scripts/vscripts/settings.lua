@@ -426,7 +426,8 @@ OUTPOST_ORIGIN = {
 
 STATUS_LIST = {
   "status_bar_bleed",
-  "status_bar_cold"
+  "status_bar_cold",
+  "status_bar_curse"
 }
 
 STATUS_OFFSET_HERO = -25
@@ -441,6 +442,9 @@ HEROES_DATA = {
     shield_fx_height = 155
   },
   ["strider"] = {
+    shield_fx_height = 185
+  },
+  ["genuine"] = {
     shield_fx_height = 185
   },
   ["paladin"] = {
@@ -459,7 +463,6 @@ HEROES_DATA = {
 -- if GetHeroName(self.parent) == "druid" then size = 185 end
 -- if GetHeroName(self.parent) == "hunter" then size = 165 end
 
--- if GetHeroName(self.parent) == "genuine" then size = 185 end
 -- if GetHeroName(self.parent) == "icebreaker" then size = 155 end
 
 -- if GetHeroName(self.parent) == "ancient" then size = 250 end

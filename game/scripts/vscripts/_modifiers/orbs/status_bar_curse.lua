@@ -1,11 +1,11 @@
-status_bar_cold = class({})
+status_bar_curse = class({})
 
-function status_bar_cold:IsHidden() return true end
-function status_bar_cold:IsPurgable() return false end
+function status_bar_curse:IsHidden() return true end
+function status_bar_curse:IsPurgable() return false end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
-function status_bar_cold:OnCreated(kv)
+function status_bar_curse:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
@@ -13,8 +13,7 @@ function status_bar_cold:OnCreated(kv)
 
   self.status_amount = {}
   self.status_degen = 2
-  self.freeze_amount = 500
-  self.freeze_duration = 5
+  self.curse_duration = 5
 
   self.caster = EntIndexToHScript(kv.inflictor)
   self.current_status = kv.status_amount --self.caster:GetDebuffPower(kv.status_amount, self.parent)
@@ -27,7 +26,7 @@ function status_bar_cold:OnCreated(kv)
   self:UpdateStatusBar()
 end
 
-function status_bar_cold:OnRefresh(kv)
+function status_bar_curse:OnRefresh(kv)
   if not IsServer() then return end
 
   self.caster = EntIndexToHScript(kv.inflictor)
@@ -37,7 +36,7 @@ function status_bar_cold:OnRefresh(kv)
   self:AddCurrentStatus(added_amount)
 end
 
-function status_bar_cold:OnRemoved()
+function status_bar_curse:OnRemoved()
   if not IsServer() then return end
 
   if self.bCompleted == nil then
@@ -47,7 +46,7 @@ end
 
 -- API FUNCTIONS -----------------------------------------------------------
 
-function status_bar_cold:OnIntervalThink()
+function status_bar_curse:OnIntervalThink()
   if not IsServer() then return end
 
   local interval = 0.1
@@ -58,7 +57,7 @@ end
 
 -- UTILS -----------------------------------------------------------
 
-function status_bar_cold:ReduceAmount(amount)
+function status_bar_curse:ReduceAmount(amount)
   for ent_index, table in pairs(self.status_amount) do
     self:AddEntityAmount(ent_index, amount / #self.status_amount)
   end
@@ -66,7 +65,7 @@ function status_bar_cold:ReduceAmount(amount)
   self:AddCurrentStatus(-amount)
 end
 
-function status_bar_cold:ApplyFrozenState()
+function status_bar_curse:ApplyCurseState()
   local attacker = {unit = nil, amount = 0}
 
   for ent_index, table in pairs(self.status_amount) do
@@ -87,16 +86,15 @@ function status_bar_cold:ApplyFrozenState()
 
   self:StartIntervalThink(-1)
 
-  self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "status_bar_cold_max", {
-    duration = attacker.unit:GetDebuffPower(self.freeze_duration, nil),
-    amount = attacker.unit:GetDebuffPower(self.freeze_amount, nil),
-    multiplier = 100 / self.freeze_amount
+  self.bCompleted = self.parent:AddNewModifier(attacker.unit, self.ability, "status_bar_curse_max", {
+    time = attacker.unit:GetDebuffPower(self.curse_duration, nil),
+    multiplier = 100 / self.curse_duration
   })
 
   if self.current_status <= 0 then self:Destroy() end
 end
 
-function status_bar_cold:AddEntityAmount(ent_index, amount)
+function status_bar_curse:AddEntityAmount(ent_index, amount)
   if IsValidEntity(EntIndexToHScript(ent_index)) == false then
     self.status_amount[ent_index] = nil
     return
@@ -114,12 +112,12 @@ function status_bar_cold:AddEntityAmount(ent_index, amount)
   end
 end
 
-function status_bar_cold:AddCurrentStatus(amount)
+function status_bar_curse:AddCurrentStatus(amount)
   if self.parent:IsMagicImmune() and amount > 0 then amount = 0 end
   self.current_status = self.current_status + amount
 
   if self.current_status > self.max_status then
-    self:ApplyFrozenState()
+    self:ApplyCurseState()
     return
   end
 
@@ -137,13 +135,13 @@ function status_bar_cold:AddCurrentStatus(amount)
   })
 end
 
-function status_bar_cold:UpdateStatusBar()
+function status_bar_curse:UpdateStatusBar()
   local old_max_status = self.max_status
   self.max_status = self.parent:GetResistance(self.status_name)
 
   if old_max_status == nil then
     if self.current_status > self.max_status then
-      self:ApplyFrozenState()
+      self:ApplyCurseState()
       return
     end
   else

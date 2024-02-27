@@ -16,7 +16,7 @@ function status_bar_bleed:OnCreated(kv)
   self.bloodloss = 500
 
   self.caster = EntIndexToHScript(kv.inflictor)
-  self.current_status = self.caster:GetDebuffPower(kv.status_amount, self.parent)
+  self.current_status = kv.status_amount --self.caster:GetDebuffPower(kv.status_amount, self.parent)
   self.status_name = self:GetName()
 
   if self.parent:IsMagicImmune() then self.current_status = 1 end

@@ -52,6 +52,9 @@ function _modifier__ai:HandleCustomTransmitterData(data)
 	self.state = data.state
 end
 
+-----------------------------------------------------------
+-----------------------------------------------------------
+
 function _modifier__ai:OnIntervalThink()
   if not IsServer() then return end
 
@@ -81,21 +84,6 @@ function _modifier__ai:IdleThink()
   if aggro then
     self.unit:MoveToPosition(self.spawnPos)
   end
-end
-
-function _modifier__ai:CheckTarget(target)
-  if target == nil then return false end
-  if IsValidEntity(target) == false then return false end
-  if not target:IsAlive() then return false end
-  if target:IsOutOfGame() or target:IsInvisible() then return false end
-
-  if self.unit:GetAggroTarget() then
-    if self.unit:GetAggroTarget() ~= target then
-      return false
-    end
-  end
-
-  return true
 end
 
 function _modifier__ai:AggressiveThink()
@@ -159,6 +147,21 @@ function _modifier__ai:ReturningThink()
   self.unit:AddSubStats(self.ability, {speed = 300})
 end
 
+function _modifier__ai:CheckTarget(target)
+  if target == nil then return false end
+  if IsValidEntity(target) == false then return false end
+  if not target:IsAlive() then return false end
+  if target:IsOutOfGame() or target:IsInvisible() then return false end
+
+  if self.unit:GetAggroTarget() then
+    if self.unit:GetAggroTarget() ~= target then
+      return false
+    end
+  end
+
+  return true
+end
+
 function _modifier__ai:FindNewTarget()
   local enemies = FindUnitsInRadius(
     self.unit:GetTeam(), self.spot_origin, nil, self.aggroRange,
@@ -199,11 +202,12 @@ end
 
 function _modifier__ai:DeclareFunctions()
 	local funcs = {
-    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
-    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
-    MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
-    MODIFIER_PROPERTY_PRE_ATTACK,
+    MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
 
+    MODIFIER_EVENT_ON_TAKEDAMAGE,
+    
+
+    MODIFIER_PROPERTY_PRE_ATTACK,
     MODIFIER_EVENT_ON_ATTACK,
 		MODIFIER_EVENT_ON_ATTACK_LANDED,
 		MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND
@@ -212,19 +216,25 @@ function _modifier__ai:DeclareFunctions()
 	return funcs
 end
 
-function _modifier__ai:GetAbsoluteNoDamagePhysical(keys)
-  if self.state == AI_STATE_IDLE then return 1 end
-  return 0
+function _modifier__ai:GetModifierConstantHealthRegen(keys)
+  if self.state == AI_STATE_AGGRESSIVE then return 0 else return self:GetParent():GetMaxHealth() * 0.2 end
 end
 
-function _modifier__ai:GetAbsoluteNoDamageMagical(keys)
-  if self.state == AI_STATE_IDLE then return 1 end
-  return 0
+function _modifier__ai:GetMinHealth(keys)
+  if self.state == AI_STATE_AGGRESSIVE then return 0 else return 1 end
 end
 
-function _modifier__ai:GetAbsoluteNoDamagePure(keys)
-  if self.state == AI_STATE_IDLE then return 1 end
-  return 0
+function _modifier__ai:OnTakeDamage(keys)
+  if not IsServer() then return end
+
+  if keys.unit ~= self.unit then return end
+  if self.state ~= AI_STATE_IDLE then return end
+  if self:CheckTarget(keys.attacker) == false then return end
+  if CalcDistanceBetweenEntityOBB(self.unit, keys.attacker) > self.leashRange - 100 then return end
+
+  self.aggroTarget = keys.attacker
+  self.unit:MoveToTargetToAttack(self.aggroTarget)
+  self:SetState(AI_STATE_AGGRESSIVE)
 end
 
 function _modifier__ai:GetModifierPreAttack(keys)

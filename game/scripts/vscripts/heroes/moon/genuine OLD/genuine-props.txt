@@ -13,13 +13,13 @@
 			"Ability4"						"genuine_4__under"
 			"Ability5"						"genuine_5__nightfall"
 			"Ability6"						"genuine_u__morning"
-			"Ability7"						"genuine__precache"
-			"Ability8"						"_ability_str"
-			"Ability9"						"_ability_agi"
-			"Ability10"						"_ability_int"
-			"Ability11"						"_ability_vit"
-			"Ability12"						"cosmetics"
-			"Ability13"						"base_hero"
+			"Ability7"						"cosmetics"
+			"Ability8"						"base_hero"
+			"Ability9"						"base_stats"
+			"Ability10"						"_channel"
+			"Ability11"						"_void"
+			"Ability12"						"genuine__precache"
+			"Ability13"						"null"
 			"Ability14"						"null"
 			"Ability15"						"null"
 			"Ability16"						"null"
@@ -50,10 +50,10 @@
 		"Level"							"0"
 
 		"AttackAcquisitionRange"        "200"     // Range within a target can be acquired.
-		"AttackRange"                   "700"     // Range within a target can be attacked.
+		"AttackRange"                   "600"     // Range within a target can be attacked.
 		"AttackRangeBuffer"             "200"     // Extra range the target can move without canceling the attack
 		"ProjectileModel"          		"particles/genuine/base_attack/genuine_base_attack.vpcf"
-		"ProjectileSpeed"          	  "1200"
+		"ProjectileSpeed"          	  "900"
 		"VisionDaytimeRange"        	"700"        // Range of vision during day light.
 		"VisionNighttimeRange"      	"900"        // Range of vision at night time.
 

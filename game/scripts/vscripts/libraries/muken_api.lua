@@ -193,13 +193,21 @@
     return amount * (1 - self:GetMainStat("VIT"):GetStatusResist(true))
   end
 
+  function CDOTA_BaseNPC:IncrementStatus(status_name, ability, inflictor, amount)
+    if amount <= 0 then return end
+    
+    self:AddModifier(ability, status_name, {
+      inflictor = inflictor:entindex(), status_amount = inflictor:GetDebuffPower(amount, self)
+    })
+  end
+
   function CDOTA_BaseNPC:GetResistance(type)
     if self:GetMainStat("STR") == nil or self:GetMainStat("AGI") == nil
     or self:GetMainStat("INT") == nil or self:GetMainStat("VIT") == nil then
       return 100
     end
 
-    local name = string.sub(type, 1, string.len(type) - 8)
+    local name = string.sub(type, 12, string.len(type))
     
     if name == "stone" then
       return 100 + self:GetMainStat("STR"):GetStoneResist()
@@ -292,6 +300,10 @@
 
     if self:HasModifier("status_bar_cold_max") then
       if modifier_name == "status_bar_cold" then return end
+    end
+
+    if self:HasModifier("status_bar_curse_max") then
+      if modifier_name == "status_bar_curse" then return end
     end
 
     if modifier_name == "modifier_knockback" then ability = nil end
@@ -398,6 +410,8 @@
   end
 
   function CDOTA_BaseNPC:ReduceStatus(amount, list)
+    if amount <= 0 then return end
+    
     for _,status_name in pairs(list) do
       local modifier = self:FindModifierByName(status_name)
       if modifier then
@@ -449,6 +463,11 @@
 
   function CDOTA_BaseNPC:SetForceCrit(chance, damage)
     self:GetMainStat("STR"):SetForceCrit(chance, damage)
+  end
+
+  function CDOTA_BaseNPC:SetForceSpellCrit(damage)
+    if damage <= 100 then return end
+    self:GetMainStat("INT"):SetForceSpellCrit(damage - 100)
   end
 
 -- CDOTA_BaseNPC || COSMETICS

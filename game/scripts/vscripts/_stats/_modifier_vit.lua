@@ -122,9 +122,8 @@ end
 function _modifier_vit:GetBonusHP(base_hp)
   local bonus_hp = self:GetCalculedData("sub_stat_max_health", false)
   local hp_percent = self:GetCalculedData("sub_stat_max_health_percent", false)
-  if hp_percent < -90 then hp_percent = -90 end
 
-  if self.parent:IsHero() == false then base_hp = self.parent:GetBaseMaxHealth() end
+  if hp_percent < -90 then hp_percent = -90 end
 
   local total = bonus_hp + ((base_hp + bonus_hp) * hp_percent * 0.01)
   if base_hp + total < 100 then total = 100 - base_hp end

@@ -1,57 +1,3 @@
-genuine_1__shooting_rank_11 = class ({})
-genuine_1__shooting_rank_12 = class ({})
-genuine_1__shooting_rank_21 = class ({})
-genuine_1__shooting_rank_22 = class ({})
-genuine_1__shooting_rank_31 = class ({})
-genuine_1__shooting_rank_32 = class ({})
-genuine_1__shooting_rank_41 = class ({})
-genuine_1__shooting_rank_42 = class ({})
-
-genuine_2__fallen_rank_11 = class ({})
-genuine_2__fallen_rank_12 = class ({})
-genuine_2__fallen_rank_21 = class ({})
-genuine_2__fallen_rank_22 = class ({})
-genuine_2__fallen_rank_31 = class ({})
-genuine_2__fallen_rank_32 = class ({})
-genuine_2__fallen_rank_41 = class ({})
-genuine_2__fallen_rank_42 = class ({})
-
-genuine_3__travel_rank_11 = class ({})
-genuine_3__travel_rank_12 = class ({})
-genuine_3__travel_rank_21 = class ({})
-genuine_3__travel_rank_22 = class ({})
-genuine_3__travel_rank_31 = class ({})
-genuine_3__travel_rank_32 = class ({})
-genuine_3__travel_rank_41 = class ({})
-genuine_3__travel_rank_42 = class ({})
-
-genuine_4__under_rank_11 = class ({})
-genuine_4__under_rank_12 = class ({})
-genuine_4__under_rank_21 = class ({})
-genuine_4__under_rank_22 = class ({})
-genuine_4__under_rank_31 = class ({})
-genuine_4__under_rank_32 = class ({})
-genuine_4__under_rank_41 = class ({})
-genuine_4__under_rank_42 = class ({})
-
-genuine_5__nightfall_rank_11 = class ({})
-genuine_5__nightfall_rank_12 = class ({})
-genuine_5__nightfall_rank_21 = class ({})
-genuine_5__nightfall_rank_22 = class ({})
-genuine_5__nightfall_rank_31 = class ({})
-genuine_5__nightfall_rank_32 = class ({})
-genuine_5__nightfall_rank_41 = class ({})
-genuine_5__nightfall_rank_42 = class ({})
-
-genuine_u__morning_rank_11 = class ({})
-genuine_u__morning_rank_12 = class ({})
-genuine_u__morning_rank_21 = class ({})
-genuine_u__morning_rank_22 = class ({})
-genuine_u__morning_rank_31 = class ({})
-genuine_u__morning_rank_32 = class ({})
-genuine_u__morning_rank_41 = class ({})
-genuine_u__morning_rank_42 = class ({})
-
 genuine__precache = class ({})
 LinkLuaModifier("genuine_special_values", "heroes/moon/genuine/genuine-special_values", LUA_MODIFIER_MOTION_NONE)
 
@@ -60,7 +6,11 @@ function genuine__precache:GetIntrinsicModifierName()
 end
 
 function genuine__precache:Spawn()
-	if self:IsTrained() == false then self:UpgradeAbility(true) end
+  if IsServer() then
+    if self:IsTrained() == false then
+      self:UpgradeAbility(true)
+    end
+  end
 end
 
 function genuine__precache:Precache(context)
@@ -75,22 +25,4 @@ function genuine__precache:Precache(context)
   PrecacheResource("particle", "particles/genuine/shoulder_efx/genuine_back_ambient.vpcf", context)
   PrecacheResource("particle", "particles/genuine/bow_efx/genuine_bow_ambient.vpcf", context)
   PrecacheResource("particle", "particles/genuine/base_attack/genuine_base_attack.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/shooting_star/genuine_shooting.vpcf", context)
-  PrecacheResource("particle", "particles/econ/items/drow/drow_ti6_gold/drow_ti6_silence_gold_wave.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/genuine_fallen_hit.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/morning_star/genuine_morning_star.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/genuine_powershoot/genuine_spell_powershot_ti6.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/genuine_powershoot/genuine_powershot_channel_combo_v2.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/ult_caster/genuine_ult_caster.vpcf", context)
-  PrecacheResource("particle", "particles/units/heroes/hero_terrorblade/terrorblade_sunder.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/genuine_ultimate.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/ult_deny/genuine_deny_v2.vpcf", context)
-  PrecacheResource("particle", "particles/units/heroes/hero_puck/puck_orb_damage.vpcf", context)
-  PrecacheResource("particle", "particles/econ/items/puck/puck_merry_wanderer/puck_illusory_orb_merry_wanderer.vpcf", context)
-  PrecacheResource("particle", "particles/units/heroes/hero_puck/puck_illusory_orb_blink_out.vpcf", context)
-  PrecacheResource("particle", "particles/genuine/genuine_travel_silence/genuine_silence_aproset.vpcf", context)
-  PrecacheResource("particle", "particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf", context)
-
-  PrecacheResource("particle", "particles/genuine/starfall/genuine_starfall_attack.vpcf", context)
-  PrecacheResource("particle", "particles/econ/items/drow/drow_ti6_gold/drow_ti6_silence_gold_wave_wide.vpcf", context)
 end

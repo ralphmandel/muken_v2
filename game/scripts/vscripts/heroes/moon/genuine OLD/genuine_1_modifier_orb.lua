@@ -9,8 +9,6 @@ function genuine_1_modifier_orb:OnCreated(kv)
 	self.caster = self:GetCaster()
 	self.parent = self:GetParent()
 	self.ability = self:GetAbility()
-
-  if not IsServer() then return end
 	
 	self.cast = false
   self.proj_name = false
@@ -44,31 +42,25 @@ function genuine_1_modifier_orb:DeclareFunctions()
 end
 
 function genuine_1_modifier_orb:GetModifierAttackRangeBonus(keys)
-  if not IsServer() then return end
-
   if self:ShouldLaunch(self.parent:GetAggroTarget()) then
-    return self.ability:GetSpecialValueFor("special_attack_range")
+    return self.ability:GetSpecialValueFor("atk_range")
   end
 
 	return 0
 end
 
 function genuine_1_modifier_orb:GetModifierProjectileSpeedBonus(keys)
-  if not IsServer() then return end
-
   if self:ShouldLaunch(keys.target) then
 		self.pre[keys.record] = true
     self.proj_name = true
     self.cast = false
-    return self.ability:GetSpecialValueFor("special_arrow_speed")
+    return self.ability:GetSpecialValueFor("proj_speed")
 	end
 
 	return 0
 end
 
 function genuine_1_modifier_orb:GetModifierProjectileName()
-  if not IsServer() then return end
-
 	if not self.ability.GetProjectileName then return end
 
 	if self.proj_name == true then
@@ -78,12 +70,11 @@ function genuine_1_modifier_orb:GetModifierProjectileName()
 end
 
 function genuine_1_modifier_orb:OnAttack(keys)
-  if not IsServer() then return end
-
 	if keys.attacker ~= self.parent then return end
 
 	if self.pre[keys.record] then
-		self.ability:UseResources(true, false, false, false)
+		self.ability:UseResources(true, false, false, true)
+    self.ability:SetCurrentAbilityCharges(self.ability:GetCurrentAbilityCharges() - 1)
 		self.launch[keys.record] = true
     self.pre[keys.record] = nil
     self.proj_name = true
@@ -93,44 +84,32 @@ function genuine_1_modifier_orb:OnAttack(keys)
 end
 
 function genuine_1_modifier_orb:GetModifierProcAttack_Feedback(keys)
-  if not IsServer() then return end
-
 	if self.launch[keys.record] then
 		if self.ability.OnOrbImpact then self.ability:OnOrbImpact(keys) end
 	end
 end
 
 function genuine_1_modifier_orb:OnTakeDamage(keys)
-  if not IsServer() then return end
-
 	if keys.inflictor ~= self.ability then return end
   if keys.damage_type ~= self.ability:GetAbilityDamageType() then return end
 
-  local heal = keys.original_damage * self.ability:GetSpecialValueFor("special_lifesteal") * 0.01
-
-	if heal > 0 then
-		self.parent:ApplyHeal(heal, self.ability, false)
-		self:PlayEfxSpellLifesteal()
-	end
+	-- if heal > 0 then
+	-- 	self.parent:Heal(heal, self.ability)
+	-- 	self:PlayEfxSpellLifesteal()
+	-- end
 end
 
 function genuine_1_modifier_orb:OnAttackFail(keys)
-  if not IsServer() then return end
-
 	if self.launch[keys.record] then
 		if self.ability.OnOrbFail then self.ability:OnOrbFail(keys) end
 	end
 end
 
 function genuine_1_modifier_orb:OnAttackRecordDestroy(keys)
-  if not IsServer() then return end
-
 	self.launch[keys.record] = nil
 end
 
 function genuine_1_modifier_orb:OnOrder(keys)
-  if not IsServer() then return end
-
 	if keys.unit ~= self.parent then return end
 
 	if keys.ability then
@@ -159,7 +138,7 @@ function genuine_1_modifier_orb:ShouldLaunch(target)
 		end
 	end
 
-	if self.cast and self.parent:IsSilenced() == false and self.ability:IsOwnersManaEnough() then
+	if self.cast and self.parent:IsSilenced() == false and self.ability:IsFullyCastable() then
 		return true
 	end
 

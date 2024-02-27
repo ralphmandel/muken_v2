@@ -16,7 +16,7 @@ function status_bar_cold_max:OnCreated(kv)
   self.current_status = 1
   self.max_status = kv.amount
   self.multiplier = kv.multiplier
-  self.status_name = string.sub(self:GetName(), -4, string.len(self:GetName()))
+  self.status_name = string.sub(self:GetName(), 1, -5)
 
   self.parent:UpdatePanel({
     current_status = self.current_status * self.multiplier,

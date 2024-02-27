@@ -64,11 +64,17 @@
   background-color: gradient(linear, 0% 0%, 0% 100%, from(#007be6), color-stop(0.25, #0069bf), to(#003b73));
 }
 
-#current_status_panel.cold__status.max_state
+.status_bar_curse
+{
+  box-shadow: #a94c5c -4px 0px 8px 2px;
+  background-color: gradient(linear, 0% 0%, 0% 100%, from(#dd5c71), color-stop(0.25, rgb(188, 84, 102)), to(#74323d));
+}
+
+/* #current_status_panel.cold__status.max_state
 {
   box-shadow: #003b73 -5px 0px 10px 1px;
   background-color: #003b73;
-}
+} */
 
 .Friendly .HP
 {

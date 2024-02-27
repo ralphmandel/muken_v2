@@ -85,12 +85,17 @@ function SetIcon(icon, status_name) {
     source = "file://{resources}/images/custom_game/status_bar/status_freeze.png";
   }
 
+  if (status_name == "status_bar_curse") {
+    source = "file://{resources}/images/custom_game/status_bar/status_curse.png";
+  }
+
   icon.SetImage(source);
 }
 
 function SetBarStyle(pan, status_name) {
   pan.SetHasClass("status_bar_bleed", "status_bar_bleed" == status_name);
   pan.SetHasClass("status_bar_cold", "status_bar_cold" == status_name);
+  pan.SetHasClass("status_bar_curse", "status_bar_curse" == status_name);
 }
 
 (function()

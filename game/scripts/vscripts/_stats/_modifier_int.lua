@@ -8,6 +8,7 @@ function _modifier_int:OnCreated(kv)
   self.caster = self:GetCaster()
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
+  self.crit_popup = {}
 
   if IsServer() then
     self:SetHasCustomTransmitterData(true)
@@ -25,6 +26,7 @@ function _modifier_int:OnCreated(kv)
       sub_stat_cold_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_cold_resist"), bonus = 0},
       sub_stat_sleep_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_sleep_resist"), bonus = 0},
       sub_stat_thunder_resist = {mult = self.ability:GetSpecialValueFor("sub_stat_thunder_resist"), bonus = 0},
+      sub_stat_max_mana_percent = {mult = 0, bonus = 0},
       sub_stat_manacost = {mult = 0, bonus = 0},
       sub_stat_magical_block = {mult = 0, bonus = 0},
     }
@@ -55,7 +57,7 @@ function _modifier_int:DeclareFunctions()
     MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
     MODIFIER_PROPERTY_MANA_BONUS,
     MODIFIER_PROPERTY_MANACOST_PERCENTAGE,
-    --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
     MODIFIER_PROPERTY_MAGICAL_CONSTANT_BLOCK,
     MODIFIER_EVENT_ON_TAKEDAMAGE
@@ -84,19 +86,19 @@ function _modifier_int:GetModifierPercentageManacost(keys)
   return self:GetCalculedData("sub_stat_manacost", false)
 end
 
--- function _modifier_int:GetModifierSpellAmplify_Percentage(keys)
---   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
---   if keys.damage_flags == 31 then return 0 end
---   if keys.damage_type == DAMAGE_TYPE_PURE then return 0 end
+function _modifier_int:GetModifierSpellAmplify_Percentage(keys)
+  if not IsServer() then return 0 end
 
---   if keys.damage_type == DAMAGE_TYPE_MAGICAL then
---     return self:GetCalculedData("sub_stat_magical_damage", false)
---   end
+  if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
+  if keys.damage_flags == 31 or keys.damage_flags == 1040 then return 0 end
+  if self.force_spell_crit_damage == nil then return 0 end
 
---   if keys.damage_type == DAMAGE_TYPE_PURE then
---     return self:GetCalculedData("sub_stat_holy_damage", false)
---   end
--- end
+  local result = self.force_spell_crit_damage
+  self.force_spell_crit_damage = nil
+  self.crit_popup[keys.record] = true
+
+  return result
+end
 
 function _modifier_int:GetModifierMagicalResistanceBonus()
   return self:GetCalculedData("sub_stat_magic_resist", true)
@@ -117,6 +119,19 @@ function _modifier_int:OnTakeDamage(keys)
 
   if keys.damage_type == DAMAGE_TYPE_MAGICAL then
     local efx = OVERHEAD_ALERT_BONUS_SPELL_DAMAGE
+
+    if keys.attacker then
+      if keys.attacker:IsBaseNPC() == true then
+        local int = keys.attacker:GetMainStat("INT")
+        if int then
+          if int.crit_popup[keys.record] then
+            int.crit_popup[keys.record] = nil
+            self:PopupSpellCrit(keys.damage, keys.unit)
+            return
+          end
+        end
+      end
+    end
 
     if keys.inflictor then
       if keys.inflictor:GetClassname() == "ability_lua" then
@@ -142,6 +157,10 @@ end
 
 function _modifier_int:GetData(property)
   return self.data[property].bonus
+end
+
+function _modifier_int:SetForceSpellCrit(damage)
+  self.force_spell_crit_damage = damage
 end
 
 function _modifier_int:GetMagicalDamageAmp()
@@ -185,15 +204,25 @@ function _modifier_int:GetThunderResist()
 end
 
 function _modifier_int:GetBonusMP(base_mp)
+  local ancient_extra_mp = 0
+
   if self.parent:HasModifier("ancient_3_modifier_passive") then
     if self.parent:HasModifier("ancient_u_modifier_passive") == false then
       return 0
     else
-      return base_mp + self:GetCalculedData("sub_stat_max_mana", false)
+      ancient_extra_mp = base_mp
     end
   end
   
-  return self:GetCalculedData("sub_stat_max_mana", false)
+  local bonus_hp = self:GetCalculedData("sub_stat_max_mana", false)
+  local hp_percent = self:GetCalculedData("sub_stat_max_mana_percent", false)
+
+  if hp_percent < -90 then hp_percent = -90 end
+
+  local total = bonus_hp + ((base_mp + bonus_hp) * hp_percent * 0.01)
+  if base_mp + total < 100 then total = 100 - base_mp end
+
+  return total + ancient_extra_mp
 end
 
 function _modifier_int:GetCalculedDataStack(property, bScalar)
@@ -319,4 +348,19 @@ function _modifier_int:PopupHolyDamage(damage, color, target)
   ParticleManager:SetParticleControl(pidx, 1, Vector(0, damage, 4))
   ParticleManager:SetParticleControl(pidx, 2, Vector(3, digits, 0))
   ParticleManager:SetParticleControl(pidx, 3, color)
+end
+
+function _modifier_int:PopupSpellCrit(damage, target)
+  local digits = 1
+  if damage < 10 then digits = 2 end
+  if damage > 9 and damage < 100 then digits = 3 end
+  if damage > 99 and damage < 1000 then digits = 4 end
+  if damage > 999 then digits = 5 end
+
+  local pidx = ParticleManager:CreateParticle("particles/msg_fx/msg_crit.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+  ParticleManager:SetParticleControl(pidx, 1, Vector(0, damage, 4))
+  ParticleManager:SetParticleControl(pidx, 2, Vector(3, digits, 0))
+  ParticleManager:SetParticleControl(pidx, 3, Vector(100, 0, 150))
+
+  if IsServer() then target:EmitSound("Item_Desolator.Target") end
 end
