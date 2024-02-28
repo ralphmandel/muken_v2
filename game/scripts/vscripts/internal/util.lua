@@ -492,30 +492,6 @@
 		end
 	end
 
-  function GetHeroName(name_or_npc)
-		local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
-
-    if type(name_or_npc) == "table" then
-      name_or_npc = name_or_npc:GetUnitName()
-    end
-
-		for name, id_name in pairs(heroes_name_data) do
-			if name_or_npc == id_name then return name end
-		end
-	end
-
-  function GetHeroTeam(name_or_npc)
-		local heroes_team_data = LoadKeyValues("scripts/kv/heroes_team.kv")
-
-    for team, hero_list in pairs(heroes_team_data) do
-      for _, hero_name in pairs(hero_list) do
-        if GetHeroName(name_or_npc) == hero_name then
-          return team
-        end
-      end
-		end
-	end
-
   function GetHeroInitPts(hero_name)
 		local data = LoadKeyValues("scripts/kv/heroes_init_pts.kv")
 
@@ -688,18 +664,23 @@
     local random_list = {}
     local hero_index = 1
 
+    local players = PlayerResource:GetAllPlayers()
+    for _, player in pairs(players) do
+      local hero = player:GetAssignedHero()
+      table.insert(players_hero_list, hero:GetHeroName())
+    end
+
     for _, team in pairs(TEAMS) do
       for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team[1]] do
         local playerID = PlayerResource:GetNthPlayerIDOnTeam(team[1], i)
         if playerID then
-          local hero_name = GetHeroName(PlayerResource:GetSelectedHeroName(playerID))
-          if hero_name then
-            table.insert(players_hero_list, hero_name)
+          local unit_name = GetHeroName(PlayerResource:GetSelectedHeroName(playerID))
+          if unit_name then
             for bot_team, number in pairs(bot_slots) do
               if bot_team == team[1] then
                 bot_slots[bot_team] = bot_slots[bot_team] - 1
               end
-            end            
+            end
           end
         end
       end

@@ -40,6 +40,7 @@ function status_bar_curse_max:OnRemoved()
   if not IsServer() then return end
 
   self.parent:RemoveSubStats(self.ability, {"max_health_percent", "max_mana_percent"})
+  self.parent:RemoveStatusEfx(nil, nil, "status_bar_curse_max_efx")
 
   local status_modifier = self.parent:FindModifierByName("status_bar_curse")
 
@@ -77,22 +78,23 @@ end
 
 -- EFFECTS -----------------------------------------------------------
 
--- function status_bar_curse_max:GetEffectName()
--- 	return "particles/econ/items/winter_wyvern/winter_wyvern_ti7/wyvern_cold_embrace_ti7buff.vpcf"
--- end
+function status_bar_curse_max:GetEffectName()
+	return "particles/vulture/rot/vulture_rot.vpcf"
+end
 
--- function status_bar_curse_max:GetEffectAttachType()
--- 	return PATTACH_ABSORIGIN_FOLLOW
--- end
+function status_bar_curse_max:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
 
--- function status_bar_curse_max:GetStatusEffectName()
--- 	return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
--- end
+function status_bar_curse_max:GetStatusEffectName()
+  return "particles/econ/items/effigies/status_fx_effigies/status_effect_aghs_standard_statue.vpcf"
+end
 
--- function status_bar_curse_max:StatusEffectPriority()
--- 	return MODIFIER_PRIORITY_ULTRA
--- end
+function status_bar_curse_max:StatusEffectPriority()
+	return MODIFIER_PRIORITY_ULTRA
+end
 
 function status_bar_curse_max:PlayEfxStart()
-	--self.parent:EmitSound("Hero_Ancient_Apparition.IceBlast.Tracker")
+  self.parent:AddStatusEfx(self.caster, self.ability, "status_bar_curse_max_efx")
+	self.parent:EmitSound("Hero_ShadowDemon.ShadowPoison.Release")
 end

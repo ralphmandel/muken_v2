@@ -188,6 +188,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if self:HasRank(2, 1, 2) then
       if value_name == "speed" then return 1500 end
       if value_name == "radius" then return 425 end
+      if value_name == "distance" then return 300 end
       if value_name == "special_wide" then return 1 end
     end
 
@@ -201,7 +202,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		end
 
 		if self:HasRank(2, 3, 1) then
-      if value_name == "special_curse_percent" then return 30 end
+      if value_name == "special_curse_percent" then return 30 * self:GetDebuffAmp() end
 		end
 
     if self:HasRank(2, 3, 2) then

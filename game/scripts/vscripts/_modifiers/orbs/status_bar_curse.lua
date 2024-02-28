@@ -13,7 +13,7 @@ function status_bar_curse:OnCreated(kv)
 
   self.status_amount = {}
   self.status_degen = 2
-  self.curse_duration = 5
+  self.curse_duration = 7.5
 
   self.caster = EntIndexToHScript(kv.inflictor)
   self.current_status = kv.status_amount --self.caster:GetDebuffPower(kv.status_amount, self.parent)
@@ -30,10 +30,9 @@ function status_bar_curse:OnRefresh(kv)
   if not IsServer() then return end
 
   self.caster = EntIndexToHScript(kv.inflictor)
-  local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
-  self:AddEntityAmount(kv.inflictor, added_amount)
-  self:AddCurrentStatus(added_amount)
+  self:AddEntityAmount(kv.inflictor, kv.status_amount)
+  self:AddCurrentStatus(kv.status_amount)
 end
 
 function status_bar_curse:OnRemoved()
@@ -116,6 +115,8 @@ function status_bar_curse:AddCurrentStatus(amount)
   if self.parent:IsMagicImmune() and amount > 0 then amount = 0 end
   self.current_status = self.current_status + amount
 
+  print("K2", self.current_status)
+
   if self.current_status > self.max_status then
     self:ApplyCurseState()
     return
@@ -138,6 +139,8 @@ end
 function status_bar_curse:UpdateStatusBar()
   local old_max_status = self.max_status
   self.max_status = self.parent:GetResistance(self.status_name)
+
+  print("K1", self.current_status)
 
   if old_max_status == nil then
     if self.current_status > self.max_status then

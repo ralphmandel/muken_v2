@@ -89,9 +89,20 @@ function MukenEvents:OnRoleBarRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
+  local event_hero_name = ""
+
+  local players = PlayerResource:GetAllPlayers()
+  for _, player in pairs(players) do
+    local hero = player:GetAssignedHero()
+    if "npc_dota_hero_"..event.id_name == hero:GetUnitName() then
+      event_hero_name = hero:GetHeroName()
+      break
+    end
+  end
+
   local heroes_stats_data = LoadKeyValues("scripts/kv/heroes_roles_level.kv")
-  for hero, data in pairs(heroes_stats_data) do
-    if hero == GetHeroName("npc_dota_hero_" .. event.id_name) then
+  for hero_name, data in pairs(heroes_stats_data) do
+    if hero_name == event_hero_name then
       CustomGameEventManager:Send_ServerToPlayer(player, "role_bar_state_from_server", data)
     end
   end

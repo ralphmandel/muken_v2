@@ -24,7 +24,7 @@ function neutral_spiders:OnSpellStart()
   local caster = self:GetCaster()
   local target = self:GetCursorTarget()
 
-  if GetHeroName(caster) == "trickster" then
+  if caster:GetHeroName() == "trickster" then
     for _,spider in pairs(self.spiders) do
       if IsValidEntity(spider) then
         spider:RemoveModifierByName("neutral_spiders_modifier_summon")
@@ -46,7 +46,7 @@ function neutral_spiders:OnSpellStart()
         target = target:entindex()
       })
 
-      if GetHeroName(caster) == "trickster" then
+      if caster:GetHeroName() == "trickster" then
         table.insert(self.spiders, spider)
       end
     end

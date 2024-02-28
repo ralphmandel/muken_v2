@@ -30,10 +30,9 @@ function status_bar_bleed:OnRefresh(kv)
   if not IsServer() then return end
 
   self.caster = EntIndexToHScript(kv.inflictor)
-  local added_amount = self.caster:GetDebuffPower(kv.status_amount, self.parent)
 
-  self:AddEntityAmount(kv.inflictor, added_amount)
-  self:AddCurrentStatus(added_amount)
+  self:AddEntityAmount(kv.inflictor, kv.status_amount)
+  self:AddCurrentStatus(kv.status_amount)
 end
 
 function status_bar_bleed:OnRemoved()

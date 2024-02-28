@@ -17,7 +17,7 @@ end
 -----------------------------------------------------------
 
 function status_bar_cold_max_efx:GetStatusEffectName()
-    return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
+  return "particles/econ/items/drow/drow_ti9_immortal/status_effect_drow_ti9_frost_arrow.vpcf"
 end
 
 function status_bar_cold_max_efx:StatusEffectPriority()

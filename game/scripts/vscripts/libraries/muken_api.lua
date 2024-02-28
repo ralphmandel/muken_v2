@@ -131,6 +131,8 @@
     for name, id_name in pairs(data) do
       if self:GetUnitName() == id_name then return name end
     end
+
+    return ""
   end
 
   function CDOTA_BaseNPC:GetHeroTeam()
@@ -196,9 +198,7 @@
   function CDOTA_BaseNPC:IncrementStatus(status_name, ability, inflictor, amount)
     if amount <= 0 then return end
     
-    self:AddModifier(ability, status_name, {
-      inflictor = inflictor:entindex(), status_amount = inflictor:GetDebuffPower(amount, self)
-    })
+    self:AddModifier(ability, status_name, {inflictor = inflictor:entindex(), status_amount = amount})
   end
 
   function CDOTA_BaseNPC:GetResistance(type)

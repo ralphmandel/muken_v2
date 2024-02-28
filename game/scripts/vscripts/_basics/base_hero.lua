@@ -55,6 +55,7 @@ LinkLuaModifier("status_bar_cold_max", "_modifiers/orbs/status_bar_cold_max", LU
 LinkLuaModifier("status_bar_cold_max_efx", "_modifiers/orbs/status_bar_cold_max_efx", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("status_bar_curse", "_modifiers/orbs/status_bar_curse", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("status_bar_curse_max", "_modifiers/orbs/status_bar_curse_max", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("status_bar_curse_max_efx", "_modifiers/orbs/status_bar_curse_max_efx", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("orb_holy__modifier", "_modifiers/orbs/orb_holy__modifier", LUA_MODIFIER_MOTION_NONE)
 
 require("internal/muken_events")

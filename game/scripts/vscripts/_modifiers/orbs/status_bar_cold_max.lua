@@ -116,7 +116,7 @@ function status_bar_cold_max:StatusEffectPriority()
 end
 
 function status_bar_cold_max:PlayEfxStart()
-  self.parent:AddStatusEfx(nil, nil, "status_bar_cold_max_efx")
+  self.parent:AddStatusEfx(self.caster, self.ability, "status_bar_cold_max_efx")
 	self.parent:EmitSound("Hero_Ancient_Apparition.IceBlast.Tracker")
 end
 

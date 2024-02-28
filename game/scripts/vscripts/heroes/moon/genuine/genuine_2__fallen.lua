@@ -5,6 +5,10 @@ LinkLuaModifier("genuine_2_modifier_fallen", "heroes/moon/genuine/genuine_2_modi
 
   genuine_2__fallen.spawn_origin = {}
 
+  function genuine_2__fallen:GetIntrinsicModifierName()
+    return "_modifier_generic_custom_indicator"
+  end
+
 -- SPELL START
 
   function genuine_2__fallen:OnSpellStart()
@@ -82,7 +86,8 @@ LinkLuaModifier("genuine_2_modifier_fallen", "heroes/moon/genuine/genuine_2_modi
     end
 
     local origin = caster:GetOrigin()
-    local curse_percent = caster:GetDebuffPower(self:GetSpecialValueFor("special_curse_percent"), hTarget)
+    local curse_percent = hTarget:GetStatusResist(self:GetSpecialValueFor("special_curse_percent"))
+
     hTarget:IncrementStatus("status_bar_curse", self, caster, curse_percent)
 
     local truesight = hTarget:AddModifier(self, "_modifier_truesight", {})
@@ -102,3 +107,47 @@ LinkLuaModifier("genuine_2_modifier_fallen", "heroes/moon/genuine/genuine_2_modi
   end
 
 -- EFFECTS
+
+  function genuine_2__fallen:CastFilterResultLocation(vLoc)
+    if IsClient() then
+      if self.custom_indicator then
+        self.custom_indicator:Register(vLoc)
+      end
+    end
+
+    return UF_SUCCESS
+  end
+
+  function genuine_2__fallen:CreateCustomIndicator()
+    local caster = self:GetCaster()
+    local particle_cast = "particles/generic/finders/directional_finder.vpcf"
+    self.effect_indicator = ParticleManager:CreateParticle(particle_cast, PATTACH_CUSTOMORIGIN, caster)
+    ParticleManager:SetParticleControl(self.effect_indicator, 15, Vector(1, 0, 1))
+    self:UpdateEndPosition(caster:GetAbsOrigin())
+  end
+
+  function genuine_2__fallen:UpdateCustomIndicator(loc)
+    self:UpdateEndPosition(loc)
+  end
+
+  function genuine_2__fallen:DestroyCustomIndicator()
+    ParticleManager:DestroyParticle(self.effect_indicator, true)
+    ParticleManager:ReleaseParticleIndex(self.effect_indicator)
+  end
+
+  function genuine_2__fallen:UpdateEndPosition(loc)
+    local caster = self:GetCaster()
+    local origin = caster:GetAbsOrigin()
+    local direction = origin - loc
+    local distance = self:GetSpecialValueFor("distance")
+    local radius = self:GetSpecialValueFor("radius")
+    local current_distance = direction:Length2D()
+
+    --if current_distance > distance then
+      loc = origin - (direction:Normalized() * distance)
+    --end
+
+    ParticleManager:SetParticleControl(self.effect_indicator, 0, origin)
+    ParticleManager:SetParticleControl(self.effect_indicator, 1, loc)
+    ParticleManager:SetParticleControl(self.effect_indicator, 2, Vector(radius, radius, radius))
+  end
