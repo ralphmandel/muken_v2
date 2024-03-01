@@ -177,7 +177,7 @@
 
 		"AbilityValues"
 		{
-      "step"            "0"
+      "behavior"        "0"
       "blood_duration"  "0"
       "hp_lost"		      "0"
       "interval"		    "0"

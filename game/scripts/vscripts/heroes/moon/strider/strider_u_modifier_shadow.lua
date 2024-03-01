@@ -51,6 +51,7 @@ function strider_u_modifier_shadow:OnRemoved()
   if self.endCallback then self.endCallback(self.entindex) end
 
   self.parent:RemoveStatusEfx(self.caster, self.ability, "strider_u_modifier_shadow_status_efx")
+  self.parent:EmitSound("Creature.Kill")
   self.parent:Kill(self.ability, self.caster)
 
   for _, modifier in pairs(self.modifiers) do
@@ -246,6 +247,8 @@ function strider_u_modifier_shadow:ChangeState(new_state)
   self.state = new_state
 
   if self.state == SHADOW_STATE_IDLE then
+    self.parent:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
+    
     if self.ability:GetSpecialValueFor("special_invisibility") == 1 then
       self.parent:RemoveAllModifiersByNameAndAbility("_modifier_invisible", self.ability)
       self.parent:AddModifier(self.ability, "_modifier_invisible", {
@@ -275,8 +278,7 @@ function strider_u_modifier_shadow:FindTarget(target_type)
 	for _,enemy in pairs(enemies) do
     if self.parent:CanEntityBeSeenByMyTeam(enemy) then
       self.target = enemy
-      self.parent:SetForceAttackTarget(self.target)
-      self.parent:MoveToTargetToAttack(self.target)
+      self.parent:AddModifier(self.ability, "_modifier_force_attack", {target = self.target:GetEntityIndex()})
       self:ChangeState(SHADOW_STATE_ATTACKING)
       return
     end

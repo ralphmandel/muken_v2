@@ -182,6 +182,10 @@ TIER_TEAMS = {
   [RARITY_LEGENDARY] = DOTA_TEAM_CUSTOM_7,
 }
 
+MAX_MOB_COUNT_TOTAL = 10
+MAX_MOB_COUNT_PER_AREA = 3
+MAX_BOSS_COUNT = 1
+
 SPAWNER_MOBS = {
   -- {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
   --   "neutral_legendary_great_lamp"
@@ -276,83 +280,6 @@ SPAWNER_MOBS = {
     }}, -- 1190 | 1190 [ 2,082 | 2,082]
   }
 
-SPAWNER_MOBS_OLD = {
-  -- TIER 1
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_chameleon_a", "neutral_common_chameleon_b",
-      "neutral_common_chameleon_a", "neutral_common_chameleon_b"
-    }}, -- 192 | 43 + 43 + 53 + 53
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b"
-    }}, -- 192 | 96 + 96
-    {["rarity"] = RARITY_COMMON, ["tier"] = 1, ["units"] = {
-      "neutral_common_gargoyle", "neutral_common_gargoyle",
-      "neutral_common_great_gargoyle"
-    }}, -- 185 | 53 + 53 + 79
-    {["rarity"] = RARITY_RARE, ["tier"] = 1, ["units"] = { -- [x1.25]
-      "neutral_rare_frostbitten"
-    }}, -- 210 | 210 [262 | 262]
-
-  -- TIER 2
-    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
-      "neutral_common_drake"
-    }}, -- 376 | 376
-    {["rarity"] = RARITY_COMMON, ["tier"] = 2, ["units"] = {
-      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-      "neutral_common_crocodilian_a", "neutral_common_crocodilian_b",
-    }}, -- 384 | 96 + 96 + 96 + 96
-    {["rarity"] = RARITY_RARE, ["tier"] = 2, ["units"] = { -- [x1.25]
-      "neutral_rare_crocodile"
-    }}, -- 376 | 376 [470 | 470]
-    {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-      "neutral_epic_igneo", "neutral_epic_igneo"
-    }}, -- 420 | 210 + 210 [630 | 315 + 315]
-
-  -- TIER 3
-    {["rarity"] = RARITY_COMMON, ["tier"] = 3, ["units"] = {
-      "neutral_common_great_gargoyle", "neutral_common_great_gargoyle", "neutral_common_great_gargoyle",
-      "neutral_common_drake"
-    }}, -- 613 | 79 + 79 + 79 + 376
-    {["rarity"] = RARITY_RARE, ["tier"] = 3, ["units"] = { -- [x1.25]
-      "neutral_rare_skydragon", "neutral_rare_dragon"
-    }}, -- 586 | 376 + 210 [ 732 | 470 + 262]
-    {["rarity"] = RARITY_EPIC, ["tier"] = 3, ["units"] = { -- [x1.5]
-      "neutral_epic_lamp"
-    }}, -- 595 | 595 [ 892 | 892]
-    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 3, ["units"] = { -- [x1.75]
-      "neutral_legendary_great_lamp"
-    }}, -- 595 | 595 [ 1,041 | 1,041]
-
-  -- TIER 4
-    {["rarity"] = RARITY_COMMON, ["tier"] = 4, ["units"] = {
-      "neutral_common_skeleton"
-    }}, -- 866 | 866
-    {["rarity"] = RARITY_RARE, ["tier"] = 4, ["units"] = { -- [x1.25]
-      "neutral_rare_frostbitten", "neutral_rare_frostbitten",
-      "neutral_rare_mage"
-    }}, -- 877 | 210 + 210 + 457 [1,095 | 262 + 262 + 571]
-    {["rarity"] = RARITY_EPIC, ["tier"] = 2, ["units"] = { -- [x1.5]
-      "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo", "neutral_epic_igneo"
-    }}, -- 840 | 210 + 210 + 210 + 210 [1260 | 315 + 315 + 315 + 315]
-    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 4, ["units"] = { -- [x1.75]
-      "neutral_legendary_spider"
-    }}, -- 866 | 866 [1,515 | 1,515]
-
-  -- TIER 5
-    {["rarity"] = RARITY_COMMON, ["tier"] = 5, ["units"] = {
-      "neutral_common_drake", "neutral_common_drake", "neutral_common_drake"
-    }}, -- 1,128 | 376 + 376 + 376
-    {["rarity"] = RARITY_RARE, ["tier"] = 5, ["units"] = { -- [x1.25]
-      "neutral_rare_crocodile", "neutral_rare_crocodile", "neutral_rare_crocodile"
-    }}, -- 1,128 | 376 + 376 + 376 [1,410 | 470 + 470 + 470]
-    {["rarity"] = RARITY_EPIC, ["tier"] = 5, ["units"] = { -- [x1.5]
-      "neutral_epic_lamp", "neutral_epic_lamp"
-    }}, -- 1190 | 595 + 595 [ 2,082 | 1,041 + 1,041]
-    {["rarity"] = RARITY_LEGENDARY, ["tier"] = 5, ["units"] = { -- [x1.75]
-      "neutral_legendary_iron_golem"
-    }}, -- 1190 | 1190 [ 2,082 | 2,082]
-  }
-
 SPAWNER_SPOTS = {
   ["death"] = {
     [1] = { ["mob"] = {}, ["origin"] = Vector(1043.112671, -2866.549316, 0.000000), ["respawn"] = -90 },
@@ -388,19 +315,6 @@ SPAWNER_BOSS_SPOTS = {
   [1] = { ["mob"] = {}, ["origin"] = Vector(-6500, 0, 0), ["respawn"] = -300},
   [2] = { ["mob"] = {}, ["origin"] = Vector(6500, 0, 0), ["respawn"] = -300},
 }
-
-MAX_MOB_COUNT_TOTAL = 10
-MAX_MOB_COUNT_PER_AREA = 3
-MAX_BOSS_COUNT = 1
-
-BALDUR_CHARGING = 0
-BALDUR_READY = 1
-BALDUR_READY_NO_MANACOST = 2
-
-GENUINE_TRAVEL_STATE_IN = 0
-GENUINE_TRAVEL_STATE_OUT = 1
-CYCLE_NIGHT = 0
-CYCLE_DAY = 1
 
 PLAYERS = {}
 TEAMS = { -- [1] Team, [2] Score, [3] Team Name, [4] number of players, [5] team colour bar  
@@ -454,6 +368,18 @@ HEROES_DATA = {
     shield_fx_height = 235
   },
 }
+
+CYCLE_NIGHT = 0
+CYCLE_DAY = 1
+
+BALDUR_CHARGING = 0
+BALDUR_READY = 1
+BALDUR_READY_NO_MANACOST = 2
+
+GENUINE_TRAVEL_DEFAULT = 2
+GENUINE_TRAVEL_ON_ORB = 3
+GENUINE_TRAVEL_SUPER_CAST = 5
+GENUINE_TRAVEL_POINT_CAST = 7
 
 -- if GetHeroName(self.parent) == "lawbreaker" then size = 185 end
 -- if GetHeroName(self.parent) == "bocuse" then size = 210 end

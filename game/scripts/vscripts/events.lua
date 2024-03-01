@@ -292,6 +292,8 @@ function GameMode:OnTeamKillCredit(keys)
   --DebugPrint('[BAREBONES] OnTeamKillCredit')
   --DebugPrintTable(keys)
 
+  if IsInToolsMode() then return end
+
   local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
   local victimPlayer = PlayerResource:GetPlayer(keys.victim_userid)
   local numKills = keys.herokills

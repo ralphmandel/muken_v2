@@ -34,7 +34,7 @@ function bloodstained_special_values:OnCreated(kv)
     holy_damage = 0,
     luck = 0,
     heal_power = 0,
-    tears_step = 1
+    behavior_tears = 0
   }
 end
 
@@ -135,7 +135,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "AbilityHealthCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
 
-    if value_name == "step" then return 1 end
+    if value_name == "behavior" then return 1 end
     if value_name == "radius" then return 1 end
     if value_name == "blood_duration" then return 1 end
     if value_name == "hp_lost" then return 1 end
@@ -342,7 +342,7 @@ function bloodstained_special_values:GetModifierOverrideAbilitySpecialValue(keys
     if value_name == "AbilityCooldown" then return ability:GetSpecialValueFor("cooldown") end
     if value_name == "cooldown" then return 40 - (value_level * 2.5) end
 
-    if value_name == "step" then return self.data_props["tears_step"] end
+    if value_name == "behavior" then return self.data_props["behavior_tears"] end
     if value_name == "radius" then return 350 end
     if value_name == "blood_duration" then return 20 end
     if value_name == "hp_lost" then return 1 end

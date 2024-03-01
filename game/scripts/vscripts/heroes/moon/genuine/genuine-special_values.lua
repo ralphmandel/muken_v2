@@ -33,7 +33,8 @@ function genuine_special_values:OnCreated(kv)
     magical_damage = 0,
     holy_damage = 0,
     heal_power = 0,
-    luck = 0
+    luck = 0,
+    behavior_travel = 2
   }
 end
 
@@ -72,6 +73,9 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
 	local value_name = keys.ability_special_value
 	local value_level = keys.ability_special_level
 
+  if value_name == "starfall_damage" then return 1 end
+	if value_name == "starfall_radius" then return 1 end
+
 	if ability:GetAbilityName() == "genuine_1__shooting" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
@@ -106,8 +110,16 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "behavior" then return 1 end
+    if value_name == "silence_duration" then return 1 end
+    if value_name == "vision_radius" then return 1 end
+    if value_name == "radius" then return 1 end
+    if value_name == "speed" then return 1 end
+    if value_name == "distance" then return 1 end
+    if value_name == "silence_radius" then return 1 end
+    if value_name == "special_attack_immunity" then return 1 end
+    if value_name == "special_move" then return 1 end
 	end
 
   if ability:GetAbilityName() == "genuine_4__under" then
@@ -147,6 +159,9 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
   local mana_mult = (1 + ((ability_level - 1) * 0.1))
 
+  local starfall_damage = 175 * self:GetMagicalDamageAmp()
+  local starfall_radius = 250
+
 	if ability:GetAbilityName() == "genuine_1__shooting" then
     if self:HasRank(1, 1, 1) then
       if value_name == "special_attack_range" then return 100 end
@@ -157,7 +172,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(1, 2, 1) then
-      if value_name == "AbilityManaCost" then return 50 * mana_mult end
+      if value_name == "AbilityManaCost" then return 45 * mana_mult end
 		end
 
     if self:HasRank(1, 2, 2) then
@@ -223,26 +238,51 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
 	if ability:GetAbilityName() == "genuine_3__travel" then
+    local behavior = self.data_props["behavior_travel"]
+
     if self:HasRank(3, 1, 1) then
+      if value_name == "silence_duration" then return 6 * self:GetDebuffAmp() end
     end
 
     if self:HasRank(3, 1, 2) then
+      if value_name == "starfall_damage" then return starfall_damage end
+      if value_name == "starfall_radius" then return starfall_radius end
     end
 
     if self:HasRank(3, 2, 1) then
+      if value_name == "behavior" then behavior = behavior * GENUINE_TRAVEL_SUPER_CAST end
 		end
 
     if self:HasRank(3, 2, 2) then
+      if value_name == "special_attack_immunity" then return 4 * self:GetBuffAmp() end
 		end
 
 		if self:HasRank(3, 3, 1) then
+      if value_name == "speed" then return 2000 end
+      if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("distance") end
+      if value_name == "behavior" then behavior = behavior * GENUINE_TRAVEL_POINT_CAST end
 		end
 
     if self:HasRank(3, 3, 2) then
+      if value_name == "distance" then return 1500 end
+      if value_name == "special_move" then return 1 end
 		end
 
-    if value_name == "AbilityManaCost" then return 100 * mana_mult end
+    if value_name == "AbilityManaCost" then
+      if ability:GetSpecialValueFor("behavior") % GENUINE_TRAVEL_ON_ORB == 0 then return 0 end
+      return 150 * mana_mult
+    end
+
     if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCastRange" then return 0 end
+    if value_name == "silence_radius" then return 300 + (value_level * 25) end
+
+    if value_name == "behavior" then return behavior end
+    if value_name == "silence_duration" then return 3 * self:GetDebuffAmp() end
+    if value_name == "vision_radius" then return 250 end
+    if value_name == "radius" then return 150 end
+    if value_name == "speed" then return 500 end
+    if value_name == "distance" then return 1000 end
 	end
 
 	if ability:GetAbilityName() == "genuine_4__under" then

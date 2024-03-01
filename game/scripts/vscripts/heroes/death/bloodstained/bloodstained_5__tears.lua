@@ -7,19 +7,19 @@ LinkLuaModifier("bloodstained_5_modifier_blood", "heroes/death/bloodstained/bloo
   function bloodstained_5__tears:OnOwnerSpawned()
     local caster = self:GetCaster()
     local special_kv_modifier = caster:FindModifierByName("bloodstained_special_values")
-    if special_kv_modifier then special_kv_modifier:UpdateData("tears_step", 1) end
+    if special_kv_modifier then special_kv_modifier:UpdateData("behavior_tears", 0) end
   end
 
   function bloodstained_5__tears:GetAbilityTextureName()
-    if self:GetSpecialValueFor("step") == 1 then return "bloodstained_tears" end
-    if self:GetSpecialValueFor("step") == 2 then return "bloodstained_consume" end
+    if self:GetSpecialValueFor("behavior") == 1 then return "bloodstained_consume" end
 
     return "bloodstained_tears"
   end
 
   function bloodstained_5__tears:GetBehavior()
-    if self:GetSpecialValueFor("step") == 1 then return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE end
-    if self:GetSpecialValueFor("step") == 2 then return DOTA_ABILITY_BEHAVIOR_NO_TARGET end
+    if self:GetSpecialValueFor("behavior") == 1 then return DOTA_ABILITY_BEHAVIOR_NO_TARGET end
+
+    return DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR_IMMEDIATE
   end
 
   function bloodstained_5__tears:GetAOERadius()
@@ -33,7 +33,7 @@ LinkLuaModifier("bloodstained_5_modifier_blood", "heroes/death/bloodstained/bloo
     local special_kv_modifier = caster:FindModifierByName("bloodstained_special_values")
     if special_kv_modifier == nil then return end
 
-    if self:GetSpecialValueFor("step") == 1 then
+    if self:GetSpecialValueFor("behavior") == 0 then
       if self:GetSpecialValueFor("special_purge") == 1 then
         caster:Purge(false, true, false, false, false)
       end
@@ -42,13 +42,13 @@ LinkLuaModifier("bloodstained_5_modifier_blood", "heroes/death/bloodstained/bloo
       self:PlayEfxShake()
       self:EndCooldown()
       self:StartCooldown(3)
-      special_kv_modifier:UpdateData("tears_step", 2)
+      special_kv_modifier:UpdateData("behavior_tears", 1)
       return
     end
 
-    if self:GetSpecialValueFor("step") == 2 then
+    if self:GetSpecialValueFor("behavior") == 1 then
       caster:RemoveModifierByName("bloodstained_5_modifier_tears")
-      special_kv_modifier:UpdateData("tears_step", 1)
+      special_kv_modifier:UpdateData("behavior_tears", 0)
     end
   end
 

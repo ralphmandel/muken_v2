@@ -18,8 +18,7 @@ function neutral_spiders_modifier_summon:OnCreated(kv)
   })
 
   self.target = EntIndexToHScript(kv.target)
-  self.parent:SetForceAttackTarget(self.target)
-  self.parent:MoveToTargetToAttack(self.target)
+  self.parent:AddModifier(self.ability, "_modifier_force_attack", {target = kv.target})
   self:StartIntervalThink(1)
 end
 
@@ -79,16 +78,15 @@ function neutral_spiders_modifier_summon:OnIntervalThink()
     end
   end
 
+  self.parent:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
+
   if self.caster:GetAggroTarget() then
     self.target = self.caster:GetAggroTarget()
-    self.parent:SetForceAttackTarget(self.target)
-    self.parent:MoveToTargetToAttack(self.target)
-    return
+    self.parent:AddModifier(self.ability, "_modifier_force_attack", {target = self.target:GetEntityIndex()})
+  else
+    self.target = nil
+    self.parent:MoveToNPC(self.caster)
   end
-
-  self.target = nil
-  self.parent:SetForceAttackTarget(nil)
-  self.parent:MoveToNPC(self.caster)
 end
 
 -- UTILS -----------------------------------------------------------

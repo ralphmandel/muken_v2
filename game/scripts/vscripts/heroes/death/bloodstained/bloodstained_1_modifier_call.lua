@@ -12,8 +12,7 @@ function bloodstained_1_modifier_call:OnCreated(kv)
 
   if not IsServer() then return end
 
-	self.parent:SetForceAttackTarget(self.caster)
-	self.parent:MoveToTargetToAttack(self.caster)
+  self.parent:AddModifier(self.ability, "_modifier_force_attack", {target = self.caster:GetEntityIndex()})
   self.parent:AddStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_call_status_efx")
 end
 
@@ -23,19 +22,11 @@ end
 function bloodstained_1_modifier_call:OnRemoved()
   if not IsServer() then return end
 
-	self.parent:SetForceAttackTarget(nil)
+	self.parent:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
   self.parent:RemoveStatusEfx(self.caster, self.ability, "bloodstained_1_modifier_call_status_efx")
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
-
-function bloodstained_1_modifier_call:CheckState()
-	local state = {
-		[MODIFIER_STATE_COMMAND_RESTRICTED] = true
-	}
-
-	return state
-end
 
 -- UTILS -----------------------------------------------------------
 

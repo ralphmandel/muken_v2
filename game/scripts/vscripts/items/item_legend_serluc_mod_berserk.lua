@@ -33,7 +33,6 @@ function item_legend_serluc_mod_berserk:OnRefresh( kv )
 end
 
 function item_legend_serluc_mod_berserk:OnRemoved( kv )
-	self.parent:SetForceAttackTarget(nil)
 	RemoveBonus(self.ability, "AGI", self.parent)
   RemoveAllModifiersByNameAndAbility(self.parent, "_modifier_movespeed_buff", self.ability)
   --RemoveStatusEfx(self.ability, "krieger_1_modifier_fury_status_efx", self.caster, self.parent)
@@ -72,7 +71,6 @@ function item_legend_serluc_mod_berserk:FindNewTarget(bUnits)
 	for _,hero in pairs(heroes) do
 		self.target = hero
 		self.parent:MoveToTargetToAttack(self.target)
-		self.parent:SetForceAttackTarget(self.target)
 		return
 	end
 
@@ -86,7 +84,6 @@ function item_legend_serluc_mod_berserk:FindNewTarget(bUnits)
 		for _,enemy in pairs(enemies) do
 			self.target = enemy
 			self.parent:MoveToTargetToAttack(self.target)
-			self.parent:SetForceAttackTarget(self.target)
 			return
 		end
 	end

@@ -15,6 +15,7 @@ LinkLuaModifier("_modifier_ethereal", "_modifiers/generics/_modifier_ethereal", 
 LinkLuaModifier("_modifier_ethereal_status_efx", "_modifiers/generics/_modifier_ethereal_status_efx", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_fear", "_modifiers/generics/_modifier_fear", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_fear_status_efx", "_modifiers/generics/_modifier_fear_status_efx", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("_modifier_force_attack", "_modifiers/generics/_modifier_force_attack", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_generic_arc", "_modifiers/generics/_modifier_generic_arc", LUA_MODIFIER_MOTION_BOTH)
 LinkLuaModifier("_modifier_generic_custom_indicator", "_modifiers/generics/_modifier_generic_custom_indicator", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("_modifier_generic_knockback_lua", "_modifiers/generics/_modifier_generic_knockback_lua", LUA_MODIFIER_MOTION_NONE)

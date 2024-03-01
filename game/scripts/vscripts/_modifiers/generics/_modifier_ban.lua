@@ -44,6 +44,7 @@ function _modifier_ban:CheckState()
 	local state = {
 		[MODIFIER_STATE_OUT_OF_GAME] = true,
     [MODIFIER_STATE_STUNNED] = true,
+    [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
     [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
 		[MODIFIER_STATE_INVULNERABLE] = true,
 	}

@@ -74,7 +74,6 @@ function _modifier__ai:IdleThink()
 
   if target then
     self.aggroTarget = target
-    self.unit:MoveToTargetToAttack(self.aggroTarget)
     self:SetState(AI_STATE_AGGRESSIVE)
     return
   end
@@ -102,7 +101,6 @@ function _modifier__ai:AggressiveThink()
     end
   end
 
-  self.unit:MoveToTargetToAttack(self.aggroTarget)
 
   local units = FindUnitsInRadius(
     self.unit:GetTeam(), self.unit:GetAbsOrigin(), nil, 800,
@@ -129,7 +127,6 @@ function _modifier__ai:ReturningThink()
 
     if target then
       self.aggroTarget = target
-      self.unit:MoveToTargetToAttack(self.aggroTarget)
       self:SetState(AI_STATE_AGGRESSIVE)
       return
     end
@@ -184,6 +181,12 @@ function _modifier__ai:SetReturning(aggressive)
 end
 
 function _modifier__ai:SetState(new_state)
+  if new_state == AI_STATE_AGGRESSIVE then
+    self.unit:AddModifier(self.ability, "_modifier_force_attack", {target = self.aggroTarget:GetEntityIndex()})
+  else
+    self.unit:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
+  end
+
   self.state = new_state
   self:SendBuffRefreshToClients()
 end
@@ -233,7 +236,6 @@ function _modifier__ai:OnTakeDamage(keys)
   if CalcDistanceBetweenEntityOBB(self.unit, keys.attacker) > self.leashRange - 100 then return end
 
   self.aggroTarget = keys.attacker
-  self.unit:MoveToTargetToAttack(self.aggroTarget)
   self:SetState(AI_STATE_AGGRESSIVE)
 end
 
