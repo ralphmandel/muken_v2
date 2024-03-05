@@ -251,6 +251,7 @@ function _modifier_agi:UpdateMainBonus()
 
   self.stat_bonus = value
   self:SendBuffRefreshToClients()
+  self.ability:UpdatePanoramaStat()
 end
 
 function _modifier_agi:UpdateSubBonus(property)

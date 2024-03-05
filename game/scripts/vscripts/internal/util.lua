@@ -218,32 +218,6 @@
     return false
   end
 
-  function UpdatePanoramaStat(baseNPC, stat)
-    if baseNPC:IsHero() == false then return end
-    if baseNPC:IsIllusion() then return end
-    
-    local player = baseNPC:GetPlayerOwner()
-    if (not player) then return end
-
-    local modifier = baseNPC:FindModifierByName("_modifier_"..stat)
-    if modifier == nil then return end
-
-    local value = 0
-    local mods = baseNPC:FindAllModifiersByName("main_stat_modifier")
-    for _,mod in pairs(mods) do
-      if mod.kv[stat] then value = value + mod.kv[stat] end
-    end
-
-    modifier:UpdateMainBonus(value)
-
-    CustomGameEventManager:Send_ServerToPlayer(player, "update_stat_from_lua", {
-      stat = string.upper(stat),
-      base = modifier:GetAbility():GetLevel(),
-      bonus = modifier.stat_bonus,
-      total = modifier:GetAbility():GetLevel() + modifier.stat_bonus
-    })
-  end
-
 -- HEROES UTIL
 
   function HasTreeNearby(point, radius)

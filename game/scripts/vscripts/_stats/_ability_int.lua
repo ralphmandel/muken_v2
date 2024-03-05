@@ -8,5 +8,24 @@ function _ability_int:GetIntrinsicModifierName()
 end
 
 function _ability_int:OnUpgrade()
-  if IsServer() then UpdatePanoramaStat(self:GetCaster(), "int") end
+  local caster = self:GetCaster()
+  caster:FindModifierByName(self:GetIntrinsicModifierName()):UpdateMainBonus()
+end
+
+function _ability_int:UpdatePanoramaStat()
+  local caster = self:GetCaster()
+  if caster:IsHero() == false then return end
+  if caster:IsIllusion() then return end
+  
+  local player = caster:GetPlayerOwner()
+  if (not player) then return end
+
+  local modifier = caster:FindModifierByName(self:GetIntrinsicModifierName())
+
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_stat_from_lua", {
+    stat = string.upper("int"),
+    base = modifier:GetAbility():GetLevel(),
+    bonus = modifier.stat_bonus,
+    total = modifier:GetAbility():GetLevel() + modifier.stat_bonus
+  })
 end

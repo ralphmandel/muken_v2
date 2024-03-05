@@ -74,16 +74,21 @@ LinkLuaModifier("_modifier_ban", "_modifiers/_modifier_ban", LUA_MODIFIER_MOTION
     local caster = self:GetCaster()
     local distance = self:GetSpecialValueFor("distance")
     local origin = caster:GetOrigin()
-
-    self.direction = point - origin
-    local direction = Vector(self.direction.x, self.direction.y, 0):Normalized()
+    local direction = point - origin
 
     local data = {
       max_distance = distance,
       travelled_distance = travelled_distance,
+      direction = direction,
       origin = origin,
       location = origin
     }
+
+    if self:HasBehavior(GENUINE_TRAVEL_POINT_CAST) then
+      distance = self.direction:Length2D()
+    end
+
+    direction = Vector(direction.x, direction.y, 0):Normalized()
 
     if new_orb == false and self.projectileData then
       data.travelled_distance = self.projectileData.travelled_distance + travelled_distance
@@ -96,10 +101,6 @@ LinkLuaModifier("_modifier_ban", "_modifiers/_modifier_ban", LUA_MODIFIER_MOTION
       )
 
       data.modifier = modifier_thinker:FindModifierByName("genuine_3_modifier_orb")
-    end
-
-    if self:HasBehavior(GENUINE_TRAVEL_POINT_CAST) then
-      distance = self.direction:Length2D()
     end
 
     if distance > distance - data.travelled_distance then

@@ -69,6 +69,8 @@ require("internal/rank_system")
 
     if self:IsTrained() == false then self:UpgradeAbility(true) end
 
+    self.stats_lv_limit = {["str"] = 30, ["agi"] = 30, ["int"] = 30, ["vit"] = 30}
+
     local caster = self:GetCaster()
     if caster:IsHero() then return end
   
@@ -220,13 +222,21 @@ require("internal/rank_system")
     for stat, bool in pairs(stats) do
       local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
       if ability_stat then
-        stats[stat] = ability_stat:GetLevel() < 30 + (caster:GetLevel() * 4) and self.stat_points > 0
+        stats[stat] = ability_stat:GetLevel() < self.stats_lv_limit[string.lower(stat)] + (caster:GetLevel() * 4) and self.stat_points > 0
       end
     end
 
     CustomGameEventManager:Send_ServerToPlayer(player, "update_stats_point_from_lua", {
       total_points = self.stat_points, stats = stats, upgraded_stat = upgraded_stat
     })
+  end
+
+  function base_hero:AddPermanentStat(stats, amount)
+    for _,stat in pairs(stats) do
+      self.stats_lv_limit[stat] = self.stats_lv_limit[stat] + amount
+      local ability_stat = self:GetCaster():FindAbilityByName("_ability_"..stat)
+      if ability_stat then ability_stat:SetLevel(ability_stat:GetLevel() + amount) end
+    end
   end
 
 -- RANK SYSTEM

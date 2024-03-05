@@ -112,6 +112,7 @@
   /* width: fit-children; */
   /* height: fit-children; */
   flow-children: down;
+  margin-left: 5px;
 }
 
 .TitleLabel
@@ -128,6 +129,7 @@
   height: 19px;
   width: 30px;
   margin-bottom: 5px;
+  text-align: right;
 }
 
 .StatBonus
@@ -184,18 +186,22 @@
 .PositiveStats
 {
   text-shadow: 0 0 2px greenyellow;
+  horizontal-align: right;
+  text-align: right;
 }
 
 .NegativeStats
 {
   text-shadow: 0 0 2px red;
+  horizontal-align: right;
+  text-align: right;
 }
 
 .NeutralStats
 {
   text-shadow: 0 0 3px rgb(150, 150, 150);
   horizontal-align: right;
-  margin-right: 5px;
+  text-align: right;
 }
 
 #PtsTotalContainer

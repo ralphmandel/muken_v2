@@ -646,6 +646,7 @@
 				}
 			}
 			m_nOutputField = 7
+			m_bDisableOperator = true
 		},
 	]
 	m_Operators = 

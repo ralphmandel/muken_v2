@@ -255,6 +255,8 @@ function _modifier_int:UpdateMainBonus()
 
   self.stat_bonus = value
   self:SendBuffRefreshToClients()
+  self.ability:UpdatePanoramaStat()
+
   for property, table in pairs(self.data) do
     self:OnStatUpated(property)
   end

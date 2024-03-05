@@ -141,9 +141,11 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
   if ability:GetAbilityName() == "genuine_u__morning" then
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
-    if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "int" then return 1 end
+    if value_name == "agi" then return 1 end
+		if value_name == "duration_night" then return 1 end
+		if value_name == "duration_day" then return 1 end
 	end
 
 	return 0
@@ -350,8 +352,13 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if self:HasRank(6, 3, 2) then
 		end
 
-    if value_name == "AbilityManaCost" then return 100 * mana_mult end
-    if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityManaCost" then return 0 * mana_mult end
+    if value_name == "AbilityCooldown" then return 90 end
+    if value_name == "duration_night" then return (60 + (value_level * 2.5)) * self:GetBuffAmp() end
+		if value_name == "duration_day" then return (20 + (value_level * 2.5)) * self:GetBuffAmp() end
+
+    if value_name == "int" then return 30 end
+    if value_name == "agi" then return 30 end
 	end
 
 	return 0
