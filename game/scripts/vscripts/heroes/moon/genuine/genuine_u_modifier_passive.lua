@@ -3,6 +3,20 @@ genuine_u_modifier_passive = class({})
 function genuine_u_modifier_passive:IsHidden() return false end
 function genuine_u_modifier_passive:IsPurgable() return false end
 
+-- AURA -----------------------------------------------------------
+
+function genuine_u_modifier_passive:IsAura() return true end
+function genuine_u_modifier_passive:GetAuraDuration() return 0 end
+function genuine_u_modifier_passive:GetModifierAura() return "genuine_u_modifier_morning" end
+function genuine_u_modifier_passive:GetAuraRadius() return FIND_UNITS_EVERYWHERE end
+function genuine_u_modifier_passive:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_FRIENDLY end
+function genuine_u_modifier_passive:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO end
+function genuine_u_modifier_passive:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD end
+function genuine_u_modifier_passive:GetAuraEntityReject(hEntity)
+  if not IsServer() then return true end
+  return self.caster ~= hEntity or self.ability:GetSpecialValueFor("special_passive") == 0 or GameRules:IsDaytime()
+end
+
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function genuine_u_modifier_passive:OnCreated(kv)
@@ -13,6 +27,7 @@ function genuine_u_modifier_passive:OnCreated(kv)
   if not IsServer() then return end
 
   self:SetStackCount(0)
+  self:StartIntervalThink(1)
 end
 
 function genuine_u_modifier_passive:OnRefresh(kv)  

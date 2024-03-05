@@ -1,5 +1,4 @@
 genuine_3__travel = class({})
-LinkLuaModifier("genuine_3_modifier_passive", "heroes/moon/genuine/genuine_3_modifier_passive", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("genuine__modifier_starfall", "heroes/moon/genuine/genuine__modifier_starfall", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("genuine_3_modifier_travel", "heroes/moon/genuine/genuine_3_modifier_travel", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("genuine_3_modifier_orb", "heroes/moon/genuine/genuine_3_modifier_orb", LUA_MODIFIER_MOTION_NONE)
@@ -58,6 +57,19 @@ LinkLuaModifier("_modifier_ban", "_modifiers/_modifier_ban", LUA_MODIFIER_MOTION
     self.projectileData.location = location
     self.projectileData.modifier:GetParent():SetOrigin(location)
     caster:SetOrigin(location)
+    self:SetDirection()
+  end
+
+  function genuine_3__travel:SetDirection()
+    if self.aggro_target == nil then return end
+    if IsValidEntity(self.aggro_target) == false then return end
+    if self.casting then return end
+  
+    local caster = self:GetCaster()
+
+    caster:SetAggroTarget(self.aggro_target)
+    caster:MoveToTargetToAttack(self.aggro_target)
+    caster:SetForwardVector((self.aggro_target:GetOrigin() - caster:GetOrigin()):Normalized())
   end
 
   function genuine_3__travel:OnProjectileHitHandle(target, location, proj)
@@ -85,7 +97,7 @@ LinkLuaModifier("_modifier_ban", "_modifiers/_modifier_ban", LUA_MODIFIER_MOTION
     }
 
     if self:HasBehavior(GENUINE_TRAVEL_POINT_CAST) then
-      distance = self.direction:Length2D()
+      distance = direction:Length2D()
     end
 
     direction = Vector(direction.x, direction.y, 0):Normalized()

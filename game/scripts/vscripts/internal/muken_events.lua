@@ -180,7 +180,7 @@ function MukenEvents:OnPortraitUpdate(event)
     heal_amp = entity:GetMainStat("VIT"):GetIncomingHeal(),
     status_resist = entity:GetMainStat("VIT"):GetStatusResist(true) * 100,
     cd_reduction = entity:GetMainStat("AGI"):GetCooldownReduction(),
-    cd_reduction_percent = entity:GetCooldownReduction() * 100,
+    cd_reduction_percent = 100 - (entity:GetCooldownReduction() * 100),
     buff_amp = entity:GetMainStat("VIT"):GetIncomingBuff() * 100
   }
 

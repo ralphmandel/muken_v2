@@ -113,13 +113,14 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
 
     if value_name == "behavior" then return 1 end
     if value_name == "silence_duration" then return 1 end
+    if value_name == "silence_radius" then return 1 end
     if value_name == "vision_radius" then return 1 end
     if value_name == "radius" then return 1 end
     if value_name == "speed" then return 1 end
+    if value_name == "change_direction" then return 1 end
     if value_name == "distance" then return 1 end
-    if value_name == "silence_radius" then return 1 end
     if value_name == "special_attack_immunity" then return 1 end
-    if value_name == "special_move" then return 1 end
+    if value_name == "special_no_disarm" then return 1 end
 	end
 
   if ability:GetAbilityName() == "genuine_4__under" then
@@ -146,6 +147,9 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "agi" then return 1 end
 		if value_name == "duration_night" then return 1 end
 		if value_name == "duration_day" then return 1 end
+    if value_name == "special_fly_vision" then return 1 end
+    if value_name == "special_interval" then return 1 end
+    if value_name == "special_passive" then return 1 end
 	end
 
 	return 0
@@ -243,7 +247,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     local behavior = self.data_props["behavior_travel"]
 
     if self:HasRank(3, 1, 1) then
-      if value_name == "silence_duration" then return 6 * self:GetDebuffAmp() end
+      if value_name == "silence_radius" then return 500 end
     end
 
     if self:HasRank(3, 1, 2) then
@@ -259,15 +263,16 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "special_attack_immunity" then return 4 * self:GetBuffAmp() end
 		end
 
-		if self:HasRank(3, 3, 1) then
+    if self:HasRank(3, 3, 1) then
       if value_name == "speed" then return 2000 end
       if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("distance") end
       if value_name == "behavior" then behavior = behavior * GENUINE_TRAVEL_POINT_CAST end
+      if value_name == "change_direction" then return 0 end
 		end
 
     if self:HasRank(3, 3, 2) then
-      if value_name == "distance" then return 1500 end
-      if value_name == "special_move" then return 1 end
+      if value_name == "special_no_disarm" then return 1 end
+      if value_name == "speed" then return 400 end
 		end
 
     if value_name == "AbilityManaCost" then
@@ -275,16 +280,17 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       return 150 * mana_mult
     end
 
-    if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCooldown" then return 24 end
     if value_name == "AbilityCastRange" then return 0 end
-    if value_name == "silence_radius" then return 300 + (value_level * 25) end
+    if value_name == "distance" then return 1200 + (value_level * 50) end
 
     if value_name == "behavior" then return behavior end
     if value_name == "silence_duration" then return 3 * self:GetDebuffAmp() end
+    if value_name == "silence_radius" then return 300 end
     if value_name == "vision_radius" then return 250 end
     if value_name == "radius" then return 150 end
     if value_name == "speed" then return 500 end
-    if value_name == "distance" then return 1000 end
+    if value_name == "change_direction" then return 1 end
 	end
 
 	if ability:GetAbilityName() == "genuine_4__under" then
@@ -335,27 +341,38 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "genuine_u__morning" then
     if self:HasRank(6, 1, 1) then
+      if value_name == "int" then return 40 end
     end
 
     if self:HasRank(6, 1, 2) then
+      if value_name == "agi" then return 40 end
     end
 
     if self:HasRank(6, 2, 1) then
+      if value_name == "special_fly_vision" then return 1 end
 		end
 
     if self:HasRank(6, 2, 2) then
+      if value_name == "starfall_damage" then return starfall_damage end
+      if value_name == "starfall_radius" then return starfall_radius end
+      if value_name == "special_interval" then return 6 end
 		end
 
 		if self:HasRank(6, 3, 1) then
+      if value_name == "duration_day" then return ability:GetSpecialValueFor("duration_night") end
 		end
 
     if self:HasRank(6, 3, 2) then
+      if value_name == "AbilityCooldown" then return 0 end
+      if value_name == "duration_night" then return 0 end
+      if value_name == "duration_day" then return 0 end
+      if value_name == "special_passive" then return 1 end
 		end
 
     if value_name == "AbilityManaCost" then return 0 * mana_mult end
-    if value_name == "AbilityCooldown" then return 90 end
-    if value_name == "duration_night" then return (60 + (value_level * 2.5)) * self:GetBuffAmp() end
-		if value_name == "duration_day" then return (20 + (value_level * 2.5)) * self:GetBuffAmp() end
+    if value_name == "AbilityCooldown" then return 120 end
+    if value_name == "duration_night" then return 60 + (value_level * 1.5) end
+		if value_name == "duration_day" then return 20 + (value_level * 0.5) end
 
     if value_name == "int" then return 30 end
     if value_name == "agi" then return 30 end

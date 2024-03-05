@@ -14,6 +14,14 @@ LinkLuaModifier("genuine_u_modifier_morning", "heroes/moon/genuine/genuine_u_mod
     return "genuine_u_modifier_passive"
   end
 
+  function genuine_u__morning:GetBehavior()
+    if self:GetSpecialValueFor("special_passive") == 1 then
+      return DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE + DOTA_ABILITY_BEHAVIOR_PASSIVE
+    end
+    
+    return DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE + DOTA_ABILITY_BEHAVIOR_NO_TARGET
+  end
+
 -- SPELL START
 
   function genuine_u__morning:OnAbilityPhaseStart()
@@ -27,11 +35,32 @@ LinkLuaModifier("genuine_u_modifier_morning", "heroes/moon/genuine/genuine_u_mod
 
   function genuine_u__morning:OnSpellStart()
     local caster = self:GetCaster()
-    local duration = self:GetSpecialValueFor("duration_night")
+    local duration_night = self:GetSpecialValueFor("duration_night")
+    local duration_day = self:GetSpecialValueFor("duration_day")
+    local dota_time = GameRules:GetDOTATime(false, true)
+    local cycle_time = dota_time % 300
+    local duration = 0
+    local extra_time = 0
 
-    if GameRules:IsDaytime() then duration = self:GetSpecialValueFor("duration_day") end
+    if cycle_time >= 0 and cycle_time <= 150 - duration_day then
+      duration = duration_day
+    end
 
-    caster:AddModifier(self, "genuine_u_modifier_morning", {duration = duration})
+    if cycle_time > 150 - duration_day and cycle_time < 150 then
+      duration = 150 - cycle_time
+      extra_time = (duration_day - duration) * (duration_night / duration_day)
+    end
+
+    if cycle_time >= 150 and cycle_time <= 300 - duration_night then
+      duration = duration_night
+    end
+
+    if cycle_time > 300 - duration_night and cycle_time < 300 then
+      duration = 300 - cycle_time
+      extra_time = (duration_night - duration) * (duration_day / duration_night)
+    end
+
+    caster:AddModifier(self, "genuine_u_modifier_morning", {duration = duration + extra_time})
   end
 
   function genuine_u__morning:OnHeroDiedNearby(unit, attacker, table)

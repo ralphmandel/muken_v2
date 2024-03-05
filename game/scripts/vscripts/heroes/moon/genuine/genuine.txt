@@ -106,15 +106,16 @@
 		{
       "behavior"          "0"
 			"silence_duration"  "0"
+			"silence_radius"	  "0"
 			"vision_radius"	    "0"
 			"radius"	          "0"
 			"speed"	            "0"
-			"distance"	        "0"
-			"silence_radius"	  "1 2 3 4 5 6 7"
+      "change_direction"  "0"
+			"distance"	        "1 2 3 4 5 6 7"
       "starfall_damage"   "0"
       "starfall_radius"   "0"
       "special_attack_immunity" "0"
-      "special_move"            "0"
+      "special_no_disarm"       "0"
 		}
 
     "precache"
@@ -204,6 +205,11 @@
       "agi"             "0"
       "duration_night"  "1 2 3 4 5 6 7"
       "duration_day"    "1 2 3 4 5 6 7"
+      "starfall_damage"     "0"
+      "starfall_radius"     "0"
+      "special_fly_vision"  "0"
+      "special_interval"    "0"
+      "special_passive"     "0"
 		}
 
     "precache"
