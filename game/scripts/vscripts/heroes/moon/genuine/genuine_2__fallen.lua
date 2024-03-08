@@ -131,8 +131,11 @@ LinkLuaModifier("genuine_2_modifier_fallen", "heroes/moon/genuine/genuine_2_modi
   end
 
   function genuine_2__fallen:DestroyCustomIndicator()
-    ParticleManager:DestroyParticle(self.effect_indicator, true)
-    ParticleManager:ReleaseParticleIndex(self.effect_indicator)
+    if self.effect_indicator then
+      ParticleManager:DestroyParticle(self.effect_indicator, true)
+      ParticleManager:ReleaseParticleIndex(self.effect_indicator)
+      self.effect_indicator = nil
+    end
   end
 
   function genuine_2__fallen:UpdateEndPosition(loc)
@@ -147,7 +150,9 @@ LinkLuaModifier("genuine_2_modifier_fallen", "heroes/moon/genuine/genuine_2_modi
       loc = origin - (direction:Normalized() * distance)
     --end
 
-    ParticleManager:SetParticleControl(self.effect_indicator, 0, origin)
-    ParticleManager:SetParticleControl(self.effect_indicator, 1, loc)
-    ParticleManager:SetParticleControl(self.effect_indicator, 2, Vector(radius, radius, radius))
+    if self.effect_indicator then
+      ParticleManager:SetParticleControl(self.effect_indicator, 0, origin)
+      ParticleManager:SetParticleControl(self.effect_indicator, 1, loc)
+      ParticleManager:SetParticleControl(self.effect_indicator, 2, Vector(radius, radius, radius))
+    end
   end

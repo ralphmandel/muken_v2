@@ -135,8 +135,19 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "AbilityManaCost" then return 1 end
 		if value_name == "AbilityCooldown" then return 1 end
     if value_name == "AbilityCastRange" then return 1 end
-    if value_name == "AbilityCharges" then return 1 end
-    if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "damage" then return 1 end
+    if value_name == "stun_duration" then return 1 end
+    if value_name == "vision_radius" then return 1 end
+    if value_name == "vision_duration" then return 1 end
+    if value_name == "tree_width" then return 1 end
+    if value_name == "arrow_width" then return 1 end
+    if value_name == "arrow_speed" then return 1 end
+    if value_name == "arrow_range" then return 1 end
+    if value_name == "cast_point" then return 1 end
+    if value_name == "special_extra_range" then return 1 end
+    if value_name == "special_extra_shoots" then return 1 end
+    if value_name == "special_angle" then return 1 end
 	end
 
   if ability:GetAbilityName() == "genuine_u__morning" then
@@ -316,27 +327,48 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if value_name == "AbilityCooldown" then return 0 end
 	end
 
-	if ability:GetAbilityName() == "genuine_5__smoke" then
+	if ability:GetAbilityName() == "genuine_5__nightfall" then
     if self:HasRank(5, 1, 1) then
+      if value_name == "AbilityCooldown" then return 18 end
     end
 
     if self:HasRank(5, 1, 2) then
+      if value_name == "AbilityManaCost" then return 150 * mana_mult end
     end
 
     if self:HasRank(5, 2, 1) then
+      if value_name == "damage" then return 600 * self:GetMagicalDamageAmp() end
 		end
 
     if self:HasRank(5, 2, 2) then
+      if value_name == "stun_duration" then return 6 * self:GetDebuffAmp() end
 		end
 
 		if self:HasRank(5, 3, 1) then
+      if value_name == "arrow_speed" then return 3500 end
+      if value_name == "special_extra_range" then return 1000 end
 		end
 
     if self:HasRank(5, 3, 2) then
+      if value_name == "special_extra_shoots" then return 4 end
+      if value_name == "special_angle" then return 40 end
+      if value_name == "arrow_width" then return 75 end
+      if value_name == "arrow_range" then return 1750 + ability:GetSpecialValueFor("special_extra_range") end
 		end
 
-    if value_name == "AbilityManaCost" then return 100 * mana_mult end
-    if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityManaCost" then return 200 * mana_mult end
+    if value_name == "AbilityCooldown" then return 21 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("arrow_range") end
+    if value_name == "cast_point" then return 1.2 - (value_level * 0.1) end
+
+    if value_name == "damage" then return 400 * self:GetMagicalDamageAmp() end
+    if value_name == "stun_duration" then return 4 * self:GetDebuffAmp() end
+    if value_name == "vision_radius" then return 600 end
+    if value_name == "vision_duration" then return 1 end
+    if value_name == "tree_width" then return 75 end
+    if value_name == "arrow_width" then return 100 end
+    if value_name == "arrow_speed" then return 2500 end
+    if value_name == "arrow_range" then return 2500 + ability:GetSpecialValueFor("special_extra_range") end
 	end
 
 	if ability:GetAbilityName() == "genuine_u__morning" then

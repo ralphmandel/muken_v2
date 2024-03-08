@@ -166,22 +166,35 @@
 		"RequiredLevel"         	 	"0"
     "LevelsBetweenUpgrades"  		"50"
 
-    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
-		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_MAGICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
 		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
-
-		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint"       		"0.3"
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_2"
 
     "AbilityValues"
 		{
+      "damage"		        "0"
+      "stun_duration"     "0"
+      "vision_radius"			"0"
+      "vision_duration"		"0"
+      "tree_width"			  "0"
+      "arrow_width"			  "0"
+      "arrow_speed"			  "0"
+      "arrow_range"			  "0"
+      "cast_point"		    "1 2 3 4 5 6 7"
+      "cast_rate"		      "0.33 0.36 0.4 0.44 0.5 0.57 0.66"
+      "special_extra_range"   "0"
+      "special_extra_shoots"  "0"
+      "special_angle"         "0"
 		}
 
     "precache"
     {
-      "particle"  ""
+      "particle"  "particles/genuine/genuine_powershoot/genuine_spell_powershot_ti6.vpcf"
+      "particle"  "particles/generic/finders/directional_finder.vpcf"
+      "particle"  "particles/genuine/genuine_powershoot/genuine_powershot_channel_combo_v2.vpcf"
     }
 	}
 
@@ -214,7 +227,7 @@
 
     "precache"
     {
-      "particle"  ""
+      "particle"  "particles/genuine/morning_star/genuine_morning_star.vpcf"
     }
 	}
 }
