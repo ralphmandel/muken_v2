@@ -129,6 +129,15 @@ function genuine_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "AbilityCastRange" then return 1 end
     if value_name == "AbilityCharges" then return 1 end
     if value_name == "AbilityChargeRestoreTime" then return 1 end
+
+    if value_name == "cast_range" then return 1 end
+    if value_name == "manasteal" then return 1 end
+    if value_name == "barrier_duration" then return 1 end
+    if value_name == "magical_barrier" then return 1 end
+    if value_name == "barrier_mult" then return 1 end
+    if value_name == "cooldown" then return 1 end
+    if value_name == "special_universal_barrier" then return 1 end
+    if value_name == "special_lifesteal" then return 1 end
 	end
 
   if ability:GetAbilityName() == "genuine_5__nightfall" then
@@ -306,25 +315,45 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 
 	if ability:GetAbilityName() == "genuine_4__under" then
     if self:HasRank(4, 1, 1) then
+      if value_name == "cast_range" then return 1500 end
     end
 
     if self:HasRank(4, 1, 2) then
+      if value_name == "AbilityCharges" then return 2 end
+      if value_name == "AbilityManaCost" then return 50 * mana_mult end
     end
 
     if self:HasRank(4, 2, 1) then
+      if value_name == "barrier_mult" then return 900 end
+      if value_name == "barrier_duration" then return 30 * self:GetBuffAmp() end
 		end
 
     if self:HasRank(4, 2, 2) then
+      if value_name == "barrier_mult" then return 900 end
+      if value_name == "magical_barrier" then return 0 end
+      if value_name == "special_universal_barrier" then return ability:GetSpecialValueFor("barrier_mult") / ability:GetSpecialValueFor("manasteal") end
 		end
 
 		if self:HasRank(4, 3, 1) then
+      if value_name == "manasteal" then return 50 end
 		end
 
     if self:HasRank(4, 3, 2) then
+      if value_name == "special_lifesteal" then return 10 end
 		end
 
-    if value_name == "AbilityManaCost" then return 100 * mana_mult end
+    if value_name == "AbilityManaCost" then return 0 * mana_mult end
     if value_name == "AbilityCooldown" then return 0 end
+    if value_name == "AbilityCastRange" then return ability:GetSpecialValueFor("cast_range") end
+    if value_name == "AbilityCharges" then return 1 end
+    if value_name == "AbilityChargeRestoreTime" then return ability:GetSpecialValueFor("cooldown") end
+    if value_name == "cooldown" then return 30 - (value_level * 1) end
+
+    if value_name == "cast_range" then return 500 end
+    if value_name == "manasteal" then return 30 end
+    if value_name == "barrier_duration" then return 15 * self:GetBuffAmp() end
+    if value_name == "magical_barrier" then return ability:GetSpecialValueFor("barrier_mult") / ability:GetSpecialValueFor("manasteal") end
+    if value_name == "barrier_mult" then return 6000 end
 	end
 
 	if ability:GetAbilityName() == "genuine_5__nightfall" then
@@ -401,7 +430,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
       if value_name == "special_passive" then return 1 end
 		end
 
-    if value_name == "AbilityManaCost" then return 0 * mana_mult end
+    if value_name == "AbilityManaCost" then return 100 * mana_mult end
     if value_name == "AbilityCooldown" then return 120 end
     if value_name == "duration_night" then return 60 + (value_level * 1.5) end
 		if value_name == "duration_day" then return 20 + (value_level * 0.5) end

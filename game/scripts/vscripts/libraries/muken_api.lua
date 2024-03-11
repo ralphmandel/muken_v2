@@ -354,6 +354,10 @@
 
 -- CDOTA_BaseNPC || PERFORMS
 
+  function CDOTA_BaseNPC:ChangeActivity(activity)
+    if self:GetBaseHeroModifier() then self:GetBaseHeroModifier():ChangeActivity(activity) end
+  end
+
   function CDOTA_BaseNPC:ApplyHeal(amount, ability, bAmplify)
     if bAmplify and ability then
       local caster = ability:GetCaster()

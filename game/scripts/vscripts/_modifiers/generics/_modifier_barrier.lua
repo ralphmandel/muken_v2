@@ -3,7 +3,7 @@ _modifier_barrier = class({})
 --------------------------------------------------------------------------------
 
 function _modifier_barrier:IsHidden()
-	return true
+	return false
 end
 
 function _modifier_barrier:IsPurgable()
