@@ -1,0 +1,9 @@
+"skills"
+{
+	"1" "death_slash_1__slash"
+	"2" "death_slash_2__sk2"
+	"3" "death_slash_3__sk3"
+	"4" "death_slash_4__sk4"
+	"5" "death_slash_5__sk5"
+	"6" "death_slash_u__sk6"
+}

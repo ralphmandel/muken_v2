@@ -219,6 +219,12 @@ function base_hero_mod:LoadModel()
           self.parent:SetModelScale(self.model_scale)
 					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
 				end
+				if self.hero_name == "death_slash" then
+					self.model_scale = 1.0
+          self.parent.hp_offset = 200
+          self.parent:SetModelScale(self.model_scale)
+					self.parent:SetHealthBarOffsetOverride(self.parent.hp_offset)
+				end
 			end
 		end
 	end)
@@ -229,6 +235,7 @@ function base_hero_mod:LoadSounds()
 	if self.hero_name == "icebreaker" then self.pre_attack_sound = "hero_bloodseeker.PreAttack" end
   if self.hero_name == "paladin" then self.pre_attack_sound = "Hero_Dawnbreaker.PreAttack" end
 	if self.hero_name == "bloodstained" then self.pre_attack_sound = "Hero_Nightstalker.PreAttack" end
+	if self.hero_name == "death_slash" then self.pre_attack_sound = "Hero_Sven.PreAttack" end
 	-- if self.hero_name == "krieger" then self.pre_attack_sound = "Krieger.Pre.Attack" end
 
 	self.attack_sound = ""
@@ -250,6 +257,7 @@ function base_hero_mod:LoadSounds()
 	if self.hero_name == "templar" then self.attack_landed_sound = "Hero_Omniknight.Attack" end
 	if self.hero_name == "trickster" then self.attack_landed_sound = "Trickster.Hit" end
 	if self.hero_name == "strider" then self.attack_landed_sound = "Hero_Juggernaut.Attack" end
+	if self.hero_name == "death_slash" then self.attack_landed_sound = "Hero_Sven.Attack" end
 	
 
 	-- if self.hero_name == "krieger" then self.attack_landed_sound = "krieger.Attack" end

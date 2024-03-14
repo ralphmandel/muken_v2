@@ -1,0 +1,192 @@
+// Dota Ability death_slash
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+  "death_slash__precache"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/death/death_slash/death_slash-ranks_lua"
+    "AbilityTextureName"    		"death_slash__precache"
+		"FightRecapLevel"				"1"
+		"MaxLevel"						"99"
+		"RequiredLevel"         	 	"-200"
+
+		"AbilityType"					"ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+	}
+
+	"death_slash_1__slash"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_1__slash"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"death_slash_slash"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+
+	"death_slash_2__sk2"
+	{  
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_2__sk2"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"death_slash_sk2"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+
+	"death_slash_3__sk3"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_3__sk3"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"death_slash_sk3"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+
+	"death_slash_4__sk4"
+	{ 
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_4__sk4"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"death_slash_sk4"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+
+	"death_slash_5__sk5"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_5__sk5"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityTextureName"     		"death_slash_sk5"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"0"
+    "LevelsBetweenUpgrades"  		"50"
+
+    "AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+
+	"death_slash_u__sk6"
+	{
+		"BaseClass"              		"ability_lua"
+		"ScriptFile"            		"heroes/death/death_slash/death_slash_u__sk6"
+		"AbilityTextureName"     		"death_slash_sk6"
+		"AbilityType"           	 	"DOTA_ABILITY_TYPE_ULTIMATE"
+		"MaxLevel"               		"1"
+		"RequiredLevel"         	 	"8"
+		"LevelsBetweenUpgrades"  		"50"
+
+		"AbilityUnitDamageType"  		"DAMAGE_TYPE_PHYSICAL"
+		"AbilityBehavior"        		"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"  		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" 	 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"	 	"DOTA_UNIT_TARGET_FLAG_NONE"
+
+		"AbilityCastAnimation"   		"ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint"       		"0.3"
+
+    "AbilityValues"
+		{
+		}
+
+    "precache"
+    {
+      "particle"  
+    }
+	}
+}

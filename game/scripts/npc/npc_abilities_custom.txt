@@ -456,6 +456,7 @@
 #base "../vscripts/heroes/death/lawbreaker/lawbreaker.txt"
 #base "../vscripts/heroes/death/bocuse/bocuse.txt"
 #base "../vscripts/heroes/death/vulture/vulture.txt"
+#base "../vscripts/heroes/death/death_slash/death_slash.txt"
 
 //SUN
 #base "../vscripts/heroes/sun/paladin/paladin.txt"

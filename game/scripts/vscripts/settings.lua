@@ -361,6 +361,9 @@ HEROES_DATA = {
   ["templar"] = {
     shield_fx_height = 235
   },
+  ["death_slash"] = {
+    shield_fx_height = 210
+  },
 }
 
 CYCLE_NIGHT = 0
