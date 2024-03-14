@@ -1,6 +1,6 @@
 "DOTAAbilities"
 {
-  "item_rare_iron_shield"
+  "item_rare_iron_shield" //name
   {
     "BaseClass"						  "item_lua"
     "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
