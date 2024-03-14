@@ -22,7 +22,7 @@ function OnPortraitChanged(nEntityIndex) {
   current_portrait_entity = nEntityIndex;
 
   if (Entities.GetUnitName(current_portrait_entity) == "npc_dota_watch_tower") {
-    GameEvents.SendCustomGameEventToServer("forge_tower_from_panorama", {ent_index: current_portrait_entity});
+    //GameEvents.SendCustomGameEventToServer("forge_tower_from_panorama", {ent_index: current_portrait_entity});
   }
 }
 

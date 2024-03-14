@@ -11,16 +11,18 @@ function item_rare_cloak_evasion_mod_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    evasion = self.ability:GetSpecialValueFor("evasion")
-  }, false)
+  if not IsServer() then return end
+
+  self.parent:AddSubStats(self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")})
 end
 
 function item_rare_cloak_evasion_mod_passive:OnRefresh(kv)
 end
 
 function item_rare_cloak_evasion_mod_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"evasion"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"evasion"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -45,18 +47,19 @@ end
 -- UTILS -----------------------------------------------------------
 
 function item_rare_cloak_evasion_mod_passive:ApplyInvisibility(keys)
+  if not IsServer() then return end
+
   if keys.target ~= self.parent then return end
   if self.parent:HasModifier("_modifier_invisible") then return end
   if self.parent:IsMuted() then return end
 
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("invi_chance") then
-    if IsServer() then self.parent:EmitSound("Hunter.Invi") end
-
-    local invi_duration = self.ability:GetSpecialValueFor("invi_duration")
-    local invi_delay = self.ability:GetSpecialValueFor("invi_delay")
+    self.parent:EmitSound("Hunter.Invi")
   
     AddModifier(self.parent, self.ability, "_modifier_invisible", {
-      delay = invi_delay, attack_break = 0, spell_break = 0, duration = invi_duration + invi_delay
+      duration = self.ability:GetSpecialValueFor("invi_duration"),
+      delay = self.ability:GetSpecialValueFor("invi_delay"),
+      attack_break = 0, spell_break = 0
     }, false)
   end
 end

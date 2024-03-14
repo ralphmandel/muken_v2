@@ -15,11 +15,13 @@
     "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_NONE"
 
+    "AbilityCooldown"       "3"
+
     "AbilityValues"
     {
       "armor"         "3"
-      "block_chance"  "20"
-      "block_percent" "50"
+      "block_chance"  "0"
+      "block"         "30"
     }
 
     "precache"
@@ -60,8 +62,8 @@
     "AbilityValues"
     {
       "evasion"       "2.5"
-      "invi_chance"   "20"
-      "invi_duration" "1.2"
+      "invi_chance"   "0"
+      "invi_duration" "0"
       "invi_delay"    "0.3"
     }
 

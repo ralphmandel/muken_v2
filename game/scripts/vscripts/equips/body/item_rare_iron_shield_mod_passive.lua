@@ -11,16 +11,18 @@ function item_rare_iron_shield_mod_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    armor = self.ability:GetSpecialValueFor("armor")
-  }, false)
+  if not IsServer() then return end
+
+  self.parent:AddSubStats(self.ability, {armor = self.ability:GetSpecialValueFor("armor")})
 end
 
 function item_rare_iron_shield_mod_passive:OnRefresh(kv)
 end
 
 function item_rare_iron_shield_mod_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"armor"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"armor"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -38,11 +40,13 @@ function item_rare_iron_shield_mod_passive:GetModifierPhysical_ConstantBlock(key
   if not keys.ranged_attack then return end
   if self.parent:IsMuted() then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("block_chance") then
-    local block = keys.damage * self.ability:GetSpecialValueFor("block_percent") * 0.01
-    if block > 0 and self.parent:IsBlockDisabled() == false then self:StartGenericEfxBlock(keys) end
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("block_chance") and self.ability:IsCooldownReady() then
+    if IsServer() and self.parent:IsBlockDisabled() == false then
+      self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+      self:StartGenericEfxBlock(keys)
+    end
 
-    return block
+    return self.ability:GetSpecialValueFor("block")
   end
 
   return 0

@@ -282,27 +282,34 @@ function _modifier_int:UpdateSubBonus(property)
 end
 
 function _modifier_int:OnStatUpated(property)
+  if self.parent:IsHero() == false then return end
   local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
-  if special_kv_modifier == nil then return end
+  local base_hero_mod = self.parent:GetBaseHeroModifier()
+  if special_kv_modifier == nil or base_hero_mod == nil then return end
 
   if property == "sub_stat_debuff_amp" then
     special_kv_modifier:UpdateData("debuff_amp", self:GetDebuffAmp())
+    base_hero_mod:UpdateData("debuff_amp", self:GetDebuffAmp())
   end
 
   if property == "sub_stat_luck" then
     special_kv_modifier:UpdateData("luck", self:GetLuck())
+    base_hero_mod:UpdateData("luck", self:GetLuck())
   end
 
   if property == "sub_stat_magical_damage" then
     special_kv_modifier:UpdateData("magical_damage", self:GetMagicalDamageAmp())
+    base_hero_mod:UpdateData("magical_damage", self:GetMagicalDamageAmp())
   end
 
   if property == "sub_stat_holy_damage" then
     special_kv_modifier:UpdateData("holy_damage", self:GetHolyDamageAmp())
+    base_hero_mod:UpdateData("holy_damage", self:GetHolyDamageAmp())
   end
 
   if property == "sub_stat_heal_power" then
     special_kv_modifier:UpdateData("heal_power", self:GetHealPower())
+    base_hero_mod:UpdateData("heal_power", self:GetHealPower())
   end
 end
 

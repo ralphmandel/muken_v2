@@ -207,11 +207,14 @@ function _modifier_vit:OnStatUpated(property)
     end
   end
 
+  if self.parent:IsHero() == false then return end
   local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
-  if special_kv_modifier == nil then return end
+  local base_hero_mod = self.parent:GetBaseHeroModifier()
+  if special_kv_modifier == nil or base_hero_mod == nil then return end
 
   if property == "sub_stat_incoming_buff" then
     special_kv_modifier:UpdateData("buff_amp", self:GetIncomingBuff())
+    base_hero_mod:UpdateData("buff_amp", self:GetIncomingBuff())
   end
 end
 

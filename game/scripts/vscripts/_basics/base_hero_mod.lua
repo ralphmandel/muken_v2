@@ -10,22 +10,45 @@ function base_hero_mod:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  if IsServer() then
-    self.hero_name = self.caster:GetHeroName()
-    self.hero_team = self.caster:GetHeroTeam()
-  
-    self:LoadActivity()
-    self:LoadModel()
-    self:LoadSounds()
+  if not IsServer() then return end
 
-    self:StartIntervalThink(0.5)
-  end
+  self.hero_name = self.caster:GetHeroName()
+  self.hero_team = self.caster:GetHeroTeam()
+
+  self:LoadActivity()
+  self:LoadModel()
+  self:LoadSounds()
+
+  self:StartIntervalThink(0.5)
+  self:SetHasCustomTransmitterData(true)
+
+  self.data_props = {
+    buff_amp = 0,
+    debuff_amp = 0,
+    physical_damage = 0,
+    magical_damage = 0,
+    holy_damage = 0,
+    heal_power = 0,
+    luck = 0
+  }
 end
 
 function base_hero_mod:OnRefresh(kv)
 end
 
+function base_hero_mod:AddCustomTransmitterData()
+  return {
+    data_props = self.data_props
+  }
+end
+
+function base_hero_mod:HandleCustomTransmitterData(data)
+	self.data_props = data.data_props
+end
+
 function base_hero_mod:OnIntervalThink()
+  if not IsServer() then return end
+
   if self.parent:IsControllableByAnyPlayer() then
 		local player = self:GetCaster():GetPlayerOwner()
 		if (not player) then return end
@@ -230,6 +253,93 @@ function base_hero_mod:LoadSounds()
 	
 
 	-- if self.hero_name == "krieger" then self.attack_landed_sound = "krieger.Attack" end
+end
+
+-----------------------------------------------------------
+
+function base_hero_mod:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
+		MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE
+	}
+
+	return funcs
+end
+
+function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
+	local caster = self:GetCaster()
+	local ability = keys.ability
+	local value_name = keys.ability_special_value
+	local value_level = keys.ability_special_level
+
+	if ability:GetAbilityName() == "item_rare_iron_shield" then
+		if value_name == "block_chance" then return 1 end
+	end
+
+  if ability:GetAbilityName() == "item_rare_cloak_evasion" then
+		if value_name == "invi_chance" then return 1 end
+		if value_name == "invi_duration" then return 1 end
+	end
+
+	return 0
+end
+
+function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
+	local caster = self:GetCaster()
+	local ability = keys.ability
+	local value_name = keys.ability_special_value
+	local value_level = keys.ability_special_level
+	local ability_level = ability:GetLevel()
+	if ability_level < 1 then ability_level = 1 end
+
+  local mana_mult = (1 + ((ability_level - 1) * 0.1))
+
+	if ability:GetAbilityName() == "item_rare_iron_shield" then
+		if value_name == "block_chance" then return self:CalcLuck(25) end
+	end
+
+  if ability:GetAbilityName() == "item_rare_cloak_evasion" then
+		if value_name == "invi_chance" then return self:CalcLuck(8) end
+		if value_name == "invi_duration" then return 2 * self:GetBuffAmp() end
+	end
+
+	return 0
+end
+
+function base_hero_mod:UpdateData(data, value)
+	self.data_props[data] = value
+  self:SendBuffRefreshToClients()
+end
+
+function base_hero_mod:GetBuffAmp()
+  return 1 + self.data_props["buff_amp"]
+end
+
+function base_hero_mod:GetDebuffAmp()
+  return 1 + self.data_props["debuff_amp"]
+end
+
+function base_hero_mod:GetPhysicalDamageAmp()
+  return self.data_props["physical_damage"] * 0.01
+end
+
+function base_hero_mod:GetMagicalDamageAmp()
+  return self.data_props["magical_damage"] * 0.01
+end
+
+function base_hero_mod:GetHolyDamageAmp()
+  return self.data_props["holy_damage"] * 0.01
+end
+
+function base_hero_mod:GetHealPower()
+  return 1 + self.data_props["heal_power"]
+end
+
+function base_hero_mod:CalcLuck(value)
+  local result = value * (1 + self.data_props["luck"])
+  if result < 0 then result = 0 elseif result > 100 then result = 100 end
+
+  return result
 end
 
 -----------------------------------------------------------

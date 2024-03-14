@@ -156,13 +156,13 @@ function SetupEvents(panel, header, message){
   $.RegisterEventHandler('DragEnter', panel.GetChild(0), OnDragEnter);
 	$.RegisterEventHandler('DragLeave', panel.GetChild(0), OnDragLeave);
 
-  panel.SetPanelEvent("onmouseover", function() {
-    $.DispatchEvent("DOTAShowTitleTextTooltip", panel, header, message);
-  })
+  // panel.SetPanelEvent("onmouseover", function() {
+  //   $.DispatchEvent("DOTAShowTitleTextTooltip", panel, header, message);
+  // })
 
-  panel.SetPanelEvent("onmouseout", function(){
-    $.DispatchEvent("DOTAHideTitleTextTooltip", panel);
-  })
+  // panel.SetPanelEvent("onmouseout", function(){
+  //   $.DispatchEvent("DOTAHideTitleTextTooltip", panel);
+  // })
 }
 
 (function(){
@@ -183,6 +183,7 @@ function SetupEvents(panel, header, message){
 function ChangeItem(m_QueryUnit, rarity, type, toRemove, toEquip){
   var bEquipped = !(toEquip == null);
 
+  SLOTS[type]["center"].hittest = !bEquipped
   SLOTS[type]["center"].SetHasClass("item-equipped", bEquipped);
   SLOTS[type]["center"].SetHasClass("item-rare", rarity == 1);
   SLOTS[type]["center"].SetHasClass("item-epic", rarity == 2);

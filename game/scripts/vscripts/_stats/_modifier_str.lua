@@ -231,11 +231,14 @@ function _modifier_str:UpdateSubBonus(property)
 end
 
 function _modifier_str:OnStatUpated(property)
+  if self.parent:IsHero() == false then return end
   local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
-  if special_kv_modifier == nil then return end
+  local base_hero_mod = self.parent:GetBaseHeroModifier()
+  if special_kv_modifier == nil or base_hero_mod == nil then return end
 
   if property == "sub_stat_physical_damage" then
     special_kv_modifier:UpdateData("physical_damage", self:GetPhysicalDamageAmp())
+    base_hero_mod:UpdateData("physical_damage", self:GetPhysicalDamageAmp())
   end
 end
 
