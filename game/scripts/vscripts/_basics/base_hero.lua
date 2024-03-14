@@ -106,9 +106,13 @@ require("internal/rank_system")
 		if caster:IsIllusion() then return end
 
 		if self:GetLevel() == 1 then
-      self.ability_points = GetHeroInitPts(caster:GetHeroName())
-
       self:ResetData()
+
+      local init_pts_data = LoadKeyValues("scripts/kv/heroes_init_pts.kv")
+
+      for name, pts in pairs(init_pts_data) do
+        if caster:GetHeroName() == name then self.ability_points = pts end
+      end
 
       for team = DOTA_TEAM_CUSTOM_MIN, DOTA_TEAM_CUSTOM_MIN + 3 do
         if caster:GetTeamNumber() == team then
@@ -133,6 +137,7 @@ require("internal/rank_system")
     self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
     self.max_level = 15
+    self.ability_points = 0
 
     self.chosen_path = {Path_1 = false, Path_2 = false, Path_3 = false}
     self.path_points = 0

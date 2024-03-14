@@ -124,6 +124,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "heal" then return 1 end
     if value_name == "special_stun_duration" then return 1 end
     if value_name == "special_purge" then return 1 end
+    if value_name == "special_status_reduction" then return 1 end 
 	end
 
 	if ability:GetAbilityName() == "paladin_4__magnus" then
@@ -278,6 +279,7 @@ function paladin_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if self:HasRank(3, 2, 2) then
       if value_name == "special_stun_duration" then return 2.5 * self:GetDebuffAmp() end
       if value_name == "special_purge" then return 1 end
+      if value_name == "special_status_reduction" then return 20 end
 		end
 
 		if self:HasRank(3, 3, 1) then

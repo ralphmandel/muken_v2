@@ -317,18 +317,12 @@ SPAWNER_BOSS_SPOTS = {
 }
 
 PLAYERS = {}
-TEAMS = { -- [1] Team, [2] Score, [3] Team Name, [4] number of players, [5] team colour bar  
-  [1] = {[1] = DOTA_TEAM_CUSTOM_1, [2] = 0, [3] = "Death Team",  [4] = 0, [5] = "<font color='#ac0020'>", ["fountain_origin"] = Vector(-2550, 3850, 0), ["team_origin"] = Vector(-3215, 3965, 0)},
-  [2] = {[1] = DOTA_TEAM_CUSTOM_2, [2] = 0, [3] = "Nature Team",   [4] = 0, [5] = "<font color='#3dd296'>", ["fountain_origin"] = Vector(2550, -3850, 0), ["team_origin"] = Vector(3215, -3965, 0)},
-  [3] = {[1] = DOTA_TEAM_CUSTOM_3, [2] = 0, [3] = "Moon Team", [4] = 0, [5] = "<font color='#8c2af4'>", ["fountain_origin"] = Vector(-3850, -2550, 0), ["team_origin"] = Vector(-3965, -3215, 0)},
-  [4] = {[1] = DOTA_TEAM_CUSTOM_4, [2] = 0, [3] = "Sun Team", [4] = 0, [5] = "<font color='#c7e40d'>", ["fountain_origin"] = Vector(3850, 2550, 0), ["team_origin"] = Vector(3965, 3215, 0)},
-}
 
-TEAM_ORIGIN = {
-  [DOTA_TEAM_CUSTOM_1] = Vector(-2730, -2730, 0),
-  [DOTA_TEAM_CUSTOM_2] = Vector(2730, 2730, 0),
-  [DOTA_TEAM_CUSTOM_3] = Vector(-2730, 2730, 0),
-  [DOTA_TEAM_CUSTOM_4] = Vector(2730, -2730, 0),
+TEAMS = {
+  [DOTA_TEAM_CUSTOM_1] = {name = "Death Team", color = "<font color='#ac0020'>", origin = Vector(-2730, -2730, 0), score = 0, size = 0},
+  [DOTA_TEAM_CUSTOM_2] = {name = "Nature Team", color = "<font color='#3dd296'>", origin = Vector(2730, 2730, 0), score = 0, size = 0},
+  [DOTA_TEAM_CUSTOM_3] = {name = "Moon Team", color = "<font color='#8c2af4'>", origin = Vector(-2730, 2730, 0), score = 0, size = 0},
+  [DOTA_TEAM_CUSTOM_4] = {name = "Sun Team", color = "<font color='#c7e40d'>", origin = Vector(2730, -2730, 0), score = 0, size = 0},
 }
 
 OUTPOST_ORIGIN = {

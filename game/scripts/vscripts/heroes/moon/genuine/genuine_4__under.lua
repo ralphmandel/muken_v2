@@ -4,13 +4,11 @@ LinkLuaModifier("genuine_4_modifier_under", "heroes/moon/genuine/genuine_4_modif
 -- INIT
 
   function genuine_4__under:CastFilterResultTarget(hTarget)
-    local caster = self:GetCaster()
-
     local result = UnitFilter(
-      hTarget, self:GetAbilityTargetTeam(),
-      self:GetAbilityTargetType(),
-      self:GetAbilityTargetFlags(),
-      caster:GetTeamNumber()
+      hTarget, DOTA_UNIT_TARGET_TEAM_ENEMY,
+      DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+      DOTA_UNIT_TARGET_FLAG_NONE,
+      self:GetCaster():GetTeamNumber()
     )
     
     if result == UF_SUCCESS and hTarget:GetMaxMana() == 0 then return UF_FAIL_CUSTOM end

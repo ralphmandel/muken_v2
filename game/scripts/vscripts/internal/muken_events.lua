@@ -90,12 +90,11 @@ function MukenEvents:OnRoleBarRequest(event)
   if (not player) then return end
 
   local event_hero_name = ""
+  local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
 
-  local players = PlayerResource:GetAllPlayers()
-  for _, player in pairs(players) do
-    local hero = player:GetAssignedHero()
-    if "npc_dota_hero_"..event.id_name == hero:GetUnitName() then
-      event_hero_name = hero:GetHeroName()
+  for name, id_name in pairs(heroes_name_data) do
+    if "npc_dota_hero_"..event.id_name == id_name then
+      event_hero_name = name
       break
     end
   end
@@ -104,6 +103,7 @@ function MukenEvents:OnRoleBarRequest(event)
   for hero_name, data in pairs(heroes_stats_data) do
     if hero_name == event_hero_name then
       CustomGameEventManager:Send_ServerToPlayer(player, "role_bar_state_from_server", data)
+      break
     end
   end
 end
@@ -114,12 +114,11 @@ function MukenEvents:OnScoreRequest(event)
   local player = PlayerResource:GetPlayer(event.PlayerID)
   if (not player) then return end
 
-  local score_table = {
-    [DOTA_TEAM_CUSTOM_1] = TEAMS[1][2],
-    [DOTA_TEAM_CUSTOM_2] = TEAMS[2][2],
-    [DOTA_TEAM_CUSTOM_3] = TEAMS[3][2],
-    [DOTA_TEAM_CUSTOM_4] = TEAMS[4][2]
-  }
+  local score_table = {}
+
+  for team_number, data in pairs(TEAMS) do
+    score_table[team_number] = data.score
+  end
 
   CustomGameEventManager:Send_ServerToPlayer(player, "score_state_from_server", score_table)
 end

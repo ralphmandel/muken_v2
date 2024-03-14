@@ -155,7 +155,7 @@ _general_script = class({})
           end
         end
 
-        if self.parent:IsAlive() and (TEAM_ORIGIN[self.parent:GetTeamNumber()] - self.parent:GetOrigin()):Length2D() > 250 then
+        if self.parent:IsAlive() and (TEAMS[self.parent:GetTeamNumber()].origin - self.parent:GetOrigin()):Length2D() > 250 then
           self.rested = true
         end
       end

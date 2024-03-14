@@ -380,9 +380,9 @@
   end
 
   function AddModifierOnAllCosmetics(BaseNPC, ability, modifier_name, table)
-    if Cosmetics(BaseNPC) == nil then return end
-
     BaseNPC:AddNewModifier(BaseNPC, ability, modifier_name, table)
+
+    if Cosmetics(BaseNPC) == nil then return end
 
     for i = 1, #Cosmetics(BaseNPC).cosmetic, 1 do
       Cosmetics(BaseNPC).cosmetic[i]:AddNewModifier(BaseNPC, ability, modifier_name, table)
@@ -390,9 +390,9 @@
   end
 
   function RemoveModifierOnAllCosmetics(BaseNPC, ability, modifier_name)
-    if Cosmetics(BaseNPC) == nil then return end
-
     RemoveAllModifiersByNameAndAbility(BaseNPC, modifier_name, ability)
+
+    if Cosmetics(BaseNPC) == nil then return end
 
     for i = 1, #Cosmetics(BaseNPC).cosmetic, 1 do
       RemoveAllModifiersByNameAndAbility(Cosmetics(BaseNPC).cosmetic[i], modifier_name, ability)
@@ -414,30 +414,6 @@
   end
 
 -- GETTERS
-
-  function GetTeamIndex(team_number)
-    for i = #TEAMS, 1, -1 do
-      if team_number == TEAMS[i][1] then
-        return i
-      end
-    end
-  end
-
-  function GetIDName(hero_name)
-		local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
-
-		for name, id_name in pairs(heroes_name_data) do
-			if hero_name == name then return id_name end
-		end
-	end
-
-  function GetHeroInitPts(hero_name)
-		local data = LoadKeyValues("scripts/kv/heroes_init_pts.kv")
-
-		for name, pts in pairs(data) do
-			if hero_name == name then return pts end
-		end
-	end
 
   function GetAbilitiesList(BaseNPC)
     local list = {}
@@ -545,9 +521,9 @@
   end
 
   function RandomForNoHeroSelected()
-    for _, team in pairs(TEAMS) do
-      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team[1]] do
-        local playerID = PlayerResource:GetNthPlayerIDOnTeam(team[1], i)
+    for team_number, data in pairs(TEAMS) do
+      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team_number] do
+        local playerID = PlayerResource:GetNthPlayerIDOnTeam(team_number, i)
         if playerID ~= nil then
           if not PlayerResource:HasSelectedHero(playerID) then
             local hPlayer = PlayerResource:GetPlayer(playerID)
@@ -609,14 +585,14 @@
       table.insert(players_hero_list, hero:GetHeroName())
     end
 
-    for _, team in pairs(TEAMS) do
-      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team[1]] do
-        local playerID = PlayerResource:GetNthPlayerIDOnTeam(team[1], i)
+    for team_number, data in pairs(TEAMS) do
+      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team_number] do
+        local playerID = PlayerResource:GetNthPlayerIDOnTeam(team_number, i)
         if playerID then
           local unit_name = GetHeroName(PlayerResource:GetSelectedHeroName(playerID))
           if unit_name then
             for bot_team, number in pairs(bot_slots) do
-              if bot_team == team[1] then
+              if bot_team == team_number then
                 bot_slots[bot_team] = bot_slots[bot_team] - 1
               end
             end

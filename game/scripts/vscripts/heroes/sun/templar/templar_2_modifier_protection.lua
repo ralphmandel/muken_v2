@@ -21,11 +21,11 @@ function templar_2_modifier_protection:OnCreated(kv)
   self:PlayEfxStart()
 
   if self.parent:GetHealthPercent() < self.ability:GetSpecialValueFor("special_hp_cap") then
-    self.parent:Purge(false, true, false, true, false)
+    self.parent:ReduceStatus(self.ability:GetSpecialValueFor("special_status_reduction"), STATUS_LIST)
     self.parent:ApplyHeal(self.ability:GetSpecialValueFor("special_heal"), self.ability, false)
     self:StartEfxBeam(self.parent)
 
-    self.caster:Purge(false, true, false, true, false)
+    self.caster:ReduceStatus(self.ability:GetSpecialValueFor("special_status_reduction"), STATUS_LIST)
     self.caster:ApplyHeal(self.ability:GetSpecialValueFor("special_heal"), self.ability, false)
     self:StartEfxBeam(self.caster)
   end

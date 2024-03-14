@@ -42,14 +42,18 @@ function status_bar_cold_max:OnRemoved()
 
   self:PlayEfxEnd(damage_result)
 
-  local status_modifier = self.parent:FindModifierByName("status_bar_cold")
-
-  if status_modifier then
-    status_modifier.bCompleted = nil
-    status_modifier:OnIntervalThink()
-  else
-    self.parent:RemovePanelFromList(self.status_name)
+  if self.parent then
+    if IsValidEntity(self.parent) then
+      local status_modifier = self.parent:FindModifierByName("status_bar_cold")
+      if status_modifier then
+        status_modifier.bCompleted = nil
+        status_modifier:OnIntervalThink()
+        return
+      end
+    end
   end
+
+  self.parent:RemovePanelFromList(self.status_name)
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

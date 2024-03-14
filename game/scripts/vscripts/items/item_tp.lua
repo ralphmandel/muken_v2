@@ -52,15 +52,8 @@ function item_tp:OnSpellStart()
 end
 
 function item_tp:RandomizePlayerSpawn(unit)
-  if GetMapName() == "muken_arena_pvp" then
-    return TEAM_ORIGIN[unit:GetTeamNumber()]
-  end
+  return TEAMS[unit:GetTeamNumber()].origin
 
-	for i = 1, #TEAMS, 1 do
-		if TEAMS[i][1] == unit:GetTeamNumber() then
-			return TEAMS[i]["team_origin"]
-		end
-	end
 	-- unit:SetOrigin(further_loc)
 	-- FindClearSpaceForUnit(unit, further_loc, true)
 end

@@ -85,6 +85,9 @@ function status_bar_bleed:ApplyBloodLoss()
     damage_flags = DOTA_DAMAGE_FLAG_DONT_DISPLAY_DAMAGE_IF_SOURCE_HIDDEN + DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
   })
 
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
   CallBloodLoss(damage_result, attacker.unit, self.parent)
 
   self:PopupBleedDamage(damage_result, self.parent)

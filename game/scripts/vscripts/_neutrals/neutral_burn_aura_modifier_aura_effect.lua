@@ -35,7 +35,7 @@ function neutral_burn_aura_modifier_aura_effect:OnIntervalThink()
 
   local damage = self.ability:GetSpecialValueFor("damage") * self.interval
   self.damageTable.damage = self.damageTable.attacker:GetSpellDamage(damage, self.ability:GetAbilityDamageType())
-  ApplyDamage(self.damageTable)  
+  ApplyDamage(self.damageTable)
 end
 
 -- UTILS -----------------------------------------------------------

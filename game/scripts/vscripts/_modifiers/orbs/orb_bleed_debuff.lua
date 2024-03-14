@@ -53,6 +53,10 @@ function orb_bleed_debuff:OnIntervalThink()
   if self.parent:IsMoving() then self.damageTable.damage = self.damageTable.damage * 2 end
 
   local damage_result = ApplyDamage(self.damageTable)
+
+  if self.parent == nil then return end
+  if IsValidEntity(self.parent) == false then return end
+
   self:PopupBleedDamage(damage_result, self.parent)
 
   self.parent:IncrementStatus("status_bar_bleed", self.ability, self.caster, damage_result * self.status_mult)

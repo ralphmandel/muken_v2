@@ -140,8 +140,7 @@ function GameMode:OnHeroInGame(hero)
     hero:AddNewModifier(hero, base_hero, "_modifier_no_bar", {duration = 10})
   end
 
-  local team_index = GetTeamIndex(hero:GetTeamNumber())
-  TEAMS[team_index][4] = TEAMS[team_index][4] + 1
+  TEAMS[hero:GetTeamNumber()].size = TEAMS[hero:GetTeamNumber()].size + 1
   local player = {[1] = hero:GetPlayerOwner(), [2] = 0}
   table.insert(PLAYERS, player)
 end

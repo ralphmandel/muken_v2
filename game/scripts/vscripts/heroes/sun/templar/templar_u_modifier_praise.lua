@@ -58,7 +58,7 @@ function templar_u_modifier_praise:OnIntervalThink()
 
   if index > 0 then
     local random_ally = allies[RandomInt(1, #allies)]
-    random_ally:Purge(false, true, false, true, false)
+    random_ally:ReduceStatus(self.ability:GetSpecialValueFor("status_reduction"), STATUS_LIST)
     random_ally:ApplyHeal(self.ability:GetSpecialValueFor("heal"), self.ability, false)
     random_ally:ApplyMana(self.ability:GetSpecialValueFor("special_mana"), self.ability, false, nil, true)
 

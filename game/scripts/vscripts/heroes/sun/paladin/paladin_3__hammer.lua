@@ -34,8 +34,11 @@ LinkLuaModifier("paladin_3_modifier_hammer", "heroes/sun/paladin/paladin_3_modif
       self:PlayEfxMult(unit, mult)
 
       if unit:GetTeamNumber() == caster:GetTeamNumber() then
-        if random_mult ==  self:GetSpecialValueFor("max_mult") and self:GetSpecialValueFor("special_purge") == 1 then
-          unit:Purge(false, true, false, true, false)
+        if random_mult ==  self:GetSpecialValueFor("max_mult") then
+          unit:ReduceStatus(self:GetSpecialValueFor("special_status_reduction"), STATUS_LIST)
+          if self:GetSpecialValueFor("special_purge") == 1 then
+            unit:Purge(false, true, false, true, false)
+          end
         end
 
         unit:ApplyHeal(self:GetSpecialValueFor("heal") * mult, self, false)

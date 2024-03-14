@@ -63,17 +63,17 @@ function fleaman_u_modifier_chain:OnIntervalThink()
     end
   end
 
+  self.source = self.current_target
+  self.current_target = new_target
+  self.chain_hits = self.chain_hits - 1
+
   ApplyDamage({
     victim = self.current_target, attacker = self.parent,
     damage = self.ability:GetSpecialValueFor("special_chain_damage"),
     damage_type = self.ability:GetAbilityDamageType(),
     ability = self.ability
   })
-
-  self.source = self.current_target
-  self.current_target = new_target
-  self.chain_hits = self.chain_hits - 1
-
+  
   self:StartIntervalThink(0.2)
 end
 

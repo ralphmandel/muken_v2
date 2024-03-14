@@ -53,6 +53,8 @@ end
 function paladin_4_modifier_aura:OnIntervalThink()
   if not IsServer() then return end
 
+  self.parent:EmitSound("Paladin.Magnus.Hit")
+
   ApplyDamage({
     victim = self.parent, attacker = self.caster,
     damage = self.caster:GetMaxHealth() * self.ability:GetSpecialValueFor("damage_percent") * self.interval * 0.01,
@@ -60,7 +62,6 @@ function paladin_4_modifier_aura:OnIntervalThink()
     ability = self.ability, damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL
   })
 
-  self.parent:EmitSound("Paladin.Magnus.Hit")
   self:StartIntervalThink(self.interval)
 end
 

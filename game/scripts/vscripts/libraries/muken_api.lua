@@ -3,9 +3,9 @@
   function CDOTA_PlayerResource:GetAllPlayers()
     local data = {}
 
-    for _, team in pairs(TEAMS) do
-      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team[1]] do
-        local playerID = self:GetNthPlayerIDOnTeam(team[1], i)
+    for team_number, data in pairs(TEAMS) do
+      for i = 1, CUSTOM_TEAM_PLAYER_COUNT[team_number] do
+        local playerID = self:GetNthPlayerIDOnTeam(team_number, i)
         if playerID ~= nil then
           if self:HasSelectedHero(playerID) then
             local hPlayer = self:GetPlayer(playerID)

@@ -9,17 +9,18 @@
 
 #ButtonContainer{
   height: 52px;
-  width: 220px;
+  width: 243px;
   flow-children: right;
   margin-top: 10px;
-  margin-left: 25px;
+  margin-left: 22px;
 }
 
 #LabelContainer{
   height: 45px;
   width: 244px;
   flow-children: right;
-  margin-left: 16px;
+  margin-left: 11px;
+  margin-right: 11px;
 }
 
 #LabelContainer Label{
@@ -34,7 +35,8 @@
   horizontal-align: middle;
   vertical-align: middle;
   width: 60px;
-  margin-right: 16px;
+  margin-right: 7px;
+  margin-left: 7px;
 }
 
 #PathBG {

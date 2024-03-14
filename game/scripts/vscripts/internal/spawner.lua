@@ -12,9 +12,9 @@ function Spawner:SpawnFountains()
         shrine_ability:UpgradeAbility(true)
       end
     else
-      -- for i = 1, #TEAMS, 1 do
-      --   local loc = GetGroundPosition(TEAMS[i]["fountain_origin"], nil)
-      --   local fountain = CreateUnitByName("fountain_building", loc, true, nil, nil, TEAMS[i][1])
+      -- for i = 1, 4, 1 do
+      --   local loc = GetGroundPosition(fountain_origin, nil)
+      --   local fountain = CreateUnitByName("fountain_building", loc, true, nil, nil, team_number)
       --   fountain:SetOrigin(loc)
       --   FindClearSpaceForUnit(fountain, loc, true)
       -- end
@@ -148,18 +148,7 @@ function Spawner:CreateMob(spawner, map, mob, modifier)
 end
 
 function Spawner:RandomizePlayerSpawn(unit)
-  local loc = Vector(0, 0, 0)
-
-  if GetMapName() == "muken_arena_pvp" then
-    loc = TEAM_ORIGIN[unit:GetTeamNumber()]
-  else
-    for i = 1, #TEAMS, 1 do
-      if TEAMS[i][1] == unit:GetTeamNumber() then
-        loc = TEAMS[i]["team_origin"]
-      end
-    end
-  end
-
+  local loc = TEAMS[unit:GetTeamNumber()].origin
   unit:SetOrigin(loc)
   FindClearSpaceForUnit(unit, loc, true)
 end

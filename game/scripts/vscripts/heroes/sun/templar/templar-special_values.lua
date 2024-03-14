@@ -101,6 +101,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
     if value_name == "special_bkb" then return 1 end
     if value_name == "special_heal" then return 1 end
     if value_name == "special_hp_cap" then return 1 end
+    if value_name == "special_status_reduction" then return 1 end
     if value_name == "special_self_cast" then return 1 end
 	end
 
@@ -164,6 +165,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "interval_reduction" then return 1 end
 		if value_name == "heal" then return 1 end
 		if value_name == "duration" then return 1 end
+		if value_name == "status_reduction" then return 1 end
 		if value_name == "hp_cap" then return 1 end
     if value_name == "special_bkb" then return 1 end
     if value_name == "special_ethereal" then return 1 end
@@ -237,6 +239,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if self:HasRank(2, 3, 1) then
       if value_name == "special_heal" then return 60 * self:GetHealPower() end
       if value_name == "special_hp_cap" then return 75 end
+      if value_name == "special_status_reduction" then return 20 end
 		end
 
     if self:HasRank(2, 3, 2) then
@@ -404,6 +407,7 @@ function templar_special_values:GetModifierOverrideAbilitySpecialValue(keys)
 		if value_name == "interval_reduction" then return 0.7 end
 		if value_name == "heal" then return 60 * self:GetHealPower() end
 		if value_name == "duration" then return 9 * self:GetBuffAmp() end
+    if value_name == "status_reduction" then return 20 end
 	end
 
 	return 0

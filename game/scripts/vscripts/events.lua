@@ -298,24 +298,22 @@ function GameMode:OnTeamKillCredit(keys)
   local victimPlayer = PlayerResource:GetPlayer(keys.victim_userid)
   local numKills = keys.herokills
   local killerTeamNumber = keys.teamnumber
-  local KillerTeamIndex = GetTeamIndex(killerTeamNumber)
-  local VictimTeamIndex = GetTeamIndex(victimPlayer:GetAssignedHero():GetTeamNumber())
+  local VictimTeamNumber = victimPlayer:GetAssignedHero():GetTeamNumber()
 
-  TEAMS[VictimTeamIndex][2] = TEAMS[VictimTeamIndex][2] + SCORE_DEATH
-  if TEAMS[VictimTeamIndex][2] < 0 then TEAMS[VictimTeamIndex][2] = 0 end
-  local message = TEAMS[VictimTeamIndex][3] .. " SCORE: " .. TEAMS[VictimTeamIndex][2]
-  GameRules:SendCustomMessage(TEAMS[VictimTeamIndex][5] .. message .."</font>",-1,0)
+  TEAMS[VictimTeamNumber].score = TEAMS[VictimTeamNumber].score + SCORE_DEATH
+  if TEAMS[VictimTeamNumber].score < 0 then TEAMS[VictimTeamNumber].score = 0 end
+  local message = TEAMS[VictimTeamNumber].name .. " SCORE: " .. TEAMS[VictimTeamNumber].score
+  GameRules:SendCustomMessage(TEAMS[VictimTeamNumber].color .. message .."</font>", -1, 0)
 
-  TEAMS[KillerTeamIndex][2] = TEAMS[KillerTeamIndex][2] + SCORE_KILL
-  local message = TEAMS[KillerTeamIndex][3] .. " SCORE: " .. TEAMS[KillerTeamIndex][2]
-  GameRules:SendCustomMessage(TEAMS[KillerTeamIndex][5] .. message .."</font>",-1,0)
+  TEAMS[killerTeamNumber].score = TEAMS[killerTeamNumber].score + SCORE_KILL
+  local message = TEAMS[killerTeamNumber].name .. " SCORE: " .. TEAMS[killerTeamNumber].score
+  GameRules:SendCustomMessage(TEAMS[killerTeamNumber].color .. message .."</font>", -1, 0)
 
-  local score_table = {
-    [DOTA_TEAM_CUSTOM_1] = TEAMS[1][2],
-    [DOTA_TEAM_CUSTOM_2] = TEAMS[2][2],
-    [DOTA_TEAM_CUSTOM_3] = TEAMS[3][2],
-    [DOTA_TEAM_CUSTOM_4] = TEAMS[4][2]
-  }
+  local score_table = {}
+
+  for team_number, data in pairs(TEAMS) do
+    score_table[team_number] = data.score
+  end
 
   for _,hero in pairs(HeroList:GetAllHeroes()) do
     CustomGameEventManager:Send_ServerToPlayer(
@@ -323,10 +321,10 @@ function GameMode:OnTeamKillCredit(keys)
     )
   end
 
-  if TEAMS[KillerTeamIndex][2] >= SCORE_LIMIT then
-    local message = TEAMS[KillerTeamIndex][3] .. " VICTORY!"
+  if TEAMS[killerTeamNumber].score >= SCORE_LIMIT then
+    local message = TEAMS[killerTeamNumber].name .. " VICTORY!"
     GameRules:SetCustomVictoryMessage(message)
-    GameRules:SetGameWinner(TEAMS[KillerTeamIndex][1])
+    GameRules:SetGameWinner(TEAMS[killerTeamNumber])
   end
 
   -- if victimPlayer:GetAssignedHero():IsReincarnating() == false then
