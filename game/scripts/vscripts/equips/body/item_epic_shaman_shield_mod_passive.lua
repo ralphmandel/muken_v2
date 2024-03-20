@@ -11,17 +11,18 @@ function item_epic_shaman_shield_mod_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    physical_block = self.ability:GetSpecialValueFor("physical_block"),
-    status_resist_stack = self.ability:GetSpecialValueFor("status_resist")
-  }, false)
+  if not IsServer() then return end
+
+  self.parent:AddAbilityStats(self.ability, {"physical_block", "status_resist_stack"})
 end
 
 function item_epic_shaman_shield_mod_passive:OnRefresh(kv)
 end
 
 function item_epic_shaman_shield_mod_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"physical_block", "status_resist_stack"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"physical_block", "status_resist_stack"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -35,11 +36,15 @@ function item_epic_shaman_shield_mod_passive:DeclareFunctions()
 end
 
 function item_epic_shaman_shield_mod_passive:GetModifierPhysical_ConstantBlock(keys)
+  if not IsServer() then return 0 end
+
   if self.parent:IsMuted() then return 0 end
   if self.parent:IsBlockDisabled() then return 0 end
-  if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
 
-  self.parent:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("heal")), self.ability)
+  local heal = self.ability:GetSpecialValueFor("physical_block")
+  if heal > keys.damage then heal = keys.damage end
+
+  self.parent:ApplyHeal(heal, self.ability, false)
 
   return 0
 end

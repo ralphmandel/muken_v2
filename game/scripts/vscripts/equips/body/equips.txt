@@ -1,5 +1,6 @@
 "DOTAAbilities"
 {
+  //RARE
   "item_rare_iron_shield"
   {
     "BaseClass"						  "item_lua"
@@ -179,6 +180,7 @@
     "SecretShop"		    "0"
   }
 
+  //EPIC
   "item_epic_shaman_shield"
   {
     "BaseClass"						  "item_lua"
@@ -193,9 +195,8 @@
 
     "AbilityValues"
     {
-      "physical_block"  "10"
-      "status_resist"   "25"
-      "heal"            "10"
+      "physical_block"      "10"
+      "status_resist_stack" "25"
     }
 
     "precache"
@@ -236,7 +237,7 @@
     "AbilityValues"
     {
       "magical_block"  "15"
-      "chance"         "12"
+      "chance"         "10"
     }
 
     "precache"

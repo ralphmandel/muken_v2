@@ -11,16 +11,18 @@ function item_epic_dark_shield_mod_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    magical_block = self.ability:GetSpecialValueFor("magical_block"),
-  }, false)
+  if not IsServer() then return end
+
+  self.parent:AddAbilityStats(self.ability, {"magical_block"})
 end
 
 function item_epic_dark_shield_mod_passive:OnRefresh(kv)
 end
 
 function item_epic_dark_shield_mod_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"magical_block"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"magical_block"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -34,8 +36,10 @@ function item_epic_dark_shield_mod_passive:DeclareFunctions()
 end
 
 function item_epic_dark_shield_mod_passive:GetAbsorbSpell(keys)
+  if not IsServer() then return 0 end
+
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("chance") then
-    if IsServer() then self:PlayEfxSpellBlock() end
+    self:PlayEfxSpellBlock()
     return 1
   end
 
@@ -53,5 +57,5 @@ function item_epic_dark_shield_mod_passive:PlayEfxSpellBlock()
 	ParticleManager:SetParticleControlEnt(effect_cast, 0, self.parent, PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:ReleaseParticleIndex(effect_cast)
 
-	if IsServer() then self.parent:EmitSound("DOTA_Item.LinkensSphere.Activate") end
+	self.parent:EmitSound("DOTA_Item.LinkensSphere.Activate")
 end

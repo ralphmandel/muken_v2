@@ -297,6 +297,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "heal" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_epic_dark_shield" then
+		if value_name == "chance" then return 1 end
+	end
+
 	return 0
 end
 
@@ -325,6 +329,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_rare_healing_mail" then
 		if value_name == "heal" then return math.floor(15 * self:GetHealPower()) end
+	end
+
+  if ability:GetAbilityName() == "item_epic_dark_shield" then
+		if value_name == "chance" then return self:CalcLuck(10) end
 	end
 
 	return 0

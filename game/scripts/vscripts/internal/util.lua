@@ -549,8 +549,8 @@
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {
-        [1] = "item_rare_wizard_garb", [2] = "item_rare_wizard_garb",
-        [3] = "item_rare_healing_mail", [4] = "item_rare_healing_mail"
+        [1] = "item_epic_dark_shield", [2] = "item_epic_shaman_shield",
+        [3] = "item_epic_dark_shield", [4] = "item_epic_shaman_shield"
       }
 
       for i = 1, 5, 1 do
