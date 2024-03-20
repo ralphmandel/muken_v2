@@ -20,7 +20,7 @@
     "AbilityValues"
     {
       "armor"         "3"
-      "block_chance"  "0"
+      "block_chance"  "25"
       "block"         "30"
     }
 
@@ -34,7 +34,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"
@@ -59,11 +59,13 @@
 
     "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
+    "AbilityCooldown"       "10"
+
     "AbilityValues"
     {
       "evasion"       "2.5"
-      "invi_chance"   "0"
-      "invi_duration" "0"
+      "invi_chance"   "40"
+      "invi_duration" "2"
       "invi_delay"    "0.3"
     }
 
@@ -77,7 +79,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"
@@ -103,10 +105,12 @@
     "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL" 
     "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
+    "AbilityCooldown"       "2"
+
     "AbilityValues"
     {
       "magic_resist"    "3"
-      "damage_percent"  "10"
+      "mana_gain"       "10"
     }
 
     "precache"
@@ -119,7 +123,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"
@@ -147,8 +151,9 @@
 
     "AbilityValues"
     {
-      "health_regen"    "10"
-      "heal"            "20"
+      "health_regen"  "10"
+      "heal"          "15"
+      "interval"      "2"
     }
 
     "precache"
@@ -161,7 +166,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"
@@ -203,7 +208,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"
@@ -244,7 +249,7 @@
     "ItemKillable"		  "1"
     "ItemSellable"		  "0"
     "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "1"
+    "ItemDroppable" 	  "0"
     "ItemStackable"		  "0"
     // "ItemPermanent"     "1" //used for charges
     // "MaxUpgradeLevel"   "1"

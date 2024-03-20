@@ -52,12 +52,12 @@ function MukenEvents:OnItemEquipped(event)
   local item = CreateItem(event.itemname, player, nil)
   unit:AddItem(item)
 
-  local item_slot = item:GetItemSlot()
-  local new_slot = GetSlotByType(event.type)
+  -- local item_slot = item:GetItemSlot()
+  -- local new_slot = GetSlotByType(event.type)
 
-  if item_slot ~= new_slot then
-    unit:SwapItems(item_slot, new_slot)
-  end
+  -- if item_slot ~= new_slot then
+  --   unit:SwapItems(item_slot, new_slot)
+  -- end
 end
 
 function MukenEvents:OnItemUnequipped(event)

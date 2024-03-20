@@ -72,31 +72,35 @@ function OnDragDrop(newPanel, draggedPanel) {
   var context = ROWS[row].GetChild(slot_index);
 
   if (draggedPanel.row != row || draggedPanel.slot != slot) {
-    if (newPanel.id == "item") {
-      if (draggedPanel.equip_type != null && itemtype != newPanel.itemtype) {
-        Game.EmitSound("General.Item_CantMove_Slot");
+    if (draggedPanel.m_OriginalPanel != null) {
+      if (newPanel.id == "item") {
+        if (draggedPanel.equip_type != null && itemtype != newPanel.itemtype) {
+          Game.EmitSound("General.Item_CantMove_Slot");
+        } else {
+          Game.EmitSound("General.ButtonClickRelease");
+  
+          draggedPanel.m_DragCompleted = true;
+          draggedPanel.swap_itens = true;
+          draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
+          draggedPanel.m_OriginalPanel.itemrarity = newPanel.itemrarity;
+          draggedPanel.m_OriginalPanel.itemtype = newPanel.itemtype;
+    
+          newPanel.itemname = itemname;
+          newPanel.itemrarity = itemrarity;
+          newPanel.itemtype = itemtype;
+        }
       } else {
         Game.EmitSound("General.ButtonClickRelease");
-
-        draggedPanel.m_DragCompleted = true;
-        draggedPanel.swap_itens = true;
-        draggedPanel.m_OriginalPanel.itemname = newPanel.itemname;
-        draggedPanel.m_OriginalPanel.itemrarity = newPanel.itemrarity;
-        draggedPanel.m_OriginalPanel.itemtype = newPanel.itemtype;
   
-        newPanel.itemname = itemname;
-        newPanel.itemrarity = itemrarity;
-        newPanel.itemtype = itemtype;
+        draggedPanel.m_DragCompleted = true;
+        draggedPanel.m_OriginalPanel.DeleteAsync(0);
+        var panel = $.CreatePanel("DOTAItemImage", context, "item");
+        panel.itemname = itemname;
+        panel.itemrarity = itemrarity;
+        panel.itemtype = itemtype;
       }
     } else {
-      Game.EmitSound("General.ButtonClickRelease");
-
-      draggedPanel.m_DragCompleted = true;
-      draggedPanel.m_OriginalPanel.DeleteAsync(0);
-      var panel = $.CreatePanel("DOTAItemImage", context, "item");
-      panel.itemname = itemname;
-      panel.itemrarity = itemrarity;
-      panel.itemtype = itemtype;
+      Game.EmitSound("General.Item_CantMove_Slot");
     }
   }
 

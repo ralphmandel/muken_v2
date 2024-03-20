@@ -257,6 +257,18 @@
     return self:AddModifier(ability, "sub_stat_modifier", table)
   end
 
+  function CDOTA_BaseNPC:AddAbilityStats(ability, data)
+    local type = "sub_stat_modifier"
+    local table = {}
+
+    for _, stat in pairs(data) do
+      if stat == "str" or stat == "agi" or stat == "int" or stat == "vit" then type = "main_stat_modifier" end
+      table[stat] = ability:GetSpecialValueFor(stat)
+    end
+
+    return self:AddModifier(ability, type, table)
+  end
+
   function CDOTA_BaseNPC:RemoveMainStats(ability, list)
     if IsValidEntity(self) == false then return end
 

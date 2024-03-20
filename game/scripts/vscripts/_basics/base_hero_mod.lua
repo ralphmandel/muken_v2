@@ -289,6 +289,14 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "invi_duration" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_rare_wizard_garb" then
+		if value_name == "mana_gain" then return 1 end
+	end
+
+  if ability:GetAbilityName() == "item_rare_healing_mail" then
+		if value_name == "heal" then return 1 end
+	end
+
 	return 0
 end
 
@@ -307,8 +315,16 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 	end
 
   if ability:GetAbilityName() == "item_rare_cloak_evasion" then
-		if value_name == "invi_chance" then return self:CalcLuck(8) end
+		if value_name == "invi_chance" then return self:CalcLuck(40) end
 		if value_name == "invi_duration" then return 2 * self:GetBuffAmp() end
+	end
+
+  if ability:GetAbilityName() == "item_rare_wizard_garb" then
+		if value_name == "mana_gain" then return math.floor(10 * self:GetHealPower()) end
+	end
+
+  if ability:GetAbilityName() == "item_rare_healing_mail" then
+		if value_name == "heal" then return math.floor(15 * self:GetHealPower()) end
 	end
 
 	return 0

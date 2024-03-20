@@ -1,13 +1,13 @@
 .slotContainer{
   width: 205px;
-  height: 100%;
-  vertical-align: bottom;  
-  horizontal-align: left;
+  height: 145px;
+  vertical-align: center;  
+  horizontal-align: right;
   z-index: -1;
   background-image: url("file://{images}/custom_game/inventory_bg_symbol3.png");
   background-color: #10171c;
+  margin-bottom: 841px;
 }
-
 
 .slot_item{
   wash-color: #828282db;
@@ -144,25 +144,25 @@ DOTAItemImage{
 
 #HotkeyContainer-head{
   position: 66px 4px 0px;
-  width: 15px;
+  width: 40px;
   height: 15px;
   z-index: 10;
 }
 #HotkeyContainer-armor{
   position: 0px 36.5px 0px;
-  width: 15px;
+  width: 40px;
   height: 15px;
   z-index: 10;
 }
 #HotkeyContainer-weapon{
   position: 133px 36.5px 0px;
-  width: 15px;
+  width: 40px;
   height: 15px;
   z-index: 10;
 }
 #HotkeyContainer-misc{
   position: 66px 72px 0px;
-  width: 15px;
+  width: 40px;
   height: 15px;
   z-index: 10;
 }
@@ -175,9 +175,9 @@ DOTAItemImage{
   border-radius: 4px;
   vertical-align: top;
   horizontal-align: left;
-  min-width: 14px;
+  min-width: 39px;
   min-height: 14px;
-  max-width: 70px;
+  max-width: 40px;
   max-height: 15px;
   white-space: nowrap;
   background-color: #212726;

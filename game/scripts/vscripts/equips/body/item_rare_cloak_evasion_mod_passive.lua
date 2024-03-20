@@ -13,7 +13,7 @@ function item_rare_cloak_evasion_mod_passive:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:AddSubStats(self.ability, {evasion = self.ability:GetSpecialValueFor("evasion")})
+  self.parent:AddAbilityStats(self.ability, {"evasion"})
 end
 
 function item_rare_cloak_evasion_mod_passive:OnRefresh(kv)
@@ -52,15 +52,18 @@ function item_rare_cloak_evasion_mod_passive:ApplyInvisibility(keys)
   if keys.target ~= self.parent then return end
   if self.parent:HasModifier("_modifier_invisible") then return end
   if self.parent:IsMuted() then return end
+  if self.ability:IsCooldownReady() == false then return end
 
   if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("invi_chance") then
+    self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+
     self.parent:EmitSound("Hunter.Invi")
-  
-    AddModifier(self.parent, self.ability, "_modifier_invisible", {
+
+    self.parent:AddModifier(self.ability, "_modifier_invisible", {
       duration = self.ability:GetSpecialValueFor("invi_duration"),
       delay = self.ability:GetSpecialValueFor("invi_delay"),
       attack_break = 0, spell_break = 0
-    }, false)
+    })
   end
 end
 

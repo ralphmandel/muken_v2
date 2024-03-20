@@ -41,7 +41,7 @@ function toggleInventory(){
 
 
 (function(){
-  mukenItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("muken_inventory_items");
+  mukenItems = $.GetContextPanel().GetParent().GetParent().GetParent().GetParent().GetParent().FindChildTraverse("muken_inventory_items");
   inventoryButton = $.GetContextPanel().FindChildTraverse("inventory-button");
   buttonContainer = $.GetContextPanel().FindChildTraverse("inventory-container");
 

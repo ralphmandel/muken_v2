@@ -11,16 +11,19 @@ function item_rare_healing_mail_mod_passive:OnCreated(kv)
   self.parent = self:GetParent()
   self.ability = self:GetAbility()
 
-  AddSubStats(self.parent, self.ability, {
-    health_regen = self.ability:GetSpecialValueFor("health_regen")
-  }, false)
+  if not IsServer() then return end
+
+  self.parent:AddAbilityStats(self.ability, {"health_regen"})
+  self:StartIntervalThink(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 end
 
 function item_rare_healing_mail_mod_passive:OnRefresh(kv)
 end
 
 function item_rare_healing_mail_mod_passive:OnRemoved()
-  RemoveSubStats(self.parent, self.ability, {"health_regen"})
+  if not IsServer() then return end
+
+  self.parent:RemoveSubStats(self.ability, {"health_regen"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------
@@ -34,12 +37,23 @@ function item_rare_healing_mail_mod_passive:DeclareFunctions()
 end
 
 function item_rare_healing_mail_mod_passive:OnTakeDamage(keys)
+  if not IsServer() then return end
+
   if keys.unit ~= self.parent then return end
-  if self.ability:IsCooldownReady() == false then return end
+  
+  self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+  self:StartIntervalThink(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+end
+
+function item_rare_healing_mail_mod_passive:OnIntervalThink()
+  if not IsServer() then return end
+
   if self.parent:IsMuted() then return end
 
-  self.parent:Heal(CalcHeal(self.caster, self.ability:GetSpecialValueFor("heal")), self.ability)
-  self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
+  local interval = self.ability:GetSpecialValueFor("interval")
+
+  self.parent:ApplyHeal(self.ability:GetSpecialValueFor("heal") * interval, self.ability, false)
+  self:StartIntervalThink(interval)
 end
 
 -- UTILS -----------------------------------------------------------

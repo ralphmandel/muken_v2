@@ -13,7 +13,7 @@ function item_rare_iron_shield_mod_passive:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:AddSubStats(self.ability, {armor = self.ability:GetSpecialValueFor("armor")})
+  self.parent:AddAbilityStats(self.ability, {"armor"})
 end
 
 function item_rare_iron_shield_mod_passive:OnRefresh(kv)
@@ -39,8 +39,9 @@ function item_rare_iron_shield_mod_passive:GetModifierPhysical_ConstantBlock(key
 	if keys.damage_category ~= DOTA_DAMAGE_CATEGORY_ATTACK then return end
   if not keys.ranged_attack then return end
   if self.parent:IsMuted() then return end
+  if self.ability:IsCooldownReady() == false then return end
 
-  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("block_chance") and self.ability:IsCooldownReady() then
+  if RandomFloat(0, 100) < self.ability:GetSpecialValueFor("block_chance") then
     if IsServer() and self.parent:IsBlockDisabled() == false then
       self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
       self:StartGenericEfxBlock(keys)

@@ -271,24 +271,26 @@ function CreateRunePanel(){
   BuffPanel.style.marginBottom = "30px";
   var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
   CenterPanel.FindChildTraverse("stats_container").style.visibility = "collapse";
-  var RuneContainer = $.CreatePanel( "Panel", CenterPanel, "" );
-  RuneContainer.BLoadLayout( "file://{resources}/layout/custom_game/panel_runemaster.xml", false, false );
-  CenterPanel.MoveChildBefore(RuneContainer, CenterPanel.GetChild(24));
-  CenterPanel.FindChildTraverse("power").checked = true;
-  $.Msg("skillet", BuffPanel.FindChildTraverse("buffs").style.transform == 0);
+  // var RuneContainer = $.CreatePanel( "Panel", CenterPanel, "" );
+  // RuneContainer.BLoadLayout( "file://{resources}/layout/custom_game/panel_runemaster.xml", false, false );
+  // CenterPanel.MoveChildBefore(RuneContainer, CenterPanel.GetChild(24));
+  // CenterPanel.FindChildTraverse("power").checked = true;
+  //$.Msg("skillet", BuffPanel.FindChildTraverse("buffs").style.transform == 0);
 }
 
 function CreateItemSlotPanel(){
-  var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
-  var SlotContainer = CenterPanel.FindChildTraverse("inventory");
+  //var CenterPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud").FindChildTraverse("center_with_stats").FindChildTraverse("center_block");
+  //var SlotContainer = CenterPanel.FindChildTraverse("inventory");
+
+  var SlotContainer = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements");
   var ItemSlot = $.CreatePanel( "Panel", SlotContainer, "" );
   ItemSlot.BLoadLayout( "file://{resources}/layout/custom_game/item_slot_container.xml", false, false );
-
-
 }
 
 function CreateInventoryPanel(){
-  var centerPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
+  //var centerPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("lower_hud");
+  
+  var centerPanel = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements");
   var inventorySlot = $.CreatePanel( "Panel", centerPanel, "" );
   inventorySlot.BLoadLayout( "file://{resources}/layout/custom_game/equip_system/muken_inventory.xml", false, false );
 
