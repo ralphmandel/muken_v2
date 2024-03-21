@@ -119,6 +119,9 @@
 							"value0"	"sounds/bloodstained_seal.vsnd"
 						}
 					}
+
+					"mixgroup"			  { "value"	"Weapons"	}
+
 					"volume"            
 					{   
 						"value"     "2.50000"  

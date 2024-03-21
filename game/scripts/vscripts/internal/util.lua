@@ -549,8 +549,8 @@
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {
-        [1] = "item_epic_holy_mail", [2] = "item_epic_holy_mail",
-        [3] = "item_epic_dark_shield", [4] = "item_epic_shaman_shield"
+        [1] = "item_epic_fury_plate", [2] = "item_epic_fury_plate",
+        [3] = "item_epic_fire_mail", [4] = "item_epic_fire_mail"
       }
 
       for i = 1, 5, 1 do

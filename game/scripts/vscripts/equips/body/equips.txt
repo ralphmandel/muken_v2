@@ -4,17 +4,14 @@
   "item_rare_iron_shield"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/red_box.vmdl"
     "ScriptFile"					  "equips/body/item_rare_iron_shield"
     "AbilityTextureName"		"shield/iron_shield"
     "ItemType"              "shield"
     "ItemQuality"           "1"
     "ID"							      "3101"
 
-    "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP"
-    "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_NONE"
+    "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "AbilityCooldown"       "3"
 
@@ -51,7 +48,7 @@
   "item_rare_cloak_evasion"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/red_box.vmdl"
     "ScriptFile"					  "equips/body/item_rare_cloak_evasion"
     "AbilityTextureName"		"armor/cloak_evasion"
     "ItemType"              "armor"
@@ -96,7 +93,7 @@
   "item_rare_wizard_garb"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/red_box.vmdl"
     "ScriptFile"					  "equips/body/item_rare_wizard_garb"
     "AbilityTextureName"		"armor/wizard_garb"
     "ItemType"              "armor"
@@ -140,7 +137,7 @@
   "item_rare_healing_mail"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/red_box.vmdl"
     "ScriptFile"					  "equips/body/item_rare_healing_mail"
     "AbilityTextureName"		"armor/healing_mail"
     "ItemType"              "armor"
@@ -184,7 +181,7 @@
   "item_epic_shaman_shield"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
     "ScriptFile"					  "equips/body/item_epic_shaman_shield"
     "AbilityTextureName"		"shield/shaman_shield"
     "ItemType"              "shield"
@@ -225,7 +222,7 @@
   "item_epic_dark_shield"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
     "ScriptFile"					  "equips/body/item_epic_dark_shield"
     "AbilityTextureName"		"shield/dark_shield"
     "ItemType"              "shield"
@@ -266,15 +263,15 @@
   "item_epic_holy_mail"
   {
     "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest_gold.vmdl"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
     "ScriptFile"					  "equips/body/item_epic_holy_mail"
     "AbilityTextureName"		"armor/holy_mail"
     "ItemType"              "armor"
     "ItemQuality"           "2"
     "ID"							      "3107"
 
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
     "AbilityValues"
     {
@@ -291,6 +288,99 @@
     {
       "particle"	"particles/items/holy_mail/holy_mail_book.vpcf"
       "particle"  "particles/econ/items/wisp/calavera/io_calavera_attack_explosion.vpcf"
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "0"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_epic_fury_plate"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+    "ScriptFile"					  "equips/body/item_epic_fury_plate"
+    "AbilityTextureName"		"armor/fury_plate"
+    "ItemType"              "armor"
+    "ItemQuality"           "2"
+    "ID"							      "3108"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    "AbilityCooldown"       "1"
+
+    "AbilityValues"
+    {
+      "str"             "12"
+      "armor"           "4"
+      "max_health"      "800"
+      "max_stack"       "24"
+      "decrement_time"  "1"
+    }
+
+    "precache"
+    {
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "0"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_epic_fire_mail"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+    "ScriptFile"					  "equips/body/item_epic_fire_mail"
+    "AbilityTextureName"		"armor/fire_mail"
+    "ItemType"              "armor"
+    "ItemQuality"           "2"
+    "ID"							      "3109"
+
+    "AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
+    "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+    "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP"
+    "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+    "AbilityValues"
+    {
+      "vit"           "10"
+      "armor"         "5"
+      "magic_resist"  "5"
+      "radius"        "600"
+      "damage"        "30"
+      "interval"      "0.5"
+    }
+
+    "precache"
+    {
     }
 
     "ItemShareability"  "ITEM_FULLY_SHAREABLE"

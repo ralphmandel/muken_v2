@@ -305,6 +305,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "damage" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_epic_fire_mail" then
+		if value_name == "damage" then return 1 end
+	end
+
 	return 0
 end
 
@@ -341,6 +345,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_epic_holy_mail" then
 		if value_name == "damage" then return 50 * self:GetHolyDamageAmp() end
+	end
+
+  if ability:GetAbilityName() == "item_epic_fire_mail" then
+		if value_name == "damage" then return 30 * self:GetMagicalDamageAmp() end
 	end
 
 	return 0
