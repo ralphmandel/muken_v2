@@ -109,6 +109,10 @@ require("internal/rank_system")
       self:ResetData()
       self.ability_points = self.hero_data.ability_points
 
+      Timers:CreateTimer(0.1, function()
+        self.hero:SetAbilityPoints(self.ability_points)
+      end)
+
       for team = DOTA_TEAM_CUSTOM_MIN, DOTA_TEAM_CUSTOM_MIN + 3 do
         if self.hero:GetTeamNumber() == team then
           Timers:CreateTimer(team, function()
@@ -355,11 +359,11 @@ require("internal/rank_system")
 
     self.hero:SetAbilityPoints(self.ability_points)
 
-    if level == 2 or level == 4 then
+    if level == 2 or level == 4 or level == 7 then
       self:UpdateAbilityPoints(1)
     end
 
-		if level == 8 then
+		if level == 10 then
 			local ultimate = self.hero:FindAbilityByName(self.abilities_name[6])
 			if ultimate then
 				if ultimate:IsTrained() == false then
@@ -369,19 +373,33 @@ require("internal/rank_system")
 			end
 		end
 
-    if level % 1 == 0 then
+    if level == 1 or level == 5 or level == 8
+    or level == 11 or level == 13 or level == 15
+    or level == 17 or level == 19 then
       self:ApplyStatBonusLevel()
-      self:UpdateStatPoints(3, "nil")
+      self:UpdateStatPoints(5, "nil")
     end
 
-    if (level + 1) % 2 == 0 then
+    if level == 21 or level == 23 or level == 25
+    or level == 27 or level == 29 then
+      self:ApplyStatBonusLevel()
+      self:UpdateStatPoints(10, "nil")
+    end
+
+    if level == 3 or level == 6 or level == 9
+    or level == 12 or level == 14 or level == 16
+    or level == 18 then
       self:UpdateRankPoints(1)
     end
 
-    if level % 15 == 0 then
-      self:UpdatePathPoints(1)
+    if level == 22 or level == 24 or level == 26
+    or level == 28 then
+      self:UpdateRankPoints(2)
     end
 
+    if level == 20 or level == 30 then
+      self:UpdatePathPoints(1)
+    end
 
     local bot_script = self.hero:FindModifierByName("_general_script")
     if bot_script then bot_script:ConsumeAllPoints() end

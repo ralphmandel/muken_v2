@@ -278,6 +278,7 @@ function strider_u_modifier_shadow:FindTarget(target_type)
 	for _,enemy in pairs(enemies) do
     if self.parent:CanEntityBeSeenByMyTeam(enemy) then
       self.target = enemy
+      self.parent:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
       self.parent:AddModifier(self.ability, "_modifier_force_attack", {target = self.target:GetEntityIndex()})
       self:ChangeState(SHADOW_STATE_ATTACKING)
       return
