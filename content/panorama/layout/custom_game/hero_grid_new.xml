@@ -1,9 +1,9 @@
 <!-- xml reconstructed by ValveResourceFormat: https://vrf.steamdb.info/ -->
 <root>
 	<styles>
-		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<!-- <include src="s2r://panorama/styles/dotastyles.vcss_c" />
 		<include src="s2r://panorama/styles/battle_pass/current_battle_pass.vcss_c" />
-		<include src="file://{resources}/styles/custom_game/hero_grid_new.css" />
+		<include src="file://{resources}/styles/custom_game/hero_grid_new.css" /> -->
 	</styles>
 	<snippets>
 		<snippet name="HeroCategory">

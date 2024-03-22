@@ -342,30 +342,6 @@ STATUS_OFFSET_HERO = -25
 STATUS_OFFSET_CREEP = -10
 STATUS_OFFSET_SPACING = -25
 
-HEROES_DATA = {
-  ["bloodstained"] = {
-    shield_fx_height = 210
-  },
-  ["fleaman"] = {
-    shield_fx_height = 155
-  },
-  ["strider"] = {
-    shield_fx_height = 185
-  },
-  ["genuine"] = {
-    shield_fx_height = 185
-  },
-  ["paladin"] = {
-    shield_fx_height = 215
-  },
-  ["templar"] = {
-    shield_fx_height = 235
-  },
-  ["death_slash"] = {
-    shield_fx_height = 210
-  },
-}
-
 CYCLE_NIGHT = 0
 CYCLE_DAY = 1
 
@@ -377,16 +353,3 @@ GENUINE_TRAVEL_DEFAULT = 2
 GENUINE_TRAVEL_ON_ORB = 3
 GENUINE_TRAVEL_SUPER_CAST = 5
 GENUINE_TRAVEL_POINT_CAST = 7
-
--- if GetHeroName(self.parent) == "lawbreaker" then size = 185 end
--- if GetHeroName(self.parent) == "bocuse" then size = 210 end
--- if GetHeroName(self.parent) == "vulture" then size = 250 end
-
--- if GetHeroName(self.parent) == "dasdingo" then size = 175 end
--- if GetHeroName(self.parent) == "druid" then size = 185 end
--- if GetHeroName(self.parent) == "hunter" then size = 165 end
-
--- if GetHeroName(self.parent) == "icebreaker" then size = 155 end
-
--- if GetHeroName(self.parent) == "ancient" then size = 250 end
--- if GetHeroName(self.parent) == "baldur" then size = 175 end

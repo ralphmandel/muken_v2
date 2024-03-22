@@ -90,19 +90,11 @@ function MukenEvents:OnRoleBarRequest(event)
   if (not player) then return end
 
   local event_hero_name = ""
-  local heroes_name_data = LoadKeyValues("scripts/kv/heroes_name.kv")
+  local heroes_data = LoadKeyValues("scripts/kv/heroes_data.kv")
 
-  for name, id_name in pairs(heroes_name_data) do
+  for id_name, data in pairs(heroes_data) do
     if "npc_dota_hero_"..event.id_name == id_name then
-      event_hero_name = name
-      break
-    end
-  end
-
-  local heroes_stats_data = LoadKeyValues("scripts/kv/heroes_roles_level.kv")
-  for hero_name, data in pairs(heroes_stats_data) do
-    if hero_name == event_hero_name then
-      CustomGameEventManager:Send_ServerToPlayer(player, "role_bar_state_from_server", data)
+      CustomGameEventManager:Send_ServerToPlayer(player, "role_bar_state_from_server", data.roles_level)
       break
     end
   end

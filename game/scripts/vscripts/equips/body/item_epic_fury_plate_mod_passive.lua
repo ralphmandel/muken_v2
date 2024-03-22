@@ -44,17 +44,15 @@ end
 function item_epic_fury_plate_mod_passive:OnAttackLanded(keys)
   if not IsServer() then return end
 
-  if keys.attacker ~= self.parent then return end
-  if keys.target:GetTeamNumber() == self.parent:GetTeamNumber() then return end
+  if keys.target ~= self.parent then return end
+  if keys.attacker:GetTeamNumber() == self.parent:GetTeamNumber() then return end
   if self.parent:IsMuted() then return end
   if self.ability:IsCooldownReady() == false then return end
   if self:GetStackCount() >= self.ability:GetSpecialValueFor("max_stack") then return end
 
-  local refresh = self.ability:GetEffectiveCooldown(self.ability:GetLevel())
-
-  self.ability:StartCooldown(refresh)
   self:IncrementStackCount()
-  self:StartIntervalThink(refresh + self.decrement_time)
+  self:StartIntervalThink(self.decrement_time)
+  self.ability:StartCooldown(self.ability:GetEffectiveCooldown(self.ability:GetLevel()))
 end
 
 function item_epic_fury_plate_mod_passive:OnIntervalThink()
@@ -63,7 +61,7 @@ function item_epic_fury_plate_mod_passive:OnIntervalThink()
   if self:GetStackCount() == 0 then self:StartIntervalThink(-1) return end
 
   self:DecrementStackCount()
-  self:StartIntervalThink(self.decrement_time)
+  self:StartIntervalThink(1)
 end
 
 function item_epic_fury_plate_mod_passive:OnStackCountChanged(old)

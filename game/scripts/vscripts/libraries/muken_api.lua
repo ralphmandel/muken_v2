@@ -123,28 +123,24 @@
 
 -- CDOTA_BaseNPC || GET STATS
 
+  function CDOTA_BaseNPC:GetHeroData()
+    local data = LoadKeyValues("scripts/kv/heroes_data.kv")
+    if data == nil then return end
+
+    local unit_name = self:GetUnitName()
+    if unit_name == "strider_shadow" then unit_name = "npc_dota_hero_juggernaut" end
+    
+    return data[unit_name]
+  end
+
   function CDOTA_BaseNPC:GetHeroName()
-    local data = LoadKeyValues("scripts/kv/heroes_name.kv")
-
-    if self:GetUnitName() == "strider_shadow" then return "strider" end
-
-    for name, id_name in pairs(data) do
-      if self:GetUnitName() == id_name then return name end
-    end
-
-    return ""
+    local data = self:GetHeroData()
+    if data then return self:GetHeroData().name else return "" end
   end
 
   function CDOTA_BaseNPC:GetHeroTeam()
-    local data = LoadKeyValues("scripts/kv/heroes_team.kv")
-
-    for team, hero_list in pairs(data) do
-      for _,hero_name in pairs(hero_list) do
-        if self:GetHeroName() == hero_name then
-          return team
-        end
-      end
-    end
+    local data = self:GetHeroData()
+    if data then return self:GetHeroData().team else return "" end
   end
 
   function CDOTA_BaseNPC:GetMainStat(stat)

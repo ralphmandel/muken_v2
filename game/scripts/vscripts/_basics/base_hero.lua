@@ -67,29 +67,30 @@ require("internal/rank_system")
 	function base_hero:Spawn()
     if not IsServer() then return end
 
-    if self:IsTrained() == false then self:UpgradeAbility(true) end
-
+    self.hero = self:GetCaster()
+    self.hero_data = self.hero:GetHeroData()
     self.stats_lv_limit = {["str"] = 30, ["agi"] = 30, ["int"] = 30, ["vit"] = 30}
 
-    local caster = self:GetCaster()
-    if caster:IsHero() then return end
-  
-    local stats_list = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-    local abilities_stats = {
-      ["str"] = caster:FindAbilityByName("_ability_str"),
-      ["agi"] = caster:FindAbilityByName("_ability_agi"),
-      ["int"] = caster:FindAbilityByName("_ability_int"),
-      ["vit"] = caster:FindAbilityByName("_ability_vit")
-    }
-  
-    for name, table in pairs(stats_list) do
-      if name == caster:GetUnitName() then
-        for info, stats in pairs(table) do
-          if info == "Stats" then
-            for stat, value in pairs(stats) do
-              abilities_stats[stat]:SetLevel(value)
+    if self:IsTrained() == false then self:UpgradeAbility(true) end
+
+    if self.hero:GetUnitName() == "strider_shadow" then
+      local stats_list = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+      local abilities_stats = {
+        ["str"] = self.hero:FindAbilityByName("_ability_str"),
+        ["agi"] = self.hero:FindAbilityByName("_ability_agi"),
+        ["int"] = self.hero:FindAbilityByName("_ability_int"),
+        ["vit"] = self.hero:FindAbilityByName("_ability_vit")
+      }
+    
+      for name, table in pairs(stats_list) do
+        if name == self.hero:GetUnitName() then
+          for info, stats in pairs(table) do
+            if info == "Stats" then
+              for stat, value in pairs(stats) do
+                abilities_stats[stat]:SetLevel(value)
+              end
+              return
             end
-            return
           end
         end
       end
@@ -101,25 +102,19 @@ require("internal/rank_system")
 	end
 
   function base_hero:OnUpgrade()
-		local caster = self:GetCaster()
-    if caster:IsHero() == false then return end
-		if caster:IsIllusion() then return end
+    if self.hero:IsHero() == false then return end
+		if self.hero:IsIllusion() then return end
 
 		if self:GetLevel() == 1 then
       self:ResetData()
-
-      local init_pts_data = LoadKeyValues("scripts/kv/heroes_init_pts.kv")
-
-      for name, pts in pairs(init_pts_data) do
-        if caster:GetHeroName() == name then self.ability_points = pts end
-      end
+      self.ability_points = self.hero_data.ability_points
 
       for team = DOTA_TEAM_CUSTOM_MIN, DOTA_TEAM_CUSTOM_MIN + 3 do
-        if caster:GetTeamNumber() == team then
+        if self.hero:GetTeamNumber() == team then
           Timers:CreateTimer(team, function()
-            caster:RemoveAbilityByHandle(caster:FindAbilityByName("ability_capture"))
-            caster:RemoveAbilityByHandle(caster:FindAbilityByName("abyssal_underlord_portal_warp"))
-            if INITIAL_XP > 0 then caster:AddExperience(INITIAL_XP, 0, false, false) end
+            self.hero:RemoveAbilityByHandle(self.hero:FindAbilityByName("ability_capture"))
+            self.hero:RemoveAbilityByHandle(self.hero:FindAbilityByName("abyssal_underlord_portal_warp"))
+            if INITIAL_XP > 0 then self.hero:AddExperience(INITIAL_XP, 0, false, false) end
           end)
         end
       end
@@ -127,13 +122,11 @@ require("internal/rank_system")
 	end
 
   function base_hero:ResetData()
-    local caster = self:GetCaster()
-
     self.stat_points = 0
     self.bonus_level = {str = 0, agi = 0, int = 0, vit = 0}
     self:LoadBaseStats()
 
-    self.abilities_name = GetAbilitiesList(caster)
+    self.abilities_name = GetAbilitiesList(self.hero)
     self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
     self.max_level = 15
@@ -146,29 +139,21 @@ require("internal/rank_system")
 -- STAT SYSTEM
 
   function base_hero:LoadBaseStats()
-    local caster = self:GetCaster()
-    local stats_data = LoadKeyValues("scripts/kv/heroes_stats.kv")
-
-    for hero_name, stats in pairs(stats_data) do
-      if hero_name == caster:GetHeroName() then
-        for stat, types_table in pairs(stats) do
-          for type, value in pairs(types_table) do
-            if type == "base" then
-              local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
-              if ability_stat then ability_stat:SetLevel(value) end
-            else
-              self.bonus_level[string.lower(stat)] = value
-            end
-          end
+    for stat, types_table in pairs(self.hero_data.stats) do
+      for type, value in pairs(types_table) do
+        if type == "base" then
+          local ability_stat = self.hero:FindAbilityByName("_ability_"..string.lower(stat))
+          if ability_stat then ability_stat:SetLevel(value) end
+        else
+          self.bonus_level[string.lower(stat)] = value
         end
       end
     end
   end
 
   function base_hero:GetRanksException()
-    local caster = self:GetCaster()
-    local name = caster:GetHeroName()
-    local team = caster:GetHeroTeam()
+    local name = self.hero:GetHeroName()
+    local team = self.hero:GetHeroTeam()
     local data = LoadKeyValues("scripts/vscripts/heroes/"..team.."/"..name.."/"..name..".txt")
     local result = {}
 
@@ -190,8 +175,7 @@ require("internal/rank_system")
   end
 
   function base_hero:ApplyStatBonusLevel()
-    local caster = self:GetCaster()
-		local level = caster:GetLevel()
+		local level = self.hero:GetLevel()
 
     for stat, value in pairs(self.bonus_level) do
       local up = math.floor(value)
@@ -199,15 +183,13 @@ require("internal/rank_system")
       local new = math.fmod(value, 1) * level
       if math.floor(new + 0.01) - math.floor(old + 0.01) > 0 then up = up + 1 end
 
-      local ability_stat = caster:FindAbilityByName("_ability_"..stat)
+      local ability_stat = self.hero:FindAbilityByName("_ability_"..stat)
       if ability_stat then ability_stat:SetLevel(ability_stat:GetLevel() + up) end
     end
   end
 
   function base_hero:UpgradeStat(stat)
-    local caster = self:GetCaster()
-
-    local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
+    local ability_stat = self.hero:FindAbilityByName("_ability_"..string.lower(stat))
     if ability_stat then
       ability_stat:UpgradeAbility(true)
       self:UpdateStatPoints(-1, stat)
@@ -215,19 +197,18 @@ require("internal/rank_system")
   end
 
   function base_hero:UpdatePanoramaPoints(upgraded_stat)
-    local caster = self:GetCaster()
-    if caster:IsHero() == false then return end
-    if caster:IsIllusion() then return end
+    if self.hero:IsHero() == false then return end
+    if self.hero:IsIllusion() then return end
 
-    local player = caster:GetPlayerOwner()
+    local player = self.hero:GetPlayerOwner()
     if (not player) then return end
 
     local stats = {STR = false, AGI = false, INT = false, VIT = false}
 
     for stat, bool in pairs(stats) do
-      local ability_stat = caster:FindAbilityByName("_ability_"..string.lower(stat))
+      local ability_stat = self.hero:FindAbilityByName("_ability_"..string.lower(stat))
       if ability_stat then
-        stats[stat] = ability_stat:GetLevel() < self.stats_lv_limit[string.lower(stat)] + (caster:GetLevel() * 4) and self.stat_points > 0
+        stats[stat] = ability_stat:GetLevel() < self.stats_lv_limit[string.lower(stat)] + (self.hero:GetLevel() * 4) and self.stat_points > 0
       end
     end
 
@@ -239,7 +220,7 @@ require("internal/rank_system")
   function base_hero:AddPermanentStat(stats, amount)
     for _,stat in pairs(stats) do
       self.stats_lv_limit[stat] = self.stats_lv_limit[stat] + amount
-      local ability_stat = self:GetCaster():FindAbilityByName("_ability_"..stat)
+      local ability_stat = self.hero:FindAbilityByName("_ability_"..stat)
       if ability_stat then ability_stat:SetLevel(ability_stat:GetLevel() + amount) end
     end
   end
@@ -247,8 +228,7 @@ require("internal/rank_system")
 -- RANK SYSTEM
 
   function base_hero:UpgradeRank(skill_name, tier, path)
-    local caster = self:GetCaster()
-    local special_kv_modifier = caster:FindModifierByName(caster:GetHeroName().."_special_values")
+    local special_kv_modifier = self.hero:FindModifierByName(self.hero:GetHeroName().."_special_values")
     if special_kv_modifier == nil then return end
 
     local skill_id = self:GetSkillID(skill_name)
@@ -257,18 +237,17 @@ require("internal/rank_system")
 
     special_kv_modifier:LearnRank(skill_id, tier, path)
 
-    local ability = caster:FindAbilityByName(self.abilities_name[skill_id])
+    local ability = self.hero:FindAbilityByName(self.abilities_name[skill_id])
     ability:SetLevel(ability:GetLevel() + tier)
     self:UpdateRankPoints(-tier)
 
-    SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, caster, tier, caster)
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_SHARD, self.hero, tier, self.hero)
   end
 
   function base_hero:UpdatePanoramaRanksByName(player, skill_name)
-    local caster = self:GetCaster()
 		if (not player) then return end
 
-    local hero_name = caster:GetHeroName()
+    local hero_name = self.hero:GetHeroName()
     local skill_id = self:GetSkillID(skill_name)
     if skill_id == nil then return end
 
@@ -282,8 +261,8 @@ require("internal/rank_system")
     end
 
     local skill_level = 0
-    if caster:FindAbilityByName(skill_name):IsTrained() then
-      skill_level = caster:FindAbilityByName(skill_name):GetLevel() + 5
+    if self.hero:FindAbilityByName(skill_name):IsTrained() then
+      skill_level = self.hero:FindAbilityByName(skill_name):GetLevel() + 5
       if skill_id == 6 then skill_level = skill_level + 3 end
     end
 
@@ -301,19 +280,17 @@ require("internal/rank_system")
   end
 
   function base_hero:GetRankState(skill_id, tier, path)
-    local caster = self:GetCaster()
-    if caster:HasRank(skill_id, tier, path) then return "StateUpgraded" end
+    if self.hero:HasRank(skill_id, tier, path) then return "StateUpgraded" end
     if self:IsRankAvailable(skill_id, tier, path) then return "StateAvailable" end
     return "StateDisabled"
   end
 
   function base_hero:IsRankAvailable(skill_id, tier, path)
-    local caster = self:GetCaster()
     if self.rank_points < tier then return false end
-    if caster:FindAbilityByName(self.abilities_name[skill_id]):IsTrained() == false then return false end
+    if self.hero:FindAbilityByName(self.abilities_name[skill_id]):IsTrained() == false then return false end
 
     for i = 1, 2, 1 do
-      if path ~= i and caster:HasRank(skill_id, tier, i) then
+      if path ~= i and self.hero:HasRank(skill_id, tier, i) then
         return false
       end
     end
@@ -322,26 +299,25 @@ require("internal/rank_system")
   end
 
   function base_hero:GetProgressBarInfo()
-    local caster = self:GetCaster()
     local level = 0
     local style = "mana"
 
     for skill_id = 1, 6, 1 do
       for tier = 1, 3, 1 do
         for path = 1, 2, 1 do
-          if caster:HasRank(skill_id, tier, path) then
+          if self.hero:HasRank(skill_id, tier, path) then
             level = level + tier
           end
         end
       end
     end
 
-    if caster:HasModifier("ancient_u_modifier_passive") then
+    if self.hero:HasModifier("ancient_u_modifier_passive") then
       style = "energy"
     end
 
     return {
-      entity = caster:entindex(),
+      entity = self.hero:entindex(),
       points = self.rank_points,
       rank_level = level,
       max_level = self.max_level,
@@ -352,11 +328,10 @@ require("internal/rank_system")
 -- HERO LEVEL UP
 
   function base_hero:AddManaExtra(ability)
-    local caster = self:GetCaster()
-    if caster:IsHero() == false then return end
+    if self.hero:IsHero() == false then return end
 
-    local hero_name = caster:GetHeroName()
-    local hero_team = caster:GetHeroTeam()
+    local hero_name = self.hero:GetHeroName()
+    local hero_team = self.hero:GetHeroTeam()
     local abilities_data = LoadKeyValues("scripts/vscripts/heroes/"..hero_team.."/"..hero_name.."/"..hero_name..".txt")
     if abilities_data == nil then return end
 
@@ -374,19 +349,18 @@ require("internal/rank_system")
   end
 
 	function base_hero:OnHeroLevelUp()
-		local caster = self:GetCaster()
-		local level = caster:GetLevel()
-    if caster:IsHero() == false then return end
-		if caster:IsIllusion() then return end
+		local level = self.hero:GetLevel()
+    if self.hero:IsHero() == false then return end
+		if self.hero:IsIllusion() then return end
 
-    caster:SetAbilityPoints(self.ability_points)
+    self.hero:SetAbilityPoints(self.ability_points)
 
     if level == 2 or level == 4 then
       self:UpdateAbilityPoints(1)
     end
 
 		if level == 8 then
-			local ultimate = caster:FindAbilityByName(self.abilities_name[6])
+			local ultimate = self.hero:FindAbilityByName(self.abilities_name[6])
 			if ultimate then
 				if ultimate:IsTrained() == false then
 					ultimate:UpgradeAbility(true)
@@ -409,25 +383,23 @@ require("internal/rank_system")
     end
 
 
-    local bot_script = caster:FindModifierByName("_general_script")
+    local bot_script = self.hero:FindModifierByName("_general_script")
     if bot_script then bot_script:ConsumeAllPoints() end
 	end
 
 	function base_hero:OnAbilityUpgrade(ability)
-		if ability:GetCaster() == self:GetCaster() then
+		if ability:GetCaster() == self.hero then
       self:UpdateAbilityPoints(-1)
       self:AddManaExtra(ability)
     end
 	end
 
 	function base_hero:UpdateAbilityPoints(points)
-		local caster = self:GetCaster()
-
 		self.ability_points = self.ability_points + points
-		caster:SetAbilityPoints(self.ability_points)
+		self.hero:SetAbilityPoints(self.ability_points)
 
 		for i = 1, 5, 1 do
-			local skill = caster:FindAbilityByName(self.abilities_name[i])
+			local skill = self.hero:FindAbilityByName(self.abilities_name[i])
 			if skill then
 				if skill:IsTrained() == false then
 					--skill:SetHidden(self.ability_points < 1)
@@ -455,21 +427,18 @@ require("internal/rank_system")
 	end
 
   function base_hero:UpdatePanoramaRankWindow()
-    local caster = self:GetCaster()
-    CustomGameEventManager:Send_ServerToAllClients("update_rank_window_from_lua", {entity = caster:entindex()})    
+    CustomGameEventManager:Send_ServerToAllClients("update_rank_window_from_lua", {entity = self.hero:entindex()})    
 	end
 
   function base_hero:UpdatePanoramaProgressBar()
-    local caster = self:GetCaster()
     CustomGameEventManager:Send_ServerToAllClients("update_bar_from_lua", self:GetProgressBarInfo())
 	end
 
   function base_hero:UpdatePanoramaPathWindow()
-    local caster = self:GetCaster()
-    if caster:IsHero() == false then return end
-    if caster:IsIllusion() then return end
+    if self.hero:IsHero() == false then return end
+    if self.hero:IsIllusion() then return end
 
-    local player = caster:GetPlayerOwner()
+    local player = self.hero:GetPlayerOwner()
     if (not player) then return end
 
     CustomGameEventManager:Send_ServerToPlayer(player, "update_path_window_from_lua", {
@@ -480,7 +449,6 @@ require("internal/rank_system")
 -- PATH SYSTEM
 
   function base_hero:UpgradePath(path)
-    local caster = self:GetCaster()
     self.chosen_path[path] = true
 
     if path == "Path_1" then

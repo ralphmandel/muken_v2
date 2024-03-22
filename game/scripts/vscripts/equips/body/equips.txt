@@ -328,7 +328,7 @@
       "armor"           "4"
       "max_health"      "800"
       "max_stack"       "24"
-      "decrement_time"  "1"
+      "decrement_time"  "5"
     }
 
     "precache"
@@ -381,6 +381,8 @@
 
     "precache"
     {
+      "particle"	"particles/econ/events/fall_2022/radiance/radiance_owner_fall2022.vpcf"
+      "particle"	"particles/econ/events/fall_2022/radiance_target_fall2022.vpcf"
     }
 
     "ItemShareability"  "ITEM_FULLY_SHAREABLE"

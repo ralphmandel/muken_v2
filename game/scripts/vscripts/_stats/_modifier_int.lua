@@ -282,9 +282,8 @@ function _modifier_int:UpdateSubBonus(property)
 end
 
 function _modifier_int:OnStatUpated(property)
-  if self.parent:IsHero() == false then return end
   local special_kv_modifier = self.parent:FindModifierByName(self.parent:GetHeroName().."_special_values")
-  local base_hero_mod = self.parent:GetBaseHeroModifier()
+  local base_hero_mod = self.parent:FindModifierByName("base_hero_mod")
   if special_kv_modifier == nil or base_hero_mod == nil then return end
 
   if property == "sub_stat_debuff_amp" then

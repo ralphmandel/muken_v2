@@ -103,7 +103,7 @@ function templar_1_modifier_aura_effect:PlayEfxStart()
 	ParticleManager:SetParticleControlEnt(self.effect_cast, 1, self.parent, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", Vector(0,0,0), true)
 	ParticleManager:SetParticleControl(self.effect_cast, 3, Vector(special, 0, 0))
   ParticleManager:SetParticleControl(self.effect_cast, 10, Vector(shield_count, math.floor(100 / shield_count), 0))
-	ParticleManager:SetParticleControl(self.effect_cast, 11, Vector(0, 0, HEROES_DATA[self.parent:GetHeroName()].shield_fx_height))
+	ParticleManager:SetParticleControl(self.effect_cast, 11, Vector(0, 0, self.parent:GetHeroData().model.shield_fx))
 
 	self:AddParticle(self.effect_cast, false, false, -1, false, false)
 end
