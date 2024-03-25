@@ -92,6 +92,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "damage" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_epic_spectral_armor" then
+		if value_name == "duration" then return 1 end
+	end
+
 	return 0
 end
 
@@ -132,6 +136,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_epic_fire_mail" then
 		if value_name == "damage" then return 30 * self:GetMagicalDamageAmp() end
+	end
+
+  if ability:GetAbilityName() == "item_epic_spectral_armor" then
+		if value_name == "duration" then return 10 * self:GetBuffAmp() end
 	end
 
 	return 0

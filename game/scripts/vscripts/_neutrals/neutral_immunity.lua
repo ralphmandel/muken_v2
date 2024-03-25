@@ -22,7 +22,10 @@ function neutral_immunity:OnSpellStart()
   )
 
 	for _,ally in pairs(allies) do
-    ally:AddModifier(self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
+    if caster:IsHero() == false
+    and (ally:GetTeamNumber() == TIER_TEAMS[RARITY_COMMON] or ally:GetTeamNumber() >= TIER_TEAMS[RARITY_RARE]) then
+      ally:AddModifier(self, "neutral_immunity_modifier_buff", {duration = self:GetSpecialValueFor("duration"), bResist = 1})
+    end
 	end
 
   caster:EmitSound("Hero_Omniknight.GuardianAngel.Cast")

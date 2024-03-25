@@ -144,8 +144,9 @@ function _modifier_vit:GetStatusResist(bPercent)
 end
 
 function _modifier_vit:GetCalculedDataStack(property, bScalar)
-  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
-  value = value + self.data[property].bonus
+  local level = math.floor((self.ability:GetLevel() + self.stat_bonus) / 5)
+  if level > 30 then level = 30 end
+  local value = (self.data[property].mult * level) + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end

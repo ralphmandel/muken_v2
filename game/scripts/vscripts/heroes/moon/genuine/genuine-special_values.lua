@@ -324,12 +324,12 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     end
 
     if self:HasRank(4, 2, 1) then
-      if value_name == "barrier_mult" then return 900 end
+      if value_name == "barrier_mult" then return 9000 end
       if value_name == "barrier_duration" then return 30 * self:GetBuffAmp() end
 		end
 
     if self:HasRank(4, 2, 2) then
-      if value_name == "barrier_mult" then return 900 end
+      if value_name == "barrier_mult" then return 9000 end
       if value_name == "magical_barrier" then return 0 end
       if value_name == "special_universal_barrier" then return ability:GetSpecialValueFor("barrier_mult") / ability:GetSpecialValueFor("manasteal") end
 		end
@@ -416,7 +416,7 @@ function genuine_special_values:GetModifierOverrideAbilitySpecialValue(keys)
     if self:HasRank(6, 2, 2) then
       if value_name == "starfall_damage" then return starfall_damage end
       if value_name == "starfall_radius" then return starfall_radius end
-      if value_name == "special_interval" then return 6 end
+      if value_name == "special_interval" then return 7 end
 		end
 
 		if self:HasRank(6, 3, 1) then

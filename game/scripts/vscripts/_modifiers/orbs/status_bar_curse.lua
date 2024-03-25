@@ -115,8 +115,6 @@ function status_bar_curse:AddCurrentStatus(amount)
   if self.parent:IsMagicImmune() and amount > 0 then amount = 0 end
   self.current_status = self.current_status + amount
 
-  print("K2", self.current_status)
-
   if self.current_status > self.max_status then
     self:ApplyCurseState()
     return
@@ -139,8 +137,6 @@ end
 function status_bar_curse:UpdateStatusBar()
   local old_max_status = self.max_status
   self.max_status = self.parent:GetResistance(self.status_name)
-
-  print("K1", self.current_status)
 
   if old_max_status == nil then
     if self.current_status > self.max_status then

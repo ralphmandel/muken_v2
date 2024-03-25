@@ -30,7 +30,8 @@ function _modifier_agi:OnCreated(kv)
       sub_stat_speed_percent = {mult = 0, bonus = 0},
       sub_stat_slow = {mult = 0, bonus = 0},
       sub_stat_slow_percent = {mult = 0, bonus = 0},
-      sub_stat_attack_time = {mult = 0, bonus = 0}
+      sub_stat_attack_time = {mult = 0, bonus = 0},
+      sub_stat_perfect_dodge = {mult = 0, bonus = 0}
     }
     
     self:LoadData()
@@ -111,7 +112,9 @@ function _modifier_agi:GetModifierDodgeProjectile(keys)
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
   local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion(true))
-  if attacker_missing or target_evasion then
+  local perfect_dodge = RandomFloat(0, 100) < self:GetPerfectDodge()
+
+  if attacker_missing or target_evasion or perfect_dodge then
     SendOverheadEventMessage(nil, OVERHEAD_ALERT_MISS, self.parent, 0, self.parent)
     self.proj_miss_attacker = keys.attacker
     return 1
@@ -142,7 +145,9 @@ function _modifier_agi:OnAttack(keys)
 
   local attacker_missing = RandomFloat(0, 100) < attacker_str:GetMissChance()
   local target_evasion = (crit == false and RandomFloat(0, 100) < self:GetEvasion(true))
-  attacker_str.missing = (attacker_missing or target_evasion)
+  local perfect_dodge = RandomFloat(0, 100) < self:GetPerfectDodge()
+
+  attacker_str.missing = (attacker_missing or target_evasion or perfect_dodge)
 end
 
 function _modifier_agi:GetModifierPercentageCooldown()
@@ -221,9 +226,18 @@ function _modifier_agi:GetEvasion(bPercent)
   return evasion
 end
 
+function _modifier_agi:GetPerfectDodge()
+  local perfect_dodge = self:GetCalculedData("sub_stat_perfect_dodge", false)
+  if perfect_dodge < 0 then perfect_dodge = 0 end
+  if perfect_dodge > 100 then perfect_dodge = 100 end
+
+  return perfect_dodge
+end
+
 function _modifier_agi:GetCalculedDataStack(property, bScalar)
-  local value = self.data[property].mult * (math.floor((self.ability:GetLevel() + self.stat_bonus) / 5))
-  value = value + self.data[property].bonus
+  local level = math.floor((self.ability:GetLevel() + self.stat_bonus) / 5)
+  if level > 30 then level = 30 end
+  local value = (self.data[property].mult * level) + self.data[property].bonus
   if bScalar then value = (value * 6) / (1 +  (value * 0.06)) end
   return value
 end

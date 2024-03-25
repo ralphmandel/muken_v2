@@ -70,6 +70,7 @@ require("internal/rank_system")
     self.hero = self:GetCaster()
     self.hero_data = self.hero:GetHeroData()
     self.stats_lv_limit = {["str"] = 30, ["agi"] = 30, ["int"] = 30, ["vit"] = 30}
+    self.rank_max_rand = 24
 
     if self:IsTrained() == false then self:UpgradeAbility(true) end
 
@@ -133,7 +134,7 @@ require("internal/rank_system")
     self.abilities_name = GetAbilitiesList(self.hero)
     self.ranks_exception = self:GetRanksException()
     self.rank_points = 0
-    self.max_level = 15
+    self.max_level = 0
     self.ability_points = 0
 
     self.chosen_path = {Path_1 = false, Path_2 = false, Path_3 = false}
@@ -210,11 +211,10 @@ require("internal/rank_system")
     local stats = {STR = false, AGI = false, INT = false, VIT = false}
 
     for stat, bool in pairs(stats) do
-      local ability_stat = self.hero:FindAbilityByName("_ability_"..string.lower(stat))
-      if ability_stat then
-        stats[stat] = ability_stat:GetLevel() < self.stats_lv_limit[string.lower(stat)] + (self.hero:GetLevel() * 4) and self.stat_points > 0
-      end
+      stats[stat] = self.stat_points > 0
     end
+
+    -- stats[stat] = ability_stat:GetLevel() < self.stats_lv_limit[string.lower(stat)] + (self.hero:GetLevel() * 4) and self.stat_points > 0
 
     CustomGameEventManager:Send_ServerToPlayer(player, "update_stats_point_from_lua", {
       total_points = self.stat_points, stats = stats, upgraded_stat = upgraded_stat
@@ -303,8 +303,23 @@ require("internal/rank_system")
   end
 
   function base_hero:GetProgressBarInfo()
-    local level = 0
     local style = "mana"
+
+    if self.hero:HasModifier("ancient_u_modifier_passive") then
+      style = "energy"
+    end
+
+    return {
+      entity = self.hero:entindex(),
+      points = self.rank_points,
+      rank_level = self:GetRankLevel(),
+      max_level = self.max_level,
+      style = style
+    }
+  end
+
+  function base_hero:GetRankLevel()
+    local level = 0
 
     for skill_id = 1, 6, 1 do
       for tier = 1, 3, 1 do
@@ -316,41 +331,10 @@ require("internal/rank_system")
       end
     end
 
-    if self.hero:HasModifier("ancient_u_modifier_passive") then
-      style = "energy"
-    end
-
-    return {
-      entity = self.hero:entindex(),
-      points = self.rank_points,
-      rank_level = level,
-      max_level = self.max_level,
-      style = style
-    }
+    return level
   end
 
 -- HERO LEVEL UP
-
-  function base_hero:AddManaExtra(ability)
-    if self.hero:IsHero() == false then return end
-
-    local hero_name = self.hero:GetHeroName()
-    local hero_team = self.hero:GetHeroTeam()
-    local abilities_data = LoadKeyValues("scripts/vscripts/heroes/"..hero_team.."/"..hero_name.."/"..hero_name..".txt")
-    if abilities_data == nil then return end
-
-    for ability_name, data in pairs(abilities_data) do
-      if ability:GetAbilityName() == ability_name then
-        for key, value in pairs(data) do
-          if key == "ActiveSpell" then
-            if tonumber(value) == 1 then
-              self:UpgradeAbility(true)
-            end
-          end
-        end          
-      end
-    end
-  end
 
 	function base_hero:OnHeroLevelUp()
 		local level = self.hero:GetLevel()
@@ -358,8 +342,9 @@ require("internal/rank_system")
 		if self.hero:IsIllusion() then return end
 
     self.hero:SetAbilityPoints(self.ability_points)
+    self:ApplyStatBonusLevel()
 
-    if level == 2 or level == 4 or level == 7 then
+    if level == 2 or level == 4 or level == 6 then
       self:UpdateAbilityPoints(1)
     end
 
@@ -368,37 +353,24 @@ require("internal/rank_system")
 			if ultimate then
 				if ultimate:IsTrained() == false then
 					ultimate:UpgradeAbility(true)
-          self:AddManaExtra(ultimate)
 				end
 			end
 		end
 
-    if level == 1 or level == 5 or level == 8
-    or level == 11 or level == 13 or level == 15
-    or level == 17 or level == 19 then
-      self:ApplyStatBonusLevel()
-      self:UpdateStatPoints(5, "nil")
-    end
-
-    if level == 21 or level == 23 or level == 25
-    or level == 27 or level == 29 then
-      self:ApplyStatBonusLevel()
-      self:UpdateStatPoints(10, "nil")
-    end
-
-    if level == 3 or level == 6 or level == 9
-    or level == 12 or level == 14 or level == 16
-    or level == 18 then
-      self:UpdateRankPoints(1)
-    end
-
-    if level == 22 or level == 24 or level == 26
-    or level == 28 then
-      self:UpdateRankPoints(2)
-    end
-
     if level == 20 or level == 30 then
       self:UpdatePathPoints(1)
+    end
+
+    local mult = 1
+    if level > 20 then mult = 2 end
+
+    if level % 10 ~= 0 then
+      if RandomInt(1, 2) == 1 or self.max_level + mult > self.rank_max_rand then
+        self:UpdateStatPoints(5 * mult, "nil")
+      else
+        self.max_level = self.max_level + mult
+        self:UpdateRankPoints(1 * mult)
+      end      
     end
 
     local bot_script = self.hero:FindModifierByName("_general_script")
@@ -408,7 +380,6 @@ require("internal/rank_system")
 	function base_hero:OnAbilityUpgrade(ability)
 		if ability:GetCaster() == self.hero then
       self:UpdateAbilityPoints(-1)
-      self:AddManaExtra(ability)
     end
 	end
 
@@ -470,6 +441,7 @@ require("internal/rank_system")
     self.chosen_path[path] = true
 
     if path == "Path_1" then
+      --self.rank_max_rand = 30
       self:UpdateAbilityPoints(1)
     end
 

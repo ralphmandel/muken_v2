@@ -61,7 +61,7 @@
 
     "AbilityValues"
     {
-      "evasion"       "2.5"
+      "evasion"       "3"
       "invi_chance"   "40"
       "invi_duration" "2"
       "invi_delay"    "0.3"
@@ -149,7 +149,7 @@
 
     "AbilityValues"
     {
-      "health_regen"  "10"
+      "health_regen"  "5"
       "heal"          "15"
       "interval"      "2"
     }
@@ -383,6 +383,51 @@
     {
       "particle"	"particles/econ/events/fall_2022/radiance/radiance_owner_fall2022.vpcf"
       "particle"	"particles/econ/events/fall_2022/radiance_target_fall2022.vpcf"
+    }
+
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemCost"			    "0"
+    "ItemKillable"		  "1"
+    "ItemSellable"		  "0"
+    "ItemPurchasable"   "0"
+    "ItemDroppable" 	  "0"
+    "ItemStackable"		  "0"
+    // "ItemPermanent"     "1" //used for charges
+    // "MaxUpgradeLevel"   "1"
+    // "ItemBaseLevel"     "1"
+    "AllowedInBackpack"	"0"
+    "ItemIsNeutralDrop"	"0"
+    "ItemAlertable" 	  "1"
+    "ItemInitial"		    "0"
+    "SideShop"			    "0"
+    "SecretShop"		    "0"
+  }
+
+  "item_epic_spectral_armor"
+  {
+    "BaseClass"						  "item_lua"
+    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+    "ScriptFile"					  "equips/body/item_epic_spectral_armor"
+    "AbilityTextureName"		"armor/spectral_armor"
+    "ItemType"              "armor"
+    "ItemQuality"           "2"
+    "ID"							      "3110"
+
+    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityCooldown"       "75"
+
+    "AbilityValues"
+    {
+      "magic_resist"  "5"
+      "evasion"       "5"
+      "curse_resist"  "20"
+      "duration"      "10"
+      "attack_time"   "0.3"
+    }
+
+    "precache"
+    {
+      "particle"  "particles/shadowmancer/shadowmancer_arcana_ambient.vpcf"
     }
 
     "ItemShareability"  "ITEM_FULLY_SHAREABLE"
