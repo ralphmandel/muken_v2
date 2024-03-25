@@ -12,7 +12,7 @@ function status_bar_cold:OnCreated(kv)
   if not IsServer() then return end
 
   self.status_amount = {}
-  self.status_degen = 2
+  self.status_degen = 1
   self.freeze_amount = 500
   self.freeze_duration = 5
 
@@ -51,7 +51,7 @@ function status_bar_cold:OnIntervalThink()
 
   local interval = 0.1
 
-  self:ReduceAmount(self.status_degen * interval)
+  self:ReduceAmount(self.max_status * self.status_degen * interval * 0.01)
   self:StartIntervalThink(interval)
 end
 
@@ -146,8 +146,10 @@ function status_bar_cold:UpdateStatusBar()
       return
     end
   else
-    local percent = self.current_status / old_max_status
-    self.current_status = self.max_status * percent
+    if old_max_status ~= self.max_status then
+      local percent = self.current_status / old_max_status
+      self.current_status = self.max_status * percent
+    end
   end
 
   self.parent:UpdatePanel({

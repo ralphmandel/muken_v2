@@ -1421,6 +1421,6 @@
 }
 
 #base "../vscripts/equips/body/equips.txt"
-// #base "../vscripts/equips/hand/equips.txt"
-// #base "../vscripts/equips/head/equips.txt"
-// #base "../vscripts/equips/other/equips.txt"
+#base "../vscripts/equips/hand/equips.txt"
+#base "../vscripts/equips/head/equips.txt"
+#base "../vscripts/equips/other/equips.txt"

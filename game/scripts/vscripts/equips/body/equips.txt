@@ -1,450 +1,445 @@
 "DOTAAbilities"
 {
   //RARE
-  "item_rare_iron_shield"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/red_box.vmdl"
-    "ScriptFile"					  "equips/body/item_rare_iron_shield"
-    "AbilityTextureName"		"shield/iron_shield"
-    "ItemType"              "shield"
-    "ItemQuality"           "1"
-    "ID"							      "3101"
-
-    "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityCooldown"       "3"
-
-    "AbilityValues"
+    "item_rare_iron_shield"
     {
-      "armor"         "3"
-      "block_chance"  "25"
-      "block"         "30"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/body/item_rare_iron_shield"
+      "AbilityTextureName"		"shield/iron_shield"
+      "ItemType"              "shield"
+      "ItemQuality"           "1"
+      "ID"							      "3101"
+
+      "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityCooldown"       "3"
+
+      "AbilityValues"
+      {
+        "armor"         "3"
+        "block_chance"  "25"
+        "block"         "30"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "precache"
+    "item_rare_cloak_evasion"
     {
-      "particle"	""
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/body/item_rare_cloak_evasion"
+      "AbilityTextureName"		"armor/cloak_evasion"
+      "ItemType"              "armor"
+      "ItemQuality"           "1"
+      "ID"							      "3102"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityCooldown"       "10"
+
+      "AbilityValues"
+      {
+        "evasion"       "3"
+        "invi_chance"   "40"
+        "invi_duration" "2"
+        "invi_delay"    "0.3"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_rare_cloak_evasion"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/red_box.vmdl"
-    "ScriptFile"					  "equips/body/item_rare_cloak_evasion"
-    "AbilityTextureName"		"armor/cloak_evasion"
-    "ItemType"              "armor"
-    "ItemQuality"           "1"
-    "ID"							      "3102"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityCooldown"       "10"
-
-    "AbilityValues"
+    "item_rare_wizard_garb"
     {
-      "evasion"       "3"
-      "invi_chance"   "40"
-      "invi_duration" "2"
-      "invi_delay"    "0.3"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/body/item_rare_wizard_garb"
+      "AbilityTextureName"		"armor/wizard_garb"
+      "ItemType"              "armor"
+      "ItemQuality"           "1"
+      "ID"							      "3103"
+
+      "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL" 
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityCooldown"       "2"
+
+      "AbilityValues"
+      {
+        "magic_resist"    "3"
+        "mana_gain"       "10"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "precache"
+    "item_rare_healing_mail"
     {
-      "particle"	""
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/body/item_rare_healing_mail"
+      "AbilityTextureName"		"armor/healing_mail"
+      "ItemType"              "armor"
+      "ItemQuality"           "1"
+      "ID"							      "3104"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityCooldown"       "3"
+
+      "AbilityValues"
+      {
+        "health_regen"  "5"
+        "heal"          "15"
+        "interval"      "2"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_rare_wizard_garb"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/red_box.vmdl"
-    "ScriptFile"					  "equips/body/item_rare_wizard_garb"
-    "AbilityTextureName"		"armor/wizard_garb"
-    "ItemType"              "armor"
-    "ItemQuality"           "1"
-    "ID"							      "3103"
-
-    "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL" 
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityCooldown"       "2"
-
-    "AbilityValues"
-    {
-      "magic_resist"    "3"
-      "mana_gain"       "10"
-    }
-
-    "precache"
-    {
-      "particle"	""
-    }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_rare_healing_mail"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/red_box.vmdl"
-    "ScriptFile"					  "equips/body/item_rare_healing_mail"
-    "AbilityTextureName"		"armor/healing_mail"
-    "ItemType"              "armor"
-    "ItemQuality"           "1"
-    "ID"							      "3104"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityCooldown"       "3"
-
-    "AbilityValues"
-    {
-      "health_regen"  "5"
-      "heal"          "15"
-      "interval"      "2"
-    }
-
-    "precache"
-    {
-      "particle"	""
-    }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
 
   //EPIC
-  "item_epic_shaman_shield"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_shaman_shield"
-    "AbilityTextureName"		"shield/shaman_shield"
-    "ItemType"              "shield"
-    "ItemQuality"           "2"
-    "ID"							      "3105"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityValues"
+    "item_epic_shaman_shield"
     {
-      "physical_block"      "10"
-      "status_resist_stack" "25"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_shaman_shield"
+      "AbilityTextureName"		"shield/shaman_shield"
+      "ItemType"              "shield"
+      "ItemQuality"           "2"
+      "ID"							      "3105"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "physical_block"      "10"
+        "status_resist_stack" "25"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "precache"
+    "item_epic_dark_shield"
     {
-      "particle"	""
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_dark_shield"
+      "AbilityTextureName"		"shield/dark_shield"
+      "ItemType"              "shield"
+      "ItemQuality"           "2"
+      "ID"							      "3106"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "magical_block"  "15"
+        "chance"         "10"
+      }
+
+      "precache"
+      {
+        "particle"	"particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf"
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_epic_dark_shield"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_dark_shield"
-    "AbilityTextureName"		"shield/dark_shield"
-    "ItemType"              "shield"
-    "ItemQuality"           "2"
-    "ID"							      "3106"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityValues"
+    "item_epic_holy_mail"
     {
-      "magical_block"  "15"
-      "chance"         "10"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_holy_mail"
+      "AbilityTextureName"		"armor/holy_mail"
+      "ItemType"              "armor"
+      "ItemQuality"           "2"
+      "ID"							      "3107"
+
+      "AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "holy_reduction"    "15"
+        "max_mana"          "200"
+        "radius"            "125"
+        "book_turn_rate"    "125"
+        "max_book"          "2"
+        "collision_radius"  "50"
+        "damage"            "50"
+      }
+
+      "precache"
+      {
+        "particle"	"particles/items/holy_mail/holy_mail_book.vpcf"
+        "particle"  "particles/econ/items/wisp/calavera/io_calavera_attack_explosion.vpcf"
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "precache"
+    "item_epic_fury_plate"
     {
-      "particle"	"particles/units/heroes/hero_antimage/antimage_spellshield_reflect.vpcf"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_fury_plate"
+      "AbilityTextureName"		"armor/fury_plate"
+      "ItemType"              "armor"
+      "ItemQuality"           "2"
+      "ID"							      "3108"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityCooldown"       "1"
+
+      "AbilityValues"
+      {
+        "str"             "12"
+        "armor"           "4"
+        "max_health"      "800"
+        "max_stack"       "24"
+        "decrement_time"  "5"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_epic_holy_mail"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_holy_mail"
-    "AbilityTextureName"		"armor/holy_mail"
-    "ItemType"              "armor"
-    "ItemQuality"           "2"
-    "ID"							      "3107"
-
-    "AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityValues"
+    "item_epic_fire_mail"
     {
-      "holy_reduction"    "15"
-      "max_mana"          "200"
-      "radius"            "125"
-      "book_turn_rate"    "125"
-      "max_book"          "2"
-      "collision_radius"  "50"
-      "damage"            "50"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_fire_mail"
+      "AbilityTextureName"		"armor/fire_mail"
+      "ItemType"              "armor"
+      "ItemQuality"           "2"
+      "ID"							      "3109"
+
+      "AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+      "AbilityValues"
+      {
+        "vit"           "10"
+        "armor"         "5"
+        "magic_resist"  "5"
+        "radius"        "600"
+        "damage"        "30"
+        "interval"      "0.5"
+      }
+
+      "precache"
+      {
+        "particle"	"particles/econ/events/fall_2022/radiance/radiance_owner_fall2022.vpcf"
+        "particle"	"particles/econ/events/fall_2022/radiance_target_fall2022.vpcf"
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
 
-    "precache"
+    "item_epic_spectral_armor"
     {
-      "particle"	"particles/items/holy_mail/holy_mail_book.vpcf"
-      "particle"  "particles/econ/items/wisp/calavera/io_calavera_attack_explosion.vpcf"
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/body/item_epic_spectral_armor"
+      "AbilityTextureName"		"armor/spectral_armor"
+      "ItemType"              "armor"
+      "ItemQuality"           "2"
+      "ID"							      "3110"
+
+      "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+      "AbilityCooldown"       "75"
+
+      "AbilityValues"
+      {
+        "magic_resist"  "5"
+        "evasion"       "5"
+        "curse_resist"  "20"
+        "duration"      "10"
+        "attack_time"   "0.3"
+      }
+
+      "precache"
+      {
+        "particle"  "particles/shadowmancer/shadowmancer_arcana_ambient.vpcf"
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
     }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_epic_fury_plate"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_fury_plate"
-    "AbilityTextureName"		"armor/fury_plate"
-    "ItemType"              "armor"
-    "ItemQuality"           "2"
-    "ID"							      "3108"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-    "AbilityCooldown"       "1"
-
-    "AbilityValues"
-    {
-      "str"             "12"
-      "armor"           "4"
-      "max_health"      "800"
-      "max_stack"       "24"
-      "decrement_time"  "5"
-    }
-
-    "precache"
-    {
-    }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_epic_fire_mail"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_fire_mail"
-    "AbilityTextureName"		"armor/fire_mail"
-    "ItemType"              "armor"
-    "ItemQuality"           "2"
-    "ID"							      "3109"
-
-    "AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
-    "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
-    "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP"
-    "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-
-    "AbilityValues"
-    {
-      "vit"           "10"
-      "armor"         "5"
-      "magic_resist"  "5"
-      "radius"        "600"
-      "damage"        "30"
-      "interval"      "0.5"
-    }
-
-    "precache"
-    {
-      "particle"	"particles/econ/events/fall_2022/radiance/radiance_owner_fall2022.vpcf"
-      "particle"	"particles/econ/events/fall_2022/radiance_target_fall2022.vpcf"
-    }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
-
-  "item_epic_spectral_armor"
-  {
-    "BaseClass"						  "item_lua"
-    "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
-    "ScriptFile"					  "equips/body/item_epic_spectral_armor"
-    "AbilityTextureName"		"armor/spectral_armor"
-    "ItemType"              "armor"
-    "ItemQuality"           "2"
-    "ID"							      "3110"
-
-    "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityCooldown"       "75"
-
-    "AbilityValues"
-    {
-      "magic_resist"  "5"
-      "evasion"       "5"
-      "curse_resist"  "20"
-      "duration"      "10"
-      "attack_time"   "0.3"
-    }
-
-    "precache"
-    {
-      "particle"  "particles/shadowmancer/shadowmancer_arcana_ambient.vpcf"
-    }
-
-    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
-    "ItemCost"			    "0"
-    "ItemKillable"		  "1"
-    "ItemSellable"		  "0"
-    "ItemPurchasable"   "0"
-    "ItemDroppable" 	  "0"
-    "ItemStackable"		  "0"
-    // "ItemPermanent"     "1" //used for charges
-    // "MaxUpgradeLevel"   "1"
-    // "ItemBaseLevel"     "1"
-    "AllowedInBackpack"	"0"
-    "ItemIsNeutralDrop"	"0"
-    "ItemAlertable" 	  "1"
-    "ItemInitial"		    "0"
-    "SideShop"			    "0"
-    "SecretShop"		    "0"
-  }
 }

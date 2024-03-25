@@ -1,0 +1,45 @@
+"DOTAAbilities"
+{
+  //RARE
+    "item_rare_speed_boots"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/other/item_rare_speed_boots"
+      "AbilityTextureName"		"boots/speed_boots"
+      "ItemType"              "boots"
+      "ItemQuality"           "1"
+      "ID"							      "3201"
+
+      "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityCooldown"       "3"
+
+      "AbilityValues"
+      {
+        "speed"         "200"
+        "slow_percent"  "40"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+}

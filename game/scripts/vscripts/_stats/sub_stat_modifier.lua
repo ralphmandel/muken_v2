@@ -78,4 +78,21 @@ function sub_stat_modifier:UpdateStatKV()
       end
     end
   end
+
+  for property, value in pairs(self.kv) do
+    local status_bar_name = nil
+
+    if property == "stone_resist" then end  
+    if property == "poison_resist" then end
+    if property == "cold_resist" then status_bar_name = "status_bar_cold" end
+    if property == "curse_resist" then status_bar_name = "status_bar_curse" end
+    if property == "bleed_resist" then status_bar_name = "status_bar_bleed" end
+    if property == "thunder_resist" then end
+    if property == "sleep_resist" then end
+
+    if status_bar_name then
+      local status_bar = self:GetParent():FindModifierByName(status_bar_name)
+      if status_bar then status_bar:UpdateStatusBar() end
+    end
+  end
 end

@@ -12,7 +12,7 @@ function status_bar_bleed:OnCreated(kv)
   if not IsServer() then return end
 
   self.status_amount = {}
-  self.status_degen = 2
+  self.status_degen = 1
   self.bloodloss = 500
 
   self.caster = EntIndexToHScript(kv.inflictor)
@@ -48,7 +48,7 @@ function status_bar_bleed:OnIntervalThink()
 
   local interval = 0.1
   
-  self:ReduceAmount(self.status_degen * interval)
+  self:ReduceAmount(self.max_status * self.status_degen * interval * 0.01)
   self:StartIntervalThink(interval)
 end
 
@@ -146,8 +146,10 @@ function status_bar_bleed:UpdateStatusBar()
       return
     end
   else
-    local percent = self.current_status / old_max_status
-    self.current_status = self.max_status * percent
+    if old_max_status ~= self.max_status then
+      local percent = self.current_status / old_max_status
+      self.current_status = self.max_status * percent
+    end
   end
 
   self.parent:UpdatePanel({

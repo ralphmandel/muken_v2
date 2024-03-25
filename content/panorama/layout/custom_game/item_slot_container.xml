@@ -64,7 +64,7 @@
     </Panel>
     <Panel id="HotkeyContainer-misc" hittest="false">
       <Panel class="Hotkey">
-        <Label id="HotkeyText" text="MISC" html="true" />
+        <Label id="HotkeyText" text="OTHER" html="true" />
       </Panel>
     </Panel>
   </Panel>
