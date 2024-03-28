@@ -13,12 +13,141 @@
 
       "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-      "AbilityCooldown"       "3"
-
       "AbilityValues"
       {
         "speed"         "200"
         "slow_percent"  "40"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_power_boots"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/other/item_rare_power_boots"
+      "AbilityTextureName"		"boots/power_boots_str"
+      "ItemType"              "boots"
+      "ItemQuality"           "1"
+      "ID"							      "3202"
+
+      "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+      "AbilityValues"
+      {
+        "speed"         "25"
+        "bonus_stat"    "10"
+        "state"         "1"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_ring_strength"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/other/item_rare_ring_strength"
+      "AbilityTextureName"		"misc/ring_strength"
+      "ItemType"              "misc"
+      "ItemQuality"           "1"
+      "ID"							      "3203"
+
+      "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "physical_damage" "20"
+        "str"             "30"
+        "hp_cap"          "25"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_nature_ring"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/other/item_rare_nature_ring"
+      "AbilityTextureName"		"misc/nature_ring"
+      "ItemType"              "misc"
+      "ItemQuality"           "1"
+      "ID"							      "3204"
+
+			"AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+			"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_TREE"
+			"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_CUSTOM"
+			"AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_PREFER_ENEMIES"
+
+      "AbilityCooldown"         "30"
+      "AbilityCastRange"		    "100"
+      "AbilityCastPoint"		    "0.1"
+      "AbilityCastAnimation"    ""
+
+      "AbilityValues"
+      {
+        "incoming_heal" "5"
+        "max_health"    "250"
+        "heal"          "300"
       }
 
       "precache"

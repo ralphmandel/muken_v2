@@ -13,7 +13,7 @@ function item_epic_spectral_armor_mod_buff:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:AddSubStats(self.ability, {perfect_dodge = 100, attack_time = self.ability:GetSpecialValueFor("attack_time")})
+  self.parent:AddAbilityStats(self.ability, {"perfect_dodge", "attack_time"})
 
   self:PlayEfxStart()
 end

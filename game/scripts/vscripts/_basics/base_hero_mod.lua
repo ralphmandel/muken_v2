@@ -23,7 +23,8 @@ function base_hero_mod:OnCreated(kv)
     magical_damage = 0,
     holy_damage = 0,
     heal_power = 0,
-    luck = 0
+    luck = 0,
+    power_boots_state = 1
   }
 end
 
@@ -96,6 +97,14 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "duration" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_rare_power_boots" then
+		if value_name == "state" then return 1 end
+	end
+
+  if ability:GetAbilityName() == "item_rare_nature_ring" then
+		if value_name == "heal" then return 1 end
+	end
+
 	return 0
 end
 
@@ -140,6 +149,14 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_epic_spectral_armor" then
 		if value_name == "duration" then return 10 * self:GetBuffAmp() end
+	end
+
+  if ability:GetAbilityName() == "item_rare_power_boots" then
+		if value_name == "state" then return self.data_props["power_boots_state"] end
+	end
+
+  if ability:GetAbilityName() == "item_rare_nature_ring" then
+		if value_name == "heal" then return 300 * self:GetHealPower() end
 	end
 
 	return 0

@@ -409,15 +409,15 @@
       "ID"							      "3110"
 
       "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-      "AbilityCooldown"       "75"
+      "AbilityCooldown"       "60"
 
       "AbilityValues"
       {
         "magic_resist"  "5"
         "evasion"       "5"
-        "curse_resist"  "20"
         "duration"      "10"
         "attack_time"   "0.3"
+        "perfect_dodge" "100"
       }
 
       "precache"

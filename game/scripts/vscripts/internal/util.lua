@@ -549,8 +549,8 @@
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {
-        [1] = "item_epic_spectral_armor", [2] = "item_epic_spectral_armor",
-        [3] = "item_rare_speed_boots", [4] = "item_rare_speed_boots"
+        [1] = "item_rare_nature_ring", [2] = "item_rare_nature_ring",
+        [3] = "item_rare_nature_ring", [4] = "item_rare_nature_ring"
       }
 
       for i = 1, 5, 1 do
