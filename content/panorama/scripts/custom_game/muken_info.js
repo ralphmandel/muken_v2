@@ -95,11 +95,11 @@ var current_info = {};
         for (const [layout_name, layout_value] of Object.entries(INFO_LAYOUT[tab]["INFO_VALUE"])) {
           if (alt_pressed == true && (layout_name == "evasion" || layout_name == "magical_resist" || layout_name == "cd_reduction")) {
             if (name == layout_name + "_percent") {
-              var text = Number((value).toFixed(2)) + "%";
+              var text = FormatValue(value) + "%";
               INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text; 
             }  
           } else if (name == layout_name) {
-            var text = Number((value).toFixed(2)) + INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["string"];
+            var text = FormatValue(value) + INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["string"];
             INFO_LAYOUT[tab]["INFO_VALUE"][layout_name]["label"].text = text;            
           }
         }
@@ -109,6 +109,15 @@ var current_info = {};
 
   function OnUnitInfoUpdate(event) {
     GameEvents.SendCustomGameEventToServer("request_unit_info_from_panorama", {"entity": Players.GetLocalPlayerPortraitUnit()})
+  }
+
+  function FormatValue(value) {
+    var length = Number(value.toFixed()).toString().length;
+    var decimals = 4 - length;
+    if (decimals < 0) {decimals = 0}
+    if (decimals > 2) {decimals = 2}
+
+    return Number(value.toFixed(decimals))
   }
 
 //INIT

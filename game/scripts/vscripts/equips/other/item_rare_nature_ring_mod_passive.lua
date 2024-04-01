@@ -2,7 +2,7 @@ item_rare_nature_ring_mod_passive = class({})
 
 function item_rare_nature_ring_mod_passive:IsHidden() return false end
 function item_rare_nature_ring_mod_passive:IsPurgable() return false end
-function item_rare_nature_ring_mod_passive:GetTexture() return "misc/ring_strength" end
+function item_rare_nature_ring_mod_passive:GetTexture() return "misc/nature_ring" end
 
 -- CONSTRUCTORS -----------------------------------------------------------
 
