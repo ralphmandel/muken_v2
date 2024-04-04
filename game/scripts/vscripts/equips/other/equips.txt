@@ -15,8 +15,8 @@
 
       "AbilityValues"
       {
-        "speed"         "200"
-        "slow_percent"  "40"
+        "speed"         "150"
+        "slow_percent"  "30"
       }
 
       "precache"
@@ -55,7 +55,7 @@
 
       "AbilityValues"
       {
-        "speed"         "25"
+        "speed"         "30"
         "bonus_stat"    "10"
         "state"         "1"
       }
@@ -173,6 +173,132 @@
     }
 
   //EPIC
+    "item_epic_nature_boots"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/other/item_epic_nature_boots"
+      "AbilityTextureName"		"boots/nature_boots"
+      "ItemType"              "boots"
+      "ItemQuality"           "2"
+      "ID"							      "3205"
+
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "speed"         "35"
+        "incoming_heal" "10"
+        "health_regen"  "35"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_secret_boots"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/other/item_epic_secret_boots"
+      "AbilityTextureName"		"boots/secret_boots"
+      "ItemType"              "boots"
+      "ItemQuality"           "2"
+      "ID"							      "3206"
+
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "speed"         "45"
+        "bonus_vision"  "150"
+        "attack_range"  "75"
+        "size_percent"  "25"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_spectral_boots"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/other/item_epic_spectral_boots"
+      "AbilityTextureName"		"boots/spectral_boots"
+      "ItemType"              "boots"
+      "ItemQuality"           "2"
+      "ID"							      "3207"
+
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "speed"         "40"
+        "int"           "5"
+        "curse_resist"  "15"
+        "speed_percent" "10"
+        "invi_delay"    "2"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
     "item_epic_ring_ares"
     {
       "BaseClass"						  "item_lua"
@@ -181,14 +307,95 @@
       "AbilityTextureName"		"misc/ring_ares"
       "ItemType"              "misc"
       "ItemQuality"           "2"
-      "ID"							      "3205"
+      "ID"							      "3208"
 
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
       "AbilityValues"
       {
-        "str"   "100"
-        "armor" "-20"
+        "str"   "50"
+        "armor" "-10"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_mystic_pendant"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/other/item_epic_mystic_pendant"
+      "AbilityTextureName"		"misc/mystic_pendant"
+      "ItemType"              "misc"
+      "ItemQuality"           "2"
+      "ID"							      "3209"
+
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "mana_regen"          "10"
+        "cooldown_reduction"  "30"
+        "mana_cap"            "75"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_talisman"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/treasure_chest001b.vmdl"
+      "ScriptFile"					  "equips/other/item_epic_talisman"
+      "AbilityTextureName"		"misc/talisman"
+      "ItemType"              "misc"
+      "ItemQuality"           "2"
+      "ID"							      "3210"
+
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "luck"    "25"
+        "chance"  "5"
       }
 
       "precache"

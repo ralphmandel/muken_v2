@@ -60,6 +60,7 @@ function _modifier__ai:OnIntervalThink()
 
   if self.unit:IsDominated() then
     self.unit:RemoveSubStats(self.ability, {"speed"})
+    self:StartIntervalThink(-1)
     return
   end
 
@@ -68,8 +69,6 @@ function _modifier__ai:OnIntervalThink()
 end
 
 function _modifier__ai:IdleThink()
-  self.unit:RemoveSubStats(self.ability, {"speed"})
-
   local target = self:FindNewTarget()
 
   if target then
@@ -116,9 +115,7 @@ function _modifier__ai:AggressiveThink()
         ai.state = AI_STATE_AGGRESSIVE
       end
     end
-  end
-  
-  self.unit:RemoveSubStats(self.ability, {"speed"})
+  end  
 end
 
 function _modifier__ai:ReturningThink()
@@ -185,6 +182,10 @@ function _modifier__ai:SetState(new_state)
     self.unit:AddModifier(self.ability, "_modifier_force_attack", {target = self.aggroTarget:GetEntityIndex()})
   else
     self.unit:RemoveAllModifiersByNameAndAbility("_modifier_force_attack", self.ability)
+  end
+
+  if new_state == AI_STATE_AGGRESSIVE or new_state == AI_STATE_IDLE then
+    self.unit:RemoveSubStats(self.ability, {"speed"})
   end
 
   self.state = new_state

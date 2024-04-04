@@ -80,7 +80,8 @@ function strider_u_modifier_shadow:DeclareFunctions()
     MODIFIER_PROPERTY_FIXED_DAY_VISION,
     MODIFIER_PROPERTY_FIXED_NIGHT_VISION,
     MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-    MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
+    MODIFIER_PROPERTY_BONUSDAMAGEOUTGOING_PERCENTAGE,
+    MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_EVENT_ON_DEATH,
     MODIFIER_EVENT_ON_MODIFIER_ADDED,
     MODIFIER_EVENT_ON_ABILITY_START,
@@ -102,7 +103,11 @@ function strider_u_modifier_shadow:GetModifierIncomingDamage_Percentage(keys)
   return self.ability:GetSpecialValueFor("incoming_damage")
 end
 
-function strider_u_modifier_shadow:GetModifierTotalDamageOutgoing_Percentage(keys)
+function strider_u_modifier_shadow:GetModifierBonusDamageOutgoing_Percentage(keys)
+  return self.ability:GetSpecialValueFor("outgoing_damage") -100
+end
+
+function strider_u_modifier_shadow:GetModifierSpellAmplify_Percentage(keys)
   return self.ability:GetSpecialValueFor("outgoing_damage") -100
 end
 

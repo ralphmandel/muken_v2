@@ -58,11 +58,10 @@ end
 function _modifier_str:DeclareFunctions()
   local funcs = {
     MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
-    --MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
     MODIFIER_PROPERTY_MISS_PERCENTAGE,
     MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK,
-    MODIFIER_PROPERTY_PHYSICALDAMAGEOUTGOING_PERCENTAGE,
+    MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
     MODIFIER_EVENT_ON_TAKEDAMAGE
   }
 
@@ -72,14 +71,6 @@ end
 function _modifier_str:GetModifierBaseAttack_BonusDamage()
   return self:GetCalculedData("sub_stat_attack_damage", false)
 end
-
--- function _modifier_str:GetModifierSpellAmplify_Percentage(keys)
---   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then return 0 end
---   if keys.damage_flags == 31 then return 0 end
---   if keys.damage_type ~= DAMAGE_TYPE_PHYSICAL then return 0 end
-
---   return self:GetCalculedData("sub_stat_physical_damage", false)
--- end
 
 function _modifier_str:GetModifierPhysicalArmorBonus()
   return self:GetCalculedData("sub_stat_armor", false)
@@ -102,7 +93,7 @@ function _modifier_str:GetModifierPhysical_ConstantBlock(keys)
   return block
 end
 
-function _modifier_str:GetModifierPhysicalDamageOutgoing_Percentage(keys)
+function _modifier_str:GetModifierTotalDamageOutgoing_Percentage(keys)
   if keys.damage_category == DOTA_DAMAGE_CATEGORY_ATTACK then
     if keys.damage_flags ~= DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
     and keys.damage_flags ~= 31 and keys.damage_flags ~= 1040 and self.has_crit == true then

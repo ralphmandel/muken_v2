@@ -121,6 +121,19 @@
     return special_kv_modifier:HasRank(skill_id, tier, path)
   end
 
+  function CDOTA_BaseNPC_Hero:AddModelSizePercent(value)
+    if not self.GetBaseHeroModifier then return end
+    if not self.size_percent then self.size_percent = 100 end
+
+    local data = self:GetBaseHeroModifier().ability.hero_data.model
+
+    self.size_percent = self.size_percent + value or 100
+    print(data.hp_offset, data.scale, value, self.size_percent)
+    self.hp_offset = data.hp_offset * self.size_percent * 0.01
+    self:SetModelScale(data.scale * self.size_percent * 0.01)
+    self:SetHealthBarOffsetOverride(data.hp_offset * self.size_percent * 0.01)
+  end
+
 -- CDOTA_BaseNPC || GET STATS
 
   function CDOTA_BaseNPC:GetHeroData()
@@ -297,7 +310,7 @@
         end
       end
 
-      if bPass == true and (modifier:GetAbility() == ability or ability == nil) then
+      if bPass == true and (modifier:GetAbility() == ability or modifier:GetAbility() == nil or ability == nil) then
         modifier:Destroy()
       end
     end

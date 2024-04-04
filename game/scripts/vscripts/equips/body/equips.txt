@@ -410,6 +410,7 @@
 
       "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
       "AbilityCooldown"       "60"
+      "AbilityManaCost"       "100"
 
       "AbilityValues"
       {

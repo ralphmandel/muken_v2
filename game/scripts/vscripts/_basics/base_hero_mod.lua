@@ -59,7 +59,6 @@ function base_hero_mod:DeclareFunctions()
 end
 
 function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
-	local caster = self:GetCaster()
 	local ability = keys.ability
 	local value_name = keys.ability_special_value
 	local value_level = keys.ability_special_level
@@ -105,11 +104,18 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "heal" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_epic_secret_boots" then
+		if value_name == "attack_range" then return 1 end
+	end
+
+  if ability:GetAbilityName() == "item_epic_talisman" then
+		if value_name == "chance" then return 1 end
+	end
+
 	return 0
 end
 
 function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
-	local caster = self:GetCaster()
 	local ability = keys.ability
 	local value_name = keys.ability_special_value
 	local value_level = keys.ability_special_level
@@ -157,6 +163,16 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_rare_nature_ring" then
 		if value_name == "heal" then return 300 * self:GetHealPower() end
+	end
+
+  if ability:GetAbilityName() == "item_epic_secret_boots" then
+		if value_name == "attack_range" then
+      if self.parent:IsRangedAttacker() then return 150 else return 75 end
+    end
+	end
+
+  if ability:GetAbilityName() == "item_epic_talisman" then
+		if value_name == "chance" then return self:CalcLuck(5) end
 	end
 
 	return 0
