@@ -13,7 +13,7 @@ function item_epic_spectral_armor_mod_passive:OnCreated(kv)
 
   if not IsServer() then return end
 
-  self.parent:AddAbilityStats(self.ability, {"magic_resist", "evasion"})
+  self.parent:AddAbilityStats(self.ability, {"magic_resist", "evasion", "curse_resist"})
 end
 
 function item_epic_spectral_armor_mod_passive:OnRefresh(kv)
@@ -22,7 +22,7 @@ end
 function item_epic_spectral_armor_mod_passive:OnRemoved()
   if not IsServer() then return end
 
-  self.parent:RemoveSubStats(self.ability, {"magic_resist", "evasion"})
+  self.parent:RemoveSubStats(self.ability, {"magic_resist", "evasion", "curse_resist"})
 end
 
 -- API FUNCTIONS -----------------------------------------------------------

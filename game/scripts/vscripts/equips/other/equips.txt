@@ -272,7 +272,7 @@
       {
         "speed"         "40"
         "int"           "5"
-        "curse_resist"  "15"
+        "curse_resist"  "20"
         "speed_percent" "10"
         "invi_delay"    "2"
       }
@@ -394,8 +394,8 @@
 
       "AbilityValues"
       {
-        "luck"    "25"
-        "chance"  "5"
+        "luck"    "10"
+        "chance"  "10"
       }
 
       "precache"

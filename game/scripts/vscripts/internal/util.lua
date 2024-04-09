@@ -549,12 +549,12 @@
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {
-        [1] = "item_epic_mystic_pendant", [2] = "item_epic_mystic_pendant",
-        [3] = "item_epic_talisman", [4] = "item_epic_talisman"
+        [1] = "item_epic_aetherweave_hat", [2] = "item_epic_etherweaver_cap",
+        [3] = "item_epic_ruby_helm"
       }
 
-      for i = 1, 5, 1 do
-        local item = CreateItem(names[RandomInt(1, 4)], nil, nil)
+      for i = 1, 6, 1 do
+        local item = CreateItem(names[RandomInt(1, 3)], nil, nil)
         local pos = Vector(-1400, -1400, 0)
         local drop = CreateItemOnPositionSync(pos, item)
         local pos_launch = pos + RandomVector(RandomInt(100, 200))

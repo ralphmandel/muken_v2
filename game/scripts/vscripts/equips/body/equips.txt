@@ -321,7 +321,7 @@
       {
         "str"             "12"
         "armor"           "4"
-        "max_health"      "800"
+        "max_health"      "1000"
         "max_stack"       "24"
         "decrement_time"  "5"
       }
@@ -416,6 +416,7 @@
       {
         "magic_resist"  "5"
         "evasion"       "5"
+        "curse_resist"  "10"
         "duration"      "10"
         "attack_time"   "0.3"
         "perfect_dodge" "100"

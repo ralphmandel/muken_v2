@@ -1,4 +1,323 @@
 "DOTAAbilities"
 {
   //RARE
+    "item_rare_helm_endurance"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_rare_helm_endurance"
+      "AbilityTextureName"		"head/helm_endurance"
+      "ItemType"              "head"
+      "ItemQuality"           "1"
+      "ID"							      "3301"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"        "1200"
+        "stone_resist"  "10"
+        "armor"         "2"
+        "health_regen"  "10"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_dragon_helm"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_rare_dragon_helm"
+      "AbilityTextureName"		"head/dragon_helm"
+      "ItemType"              "head"
+      "ItemQuality"           "1"
+      "ID"							      "3302"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"          "1200"
+        "poison_resist"   "10"
+        "physical_damage" "25"
+        "magical_damage"  "25"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_manaveil_circlet"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_rare_manaveil_circlet"
+      "AbilityTextureName"		"head/manaveil_circlet"
+      "ItemType"              "head"
+      "ItemQuality"           "1"
+      "ID"							      "3303"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"              "1200"
+        "cold_resist"         "10"
+        "cooldown_reduction"  "2"
+        "mana_regen"          "3"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_rare_silver_circlet"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_rare_silver_circlet"
+      "AbilityTextureName"		"head/silver_circlet"
+      "ItemType"              "head"
+      "ItemQuality"           "1"
+      "ID"							      "3304"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"        "1200"
+        "curse_resist"  "10"
+        "incoming_buff" "10"
+        "debuff_amp"    "10"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+  
+  //EPIC
+
+    "item_epic_aetherweave_hat"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_aetherweave_hat"
+      "AbilityTextureName"		"head/aetherweave_hat"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3305"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"        "1500"
+        "stone_resist"  "20"
+        "poison_resist" "20"
+        "cold_resist"   "20"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+    
+    "item_epic_etherweaver_cap"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_etherweaver_cap"
+      "AbilityTextureName"		"head/etherweaver_cap"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3306"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityValues"
+      {
+        "radius"          "1500"
+        "bleed_resist"    "20"
+        "sleep_resist"    "20"
+        "thunder_resist"  "20"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_ruby_helm"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_ruby_helm"
+      "AbilityTextureName"		"head/ruby_helm"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3307"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
+
+      "AbilityCooldown"         "45"
+      "AbilityHealthCost"       "150"
+
+      "AbilityValues"
+      {
+        "max_health"  "750"
+        "mana_regen"  "5"
+        "mana"        "300"
+      }
+
+      "precache"
+      {
+        "particle"		"particles/items3_fx/mango_active.vpcf"
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
 }
