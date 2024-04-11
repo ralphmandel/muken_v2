@@ -289,7 +289,8 @@
       "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_NONE"
 
       "AbilityCooldown"         "45"
-      "AbilityHealthCost"       "150"
+      "AbilityCastRange"		    "750"
+      "AbilityHealthCost"       "300"
 
       "AbilityValues"
       {
@@ -320,4 +321,89 @@
       "SideShop"			    "0"
       "SecretShop"		    "0"
     }
+
+    "item_epic_mystical_veil"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_mystical_veil"
+      "AbilityTextureName"		"head/mystical_veil"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3308"
+
+      "AbilityBehavior"			  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "max_mana"            "150"
+        "cooldown_reduction"  "5"
+        "reset_chance"        "15"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
+
+    "item_epic_helm_corruption"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_helm_corruption"
+      "AbilityTextureName"		"head/helm_corruption"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3309"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetFlags"  "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+
+      "AbilityValues"
+      {
+        "radius"        "1500"
+        "armor"         "-5"
+        "magic_resist"  "-5"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }  
 }

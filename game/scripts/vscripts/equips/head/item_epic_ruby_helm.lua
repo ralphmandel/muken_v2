@@ -30,7 +30,7 @@ LinkLuaModifier("item_epic_ruby_helm_mod_passive", "equips/head/item_epic_ruby_h
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
 
-    target:ApplyMana(self:GetSpecialValueFor("mana"), self, false, target, true)
+    target:ApplyMana(self:GetSpecialValueFor("mana"), self, false, nil, true)
     self:PlayEfxStart(target)
   end
 

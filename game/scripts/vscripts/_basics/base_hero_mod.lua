@@ -116,6 +116,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecial(keys)
 		if value_name == "mana" then return 1 end
 	end
 
+  if ability:GetAbilityName() == "item_epic_mystical_veil" then
+		if value_name == "reset_chance" then return 1 end
+	end
+
 	return 0
 end
 
@@ -181,6 +185,10 @@ function base_hero_mod:GetModifierOverrideAbilitySpecialValue(keys)
 
   if ability:GetAbilityName() == "item_epic_ruby_helm" then
 		if value_name == "mana" then return 300 * self:GetHealPower() end
+	end
+
+  if ability:GetAbilityName() == "item_epic_mystical_veil" then
+		if value_name == "reset_chance" then return self:CalcLuck(15) end
 	end
 
 	return 0

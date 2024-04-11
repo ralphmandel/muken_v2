@@ -353,9 +353,8 @@
 
       "AbilityValues"
       {
-        "mana_regen"          "10"
-        "cooldown_reduction"  "30"
-        "mana_cap"            "75"
+        "mana_regen"  "10"
+        "manacost"    "50"
       }
 
       "precache"

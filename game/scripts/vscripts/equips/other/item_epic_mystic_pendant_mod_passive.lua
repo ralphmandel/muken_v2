@@ -29,19 +29,15 @@ end
 
 function item_epic_mystic_pendant_mod_passive:DeclareFunctions()
   local funcs = {
-    MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE
+    MODIFIER_PROPERTY_MANACOST_PERCENTAGE
   }
 
   return funcs
 end
 
-function item_epic_mystic_pendant_mod_passive:GetModifierPercentageCooldown()
-  if self.parent:GetMaxMana() == 0 then return 0 end
-
-  local mana_cap = self.ability:GetSpecialValueFor("mana_cap")
-
-  if (self.parent:GetMana() / self.parent:GetMaxMana()) * 100 > mana_cap then
-    return self.ability:GetSpecialValueFor("cooldown_reduction")
+function item_epic_mystic_pendant_mod_passive:GetModifierPercentageManacost()
+  if self.parent:GetMana() == self.parent:GetMaxMana() then
+    return self.ability:GetSpecialValueFor("manacost")
   end
 
   return 0
