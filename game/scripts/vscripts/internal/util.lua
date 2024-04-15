@@ -549,15 +549,15 @@
   function LoadBots()
     if BOTS_ENABLED_TOOLS == false then
       local names = {
-        [1] = "item_epic_mystical_veil", [2] = "item_epic_mystical_veil",
-        [3] = "item_epic_helm_corruption", [4] = "item_epic_helm_corruption"
+        [1] = "item_epic_spectral_armor", [2] = "item_epic_spectral_armor",
+        [3] = "item_epic_spectral_mask", [4] = "item_epic_spectral_mask"
       }
 
-      for i = 1, 6, 1 do
+      for i = 1, 5, 1 do
         local item = CreateItem(names[RandomInt(1, 4)], nil, nil)
-        local pos = Vector(-1400, -1400, 0)
+        local pos = Vector(-2700, -2700, 0)
         local drop = CreateItemOnPositionSync(pos, item)
-        local pos_launch = pos + RandomVector(RandomInt(100, 200))
+        local pos_launch = Vector(-2700, -2600 + (i * 50), 0) -- + RandomVector(100 + (i * 25))
         item:LaunchLoot(false, 200, 0.75, pos_launch, nil)        
       end
     end

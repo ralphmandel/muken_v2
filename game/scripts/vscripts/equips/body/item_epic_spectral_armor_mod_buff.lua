@@ -4,6 +4,19 @@ function item_epic_spectral_armor_mod_buff:IsHidden() return false end
 function item_epic_spectral_armor_mod_buff:IsPurgable() return false end
 function item_epic_spectral_armor_mod_buff:GetTexture() return "armor/spectral_armor" end
 
+-- AURA -----------------------------------------------------------
+
+function item_epic_spectral_armor_mod_buff:IsAura() return true end
+function item_epic_spectral_armor_mod_buff:GetModifierAura() return "_modifier_truesight" end
+function item_epic_spectral_armor_mod_buff:GetAuraDuration() return 0 end
+function item_epic_spectral_armor_mod_buff:GetAuraRadius() return self.parent:GetCurrentVisionRange() end
+function item_epic_spectral_armor_mod_buff:GetAuraSearchTeam() return DOTA_UNIT_TARGET_TEAM_ENEMY end
+function item_epic_spectral_armor_mod_buff:GetAuraSearchType() return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC end
+function item_epic_spectral_armor_mod_buff:GetAuraSearchFlags() return DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES end
+function item_epic_spectral_armor_mod_buff:GetAuraEntityReject(hEntity)
+  return self.parent:FindItemInInventory("item_epic_spectral_mask") == nil
+end
+
 -- CONSTRUCTORS -----------------------------------------------------------
 
 function item_epic_spectral_armor_mod_buff:OnCreated(kv)
@@ -12,6 +25,7 @@ function item_epic_spectral_armor_mod_buff:OnCreated(kv)
   self.ability = self:GetAbility()
 
   self.phase = kv.phase or 0
+  self.fly_vision = kv.fly_vision or 0
 
   if not IsServer() then return end
 
@@ -43,6 +57,7 @@ end
 function item_epic_spectral_armor_mod_buff:CheckState()
 	local state = {
     [MODIFIER_STATE_NO_UNIT_COLLISION] = self.phase == 1,
+    [MODIFIER_STATE_FORCED_FLYING_VISION] = self.fly_vision == 1
 	}
 
 	return state

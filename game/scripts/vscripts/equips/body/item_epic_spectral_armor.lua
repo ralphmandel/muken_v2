@@ -23,6 +23,13 @@ LinkLuaModifier("item_epic_spectral_armor_mod_buff", "equips/body/item_epic_spec
       end
     end
 
+    local spectral_mask = caster:FindItemInInventory("item_epic_spectral_mask")
+    if spectral_mask then
+      if spectral_mask:IsActivated() then
+        table.fly_vision = 1
+      end
+    end
+
     caster:AddModifier(self, "item_epic_spectral_armor_mod_buff", table)
   end
 

@@ -405,5 +405,46 @@
       "ItemInitial"		    "0"
       "SideShop"			    "0"
       "SecretShop"		    "0"
-    }  
+    }
+
+    "item_epic_spectral_mask"
+    {
+      "BaseClass"						  "item_lua"
+      "Model"							    "models/props_gameplay/red_box.vmdl"
+      "ScriptFile"					  "equips/head/item_epic_spectral_mask"
+      "AbilityTextureName"		"head/spectral_mask"
+      "ItemType"              "head"
+      "ItemQuality"           "2"
+      "ID"							      "3310"
+
+      "AbilityBehavior"				  "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+      "AbilityValues"
+      {
+        "curse_resist"  "30"
+        "night_vision"  "300"
+        "day_vision"    "-150"
+      }
+
+      "precache"
+      {
+      }
+
+      "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+      "ItemCost"			    "0"
+      "ItemKillable"		  "1"
+      "ItemSellable"		  "0"
+      "ItemPurchasable"   "0"
+      "ItemDroppable" 	  "0"
+      "ItemStackable"		  "0"
+      // "ItemPermanent"     "1" //used for charges
+      // "MaxUpgradeLevel"   "1"
+      // "ItemBaseLevel"     "1"
+      "AllowedInBackpack"	"0"
+      "ItemIsNeutralDrop"	"0"
+      "ItemAlertable" 	  "1"
+      "ItemInitial"		    "0"
+      "SideShop"			    "0"
+      "SecretShop"		    "0"
+    }
 }
